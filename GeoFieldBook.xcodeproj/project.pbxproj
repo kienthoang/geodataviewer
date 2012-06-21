@@ -13,13 +13,16 @@
 		0294E0A0159361060025219F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0294E09E159361060025219F /* InfoPlist.strings */; };
 		0294E0A2159361060025219F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0A1159361060025219F /* main.m */; };
 		0294E0A6159361060025219F /* GeoFieldBookAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */; };
-		0294E0A9159361060025219F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0294E0A7159361060025219F /* MainStoryboard.storyboard */; };
-		0294E0AC159361060025219F /* GeoFieldBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0AB159361060025219F /* GeoFieldBookViewController.m */; };
+		0294E0A9159361060025219F /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0294E0A7159361060025219F /* iPad.storyboard */; };
 		0294E0B4159361060025219F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0B3159361060025219F /* SenTestingKit.framework */; };
 		0294E0B5159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E0B6159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E0BE159361060025219F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0294E0BC159361060025219F /* InfoPlist.strings */; };
 		0294E0C1159361060025219F /* GeoFieldBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0C0159361060025219F /* GeoFieldBookTests.m */; };
+		0294E0CB159361F50025219F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CA159361F50025219F /* CoreData.framework */; };
+		0294E0CD159362040025219F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CC159362040025219F /* MapKit.framework */; };
+		0294E0CF1593620B0025219F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CE1593620B0025219F /* CoreLocation.framework */; };
+		0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,15 +46,17 @@
 		0294E0A3159361060025219F /* GeoFieldBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoFieldBook-Prefix.pch"; sourceTree = "<group>"; };
 		0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookAppDelegate.h; sourceTree = "<group>"; };
 		0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookAppDelegate.m; sourceTree = "<group>"; };
-		0294E0A8159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		0294E0AA159361060025219F /* GeoFieldBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookViewController.h; sourceTree = "<group>"; };
-		0294E0AB159361060025219F /* GeoFieldBookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookViewController.m; sourceTree = "<group>"; };
+		0294E0A8159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		0294E0B2159361060025219F /* GeoFieldBookTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoFieldBookTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E0B3159361060025219F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0294E0BB159361060025219F /* GeoFieldBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoFieldBookTests-Info.plist"; sourceTree = "<group>"; };
 		0294E0BD159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0294E0BF159361060025219F /* GeoFieldBookTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookTests.h; sourceTree = "<group>"; };
 		0294E0C0159361060025219F /* GeoFieldBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookTests.m; sourceTree = "<group>"; };
+		0294E0CA159361F50025219F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0294E0CC159362040025219F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0294E0CE1593620B0025219F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoFieldBook.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0294E0CF1593620B0025219F /* CoreLocation.framework in Frameworks */,
+				0294E0CD159362040025219F /* MapKit.framework in Frameworks */,
+				0294E0CB159361F50025219F /* CoreData.framework in Frameworks */,
 				0294E096159361060025219F /* UIKit.framework in Frameworks */,
 				0294E098159361060025219F /* Foundation.framework in Frameworks */,
 				0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */,
@@ -100,6 +108,9 @@
 		0294E094159361060025219F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0294E0CE1593620B0025219F /* CoreLocation.framework */,
+				0294E0CC159362040025219F /* MapKit.framework */,
+				0294E0CA159361F50025219F /* CoreData.framework */,
 				0294E095159361060025219F /* UIKit.framework */,
 				0294E097159361060025219F /* Foundation.framework */,
 				0294E099159361060025219F /* CoreGraphics.framework */,
@@ -111,11 +122,8 @@
 		0294E09B159361060025219F /* GeoFieldBook */ = {
 			isa = PBXGroup;
 			children = (
-				0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */,
-				0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */,
-				0294E0A7159361060025219F /* MainStoryboard.storyboard */,
-				0294E0AA159361060025219F /* GeoFieldBookViewController.h */,
-				0294E0AB159361060025219F /* GeoFieldBookViewController.m */,
+				0294E0A7159361060025219F /* iPad.storyboard */,
+				0294E0D1159362D20025219F /* Database */,
 				0294E09C159361060025219F /* Supporting Files */,
 			);
 			path = GeoFieldBook;
@@ -124,6 +132,8 @@
 		0294E09C159361060025219F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */,
+				0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */,
 				0294E09D159361060025219F /* GeoFieldBook-Info.plist */,
 				0294E09E159361060025219F /* InfoPlist.strings */,
 				0294E0A1159361060025219F /* main.m */,
@@ -149,6 +159,22 @@
 				0294E0BC159361060025219F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0294E0D1159362D20025219F /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */,
+				0294E0D5159363050025219F /* NSManagedObject */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		0294E0D5159363050025219F /* NSManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NSManagedObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,7 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0294E0A0159361060025219F /* InfoPlist.strings in Resources */,
-				0294E0A9159361060025219F /* MainStoryboard.storyboard in Resources */,
+				0294E0A9159361060025219F /* iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +286,7 @@
 			files = (
 				0294E0A2159361060025219F /* main.m in Sources */,
 				0294E0A6159361060025219F /* GeoFieldBookAppDelegate.m in Sources */,
-				0294E0AC159361060025219F /* GeoFieldBookViewController.m in Sources */,
+				0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,12 +317,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		0294E0A7159361060025219F /* MainStoryboard.storyboard */ = {
+		0294E0A7159361060025219F /* iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0294E0A8159361060025219F /* en */,
 			);
-			name = MainStoryboard.storyboard;
+			name = iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		0294E0BC159361060025219F /* InfoPlist.strings */ = {
@@ -442,6 +468,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */,
+			);
+			currentVersion = 0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */;
+			path = GeoFieldBook.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0294E088159361060025219F /* Project object */;
 }
