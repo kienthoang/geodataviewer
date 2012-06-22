@@ -50,7 +50,7 @@
     
     //Resize self to fit the master view
     self.view.superview.frame=CGRectMake(0, 0, 300, 400);
-    self.view.superview.center=self.presentingViewController.view.center;
+    self.view.superview.center=CGPointMake(0, 0);
 }
 
 - (void)viewDidUnload

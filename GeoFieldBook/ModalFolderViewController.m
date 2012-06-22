@@ -36,6 +36,9 @@
     if ([self.folderName length])
         self.folderNameTextField.text=self.folderName;
     
+    //Set the title of self: if folderName is set, the user is editting an existing folder; otherwise, he/she is creating a new folder
+    self.navigationItem.title=self.folderName ? @"Edit Folder" : @"New Folder";
+    
     //Add tap gesture recognizer
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;

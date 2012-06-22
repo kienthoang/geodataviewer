@@ -118,7 +118,7 @@
     self.database=[[GeoDatabaseManager standardDatabaseManager] fetchDatabaseFromDisk:self completion:^(BOOL success){
         //May be show up an alert if not success?
         if (!success) {
-            //Put up an alert	
+            //Put up an alert
         } 
     }];
 }
