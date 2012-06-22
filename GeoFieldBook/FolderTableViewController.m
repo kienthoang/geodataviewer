@@ -20,8 +20,6 @@
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;
 
-@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
-
 @end
 
 @implementation FolderTableViewController 

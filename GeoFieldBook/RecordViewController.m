@@ -35,7 +35,7 @@
     
     //Set the items to be the toolbar's items
     self.toolbar.items=[items copy];
-    
+        
     _splitViewBarButtonItem=splitViewBarButtonItem; 
 }
 
