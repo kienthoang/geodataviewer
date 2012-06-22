@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020EBB5A15941F7C00EECC08 /* FolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB5915941F7C00EECC08 /* FolderTableViewController.m */; };
+		020EBB7A15941FB400EECC08 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7915941FB400EECC08 /* Formation.m */; };
+		020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7C15941FB400EECC08 /* Formation_Folder.m */; };
+		020EBB8015941FB400EECC08 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7F15941FB400EECC08 /* Fault.m */; };
+		020EBB8315941FB400EECC08 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8215941FB400EECC08 /* Bedding.m */; };
+		020EBB8615941FB400EECC08 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8515941FB400EECC08 /* JointSet.m */; };
+		020EBB8915941FB400EECC08 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8815941FB400EECC08 /* Record.m */; };
+		020EBB8C15941FB400EECC08 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8B15941FB400EECC08 /* Other.m */; };
+		020EBB8F15941FB400EECC08 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8E15941FB400EECC08 /* Folder.m */; };
+		020EBB9215941FB400EECC08 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB9115941FB400EECC08 /* Contact.m */; };
+		020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB941594217A00EECC08 /* CoreDataTableViewController.m */; };
+		020EBB991594259900EECC08 /* GeoDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB981594259900EECC08 /* GeoDatabaseManager.m */; };
+		020EBB9E15942CBB00EECC08 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB9D15942CBB00EECC08 /* RecordViewController.m */; };
+		020EBBA115942E8800EECC08 /* ModalFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBA015942E8800EECC08 /* ModalFolderViewController.m */; };
+		020EBBA41594355800EECC08 /* Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBA31594355800EECC08 /* Folder+Creation.m */; };
+		020EBBAF15944F4500EECC08 /* TextInputFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBAE15944F4500EECC08 /* TextInputFilter.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -36,6 +52,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		020EBB5815941F7C00EECC08 /* FolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableViewController.h; sourceTree = "<group>"; };
+		020EBB5915941F7C00EECC08 /* FolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewController.m; sourceTree = "<group>"; };
+		020EBB7815941FB400EECC08 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
+		020EBB7915941FB400EECC08 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
+		020EBB7B15941FB400EECC08 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
+		020EBB7C15941FB400EECC08 /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
+		020EBB7E15941FB400EECC08 /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
+		020EBB7F15941FB400EECC08 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
+		020EBB8115941FB400EECC08 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
+		020EBB8215941FB400EECC08 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
+		020EBB8415941FB400EECC08 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
+		020EBB8515941FB400EECC08 /* JointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JointSet.m; sourceTree = "<group>"; };
+		020EBB8715941FB400EECC08 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		020EBB8815941FB400EECC08 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		020EBB8A15941FB400EECC08 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
+		020EBB8B15941FB400EECC08 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
+		020EBB8D15941FB400EECC08 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		020EBB8E15941FB400EECC08 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
+		020EBB9015941FB400EECC08 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		020EBB9115941FB400EECC08 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		020EBB931594217A00EECC08 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		020EBB941594217A00EECC08 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		020EBB971594259900EECC08 /* GeoDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDatabaseManager.h; sourceTree = "<group>"; };
+		020EBB981594259900EECC08 /* GeoDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoDatabaseManager.m; sourceTree = "<group>"; };
+		020EBB9C15942CBB00EECC08 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		020EBB9D15942CBB00EECC08 /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalFolderViewController.h; sourceTree = "<group>"; };
+		020EBBA015942E8800EECC08 /* ModalFolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalFolderViewController.m; sourceTree = "<group>"; };
+		020EBBA21594355800EECC08 /* Folder+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+Creation.h"; sourceTree = "<group>"; };
+		020EBBA31594355800EECC08 /* Folder+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Folder+Creation.m"; sourceTree = "<group>"; };
+		020EBBAD15944F4500EECC08 /* TextInputFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextInputFilter.h; sourceTree = "<group>"; };
+		020EBBAE15944F4500EECC08 /* TextInputFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextInputFilter.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,6 +134,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020EBB5C15941F8300EECC08 /* View Controller Prototypes */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB931594217A00EECC08 /* CoreDataTableViewController.h */,
+				020EBB941594217A00EECC08 /* CoreDataTableViewController.m */,
+			);
+			name = "View Controller Prototypes";
+			sourceTree = "<group>";
+		};
+		020EBB961594255700EECC08 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB971594259900EECC08 /* GeoDatabaseManager.h */,
+				020EBB981594259900EECC08 /* GeoDatabaseManager.m */,
+				020EBBAD15944F4500EECC08 /* TextInputFilter.h */,
+				020EBBAE15944F4500EECC08 /* TextInputFilter.m */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		020EBB9A15942C7900EECC08 /* Master View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB5815941F7C00EECC08 /* FolderTableViewController.h */,
+				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
+				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
+				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
+			);
+			name = "Master View Controllers";
+			sourceTree = "<group>";
+		};
+		020EBB9B15942C8F00EECC08 /* Detail View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
+				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
+			);
+			name = "Detail View Controllers";
+			sourceTree = "<group>";
+		};
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +211,10 @@
 			isa = PBXGroup;
 			children = (
 				0294E0A7159361060025219F /* iPad.storyboard */,
+				020EBB9A15942C7900EECC08 /* Master View Controllers */,
+				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
+				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
+				020EBB961594255700EECC08 /* Library */,
 				0294E0D1159362D20025219F /* Database */,
 				0294E09C159361060025219F /* Supporting Files */,
 			);
@@ -173,6 +265,26 @@
 		0294E0D5159363050025219F /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				020EBB9015941FB400EECC08 /* Contact.h */,
+				020EBB9115941FB400EECC08 /* Contact.m */,
+				020EBB8D15941FB400EECC08 /* Folder.h */,
+				020EBB8E15941FB400EECC08 /* Folder.m */,
+				020EBBA21594355800EECC08 /* Folder+Creation.h */,
+				020EBBA31594355800EECC08 /* Folder+Creation.m */,
+				020EBB8A15941FB400EECC08 /* Other.h */,
+				020EBB8B15941FB400EECC08 /* Other.m */,
+				020EBB8715941FB400EECC08 /* Record.h */,
+				020EBB8815941FB400EECC08 /* Record.m */,
+				020EBB8415941FB400EECC08 /* JointSet.h */,
+				020EBB8515941FB400EECC08 /* JointSet.m */,
+				020EBB8115941FB400EECC08 /* Bedding.h */,
+				020EBB8215941FB400EECC08 /* Bedding.m */,
+				020EBB7E15941FB400EECC08 /* Fault.h */,
+				020EBB7F15941FB400EECC08 /* Fault.m */,
+				020EBB7B15941FB400EECC08 /* Formation_Folder.h */,
+				020EBB7C15941FB400EECC08 /* Formation_Folder.m */,
+				020EBB7815941FB400EECC08 /* Formation.h */,
+				020EBB7915941FB400EECC08 /* Formation.m */,
 			);
 			name = NSManagedObject;
 			sourceTree = "<group>";
@@ -287,6 +399,22 @@
 				0294E0A2159361060025219F /* main.m in Sources */,
 				0294E0A6159361060025219F /* GeoFieldBookAppDelegate.m in Sources */,
 				0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */,
+				020EBB5A15941F7C00EECC08 /* FolderTableViewController.m in Sources */,
+				020EBB7A15941FB400EECC08 /* Formation.m in Sources */,
+				020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */,
+				020EBB8015941FB400EECC08 /* Fault.m in Sources */,
+				020EBB8315941FB400EECC08 /* Bedding.m in Sources */,
+				020EBB8615941FB400EECC08 /* JointSet.m in Sources */,
+				020EBB8915941FB400EECC08 /* Record.m in Sources */,
+				020EBB8C15941FB400EECC08 /* Other.m in Sources */,
+				020EBB8F15941FB400EECC08 /* Folder.m in Sources */,
+				020EBB9215941FB400EECC08 /* Contact.m in Sources */,
+				020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */,
+				020EBB991594259900EECC08 /* GeoDatabaseManager.m in Sources */,
+				020EBB9E15942CBB00EECC08 /* RecordViewController.m in Sources */,
+				020EBBA115942E8800EECC08 /* ModalFolderViewController.m in Sources */,
+				020EBBA41594355800EECC08 /* Folder+Creation.m in Sources */,
+				020EBBAF15944F4500EECC08 /* TextInputFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +586,7 @@
 				0294E0C6159361060025219F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0294E0C7159361060025219F /* Build configuration list for PBXNativeTarget "GeoFieldBookTests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +595,7 @@
 				0294E0C9159361060025219F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
