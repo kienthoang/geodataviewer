@@ -13,11 +13,14 @@
 - (void)synchronizeWithMainDatabase;                                    //synchronize the database with the main database
 - (void)createMainDatabaseWithURL:(NSURL *)databaseURL;                  //create the main database if it does not exist on disk
 
+@property (nonatomic,strong) completion_handler_t completionBlockForFetchingDatabase;
+
 @end
 
 @implementation GeoDatabaseManager
 
 @synthesize geoFieldBookDatabase=_geoFieldBookDatabase;
+@synthesize completionBlockForFetchingDatabase=_completionBlockForFetchingDatabase;
 
 static GeoDatabaseManager *standardDatabaseManager;
 
@@ -45,15 +48,19 @@ static GeoDatabaseManager *standardDatabaseManager;
 
 - (void)createMainDatabaseWithURL:(NSURL *)databaseURL {
     //Create a UIManagedDocument with the database URL and save it first before keeping it as a property in case the user accesses the property in the middle of the saving process
-    UIManagedDocument *geoFieldBookDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
-    [geoFieldBookDatabase saveToURL:databaseURL
+    self.geoFieldBookDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
+    [self.geoFieldBookDatabase saveToURL:databaseURL
                    forSaveOperation:UIDocumentSaveForCreating 
                   completionHandler:^(BOOL success){
                       if (success) {
-                          self.geoFieldBookDatabase=geoFieldBookDatabase;
+                          NSLog(@"Database created: %@",self.geoFieldBookDatabase);
+                          if (self.completionBlockForFetchingDatabase)
+                              self.completionBlockForFetchingDatabase(YES);
                       } else {
                           //handle errors
-                          NSLog(@"Failed: %@",geoFieldBookDatabase);
+                          NSLog(@"Failed: %@",self.geoFieldBookDatabase);
+                          if (self.completionBlockForFetchingDatabase)
+                              self.completionBlockForFetchingDatabase(NO);
                       }
                   }];
 }
@@ -73,6 +80,14 @@ static GeoDatabaseManager *standardDatabaseManager;
     else {
         self.geoFieldBookDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
     }
+}
+
+//Fetch the database
+- (UIManagedDocument *)fetchDatabaseFromDisk:(id)sender completion:(completion_handler_t)completionBlock {
+    //Save the completion block
+    self.completionBlockForFetchingDatabase=completionBlock;
+    
+    return self.geoFieldBookDatabase;
 }
 
 @end

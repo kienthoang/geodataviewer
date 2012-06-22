@@ -31,7 +31,7 @@
         _database=database;
         
         //Make sure the document is open and set up the fetched result controller
-        [self normalizeDatabase];
+        [self normalizeDatabase];        
     }
 }
 
@@ -55,7 +55,7 @@
                 forSaveOperation:UIDocumentSaveForCreating 
                completionHandler:^(BOOL sucess){
                    //Set up the fetched result controller
-                   [self setupFetchedResultsController];
+                   [self setupFetchedResultsController];                   
                }];
     }
     
@@ -110,11 +110,17 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    //Set up the database to fetch the folders from
-    self.database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    //Set up the database using the GeoDatabaseManager fetch method=====>the block will get called only the first time the database gets created
+    //success is YES if the database saving process succeeded or NO otherwise
+    self.database=[[GeoDatabaseManager standardDatabaseManager] fetchDatabaseFromDisk:self completion:^(BOOL success){
+        //May be show up an alert if not success?
+        if (!success) {
+            //Put up an alert	
+        } 
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
