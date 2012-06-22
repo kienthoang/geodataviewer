@@ -23,6 +23,9 @@
 		020EBBA115942E8800EECC08 /* ModalFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBA015942E8800EECC08 /* ModalFolderViewController.m */; };
 		020EBBA41594355800EECC08 /* Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBA31594355800EECC08 /* Folder+Creation.m */; };
 		020EBBAF15944F4500EECC08 /* TextInputFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBAE15944F4500EECC08 /* TextInputFilter.m */; };
+		020EBBBA1594611A00EECC08 /* RecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBB91594611A00EECC08 /* RecordTableViewController.m */; };
+		020EBBC1159467F200EECC08 /* ModalRecordTypeSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */; };
+		020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBC315946B3D00EECC08 /* Record+Types.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -84,6 +87,12 @@
 		020EBBA31594355800EECC08 /* Folder+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Folder+Creation.m"; sourceTree = "<group>"; };
 		020EBBAD15944F4500EECC08 /* TextInputFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextInputFilter.h; sourceTree = "<group>"; };
 		020EBBAE15944F4500EECC08 /* TextInputFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextInputFilter.m; sourceTree = "<group>"; };
+		020EBBB81594611A00EECC08 /* RecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewController.h; sourceTree = "<group>"; };
+		020EBBB91594611A00EECC08 /* RecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewController.m; sourceTree = "<group>"; };
+		020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalRecordTypeSelector.h; sourceTree = "<group>"; };
+		020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalRecordTypeSelector.m; sourceTree = "<group>"; };
+		020EBBC215946B3D00EECC08 /* Record+Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Types.h"; sourceTree = "<group>"; };
+		020EBBC315946B3D00EECC08 /* Record+Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Types.m"; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -159,8 +168,12 @@
 			children = (
 				020EBB5815941F7C00EECC08 /* FolderTableViewController.h */,
 				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
+				020EBBB81594611A00EECC08 /* RecordTableViewController.h */,
+				020EBBB91594611A00EECC08 /* RecordTableViewController.m */,
 				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
 				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
+				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
+				020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */,
 			);
 			name = "Master View Controllers";
 			sourceTree = "<group>";
@@ -275,6 +288,8 @@
 				020EBB8B15941FB400EECC08 /* Other.m */,
 				020EBB8715941FB400EECC08 /* Record.h */,
 				020EBB8815941FB400EECC08 /* Record.m */,
+				020EBBC215946B3D00EECC08 /* Record+Types.h */,
+				020EBBC315946B3D00EECC08 /* Record+Types.m */,
 				020EBB8415941FB400EECC08 /* JointSet.h */,
 				020EBB8515941FB400EECC08 /* JointSet.m */,
 				020EBB8115941FB400EECC08 /* Bedding.h */,
@@ -415,6 +430,9 @@
 				020EBBA115942E8800EECC08 /* ModalFolderViewController.m in Sources */,
 				020EBBA41594355800EECC08 /* Folder+Creation.m in Sources */,
 				020EBBAF15944F4500EECC08 /* TextInputFilter.m in Sources */,
+				020EBBBA1594611A00EECC08 /* RecordTableViewController.m in Sources */,
+				020EBBC1159467F200EECC08 /* ModalRecordTypeSelector.m in Sources */,
+				020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
