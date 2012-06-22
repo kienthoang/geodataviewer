@@ -18,6 +18,7 @@
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (void)createNewFolderWithName:(NSString *)folderName;    //Create a folder in the database with the specified name
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName;   //Modify a folder's name
+- (void)deleteFolder:(Folder *)folder;
 
 @end
 
@@ -74,11 +75,17 @@
 }
 
 - (void)createNewFolderWithName:(NSString *)folderName {
+    //Filter folder name
+    folderName=[TextInputFilter filterDatabaseInputText:folderName];
+    
     //Create a folder entity with the specified name (after filtering)
-    [Folder folderWithName:[TextInputFilter filterDatabaseInputText:folderName] inManagedObjectContext:self.database.managedObjectContext];
+    [Folder folderWithName:folderName inManagedObjectContext:self.database.managedObjectContext];
 }
 
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName {
+    //Filter new name
+    newName=[TextInputFilter filterDatabaseInputText:newName];
+    
     //Fetch the folder entity with the specified original name
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Folder"];
     request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",originalName];
@@ -88,12 +95,17 @@
     //If there is exactly one folder in the result array, modify the folder's name (after filtering)
     if ([results count]==1) {
         Folder *folder=[results lastObject];
-        folder.folderName=[TextInputFilter filterDatabaseInputText:newName];
+        folder.folderName=newName;
     } 
     
     //Else, handle errors
     else {
     }
+}
+
+- (void)deleteFolder:(Folder *)folder {
+    //Delete the folder
+    [self.database.managedObjectContext deleteObject:folder];
 }
 
 #pragma mark - View lifecycle
@@ -138,6 +150,10 @@
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Set the table view to editting mode
     [self.tableView setEditing:!self.tableView.editing animated:YES];
+
+    //Change the style of the button to edit or done
+    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    sender.title=self.tableView.editing ? @"Done" : @"Edit";
 }
 
 #pragma mark - ModalFolderDelegate methods
@@ -187,6 +203,14 @@
     //If the table view is currently in editting mode, segue to the MoDalNewFolderViewController and set its 
     if (self.tableView.editing) {
         [self performSegueWithIdentifier:@"Add/Edit Folder" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the editing style is delete, delete the corresponding folder
+    if (editingStyle==UITableViewCellEditingStyleDelete) {
+        //Get the selected folder and delete it
+        [self deleteFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
 

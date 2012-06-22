@@ -23,10 +23,14 @@
         <scene sceneID="z5O-dJ-9wu">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6h-mH-5s3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="4cQ-nf-DPF" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="4cQ-nf-DPF" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Cca-Zh-pc2">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MfC-tO-HxK">
+                        <rect key="frame" x="0.0" y="960" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Uwh-l0-QS0" kind="relationship" relationship="rootViewController" id="SR1-JW-OjD"/>
                     </connections>
@@ -81,7 +85,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="741" y="-1594"/>
+            <point key="canvasLocation" x="745" y="-1549"/>
         </scene>
         <scene sceneID="p56-nE-sZ6">
             <objects>
@@ -141,7 +145,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="233" y="-345"/>
@@ -183,7 +186,6 @@
                     <navigationItem key="navigationItem" id="snE-dY-fcY">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="PL1-Ih-t0C"/>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="807" y="-345"/>
@@ -421,7 +423,7 @@
                     </navigationItem>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1622" y="-1811"/>
+            <point key="canvasLocation" x="1852" y="-431"/>
         </scene>
         <scene sceneID="VXG-wO-A5P">
             <objects>
@@ -437,6 +439,23 @@
             <point key="canvasLocation" x="-1316" y="455"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CoreDataTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
+        </class>
+        <class className="ModalFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="folderNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="RecordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
