@@ -20,11 +20,14 @@
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;
 
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+
 @end
 
 @implementation FolderTableViewController 
 
 @synthesize database=_database;
+@synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
@@ -219,5 +222,6 @@
         [self deleteFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
+
 
 @end
