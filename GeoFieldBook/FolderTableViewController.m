@@ -9,6 +9,7 @@
 #import "FolderTableViewController.h"
 #import "ModalFolderViewController.h"
 #import "RecordTableViewController.h"
+#import "InitialDetailViewController.h"
 #import "TextInputFilter.h"
 #import "GeoDatabaseManager.h"
 #import "Folder.h"
@@ -142,6 +143,10 @@
             //Put up an alert
         } 
     }];
+    
+    //Perform a segue to the initial view controller
+    if (![[self.splitViewController.viewControllers lastObject] isKindOfClass:[InitialDetailViewController class]])
+        [self performSegueWithIdentifier:@"Show Home Page" sender:self];
     
     //Set the split view controller's delegate to self here because doing so in awakeFromNib would set the 
     //presentingViewController of ModalFolderViewController to UISplitViewController, which screws up its

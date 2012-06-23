@@ -1,20 +1,20 @@
 //
-//  IntialDetailViewController.m
+//  InitialDetailViewController.m
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 6/22/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "IntialDetailViewController.h"
+#import "InitialDetailViewController.h"
 
-@interface IntialDetailViewController () <UINavigationControllerDelegate>
+@interface InitialDetailViewController () <UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
-@implementation IntialDetailViewController
+@implementation InitialDetailViewController
 
 @synthesize splitViewBarButtonItem=_splitViewBarButtonItem;
 @synthesize toolbar=_toolbar;

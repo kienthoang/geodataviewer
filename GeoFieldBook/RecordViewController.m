@@ -377,7 +377,6 @@
 }
 
 - (void)formSetupForOtherType {
-    NSLog(@"Setup form!");
     //Hide all the textfields except for the name textfield
     [self.textFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:NO]];
     self.recordNameTextField.hidden=NO;

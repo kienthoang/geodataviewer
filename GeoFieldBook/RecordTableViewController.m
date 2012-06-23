@@ -78,10 +78,19 @@
 
 //Create a new record entity with the specified record type
 - (void)createRecordForRecordType:(NSString *)recordType {
-    [Record recordForRecordType:recordType andFolderName:self.folderName inManagedObjectContext:self.database.managedObjectContext];
-    
+    Record *record=[Record recordForRecordType:recordType andFolderName:self.folderName inManagedObjectContext:self.database.managedObjectContext];
+        
     //Save
     [self saveChangesToDatabase];
+    
+    //get ithe index path of the newly created record
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
+    
+    //Select the new record
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    
+    //Show the new record on the detail view
+    [self performSegueWithIdentifier:@"Show Record" sender:[self.fetchedResultsController indexPathForObject:record]];
 }
 
 //Modify a record wiht the specified record type
@@ -100,7 +109,6 @@
     //Get the record and delete it
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
     [self.database.managedObjectContext deleteObject:record];
-    NSLog(@"DatabaseL %@",self.database);
     
     //Save
     [self saveChangesToDatabase];
@@ -121,13 +129,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -145,11 +146,19 @@
         if (detailvc)
             [segue.destinationViewController setSplitViewBarButtonItem:[detailvc splitViewBarButtonItem]];
         
-        //Set up the record for the record view controller
-        Record *record=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:sender]];
-        [segue.destinationViewController setRecord:record];
         
-        NSLog(@"Passing the record: %@",record);
+        NSIndexPath *indexPath=nil;
+        //if the sender if a table view cell
+        if ([sender isKindOfClass:[UITableViewCell class]])
+            indexPath=[self.tableView indexPathForCell:sender];
+        
+        //else if the sender is an index path (probably sent by the createRecordWithRecordType method)
+        else if ([sender isKindOfClass:[NSIndexPath class]])
+            indexPath=(NSIndexPath *)sender;
+        
+        //Set up the record for the record view controller
+        Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        [segue.destinationViewController setRecord:record];
         
         //Set the delegate of the destination view controller to be self
         [segue.destinationViewController setDelegate:self];
