@@ -16,6 +16,10 @@
 - (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo {
     [super updateWithNewRecordInfo:recordInfo];
 
+    //Update trend and plunge
+    self.trend=[recordInfo objectForKey:RECORD_TREND];
+    self.plunge=[recordInfo objectForKey:RECORD_PLUNGE];
+    
     //Update the formation if it exists in database
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
     request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",[recordInfo objectForKey:RECORD_FORMATION]];
@@ -28,10 +32,6 @@
         return false;
     }
     
-    //Update trend and plunge
-    self.trend=[recordInfo objectForKey:RECORD_TREND];
-    self.plunge=[recordInfo objectForKey:RECORD_PLUNGE];
-
     return true;
 }
 

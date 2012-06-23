@@ -76,6 +76,18 @@
     }];
 }
 
+- (void)highlightRecord:(Record *)record {
+    //get ithe index path of the specified record
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
+    
+    //Select the new record
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    
+    //Show the record on the detail view
+    [self performSegueWithIdentifier:@"Show Record" sender:[self.fetchedResultsController indexPathForObject:record]];
+
+}
+
 //Create a new record entity with the specified record type
 - (void)createRecordForRecordType:(NSString *)recordType {
     Record *record=[Record recordForRecordType:recordType andFolderName:self.folderName inManagedObjectContext:self.database.managedObjectContext];
@@ -83,14 +95,8 @@
     //Save
     [self saveChangesToDatabase];
     
-    //get ithe index path of the newly created record
-    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
-    
-    //Select the new record
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-    
-    //Show the new record on the detail view
-    [self performSegueWithIdentifier:@"Show Record" sender:[self.fetchedResultsController indexPathForObject:record]];
+    //highlight the newly created record
+    [self highlightRecord:record];
 }
 
 //Modify a record wiht the specified record type
@@ -102,6 +108,10 @@
     
     //Save
     [self saveChangesToDatabase];
+    
+    //highlight the newly modified record
+    [self highlightRecord:record];
+
 }
 
 //Delete the record at the specified index path in the table
