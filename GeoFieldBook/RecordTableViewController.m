@@ -15,11 +15,15 @@
 #import "Record+Creation.h"
 #import "Record+Modification.h"
 
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate>
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
 - (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
+- (void)autosaveRecord:(Record *)record withNewRecordInfo:(NSDictionary *)recordInfo;
+
+@property (nonatomic,strong) Record *modifiedRecord;
+@property (nonatomic,strong) NSDictionary *recordModifiedInfo;
 
 @end
 
@@ -27,6 +31,9 @@
 
 @synthesize folderName=_folderName;
 @synthesize database=_database;
+
+@synthesize modifiedRecord=_modifiedRecord;
+@synthesize recordModifiedInfo=_recordModifiedInfo;
 
 - (void)setupFetchedResultsController {
     //Set up the fetched results controller to fetch records
@@ -63,6 +70,27 @@
     }
     
     return detailvc;
+}
+
+- (void)autosaveRecord:(Record *)record 
+     withNewRecordInfo:(NSDictionary *)recordInfo 
+{
+    //Save the recordInfo dictionary in a temporary property
+    self.recordModifiedInfo=recordInfo;
+    
+    //Save the record in a temporary property
+    self.modifiedRecord=record;
+    
+    //If the name of the record is not nil
+    NSString *message=[[recordInfo objectForKey:RECORD_NAME] length] ? @"You are navigating away. Do you want to save the record you are editing?" : @"Autosave failed. You left the record name blank.";
+    
+    //Put up an alert to ask the user whether he/she wants to save
+    UIAlertView *autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
+                                                          message:message 
+                                                         delegate:self 
+                                                cancelButtonTitle:@"Don't Save" 
+                                                otherButtonTitles:@"Save", nil];
+    [autosaveAlert show];
 }
 
 #pragma mark - Record Creation/Deletion
@@ -124,6 +152,21 @@
     [self saveChangesToDatabase];
 }
 
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Save"]) {
+        //Save the record info
+        [self modifyRecord:self.modifiedRecord withNewInfo:self.recordModifiedInfo];
+    }
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView {
+    //Nillify the temporary record modified data
+    self.modifiedRecord=nil;
+    self.recordModifiedInfo=nil;
+}
+
 #pragma mark - RecordViewControllerDelegate methods
 
 - (void)recordViewController:(RecordViewController *)sender 
@@ -135,6 +178,13 @@
     
     //Dismiss the modal view controller
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
+           whileModifyingRecord:(Record *)record 
+              withNewRecordInfo:(NSDictionary *)recordInfo
+{
+    [self autosaveRecord:record withNewRecordInfo:recordInfo];
 }
 
 #pragma mark - View lifecycle

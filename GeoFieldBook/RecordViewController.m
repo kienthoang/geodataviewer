@@ -7,6 +7,7 @@
 //
 
 #import "RecordViewController.h"
+#import "Record+Modification.h"
 #import "TextInputFilter.h"
 #import "Record.h"
 #import "Formation.h"
@@ -132,8 +133,8 @@
     return [NSArray arrayWithObjects:self.recordNameTextField,self.strikeTextField,self.dipTextField,self.dipDirectionTextField,self.formationTextField,self.textField1,self.textField2, nil];
 }
 
-- (void)userDoneEditingRecord {
-    
+//Creates and returns the user-modified info dictionary
+- (NSDictionary *)dictionaryFromForm {
     //Create a NSDictionary with the user-modified information
     NSMutableDictionary *recordDictionary=[NSMutableDictionary dictionary];
     [recordDictionary setObject:self.recordNameTextField.text forKey:RECORD_NAME];
@@ -156,8 +157,12 @@
         [recordDictionary setObject:self.textField2.text forKey:RECORD_UPPER_FORMATION];
     }
     
+    return [recordDictionary copy];
+}
+
+- (void)userDoneEditingRecord {
     //Pass the user-modified info dictionary to the delegate for processing
-    [self.delegate recordViewController:self userDidModifyRecord:self.record withNewRecordInfo:[recordDictionary copy]];
+    [self.delegate recordViewController:self userDidModifyRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
 }
 
 #pragma mark - Gesture Handlers
@@ -264,10 +269,15 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];    
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-	return YES;
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //If self is still in editing mode, notify the delegate before going off screen
+    if (self.editing && [self.delegate respondsToSelector:@selector(userDidNavigateAwayFrom:whileModifyingRecord:withNewRecordInfo:)]) {
+        //If the delegate has not been deallocated yet, pass the user-modified info to it
+        if (self.delegate)
+            [self.delegate userDidNavigateAwayFrom:self whileModifyingRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
+    }
 }
 
 - (void)viewDidUnload {
@@ -292,6 +302,12 @@
     [self setDipLabel:nil];
     [self setDipDirectionLabel:nil];
     [super viewDidUnload];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+	return YES;
 }
 
 #pragma mark - Set up the record form for each individual type of record

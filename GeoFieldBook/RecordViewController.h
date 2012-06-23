@@ -19,11 +19,19 @@
          userDidModifyRecord:(Record *)record 
            withNewRecordInfo:(NSDictionary *)recordInfo;
 
+@optional
+
+- (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
+           whileModifyingRecord:(Record *)record 
+              withNewRecordInfo:(NSDictionary *)recordInfo;
+
 @end
 
 @interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>
 
 @property (nonatomic,strong) Record *record;
 @property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
+
+- (NSDictionary *)dictionaryFromForm;
 
 @end
