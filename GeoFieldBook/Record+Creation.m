@@ -43,6 +43,7 @@
             
             //Set the name of the record
             record.name=@"New Record";
+            record.folder=folder;
         }
     }
     

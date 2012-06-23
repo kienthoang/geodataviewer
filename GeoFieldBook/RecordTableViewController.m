@@ -27,6 +27,7 @@
 - (void)setupFetchedResultsController {
     //Set up the fetched results controller to fetch records
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",self.folderName];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -39,6 +40,13 @@
         //Set up fetchedResultsController
         [self setupFetchedResultsController];
     }
+}
+
+- (void)setFolderName:(NSString *)folderName {
+    _folderName=folderName;
+    
+    //Set up fetchedResultsController
+    [self setupFetchedResultsController];
 }
 
 #pragma mark - Record Creation/Deletion

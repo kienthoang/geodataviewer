@@ -215,7 +215,8 @@
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
     cell.textLabel.text=folder.folderName;
-    cell.detailTextLabel.text=[NSString stringWithFormat:@"%d Records",[folder.records count]];
+    NSString *recordCounter=[folder.records count]>1 ? @"Records" : @"Record";
+    cell.detailTextLabel.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
     
     return cell;
 }
