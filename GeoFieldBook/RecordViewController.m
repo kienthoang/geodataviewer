@@ -7,12 +7,10 @@
 //
 
 #import "RecordViewController.h"
-#import "SplitViewBarButtonItemPresenter.h"
 
-@interface RecordViewController() <UISplitViewControllerDelegate,UINavigationControllerDelegate>
+@interface RecordViewController() <UISplitViewBarButtonPresenter,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) UIBarButtonItem *splitViewBarButtonItem;
 
 @end
 
@@ -49,6 +47,15 @@
 
 #pragma mark - View lifecycle
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    //Set self to be the master's navigation controller's delegate to change the button's title when a push segue in master happens
+    UINavigationController *masterNavigation=[self.splitViewController.viewControllers objectAtIndex:0];
+    masterNavigation.delegate=self;
+}
+
 - (void)viewDidUnload
 {
     [self setToolbar:nil];
@@ -57,43 +64,10 @@
     // Release any retained subviews of the main view. (automatically added by xcode)
 }
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    //Set self to be the split vc's delegate to control the button dance
-    self.splitViewController.delegate=self;
-    
-    //Set self to be the master's navigation controller's delegate to change the button's title when a push segue in master happens
-    UINavigationController *masterNavigation=[self.splitViewController.viewControllers objectAtIndex:0];
-    masterNavigation.delegate=self;
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
 	return YES;
-}
-
-#pragma mark - UISplitViewControllerDelegate methods
-
--(void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)navigation withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
-{
-    //Get the current master view controller and set the butotn's title to its title
-    UIViewController *master=[(UINavigationController *)navigation topViewController];
-    barButtonItem.title=master.navigationItem.title;
-    
-    self.splitViewBarButtonItem = barButtonItem;
-}
-
--(void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    self.splitViewBarButtonItem = nil;
-}
-
--(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
-{
-    return UIInterfaceOrientationIsPortrait(orientation);
 }
 
 @end

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
-#import "SplitViewBarButtonItemPresenter.h"
+#import "UISplitViewBarButtonPresenter.h"
 
-@interface FolderTableViewController : CoreDataTableViewController <SplitViewBarButtonItemPresenter>       //Making this inherit the FetchedResultsController from CoreDataTVC
+@interface FolderTableViewController : CoreDataTableViewController  //Making this inherit the FetchedResultsController from CoreDataTVC
 
 @property (nonatomic,strong) UIManagedDocument *database;   //The database to fetch folders from
 

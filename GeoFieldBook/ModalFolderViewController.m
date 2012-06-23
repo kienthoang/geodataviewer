@@ -43,6 +43,10 @@
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    //Set the position of the modal
+    NSLog(@"Presenting vc: %@",self.presentingViewController);
+    NSLog(@"Master: %@",[[(UISplitViewController *)self.presentingViewController viewControllers] objectAtIndex:0]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -101,6 +105,5 @@
     //Dismiss keyboard
     [self.folderNameTextField resignFirstResponder];
 }
-
 
 @end

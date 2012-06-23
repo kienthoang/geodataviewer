@@ -13,7 +13,7 @@
 #import "Folder.h"
 #import "Folder+Creation.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate>
+@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (void)createNewFolderWithName:(NSString *)folderName;    //Create a folder in the database with the specified name
@@ -25,7 +25,6 @@
 @implementation FolderTableViewController 
 
 @synthesize database=_database;
-@synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
@@ -122,6 +121,11 @@
             //Put up an alert
         } 
     }];
+    
+    //Set the split view controller's delegate to self here because doing so in awakeFromNib would set the 
+    //presentingViewController of ModalFolderViewController to UISplitViewController, which screws up its
+    //context and its frame
+    self.splitViewController.delegate=self;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -129,7 +133,7 @@
     if ([segue.identifier isEqualToString:@"Add/Edit Folder"]) {
         //Set the delegate of the destination controller
         [segue.destinationViewController setDelegate:self];
-        
+                
         //Set the folderName of the destination controller if the table view is in editting mode
         if (self.tableView.editing) {
             UITableViewCell *cell=(UITableViewCell *)sender;
@@ -219,6 +223,34 @@
         //Get the selected folder and delete it
         [self deleteFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
+}
+
+#pragma mark - UISplitViewControllerDelegate methods
+
+- (id <UISplitViewBarButtonPresenter>)barButtonPresenter {
+    //Get the detail view controller
+    id detailvc=[self.splitViewController.viewControllers lastObject];
+    
+    //if the detail view controller does not want to be the splitview bar button presenter, set detailvc to nil
+    if (![detailvc conformsToProtocol:@protocol(UISplitViewBarButtonPresenter)]) {
+        detailvc=nil;
+    }
+    
+    return detailvc;
+}
+
+-(void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)navigation withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
+{
+    //Set the bar button item's title to self's title
+    barButtonItem.title=self.navigationItem.title;
+    
+    //Put up the button
+    [self barButtonPresenter].splitViewBarButtonItem = barButtonItem;
+}
+
+-(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
+{
+    return UIInterfaceOrientationIsPortrait(orientation);
 }
 
 

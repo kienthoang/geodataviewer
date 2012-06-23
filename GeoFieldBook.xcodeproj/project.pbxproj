@@ -55,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISplitViewBarButtonPresenter.h; sourceTree = "<group>"; };
 		020EBB5815941F7C00EECC08 /* FolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableViewController.h; sourceTree = "<group>"; };
 		020EBB5915941F7C00EECC08 /* FolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewController.m; sourceTree = "<group>"; };
 		020EBB7815941FB400EECC08 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
@@ -114,7 +115,6 @@
 		0294E0CC159362040025219F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0294E0CE1593620B0025219F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoFieldBook.xcdatamodel; sourceTree = "<group>"; };
-		210E16FF1594E17400B0AF8B /* SplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +184,6 @@
 			children = (
 				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
 				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
-				210E16FF1594E17400B0AF8B /* SplitViewBarButtonItemPresenter.h */,
 			);
 			name = "Detail View Controllers";
 			sourceTree = "<group>";
@@ -226,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				0294E0A7159361060025219F /* iPad.storyboard */,
+				0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */,
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
 				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
