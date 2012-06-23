@@ -11,7 +11,7 @@
 @implementation Record (Types)
 
 + (NSArray *)allRecordTypes {
-    return [NSArray arrayWithObjects:@"Bedding",@"Fault",@"Contact",@"Other", nil];
+    return [NSArray arrayWithObjects:@"Bedding",@"Fault",@"JointSet",@"Contact",@"Other", nil];
 }
 
 @end

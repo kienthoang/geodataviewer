@@ -1,17 +1,13 @@
 //
-//  Bedding.m
+//  Record+DictionaryKeys.m
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 6/23/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "Bedding.h"
-#import "Formation.h"
+#import "Record+DictionaryKeys.h"
 
-
-@implementation Bedding
-
-@dynamic formation;
+@implementation Record (DictionaryKeys)
 
 @end

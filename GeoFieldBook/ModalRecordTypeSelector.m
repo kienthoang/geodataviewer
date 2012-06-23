@@ -100,7 +100,6 @@
 
 - (IBAction)addRecordPressed:(UIBarButtonItem *)sender {
     //Pass the record type user chose to the delegate
-    NSLog(@"Selected record type: %@",self.recordType);
     [self.delegate modalRecordTypeSelector:self userDidPickRecordType:self.recordType];
 }
 

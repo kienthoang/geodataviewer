@@ -1,17 +1,15 @@
 //
-//  Bedding.m
+//  Fault+Modification.h
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 6/23/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "Bedding.h"
-#import "Formation.h"
+#import "Fault.h"
 
+@interface Fault (Modification)
 
-@implementation Bedding
-
-@dynamic formation;
+- (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo;
 
 @end

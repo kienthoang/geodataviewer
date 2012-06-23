@@ -75,12 +75,26 @@
     }
 }
 
+#pragma mark - Folder Creation/Editing/Deletion
+
+- (void)saveChangesToDatabase {
+    //Save changes to database
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+        if (!success) {
+            //handle errors
+        }
+    }];
+}
+
 - (void)createNewFolderWithName:(NSString *)folderName {
     //Filter folder name
     folderName=[TextInputFilter filterDatabaseInputText:folderName];
     
     //Create a folder entity with the specified name (after filtering)
     [Folder folderWithName:folderName inManagedObjectContext:self.database.managedObjectContext];
+    
+    //Save
+    [self saveChangesToDatabase];
 }
 
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName {
@@ -102,18 +116,17 @@
     //Else, handle errors
     else {
     }
+    
+    //Save
+    [self saveChangesToDatabase];
 }
 
 - (void)deleteFolder:(Folder *)folder {
     //Delete the folder
     [self.database.managedObjectContext deleteObject:folder];
     
-    //Save changes to database
-    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-        if (!success) {
-            //handle errors
-        }
-    }];
+    //Save
+    [self saveChangesToDatabase];
 }
 
 #pragma mark - View lifecycle

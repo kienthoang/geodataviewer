@@ -7,8 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Record+Creation.h"
+#import "Record+DictionaryKeys.h"
 #import "UISplitViewBarButtonPresenter.h"
 
+@class RecordViewController;
+
+@protocol RecordViewControllerDelegate <NSObject>
+
+- (void)recordViewController:(RecordViewController *)sender 
+         userDidModifyRecord:(Record *)record 
+           withNewRecordInfo:(NSDictionary *)recordInfo;
+
+@end
+
 @interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>
+
+@property (nonatomic,strong) Record *record;
+@property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
 
 @end

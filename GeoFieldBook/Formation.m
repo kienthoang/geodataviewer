@@ -2,11 +2,12 @@
 //  Formation.m
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 6/21/12.
+//  Created by Kien Hoang on 6/23/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import "Formation.h"
+#import "Bedding.h"
 #import "Contact.h"
 #import "Fault.h"
 #import "Formation_Folder.h"
@@ -18,9 +19,10 @@
 @dynamic formationName;
 @dynamic formationSortNumber;
 @dynamic faults;
+@dynamic formationFolder;
+@dynamic joinSets;
 @dynamic lowerContacts;
 @dynamic upperContacts;
-@dynamic joinSets;
-@dynamic formationFolder;
+@dynamic beddings;
 
 @end

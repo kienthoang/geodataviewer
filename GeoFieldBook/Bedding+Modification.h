@@ -1,5 +1,5 @@
 //
-//  Bedding.m
+//  Bedding+Modification.h
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 6/23/12.
@@ -7,11 +7,9 @@
 //
 
 #import "Bedding.h"
-#import "Formation.h"
 
+@interface Bedding (Modification)
 
-@implementation Bedding
-
-@dynamic formation;
+- (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo;
 
 @end

@@ -13,10 +13,12 @@
 #import "Folder.h"
 #import "Record+Types.h"
 #import "Record+Creation.h"
+#import "Record+Modification.h"
 
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate>
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
+- (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
 - (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
@@ -65,9 +67,32 @@
 
 #pragma mark - Record Creation/Deletion
 
+- (void)saveChangesToDatabase {
+    //Save changes to database
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+        if (!success) {
+            //handle errors
+        }
+    }];
+}
+
 //Create a new record entity with the specified record type
 - (void)createRecordForRecordType:(NSString *)recordType {
     [Record recordForRecordType:recordType andFolderName:self.folderName inManagedObjectContext:self.database.managedObjectContext];
+    
+    //Save
+    [self saveChangesToDatabase];
+}
+
+//Modify a record wiht the specified record type
+- (void)modifyRecord:(Record *)record 
+         withNewInfo:(NSDictionary *)recordInfo
+{
+    //Update the record
+    [record updateWithNewRecordInfo:recordInfo];
+    
+    //Save
+    [self saveChangesToDatabase];
 }
 
 //Delete the record at the specified index path in the table
@@ -77,12 +102,21 @@
     [self.database.managedObjectContext deleteObject:record];
     NSLog(@"DatabaseL %@",self.database);
     
-    //Save changes to database
-    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-        if (!success) {
-            //handle errors
-        }
-    }];
+    //Save
+    [self saveChangesToDatabase];
+}
+
+#pragma mark - RecordViewControllerDelegate methods
+
+- (void)recordViewController:(RecordViewController *)sender 
+         userDidModifyRecord:(Record *)record 
+           withNewRecordInfo:(NSDictionary *)recordInfo
+{
+    //Modify the specified record with the specified info
+    [self modifyRecord:record withNewInfo:recordInfo];
+    
+    //Dismiss the modal view controller
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - View lifecycle
@@ -108,9 +142,17 @@
     } else if ([segue.identifier isEqualToString:@"Show Record"]) {
         //Transfer the bar button item over
         id <UISplitViewBarButtonPresenter> detailvc=[self barButtonPresenter];
-        NSLog(@"detail: %@",[detailvc splitViewBarButtonItem]);
         if (detailvc)
             [segue.destinationViewController setSplitViewBarButtonItem:[detailvc splitViewBarButtonItem]];
+        
+        //Set up the record for the record view controller
+        Record *record=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:sender]];
+        [segue.destinationViewController setRecord:record];
+        
+        NSLog(@"Passing the record: %@",record);
+        
+        //Set the delegate of the destination view controller to be self
+        [segue.destinationViewController setDelegate:self];
     }
 }
 

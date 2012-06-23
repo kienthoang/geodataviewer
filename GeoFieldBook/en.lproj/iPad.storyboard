@@ -313,6 +313,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="browsePressed:" destination="LFc-wQ-Gyp" eventType="touchUpInside" id="DIL-fg-kBL"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AS2-54-wHM">
                                 <rect key="frame" x="163" y="304" width="95" height="32"/>
@@ -325,6 +328,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="LFc-wQ-Gyp" eventType="touchUpInside" id="e44-jt-Xav"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Name:" lineBreakMode="tailTruncation" minimumFontSize="10" id="PQQ-Q7-Khd">
                                 <rect key="frame" x="359" y="174" width="69" height="23"/>
@@ -361,7 +367,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="14" id="Acc-26-RSJ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="14" id="Acc-26-RSJ">
                                 <rect key="frame" x="443" y="170" width="237" height="31"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -376,14 +382,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Dip:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Tr8-wc-AoC">
-                                <rect key="frame" x="104" y="388" width="68" height="29"/>
+                                <rect key="frame" x="104" y="408" width="68" height="29"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Dip Direction:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YSI-LC-man">
-                                <rect key="frame" x="280" y="386" width="146" height="29"/>
+                                <rect key="frame" x="280" y="407" width="146" height="29"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -396,25 +402,25 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike" minimumFontSize="17" id="d55-m2-TjO">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike" minimumFontSize="17" id="d55-m2-TjO">
                                 <rect key="frame" x="162" y="359" width="79" height="31"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dip" minimumFontSize="17" id="hgi-10-nm5">
-                                <rect key="frame" x="162" y="386" width="79" height="31"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dip" minimumFontSize="17" id="hgi-10-nm5">
+                                <rect key="frame" x="162" y="406" width="79" height="31"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dip Direction" minimumFontSize="17" id="Vnu-9G-ONQ">
-                                <rect key="frame" x="439" y="385" width="145" height="31"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dip Direction" minimumFontSize="17" id="Vnu-9G-ONQ">
+                                <rect key="frame" x="439" y="405" width="145" height="31"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Formation" minimumFontSize="16" id="96G-kx-aRw">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Formation" minimumFontSize="16" id="96G-kx-aRw">
                                 <rect key="frame" x="439" y="354" width="145" height="31"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -434,13 +440,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="rtg-bf-3By">
-                                <rect key="frame" x="523" y="468" width="172" height="32"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="rtg-bf-3By">
+                                <rect key="frame" x="496" y="470" width="172" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="mpb-eR-t8c">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="mpb-eR-t8c">
                                 <rect key="frame" x="122" y="470" width="176" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -453,7 +459,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" showsHorizontalScrollIndicator="NO" id="X91-79-4UG">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" showsHorizontalScrollIndicator="NO" editable="NO" id="X91-79-4UG">
                                 <rect key="frame" x="71" y="572" width="522" height="166"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -467,7 +473,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="redraw" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dxm-3N-8JA">
+                            <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dxm-3N-8JA">
                                 <rect key="frame" x="590" y="297" width="98" height="35"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -478,6 +484,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="acquireData:" destination="LFc-wQ-Gyp" eventType="touchUpInside" id="Umh-VT-YyZ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" enabled="NO" id="Tie-9b-8ry">
                                 <rect key="frame" x="443" y="205" width="157" height="31"/>
@@ -512,7 +521,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Q9B-Kc-CAU"/>
-                                    <barButtonItem title="Edit" width="69" id="M97-hl-1T5"/>
+                                    <barButtonItem title="Edit" width="69" id="M97-hl-1T5">
+                                        <connections>
+                                            <action selector="editPressed:" destination="LFc-wQ-Gyp" id="4Mf-77-TFe"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -523,6 +536,26 @@
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="lU2-xy-pJz"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="dipDirectionLabel" destination="YSI-LC-man" id="jXa-64-uj5"/>
+                        <outlet property="dipDirectionTextField" destination="Vnu-9G-ONQ" id="yFD-Gd-UoE"/>
+                        <outlet property="dipLabel" destination="Tr8-wc-AoC" id="QEh-bV-gps"/>
+                        <outlet property="dipTextField" destination="hgi-10-nm5" id="eTr-d0-zdl"/>
+                        <outlet property="field1Label" destination="aHK-UX-lzU" id="OnD-PY-dLA"/>
+                        <outlet property="field2Label" destination="NDk-Gh-Yt2" id="nf2-re-z27"/>
+                        <outlet property="fieldObservationTextArea" destination="X91-79-4UG" id="ouP-K1-fG7"/>
+                        <outlet property="formationLabel" destination="KcO-I2-ngB" id="QTV-mZ-Lr9"/>
+                        <outlet property="formationTextField" destination="96G-kx-aRw" id="DLc-rY-Jib"/>
+                        <outlet property="recordDateLabel" destination="XkJ-tQ-9ge" id="kgU-fT-fr8"/>
+                        <outlet property="recordImage" destination="aaB-i3-Dti" id="GxM-sm-VRu"/>
+                        <outlet property="recordLatitudeLabel" destination="Tie-9b-8ry" id="uH2-Gb-TMH"/>
+                        <outlet property="recordLongitudeLabel" destination="ak1-zA-FQA" id="Jp1-w9-3gJ"/>
+                        <outlet property="recordNameTextField" destination="Acc-26-RSJ" id="T7f-lO-GtX"/>
+                        <outlet property="recordTimeLabel" destination="l5k-Vy-nPx" id="GvY-mz-u7B"/>
+                        <outlet property="recordTypeLabel" destination="Fp8-aN-cYI" id="pBb-bM-MiF"/>
+                        <outlet property="strikeLabel" destination="Cm1-zu-LdH" id="VXO-ZP-zK0"/>
+                        <outlet property="strikeTextField" destination="d55-m2-TjO" id="WQK-ZR-Hx9"/>
+                        <outlet property="textField1" destination="rtg-bf-3By" id="RAp-kv-wkh"/>
+                        <outlet property="textField2" destination="mpb-eR-t8c" id="i93-nB-ftg"/>
                         <outlet property="toolbar" destination="WsI-q1-BwC" id="9iB-dk-xLo"/>
                     </connections>
                 </viewController>
@@ -578,6 +611,26 @@
         <class className="RecordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="field1Label" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="field2Label" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="recordLatitudeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordLongitudeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textField1" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textField2" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>

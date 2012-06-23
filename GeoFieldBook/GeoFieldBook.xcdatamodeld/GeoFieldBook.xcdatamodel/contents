@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Bedding" representedClassName="Bedding" parentEntity="Record" syncable="YES"/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Bedding" representedClassName="Bedding" parentEntity="Record" syncable="YES">
+        <relationship name="formation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="beddings" inverseEntity="Formation" syncable="YES"/>
+    </entity>
     <entity name="Contact" representedClassName="Contact" parentEntity="Record" syncable="YES">
         <relationship name="lowerFormation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="lowerContacts" inverseEntity="Formation" syncable="YES"/>
         <relationship name="upperFormation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="upperContacts" inverseEntity="Formation" syncable="YES"/>
@@ -19,6 +21,7 @@
     <entity name="Formation" representedClassName="Formation" syncable="YES">
         <attribute name="formationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="formationSortNumber" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="beddings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bedding" inverseName="formation" inverseEntity="Bedding" syncable="YES"/>
         <relationship name="faults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fault" inverseName="formation" inverseEntity="Fault" syncable="YES"/>
         <relationship name="formationFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Formation_Folder" inverseName="formations" inverseEntity="Formation_Folder" syncable="YES"/>
         <relationship name="joinSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JointSet" inverseName="formation" inverseEntity="JointSet" syncable="YES"/>
@@ -48,14 +51,14 @@
         <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Folder" positionX="79" positionY="108" width="128" height="105"/>
         <element name="Bedding" positionX="178" positionY="567" width="128" height="45"/>
         <element name="Contact" positionX="250" positionY="438" width="128" height="75"/>
-        <element name="JointSet" positionX="198" positionY="720" width="128" height="60"/>
         <element name="Fault" positionX="189" positionY="252" width="128" height="90"/>
-        <element name="Other" positionX="333" positionY="594" width="128" height="45"/>
+        <element name="Folder" positionX="79" positionY="108" width="128" height="105"/>
         <element name="Formation" positionX="-101" positionY="396" width="128" height="150"/>
         <element name="Formation_Folder" positionX="-92" positionY="234" width="128" height="90"/>
+        <element name="JointSet" positionX="198" positionY="720" width="128" height="60"/>
+        <element name="Other" positionX="333" positionY="594" width="128" height="45"/>
         <element name="Record" positionX="466" positionY="162" width="128" height="210"/>
     </elements>
 </model>
