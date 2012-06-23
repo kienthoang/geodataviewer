@@ -8,18 +8,35 @@
 
 #import "RecordTableViewController.h"
 #import "ModalRecordTypeSelector.h"
-#import "Record.h"
 #import "Folder.h"
 #import "Record+Types.h"
+#import "Record+Creation.h"
 
-@interface RecordTableViewController()
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate>
 
 @end
 
 @implementation RecordTableViewController
 
 @synthesize folderName=_folderName;
-@synthesize delegate=_delegate;
+@synthesize database=_database;
+
+- (void)setupFetchedResultsController {
+    //Set up the fetched results controller to fetch records
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    
+    self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+}
+
+- (void)setDatabase:(UIManagedDocument *)database {
+    if (_database!=database) {
+        _database=database;
+        
+        //Set up fetchedResultsController
+        [self setupFetchedResultsController];
+    }
+}
 
 #pragma mark - View lifecycle
 
@@ -40,10 +57,19 @@
     //If seguing to a modal record type selector, set the destination controller's array of record types
     if ([segue.identifier isEqualToString:@"Select Record Type"]) {
         [segue.destinationViewController setRecordTypes:[Record allRecordTypes]];
+        [segue.destinationViewController setDelegate:self];
     }
 }
 
-#pragma mark -
+#pragma mark - ModalRecordTypeSelectorDelegate methods
+
+- (void)modalRecordTypeSelector:(ModalRecordTypeSelector *)sender userDidPickRecordType:(NSString *)recordType {
+    //Create a new record
+    [Record recordForRecordType:recordType andFolderName:self.folderName inManagedObjectContext:self.database.managedObjectContext];
+    
+    //Dismiss modal view controller
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 #pragma mark - Table view data source
 
@@ -63,6 +89,5 @@
     
     return cell;
 }
-
 
 @end

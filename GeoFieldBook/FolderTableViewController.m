@@ -8,6 +8,7 @@
 
 #import "FolderTableViewController.h"
 #import "ModalFolderViewController.h"
+#import "RecordTableViewController.h"
 #import "TextInputFilter.h"
 #import "GeoDatabaseManager.h"
 #import "Folder.h"
@@ -143,10 +144,12 @@
     }
     
     //Seguing to the RecordTableViewController
-    if ([segue.identifier isEqualToString:@"Show Records"]) {
+    else if ([segue.identifier isEqualToString:@"Show Records"]) {
         UITableViewCell *cell=(UITableViewCell *)sender;
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
         [segue.destinationViewController setTitle:folder.folderName];
+        [segue.destinationViewController setDatabase:self.database];
+        [segue.destinationViewController setFolderName:folder.folderName];
     }
 }
 
@@ -252,6 +255,5 @@
 {
     return UIInterfaceOrientationIsPortrait(orientation);
 }
-
 
 @end

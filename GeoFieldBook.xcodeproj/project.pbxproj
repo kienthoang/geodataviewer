@@ -42,6 +42,7 @@
 		0294E0CD159362040025219F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CC159362040025219F /* MapKit.framework */; };
 		0294E0CF1593620B0025219F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CE1593620B0025219F /* CoreLocation.framework */; };
 		0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */; };
+		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,8 @@
 		0294E0CC159362040025219F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0294E0CE1593620B0025219F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoFieldBook.xcdatamodel; sourceTree = "<group>"; };
+		029877F6159566E0000D71E7 /* Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Creation.h"; sourceTree = "<group>"; };
+		029877F7159566E0000D71E7 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,10 +228,10 @@
 			isa = PBXGroup;
 			children = (
 				0294E0A7159361060025219F /* iPad.storyboard */,
-				0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */,
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
 				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
+				029877F015955CB2000D71E7 /* Protocols */,
 				020EBB961594255700EECC08 /* Library */,
 				0294E0D1159362D20025219F /* Database */,
 				0294E09C159361060025219F /* Supporting Files */,
@@ -290,6 +293,8 @@
 				020EBB8B15941FB400EECC08 /* Other.m */,
 				020EBB8715941FB400EECC08 /* Record.h */,
 				020EBB8815941FB400EECC08 /* Record.m */,
+				029877F6159566E0000D71E7 /* Record+Creation.h */,
+				029877F7159566E0000D71E7 /* Record+Creation.m */,
 				020EBBC215946B3D00EECC08 /* Record+Types.h */,
 				020EBBC315946B3D00EECC08 /* Record+Types.m */,
 				020EBB8415941FB400EECC08 /* JointSet.h */,
@@ -304,6 +309,14 @@
 				020EBB7915941FB400EECC08 /* Formation.m */,
 			);
 			name = NSManagedObject;
+			sourceTree = "<group>";
+		};
+		029877F015955CB2000D71E7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,6 +448,7 @@
 				020EBBBA1594611A00EECC08 /* RecordTableViewController.m in Sources */,
 				020EBBC1159467F200EECC08 /* ModalRecordTypeSelector.m in Sources */,
 				020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */,
+				029877F8159566E0000D71E7 /* Record+Creation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

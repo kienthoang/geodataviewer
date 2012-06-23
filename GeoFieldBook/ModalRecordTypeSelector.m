@@ -11,6 +11,7 @@
 @interface ModalRecordTypeSelector() <UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIPickerView *recordTypePicker;
+@property (nonatomic,strong) NSString *recordType;   //The record type currently selected in the picker view
 
 @end
 
@@ -19,6 +20,7 @@
 @synthesize recordTypePicker=_recordTypePicker;
 @synthesize recordTypes=_recordTypes;
 @synthesize delegate=_delegate;
+@synthesize recordType=_recordType;
 
 //In case the recordTypePicker gets set to a new picker view, set the new one's delegate and data source to self
 - (void)setRecordTypePicker:(UIPickerView *)recordTypePicker {
@@ -34,9 +36,16 @@
     if (_recordTypes!=recordTypes) {
         _recordTypes=recordTypes;
         [self.recordTypePicker reloadAllComponents];
-        
-        NSLog(@"Types: %@",recordTypes);
     }
+}
+
+//If user has not selected anything (recordType has not been set), set it to the first row
+- (NSString *)recordType {
+    if (!_recordType) {
+        _recordType=[self.recordTypes objectAtIndex:0];
+    }
+    
+    return _recordType;
 }
 
 #pragma mark - View lifecycle
@@ -49,16 +58,13 @@
     self.recordTypePicker.dataSource=self;
     
     //Resize self to fit the master view
-    self.view.superview.frame=CGRectMake(0, 0, 300, 400);
-    self.view.superview.center=CGPointMake(0, 0);
+    self.view.superview.frame=CGRectMake(0, 0, 300, 380);
 }
 
 - (void)viewDidUnload
 {
     [self setRecordTypePicker:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -85,11 +91,17 @@
     return [self.recordTypes objectAtIndex:row];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    //Set the selected record tyoe (recordType) to the record type user selected
+    self.recordType=[self.recordTypes objectAtIndex:row];
+}
+
 #pragma mark - Target-Action Handlers
 
 - (IBAction)addRecordPressed:(UIBarButtonItem *)sender {
     //Pass the record type user chose to the delegate
-
+    NSLog(@"Selected record type: %@",self.recordType);
+    [self.delegate modalRecordTypeSelector:self userDidPickRecordType:self.recordType];
 }
 
 - (IBAction)cancelPressed:(UIBarButtonItem *)sender {

@@ -9,20 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 
-@class RecordTableViewController;
-
-@protocol RecordTableViewControllerDelegate <NSObject>
-
-- (void)recordTableViewController:(RecordTableViewController *)sender 
-               addNewRecordOfType:(NSString *)recordType 
-                         inFolder:(NSString *)folderName;
-
-@end
-
 @interface RecordTableViewController : CoreDataTableViewController
 
 @property (nonatomic,strong) NSString *folderName;
-
-@property (nonatomic,weak) id <RecordTableViewControllerDelegate> delegate;
+@property (nonatomic,strong) UIManagedDocument *database;
 
 @end

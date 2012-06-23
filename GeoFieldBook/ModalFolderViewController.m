@@ -43,10 +43,6 @@
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
     [self.view addGestureRecognizer:tapGestureRecognizer];
-    
-    //Set the position of the modal
-    NSLog(@"Presenting vc: %@",self.presentingViewController);
-    NSLog(@"Master: %@",[[(UISplitViewController *)self.presentingViewController viewControllers] objectAtIndex:0]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,19 +75,20 @@
 
 - (IBAction)confirmPressed:(UIBarButtonItem *)sender {
     //if the folder name text field is blank, focus on it
-    if (![self.folderNameTextField.text length])
+    NSString *folderName=[self.folderNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (![folderName length])
         [self.folderNameTextField becomeFirstResponder];
     
     //Else call the delegate and pass on the name of the folder
     else {
         //If the folder name has not been set before
         if (![self.folderName length]) {
-            self.folderName=self.folderNameTextField.text;
+            self.folderName=folderName;
             [self.delegate modalFolderViewController:self 
                                obtainedNewFolderName:self.folderNameTextField.text];
         } else {
             NSString *originalName=self.folderName;
-            self.folderName=self.folderNameTextField.text;
+            self.folderName=folderName;
             [self.delegate modalFolderViewController:self 
                             didAskToModifyFolderName:originalName 
                           obtainedModifiedFolderName:self.folderName];
