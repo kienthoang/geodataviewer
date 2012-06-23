@@ -39,13 +39,6 @@
 
 #pragma mark - UINavigationControllerDelegate methods
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    
-}
-
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)newMaster animated:(BOOL)animated {
     //Change the splitview button's title if it exists
     if (self.splitViewBarButtonItem)

@@ -44,6 +44,7 @@
 		0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */; };
 		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
 		029877FB1595740C000D71E7 /* IntialDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877FA1595740C000D71E7 /* IntialDetailViewController.m */; };
+		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		029877F7159566E0000D71E7 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
 		029877F91595740C000D71E7 /* IntialDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntialDetailViewController.h; sourceTree = "<group>"; };
 		029877FA1595740C000D71E7 /* IntialDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntialDetailViewController.m; sourceTree = "<group>"; };
+		029877FD1595955E000D71E7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				0294E0A7159361060025219F /* iPad.storyboard */,
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
+				029877FC1595954D000D71E7 /* Images */,
 				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
 				029877F015955CB2000D71E7 /* Protocols */,
 				020EBB961594255700EECC08 /* Library */,
@@ -324,6 +327,14 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		029877FC1595954D000D71E7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				029877FD1595955E000D71E7 /* RecordVCBackground.jpg */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -397,6 +408,7 @@
 			files = (
 				0294E0A0159361060025219F /* InfoPlist.strings in Resources */,
 				0294E0A9159361060025219F /* iPad.storyboard in Resources */,
+				029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

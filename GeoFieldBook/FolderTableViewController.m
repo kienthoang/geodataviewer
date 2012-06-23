@@ -272,7 +272,9 @@
     [self barButtonPresenter].splitViewBarButtonItem=nil;
 }
 
--(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
+-(BOOL)splitViewController:(UISplitViewController *)svc 
+  shouldHideViewController:(UIViewController *)vc 
+             inOrientation:(UIInterfaceOrientation)orientation
 {
     return UIInterfaceOrientationIsPortrait(orientation);
 }

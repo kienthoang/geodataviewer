@@ -7,7 +7,9 @@
 //
 
 #import "RecordTableViewController.h"
+#import "UISplitViewBarButtonPresenter.h"
 #import "ModalRecordTypeSelector.h"
+#import "RecordViewController.h"
 #import "Folder.h"
 #import "Record+Types.h"
 #import "Record+Creation.h"
@@ -47,6 +49,18 @@
     
     //Set up fetchedResultsController
     [self setupFetchedResultsController];
+}
+
+- (id <UISplitViewBarButtonPresenter>)barButtonPresenter {
+    //Get the detail view controller
+    id detailvc=[self.splitViewController.viewControllers lastObject];
+    
+    //if the detail view controller does not want to be the splitview bar button presenter, set detailvc to nil
+    if (![detailvc conformsToProtocol:@protocol(UISplitViewBarButtonPresenter)]) {
+        detailvc=nil;
+    }
+    
+    return detailvc;
 }
 
 #pragma mark - Record Creation/Deletion
@@ -92,15 +106,23 @@
         [segue.destinationViewController setRecordTypes:[Record allRecordTypes]];
         [segue.destinationViewController setDelegate:self];
     } else if ([segue.identifier isEqualToString:@"Show Record"]) {
-        
+        //Transfer the bar button item over
+        id <UISplitViewBarButtonPresenter> detailvc=[self barButtonPresenter];
+        NSLog(@"detail: %@",[detailvc splitViewBarButtonItem]);
+        if (detailvc)
+            [segue.destinationViewController setSplitViewBarButtonItem:[detailvc splitViewBarButtonItem]];
     }
 }
 
 #pragma mark - Target-Action Handlers
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
-    //Toggle editting mode of the table view
+    //Set the table view to editting mode
     [self.tableView setEditing:!self.tableView.editing animated:YES];
+    
+    //Change the style of the button to edit or done
+    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    sender.title=self.tableView.editing ? @"Done" : @"Edit";
 }
 
 #pragma mark - ModalRecordTypeSelectorDelegate methods
