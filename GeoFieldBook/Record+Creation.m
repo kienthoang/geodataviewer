@@ -37,6 +37,8 @@
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"JointSet" inManagedObjectContext:context];
             } else if ([recordType isEqualToString:@"Other"]) {
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"Other" inManagedObjectContext:context];
+            } else if ([recordType isEqualToString:@"Fault"]) {
+                record=[NSEntityDescription insertNewObjectForEntityForName:@"Fault" inManagedObjectContext:context];
             }
             
             //Set the name of the record

@@ -1,23 +1,23 @@
 //
-//  RecordViewController.m
+//  IntialDetailViewController.m
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 6/22/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "RecordViewController.h"
+#import "IntialDetailViewController.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate>
+@interface IntialDetailViewController () <UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
-@implementation RecordViewController
+@implementation IntialDetailViewController
 
-@synthesize toolbar=_toolbar;
 @synthesize splitViewBarButtonItem=_splitViewBarButtonItem;
+@synthesize toolbar=_toolbar;
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
     //Add the button to the toolbar
@@ -33,11 +33,18 @@
     
     //Set the items to be the toolbar's items
     self.toolbar.items=[items copy];
-        
+    
     _splitViewBarButtonItem=splitViewBarButtonItem; 
 }
 
 #pragma mark - UINavigationControllerDelegate methods
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    
+}
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)newMaster animated:(BOOL)animated {
     //Change the splitview button's title if it exists
@@ -45,10 +52,7 @@
         self.splitViewBarButtonItem.title=newMaster.navigationItem.title;
 }
 
-#pragma mark - View lifecycle
-
-- (void)viewWillAppear:(BOOL)animated   
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     //Set self to be the master's navigation controller's delegate to change the button's title when a push segue in master happens
@@ -56,9 +60,10 @@
     masterNavigation.delegate=self;
 }
 
+#pragma mark - View Controller Lifecycles
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
 	return YES;
 }
 

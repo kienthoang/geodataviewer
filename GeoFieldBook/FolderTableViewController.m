@@ -107,6 +107,13 @@
 - (void)deleteFolder:(Folder *)folder {
     //Delete the folder
     [self.database.managedObjectContext deleteObject:folder];
+    
+    //Save changes to database
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+        if (!success) {
+            //handle errors
+        }
+    }];
 }
 
 #pragma mark - View lifecycle
@@ -173,7 +180,8 @@
 #pragma mark - ModalFolderDelegate methods
 
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
-            obtainedNewFolderName:(NSString *)folderName {
+            obtainedNewFolderName:(NSString *)folderName 
+{
     //Create the folder with the specified name
     [self createNewFolderWithName:folderName];
         
@@ -183,7 +191,8 @@
 
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
          didAskToModifyFolderName:(NSString *)originalName 
-       obtainedModifiedFolderName:(NSString *)folderName {
+       obtainedModifiedFolderName:(NSString *)folderName 
+{
     //Modify the folder's name
     [self modifyFolderWithName:originalName toName:folderName];
         
@@ -242,13 +251,24 @@
     return detailvc;
 }
 
--(void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)navigation withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
+-(void)splitViewController:(UISplitViewController *)svc 
+    willHideViewController:(UIViewController *)navigation 
+         withBarButtonItem:(UIBarButtonItem *)barButtonItem 
+      forPopoverController:(UIPopoverController *)pc
 {
     //Set the bar button item's title to self's title
-    barButtonItem.title=self.navigationItem.title;
+    barButtonItem.title=self.navigationController.topViewController.navigationItem.title;
     
     //Put up the button
     [self barButtonPresenter].splitViewBarButtonItem = barButtonItem;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc 
+     willShowViewController:(UIViewController *)navigation 
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem 
+{
+    //Take the button off
+    [self barButtonPresenter].splitViewBarButtonItem=nil;
 }
 
 -(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation

@@ -43,6 +43,7 @@
 		0294E0CF1593620B0025219F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CE1593620B0025219F /* CoreLocation.framework */; };
 		0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */; };
 		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
+		029877FB1595740C000D71E7 /* IntialDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877FA1595740C000D71E7 /* IntialDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,8 @@
 		0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoFieldBook.xcdatamodel; sourceTree = "<group>"; };
 		029877F6159566E0000D71E7 /* Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Creation.h"; sourceTree = "<group>"; };
 		029877F7159566E0000D71E7 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
+		029877F91595740C000D71E7 /* IntialDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntialDetailViewController.h; sourceTree = "<group>"; };
+		029877FA1595740C000D71E7 /* IntialDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntialDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +188,8 @@
 		020EBB9B15942C8F00EECC08 /* Detail View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				029877F91595740C000D71E7 /* IntialDetailViewController.h */,
+				029877FA1595740C000D71E7 /* IntialDetailViewController.m */,
 				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
 				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
 			);
@@ -449,6 +454,7 @@
 				020EBBC1159467F200EECC08 /* ModalRecordTypeSelector.m in Sources */,
 				020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */,
 				029877F8159566E0000D71E7 /* Record+Creation.m in Sources */,
+				029877FB1595740C000D71E7 /* IntialDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

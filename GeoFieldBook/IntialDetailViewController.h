@@ -1,5 +1,5 @@
 //
-//  RecordViewController.h
+//  IntialDetailViewController.h
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 6/22/12.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UISplitViewBarButtonPresenter.h"
 
-@interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>
+@interface IntialDetailViewController : UIViewController <UISplitViewBarButtonPresenter>
 
 @end
