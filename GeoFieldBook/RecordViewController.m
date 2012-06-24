@@ -133,6 +133,10 @@
     return [NSArray arrayWithObjects:self.recordNameTextField,self.strikeTextField,self.dipTextField,self.dipDirectionTextField,self.formationTextField,self.textField1,self.textField2, nil];
 }
 
+- (BOOL)inEdittingMode {
+    return self.editing;
+}
+
 //Creates and returns the user-modified info dictionary
 - (NSDictionary *)dictionaryFromForm {
     //Create a NSDictionary with the user-modified information

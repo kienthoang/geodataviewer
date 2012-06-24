@@ -10,9 +10,25 @@
 #import "CoreDataTableViewController.h"
 #import "Record+Modification.h"
 
+@class RecordTableViewController;
+
+@protocol RecordTVCAutosaverDelegate <NSObject>
+
+typedef void (^autosaver_block_t)(void);
+
+- (void)recordTableViewController:(RecordTableViewController *)sender 
+                        showAlert:(UIAlertView *)alertView 
+          andExecuteBlockOnCancel:(autosaver_block_t)cancelBlock 
+                  andExecuteBlock:(autosaver_block_t)confirmBlock 
+         whenClickButtonWithTitle:(NSString *)buttonTitle;
+
+@end
+
 @interface RecordTableViewController : CoreDataTableViewController
 
 @property (nonatomic,strong) NSString *folderName;
 @property (nonatomic,strong) UIManagedDocument *database;
+
+@property (nonatomic,weak) id <RecordTVCAutosaverDelegate> autosaveDelegate;
 
 @end

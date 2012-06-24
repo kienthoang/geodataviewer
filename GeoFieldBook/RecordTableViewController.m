@@ -9,6 +9,7 @@
 #import "RecordTableViewController.h"
 #import "UISplitViewBarButtonPresenter.h"
 #import "ModalRecordTypeSelector.h"
+#import "GeoDatabaseManager.h"
 #import "RecordViewController.h"
 #import "Folder.h"
 #import "Record+Types.h"
@@ -34,6 +35,8 @@
 
 @synthesize modifiedRecord=_modifiedRecord;
 @synthesize recordModifiedInfo=_recordModifiedInfo;
+
+@synthesize autosaveDelegate=_autosaveDelegate;
 
 - (void)setupFetchedResultsController {
     //Set up the fetched results controller to fetch records
@@ -188,6 +191,39 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)viewWillDisappear:(BOOL)animated {
+    //Get the detail view controller
+    id detailvc=[self.splitViewController.viewControllers lastObject];
+    if (![detailvc isKindOfClass:[RecordViewController class]])
+        detailvc=nil;
+    RecordViewController *detail=(RecordViewController *)detailvc;
+    
+    //If the detail vc is in editing mode
+    if ([detail inEdittingMode]) {
+        //Get the record
+        Record *modifiedRecord=[(RecordViewController *)detailvc record];
+        NSDictionary *recordModifiedInfo=[(RecordViewController *)detailvc dictionaryFromForm];
+        UIManagedDocument *database=self.database;
+        
+        //If the name of the modified record is not nil or empty, setup the autosaver
+        if ([[recordModifiedInfo objectForKey:RECORD_NAME] length]) {
+            UIAlertView *autosaverAlert=[[UIAlertView alloc] initWithTitle:@"Autosaver" message:@"You are navigating away. Do you want to save the record you were editing?" delegate:nil cancelButtonTitle:@"Don't Save" otherButtonTitles:@"Save", nil];
+            [self.autosaveDelegate recordTableViewController:self showAlert:autosaverAlert andExecuteBlockOnCancel:^{
+                NSLog(@"Cancel autosave alert!");
+            } andExecuteBlock:^{
+                //Update the record info
+                [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
+                
+                //Save changes to database
+                [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+                }];
+            } whenClickButtonWithTitle:@"Save"];
+        }
+    }
+    
+    [super viewWillDisappear:animated];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

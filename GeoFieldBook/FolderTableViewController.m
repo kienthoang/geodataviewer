@@ -15,16 +15,25 @@
 #import "Folder.h"
 #import "Folder+Creation.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate>
+@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (void)createNewFolderWithName:(NSString *)folderName;    //Create a folder in the database with the specified name
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;
+- (void)showInitialDetailView;
+
+@property (nonatomic,strong) autosaver_block_t autosaverCancelBlock;
+@property (nonatomic,strong) autosaver_block_t autosaverConfirmBlock;
+@property (nonatomic,strong) NSString *autosaverConfirmTitle;
 
 @end
 
 @implementation FolderTableViewController 
+
+@synthesize autosaverCancelBlock=_autosaverCancelBlock;
+@synthesize autosaverConfirmTitle=_autosaverConfirmTitle;
+@synthesize autosaverConfirmBlock=_autosaverConfirmBlock;
 
 @synthesize database=_database;
 
@@ -73,6 +82,52 @@
     else if (self.database.documentState==UIDocumentStateNormal) {
         //Set up the fetched result controller
         [self setupFetchedResultsController];
+    }
+}
+
+- (void)showInitialDetailView {
+    [self performSegueWithIdentifier:@"Show Home Page" sender:self];
+}
+
+#pragma mark - RecordTVCAutosaver methods
+
+- (void)recordTableViewController:(RecordTableViewController *)sender 
+                        showAlert:(UIAlertView *)alertView 
+          andExecuteBlockOnCancel:(autosaver_block_t)cancelBlock 
+                  andExecuteBlock:(autosaver_block_t)confirmBlock 
+         whenClickButtonWithTitle:(NSString *)buttonTitle
+{
+    //Set the delegate of the alert to be self
+    alertView.delegate=self;
+    
+    //Save the blocks
+    self.autosaverCancelBlock=cancelBlock;
+    self.autosaverConfirmBlock=confirmBlock;
+    self.autosaverConfirmTitle=buttonTitle;
+    
+    //Show the alert
+    [alertView show];
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView {
+    //Cancel button on the autosaver's alert view clicked
+    self.autosaverCancelBlock();
+    
+    //Nillify cancel block
+    self.autosaverCancelBlock=nil;
+    
+    //Show home view
+    [self showInitialDetailView];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:self.autosaverConfirmTitle]) {
+        //Execute the confirm block and unset it
+        self.autosaverConfirmBlock();
+        self.autosaverConfirmBlock=nil;
+        
+        //Show home view
+        [self showInitialDetailView];
     }
 }
 
@@ -144,9 +199,12 @@
         } 
     }];
     
-    //Perform a segue to the initial view controller
-    if (![[self.splitViewController.viewControllers lastObject] isKindOfClass:[InitialDetailViewController class]])
-        [self performSegueWithIdentifier:@"Show Home Page" sender:self];
+    //Perform a segue to the initial view controller if no autosaver blocks are set
+    if (![[self.splitViewController.viewControllers lastObject] isKindOfClass:[InitialDetailViewController class]]) 
+    {
+        if (!self.autosaverCancelBlock || !self.autosaverConfirmBlock)
+            [self showInitialDetailView];
+    }
     
     //Set the split view controller's delegate to self here because doing so in awakeFromNib would set the 
     //presentingViewController of ModalFolderViewController to UISplitViewController, which screws up its
@@ -175,6 +233,7 @@
         [segue.destinationViewController setTitle:folder.folderName];
         [segue.destinationViewController setDatabase:self.database];
         [segue.destinationViewController setFolderName:folder.folderName];
+        [segue.destinationViewController setAutosaveDelegate:self];
     }
 }
 

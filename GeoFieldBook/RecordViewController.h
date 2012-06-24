@@ -33,5 +33,6 @@
 @property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
 
 - (NSDictionary *)dictionaryFromForm;
+- (BOOL) inEdittingMode;
 
 @end
