@@ -18,12 +18,15 @@
 #import "Fault.h"
 #import "Other.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate>
+#import "StrikePickerViewController.h"
+
+@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate>
 
 @property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
 
 - (void)updateSplitViewBarButtonPresenterWith:(UIBarButtonItem *)splitViewBarButtonItem;
 - (void)userDoneEditingRecord;         //handles when user finishes editing the record's info
+- (void)resignAllTextFieldsAndAreas;
 
 @property (nonatomic) BOOL editing;
 @property (nonatomic,readonly) NSArray *textFields;
@@ -169,12 +172,19 @@
     [self.delegate recordViewController:self userDidModifyRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
 }
 
+//Resign all text fields and text areas
+- (void)resignAllTextFieldsAndAreas {
+    [self.textFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
+    [self.fieldObservationTextArea resignFirstResponder];
+    
+    NSLog(@"resigned all text fields");
+}
+
 #pragma mark - Gesture Handlers
 
 - (void)dismissKeyboard:(UITapGestureRecognizer *)tapGesture {
     //dismiss the keyboard
-    [self.textFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
-    [self.fieldObservationTextArea resignFirstResponder];
+    [self resignAllTextFieldsAndAreas];
 }
 
 #pragma mark - Target-Action Handlers
@@ -239,12 +249,43 @@
 - (IBAction)takePhoto:(UIBarButtonItem *)sender {
 }
 
+#pragma mark - Target-Action Handlers for picker-using text fields
+
+- (IBAction)strikeTouchedDown:(UITextField *)sender {
+    //Dismiss the keyboard
+    [self resignAllTextFieldsAndAreas];
+}
+
+- (IBAction)strikeBeginEdit:(UITextField *)sender {
+    //Dismiss the keyboard
+    [sender resignFirstResponder];
+}
+
+#pragma mark - Delegate methods for all Picker View Controller protocols
+
+- (void)strikePickerViewController:(StrikePickerViewController *)sender 
+          userDidSelectStrikeValue:(NSString *)strike
+{
+    //Set the strike text field's text
+    self.strikeTextField.text=strike;
+}
+
 #pragma mark - UINavigationControllerDelegate methods
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)newMaster animated:(BOOL)animated {
     //Change the splitview button's title if it exists
     if (self.splitViewBarButtonItem)
         self.splitViewBarButtonItem.title=newMaster.navigationItem.title;
+}
+
+#pragma mark - Prepare for segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //Strike picker segue
+    if ([segue.identifier isEqualToString:@"Strike Picker"]) {
+        //Set self as the delegate of the popup Strike Picker
+        [segue.destinationViewController setDelegate:self];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -270,7 +311,7 @@
     //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
-    [self.view addGestureRecognizer:tapGestureRecognizer];    
+    [self.view addGestureRecognizer:tapGestureRecognizer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -32,6 +32,9 @@
 		0222DB10159622DD00699D62 /* Contact+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB0F159622DC00699D62 /* Contact+Modification.m */; };
 		0222DB161596305500699D62 /* JointSet+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB151596305400699D62 /* JointSet+Description.m */; };
 		0222DB1C1596487800699D62 /* GeoFieldBookFrontPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */; };
+		0222DB241596B40C00699D62 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB231596B40C00699D62 /* PickerViewController.m */; };
+		0222DB281596B9ED00699D62 /* FormationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB271596B9ED00699D62 /* FormationPickerViewController.m */; };
+		0222DB2B1596BF2800699D62 /* StrikePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -116,6 +119,12 @@
 		0222DB141596305400699D62 /* JointSet+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JointSet+Description.h"; sourceTree = "<group>"; };
 		0222DB151596305400699D62 /* JointSet+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JointSet+Description.m"; sourceTree = "<group>"; };
 		0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeoFieldBookFrontPage.png; sourceTree = "<group>"; };
+		0222DB221596B40C00699D62 /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
+		0222DB231596B40C00699D62 /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
+		0222DB261596B9ED00699D62 /* FormationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationPickerViewController.h; sourceTree = "<group>"; };
+		0222DB271596B9ED00699D62 /* FormationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationPickerViewController.m; sourceTree = "<group>"; };
+		0222DB291596BF2800699D62 /* StrikePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrikePickerViewController.h; sourceTree = "<group>"; };
+		0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrikePickerViewController.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -180,6 +189,8 @@
 			children = (
 				020EBB931594217A00EECC08 /* CoreDataTableViewController.h */,
 				020EBB941594217A00EECC08 /* CoreDataTableViewController.m */,
+				0222DB221596B40C00699D62 /* PickerViewController.h */,
+				0222DB231596B40C00699D62 /* PickerViewController.m */,
 			);
 			name = "View Controller Prototypes";
 			sourceTree = "<group>";
@@ -221,6 +232,17 @@
 			name = "Detail View Controllers";
 			sourceTree = "<group>";
 		};
+		0222DB251596B9B200699D62 /* Picker View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0222DB261596B9ED00699D62 /* FormationPickerViewController.h */,
+				0222DB271596B9ED00699D62 /* FormationPickerViewController.m */,
+				0222DB291596BF2800699D62 /* StrikePickerViewController.h */,
+				0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */,
+			);
+			name = "Picker View Controllers";
+			sourceTree = "<group>";
+		};
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +282,7 @@
 				0294E0A7159361060025219F /* iPad.storyboard */,
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
+				0222DB251596B9B200699D62 /* Picker View Controllers */,
 				029877FC1595954D000D71E7 /* Images */,
 				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
 				029877F015955CB2000D71E7 /* Protocols */,
@@ -513,6 +536,9 @@
 				0222DB0D1596229F00699D62 /* JointSet+Modification.m in Sources */,
 				0222DB10159622DD00699D62 /* Contact+Modification.m in Sources */,
 				0222DB161596305500699D62 /* JointSet+Description.m in Sources */,
+				0222DB241596B40C00699D62 /* PickerViewController.m in Sources */,
+				0222DB281596B9ED00699D62 /* FormationPickerViewController.m in Sources */,
+				0222DB2B1596BF2800699D62 /* StrikePickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
