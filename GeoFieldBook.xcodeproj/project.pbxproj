@@ -35,6 +35,8 @@
 		0222DB241596B40C00699D62 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB231596B40C00699D62 /* PickerViewController.m */; };
 		0222DB281596B9ED00699D62 /* FormationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB271596B9ED00699D62 /* FormationPickerViewController.m */; };
 		0222DB2B1596BF2800699D62 /* StrikePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */; };
+		0222DB2E1596D95100699D62 /* DipPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2D1596D95100699D62 /* DipPickerViewController.m */; };
+		0222DB311596DCC600699D62 /* DipDirectionPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB301596DCC600699D62 /* DipDirectionPickerViewController.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -125,6 +127,10 @@
 		0222DB271596B9ED00699D62 /* FormationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationPickerViewController.m; sourceTree = "<group>"; };
 		0222DB291596BF2800699D62 /* StrikePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrikePickerViewController.h; sourceTree = "<group>"; };
 		0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrikePickerViewController.m; sourceTree = "<group>"; };
+		0222DB2C1596D95100699D62 /* DipPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipPickerViewController.h; sourceTree = "<group>"; };
+		0222DB2D1596D95100699D62 /* DipPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipPickerViewController.m; sourceTree = "<group>"; };
+		0222DB2F1596DCC600699D62 /* DipDirectionPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipDirectionPickerViewController.h; sourceTree = "<group>"; };
+		0222DB301596DCC600699D62 /* DipDirectionPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipDirectionPickerViewController.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -239,6 +245,10 @@
 				0222DB271596B9ED00699D62 /* FormationPickerViewController.m */,
 				0222DB291596BF2800699D62 /* StrikePickerViewController.h */,
 				0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */,
+				0222DB2C1596D95100699D62 /* DipPickerViewController.h */,
+				0222DB2D1596D95100699D62 /* DipPickerViewController.m */,
+				0222DB2F1596DCC600699D62 /* DipDirectionPickerViewController.h */,
+				0222DB301596DCC600699D62 /* DipDirectionPickerViewController.m */,
 			);
 			name = "Picker View Controllers";
 			sourceTree = "<group>";
@@ -539,6 +549,8 @@
 				0222DB241596B40C00699D62 /* PickerViewController.m in Sources */,
 				0222DB281596B9ED00699D62 /* FormationPickerViewController.m in Sources */,
 				0222DB2B1596BF2800699D62 /* StrikePickerViewController.m in Sources */,
+				0222DB2E1596D95100699D62 /* DipPickerViewController.m in Sources */,
+				0222DB311596DCC600699D62 /* DipDirectionPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

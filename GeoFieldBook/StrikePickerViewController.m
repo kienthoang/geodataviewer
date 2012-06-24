@@ -29,32 +29,17 @@
     return [NSArray arrayWithObjects:firstComponent,secondComponent,thirdComponent, nil];
 }
 
-- (void)notifyDelegateOfUserSelection {
-    NSString *strike=@"";
-    
-    //Get all the numbers user selected in rows in all components
-    for (int index=0;index<[self.componentMatrix count];index++) {
-        NSArray *component=[self.componentMatrix objectAtIndex:index];
-        strike=[strike stringByAppendingString:[component objectAtIndex:[self.pickerView selectedRowInComponent:index]]];    
-    }
-    
-    //Pass the strike to the delegate
-    [self.delegate strikePickerViewController:self userDidSelectStrikeValue:strike];
-}
-
 #pragma mark - UIPickerViewDelegate methods
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [self notifyDelegateOfUserSelection];
+    //Notify the delegate
+    [self.delegate strikePickerViewController:self userDidSelectStrikeValue:[self userSelection]];
 }
 
 #pragma mark - View Controller Lifecycles
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //Set self as the picker view's delegate
-    self.pickerView.delegate=self;
     
     //Setup the component matrix
     self.componentMatrix=[self strikeComponentMatrix];    

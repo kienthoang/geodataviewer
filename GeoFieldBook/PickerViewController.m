@@ -25,6 +25,18 @@
     [self.pickerView reloadAllComponents];
 }
 
+- (NSString *)userSelection {
+    NSString *selection=@"";
+    
+    //Get all the numbers user selected in rows in all components
+    for (int index=0;index<[self.componentMatrix count];index++) {
+        NSArray *component=[self.componentMatrix objectAtIndex:index];
+        selection=[selection stringByAppendingString:[component objectAtIndex:[self.pickerView selectedRowInComponent:index]]];    
+    }
+    
+    return selection;
+}
+
 #pragma mark - UIPickerViewDataSource methods
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -44,8 +56,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Set self as the picker view's data source
+    //Set self as the picker view's data source and delegate
     self.pickerView.dataSource=self;
+    self.pickerView.delegate=self;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

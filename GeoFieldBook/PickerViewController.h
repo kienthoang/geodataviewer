@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (nonatomic,strong) NSArray *componentMatrix;   //The matrix of components; i.e. array of columns, which are arrays of rows of components
 
+- (NSString *)userSelection;
+
 @end

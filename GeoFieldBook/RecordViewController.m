@@ -19,8 +19,10 @@
 #import "Other.h"
 
 #import "StrikePickerViewController.h"
+#import "DipPickerViewController.h"
+#import "DipDirectionPickerViewController.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate>
+@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate>
 
 @property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
 
@@ -251,12 +253,12 @@
 
 #pragma mark - Target-Action Handlers for picker-using text fields
 
-- (IBAction)strikeTouchedDown:(UITextField *)sender {
+- (IBAction)textFieldTouchDown:(UITextField *)sender {
     //Dismiss the keyboard
     [self resignAllTextFieldsAndAreas];
 }
 
-- (IBAction)strikeBeginEdit:(UITextField *)sender {
+- (IBAction)textFieldDidBeginEdit:(UITextField *)sender {
     //Dismiss the keyboard
     [sender resignFirstResponder];
 }
@@ -268,6 +270,20 @@
 {
     //Set the strike text field's text
     self.strikeTextField.text=strike;
+}
+
+- (void)dipPickerViewController:(DipPickerViewController *)sender 
+          userDidSelectDipValue:(NSString *)dip
+{
+    //Set the dip text field's text
+    self.dipTextField.text=dip;
+}
+
+- (void)dipDirectionPickerViewController:(DipDirectionPickerViewController *)sender 
+          userDidSelectDipDirectionValue:(NSString *)dipDirection
+{
+    //Set the dip direction text field's text
+    self.dipDirectionTextField.text=dipDirection;
 }
 
 #pragma mark - UINavigationControllerDelegate methods
@@ -282,7 +298,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Strike picker segue
-    if ([segue.identifier isEqualToString:@"Strike Picker"]) {
+    NSSet *pickerSegueIdentifiers=[NSSet setWithObjects:@"Strike Picker",@"Dip Picker",@"Dip Direction Picker", nil];
+    if ([pickerSegueIdentifiers containsObject:segue.identifier]) {
         //Set self as the delegate of the popup Strike Picker
         [segue.destinationViewController setDelegate:self];
     }
