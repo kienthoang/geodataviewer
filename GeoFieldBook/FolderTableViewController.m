@@ -85,8 +85,19 @@
     }
 }
 
+//Put up the initial detail view (the one with the geology logo) on the detail view
 - (void)showInitialDetailView {
     [self performSegueWithIdentifier:@"Show Home Page" sender:self];
+}
+
+//Put up an alert about some database failure with specified message
+- (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Database Error" 
+                                                  message:message 
+                                                 delegate:nil 
+                                        cancelButtonTitle:@"Dismiss" 
+                                        otherButtonTitles: nil];
+    [alert show];
 }
 
 #pragma mark - RecordTVCAutosaver methods
@@ -109,22 +120,25 @@
     [alertView show];
 }
 
-- (void)alertViewCancel:(UIAlertView *)alertView {
-    //Cancel button on the autosaver's alert view clicked
-    self.autosaverCancelBlock();
-    
-    //Nillify cancel block
-    self.autosaverCancelBlock=nil;
-    
-    //Show home view
-    [self showInitialDetailView];
-}
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    //If the user clicked on the confirm button (the button with the title sent by RecordViewController via its delegate protocol)
     if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:self.autosaverConfirmTitle]) {
         //Execute the confirm block and unset it
         self.autosaverConfirmBlock();
         self.autosaverConfirmBlock=nil;
+        
+        //Show home view
+        [self showInitialDetailView];
+    }
+    
+    //If user canceled the alert view, execute the cancel block and put up the initial detail view controller on the detail side
+    else if (buttonIndex==alertView.cancelButtonIndex) {
+        //Cancel button on the autosaver's alert view clicked
+        self.autosaverCancelBlock();
+        
+        //Nillify cancel block
+        self.autosaverCancelBlock=nil;
         
         //Show home view
         [self showInitialDetailView];
@@ -138,6 +152,7 @@
     [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (!success) {
             //handle errors
+            [self putUpDatabaseErrorAlertWithMessage:@"Failed to save changes to database. Please try to submit them again."];
         }
     }];
 }
@@ -171,6 +186,8 @@
     
     //Else, handle errors
     else {
+        //Put up an error
+        [self putUpDatabaseErrorAlertWithMessage:@"Duplicate folders exist in database."];
     }
     
     //Save
@@ -196,6 +213,7 @@
         //May be show up an alert if not success?
         if (!success) {
             //Put up an alert
+            [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
         } 
     }];
     

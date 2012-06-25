@@ -41,6 +41,13 @@
     self.componentMatrix=[self dipDirectionComponentMatrix];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //Notify the delegate of the initial (default) values
+    [self.delegate dipDirectionPickerViewController:self userDidSelectDipDirectionValue:[self userSelection]];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;

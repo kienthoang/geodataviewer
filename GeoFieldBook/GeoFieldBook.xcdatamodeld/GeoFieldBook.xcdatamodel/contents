@@ -51,7 +51,7 @@
         <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bedding" positionX="178" positionY="567" width="128" height="45"/>
+        <element name="Bedding" positionX="178" positionY="567" width="128" height="60"/>
         <element name="Contact" positionX="250" positionY="438" width="128" height="75"/>
         <element name="Fault" positionX="189" positionY="252" width="128" height="90"/>
         <element name="Folder" positionX="79" positionY="108" width="128" height="105"/>

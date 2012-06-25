@@ -178,8 +178,6 @@
 - (void)resignAllTextFieldsAndAreas {
     [self.textFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
     [self.fieldObservationTextArea resignFirstResponder];
-    
-    NSLog(@"resigned all text fields");
 }
 
 #pragma mark - Gesture Handlers

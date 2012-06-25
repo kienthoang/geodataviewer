@@ -78,22 +78,34 @@
 - (void)autosaveRecord:(Record *)record 
      withNewRecordInfo:(NSDictionary *)recordInfo 
 {
-    //Save the recordInfo dictionary in a temporary property
-    self.recordModifiedInfo=recordInfo;
-    
-    //Save the record in a temporary property
-    self.modifiedRecord=record;
-    
-    //If the name of the record is not nil
-    NSString *message=[[recordInfo objectForKey:RECORD_NAME] length] ? @"You are navigating away. Do you want to save the record you are editing?" : @"Autosave failed. You left the record name blank.";
-    
-    //Put up an alert to ask the user whether he/she wants to save
-    UIAlertView *autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
-                                                          message:message 
-                                                         delegate:self 
-                                                cancelButtonTitle:@"Don't Save" 
-                                                otherButtonTitles:@"Save", nil];
-    [autosaveAlert show];
+    //If the name of the modified of the record is not blank, show the alert; otherwise, show an alert with no confirm button
+    if ([[recordInfo objectForKey:RECORD_NAME] length]) {
+        //Save the recordInfo dictionary in a temporary property
+        self.recordModifiedInfo=recordInfo;
+        
+        //Save the record in a temporary property
+        self.modifiedRecord=record;
+        
+        //If the name of the record is not nil
+        NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
+        
+        //Put up an alert to ask the user whether he/she wants to save
+        UIAlertView *autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
+                                                              message:message 
+                                                             delegate:self 
+                                                    cancelButtonTitle:@"Don't Save" 
+                                                    otherButtonTitles:@"Save", nil];
+        [autosaveAlert show];
+    } else {
+        //Show the autosave fail alert
+        NSString *message=@"Record has not been saved: Name cannot be blank.";
+        UIAlertView *autosaveFailAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
+                                                                  message:message 
+                                                                 delegate:nil 
+                                                        cancelButtonTitle:@"Dismiss" 
+                                                        otherButtonTitles:nil];
+        [autosaveFailAlert show];
+    }
 }
 
 #pragma mark - Record Creation/Deletion
@@ -210,7 +222,7 @@
         if ([[recordModifiedInfo objectForKey:RECORD_NAME] length]) {
             UIAlertView *autosaverAlert=[[UIAlertView alloc] initWithTitle:@"Autosaver" message:@"You are navigating away. Do you want to save the record you were editing?" delegate:nil cancelButtonTitle:@"Don't Save" otherButtonTitles:@"Save", nil];
             [self.autosaveDelegate recordTableViewController:self showAlert:autosaverAlert andExecuteBlockOnCancel:^{
-                NSLog(@"Cancel autosave alert!");
+                //NSLog(@"Cancel autosave alert!");
             } andExecuteBlock:^{
                 //Update the record info
                 [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];

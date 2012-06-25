@@ -45,6 +45,13 @@
     self.componentMatrix=[self strikeComponentMatrix];    
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //Notify the delegate of the initial (default) values
+    [self.delegate strikePickerViewController:self userDidSelectStrikeValue:[self userSelection]];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
