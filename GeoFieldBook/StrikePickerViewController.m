@@ -29,11 +29,18 @@
     return [NSArray arrayWithObjects:firstComponent,secondComponent,thirdComponent, nil];
 }
 
+- (void)handleUserSelection {
+    [super handleUserSelection];
+    
+    //Notify the delegate of user's selection
+    [self.delegate strikePickerViewController:self userDidSelectStrikeValue:[self userSelection]];
+}
+
 #pragma mark - UIPickerViewDelegate methods
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    //Notify the delegate
-    [self.delegate strikePickerViewController:self userDidSelectStrikeValue:[self userSelection]];
+    //Handle user selection
+    [self handleUserSelection];
 }
 
 #pragma mark - View Controller Lifecycles
@@ -43,13 +50,6 @@
     
     //Setup the component matrix
     self.componentMatrix=[self strikeComponentMatrix];    
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Notify the delegate of the initial (default) values
-    [self.delegate strikePickerViewController:self userDidSelectStrikeValue:[self userSelection]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

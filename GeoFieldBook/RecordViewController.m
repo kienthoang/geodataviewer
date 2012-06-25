@@ -347,6 +347,18 @@
         //Set self as the delegate of the popup Strike Picker
         [segue.destinationViewController setDelegate:self];
     }
+    
+    //Controls whether the PickerVC popovers would pass initial values back when they appear
+    if ([segue.identifier isEqualToString:@"Strike Picker"]) {
+        //Will send initial value to picker text field only if its value is currently 0
+        [segue.destinationViewController setInitialSelectionEnabled:[self.strikeTextField.text isEqualToString:@"0"]];
+    } else if ([segue.identifier isEqualToString:@"Dip Picker"]) {
+        //Will send initiali value to dip text field only if its value is currently 0
+        [segue.destinationViewController setInitialSelectionEnabled:[self.dipTextField.text isEqualToString:@"0"]];
+    } else if ([segue.identifier isEqualToString:@"Dip Direction Picker"]) {
+        //Will send initial value to dip direction text field only if it's currently blank (no direction selected)
+        [segue.destinationViewController setInitialSelectionEnabled:![self.dipDirectionTextField.text length]];
+    }
 }
 
 #pragma mark - View lifecycle

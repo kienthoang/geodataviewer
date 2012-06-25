@@ -17,6 +17,7 @@
 @synthesize pickerView=_pickerView;
 
 @synthesize componentMatrix=_componentMatrix;
+@synthesize initialSelectionEnabled=_initialSelectionEnabled;
 
 - (void)setComponentMatrix:(NSArray *)componentMatrix {
     _componentMatrix=componentMatrix;
@@ -35,6 +36,10 @@
     }
     
     return selection;
+}
+
+//Will be overridden in subclasses ====> Handles when user selects something (can be called by the controller to for initial selection)
+- (void)handleUserSelection {
 }
 
 #pragma mark - UIPickerViewDataSource methods
@@ -59,6 +64,14 @@
     //Set self as the picker view's data source and delegate
     self.pickerView.dataSource=self;
     self.pickerView.delegate=self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Handles initial selection if initialSelectionEnabled is set to true
+    if (self.initialSelectionEnabled)
+        [self handleUserSelection];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

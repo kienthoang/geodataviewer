@@ -11,8 +11,11 @@
 @interface PickerViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+
 @property (nonatomic,strong) NSArray *componentMatrix;   //The matrix of components; i.e. array of columns, which are arrays of rows of components
+@property (nonatomic) BOOL initialSelectionEnabled;    //flag specifying whether self would select the initial values when view first goes on screen
 
 - (NSString *)userSelection;
+- (void)handleUserSelection;
 
 @end

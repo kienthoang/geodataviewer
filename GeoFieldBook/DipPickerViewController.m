@@ -26,11 +26,18 @@
     return [NSArray arrayWithObjects:firstComponent,secondComponent, nil];
 }
 
+- (void)handleUserSelection {
+    [super handleUserSelection];
+    
+    //Notify the delegate
+    [self.delegate dipPickerViewController:self userDidSelectDipValue:[self userSelection]];
+}
+
 #pragma mark - UIPickerViewDelegate methods
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    //Notify the delegate
-    [self.delegate dipPickerViewController:self userDidSelectDipValue:[self userSelection]];
+    //Handle user selection
+    [self handleUserSelection];
 }
 
 #pragma mark - View Controller Lifecycles
@@ -41,13 +48,6 @@
     
     //Setup the component matrix
     self.componentMatrix=[self dipComponentMatrix]; 
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Notify the delegate of the initial (default) values
-    [self.delegate dipPickerViewController:self userDidSelectDipValue:[self userSelection]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
