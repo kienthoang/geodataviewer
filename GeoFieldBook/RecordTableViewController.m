@@ -211,8 +211,8 @@
         detailvc=nil;
     RecordViewController *detail=(RecordViewController *)detailvc;
     
-    //If the detail vc is in editing mode
-    if ([detail inEdittingMode]) {
+    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!!!!)
+    if ([detail inEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
         //Get the record
         Record *modifiedRecord=[(RecordViewController *)detailvc record];
         NSDictionary *recordModifiedInfo=[(RecordViewController *)detailvc dictionaryFromForm];
@@ -222,7 +222,7 @@
         if ([[recordModifiedInfo objectForKey:RECORD_NAME] length]) {
             UIAlertView *autosaverAlert=[[UIAlertView alloc] initWithTitle:@"Autosaver" message:@"You are navigating away. Do you want to save the record you were editing?" delegate:nil cancelButtonTitle:@"Don't Save" otherButtonTitles:@"Save", nil];
             [self.autosaveDelegate recordTableViewController:self showAlert:autosaverAlert andExecuteBlockOnCancel:^{
-                //NSLog(@"Cancel autosave alert!");
+                NSLog(@"Cancel autosave alert!");
             } andExecuteBlock:^{
                 //Update the record info
                 [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
