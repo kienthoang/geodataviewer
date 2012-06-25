@@ -419,8 +419,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="YnQ-HQ-mE8"/>
-                                            <action selector="textFieldTouchDown:" destination="LFc-wQ-Gyp" eventType="touchDown" id="w79-7z-N2n"/>
+                                            <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="Ma9-qT-ezx"/>
                                             <segue destination="Tvy-Qe-Ilt" kind="popover" identifier="Strike Picker" popoverAnchorView="d55-m2-TjO" id="W4q-cG-kkZ">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
@@ -433,7 +432,6 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="TZp-zY-TuG"/>
-                                            <action selector="textFieldTouchDown:" destination="LFc-wQ-Gyp" eventType="touchDown" id="ugj-i5-CH1"/>
                                             <segue destination="MxA-Uf-rRh" kind="popover" identifier="Dip Picker" popoverAnchorView="hgi-10-nm5" id="6n8-o4-eX8">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
@@ -446,7 +444,6 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="tiE-6J-eqA"/>
-                                            <action selector="textFieldTouchDown:" destination="LFc-wQ-Gyp" eventType="touchDown" id="INk-97-j9z"/>
                                             <segue destination="3dC-bP-l0r" kind="popover" identifier="Dip Direction Picker" popoverAnchorView="Vnu-9G-ONQ" id="S76-ff-Q5U">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
@@ -459,44 +456,79 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="fp6-Am-tGq"/>
-                                            <action selector="textFieldTouchDown:" destination="LFc-wQ-Gyp" eventType="touchDown" id="Tav-FI-JzD"/>
                                             <segue destination="T2a-8E-gvP" kind="popover" identifier="Formation Picker" popoverAnchorView="96G-kx-aRw" id="eTm-Rw-MYi">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Field 2:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NDk-Gh-Yt2">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Trend" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NDk-Gh-Yt2">
                                         <rect key="frame" x="27" y="448" width="155" height="29"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Field 1: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="aHK-UX-lzU">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Lower Formation" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NaE-6s-Ecu">
+                                        <rect key="frame" x="28" y="447" width="167" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Plunge" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="aHK-UX-lzU">
                                         <rect key="frame" x="384" y="448" width="157" height="29"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="rtg-bf-3By">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Upper Formation" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jcP-iM-PaQ">
+                                        <rect key="frame" x="379" y="448" width="160" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Plunge" minimumFontSize="17" id="rtg-bf-3By">
                                         <rect key="frame" x="549" y="448" width="172" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="8YS-36-8hV"/>
-                                            <action selector="textFieldTouchDown:" destination="LFc-wQ-Gyp" eventType="touchDown" id="Aaa-JZ-TFM"/>
+                                            <segue destination="Sd6-Ix-A2T" kind="popover" identifier="Plunge Picker" popoverAnchorView="rtg-bf-3By" id="woR-q9-UBb">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="mpb-eR-t8c">
-                                        <rect key="frame" x="190" y="447" width="176" height="32"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Upper Formation" minimumFontSize="17" id="c93-8P-FW6">
+                                        <rect key="frame" x="549" y="448" width="172" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="fJ0-zg-1be"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Trend" minimumFontSize="17" id="mpb-eR-t8c">
+                                        <rect key="frame" x="195" y="448" width="176" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="VKY-Zz-H09"/>
-                                            <action selector="textFieldTouchDown:" destination="LFc-wQ-Gyp" eventType="touchDown" id="p4k-GJ-K0n"/>
+                                            <segue destination="Len-YO-57e" kind="popover" identifier="Trend Picker" popoverAnchorView="mpb-eR-t8c" id="clt-pg-oo9">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lower Formation" minimumFontSize="17" id="FMh-B9-XP0">
+                                        <rect key="frame" x="203" y="454" width="176" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="efe-VI-Rks"/>
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Field Observation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="yQP-S4-lTa">
@@ -589,11 +621,13 @@
                         <outlet property="dipDirectionTextField" destination="Vnu-9G-ONQ" id="yFD-Gd-UoE"/>
                         <outlet property="dipLabel" destination="Tr8-wc-AoC" id="QEh-bV-gps"/>
                         <outlet property="dipTextField" destination="hgi-10-nm5" id="eTr-d0-zdl"/>
-                        <outlet property="field1Label" destination="aHK-UX-lzU" id="OnD-PY-dLA"/>
-                        <outlet property="field2Label" destination="NDk-Gh-Yt2" id="nf2-re-z27"/>
                         <outlet property="fieldObservationTextArea" destination="X91-79-4UG" id="ouP-K1-fG7"/>
                         <outlet property="formationLabel" destination="KcO-I2-ngB" id="QTV-mZ-Lr9"/>
                         <outlet property="formationTextField" destination="96G-kx-aRw" id="DLc-rY-Jib"/>
+                        <outlet property="lowerFormationLabel" destination="NaE-6s-Ecu" id="ZDs-1r-4vG"/>
+                        <outlet property="lowerFormationTextField" destination="FMh-B9-XP0" id="RJC-aI-5wc"/>
+                        <outlet property="plungeLabel" destination="aHK-UX-lzU" id="EPG-Lh-kwj"/>
+                        <outlet property="plungeTextField" destination="rtg-bf-3By" id="RAF-ob-H2U"/>
                         <outlet property="recordDateLabel" destination="XkJ-tQ-9ge" id="kgU-fT-fr8"/>
                         <outlet property="recordImage" destination="aaB-i3-Dti" id="GxM-sm-VRu"/>
                         <outlet property="recordLatitudeLabel" destination="Tie-9b-8ry" id="uH2-Gb-TMH"/>
@@ -604,9 +638,11 @@
                         <outlet property="scrollView" destination="SYZ-dV-H1C" id="HZG-Ye-7Bi"/>
                         <outlet property="strikeLabel" destination="Cm1-zu-LdH" id="VXO-ZP-zK0"/>
                         <outlet property="strikeTextField" destination="d55-m2-TjO" id="WQK-ZR-Hx9"/>
-                        <outlet property="textField1" destination="rtg-bf-3By" id="RAp-kv-wkh"/>
-                        <outlet property="textField2" destination="mpb-eR-t8c" id="i93-nB-ftg"/>
                         <outlet property="toolbar" destination="WsI-q1-BwC" id="9iB-dk-xLo"/>
+                        <outlet property="trendLabel" destination="NDk-Gh-Yt2" id="4l6-2j-TdZ"/>
+                        <outlet property="trendTextField" destination="mpb-eR-t8c" id="gbH-Jd-zFs"/>
+                        <outlet property="upperFormationLabel" destination="jcP-iM-PaQ" id="BWX-T7-nFb"/>
+                        <outlet property="upperFormationTextField" destination="c93-8P-FW6" id="sgK-UN-Ikc"/>
                     </connections>
                 </viewController>
             </objects>
@@ -635,7 +671,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5830" y="-2693"/>
+            <point key="canvasLocation" x="-5862" y="-4301"/>
         </scene>
         <!--Picker View Controller-->
         <scene sceneID="neq-Dd-nPE">
@@ -660,7 +696,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5871" y="-4158"/>
+            <point key="canvasLocation" x="-5903" y="-5766"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="VXG-wO-A5P">
@@ -734,7 +770,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5822" y="-1553"/>
+            <point key="canvasLocation" x="-5854" y="-3161"/>
         </scene>
         <!--Dip Direction Picker View Controller-->
         <scene sceneID="gzM-LZ-3Za">
@@ -759,7 +795,57 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5790" y="-221"/>
+            <point key="canvasLocation" x="-5822" y="-1829"/>
+        </scene>
+        <!--Trend Picker View Controller-->
+        <scene sceneID="Tjg-pS-3cq">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0on-5f-xVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Len-YO-57e" customClass="TrendPickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sdY-YL-wJt">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" id="eMw-sd-bSr">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                    <connections>
+                        <outlet property="pickerView" destination="eMw-sd-bSr" id="MGi-sp-YEl"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-5782" y="-685"/>
+        </scene>
+        <!--Plunge Picker View Controller-->
+        <scene sceneID="Yff-Cv-Agq">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G64-zs-IeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Sd6-Ix-A2T" customClass="PlungePickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cUb-X1-Wwh">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" id="QzE-xG-Efl">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="150" height="200"/>
+                    <connections>
+                        <outlet property="pickerView" destination="QzE-xG-Efl" id="ZIX-WA-52T"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-6654" y="263"/>
         </scene>
     </scenes>
     <resources>
@@ -803,6 +889,9 @@
                 <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
             </relationships>
         </class>
+        <class className="PlungePickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlungePickerViewController.h"/>
+        </class>
         <class className="RecordTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
         </class>
@@ -813,11 +902,13 @@
                 <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dipTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="field1Label" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="field2Label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="plungeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="recordDateLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="recordImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="recordLatitudeLabel" candidateClass="UILabel"/>
@@ -828,13 +919,18 @@
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textField1" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textField2" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="trendLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="trendTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="upperFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upperFormationTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="StrikePickerViewController" superclassName="PickerViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StrikePickerViewController.h"/>
+        </class>
+        <class className="TrendPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrendPickerViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

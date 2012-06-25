@@ -21,8 +21,10 @@
 #import "StrikePickerViewController.h"
 #import "DipPickerViewController.h"
 #import "DipDirectionPickerViewController.h"
+#import "PlungePickerViewController.h"
+#import "TrendPickerViewController.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate>
+@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate>
 
 @property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
 
@@ -48,15 +50,19 @@
 @property (weak, nonatomic) IBOutlet UITextField *dipTextField;
 @property (weak, nonatomic) IBOutlet UITextField *formationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dipDirectionTextField;
-@property (weak, nonatomic) IBOutlet UITextField *textField2;
-@property (weak, nonatomic) IBOutlet UITextField *textField1;
-@property (weak, nonatomic) IBOutlet UILabel *field2Label;
-@property (weak, nonatomic) IBOutlet UILabel *field1Label;
 @property (weak, nonatomic) IBOutlet UITextView *fieldObservationTextArea;
 @property (weak, nonatomic) IBOutlet UILabel *formationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *strikeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dipDirectionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *trendLabel;
+@property (weak, nonatomic) IBOutlet UITextField *trendTextField;
+@property (weak, nonatomic) IBOutlet UILabel *plungeLabel;
+@property (weak, nonatomic) IBOutlet UITextField *plungeTextField;
+@property (weak, nonatomic) IBOutlet UILabel *lowerFormationLabel;
+@property (weak, nonatomic) IBOutlet UITextField *lowerFormationTextField;
+@property (weak, nonatomic) IBOutlet UILabel *upperFormationLabel;
+@property (weak, nonatomic) IBOutlet UITextField *upperFormationTextField;
 
 //=========================================================================================//
 
@@ -92,10 +98,14 @@
 @synthesize dipLabel = _dipLabel;
 @synthesize formationTextField = _formationTextField;
 @synthesize dipDirectionLabel = _dipDirectionLabel;
-@synthesize textField2 = _textField2;
-@synthesize textField1 = _textField1;
-@synthesize field2Label = _field2Label;
-@synthesize field1Label = _field1Label;
+@synthesize trendLabel = _trendLabel;
+@synthesize trendTextField = _trendTextField;
+@synthesize plungeLabel = _plungeLabel;
+@synthesize plungeTextField = _plungeTextField;
+@synthesize lowerFormationLabel = _lowerFormationLabel;
+@synthesize lowerFormationTextField = _lowerFormationTextField;
+@synthesize upperFormationLabel = _upperFormationLabel;
+@synthesize upperFormationTextField = _upperFormationTextField;
 @synthesize fieldObservationTextArea = _fieldObservationTextArea;
 @synthesize formationLabel = _formationLabel;
 @synthesize strikeLabel = _strikeLabel;
@@ -138,7 +148,7 @@
 }
 
 - (NSArray *)textFields {
-    return [NSArray arrayWithObjects:self.recordNameTextField,self.strikeTextField,self.dipTextField,self.dipDirectionTextField,self.formationTextField,self.textField1,self.textField2, nil];
+    return [NSArray arrayWithObjects:self.recordNameTextField,self.strikeTextField,self.dipTextField,self.dipDirectionTextField,self.formationTextField,self.trendTextField,self.plungeTextField,self.lowerFormationTextField,self.upperFormationTextField, nil];
 }
 
 - (BOOL)inEdittingMode {
@@ -161,13 +171,10 @@
     [recordDictionary setObject:self.fieldObservationTextArea.text forKey:RECORD_FIELD_OBSERVATION];
     
     //Specific update for specific of records
-    if ([self.record isKindOfClass:[Fault class]]) {
-        [recordDictionary setObject:self.textField1.text forKey:RECORD_PLUNGE];
-        [recordDictionary setObject:self.textField2.text forKey:RECORD_TREND];
-    } else if ([self.record isKindOfClass:[Contact class]]) {
-        [recordDictionary setObject:self.textField1.text forKey:RECORD_LOWER_FORMATION];
-        [recordDictionary setObject:self.textField2.text forKey:RECORD_UPPER_FORMATION];
-    }
+    [recordDictionary setObject:self.plungeTextField.text forKey:RECORD_PLUNGE];
+    [recordDictionary setObject:self.trendTextField.text forKey:RECORD_TREND];
+    [recordDictionary setObject:self.lowerFormationTextField.text forKey:RECORD_LOWER_FORMATION];
+    [recordDictionary setObject:self.upperFormationTextField.text forKey:RECORD_UPPER_FORMATION];
     
     return [recordDictionary copy];
 }
@@ -269,17 +276,16 @@
 }
 
 - (void)keyboardDidAppear:(NSNotification *)notification {
-    //Get the info dictionary sent with the notification and get the size of the keyboard from it
-    NSDictionary *notificationInfo=[notification userInfo];
-    CGSize keyboardSize=[[notificationInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    //Set the insets of the scroll view to fit the keyboard
-    UIEdgeInsets contentInsets=UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    self.scrollView.contentInset=contentInsets;
-    self.scrollView.scrollIndicatorInsets=contentInsets;
-    
     //If the UITextArea is currently the first responder (the keyboard caller), scroll it to visible
     if (self.fieldObservationTextArea.isFirstResponder) {
+        //Get the info dictionary sent with the notification and get the size of the keyboard from it
+        NSDictionary *notificationInfo=[notification userInfo];
+        CGSize keyboardSize=[[notificationInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+        
+        //Set the insets of the scroll view to fit the keyboard
+        UIEdgeInsets contentInsets=UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+        self.scrollView.contentInset=contentInsets;
+        self.scrollView.scrollIndicatorInsets=contentInsets;
         CGRect aRect=self.view.frame;
         aRect.size.height-=keyboardSize.height;
         if (!CGRectContainsPoint(aRect, self.fieldObservationTextArea.frame.origin)) {
@@ -296,11 +302,6 @@
 }
 
 #pragma mark - Target-Action Handlers for picker-using text fields
-
-- (IBAction)textFieldTouchDown:(UITextField *)sender {
-    //Dismiss the keyboard
-    [self resignAllTextFieldsAndAreas];
-}
 
 - (IBAction)textFieldDidBeginEdit:(UITextField *)sender {
     //Dismiss the keyboard
@@ -330,6 +331,20 @@
     self.dipDirectionTextField.text=dipDirection;
 }
 
+- (void)trendPickerViewController:(TrendPickerViewController *)sender 
+          userDidSelectTrendValue:(NSString *)trend
+{
+    //Set the trend text field's text
+    self.trendTextField.text=trend;
+}
+
+- (void)plungePickerViewController:(PlungePickerViewController *)sender 
+          userDidSelectPlungeValue:(NSString *)plunge
+{
+    //Set the plunge text field's text
+    self.plungeTextField.text=plunge;
+}
+
 #pragma mark - UINavigationControllerDelegate methods
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)newMaster animated:(BOOL)animated {
@@ -342,7 +357,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Strike picker segue
-    NSSet *pickerSegueIdentifiers=[NSSet setWithObjects:@"Strike Picker",@"Dip Picker",@"Dip Direction Picker", nil];
+    NSSet *pickerSegueIdentifiers=[NSSet setWithObjects:@"Strike Picker",@"Dip Picker",@"Dip Direction Picker",@"Plunge Picker",@"Trend Picker", nil];
     if ([pickerSegueIdentifiers containsObject:segue.identifier]) {
         //Set self as the delegate of the popup Strike Picker
         [segue.destinationViewController setDelegate:self];
@@ -350,7 +365,7 @@
     
     //Controls whether the PickerVC popovers would pass initial values back when they appear
     if ([segue.identifier isEqualToString:@"Strike Picker"]) {
-        //Will send initial value to picker text field only if its value is currently 0
+        //Will send initial value to strike picker text field only if its value is currently 0
         [segue.destinationViewController setInitialSelectionEnabled:[self.strikeTextField.text isEqualToString:@"0"]];
     } else if ([segue.identifier isEqualToString:@"Dip Picker"]) {
         //Will send initiali value to dip text field only if its value is currently 0
@@ -358,6 +373,12 @@
     } else if ([segue.identifier isEqualToString:@"Dip Direction Picker"]) {
         //Will send initial value to dip direction text field only if it's currently blank (no direction selected)
         [segue.destinationViewController setInitialSelectionEnabled:![self.dipDirectionTextField.text length]];
+    } else if ([segue.identifier isEqualToString:@"Trend Picker"]) {
+        //Will send initial value to trend text field only if it's currently blank (no value selected)
+        [segue.destinationViewController setInitialSelectionEnabled:![self.trendTextField.text length]];
+    } else if ([segue.identifier isEqualToString:@"Plunge Picker"]) {
+        //Will send initial value to plunge picker text field only if it's currently blank
+        [segue.destinationViewController setInitialSelectionEnabled:![self.plungeTextField.text length]];
     }
 }
 
@@ -413,16 +434,20 @@
     [self setDipTextField:nil];
     [self setFormationTextField:nil];
     [self setDipDirectionTextField:nil];
-    [self setTextField2:nil];
-    [self setTextField1:nil];
     [self setFieldObservationTextArea:nil];
-    [self setField2Label:nil];
-    [self setField1Label:nil];
     [self setFormationLabel:nil];
     [self setStrikeLabel:nil];
     [self setDipLabel:nil];
     [self setDipDirectionLabel:nil];
     [self setScrollView:nil];
+    [self setTrendLabel:nil];
+    [self setTrendTextField:nil];
+    [self setPlungeLabel:nil];
+    [self setPlungeTextField:nil];
+    [self setLowerFormationLabel:nil];
+    [self setLowerFormationTextField:nil];
+    [self setUpperFormationLabel:nil];
+    [self setUpperFormationTextField:nil];
     [super viewDidUnload];
 }
 
@@ -441,12 +466,16 @@
     //Clear the color of the field observation text area
     self.fieldObservationTextArea.backgroundColor=[UIColor clearColor];
     
+    //Hide the formation, trend, plunge. lower, upper formations textfields and will put them up again if the record type requires them (WHITELISTING)
+    NSSet *hiddenFields=[NSSet setWithObjects:self.trendTextField,self.trendLabel,self.plungeLabel,self.plungeTextField,self.formationLabel,self.formationTextField,self.lowerFormationLabel,self.lowerFormationTextField,self.upperFormationLabel,self.upperFormationTextField, nil];
+    [hiddenFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
+    
     //Fill in the information from the record
     self.recordNameTextField.text=self.record.name ? self.record.name : @"";
     self.recordLatitudeLabel.text=self.record.latitude;
     self.recordLongitudeLabel.text=self.record.longitude;
-    self.strikeTextField.text=self.record.strike ? [NSString stringWithFormat:@"%@",self.record.strike] : @"";
-    self.dipTextField.text=self.record.dip ? [NSString stringWithFormat:@"%@",self.record.dip] : @"";
+    self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
+    self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];
     self.dipDirectionTextField.text=self.record.dipDirection ? self.record.dipDirection : @"";
     self.fieldObservationTextArea.text=self.record.fieldOservations ? self.record.fieldOservations : @"";
     self.recordTypeLabel.text=[self.record.class description];
@@ -468,64 +497,56 @@
 - (void)formSetupForBeddingType {
     Bedding *bedding=(Bedding *)self.record;
     
-    //Hide the two text fields
-    self.textField1.hidden=YES;
-    self.field1Label.hidden=YES;
-    self.textField2.hidden=YES;
-    self.field2Label.hidden=YES;
+    //Show the formation label and formation textfield set the textfield's value
+    self.formationLabel.hidden=NO;
+    self.formationTextField.hidden=NO;
     self.formationTextField.text=bedding.formation ? bedding.formation.formationName : @"";
 }
 
 - (void)formSetupForContactType {
+    //Show the plunge and trend text labels and text fields
+    NSSet *showedFields=[NSSet setWithObjects:self.plungeLabel,self.plungeTextField,self.trendTextField,self.trendLabel, nil];
+    [showedFields makeObjectsPerformSelector:@selector(setHidden:) withObject:nil];
+    
     //Setup the two text fields
     Contact *contact=(Contact *)self.record;
-    self.field1Label.text=@"Lower Formation:";
-    self.field2Label.text=@"Upper Formation:";
-    self.textField1.text=contact.lowerFormation ? contact.lowerFormation.formationName : @"";
-    self.textField2.text=contact.upperFormation ? contact.upperFormation.formationName : @"";
-    
-    //Hide the formation label and text field
-    self.formationTextField.hidden=YES;
-    self.formationLabel.hidden=YES;
+    self.lowerFormationTextField.text=contact.lowerFormation ? contact.lowerFormation.formationName : @"";
+    self.upperFormationTextField.text=contact.upperFormation ? contact.upperFormation.formationName : @"";
 }
 
 - (void)formSetupForJointSetType {
+    //Show the formation label and text field
+    self.formationTextField.hidden=NO;
+    self.formationLabel.hidden=NO;
+    
     //Set the formation text field
     JointSet *jointSet=(JointSet *)self.record;
     self.formationTextField.text=jointSet.formation ? jointSet.formation.formationName : @"";
-    
-    //Hide the text fields 1 and 2
-    self.textField1.hidden=YES;
-    self.textField2.hidden=YES;
-    self.field1Label.hidden=YES;
-    self.field2Label.hidden=YES;
 }
 
 - (void)formSetupForFaultType {
     Fault *fault=(Fault *)self.record;
     
-    //Set the two text fields 1 and 2
-    self.field1Label.text=@"Plunge:";
-    self.field2Label.text=@"Trend:";
-    self.textField1.text=fault.plunge ? fault.plunge : @"";
-    self.textField2.text=fault.trend ? fault.trend : @"";
+    //Show the trend, plunge and formation labels and text fields
+    NSSet *showedFields=[NSSet setWithObjects:self.plungeLabel,self.plungeTextField,self.trendLabel,self.trendTextField,self.formationLabel,self.formationTextField, nil];
+    [showedFields makeObjectsPerformSelector:@selector(setHidden:) withObject:nil];
     
-    //Set the formation
-    self.formationTextField.text=fault.formation ? fault.formation.formationName : @"";
+    //Set the trend and plunge text fields
+    self.plungeTextField.text=fault.plunge ? fault.plunge : @"";
+    self.trendTextField.text=fault.trend ? fault.trend : @"";
+
+    //Set the formation text field
+    self.formationTextField.text=fault.formation ? fault.formation.formationName : @"";    
 }
 
 - (void)formSetupForOtherType {
     //Hide all the textfields except for the name textfield
-    [self.textFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:NO]];
+    [self.textFields makeObjectsPerformSelector:@selector(setHidden:) withObject:nil];
     self.recordNameTextField.hidden=NO;
     
-    //Hide all the labels corresponding to the hidden textfields
-    self.strikeLabel.hidden=YES;
-    self.dipLabel.hidden=YES;
-    self.dipDirectionLabel.hidden=YES;
-    self.formationLabel.hidden=YES;
-    self.field1Label.hidden=YES;
-    self.field2Label.hidden=YES;
+    //Hide the strike, dip, and dip direction
+    NSSet *hiddenFields=[NSSet setWithObjects:self.strikeLabel,self.strikeTextField,self.dipLabel,self.dipTextField,self.dipDirectionLabel,self.dipDirectionTextField, nil];
+    [hiddenFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
 }
 
 @end
