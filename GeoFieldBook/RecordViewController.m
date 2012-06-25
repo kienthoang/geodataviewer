@@ -33,6 +33,8 @@
 @property (nonatomic) BOOL editing;
 @property (nonatomic,readonly) NSArray *textFields;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 //=====================================UI elements=======================================//
 
 @property (weak, nonatomic) IBOutlet UIImageView *recordImage;
@@ -73,6 +75,7 @@
 @end
 
 @implementation RecordViewController
+@synthesize scrollView = _scrollView;
 
 @synthesize record=_record;
 
@@ -249,6 +252,49 @@
 - (IBAction)takePhoto:(UIBarButtonItem *)sender {
 }
 
+#pragma mark - Handles when the keyboard slides up
+
+- (void)registerForKeyboardNotifications {
+    //Get the NSNotificationCenter and set self up to receive notifications when the keyboard slides in and slides out
+    NSNotificationCenter *notiCenter=[NSNotificationCenter defaultCenter];
+    [notiCenter addObserver:self 
+                   selector:@selector(keyboardDidAppear:) 
+                       name:UIKeyboardDidShowNotification 
+                     object:nil];
+    
+    [notiCenter addObserver:self 
+                   selector:@selector(keyboardWillHide:) 
+                       name:UIKeyboardDidHideNotification 
+                     object:nil];
+}
+
+- (void)keyboardDidAppear:(NSNotification *)notification {
+    //Get the info dictionary sent with the notification and get the size of the keyboard from it
+    NSDictionary *notificationInfo=[notification userInfo];
+    CGSize keyboardSize=[[notificationInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    //Set the insets of the scroll view to fit the keyboard
+    UIEdgeInsets contentInsets=UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    self.scrollView.contentInset=contentInsets;
+    self.scrollView.scrollIndicatorInsets=contentInsets;
+    
+    //If the UITextArea is currently the first responder (the keyboard caller), scroll it to visible
+    if (self.fieldObservationTextArea.isFirstResponder) {
+        CGRect aRect=self.view.frame;
+        aRect.size.height-=keyboardSize.height;
+        if (!CGRectContainsPoint(aRect, self.fieldObservationTextArea.frame.origin)) {
+            CGPoint scrollPoint=CGPointMake(0.0,keyboardSize.height-self.fieldObservationTextArea.frame.origin.y);
+            [self.scrollView setContentOffset:scrollPoint animated:YES];
+        }
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    UIEdgeInsets contentInsets=UIEdgeInsetsZero;
+    self.scrollView.contentInset=contentInsets;
+    self.scrollView.scrollIndicatorInsets=contentInsets;
+}
+
 #pragma mark - Target-Action Handlers for picker-using text fields
 
 - (IBAction)textFieldTouchDown:(UITextField *)sender {
@@ -310,6 +356,9 @@
         
     //Update the form
     [self updateFormForRecord:self.record];
+    
+    //Set self up to receive notifications when the keyboard appears and disappears (to adjust the text fields and areas when keyboard shows up)
+    [self registerForKeyboardNotifications];
 }
 
 - (void)viewWillAppear:(BOOL)animated   
@@ -361,6 +410,7 @@
     [self setStrikeLabel:nil];
     [self setDipLabel:nil];
     [self setDipDirectionLabel:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
 }
 
