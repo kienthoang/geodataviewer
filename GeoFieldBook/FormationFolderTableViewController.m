@@ -8,6 +8,7 @@
 
 #import "FormationFolderTableViewController.h"
 #import "FormationFolderViewController.h"
+#import "FormationTableViewController.h"
 #import "Formation_Folder+Creation.h"
 #import "Formation_Folder.h"
 #import "Formation_Folder+Modification.h"
@@ -56,6 +57,17 @@
             Formation_Folder *selectedFormationFolder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             [segue.destinationViewController setFolderName:selectedFormationFolder.folderName];
         }
+    }
+    
+    //Else if seguing to a FormationTableViewController
+    else if ([segue.identifier isEqualToString:@"Show Formations"]) {
+        //Set the database of the destination view controller
+        [segue.destinationViewController setDatabase:self.database];
+        
+        //Set the folder name of the destination view controller
+        UITableViewCell *cell=sender;
+        Formation_Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+        [segue.destinationViewController setFormationFolder:folder.folderName];
     }
 }
 

@@ -44,6 +44,10 @@
 		0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */; };
 		0238587015995DB400A0DB98 /* Folder+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586F15995DB300A0DB98 /* Folder+Modification.m */; };
 		0238587315995FB200A0DB98 /* Formation_Folder+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */; };
+		0238587615996B5C00A0DB98 /* FormationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587515996B5C00A0DB98 /* FormationTableViewController.m */; };
+		0238587915996F4A00A0DB98 /* FormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587815996F4900A0DB98 /* FormationViewController.m */; };
+		0238587C1599732000A0DB98 /* Formation+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587B1599731F00A0DB98 /* Formation+Creation.m */; };
+		0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587E1599747300A0DB98 /* Formation+Modification.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -152,6 +156,14 @@
 		0238586F15995DB300A0DB98 /* Folder+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Folder+Modification.m"; sourceTree = "<group>"; };
 		0238587115995FB100A0DB98 /* Formation_Folder+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation_Folder+Modification.h"; sourceTree = "<group>"; };
 		0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation_Folder+Modification.m"; sourceTree = "<group>"; };
+		0238587415996B5B00A0DB98 /* FormationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationTableViewController.h; sourceTree = "<group>"; };
+		0238587515996B5C00A0DB98 /* FormationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationTableViewController.m; sourceTree = "<group>"; };
+		0238587715996F4900A0DB98 /* FormationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationViewController.h; sourceTree = "<group>"; };
+		0238587815996F4900A0DB98 /* FormationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationViewController.m; sourceTree = "<group>"; };
+		0238587A1599731F00A0DB98 /* Formation+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation+Creation.h"; sourceTree = "<group>"; };
+		0238587B1599731F00A0DB98 /* Formation+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Creation.m"; sourceTree = "<group>"; };
+		0238587D1599747200A0DB98 /* Formation+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation+Modification.h"; sourceTree = "<group>"; };
+		0238587E1599747300A0DB98 /* Formation+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Modification.m"; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -248,6 +260,10 @@
 				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
 				0238586815994DF100A0DB98 /* FormationFolderViewController.h */,
 				0238586915994DF200A0DB98 /* FormationFolderViewController.m */,
+				0238587415996B5B00A0DB98 /* FormationTableViewController.h */,
+				0238587515996B5C00A0DB98 /* FormationTableViewController.m */,
+				0238587715996F4900A0DB98 /* FormationViewController.h */,
+				0238587815996F4900A0DB98 /* FormationViewController.m */,
 			);
 			name = "Master View Controllers";
 			sourceTree = "<group>";
@@ -378,6 +394,10 @@
 			children = (
 				029878051595BA4D000D71E7 /* Formation.h */,
 				029878061595BA4D000D71E7 /* Formation.m */,
+				0238587A1599731F00A0DB98 /* Formation+Creation.h */,
+				0238587B1599731F00A0DB98 /* Formation+Creation.m */,
+				0238587D1599747200A0DB98 /* Formation+Modification.h */,
+				0238587E1599747300A0DB98 /* Formation+Modification.m */,
 				029878021595BA4C000D71E7 /* Bedding.h */,
 				029878031595BA4C000D71E7 /* Bedding.m */,
 				0222DB0515961ED900699D62 /* Bedding+Modification.h */,
@@ -593,6 +613,10 @@
 				0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */,
 				0238587015995DB400A0DB98 /* Folder+Modification.m in Sources */,
 				0238587315995FB200A0DB98 /* Formation_Folder+Modification.m in Sources */,
+				0238587615996B5C00A0DB98 /* FormationTableViewController.m in Sources */,
+				0238587915996F4A00A0DB98 /* FormationViewController.m in Sources */,
+				0238587C1599732000A0DB98 /* Formation+Creation.m in Sources */,
+				0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
