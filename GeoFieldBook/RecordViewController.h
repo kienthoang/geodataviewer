@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreLocation/CoreLocation.h"
 #import "Record+Creation.h"
 #import "Record+DictionaryKeys.h"
 #import "UISplitViewBarButtonPresenter.h"

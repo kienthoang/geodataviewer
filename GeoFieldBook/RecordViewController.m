@@ -25,7 +25,7 @@
 #import "TrendPickerViewController.h"
 #import "FormationPickerViewController.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate>
+@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate>
 
 @property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
 
@@ -37,6 +37,10 @@
 @property (nonatomic,readonly) NSArray *textFields;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic, strong) CLLocationManager *locationManager; 
+@property (nonatomic, strong) NSTimer *gpsTimer;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *gatheringGPS; 
 
 //=====================================UI elements=======================================//
 
@@ -82,7 +86,12 @@
 @end
 
 @implementation RecordViewController
+
 @synthesize scrollView = _scrollView;
+
+@synthesize locationManager = _locationManager;
+@synthesize gpsTimer = _gpsTimer;
+@synthesize gatheringGPS = _gatheringGPS;
 
 @synthesize record=_record;
 
@@ -251,8 +260,84 @@
     }
 }
 
+
 - (IBAction)acquireData:(UIBarButtonItem *)sender {
+    NSLog(@"aquiring data");
+    
+    NSDate *now = [[NSDate alloc] init];
+    self.record.date = now;
+    
+    //reset the txtfields appropriately.
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
+    [timeFormatter setDateFormat:@"HH:mm:ss"];
+    [self.recordDateLabel setText:[dateFormatter stringFromDate:now ]]; 
+    [self.recordTimeLabel setText:[timeFormatter stringFromDate:now ]]; 
+    
+    //update the location. 
+    //this will return immediatley and notifies the delegate with locationmanager:didupdate... 
+    [self.locationManager startUpdatingLocation];
+    
+    //Set up the timer to respond every ten seconds and not to repeat. When timer is called, the locationManager is finished and the Activity Indicator is hidden
+    self.gpsTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
+    [self.gatheringGPS startAnimating];
 }
+
+-(void) timerFired{
+    NSLog(@"timer called. gps update stops now");
+    [self.gatheringGPS stopAnimating];
+    [self.locationManager stopUpdatingLocation];    
+}
+
+
+//// Check if GPS is enabled
+//- (BOOL) isGPSEnabled{
+//    if ( ! ([CLLocationManager locationServicesEnabled]) || ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)){
+//        return NO;
+//    }
+//    return YES;
+//    
+//}
+//
+//
+//// function to start capture GPS, we check settings first to see if GPS is disabled before attempting to get GPS
+//- (void) getGPS
+//{
+//    if([self isGPSEnabled]) [self.locationManager startUpdatingLocation];
+//    //otherwise Location Services is disabled, do sth here to tell user to enable it
+//    
+//} 
+
+-(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    
+    NSLog(@"location updated");
+    //here, save the current location
+    
+    NSString* latitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.latitude];
+    NSString* longitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.longitude];
+    [self.recordLatitudeLabel setText:latitudeText];
+    [self.recordLongitudeLabel setText:longitudeText];
+    
+    [self.record setLatitude:latitudeText]; 
+    [self.record setLongitude:longitudeText];
+    
+    NSLog(@"The latitude: %@ and longitude: %@", latitudeText, longitudeText);
+    
+    //then stop the delegate
+    [self.locationManager stopUpdatingHeading];
+    
+}
+
+-(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    
+    NSLog(@"Location grabing error %@, %@", error, [error userInfo]);
+    
+    //loop for about 5 times then give an alert
+}
+
+
+
 
 - (IBAction)browsePressed:(UIBarButtonItem *)sender {
 }
