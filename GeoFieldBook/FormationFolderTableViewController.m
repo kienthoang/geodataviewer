@@ -112,6 +112,14 @@
         [self saveChangesToDatabase];
 }
 
+- (void)deleteFormationFolder:(Formation_Folder *)formationFolder {
+    //Delete the folder
+    [self.database.managedObjectContext deleteObject:formationFolder];
+    
+    //Save
+    [self saveChangesToDatabase];
+}
+
 #pragma mark - Target-Action Handlers
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -180,7 +188,7 @@
     //If the editing style is delete, delete the corresponding folder
     if (editingStyle==UITableViewCellEditingStyleDelete) {
         //Get the selected folder and delete it
-        //[self deleteFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        [self deleteFormationFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
 
