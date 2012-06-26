@@ -20,11 +20,11 @@
 @synthesize toolbar=_toolbar;
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
-    //Add the button to the toolbar
+    //Add the buttonto the toolbar
     NSMutableArray *items=[self.toolbar.items mutableCopy];
     
     //Remove the old button if it exists
-    if (self.splitViewBarButtonItem)
+    if (_splitViewBarButtonItem)
         [items removeObject:self.splitViewBarButtonItem];
     
     //Add the new button on the leftmost if it's not nil
@@ -33,7 +33,7 @@
     
     //Set the items to be the toolbar's items
     self.toolbar.items=[items copy];
-    
+        
     _splitViewBarButtonItem=splitViewBarButtonItem; 
 }
 

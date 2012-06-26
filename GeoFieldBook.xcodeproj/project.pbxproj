@@ -48,6 +48,8 @@
 		0238587915996F4A00A0DB98 /* FormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587815996F4900A0DB98 /* FormationViewController.m */; };
 		0238587C1599732000A0DB98 /* Formation+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587B1599731F00A0DB98 /* Formation+Creation.m */; };
 		0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587E1599747300A0DB98 /* Formation+Modification.m */; };
+		0238588615999F0F00A0DB98 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238588515999F0F00A0DB98 /* HomeViewController.m */; };
+		023858891599A0CD00A0DB98 /* HomeMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023858881599A0CD00A0DB98 /* HomeMasterViewController.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -164,6 +166,10 @@
 		0238587B1599731F00A0DB98 /* Formation+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Creation.m"; sourceTree = "<group>"; };
 		0238587D1599747200A0DB98 /* Formation+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation+Modification.h"; sourceTree = "<group>"; };
 		0238587E1599747300A0DB98 /* Formation+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Modification.m"; sourceTree = "<group>"; };
+		0238588415999F0F00A0DB98 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		0238588515999F0F00A0DB98 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		023858871599A0CC00A0DB98 /* HomeMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMasterViewController.h; sourceTree = "<group>"; };
+		023858881599A0CD00A0DB98 /* HomeMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMasterViewController.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -248,6 +254,8 @@
 		020EBB9A15942C7900EECC08 /* Master View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				023858871599A0CC00A0DB98 /* HomeMasterViewController.h */,
+				023858881599A0CD00A0DB98 /* HomeMasterViewController.m */,
 				020EBB5815941F7C00EECC08 /* FolderTableViewController.h */,
 				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
 				020EBBB81594611A00EECC08 /* RecordTableViewController.h */,
@@ -271,6 +279,8 @@
 		020EBB9B15942C8F00EECC08 /* Detail View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0238588415999F0F00A0DB98 /* HomeViewController.h */,
+				0238588515999F0F00A0DB98 /* HomeViewController.m */,
 				029877F91595740C000D71E7 /* InitialDetailViewController.h */,
 				029877FA1595740C000D71E7 /* InitialDetailViewController.m */,
 				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
@@ -617,6 +627,8 @@
 				0238587915996F4A00A0DB98 /* FormationViewController.m in Sources */,
 				0238587C1599732000A0DB98 /* Formation+Creation.m in Sources */,
 				0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */,
+				0238588615999F0F00A0DB98 /* HomeViewController.m in Sources */,
+				023858891599A0CD00A0DB98 /* HomeMasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

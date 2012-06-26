@@ -102,7 +102,6 @@
 - (void)hideKeyBoard:(UITapGestureRecognizer *)tapGesture {
     //Dismiss keyboard
     [self.folderNameTextField resignFirstResponder];
-    NSLog(@"Resign");
 }
 
 @end

@@ -25,6 +25,8 @@
            whileModifyingRecord:(Record *)record 
               withNewRecordInfo:(NSDictionary *)recordInfo;
 
+- (UIManagedDocument *)databaseForFormationPicker;
+
 @end
 
 @interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>

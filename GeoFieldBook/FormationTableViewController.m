@@ -93,7 +93,7 @@
 }
 
 - (void)createNewFormationWithName:(NSString *)formationName {
-    //create a new formation folder, if that returns nil (name duplicate), put up an alert
+    //create a new formation, if that returns nil (name duplicate), put up an alert
     if (![Formation formationForName:formationName inFormationFolderWithName:self.formationFolder inManagedObjectContext:self.database.managedObjectContext])
         [self putUpDuplicateNameAlertWithName:formationName];
 }
@@ -102,7 +102,7 @@
     //Filter new name
     newName=[TextInputFilter filterDatabaseInputText:newName];
     
-    //Get the formation folder with the specified original name
+    //Get the formation with the specified original name
     Formation *selectedFormation=nil;
     for (Formation *formation in [self.fetchedResultsController fetchedObjects]) {
         if ([formation.formationName isEqualToString:originalName])
@@ -137,7 +137,7 @@
     sender.title=self.tableView.editing ? @"Done" : @"Edit";
 }
 
-#pragma mark - Formation Folder View Controller Delegate methods
+#pragma mark - Formation View Controller Delegate methods
 
 - (void)formationViewController:(FormationViewController *)sender 
       didObtainNewFormationName:(NSString *)formationName
@@ -164,7 +164,7 @@ didAskToModifyFormationWithName:(NSString *)originalName
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Formation Folder Cell";
+    static NSString *CellIdentifier = @"Formation Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -195,7 +195,6 @@ didAskToModifyFormationWithName:(NSString *)originalName
         [self deleteFormation:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
-
 
 #pragma mark - View Controller Lifecycles
 

@@ -23,8 +23,9 @@
 #import "DipDirectionPickerViewController.h"
 #import "PlungePickerViewController.h"
 #import "TrendPickerViewController.h"
+#import "FormationPickerViewController.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate>
+@interface RecordViewController() <UINavigationControllerDelegate,StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate>
 
 @property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
 
@@ -344,6 +345,12 @@
     //Set the plunge text field's text
     self.plungeTextField.text=plunge;
 }
+- (void)formationPickerViewController:(FormationPickerViewController *)sender 
+       userDidSelectFormationWithName:(NSString *)formationName
+{
+    //Set the text of the formation text field
+    self.formationTextField.text=formationName;
+}
 
 #pragma mark - UINavigationControllerDelegate methods
 
@@ -357,7 +364,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Strike picker segue
-    NSSet *pickerSegueIdentifiers=[NSSet setWithObjects:@"Strike Picker",@"Dip Picker",@"Dip Direction Picker",@"Plunge Picker",@"Trend Picker", nil];
+    NSSet *pickerSegueIdentifiers=[NSSet setWithObjects:@"Strike Picker",@"Dip Picker",@"Dip Direction Picker",@"Plunge Picker",@"Trend Picker",@"Formation Picker", nil];
     if ([pickerSegueIdentifiers containsObject:segue.identifier]) {
         //Set self as the delegate of the popup Strike Picker
         [segue.destinationViewController setDelegate:self];
@@ -379,6 +386,15 @@
     } else if ([segue.identifier isEqualToString:@"Plunge Picker"]) {
         //Will send initial value to plunge picker text field only if it's currently blank
         [segue.destinationViewController setInitialSelectionEnabled:![self.plungeTextField.text length]];
+    }
+    
+    //Seguing to the formation picker view controller
+    else if ([segue.identifier isEqualToString:@"Formation Picker"]) {
+        //Set the database of the formation picker
+        [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
+        
+        //Set initialSelection for the formation picker if the current record has no formation set yet
+        [segue.destinationViewController setInitialSelectionEnabled:![self.formationTextField.text length]];
     }
 }
 

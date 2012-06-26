@@ -13,6 +13,8 @@
 #import "FormationFolderTableViewController.h"
 #import "TextInputFilter.h"
 #import "GeoDatabaseManager.h"
+#import "UISplitViewBarButtonPresenter.h"
+
 #import "Folder.h"
 #import "Folder+Creation.h"
 #import "Folder+Modification.h"
@@ -24,6 +26,8 @@
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;
 - (void)showInitialDetailView;
+
+- (id <UISplitViewBarButtonPresenter>)barButtonPresenter;
 
 @property (nonatomic,strong) autosaver_block_t autosaverCancelBlock;
 @property (nonatomic,strong) autosaver_block_t autosaverConfirmBlock;
@@ -39,6 +43,8 @@
 
 @synthesize database=_database;
 
+@synthesize barButtonItem=_barButtonItem;
+
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
         _database=database;
@@ -46,6 +52,13 @@
         //Make sure the document is open and set up the fetched result controller
         [self normalizeDatabase];        
     }
+}
+
+- (void)setBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    //Transfer the bar button to the detail view
+    [self barButtonPresenter].splitViewBarButtonItem=barButtonItem;
+        
+    _barButtonItem=barButtonItem;
 }
 
 //Set up the FetchedResultsController to fetch folder entities from the database
@@ -207,13 +220,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    //Set the split view controller's delegate to self 
-    self.splitViewController.delegate=self;
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
@@ -227,12 +233,20 @@
         } 
     }];
     
+    //Set self to be the split view's delegate
+    self.splitViewController.delegate=self;
+    
     //Perform a segue to the initial view controller if no autosaver blocks are set
     if (![[self.splitViewController.viewControllers lastObject] isKindOfClass:[InitialDetailViewController class]]) 
     {
         if (!self.autosaverCancelBlock || !self.autosaverConfirmBlock)
             [self showInitialDetailView];
     }
+    
+    //If there is a transferred button, give it to the detail view
+    if (self.barButtonItem)
+        [[self barButtonPresenter] setSplitViewBarButtonItem:self.barButtonItem];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

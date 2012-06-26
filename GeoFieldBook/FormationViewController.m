@@ -20,6 +20,11 @@
 @synthesize delegate=_delegate;
 @synthesize formationName=_formationName;
 
+- (void)dismissKeyboard:(UITapGestureRecognizer *)tapGesture {
+    //dismiss the keyboard
+    [self.nameTextField resignFirstResponder];
+}
+
 #pragma mark - Target-Action Handlers
 
 - (IBAction)cancelPressed:(UIBarButtonItem *)sender {
@@ -28,7 +33,7 @@
 }
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
-    //If the formation folder name text field is blank, focus on it isntead of returning
+    //If the formation name text field is blank, focus on it isntead of returning
     if (![self.nameTextField.text length])
         [self.nameTextField becomeFirstResponder];
     

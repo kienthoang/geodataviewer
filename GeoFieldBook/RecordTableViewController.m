@@ -202,6 +202,10 @@
     [self autosaveRecord:record withNewRecordInfo:recordInfo];
 }
 
+- (UIManagedDocument *)databaseForFormationPicker {
+    return self.database;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewWillDisappear:(BOOL)animated {
