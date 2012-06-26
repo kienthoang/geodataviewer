@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -659,7 +659,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="redraw" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dxm-3N-8JA">
+                                    <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dxm-3N-8JA">
                                         <rect key="frame" x="611" y="273" width="98" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -723,7 +723,6 @@
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="lU2-xy-pJz"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="acquireButton" destination="Dxm-3N-8JA" id="8e8-0J-HZM"/>
                         <outlet property="dipDirectionLabel" destination="YSI-LC-man" id="jXa-64-uj5"/>
                         <outlet property="dipDirectionTextField" destination="Vnu-9G-ONQ" id="yFD-Gd-UoE"/>
                         <outlet property="dipLabel" destination="Tr8-wc-AoC" id="QEh-bV-gps"/>
@@ -1270,10 +1269,6 @@
         <class className="RecordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
             <relationships>
-<<<<<<< HEAD
-                <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
-=======
->>>>>>> 8405b4504f8022e9a62ba8ae3e04b6a7d5185235
                 <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
@@ -1282,10 +1277,6 @@
                 <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
-<<<<<<< HEAD
-                <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
-=======
->>>>>>> 8405b4504f8022e9a62ba8ae3e04b6a7d5185235
                 <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
