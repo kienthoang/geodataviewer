@@ -39,6 +39,11 @@
 		0222DB2B1596BF2800699D62 /* StrikePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */; };
 		0222DB2E1596D95100699D62 /* DipPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2D1596D95100699D62 /* DipPickerViewController.m */; };
 		0222DB311596DCC600699D62 /* DipDirectionPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB301596DCC600699D62 /* DipDirectionPickerViewController.m */; };
+		023858671599233F00A0DB98 /* FormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023858661599233F00A0DB98 /* FormationFolderTableViewController.m */; };
+		0238586A15994DF200A0DB98 /* FormationFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586915994DF200A0DB98 /* FormationFolderViewController.m */; };
+		0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */; };
+		0238587015995DB400A0DB98 /* Folder+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586F15995DB300A0DB98 /* Folder+Modification.m */; };
+		0238587315995FB200A0DB98 /* Formation_Folder+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -137,6 +142,16 @@
 		0222DB2D1596D95100699D62 /* DipPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipPickerViewController.m; sourceTree = "<group>"; };
 		0222DB2F1596DCC600699D62 /* DipDirectionPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipDirectionPickerViewController.h; sourceTree = "<group>"; };
 		0222DB301596DCC600699D62 /* DipDirectionPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipDirectionPickerViewController.m; sourceTree = "<group>"; };
+		023858651599233F00A0DB98 /* FormationFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderTableViewController.h; sourceTree = "<group>"; };
+		023858661599233F00A0DB98 /* FormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderTableViewController.m; sourceTree = "<group>"; };
+		0238586815994DF100A0DB98 /* FormationFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderViewController.h; sourceTree = "<group>"; };
+		0238586915994DF200A0DB98 /* FormationFolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderViewController.m; sourceTree = "<group>"; };
+		0238586B1599540100A0DB98 /* Formation_Folder+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation_Folder+Creation.h"; sourceTree = "<group>"; };
+		0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation_Folder+Creation.m"; sourceTree = "<group>"; };
+		0238586E15995DB300A0DB98 /* Folder+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+Modification.h"; sourceTree = "<group>"; };
+		0238586F15995DB300A0DB98 /* Folder+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Folder+Modification.m"; sourceTree = "<group>"; };
+		0238587115995FB100A0DB98 /* Formation_Folder+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation_Folder+Modification.h"; sourceTree = "<group>"; };
+		0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation_Folder+Modification.m"; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -229,6 +244,10 @@
 				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
 				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
 				020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */,
+				023858651599233F00A0DB98 /* FormationFolderTableViewController.h */,
+				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
+				0238586815994DF100A0DB98 /* FormationFolderViewController.h */,
+				0238586915994DF200A0DB98 /* FormationFolderViewController.m */,
 			);
 			name = "Master View Controllers";
 			sourceTree = "<group>";
@@ -371,6 +390,8 @@
 				020EBB8E15941FB400EECC08 /* Folder.m */,
 				020EBBA21594355800EECC08 /* Folder+Creation.h */,
 				020EBBA31594355800EECC08 /* Folder+Creation.m */,
+				0238586E15995DB300A0DB98 /* Folder+Modification.h */,
+				0238586F15995DB300A0DB98 /* Folder+Modification.m */,
 				020EBB8A15941FB400EECC08 /* Other.h */,
 				020EBB8B15941FB400EECC08 /* Other.m */,
 				020EBB8715941FB400EECC08 /* Record.h */,
@@ -395,6 +416,10 @@
 				0222DB091596204300699D62 /* Fault+Modification.m */,
 				020EBB7B15941FB400EECC08 /* Formation_Folder.h */,
 				020EBB7C15941FB400EECC08 /* Formation_Folder.m */,
+				0238586B1599540100A0DB98 /* Formation_Folder+Creation.h */,
+				0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */,
+				0238587115995FB100A0DB98 /* Formation_Folder+Modification.h */,
+				0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */,
 			);
 			name = NSManagedObject;
 			sourceTree = "<group>";
@@ -563,6 +588,11 @@
 				0222DB311596DCC600699D62 /* DipDirectionPickerViewController.m in Sources */,
 				020F06FC15982E570006B53B /* TrendPickerViewController.m in Sources */,
 				020F06FF15982ED20006B53B /* PlungePickerViewController.m in Sources */,
+				023858671599233F00A0DB98 /* FormationFolderTableViewController.m in Sources */,
+				0238586A15994DF200A0DB98 /* FormationFolderViewController.m in Sources */,
+				0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */,
+				0238587015995DB400A0DB98 /* Folder+Modification.m in Sources */,
+				0238587315995FB200A0DB98 /* Formation_Folder+Modification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

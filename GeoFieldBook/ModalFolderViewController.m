@@ -82,25 +82,27 @@
     //Else call the delegate and pass on the name of the folder
     else {
         //If the folder name has not been set before
-        if (![self.folderName length]) {
-            self.folderName=folderName;
+        if (![self.folderName length])
             [self.delegate modalFolderViewController:self 
                                obtainedNewFolderName:self.folderNameTextField.text];
-        } else {
-            NSString *originalName=self.folderName;
-            self.folderName=folderName;
+        else 
             [self.delegate modalFolderViewController:self 
-                            didAskToModifyFolderName:originalName 
-                          obtainedModifiedFolderName:self.folderName];
-        }
+                            didAskToModifyFolderName:self.folderName 
+                          obtainedModifiedFolderName:self.folderNameTextField.text];
     }
 }
 
 #pragma mark - Gesture Handlers
 
+//Workaround to dismiss the keyboard when double clicking out because the keyboard is kinda messed up in a modal view controller
+- (BOOL)disablesAutomaticKeyboardDismissal {
+    return NO;
+}
+
 - (void)hideKeyBoard:(UITapGestureRecognizer *)tapGesture {
     //Dismiss keyboard
     [self.folderNameTextField resignFirstResponder];
+    NSLog(@"Resign");
 }
 
 @end

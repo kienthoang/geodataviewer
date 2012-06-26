@@ -10,10 +10,12 @@
 #import "ModalFolderViewController.h"
 #import "RecordTableViewController.h"
 #import "InitialDetailViewController.h"
+#import "FormationFolderTableViewController.h"
 #import "TextInputFilter.h"
 #import "GeoDatabaseManager.h"
 #import "Folder.h"
 #import "Folder+Creation.h"
+#import "Folder+Modification.h"
 
 @interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate>
 
@@ -172,26 +174,22 @@
     //Filter new name
     newName=[TextInputFilter filterDatabaseInputText:newName];
     
-    //Fetch the folder entity with the specified original name
-    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Folder"];
-    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",originalName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
-    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
-    
-    //If there is exactly one folder in the result array, modify the folder's name (after filtering)
-    if ([results count]==1) {
-        Folder *folder=[results lastObject];
-        folder.folderName=newName;
-    } 
-    
-    //Else, handle errors
-    else {
-        //Put up an error
-        [self putUpDatabaseErrorAlertWithMessage:@"Duplicate folders exist in database."];
+    //Get the folder with the specified original name
+    Folder *selectedFolder=nil;
+    for (Folder *folder in [self.fetchedResultsController fetchedObjects]) {
+        if ([folder.folderName isEqualToString:originalName])
+            selectedFolder=folder;
     }
     
-    //Save
-    [self saveChangesToDatabase];
+    //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
+    if (![selectedFolder changeFolderNameTo:newName]) {
+        UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation folder with the name '%@' already exists!",newName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [duplicationAlert show];
+    }
+    
+    //Else, save
+    else
+        [self saveChangesToDatabase];
 }
 
 - (void)deleteFolder:(Folder *)folder {
@@ -203,6 +201,13 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    //Set the split view controller's delegate to self 
+    self.splitViewController.delegate=self;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -223,19 +228,22 @@
         if (!self.autosaverCancelBlock || !self.autosaverConfirmBlock)
             [self showInitialDetailView];
     }
-    
-    //Set the split view controller's delegate to self here because doing so in awakeFromNib would set the 
-    //presentingViewController of ModalFolderViewController to UISplitViewController, which screws up its
-    //context and its frame
-    self.splitViewController.delegate=self;
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Support all orientations
+    return YES;
+}
+
+#pragma mark - prepare for segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Seguing to ModalNewFolderViewController
     if ([segue.identifier isEqualToString:@"Add/Edit Folder"]) {
         //Set the delegate of the destination controller
         [segue.destinationViewController setDelegate:self];
-                
+        
         //Set the folderName of the destination controller if the table view is in editting mode
         if (self.tableView.editing) {
             UITableViewCell *cell=(UITableViewCell *)sender;
@@ -246,6 +254,7 @@
     
     //Seguing to the RecordTableViewController
     else if ([segue.identifier isEqualToString:@"Show Records"]) {
+        //Get the cell that activates the segue and set up the destination controller
         UITableViewCell *cell=(UITableViewCell *)sender;
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
         [segue.destinationViewController setTitle:folder.folderName];
@@ -253,12 +262,13 @@
         [segue.destinationViewController setFolderName:folder.folderName];
         [segue.destinationViewController setAutosaveDelegate:self];
     }
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Support all orientations
-    return YES;
+    
+    //Seguing to the modal formation folder tvc
+    else if ([segue.identifier isEqualToString:@"Show Formation Folders"]) {
+        //Set the database of the formation folder tvc to self's database
+        UINavigationController *navigationController=segue.destinationViewController;
+        [(FormationFolderTableViewController *)navigationController.topViewController setDatabase:self.database];
+    }
 }
 
 #pragma mark - Target-Action Handlers

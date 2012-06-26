@@ -39,7 +39,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-9760" y="1447"/>
+            <point key="canvasLocation" x="-11688" y="1015"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="z5O-dJ-9wu">
@@ -58,7 +58,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-9861" y="-1625"/>
+            <point key="canvasLocation" x="-11789" y="-2057"/>
         </scene>
         <!--Modal Folder View Controller-->
         <scene sceneID="wvt-X5-cC1">
@@ -66,11 +66,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hOL-ag-xhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController modalPresentationStyle="formSheet" id="bjl-xY-1vQ" customClass="ModalFolderViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="redraw" id="pNO-Zs-MaD">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="Aw1-Fg-POg">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="XeN-hR-oYl">
@@ -88,14 +88,14 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Folder Name:" lineBreakMode="tailTruncation" minimumFontSize="10" id="jEU-E9-m27">
-                                <rect key="frame" x="20" y="103" width="984" height="22"/>
+                                <rect key="frame" x="20" y="103" width="500" height="17"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Folder Name" minimumFontSize="17" clearButtonMode="whileEditing" id="dom-rB-2mA">
-                                <rect key="frame" x="20" y="151" width="984" height="31"/>
+                                <rect key="frame" x="20" y="151" width="500" height="31"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -109,7 +109,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8828" y="-2829"/>
+            <point key="canvasLocation" x="-10620" y="-4829"/>
         </scene>
         <!--Folder Table View Controller - Folders-->
         <scene sceneID="p56-nE-sZ6">
@@ -157,26 +157,92 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title=" Formations" id="uZN-m2-0jc"/>
+                        <barButtonItem title=" Formations" id="uZN-m2-0jc">
+                            <connections>
+                                <segue destination="efl-9D-qlf" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="uZN-m2-0jc" id="HV3-27-GSF">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Folders" id="fc4-75-BDf">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="tqj-i6-PiN">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="xBX-na-cpH">
+                            <connections>
+                                <segue destination="bjl-xY-1vQ" kind="modal" identifier="Add/Edit Folder" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="C0h-XZ-idy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="tqj-i6-PiN">
                             <connections>
                                 <action selector="editPressed:" destination="Uwh-l0-QS0" id="H9F-XO-jka"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xBX-na-cpH">
-                            <connections>
-                                <segue destination="bjl-xY-1vQ" kind="modal" identifier="Add/Edit Folder" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="C0h-XZ-idy"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="eRh-oI-S81" kind="replace" identifier="Show Home Page" splitViewControllerTargetIndex="1" id="6WH-XF-oBt"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-9340" y="-1625"/>
+            <point key="canvasLocation" x="-11156" y="-1993"/>
+        </scene>
+        <!--Formation Folder Table View Controller - Formation Folders-->
+        <scene sceneID="56r-Yf-LiQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rfm-Jg-D25" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="rqP-i8-UCo" customClass="FormationFolderTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0nz-Yq-xgl">
+                        <rect key="frame" x="0.0" y="44" width="1024" height="724"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" textLabel="aX7-rK-jy5" detailTextLabel="OPG-dX-d4C" style="IBUITableViewCellStyleSubtitle" id="g5m-A9-XLq">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aX7-rK-jy5">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OPG-dX-d4C">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rqP-i8-UCo" id="vK6-xB-p1Q"/>
+                            <outlet property="delegate" destination="rqP-i8-UCo" id="lFN-Ow-HeC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Formation Folders" id="3gP-S2-8wl">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="5Kq-VS-lzR">
+                            <connections>
+                                <segue destination="5rr-o1-mUY" kind="modal" identifier="Formation Folder Manipulation" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="Gk8-fP-aTA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="ooa-Kl-7co">
+                            <connections>
+                                <action selector="editPressed:" destination="rqP-i8-UCo" id="gz8-06-h64"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-8764" y="-256"/>
         </scene>
         <!--Modal Record Type Selector-->
         <scene sceneID="SPc-17-h4d">
@@ -239,7 +305,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8338" y="-172"/>
+            <point key="canvasLocation" x="-9330" y="-3272"/>
         </scene>
         <!--Record Table View Controller-->
         <scene sceneID="qZz-Vz-aQF">
@@ -279,7 +345,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="efN-TL-eXw"/>
                         <barButtonItem title="Set Location" style="plain" id="Ipl-an-wyO"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Jgh-O4-FtE"/>
-                        <barButtonItem title="Export" id="EZ6-34-aBV"/>
+                        <barButtonItem systemItem="action" id="EZ6-34-aBV"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="snE-dY-fcY">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="PL1-Ih-t0C">
@@ -288,9 +354,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-8766" y="-1625"/>
+            <point key="canvasLocation" x="-10110" y="-3901"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="hMg-tH-KZj">
@@ -543,7 +610,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                     </textView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Record Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Fp8-aN-cYI">
                                         <rect key="frame" x="406" y="77" width="148" height="44"/>
@@ -646,7 +713,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7027" y="-1573"/>
+            <point key="canvasLocation" x="-8443" y="-3857"/>
         </scene>
         <!--Strike Picker View Controller-->
         <scene sceneID="ovW-L9-di4">
@@ -671,7 +738,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5862" y="-4301"/>
+            <point key="canvasLocation" x="-8342" y="-7169"/>
         </scene>
         <!--Picker View Controller-->
         <scene sceneID="neq-Dd-nPE">
@@ -696,7 +763,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5903" y="-5766"/>
+            <point key="canvasLocation" x="-7295" y="-5138"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="VXG-wO-A5P">
@@ -710,7 +777,7 @@
                     </connections>
                 </splitViewController>
             </objects>
-            <point key="canvasLocation" x="-10941" y="-605"/>
+            <point key="canvasLocation" x="-12869" y="-1037"/>
         </scene>
         <!--Initial Detail View Controller-->
         <scene sceneID="o0V-2q-7VR">
@@ -745,7 +812,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8828" y="1423"/>
+            <point key="canvasLocation" x="-10068" y="1423"/>
         </scene>
         <!--Dip Picker View Controller-->
         <scene sceneID="hsS-KP-KGB">
@@ -770,7 +837,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5854" y="-3161"/>
+            <point key="canvasLocation" x="-7710" y="-6317"/>
         </scene>
         <!--Dip Direction Picker View Controller-->
         <scene sceneID="gzM-LZ-3Za">
@@ -795,7 +862,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5822" y="-1829"/>
+            <point key="canvasLocation" x="-7238" y="-4113"/>
         </scene>
         <!--Trend Picker View Controller-->
         <scene sceneID="Tjg-pS-3cq">
@@ -820,7 +887,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5782" y="-685"/>
+            <point key="canvasLocation" x="-7198" y="-2969"/>
         </scene>
         <!--Plunge Picker View Controller-->
         <scene sceneID="Yff-Cv-Agq">
@@ -845,7 +912,78 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6654" y="263"/>
+            <point key="canvasLocation" x="-6840" y="-2021"/>
+        </scene>
+        <!--Formation Folder View Controller-->
+        <scene sceneID="vmK-no-er4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eBg-vb-ORc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="5rr-o1-mUY" customClass="FormationFolderViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dWf-7p-5TL">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation Folder Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5bZ-Tc-rc1">
+                                <rect key="frame" x="20" y="137" width="984" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Formation Folder Name" minimumFontSize="17" id="rcg-cg-uav">
+                                <rect key="frame" x="20" y="197" width="379" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="TeM-Y4-lvk">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="IPy-5y-uFy">
+                                        <color key="tintColor" red="0.80657762096774188" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="5rr-o1-mUY" id="a7r-vp-LU7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="z6l-dZ-FgE"/>
+                                    <barButtonItem title="Item" systemItem="done" id="3UJ-Ls-giA">
+                                        <connections>
+                                            <action selector="donePressed:" destination="5rr-o1-mUY" id="fhk-X7-kTf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="420" height="300"/>
+                    <connections>
+                        <outlet property="nameTextField" destination="rcg-cg-uav" id="Rsa-6G-DVt"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-7265" y="-688"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kRT-F4-Wi6">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PGy-65-XMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="efl-9D-qlf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="500"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="93R-wW-NCR">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rqP-i8-UCo" kind="relationship" relationship="rootViewController" id="Pkw-8I-a0C"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-9994" y="-256"/>
         </scene>
     </scenes>
     <resources>
@@ -864,6 +1002,15 @@
         </class>
         <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
+        </class>
+        <class className="FormationFolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
+        </class>
+        <class className="FormationFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
         </class>
         <class className="InitialDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
