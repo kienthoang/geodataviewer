@@ -69,6 +69,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *upperFormationLabel;
 @property (weak, nonatomic) IBOutlet UITextField *upperFormationTextField;
 @property (weak, nonatomic) IBOutlet UILabel *fieldObservationLabel;
+@property (weak, nonatomic) IBOutlet UIButton *acquireButton;
 
 //=========================================================================================//
 
@@ -118,6 +119,7 @@
 @synthesize upperFormationLabel = _upperFormationLabel;
 @synthesize upperFormationTextField = _upperFormationTextField;
 @synthesize fieldObservationLabel = _fieldObservationLabel;
+@synthesize acquireButton = _acquireButton;
 @synthesize fieldObservationTextArea = _fieldObservationTextArea;
 @synthesize formationLabel = _formationLabel;
 @synthesize strikeLabel = _strikeLabel;
@@ -172,10 +174,10 @@
     //Create a NSDictionary with the user-modified information
     NSMutableDictionary *recordDictionary=[NSMutableDictionary dictionary];
     [recordDictionary setObject:self.recordNameTextField.text forKey:RECORD_NAME];
-    //[recordDictionary setObject:self.recordLatitudeLabel.text forKey:RECORD_LATITUDE];
-    //[recordDictionary setObject:self.recordLongitudeLabel.text forKey:RECORD_LONGITUDE];
-    //[recordDictionary setObject:self.recordDateLabel.text forKey:RECORD_DATE];
-    //[recordDictionary setObject:self.recordTimeLabel.text forKey:RECORD_TIME];
+    [recordDictionary setObject:self.recordLatitudeLabel.text forKey:RECORD_LATITUDE];
+    [recordDictionary setObject:self.recordLongitudeLabel.text forKey:RECORD_LONGITUDE];
+    [recordDictionary setObject:self.recordDateLabel.text forKey:RECORD_DATE];
+    [recordDictionary setObject:self.recordTimeLabel.text forKey:RECORD_TIME];
     [recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
     [recordDictionary setObject:self.dipTextField.text forKey:RECORD_DIP];
     [recordDictionary setObject:self.dipDirectionTextField.text forKey:RECORD_DIP_DIRECTION];
@@ -240,7 +242,10 @@
         self.fieldObservationTextArea.editable=editing;
         self.fieldObservationTextArea.backgroundColor=self.editing ? [UIColor whiteColor] : [UIColor clearColor];
         
-        if (editing) {
+        //set the acquire button for editing
+        self.acquireButton.enabled = editing;
+        
+        if (editing) {            
             //Make the background color of the textfields white
             [self.textFields makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor whiteColor]];
             
@@ -287,33 +292,15 @@
 }
 
 -(void) timerFired{
-    NSLog(@"timer called. gps update stops now");
+//    NSLog(@"timer called. gps update stops now");
     [self.gatheringGPS stopAnimating];
     [self.locationManager stopUpdatingLocation];    
 }
 
 
-//// Check if GPS is enabled
-//- (BOOL) isGPSEnabled{
-//    if ( ! ([CLLocationManager locationServicesEnabled]) || ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)){
-//        return NO;
-//    }
-//    return YES;
-//    
-//}
-//
-//
-//// function to start capture GPS, we check settings first to see if GPS is disabled before attempting to get GPS
-//- (void) getGPS
-//{
-//    if([self isGPSEnabled]) [self.locationManager startUpdatingLocation];
-//    //otherwise Location Services is disabled, do sth here to tell user to enable it
-//    
-//} 
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     
-    NSLog(@"location updated");
     //here, save the current location
     
     NSString* latitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.latitude];
@@ -323,8 +310,6 @@
     
     [self.record setLatitude:latitudeText]; 
     [self.record setLongitude:longitudeText];
-    
-    NSLog(@"The latitude: %@ and longitude: %@", latitudeText, longitudeText);
     
     //then stop the delegate
     [self.locationManager stopUpdatingHeading];
@@ -485,6 +470,17 @@
     }
 }
 
+#pragma mark - Set up the location manager
+-(void) setUpLocationManager {
+    self.locationManager = [[CLLocationManager alloc] init];
+    if(!self.locationManager) NSLog(@"initialized here");
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone; 
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; //accuracy in 100 meters    
+    //stop the location manager
+    [self.locationManager stopUpdatingHeading];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -495,6 +491,10 @@
     
     //Set self up to receive notifications when the keyboard appears and disappears (to adjust the text fields and areas when keyboard shows up)
     [self registerForKeyboardNotifications];
+  
+    //initialize and set up location services
+    [self setUpLocationManager];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated   
@@ -552,6 +552,7 @@
     [self setUpperFormationLabel:nil];
     [self setUpperFormationTextField:nil];
     [self setFieldObservationLabel:nil];
+    [self setAcquireButton:nil];
     [super viewDidUnload];
 }
 
@@ -578,6 +579,16 @@
     self.recordNameTextField.text=self.record.name ? self.record.name : @"";
     self.recordLatitudeLabel.text=self.record.latitude;
     self.recordLongitudeLabel.text=self.record.longitude;
+ 
+    //filling in date and time
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
+    [timeFormatter setDateFormat:@"HH:mm:ss"];
+    [self.recordDateLabel setText:[dateFormatter stringFromDate:self.record.date ]]; 
+    [self.recordTimeLabel setText:[timeFormatter stringFromDate:self.record.date ]]; 
+    
+    
     self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
     self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];
     self.dipDirectionTextField.text=self.record.dipDirection ? self.record.dipDirection : @"";
