@@ -569,10 +569,10 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Lower Formation" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NaE-6s-Ecu">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Lower Formation:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NaE-6s-Ecu">
                                         <rect key="frame" x="28" y="447" width="167" height="29"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -583,10 +583,10 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Upper Formation" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jcP-iM-PaQ">
-                                        <rect key="frame" x="379" y="448" width="160" height="29"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Upper Formation:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jcP-iM-PaQ">
+                                        <rect key="frame" x="365" y="448" width="174" height="29"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -609,6 +609,9 @@
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="fJ0-zg-1be"/>
+                                            <segue destination="gJl-xc-ecU" kind="popover" identifier="Upper Formation Picker" popoverAnchorView="c93-8P-FW6" id="EU9-pI-dxs">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Trend" minimumFontSize="17" id="mpb-eR-t8c">
@@ -624,12 +627,15 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lower Formation" minimumFontSize="17" id="FMh-B9-XP0">
-                                        <rect key="frame" x="203" y="454" width="176" height="32"/>
+                                        <rect key="frame" x="203" y="446" width="176" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textFieldDidBeginEdit:" destination="LFc-wQ-Gyp" eventType="editingDidBegin" id="efe-VI-Rks"/>
+                                            <segue destination="CHt-0A-FGC" kind="popover" identifier="Lower Formation Picker" popoverAnchorView="FMh-B9-XP0" id="d2i-Oo-1gK">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Field Observation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="yQP-S4-lTa">
@@ -772,7 +778,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5358" y="-5633"/>
+            <point key="canvasLocation" x="-5878" y="-9845"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="neq-Dd-nPE">
@@ -796,7 +802,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5375" y="-5306"/>
+            <point key="canvasLocation" x="-5543" y="-8066"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="VXG-wO-A5P">
@@ -868,7 +874,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5414" y="-5501"/>
+            <point key="canvasLocation" x="-5703" y="-8949"/>
         </scene>
         <!--Dip Direction Picker View Controller-->
         <scene sceneID="gzM-LZ-3Za">
@@ -892,7 +898,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5190" y="-5017"/>
+            <point key="canvasLocation" x="-5414" y="-7369"/>
         </scene>
         <!--Trend Picker View Controller-->
         <scene sceneID="Tjg-pS-3cq">
@@ -916,7 +922,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5174" y="-4801"/>
+            <point key="canvasLocation" x="-5344" y="-6689"/>
         </scene>
         <!--Plunge Picker View Controller-->
         <scene sceneID="Yff-Cv-Agq">
@@ -940,7 +946,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5208" y="-4653"/>
+            <point key="canvasLocation" x="-5368" y="-6077"/>
         </scene>
         <!--Formation Folder View Controller-->
         <scene sceneID="vmK-no-er4">
@@ -1135,6 +1141,54 @@
             </objects>
             <point key="canvasLocation" x="-9792" y="-2876"/>
         </scene>
+        <!--Formation Picker View Controller-->
+        <scene sceneID="dbq-aM-UYl">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uIe-qw-yNk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="CHt-0A-FGC" customClass="FormationPickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MXu-mZ-2Qs">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" id="fRU-gM-80k">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                    <connections>
+                        <outlet property="pickerView" destination="fRU-gM-80k" id="LbX-qQ-sGe"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-5263" y="-5818"/>
+        </scene>
+        <!--Formation Picker View Controller-->
+        <scene sceneID="qVl-Lc-KVd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DUK-BJ-SA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="gJl-xc-ecU" customClass="FormationPickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U1c-eR-1eb">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" id="nBT-Pg-Hsl">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                    <connections>
+                        <outlet property="pickerView" destination="nBT-Pg-Hsl" id="4zS-Qe-Lbg"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-5263" y="-5002"/>
+        </scene>
     </scenes>
     <resources>
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
@@ -1216,7 +1270,10 @@
         <class className="RecordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
             <relationships>
+<<<<<<< HEAD
                 <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
+=======
+>>>>>>> 8405b4504f8022e9a62ba8ae3e04b6a7d5185235
                 <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
@@ -1225,7 +1282,10 @@
                 <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
+<<<<<<< HEAD
                 <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
+=======
+>>>>>>> 8405b4504f8022e9a62ba8ae3e04b6a7d5185235
                 <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>

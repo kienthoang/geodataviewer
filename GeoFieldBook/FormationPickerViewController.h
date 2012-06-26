@@ -23,6 +23,7 @@
 
 @property (nonatomic,strong) UIManagedDocument *database;
 @property (nonatomic,strong) Formation_Folder *formationFolder;    //The folder the formations showed in the picker view are in.
+@property (nonatomic,strong) NSString *pickerName;   //The name of the picker, to distinguish between formation, lower formation, and upper formation pickers
 
 @property (nonatomic,strong) id <FormationPickerDelegate> delegate;
 

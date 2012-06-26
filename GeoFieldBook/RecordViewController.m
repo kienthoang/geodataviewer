@@ -27,6 +27,11 @@
 
 @interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate>
 
+#define FORMATION_PICKER_NAME @"RecordViewController.Formation_Picker"
+#define LOWER_FORMATION_PICKER_NAME @"RecordViewController.Lower_Formation_Picker"
+#define UPPER_FORMATION_PICKER_NAME @"RecordViewController.Upper_Formation_Picker"
+
+
 @property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
 
 - (void)updateSplitViewBarButtonPresenterWith:(UIBarButtonItem *)splitViewBarButtonItem;
@@ -420,8 +425,21 @@
 - (void)formationPickerViewController:(FormationPickerViewController *)sender 
        userDidSelectFormationWithName:(NSString *)formationName
 {
-    //Set the text of the formation text field
-    self.formationTextField.text=formationName;
+    //Set text fields based on whether the sender is the formation, lower formation, or upper formation textfield
+    if ([sender.pickerName isEqualToString:FORMATION_PICKER_NAME]) {
+        //Set the text of the formation text field
+        self.formationTextField.text=formationName;
+    }
+    
+    else if ([sender.pickerName isEqualToString:LOWER_FORMATION_PICKER_NAME]) {
+        //Set the text of the formation text field
+        self.lowerFormationTextField.text=formationName;
+    }
+    
+    else if ([sender.pickerName isEqualToString:UPPER_FORMATION_PICKER_NAME]) {
+        //Set the text of the formation text field
+        self.upperFormationTextField.text=formationName;
+    }
 }
 
 #pragma mark - UINavigationControllerDelegate methods
@@ -436,7 +454,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Strike picker segue
-    NSSet *pickerSegueIdentifiers=[NSSet setWithObjects:@"Strike Picker",@"Dip Picker",@"Dip Direction Picker",@"Plunge Picker",@"Trend Picker",@"Formation Picker", nil];
+    NSSet *pickerSegueIdentifiers=[NSSet setWithObjects:@"Strike Picker",@"Dip Picker",@"Dip Direction Picker",@"Plunge Picker",@"Trend Picker",@"Formation Picker",@"Lower Formation Picker",@"Upper Formation Picker", nil];
     if ([pickerSegueIdentifiers containsObject:segue.identifier]) {
         //Set self as the delegate of the popup Strike Picker
         [segue.destinationViewController setDelegate:self];
@@ -460,13 +478,40 @@
         [segue.destinationViewController setInitialSelectionEnabled:![self.plungeTextField.text length]];
     }
     
-    //Seguing to the formation picker view controller
+    //Seguing to the formation picker view controller for the formation text field
     else if ([segue.identifier isEqualToString:@"Formation Picker"]) {
         //Set the database of the formation picker
         [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
         
         //Set initialSelection for the formation picker if the current record has no formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.formationTextField.text length]];
+        
+        //Set the name of the picker
+        [segue.destinationViewController setPickerName:FORMATION_PICKER_NAME];
+    }
+    
+    //Seguing to the formation picker view controller for the lower formation text field
+    else if ([segue.identifier isEqualToString:@"Lower Formation Picker"]) {
+        //Set the database of the lower formation picker
+        [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
+        
+        //Set initialSelection for the formation picker if the current record has no lower formation set yet
+        [segue.destinationViewController setInitialSelectionEnabled:![self.lowerFormationTextField.text length]];
+        
+        //Set the name of the picker
+        [segue.destinationViewController setPickerName:LOWER_FORMATION_PICKER_NAME];
+    }
+    
+    //Seguing to the formation picker view controller for the upper formation text field
+    else if ([segue.identifier isEqualToString:@"Upper Formation Picker"]) {
+        //Set the database of the formation picker
+        [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
+        
+        //Set initialSelection for the formation picker if the current record has no upper formation set yet
+        [segue.destinationViewController setInitialSelectionEnabled:![self.upperFormationTextField.text length]];
+        
+        //Set the name of the picker
+        [segue.destinationViewController setPickerName:UPPER_FORMATION_PICKER_NAME];
     }
 }
 
@@ -620,10 +665,10 @@
 
 - (void)formSetupForContactType {
     //Show the plunge and trend text labels and text fields
-    NSSet *showedFields=[NSSet setWithObjects:self.plungeLabel,self.plungeTextField,self.trendTextField,self.trendLabel, nil];
+    NSSet *showedFields=[NSSet setWithObjects:self.lowerFormationTextField,self.lowerFormationLabel,self.upperFormationTextField,self.upperFormationLabel, nil];
     [showedFields makeObjectsPerformSelector:@selector(setHidden:) withObject:nil];
     
-    //Setup the two text fields
+    //Setup the two lower and upper formation fields
     Contact *contact=(Contact *)self.record;
     self.lowerFormationTextField.text=contact.lowerFormation ? contact.lowerFormation.formationName : @"";
     self.upperFormationTextField.text=contact.upperFormation ? contact.upperFormation.formationName : @"";

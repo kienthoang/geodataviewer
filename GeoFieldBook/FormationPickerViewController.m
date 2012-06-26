@@ -19,6 +19,7 @@
 
 @synthesize database=_database;
 @synthesize formationFolder=_formationFolder;
+@synthesize pickerName=_pickerName;
 
 @synthesize delegate=_delegate;
 
