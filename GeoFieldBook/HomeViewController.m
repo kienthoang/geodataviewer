@@ -19,25 +19,6 @@
 @synthesize toolbar = _toolbar;
 
 @synthesize delegate=_delegate;
-@synthesize splitViewBarButtonItem=_splitViewBarButtonItem;
-
-- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
-    //Get the array of bar button items in the toolbar
-    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
-    
-    //Remove the old button if it's not nil
-    if (self.splitViewBarButtonItem)
-        [toolbarItems removeObject:self.splitViewBarButtonItem];
-    
-    //If the new button is not nil, add it to the toolbar on the leftmost
-    if (splitViewBarButtonItem)
-        [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-    
-    //Set the toolbar items
-    self.toolbar.items=[toolbarItems copy];
-    
-    _splitViewBarButtonItem=splitViewBarButtonItem;
-}
 
 #pragma mark - Target-Action Handlers
 

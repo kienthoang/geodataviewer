@@ -43,8 +43,6 @@
 
 @synthesize database=_database;
 
-@synthesize barButtonItem=_barButtonItem;
-
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
         _database=database;
@@ -52,13 +50,6 @@
         //Make sure the document is open and set up the fetched result controller
         [self normalizeDatabase];        
     }
-}
-
-- (void)setBarButtonItem:(UIBarButtonItem *)barButtonItem {
-    //Transfer the bar button to the detail view
-    [self barButtonPresenter].splitViewBarButtonItem=barButtonItem;
-        
-    _barButtonItem=barButtonItem;
 }
 
 //Set up the FetchedResultsController to fetch folder entities from the database
@@ -242,11 +233,6 @@
         if (!self.autosaverCancelBlock || !self.autosaverConfirmBlock)
             [self showInitialDetailView];
     }
-    
-    //If there is a transferred button, give it to the detail view
-    if (self.barButtonItem)
-        [[self barButtonPresenter] setSplitViewBarButtonItem:self.barButtonItem];
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
