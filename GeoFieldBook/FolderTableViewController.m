@@ -149,6 +149,11 @@
 
 #pragma mark - Folder Creation/Editing/Deletion
 
+- (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
+    UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation folder with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [duplicationAlert show];
+}
+
 - (void)saveChangesToDatabase {
     //Save changes to database
     [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
@@ -163,11 +168,13 @@
     //Filter folder name
     folderName=[TextInputFilter filterDatabaseInputText:folderName];
     
-    //Create a folder entity with the specified name (after filtering)
-    [Folder folderWithName:folderName inManagedObjectContext:self.database.managedObjectContext];
-    
-    //Save
-    [self saveChangesToDatabase];
+    //Create a folder entity with the specified name (after filtering), put up an alert if that returns nil (name duplicate)
+    if (![Folder folderWithName:folderName inManagedObjectContext:self.database.managedObjectContext])
+        [self putUpDuplicateNameAlertWithName:folderName];
+        
+    //Else, save
+    else
+        [self saveChangesToDatabase];
 }
 
 - (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName {
@@ -182,10 +189,8 @@
     }
     
     //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
-    if (![selectedFolder changeFolderNameTo:newName]) {
-        UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation folder with the name '%@' already exists!",newName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        [duplicationAlert show];
-    }
+    if (![selectedFolder changeFolderNameTo:newName])
+        [self putUpDuplicateNameAlertWithName:newName];
     
     //Else, save
     else

@@ -19,12 +19,8 @@
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
     NSArray *results=[context executeFetchRequest:request error:NULL];
     
-    //If there is exactly one result, return it
-    if ([results count]==1)
-        formationFolder=[results lastObject];
-        
-    //Else if there is more than one result or results is nil, handle error
-    else if (!results || [results count]>1) {
+    //if there result or results is nil, handle error
+    if (!results || [results count]) {
         //handle errors
     }
     

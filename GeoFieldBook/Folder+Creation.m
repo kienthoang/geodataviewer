@@ -19,13 +19,8 @@
     
     
     Folder *folder=nil;
-    //If there is exactly one result, return it
-    if ([results count]==1) {
-        folder=[results lastObject];
-    }
-    
-    //If there is more than one result or the result array is nil, handle errors
-    else if ([results count] || !results) {
+    //If there is result or the result array is nil, handle errors
+    if ([results count] || !results) {
         //handle errors
     }
     

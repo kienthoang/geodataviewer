@@ -71,6 +71,11 @@
     [alert show];
 }
 
+- (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
+    UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation folder with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [duplicationAlert show];
+}
+
 - (void)saveChangesToDatabase {
     //Save changes to database
     [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
@@ -82,9 +87,9 @@
 }
 
 - (void)createNewFormationFolderWithName:(NSString *)folderName {
-    //create a new formation folder
-    [Formation_Folder formationFolderForName:folderName 
-                                                        inManagedObjectContext:self.database.managedObjectContext];
+    //create a new formation folder, if that returns nil (name duplicate), put up an alert
+    if (![Formation_Folder formationFolderForName:folderName inManagedObjectContext:self.database.managedObjectContext])
+        [self putUpDuplicateNameAlertWithName:folderName];
 }
 
 - (void)modifyFormationFolderWithName:(NSString *)originalName toName:(NSString *)newName {
@@ -99,10 +104,8 @@
     }
     
     //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
-    if (![selectedFormationFolder changeFormationFolderNameTo:newName]) {
-        UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation folder with the name '%@' already exists!",newName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        [duplicationAlert show];
-    }
+    if (![selectedFormationFolder changeFormationFolderNameTo:newName])
+        [self putUpDuplicateNameAlertWithName:newName];
     
     //Else, save
     else
