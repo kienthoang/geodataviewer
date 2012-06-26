@@ -64,6 +64,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *lowerFormationTextField;
 @property (weak, nonatomic) IBOutlet UILabel *upperFormationLabel;
 @property (weak, nonatomic) IBOutlet UITextField *upperFormationTextField;
+@property (weak, nonatomic) IBOutlet UILabel *fieldObservationLabel;
 
 //=========================================================================================//
 
@@ -107,6 +108,7 @@
 @synthesize lowerFormationTextField = _lowerFormationTextField;
 @synthesize upperFormationLabel = _upperFormationLabel;
 @synthesize upperFormationTextField = _upperFormationTextField;
+@synthesize fieldObservationLabel = _fieldObservationLabel;
 @synthesize fieldObservationTextArea = _fieldObservationTextArea;
 @synthesize formationLabel = _formationLabel;
 @synthesize strikeLabel = _strikeLabel;
@@ -464,6 +466,7 @@
     [self setLowerFormationTextField:nil];
     [self setUpperFormationLabel:nil];
     [self setUpperFormationTextField:nil];
+    [self setFieldObservationLabel:nil];
     [super viewDidUnload];
 }
 
@@ -557,11 +560,11 @@
 
 - (void)formSetupForOtherType {
     //Hide all the textfields except for the name textfield
-    [self.textFields makeObjectsPerformSelector:@selector(setHidden:) withObject:nil];
+    [self.textFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
     self.recordNameTextField.hidden=NO;
     
-    //Hide the strike, dip, and dip direction
-    NSSet *hiddenFields=[NSSet setWithObjects:self.strikeLabel,self.strikeTextField,self.dipLabel,self.dipTextField,self.dipDirectionLabel,self.dipDirectionTextField, nil];
+    //Hide the strike, dip, and dip direction, field observation labels
+    NSSet *hiddenFields=[NSSet setWithObjects:self.strikeLabel,self.dipLabel,self.dipDirectionLabel,self.formationLabel, nil];
     [hiddenFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
 }
 

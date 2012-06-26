@@ -17,7 +17,7 @@
 
 @end
 
-@interface HomeViewController : UIViewController <UISplitViewBarButtonPresenter>
+@interface HomeViewController : UIViewController
 
 @property (nonatomic,weak) id <HomeViewControllerDelegate> delegate;
 
