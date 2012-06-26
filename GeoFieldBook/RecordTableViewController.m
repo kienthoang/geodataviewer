@@ -314,7 +314,15 @@
     cell.textLabel.text=record.name;
     cell.detailTextLabel.text=[NSString stringWithFormat:@"Folder: %@",record.folder.folderName];
     
+    //Allow reordering of cell if the table view is in editing mode
+    if (self.tableView.editing)
+        cell.showsReorderControl=YES;
+    
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 #pragma mark - Table View Delegate
@@ -327,6 +335,15 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     if (editingStyle==UITableViewCellEditingStyleDelete) {
         [self deleteRecordAtIndexPath:indexPath];
     }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    return proposedDestinationIndexPath;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
 }
 
 @end
