@@ -7,23 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Folder.h"
+#import "Folder+DictionaryKeys.h"
 
 @class ModalFolderViewController;
 
 @protocol ModalFolderDelegate <NSObject>
 
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
-            obtainedNewFolderName:(NSString *)folderName;
+            obtainedNewFolderInfo:(NSDictionary *)folderInfo;
 
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
-         didAskToModifyFolderName:(NSString *)originalName 
-       obtainedModifiedFolderName:(NSString *)folderName;
+             didAskToModifyFolder:(Folder *)folder
+       obtainedModifiedFolderInfo:(NSDictionary *)folderInfo;
 
 @end
 
 @interface ModalFolderViewController : UIViewController
 
-@property (nonatomic,strong) NSString *folderName;    //The name of the folder
+@property (nonatomic,strong) Folder *folder;    //The name of the folder
 @property (nonatomic,weak) id <ModalFolderDelegate> delegate;
 
 @end

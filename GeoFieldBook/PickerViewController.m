@@ -32,7 +32,9 @@
     //Get all the numbers user selected in rows in all components
     for (int index=0;index<[self.componentMatrix count];index++) {
         NSArray *component=[self.componentMatrix objectAtIndex:index];
-        selection=[selection stringByAppendingString:[component objectAtIndex:[self.pickerView selectedRowInComponent:index]]];    
+        
+        if ([component count])
+            selection=[selection stringByAppendingString:[component objectAtIndex:[self.pickerView selectedRowInComponent:index]]];
     }
     
     return selection;
@@ -69,7 +71,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Handles initial selection if initialSelectionEnabled is set to true
+    //Handles initial selection if initialSelectionEnabled is set to true and there are some component rows
     if (self.initialSelectionEnabled)
         [self handleUserSelection];
 }

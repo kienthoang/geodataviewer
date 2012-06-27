@@ -33,7 +33,7 @@
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
             } else if ([recordType isEqualToString:@"Bedding"]) {
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"Bedding" inManagedObjectContext:context];
-            } else if ([recordType isEqualToString:@"JointSet"]) {
+            } else if ([recordType isEqualToString:@"Joint Set"]) {
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"JointSet" inManagedObjectContext:context];
             } else if ([recordType isEqualToString:@"Other"]) {
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"Other" inManagedObjectContext:context];

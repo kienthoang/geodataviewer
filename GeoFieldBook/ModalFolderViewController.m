@@ -11,19 +11,26 @@
 @interface ModalFolderViewController()
 
 @property (weak, nonatomic) IBOutlet UITextField *folderNameTextField;
+@property (weak, nonatomic) IBOutlet UITextView *folderDescriptionTextArea;
 
 @end
 
 @implementation ModalFolderViewController
 @synthesize folderNameTextField = _folderNameTextField;
+@synthesize folderDescriptionTextArea = _folderDescriptionTextArea;
 
 @synthesize delegate=_delegate;
-@synthesize folderName=_folderName;
+@synthesize folder=_folder;
 
-- (void)setFolderName:(NSString *)folderName {
-    if (_folderName!=folderName) {
-        _folderName=folderName;
-        self.folderNameTextField.text=self.folderName;
+- (void)setFolderName:(Folder *)folder {
+    if (_folder!=folder) {
+        _folder=folder;
+        
+        //Set up the text fields and areas
+        self.folderNameTextField.text=self.folder.folderName;
+        self.folderDescriptionTextArea.text=self.folder.folderDescription;
+        
+        NSLog(@"Set the description: %@",self.folderDescriptionTextArea.text);
     }
 }
 
@@ -32,12 +39,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Set the text field's text to the folder name if the folder name is not nil
-    if ([self.folderName length])
-        self.folderNameTextField.text=self.folderName;
+    //Set the text field's text to the folder name and the description area's text to the folder's description if the folder is not nil
+    if (self.folder) {
+        self.folderNameTextField.text=self.folder.folderName;
+        self.folderDescriptionTextArea.text=self.folder.folderDescription;
+    }
     
     //Set the title of self: if folderName is set, the user is editting an existing folder; otherwise, he/she is creating a new folder
-    self.navigationItem.title=self.folderName ? @"Edit Folder" : @"New Folder";
+    self.navigationItem.title=self.folder ? @"Edit Folder" : @"New Folder";
     
     //Add tap gesture recognizer
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
@@ -55,6 +64,7 @@
 - (void)viewDidUnload
 {
     [self setFolderNameTextField:nil];
+    [self setFolderDescriptionTextArea:nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view. (generated automatically by xcode)
@@ -64,6 +74,15 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+//Create a dictionary of info of the new/modified folder
+- (NSDictionary *)dictionaryFromFolderForm {
+    NSMutableDictionary *folderInfo=[NSMutableDictionary dictionary];
+    [folderInfo setObject:self.folderNameTextField.text forKey:FOLDER_NAME];
+    [folderInfo setObject:self.folderDescriptionTextArea.text forKey:FOLDER_DESCRIPTION];
+        
+    return folderInfo;
 }
 
 #pragma mark - Target-Action Handlers
@@ -81,14 +100,14 @@
     
     //Else call the delegate and pass on the name of the folder
     else {
-        //If the folder name has not been set before
-        if (![self.folderName length])
+        //If the folder has not been set before
+        if (!self.folder)
             [self.delegate modalFolderViewController:self 
-                               obtainedNewFolderName:self.folderNameTextField.text];
+                               obtainedNewFolderInfo:[self dictionaryFromFolderForm]];
         else 
             [self.delegate modalFolderViewController:self 
-                            didAskToModifyFolderName:self.folderName 
-                          obtainedModifiedFolderName:self.folderNameTextField.text];
+                                didAskToModifyFolder:self.folder 
+                          obtainedModifiedFolderInfo:[self dictionaryFromFolderForm]];
     }
 }
 
@@ -102,6 +121,7 @@
 - (void)hideKeyBoard:(UITapGestureRecognizer *)tapGesture {
     //Dismiss keyboard
     [self.folderNameTextField resignFirstResponder];
+    [self.folderDescriptionTextArea resignFirstResponder];
 }
 
 @end

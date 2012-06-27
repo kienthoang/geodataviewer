@@ -18,12 +18,13 @@
 #import "Folder.h"
 #import "Folder+Creation.h"
 #import "Folder+Modification.h"
+#import "Folder+DictionaryKeys.h"
 
 @interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
-- (void)createNewFolderWithName:(NSString *)folderName;    //Create a folder in the database with the specified name
-- (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName;   //Modify a folder's name
+- (void)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
+- (void)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;
 - (void)showInitialDetailView;
 
@@ -181,33 +182,20 @@
     }];
 }
 
-- (void)createNewFolderWithName:(NSString *)folderName {
-    //Filter folder name
-    folderName=[TextInputFilter filterDatabaseInputText:folderName];
-    
+- (void)createNewFolderWithInfo:(NSDictionary *)folderInfo {
     //Create a folder entity with the specified name (after filtering), put up an alert if that returns nil (name duplicate)
-    if (![Folder folderWithName:folderName inManagedObjectContext:self.database.managedObjectContext])
-        [self putUpDuplicateNameAlertWithName:folderName];
+    if (![Folder folderWithInfo:folderInfo inManagedObjectContext:self.database.managedObjectContext])
+        [self putUpDuplicateNameAlertWithName:[folderInfo objectForKey:FOLDER_NAME]];
         
     //Else, save
     else
         [self saveChangesToDatabase];
 }
 
-- (void)modifyFolderWithName:(NSString *)originalName toName:(NSString *)newName {
-    //Filter new name
-    newName=[TextInputFilter filterDatabaseInputText:newName];
-    
-    //Get the folder with the specified original name
-    Folder *selectedFolder=nil;
-    for (Folder *folder in [self.fetchedResultsController fetchedObjects]) {
-        if ([folder.folderName isEqualToString:originalName])
-            selectedFolder=folder;
-    }
-    
+- (void)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo {
     //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
-    if (![selectedFolder changeFolderNameTo:newName])
-        [self putUpDuplicateNameAlertWithName:newName];
+    if (![folder updateWithNewInfo:folderInfo])
+        [self putUpDuplicateNameAlertWithName:[folderInfo objectForKey:FOLDER_NAME]];
     
     //Else, save
     else
@@ -262,11 +250,11 @@
         //Set the delegate of the destination controller
         [segue.destinationViewController setDelegate:self];
         
-        //Set the folderName of the destination controller if the table view is in editting mode
+        //Set the folder of the destination controller if the table view is in editting mode
         if (self.tableView.editing) {
             UITableViewCell *cell=(UITableViewCell *)sender;
             Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-            [segue.destinationViewController setFolderName:folder.folderName];
+            [segue.destinationViewController setFolder:folder];
         }
     }
     
@@ -304,21 +292,21 @@
 #pragma mark - ModalFolderDelegate methods
 
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
-            obtainedNewFolderName:(NSString *)folderName 
+            obtainedNewFolderInfo:(NSDictionary *)folderInfo
 {
     //Create the folder with the specified name
-    [self createNewFolderWithName:folderName];
+    [self createNewFolderWithInfo:folderInfo];
         
     //Dismiss modal
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
-         didAskToModifyFolderName:(NSString *)originalName 
-       obtainedModifiedFolderName:(NSString *)folderName 
+             didAskToModifyFolder:(Folder *)folder
+       obtainedModifiedFolderInfo:(NSDictionary *)folderInfo
 {
     //Modify the folder's name
-    [self modifyFolderWithName:originalName toName:folderName];
+    [self modifyFolder:folder withNewInfo:folderInfo];
         
     //Dismiss modal
     [self dismissModalViewControllerAnimated:YES];

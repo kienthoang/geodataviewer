@@ -10,7 +10,7 @@
 
 @interface Folder (Modification)
 
-- (BOOL)changeFolderNameTo:(NSString *)newName;  //return true if the name change was successful
+- (BOOL)updateWithNewInfo:(NSDictionary *)newInfo;  //return true if the name change was successful
 
 - (BOOL)setFormationFolderWithName:(NSString *)formationFolder;
 

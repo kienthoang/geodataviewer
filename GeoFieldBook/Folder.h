@@ -2,7 +2,7 @@
 //  Folder.h
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 6/21/12.
+//  Created by Kien Hoang on 6/26/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -13,10 +13,11 @@
 
 @interface Folder : NSManagedObject
 
-@property (nonatomic, retain) NSString * folderName;
 @property (nonatomic, retain) NSNumber * folderID;
-@property (nonatomic, retain) NSSet *records;
+@property (nonatomic, retain) NSString * folderName;
+@property (nonatomic, retain) NSString * folderDescription;
 @property (nonatomic, retain) Formation_Folder *formationFolder;
+@property (nonatomic, retain) NSSet *records;
 @end
 
 @interface Folder (CoreDataGeneratedAccessors)

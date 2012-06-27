@@ -7,21 +7,32 @@
 //
 
 #import "Folder+Modification.h"
+#import "Folder+DictionaryKeys.h"
 
 @implementation Folder (Modification)
 
-- (BOOL)changeFolderNameTo:(NSString *)newName {
-    //Query the database to see if the any folder with the new name already exists
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
-    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",newName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
-    NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+- (BOOL)updateWithNewInfo:(NSDictionary *)newInfo {
+    //Get the info out of the info dictionary
+    NSString *newName=[newInfo objectForKey:FOLDER_NAME];
+    NSString *folderDescription=[newInfo objectForKey:FOLDER_DESCRIPTION];
     
-    //if there is one result, return NO
-    if ([results count])
-        return NO;
+   //if the new name is different from the old name, check for name duplication
+    if (![newName isEqualToString:self.folderName]) {
+        //Query the database to see if the any folder with the new name already exists
+        NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
+        request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",newName];
+        request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+        NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+        
+        //if there is one result and the name, return NO
+        if ([results count])
+            return NO;
+    }
     
+    //Update the folder
     self.folderName=newName;
+    self.folderDescription=folderDescription;
+    
     return YES;
 }
 

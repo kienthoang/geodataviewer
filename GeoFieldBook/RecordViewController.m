@@ -277,31 +277,31 @@
 }
 
 
-- (IBAction)acquireData:(UIBarButtonItem *)sender {
-    NSLog(@"aquiring data");
-    
-    NSDate *now = [[NSDate alloc] init];
-    self.record.date = now;
-    
-    //reset the txtfields appropriately.
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
-    [timeFormatter setDateFormat:@"HH:mm:ss"];
-    [self.recordDateLabel setText:[dateFormatter stringFromDate:now ]]; 
-    [self.recordTimeLabel setText:[timeFormatter stringFromDate:now ]]; 
-    
-    //update the location. 
-    //this will return immediatley and notifies the delegate with locationmanager:didupdate... 
-    [self.locationManager startUpdatingLocation];
-    
-    //Set up the timer to respond every ten seconds and not to repeat. When timer is called, the locationManager is finished and the Activity Indicator is hidden
-    self.gpsTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
-    [self.gatheringGPS startAnimating];
+- (IBAction)acquireData:(UIBarButtonItem *)sender {    
+    //Only acquire data when self is in editing mode
+    if (self.editing) {
+        NSDate *now = [[NSDate alloc] init];
+        self.record.date = now;
+        
+        //reset the txtfields appropriately.
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
+        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
+        [timeFormatter setDateFormat:@"HH:mm:ss"];
+        [self.recordDateLabel setText:[dateFormatter stringFromDate:now ]]; 
+        [self.recordTimeLabel setText:[timeFormatter stringFromDate:now ]]; 
+        
+        //update the location. 
+        //this will return immediatley and notifies the delegate with locationmanager:didupdate... 
+        [self.locationManager startUpdatingLocation];
+        
+        //Set up the timer to respond every ten seconds and not to repeat. When timer is called, the locationManager is finished and the Activity Indicator is hidden
+        self.gpsTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
+        [self.gatheringGPS startAnimating];
+    }
 }
 
 -(void) timerFired{
-//    NSLog(@"timer called. gps update stops now");
     [self.gatheringGPS stopAnimating];
     [self.locationManager stopUpdatingLocation];    
 }
@@ -309,9 +309,7 @@
 
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    
     //here, save the current location
-    
     NSString* latitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.latitude];
     NSString* longitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.longitude];
     [self.recordLatitudeLabel setText:latitudeText];

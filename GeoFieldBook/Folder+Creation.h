@@ -10,6 +10,6 @@
 
 @interface Folder (Creation)
 
-+ (Folder *)folderWithName:(NSString *)folderName inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Folder *)folderWithInfo:(NSDictionary *)folderInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

@@ -11,17 +11,22 @@
 @implementation Formation_Folder (Modification)
 
 - (BOOL)changeFormationFolderNameTo:(NSString *)newName {
-    //Query the database to see if the any formation folder with the new name already exists
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
-    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",newName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
-    NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+    //If the new name is different from the old one, check for name duplication
+    if (![newName isEqualToString:self.folderName]) {
+        //Query the database to see if the any formation folder with the new name already exists
+        NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
+        request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",newName];
+        request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+        NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+        
+        //if there is one result, return NO
+        if ([results count])
+            return NO;
+    }
     
-    //if there is one result, return NO
-    if ([results count])
-        return NO;
-    
+    //Update the formation folder
     self.folderName=newName;
+    
     return YES;
 }
 

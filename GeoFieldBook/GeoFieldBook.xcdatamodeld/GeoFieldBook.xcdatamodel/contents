@@ -13,6 +13,7 @@
         <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="faults" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Folder" representedClassName="Folder" syncable="YES">
+        <attribute name="folderDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="folderID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="folderName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="formationFolder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation_Folder" inverseName="folders" inverseEntity="Formation_Folder" syncable="YES"/>
