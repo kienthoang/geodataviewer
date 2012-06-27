@@ -301,6 +301,7 @@
         //Set up the timer to respond every ten seconds and not to repeat. When timer is called, the locationManager is finished and the Activity Indicator is hidden
         self.gpsTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
         [self.gatheringGPS startAnimating];
+        [self.gatheringGPS setHidesWhenStopped:YES];
     }
 }
 
