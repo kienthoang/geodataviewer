@@ -51,7 +51,7 @@
     //Set up the fetched results controller to fetch records
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
     request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",self.folder.folderName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }

@@ -208,6 +208,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem title="Add Folder" id="xBX-na-cpH">
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="bjl-xY-1vQ" kind="modal" identifier="Add/Edit Folder" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="C0h-XZ-idy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="orb-gL-eT7"/>
                         <barButtonItem title=" Formations" id="uZN-m2-0jc">
                             <connections>
                                 <segue destination="efl-9D-qlf" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="uZN-m2-0jc" id="HV3-27-GSF">
@@ -217,11 +224,6 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Folders" id="fc4-75-BDf">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="xBX-na-cpH">
-                            <connections>
-                                <segue destination="bjl-xY-1vQ" kind="modal" identifier="Add/Edit Folder" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="C0h-XZ-idy"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="tqj-i6-PiN">
                             <connections>
                                 <action selector="editPressed:" destination="Uwh-l0-QS0" id="H9F-XO-jka"/>
@@ -281,13 +283,15 @@
                             <outlet property="delegate" destination="rqP-i8-UCo" id="lFN-Ow-HeC"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Formation Folders" id="3gP-S2-8wl">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="5Kq-VS-lzR">
+                    <toolbarItems>
+                        <barButtonItem title="Add Folder" id="5Kq-VS-lzR">
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="5rr-o1-mUY" kind="modal" identifier="Formation Folder Manipulation" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="Gk8-fP-aTA"/>
                             </connections>
                         </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Formation Folders" id="3gP-S2-8wl">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="ooa-Kl-7co">
                             <connections>
                                 <action selector="editPressed:" destination="rqP-i8-UCo" id="gz8-06-h64"/>
@@ -394,6 +398,7 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem title="Add Record" id="cpv-Nu-y09">
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Rcx-ao-SRb" kind="modal" identifier="Select Record Type" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="rqL-Ed-8l9"/>
                             </connections>
@@ -1065,7 +1070,7 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem title="Add Formation" id="AuG-Wp-ICM">
-                            <color key="tintColor" red="0.35153099798387094" green="0.51250630040322576" blue="0.71934853830645162" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="IJY-xr-I7y" kind="modal" identifier="Formation Manipulation" modalPresentationStyle="currentContext" id="Vov-6V-dI2"/>
                             </connections>
