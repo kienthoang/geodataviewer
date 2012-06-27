@@ -25,7 +25,7 @@
 #import "TrendPickerViewController.h"
 #import "FormationPickerViewController.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate>
+@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate>
 
 #define FORMATION_PICKER_NAME @"RecordViewController.Formation_Picker"
 #define LOWER_FORMATION_PICKER_NAME @"RecordViewController.Lower_Formation_Picker"
@@ -37,6 +37,15 @@
 - (void)updateSplitViewBarButtonPresenterWith:(UIBarButtonItem *)splitViewBarButtonItem;
 - (void)userDoneEditingRecord;         //handles when user finishes editing the record's info
 - (void)resignAllTextFieldsAndAreas;
+
+- (BOOL)validateFormWithMandatoryFields:(NSArray *)mandatoryFields 
+                              withNames:(NSArray *)mandatoryFieldNames 
+                          alertsEnabled:(BOOL)enabled;
+
+- (NSArray *)validateMandatoryPresenceOfFields:(NSArray *)fields 
+                                     withNames:(NSArray *)fieldNames;
+
+- (BOOL)validatePresenceOfFields:(NSArray *)fields;
 
 @property (nonatomic) BOOL editing;
 @property (nonatomic,readonly) NSArray *textFields;
@@ -54,10 +63,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *recordImage;
 @property (weak, nonatomic) IBOutlet UILabel *recordTypeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *recordNameTextField;
-@property (weak, nonatomic) IBOutlet UILabel *recordLatitudeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *recordLongitudeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *recordDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *recordTimeLabel;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *latitudeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *longitudeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
+@property (weak, nonatomic) IBOutlet UITextField *timeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *strikeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dipTextField;
 @property (weak, nonatomic) IBOutlet UITextField *formationTextField;
@@ -108,10 +118,11 @@
 @synthesize recordImage = _recordImage;
 @synthesize recordTypeLabel = _recordTypeLabel;
 @synthesize recordNameTextField = _recordNameTextField;
-@synthesize recordLatitudeLabel = _recordLatitudeLabel;
-@synthesize recordLongitudeLabel = _recordLongitudeLabel;
-@synthesize recordDateLabel = _recordDateLabel;
-@synthesize recordTimeLabel = _recordTimeLabel;
+@synthesize nameTextField = _nameTextField;
+@synthesize latitudeTextField = _latitudeTextField;
+@synthesize longitudeTextField = _longitudeTextField;
+@synthesize dateTextField = _dateTextField;
+@synthesize timeTextField = _timeTextField;
 @synthesize strikeTextField = _strikeTextField;
 @synthesize dipTextField = _dipTextField;
 @synthesize dipDirectionTextField = _dipDirectionTextField;
@@ -182,14 +193,14 @@
     //Create a NSDictionary with the user-modified information
     NSMutableDictionary *recordDictionary=[NSMutableDictionary dictionary];
     [recordDictionary setObject:self.recordNameTextField.text forKey:RECORD_NAME];
-    if (self.recordLatitudeLabel.text)
-        [recordDictionary setObject:self.recordLatitudeLabel.text forKey:RECORD_LATITUDE];
-    if (self.recordLongitudeLabel.text)
-        [recordDictionary setObject:self.recordLongitudeLabel.text forKey:RECORD_LONGITUDE];
-    if (self.recordDateLabel.text)
-        [recordDictionary setObject:self.recordDateLabel.text forKey:RECORD_DATE];
-    if (self.recordTimeLabel.text)
-        [recordDictionary setObject:self.recordTimeLabel.text forKey:RECORD_TIME];
+    if (self.latitudeTextField.text)
+        [recordDictionary setObject:self.latitudeTextField.text forKey:RECORD_LATITUDE];
+    if (self.longitudeTextField.text)
+        [recordDictionary setObject:self.longitudeTextField.text forKey:RECORD_LONGITUDE];
+    if (self.dateTextField.text)
+        [recordDictionary setObject:self.dateTextField.text forKey:RECORD_DATE];
+    if (self.timeTextField.text)
+        [recordDictionary setObject:self.timeTextField.text forKey:RECORD_TIME];
     [recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
     [recordDictionary setObject:self.dipTextField.text forKey:RECORD_DIP];
     [recordDictionary setObject:self.dipDirectionTextField.text forKey:RECORD_DIP_DIRECTION];
@@ -206,7 +217,6 @@
 }
 
 - (void)userDoneEditingRecord {
-    //Pass the user-modified info dictionary to the delegate for processing
     [self.delegate recordViewController:self userDidModifyRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
 }
 
@@ -273,12 +283,37 @@
             for (UITextField *textField in self.textFields)
                 textField.borderStyle=UITextBorderStyleNone;
             
-            //Proceed to editing the record with the user-modified info
-            [self userDoneEditingRecord];
+            //Proceed to updating the record with the user-modified info if it passes the validations
+            NSArray *mandatoryFields=[NSArray arrayWithObjects:self.latitudeTextField,self.longitudeTextField,self.dateTextField,self.timeTextField, nil];
+            NSArray *mandatoryFieldNames=[NSArray arrayWithObjects:@"Latitude",@"Longitude",@"Date",@"Time", nil];
+            NSArray *optionalFields=self.textFields;
+            
+            //If the info passes the validations, update the record
+            if ([self validateFormWithMandatoryFields:mandatoryFields 
+                                            withNames:mandatoryFieldNames 
+                                        alertsEnabled:YES]) 
+            {
+                //Validate optional fields
+                if ([self validatePresenceOfFields:optionalFields])
+                    [self userDoneEditingRecord];
+                else {
+                    //Force the editing mode back
+                    [self setEditing:YES animated:YES];
+                    
+                    //Show a warning alert
+                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Some fields have not been populated yet. Do you want to continue?" delegate:self cancelButtonTitle:@"Go Back" otherButtonTitles:@"Continue", nil];
+                    [alert show];
+                }
+            }
+            
+            //Else put up an alert view
+            else {
+                //Else force reset self's editing mode
+                [self setEditing:YES animated:YES];
+            }
         }
     }
 }
-
 
 - (IBAction)acquireData:(UIBarButtonItem *)sender {    
     //Only acquire data when self is in editing mode
@@ -291,8 +326,8 @@
         [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
         NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
         [timeFormatter setDateFormat:@"HH:mm:ss"];
-        [self.recordDateLabel setText:[dateFormatter stringFromDate:now ]]; 
-        [self.recordTimeLabel setText:[timeFormatter stringFromDate:now ]]; 
+        [self.dateTextField setText:[dateFormatter stringFromDate:now ]]; 
+        [self.timeTextField setText:[timeFormatter stringFromDate:now ]]; 
         
         //update the location. 
         //this will return immediatley and notifies the delegate with locationmanager:didupdate... 
@@ -310,17 +345,12 @@
     [self.locationManager stopUpdatingLocation];    
 }
 
-
-
 -(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
     //here, save the current location
     NSString* latitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.latitude];
     NSString* longitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.longitude];
-    [self.recordLatitudeLabel setText:latitudeText];
-    [self.recordLongitudeLabel setText:longitudeText];
-    
-    [self.record setLatitude:latitudeText]; 
-    [self.record setLongitude:longitudeText];
+    [self.latitudeTextField setText:latitudeText];
+    [self.longitudeTextField setText:longitudeText];
     
     //then stop the delegate
     [self.locationManager stopUpdatingHeading];
@@ -334,13 +364,67 @@
     //loop for about 5 times then give an alert
 }
 
-
-
-
 - (IBAction)browsePressed:(UIBarButtonItem *)sender {
 }
 
 - (IBAction)takePhoto:(UIBarButtonItem *)sender {
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If the alert view is a warning about fields being left blank
+    if ([alertView.title isEqualToString:@"Missing Information"]) {
+        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
+            //End editing mode
+            self.editing=NO;
+            [self userDoneEditingRecord];
+        }
+    }
+}
+
+#pragma mark - Form Validations
+
+//Return NO if the form failed the validations; put up alerts when necessary
+- (BOOL)validateFormWithMandatoryFields:(NSArray *)mandatoryFields 
+                              withNames:(NSArray *)mandatoryFieldNames 
+                          alertsEnabled:(BOOL)alertsEnabled 
+{
+    //Validate the mandatory fields first and get the array of fields that did not pass the tests
+    NSArray *failedFieldNames=[self validateMandatoryPresenceOfFields:mandatoryFields withNames:mandatoryFieldNames];
+    if ([failedFieldNames count] && alertsEnabled) {
+        NSString *alertMessage=[NSString stringWithFormat:@"The following information is missing: %@",[failedFieldNames componentsJoinedByString:@", "]];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Invalid Information" message:alertMessage delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [alert show];
+        return NO;
+    }
+    
+    return YES;
+}
+
+//Return an array of blank field names
+- (NSArray *)validateMandatoryPresenceOfFields:(NSArray *)fields 
+                                     withNames:(NSArray *)fieldNames 
+{
+    //Iterate through the array of fields and validate
+    NSMutableArray *failedFieldNames=[NSMutableArray array];
+    for (UITextField *textField in fields) {
+        if (![textField.text length])
+            [failedFieldNames addObject:[fieldNames objectAtIndex:[fields indexOfObject:textField]]];
+    }
+    
+    return failedFieldNames;
+    
+}
+
+//Return YES if all the fields pass the test
+- (BOOL)validatePresenceOfFields:(NSArray *)fields {
+    for (UITextField *textField in fields) {
+        if (![textField.text length])
+            return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - Handles when the keyboard slides up
@@ -589,11 +673,6 @@
     [self setRecordImage:nil];
     [self setRecordTypeLabel:nil];
     [self setRecordNameTextField:nil];
-    [self setRecordLatitudeLabel:nil];
-    [self setRecordLongitudeLabel:nil];
-    [self setRecordDateLabel:nil];
-    [self setRecordTimeLabel:nil];
-    [self setStrikeTextField:nil];
     [self setDipTextField:nil];
     [self setFormationTextField:nil];
     [self setDipDirectionTextField:nil];
@@ -614,6 +693,11 @@
     [self setFieldObservationLabel:nil];
     [self setAcquireButton:nil];
     [self setEditButton:nil];
+    [self setNameTextField:nil];
+    [self setLatitudeTextField:nil];
+    [self setLongitudeTextField:nil];
+    [self setDateTextField:nil];
+    [self setTimeTextField:nil];
     [super viewDidUnload];
 }
 
@@ -638,16 +722,16 @@
     
     //Fill in the information from the record
     self.recordNameTextField.text=self.record.name ? self.record.name : @"";
-    self.recordLatitudeLabel.text=self.record.latitude;
-    self.recordLongitudeLabel.text=self.record.longitude;
+    self.latitudeTextField.text=self.record.latitude;
+    self.longitudeTextField.text=self.record.longitude;
  
     //filling in date and time
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
     [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
     [timeFormatter setDateFormat:@"HH:mm:ss"];
-    [self.recordDateLabel setText:[dateFormatter stringFromDate:self.record.date ]]; 
-    [self.recordTimeLabel setText:[timeFormatter stringFromDate:self.record.date ]]; 
+    [self.dateTextField setText:[dateFormatter stringFromDate:self.record.date ]]; 
+    [self.timeTextField setText:[timeFormatter stringFromDate:self.record.date ]]; 
     
     
     self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];

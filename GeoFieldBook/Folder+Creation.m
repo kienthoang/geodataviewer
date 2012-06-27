@@ -34,7 +34,6 @@
         //Insert a folder entity into the database
         folder=[NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:context];
         folder.folderName=folderName;
-        NSLog(@"folder description: %@",folderDescription);
         folder.folderDescription=folderDescription;
     }
     
