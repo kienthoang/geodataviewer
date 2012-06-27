@@ -29,7 +29,9 @@
 #import "TrendPickerViewController.h"
 #import "FormationPickerViewController.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate>
+#import <MobileCoreServices/MobileCoreServices.h>
+
+@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate>
 
 #define FORMATION_PICKER_NAME @"RecordViewController.Formation_Picker"
 #define LOWER_FORMATION_PICKER_NAME @"RecordViewController.Lower_Formation_Picker"
@@ -57,6 +59,13 @@
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *gatheringGPS; 
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *browseButton;
+@property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *acquireDataButton;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, strong) UIPopoverController *imagePopover;
 
 //=====================================UI elements=======================================//
 
@@ -150,6 +159,12 @@
 
 @synthesize delegate=_delegate;
 
+@synthesize browseButton = _browseButton;
+@synthesize takePhotoButton = _takePhotoButton;
+@synthesize acquireDataButton = _acquireDataButton;
+@synthesize imageView = _imageView;
+@synthesize imagePopover = _imagePopover;
+
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
     //Update the bar button presenter
     [self updateSplitViewBarButtonPresenterWith:splitViewBarButtonItem];
@@ -171,7 +186,7 @@
     //Remove the old button if it exists
     if (self.splitViewBarButtonItem)
         [items removeObject:self.splitViewBarButtonItem];
-        
+    
     //Add the new button on the leftmost if it's not nil
     if (splitViewBarButtonItem)
         [items insertObject:splitViewBarButtonItem atIndex:0];
@@ -264,6 +279,11 @@
         self.fieldObservationTextArea.editable=editing;
         self.fieldObservationTextArea.backgroundColor=self.editing ? [UIColor whiteColor] : [UIColor clearColor];
         
+        //enable or disable the take photo, browse photo, and acquire data buttons depending on whether or not edit has been pressed
+        self.browseButton.enabled = self.editing;
+        self.takePhotoButton.enabled = self.editing;
+        self.acquireDataButton.enabled = self.editing;
+        
         //set the acquire button for editing
         self.acquireButton.enabled = editing;
         
@@ -334,13 +354,13 @@
         //Set up the timer to respond every ten seconds and not to repeat. When timer is called, the locationManager is finished and the Activity Indicator is hidden
         self.gpsTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
         [self.gatheringGPS startAnimating];
-//        [self.gatheringGPS setHidden:NO];
-         }
+        //        [self.gatheringGPS setHidden:NO];
+    }
 }
 
 -(void) timerFired{
     [self.gatheringGPS stopAnimating];
-//    [self.gatheringGPS setHidden:YES];
+    //    [self.gatheringGPS setHidden:YES];
     [self.locationManager stopUpdatingLocation];    
 }
 
@@ -363,10 +383,70 @@
     //loop for about 5 times then give an alert
 }
 
-- (IBAction)browsePressed:(UIBarButtonItem *)sender {
+#pragma mark - Acquire Data, Browse Photos, Take Photo Buttons
+
+- (IBAction)browsePressed:(UIButton *)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //popover
+        self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
+        [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}	
+
+#define IMAGE_IN_POPOVER YES
+- (IBAction)takePhoto:(UIButton *)sender
+{
+    if (!self.imagePopover && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        if ([mediaTypes containsObject:(NSString *)kUTTypeImage]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            picker.allowsEditing = NO;//no editing
+            if (IMAGE_IN_POPOVER) {
+                self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
+                [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            } else {
+                [self presentModalViewController:picker animated:YES];
+            }
+        }
+    }
 }
 
-- (IBAction)takePhoto:(UIBarButtonItem *)sender {
+- (void)dismissImagePicker
+{	
+    [self.imagePopover dismissPopoverAnimated:YES];
+    
+    self.imagePopover = nil;
+    
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{	
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if (image)
+    {
+        self.imageView.image = image;
+        self.recordImage.image = image;//
+    }
+    
+    //save image
+    
+	
+    
+    [self dismissImagePicker];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissImagePicker];
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -391,7 +471,7 @@
     //Put up alerts if validations fail
     NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
     NSLog(@"Invalid: %@",validationKeys);
-
+    
     if ([validationKeys count] && alertsEnabled) {
         NSMutableArray *failedFieldNames=[NSMutableArray array];
         for (NSString *failedKey in validationKeys) {
@@ -620,13 +700,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
     //Update the form
     [self updateFormForRecord:self.record];
     
     //Set self up to receive notifications when the keyboard appears and disappears (to adjust the text fields and areas when keyboard shows up)
     [self registerForKeyboardNotifications];
-  
+    
     //initialize and set up location services
     [self setUpLocationManager];
     
@@ -715,7 +795,7 @@
     self.recordNameTextField.text=self.record.name ? self.record.name : @"";
     self.latitudeTextField.text=self.record.latitude;
     self.longitudeTextField.text=self.record.longitude;
- 
+    
     //filling in date and time
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
     [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
@@ -785,7 +865,7 @@
     //Set the trend and plunge text fields
     self.plungeTextField.text=fault.plunge ? fault.plunge : @"";
     self.trendTextField.text=fault.trend ? fault.trend : @"";
-
+    
     //Set the formation text field
     self.formationTextField.text=fault.formation ? fault.formation.formationName : @"";    
 }

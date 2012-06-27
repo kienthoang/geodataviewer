@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -455,7 +455,7 @@
                                         <rect key="frame" x="28" y="26" width="296" height="247"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CT2-6D-cfZ">
+                                    <button opaque="NO" contentMode="redraw" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CT2-6D-cfZ">
                                         <rect key="frame" x="75" y="280" width="88" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -470,7 +470,7 @@
                                             <action selector="browsePressed:" destination="LFc-wQ-Gyp" eventType="touchUpInside" id="DIL-fg-kBL"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AS2-54-wHM">
+                                    <button opaque="NO" contentMode="redraw" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AS2-54-wHM">
                                         <rect key="frame" x="184" y="280" width="95" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -766,6 +766,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="acquireButton" destination="Dxm-3N-8JA" id="KaY-6e-gG9"/>
+                        <outlet property="browseButton" destination="CT2-6D-cfZ" id="Jhy-w1-Yj4"/>
                         <outlet property="dateTextField" destination="V3o-8P-hdU" id="mCP-gO-dTs"/>
                         <outlet property="dipDirectionLabel" destination="YSI-LC-man" id="jXa-64-uj5"/>
                         <outlet property="dipDirectionTextField" destination="Vnu-9G-ONQ" id="yFD-Gd-UoE"/>
@@ -790,6 +791,7 @@
                         <outlet property="scrollView" destination="SYZ-dV-H1C" id="HZG-Ye-7Bi"/>
                         <outlet property="strikeLabel" destination="Cm1-zu-LdH" id="VXO-ZP-zK0"/>
                         <outlet property="strikeTextField" destination="d55-m2-TjO" id="WQK-ZR-Hx9"/>
+                        <outlet property="takePhotoButton" destination="AS2-54-wHM" id="agz-cw-6QR"/>
                         <outlet property="timeTextField" destination="Crt-5y-ydA" id="AJ4-nI-CR1"/>
                         <outlet property="toolbar" destination="WsI-q1-BwC" id="9iB-dk-xLo"/>
                         <outlet property="trendLabel" destination="NDk-Gh-Yt2" id="4l6-2j-TdZ"/>
@@ -1360,6 +1362,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="acquireDataButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="browseButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dateTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
@@ -1371,6 +1375,7 @@
                 <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="latitudeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="longitudeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
@@ -1384,6 +1389,7 @@
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="takePhotoButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="timeTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="trendLabel" candidateClass="UILabel"/>
