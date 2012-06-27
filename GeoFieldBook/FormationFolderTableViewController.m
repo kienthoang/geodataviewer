@@ -111,13 +111,17 @@
     }];
 }
 
-- (void)createNewFormationFolderWithName:(NSString *)folderName {
-    //create a new formation folder, if that returns nil (name duplicate), put up an alert
-    if (![Formation_Folder formationFolderForName:folderName inManagedObjectContext:self.database.managedObjectContext])
+- (BOOL)createNewFormationFolderWithName:(NSString *)folderName {
+    //create a new formation folder, if that returns nil (name duplicate), put up an alert and return NO
+    if (![Formation_Folder formationFolderForName:folderName inManagedObjectContext:self.database.managedObjectContext]) {
         [self putUpDuplicateNameAlertWithName:folderName];
+        return NO;
+    }
+    
+    return YES;
 }
 
-- (void)modifyFormationFolderWithName:(NSString *)originalName toName:(NSString *)newName {
+- (BOOL)modifyFormationFolderWithName:(NSString *)originalName toName:(NSString *)newName {
     //Filter new name
     newName=[TextInputFilter filterDatabaseInputText:newName];
     
@@ -128,13 +132,17 @@
             selectedFormationFolder=formationFolder;
     }
     
-    //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
-    if (![selectedFormationFolder changeFormationFolderNameTo:newName])
+    //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert and return NO
+    if (![selectedFormationFolder changeFormationFolderNameTo:newName]) {
         [self putUpDuplicateNameAlertWithName:newName];
+        return NO;
+    }
     
     //Else, save
     else
         [self saveChangesToDatabase];
+    
+    return YES;
 }
 
 - (void)deleteFormationFolder:(Formation_Folder *)formationFolder {
@@ -161,22 +169,22 @@
 - (void)formationFolderViewController:(FormationFolderViewController *)sender 
       didObtainNewFormationFolderName:(NSString *)formationFolderName
 {
-    //Create a new folder with the specified name
-    [self createNewFormationFolderWithName:formationFolderName];
-    
-    //Dismiss the modal
-    [self dismissModalViewControllerAnimated:YES];
+    //Create a new folder with the specified name, and if that returns YES (no name duplication) dismiss the modal
+    if ([self createNewFormationFolderWithName:formationFolderName]) {
+        //Dismiss the modal
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (void)formationFolderViewController:(FormationFolderViewController *)sender 
          didAskToModifyFolderWithName:(NSString *)originalName 
                    andObtainedNewName:(NSString *)folderName
 {
-    //Modify the folder with the specified original name
-    [self modifyFormationFolderWithName:originalName toName:folderName];
-    
-    //Dismiss the modal
-    [self dismissModalViewControllerAnimated:YES];
+    //Modify the folder with the specified original name, and if that returns YES (no name duplication error), dismiss the modal
+    if ([self modifyFormationFolderWithName:originalName toName:folderName]) {
+        //Dismiss the modal
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - TableViewControllerDataSource methods

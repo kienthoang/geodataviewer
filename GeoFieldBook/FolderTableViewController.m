@@ -23,8 +23,8 @@
 @interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
-- (void)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
-- (void)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo;   //Modify a folder's name
+- (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
+- (BOOL)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;
 - (void)showInitialDetailView;
 
@@ -195,24 +195,32 @@
     }];
 }
 
-- (void)createNewFolderWithInfo:(NSDictionary *)folderInfo {
-    //Create a folder entity with the specified name (after filtering), put up an alert if that returns nil (name duplicate)
-    if (![Folder folderWithInfo:folderInfo inManagedObjectContext:self.database.managedObjectContext])
+- (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo {
+    //Create a folder entity with the specified name (after filtering), put up an alert if that returns nil (name duplicate) and return NO
+    if (![Folder folderWithInfo:folderInfo inManagedObjectContext:self.database.managedObjectContext]) {
         [self putUpDuplicateNameAlertWithName:[folderInfo objectForKey:FOLDER_NAME]];
+        return NO;
+    }
         
     //Else, save
     else
         [self saveChangesToDatabase];
+    
+    return YES;
 }
 
-- (void)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo {
-    //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
-    if (![folder updateWithNewInfo:folderInfo])
+- (BOOL)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo {
+    //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert and return NO
+    if (![folder updateWithNewInfo:folderInfo]) {
         [self putUpDuplicateNameAlertWithName:[folderInfo objectForKey:FOLDER_NAME]];
+        return NO;
+    }
     
     //Else, save
     else
         [self saveChangesToDatabase];
+    
+    return YES;
 }
 
 - (void)deleteFolder:(Folder *)folder {
@@ -307,22 +315,22 @@
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
             obtainedNewFolderInfo:(NSDictionary *)folderInfo
 {
-    //Create the folder with the specified name
-    [self createNewFolderWithInfo:folderInfo];
-        
-    //Dismiss modal
-    [self dismissModalViewControllerAnimated:YES];
+    //Create the folder with the specified name, and if that returns YES (no name duplication) dismiss the modal
+    if ([self createNewFolderWithInfo:folderInfo]) {
+        //Dismiss modal
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (void)modalFolderViewController:(ModalFolderViewController *)sender 
              didAskToModifyFolder:(Folder *)folder
        obtainedModifiedFolderInfo:(NSDictionary *)folderInfo
 {
-    //Modify the folder's name
-    [self modifyFolder:folder withNewInfo:folderInfo];
-        
-    //Dismiss modal
-    [self dismissModalViewControllerAnimated:YES];
+    //Modify the folder's name and that returns YES, dismiss the modal
+    if ([self modifyFolder:folder withNewInfo:folderInfo]) {
+        //Dismiss modal
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - Table view data source
