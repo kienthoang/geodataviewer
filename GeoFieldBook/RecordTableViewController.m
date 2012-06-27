@@ -17,7 +17,10 @@
 #import "Record+Types.h"
 #import "Record+Creation.h"
 #import "Record+Modification.h"
+#import "Record+Validation.h"
+#import "Record+NameEncoding.h"
 #import "Formation_Folder.h"
+
 @interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
@@ -88,8 +91,9 @@
 - (void)autosaveRecord:(Record *)record 
      withNewRecordInfo:(NSDictionary *)recordInfo 
 {
-    //If the name of the modified of the record is not blank, show the alert; otherwise, show an alert with no confirm button
-    if ([[recordInfo objectForKey:RECORD_NAME] length]) {
+    //If the record info passes the validations, show the alert; otherwise, show an alert with no confirm button
+    NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
+    if (![failedKeyNames count]) {
         //Save the recordInfo dictionary in a temporary property
         self.recordModifiedInfo=recordInfo;
         
@@ -108,7 +112,10 @@
         [autosaveAlert show];
     } else {
         //Show the autosave fail alert
-        NSString *message=@"Record has not been saved: Name cannot be blank.";
+        NSMutableArray *failedNames=[NSMutableArray array];
+        for (NSString *failedKey in failedKeyNames)
+            [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
+        NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
         UIAlertView *autosaveFailAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
                                                                   message:message 
                                                                  delegate:nil 
@@ -270,17 +277,42 @@
         UIManagedDocument *database=self.database;
         
         //If the name of the modified record is not nil or empty, setup the autosaver
+        UIAlertView *autosaveAlert=nil;
         if ([[recordModifiedInfo objectForKey:RECORD_NAME] length]) {
-            UIAlertView *autosaverAlert=[[UIAlertView alloc] initWithTitle:@"Autosaver" message:@"You are navigating away. Do you want to save the record you were editing?" delegate:nil cancelButtonTitle:@"Don't Save" otherButtonTitles:@"Save", nil];
-            [self.autosaveDelegate recordTableViewController:self showAlert:autosaverAlert andExecuteBlockOnCancel:^{
+            NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordModifiedInfo];
+            if (![failedKeyNames count]) {
+                //If the name of the record is not nil
+                NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
+                
+                //Put up an alert to ask the user whether he/she wants to save
+                autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
+                                                                      message:message 
+                                                                     delegate:self 
+                                                            cancelButtonTitle:@"Don't Save" 
+                                                            otherButtonTitles:@"Save", nil];
+            } else {
+                //Show the autosave fail alert
+                NSMutableArray *failedNames=[NSMutableArray array];
+                for (NSString *failedKey in failedKeyNames)
+                    [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
+                NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
+                autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
+                                                                          message:message 
+                                                                         delegate:nil 
+                                                                cancelButtonTitle:@"Dismiss" 
+                                                                otherButtonTitles:nil];
+            }
+            
+            [self.autosaveDelegate recordTableViewController:self showAlert:autosaveAlert andExecuteBlockOnCancel:^{
                 NSLog(@"Cancel autosave alert!");
             } andExecuteBlock:^{
-                //Update the record info
-                [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
+                //Update the record info if the info passed validations
+                if (![failedKeyNames count]) {
+                    [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
                 
-                //Save changes to database
-                [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-                }];
+                    //Save changes to database
+                    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
+                }
             } whenClickButtonWithTitle:@"Save"];
         }
     }
