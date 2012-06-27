@@ -6,10 +6,14 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
+
+#import "TextInputFilter.h"
+
+#import "Record.h"
 #import "RecordViewController.h"
 #import "Record+Modification.h"
-#import "TextInputFilter.h"
-#import "Record.h"
+#import "Record+Validation.h"
+#import "Record+NameEncoding.h"
 #import "Formation.h"
 #import "Bedding.h"
 #import "Contact.h"
@@ -38,12 +42,8 @@
 - (void)userDoneEditingRecord;         //handles when user finishes editing the record's info
 - (void)resignAllTextFieldsAndAreas;
 
-- (BOOL)validateFormWithMandatoryFields:(NSArray *)mandatoryFields 
-                              withNames:(NSArray *)mandatoryFieldNames 
-                          alertsEnabled:(BOOL)enabled;
-
-- (NSArray *)validateMandatoryPresenceOfFields:(NSArray *)fields 
-                                     withNames:(NSArray *)fieldNames;
+- (BOOL)validateMandatoryFieldsOfInfo:(NSDictionary *)recordInfo 
+                        alertsEnabled:(BOOL)alertsEnabled;
 
 - (BOOL)validatePresenceOfFields:(NSArray *)fields;
 
@@ -284,14 +284,12 @@
                 textField.borderStyle=UITextBorderStyleNone;
             
             //Proceed to updating the record with the user-modified info if it passes the validations
-            NSArray *mandatoryFields=[NSArray arrayWithObjects:self.latitudeTextField,self.longitudeTextField,self.dateTextField,self.timeTextField, nil];
-            NSArray *mandatoryFieldNames=[NSArray arrayWithObjects:@"Latitude",@"Longitude",@"Date",@"Time", nil];
+            NSDictionary *recordInfo=[self dictionaryFromForm];
             NSArray *optionalFields=self.textFields;
             
             //If the info passes the validations, update the record
-            if ([self validateFormWithMandatoryFields:mandatoryFields 
-                                            withNames:mandatoryFieldNames 
-                                        alertsEnabled:YES]) 
+            if ([self validateMandatoryFieldsOfInfo:recordInfo 
+                                      alertsEnabled:YES]) 
             {
                 //Validate optional fields
                 if ([self validatePresenceOfFields:optionalFields])
@@ -384,14 +382,20 @@
 
 #pragma mark - Form Validations
 
-//Return NO if the form failed the validations; put up alerts when necessary
-- (BOOL)validateFormWithMandatoryFields:(NSArray *)mandatoryFields 
-                              withNames:(NSArray *)mandatoryFieldNames 
-                          alertsEnabled:(BOOL)alertsEnabled 
+//Return NO if the info failed the validations; put up alerts if desired
+- (BOOL)validateMandatoryFieldsOfInfo:(NSDictionary *)recordInfo 
+                        alertsEnabled:(BOOL)alertsEnabled 
 {
-    //Validate the mandatory fields first and get the array of fields that did not pass the tests
-    NSArray *failedFieldNames=[self validateMandatoryPresenceOfFields:mandatoryFields withNames:mandatoryFieldNames];
-    if ([failedFieldNames count] && alertsEnabled) {
+    //Put up alerts if validations fail
+    NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
+    NSLog(@"Invalid: %@",validationKeys);
+
+    if ([validationKeys count] && alertsEnabled) {
+        NSMutableArray *failedFieldNames=[NSMutableArray array];
+        for (NSString *failedKey in validationKeys) {
+            [failedFieldNames addObject:[Record nameForDictionaryKey:failedKey]];
+        }
+        
         NSString *alertMessage=[NSString stringWithFormat:@"The following information is missing: %@",[failedFieldNames componentsJoinedByString:@", "]];
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Invalid Information" message:alertMessage delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
         [alert show];
@@ -401,25 +405,10 @@
     return YES;
 }
 
-//Return an array of blank field names
-- (NSArray *)validateMandatoryPresenceOfFields:(NSArray *)fields 
-                                     withNames:(NSArray *)fieldNames 
-{
-    //Iterate through the array of fields and validate
-    NSMutableArray *failedFieldNames=[NSMutableArray array];
-    for (UITextField *textField in fields) {
-        if (![textField.text length])
-            [failedFieldNames addObject:[fieldNames objectAtIndex:[fields indexOfObject:textField]]];
-    }
-    
-    return failedFieldNames;
-    
-}
-
 //Return YES if all the fields pass the test
 - (BOOL)validatePresenceOfFields:(NSArray *)fields {
     for (UITextField *textField in fields) {
-        if (![textField.text length])
+        if (![textField.text length] && !textField.hidden)
             return NO;
     }
     

@@ -73,6 +73,8 @@
 		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
 		029878041595BA4D000D71E7 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 029878031595BA4C000D71E7 /* Bedding.m */; };
 		029878071595BA4D000D71E7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029878061595BA4D000D71E7 /* Formation.m */; };
+		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
+		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,6 +208,10 @@
 		029878031595BA4C000D71E7 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		029878051595BA4D000D71E7 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		029878061595BA4D000D71E7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
+		0298C25A159B43F30038E89C /* Record+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Validation.h"; sourceTree = "<group>"; };
+		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
+		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
+		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,56 +416,16 @@
 		0294E0D5159363050025219F /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
-				029878051595BA4D000D71E7 /* Formation.h */,
-				029878061595BA4D000D71E7 /* Formation.m */,
-				0238587A1599731F00A0DB98 /* Formation+Creation.h */,
-				0238587B1599731F00A0DB98 /* Formation+Creation.m */,
-				0238587D1599747200A0DB98 /* Formation+Modification.h */,
-				0238587E1599747300A0DB98 /* Formation+Modification.m */,
-				029878021595BA4C000D71E7 /* Bedding.h */,
-				029878031595BA4C000D71E7 /* Bedding.m */,
-				0222DB0515961ED900699D62 /* Bedding+Modification.h */,
-				0222DB0615961ED900699D62 /* Bedding+Modification.m */,
-				020EBB9015941FB400EECC08 /* Contact.h */,
-				020EBB9115941FB400EECC08 /* Contact.m */,
-				0222DB0E159622DC00699D62 /* Contact+Modification.h */,
-				0222DB0F159622DC00699D62 /* Contact+Modification.m */,
-				0221BDE9159A8CFA0058C792 /* Folder.h */,
-				0221BDEA159A8CFA0058C792 /* Folder.m */,
-				020EBBA21594355800EECC08 /* Folder+Creation.h */,
-				020EBBA31594355800EECC08 /* Folder+Creation.m */,
-				0238586E15995DB300A0DB98 /* Folder+Modification.h */,
-				0238586F15995DB300A0DB98 /* Folder+Modification.m */,
-				0221BDE3159A88170058C792 /* Folder+DictionaryKeys.h */,
-				0221BDE4159A88170058C792 /* Folder+DictionaryKeys.m */,
+				0298C253159B432A0038E89C /* Bedding */,
+				0298C254159B433A0038E89C /* Contact */,
+				0298C258159B43860038E89C /* Fault */,
+				0298C255159B43480038E89C /* Folder */,
+				0298C251159B43170038E89C /* Formation */,
+				0298C259159B43910038E89C /* Formation Folder */,
+				0298C257159B43790038E89C /* JointSet */,
+				0298C256159B435B0038E89C /* Record */,
 				020EBB8A15941FB400EECC08 /* Other.h */,
 				020EBB8B15941FB400EECC08 /* Other.m */,
-				020EBB8715941FB400EECC08 /* Record.h */,
-				020EBB8815941FB400EECC08 /* Record.m */,
-				0222DB0215961D5D00699D62 /* Record+Modification.h */,
-				0222DB0315961D5D00699D62 /* Record+Modification.m */,
-				0222DAFE15961D0D00699D62 /* Record+DictionaryKeys.h */,
-				0222DAFF15961D0D00699D62 /* Record+DictionaryKeys.m */,
-				029877F6159566E0000D71E7 /* Record+Creation.h */,
-				029877F7159566E0000D71E7 /* Record+Creation.m */,
-				020EBBC215946B3D00EECC08 /* Record+Types.h */,
-				020EBBC315946B3D00EECC08 /* Record+Types.m */,
-				020EBB8415941FB400EECC08 /* JointSet.h */,
-				020EBB8515941FB400EECC08 /* JointSet.m */,
-				0222DB141596305400699D62 /* JointSet+Description.h */,
-				0222DB151596305400699D62 /* JointSet+Description.m */,
-				0222DB0B1596229E00699D62 /* JointSet+Modification.h */,
-				0222DB0C1596229F00699D62 /* JointSet+Modification.m */,
-				020EBB7E15941FB400EECC08 /* Fault.h */,
-				020EBB7F15941FB400EECC08 /* Fault.m */,
-				0222DB081596204300699D62 /* Fault+Modification.h */,
-				0222DB091596204300699D62 /* Fault+Modification.m */,
-				020EBB7B15941FB400EECC08 /* Formation_Folder.h */,
-				020EBB7C15941FB400EECC08 /* Formation_Folder.m */,
-				0238586B1599540100A0DB98 /* Formation_Folder+Creation.h */,
-				0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */,
-				0238587115995FB100A0DB98 /* Formation_Folder+Modification.h */,
-				0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */,
 			);
 			name = NSManagedObject;
 			sourceTree = "<group>";
@@ -479,6 +445,114 @@
 				0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		0298C251159B43170038E89C /* Formation */ = {
+			isa = PBXGroup;
+			children = (
+				029878051595BA4D000D71E7 /* Formation.h */,
+				029878061595BA4D000D71E7 /* Formation.m */,
+				0238587A1599731F00A0DB98 /* Formation+Creation.h */,
+				0238587B1599731F00A0DB98 /* Formation+Creation.m */,
+				0238587D1599747200A0DB98 /* Formation+Modification.h */,
+				0238587E1599747300A0DB98 /* Formation+Modification.m */,
+			);
+			name = Formation;
+			sourceTree = "<group>";
+		};
+		0298C253159B432A0038E89C /* Bedding */ = {
+			isa = PBXGroup;
+			children = (
+				029878021595BA4C000D71E7 /* Bedding.h */,
+				029878031595BA4C000D71E7 /* Bedding.m */,
+				0222DB0515961ED900699D62 /* Bedding+Modification.h */,
+				0222DB0615961ED900699D62 /* Bedding+Modification.m */,
+			);
+			name = Bedding;
+			sourceTree = "<group>";
+		};
+		0298C254159B433A0038E89C /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB9015941FB400EECC08 /* Contact.h */,
+				020EBB9115941FB400EECC08 /* Contact.m */,
+				0222DB0E159622DC00699D62 /* Contact+Modification.h */,
+				0222DB0F159622DC00699D62 /* Contact+Modification.m */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
+		0298C255159B43480038E89C /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				0221BDE9159A8CFA0058C792 /* Folder.h */,
+				0221BDEA159A8CFA0058C792 /* Folder.m */,
+				020EBBA21594355800EECC08 /* Folder+Creation.h */,
+				020EBBA31594355800EECC08 /* Folder+Creation.m */,
+				0238586E15995DB300A0DB98 /* Folder+Modification.h */,
+				0238586F15995DB300A0DB98 /* Folder+Modification.m */,
+				0221BDE3159A88170058C792 /* Folder+DictionaryKeys.h */,
+				0221BDE4159A88170058C792 /* Folder+DictionaryKeys.m */,
+			);
+			name = Folder;
+			sourceTree = "<group>";
+		};
+		0298C256159B435B0038E89C /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB8715941FB400EECC08 /* Record.h */,
+				020EBB8815941FB400EECC08 /* Record.m */,
+				0222DB0215961D5D00699D62 /* Record+Modification.h */,
+				0222DB0315961D5D00699D62 /* Record+Modification.m */,
+				0222DAFE15961D0D00699D62 /* Record+DictionaryKeys.h */,
+				0222DAFF15961D0D00699D62 /* Record+DictionaryKeys.m */,
+				029877F6159566E0000D71E7 /* Record+Creation.h */,
+				029877F7159566E0000D71E7 /* Record+Creation.m */,
+				020EBBC215946B3D00EECC08 /* Record+Types.h */,
+				020EBBC315946B3D00EECC08 /* Record+Types.m */,
+				0298C25A159B43F30038E89C /* Record+Validation.h */,
+				0298C25B159B43F30038E89C /* Record+Validation.m */,
+				0298C25D159B45650038E89C /* Record+NameEncoding.h */,
+				0298C25E159B45650038E89C /* Record+NameEncoding.m */,
+			);
+			name = Record;
+			sourceTree = "<group>";
+		};
+		0298C257159B43790038E89C /* JointSet */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB8415941FB400EECC08 /* JointSet.h */,
+				020EBB8515941FB400EECC08 /* JointSet.m */,
+				0222DB141596305400699D62 /* JointSet+Description.h */,
+				0222DB151596305400699D62 /* JointSet+Description.m */,
+				0222DB0B1596229E00699D62 /* JointSet+Modification.h */,
+				0222DB0C1596229F00699D62 /* JointSet+Modification.m */,
+			);
+			name = JointSet;
+			sourceTree = "<group>";
+		};
+		0298C258159B43860038E89C /* Fault */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB7E15941FB400EECC08 /* Fault.h */,
+				020EBB7F15941FB400EECC08 /* Fault.m */,
+				0222DB081596204300699D62 /* Fault+Modification.h */,
+				0222DB091596204300699D62 /* Fault+Modification.m */,
+			);
+			name = Fault;
+			sourceTree = "<group>";
+		};
+		0298C259159B43910038E89C /* Formation Folder */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB7B15941FB400EECC08 /* Formation_Folder.h */,
+				020EBB7C15941FB400EECC08 /* Formation_Folder.m */,
+				0238586B1599540100A0DB98 /* Formation_Folder+Creation.h */,
+				0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */,
+				0238587115995FB100A0DB98 /* Formation_Folder+Modification.h */,
+				0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */,
+			);
+			name = "Formation Folder";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -641,6 +715,8 @@
 				0221BDE1159A58EA0058C792 /* FormationFolderPickerViewController.m in Sources */,
 				0221BDE5159A88170058C792 /* Folder+DictionaryKeys.m in Sources */,
 				0221BDEB159A8CFC0058C792 /* Folder.m in Sources */,
+				0298C25C159B43F30038E89C /* Record+Validation.m in Sources */,
+				0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
