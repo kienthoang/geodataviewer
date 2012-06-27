@@ -174,7 +174,7 @@ didAskToModifyFormationWithName:(NSString *)originalName
     // Configure the cell
     Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
-    cell.textLabel.text=formation.formationName;
+    cell.textLabel.text = formation.formationName;
     
     return cell;
 }

@@ -21,7 +21,7 @@
 #import "Record+NameEncoding.h"
 #import "Formation_Folder.h"
 
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate>
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
@@ -224,6 +224,15 @@
     self.recordModifiedInfo=nil;
 }
 
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If user click set location
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Set Location"]) {
+        [self performSegueWithIdentifier:@"Formation Folder Picker" sender:self];
+    }
+}
+
 #pragma mark - RecordViewControllerDelegate methods
 
 - (void)recordViewController:(RecordViewController *)sender 
@@ -373,6 +382,12 @@
     //Change the style of the button to edit or done
     sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
     sender.title=self.tableView.editing ? @"Done" : @"Edit";
+}
+
+- (IBAction)controlPressed:(UIBarButtonItem *)sender {
+    //Set up an action sheet of control buttons
+    UIActionSheet *controlActionSheet=[[UIActionSheet alloc] initWithTitle:@"Control Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Importing Records",@"Exporting Records",@"Set Location", nil];
+    [controlActionSheet showInView:self.view];
 }
 
 #pragma mark - ModalRecordTypeSelectorDelegate methods
