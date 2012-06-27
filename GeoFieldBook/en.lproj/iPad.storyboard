@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -729,6 +729,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="whiteLarge" id="ymq-S1-taP">
+                                        <rect key="frame" x="672" y="228" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="redraw" id="WsI-q1-BwC">
@@ -762,6 +766,7 @@
                         <outlet property="fieldObservationTextArea" destination="X91-79-4UG" id="ouP-K1-fG7"/>
                         <outlet property="formationLabel" destination="KcO-I2-ngB" id="QTV-mZ-Lr9"/>
                         <outlet property="formationTextField" destination="96G-kx-aRw" id="DLc-rY-Jib"/>
+                        <outlet property="gatheringGPS" destination="ymq-S1-taP" id="Lid-e6-5gg"/>
                         <outlet property="latitudeTextField" destination="LMN-BK-uhj" id="VZ0-qp-TjY"/>
                         <outlet property="longitudeTextField" destination="CRH-l5-sJf" id="Fee-bT-jzH"/>
                         <outlet property="lowerFormationLabel" destination="NaE-6s-Ecu" id="ZDs-1r-4vG"/>
