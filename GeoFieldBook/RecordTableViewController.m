@@ -183,13 +183,14 @@
 - (void)formationFolderPickerViewController:(FormationFolderPickerViewController *)sender 
        userDidSelectFormationFolderWithName:(NSString *)formationFolderName 
 {
-    //Change the text of the set location button
-    self.setLocationButton.title=formationFolderName;
+    //Save the formation folder name in the folder if the returned formationFolderName is not empty
+    if ([formationFolderName length])
+        [self.delegate recordTableViewController:self 
+                               needsUpdateFolder:self.folder
+                          setFormationFolderName:formationFolderName];
     
-    //Save the formation folder name in the folder
-    [self.delegate recordTableViewController:self 
-                           needsUpdateFolder:self.folder
-                      setFormationFolderName:formationFolderName];
+    //Change the text of the set location button
+    self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
 }
 
 #pragma mark - UIAlertViewDelegate methods

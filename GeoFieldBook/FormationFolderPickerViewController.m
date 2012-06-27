@@ -26,8 +26,9 @@
 }
 
 - (void)handleUserSelection {
-    //Notify the user of user selection
-    [self.delegate formationFolderPickerViewController:self userDidSelectFormationFolderWithName:[self userSelection]];
+    //Notify the user of user selection if user did not picked the blank option; otherqise pass empty string to the delegate
+    NSString *userSelection=[[self userSelection] isEqualToString:FORMATION_FOLDER_PICKER_BLANK_OPTION] ? @"" : [self userSelection];
+    [self.delegate formationFolderPickerViewController:self userDidSelectFormationFolderWithName:userSelection];
 }
 
 #pragma mark - UIPickerViewControllerDelegate
@@ -43,8 +44,11 @@
 #pragma mark - Setup the picker view
 
 - (NSArray *)pickerViewComponentMatrixFromFormationFolders:(NSArray *)formationFolders {
-    //Create an array of the names of all formation folders
     NSMutableArray *folderNames=[NSMutableArray arrayWithCapacity:[formationFolders count]];
+    //Add blank option
+    [folderNames addObject:FORMATION_FOLDER_PICKER_BLANK_OPTION];
+    
+    //Add the names of all formation folders
     for (Formation_Folder *folder in formationFolders)
         [folderNames addObject:folder.folderName];
     

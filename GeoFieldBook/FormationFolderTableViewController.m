@@ -14,15 +14,18 @@
 #import "Formation_Folder+Modification.h"
 #import "TextInputFilter.h"
 
-@interface FormationFolderTableViewController() <FormationFolderViewControllerDelegate>
+@interface FormationFolderTableViewController() <FormationFolderViewControllerDelegate,UIAlertViewDelegate>
 
 - (void)setupFetchedResultsController;
+
+@property (nonatomic,strong) Formation_Folder *toBeDeletedFolder;
 
 @end
 
 @implementation FormationFolderTableViewController
 
 @synthesize database=_database;
+@synthesize toBeDeletedFolder=_toBeDeletedFolder;
 
 - (void)setDatabase:(UIManagedDocument *)database {
     _database=database;
@@ -68,6 +71,16 @@
         UITableViewCell *cell=sender;
         Formation_Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
         [segue.destinationViewController setFormationFolder:folder.folderName];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If user clicked "Continue" (in the delete formation folder alert view), delete the folder
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
+        [self deleteFormationFolder:self.toBeDeletedFolder];
+        self.toBeDeletedFolder=nil;
     }
 }
 
@@ -199,8 +212,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     //If the editing style is delete, delete the corresponding folder
     if (editingStyle==UITableViewCellEditingStyleDelete) {
-        //Get the selected folder and delete it
-        [self deleteFormationFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        //Get the selected folder and save it to delete later
+        self.toBeDeletedFolder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        //Put up an alert
+        UIAlertView *deleteAlert=[[UIAlertView alloc] initWithTitle:@"Delete Formation Folder" message:@"You are about to delete an entire formation folder. Do you want to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+        [deleteAlert show];
     }
 }
 

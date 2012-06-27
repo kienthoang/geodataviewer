@@ -33,6 +33,7 @@
 @property (nonatomic,strong) autosaver_block_t autosaverCancelBlock;
 @property (nonatomic,strong) autosaver_block_t autosaverConfirmBlock;
 @property (nonatomic,strong) NSString *autosaverConfirmTitle;
+@property (nonatomic,strong) Folder *toBeDeletedFolder;
 
 @end
 
@@ -41,6 +42,8 @@
 @synthesize autosaverCancelBlock=_autosaverCancelBlock;
 @synthesize autosaverConfirmTitle=_autosaverConfirmTitle;
 @synthesize autosaverConfirmBlock=_autosaverConfirmBlock;
+
+@synthesize toBeDeletedFolder=_toBeDeletedFolder;
 
 @synthesize database=_database;
 
@@ -141,27 +144,37 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    //If the user clicked on the confirm button (the button with the title sent by RecordViewController via its delegate protocol)
-    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:self.autosaverConfirmTitle]) {
-        //Execute the confirm block and unset it
-        self.autosaverConfirmBlock();
-        self.autosaverConfirmBlock=nil;
-        
-        //Show home view
-        [self showInitialDetailView];
+    //If the alert view is the delete folder alert and user clicks "Continue", delete the folder
+    if ([alertView.title isEqualToString:@"Delete Folder"]) {
+        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
+            //Delete the folder
+            [self deleteFolder:self.toBeDeletedFolder];
+            self.toBeDeletedFolder=nil;
+        }
     }
     
-    //If user canceled the alert view, execute the cancel block and put up the initial detail view controller on the detail side
-    else if (buttonIndex==alertView.cancelButtonIndex) {
-        //Cancel button on the autosaver's alert view clicked
-        self.autosaverCancelBlock();
+    else {
+        //If the user clicked on the confirm button (the button with the title sent by RecordViewController via its delegate protocol)
+        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:self.autosaverConfirmTitle]) {
+            //Execute the confirm block and unset it
+            self.autosaverConfirmBlock();
+            self.autosaverConfirmBlock=nil;
+            
+            //Show home view
+            [self showInitialDetailView];
+        }
         
-        //Nillify cancel block
-        self.autosaverCancelBlock=nil;
-        
-        //Show home view
-        [self showInitialDetailView];
+        //If user canceled the alert view, execute the cancel block and put up the initial detail view controller on the detail side
+        else if (buttonIndex==alertView.cancelButtonIndex) {
+            //Cancel button on the autosaver's alert view clicked
+            self.autosaverCancelBlock();
+            
+            //Nillify cancel block
+            self.autosaverCancelBlock=nil;
+            
+            //Show home view
+            [self showInitialDetailView];
+        }
     }
 }
 
@@ -345,8 +358,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     //If the editing style is delete, delete the corresponding folder
     if (editingStyle==UITableViewCellEditingStyleDelete) {
-        //Get the selected folder and delete it
-        [self deleteFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        //Get the selected folder and save it to delete later
+        self.toBeDeletedFolder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        //Put up an alert
+        UIAlertView *deleteAlert=[[UIAlertView alloc] initWithTitle:@"Delete Folder" message:@"You are about to delete an entire folder of records. Do you want to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+        [deleteAlert show];
     }
 }
 
