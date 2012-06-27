@@ -40,4 +40,6 @@
 - (NSDictionary *)dictionaryFromForm;
 - (BOOL) inEdittingMode;
 
+#define RECORD_DEFAULT_NAME @"New Record"
+
 @end

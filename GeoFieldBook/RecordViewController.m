@@ -47,6 +47,8 @@
 @property (nonatomic, strong) NSTimer *gpsTimer;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *gatheringGPS; 
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+
 //=====================================UI elements=======================================//
 
 @property (weak, nonatomic) IBOutlet UIImageView *recordImage;
@@ -99,6 +101,7 @@
 @synthesize locationManager = _locationManager;
 @synthesize gpsTimer = _gpsTimer;
 @synthesize gatheringGPS = _gatheringGPS;
+@synthesize editButton = _editButton;
 
 @synthesize record=_record;
 
@@ -225,10 +228,6 @@
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Toggle the editting mode
     [self setEditing:!self.editing animated:YES];
-    
-    //Change the style of the button to edit or done
-    sender.style=self.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-    sender.title=self.editing ? @"Done" : @"Edit";
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -242,6 +241,10 @@
     //Else proceed as normal
     else {
         _editing=editing;
+        
+        //Change the style of the edit button to edit or done
+        self.editButton.style=self.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+        self.editButton.title=self.editing ? @"Done" : @"Edit";
         
         //If in editing mode, enable all the text fields; otherwise, disable them (YES is 1, NO is 0)
         for (UITextField *textField in self.textFields)
@@ -609,6 +612,7 @@
     [self setUpperFormationTextField:nil];
     [self setFieldObservationLabel:nil];
     [self setAcquireButton:nil];
+    [self setEditButton:nil];
     [super viewDidUnload];
 }
 

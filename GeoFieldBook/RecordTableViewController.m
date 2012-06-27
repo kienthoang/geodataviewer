@@ -141,6 +141,13 @@
 
 }
 
+- (void)putDetailViewIntoEditingMode {
+    //Get the detail vc and if it's of RecordViewController class, put it into editing mode
+    id detailvc=[self.splitViewController.viewControllers lastObject];
+    if ([detailvc isKindOfClass:[RecordViewController class]])
+        [detailvc setEditing:YES animated:YES];
+}
+
 //Create a new record entity with the specified record type
 - (void)createRecordForRecordType:(NSString *)recordType {
     Record *record=[Record recordForRecordType:recordType andFolderName:self.folder.folderName 
@@ -151,6 +158,9 @@
     
     //highlight the newly created record
     [self highlightRecord:record];
+    
+    //Put the detail view (now showing the newly created record's info) into editing mode
+    [self putDetailViewIntoEditingMode];
 }
 
 //Modify a record wiht the specified record type
