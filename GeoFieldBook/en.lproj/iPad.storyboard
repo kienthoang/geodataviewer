@@ -1323,8 +1323,6 @@
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
         <image name="RecordVCBackground.jpg" width="536" height="688"/>
     </resources>
-<<<<<<< HEAD
-=======
     <classes>
         <class className="CoreDataTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
@@ -1452,7 +1450,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TrendPickerViewController.h"/>
         </class>
     </classes>
->>>>>>> b54e0b9624297b2fde03f1221d6f9364ed184413
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
