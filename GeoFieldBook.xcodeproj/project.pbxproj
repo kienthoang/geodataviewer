@@ -75,6 +75,7 @@
 		029878071595BA4D000D71E7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029878061595BA4D000D71E7 /* Formation.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
+		21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B1FEEF159B58C200868F62 /* CustomRecordCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,6 +213,8 @@
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
+		21B1FEEE159B58C200868F62 /* CustomRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecordCell.h; sourceTree = "<group>"; };
+		21B1FEEF159B58C200868F62 /* CustomRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecordCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +275,8 @@
 				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
 				020EBBB81594611A00EECC08 /* RecordTableViewController.h */,
 				020EBBB91594611A00EECC08 /* RecordTableViewController.m */,
+				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
+				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
 				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
 				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
 				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
@@ -717,6 +722,7 @@
 				0221BDEB159A8CFC0058C792 /* Folder.m in Sources */,
 				0298C25C159B43F30038E89C /* Record+Validation.m in Sources */,
 				0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */,
+				21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

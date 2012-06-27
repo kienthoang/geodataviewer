@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 #import "Record+Modification.h"
+#import "CustomRecordCell.h"
 
 @class RecordTableViewController;
 

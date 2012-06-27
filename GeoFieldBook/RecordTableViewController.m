@@ -341,7 +341,7 @@
         
         
         NSIndexPath *indexPath=nil;
-        //if the sender if a table view cell
+        //if the sender is a table view cell
         if ([sender isKindOfClass:[UITableViewCell class]])
             indexPath=[self.tableView indexPathForCell:sender];
         
@@ -387,19 +387,51 @@
 
 #pragma mark - Table view data source
 
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *CellIdentifier = @"Record Cell";
+//    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//    }
+//    
+//    // Configure the cell...
+//    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
+//    cell.textLabel.text=record.name;
+//    cell.detailTextLabel.text=[NSString stringWithFormat:@"Folder: %@",record.folder.folderName];
+//    
+//    //Allow reordering of cell if the table view is in editing mode
+//    if (self.tableView.editing)
+//        cell.showsReorderControl=YES;
+//    
+//    return cell;
+//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Record Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[CustomRecordCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text=record.name;
-    cell.detailTextLabel.text=[NSString stringWithFormat:@"Folder: %@",record.folder.folderName];
+    
+    //show the name, date and time
+    cell.name.text=record.name;    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    timeFormatter.dateFormat = @"HH:mm";   
+    cell.date.text=[dateFormatter stringFromDate:record.date];
+    cell.time.text = [timeFormatter stringFromDate:record.date];
+    
+    //show the image
+    UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:record.imageURL]]];
+    [cell.image setImage:image];
     
     //Allow reordering of cell if the table view is in editing mode
     if (self.tableView.editing)
