@@ -25,4 +25,22 @@
     return YES;
 }
 
+- (BOOL)setFormationFolderWithName:(NSString *)formationFolder 
+{
+    //Query for the formation folder with the specified name
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",formationFolder];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+    NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    //if there is no formation folder with the specified name, return false
+    if (![results count])
+        return NO;
+    
+    //Change the formation folder of the folder
+    self.formationFolder=[results lastObject];
+    
+    return YES;
+}
+
 @end

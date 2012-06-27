@@ -19,7 +19,7 @@
 #import "Folder+Creation.h"
 #import "Folder+Modification.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate>
+@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (void)createNewFolderWithName:(NSString *)folderName;    //Create a folder in the database with the specified name
@@ -104,6 +104,19 @@
                                         cancelButtonTitle:@"Dismiss" 
                                         otherButtonTitles: nil];
     [alert show];
+}
+
+#pragma mark - RecordTableViewControllerDelegate methods
+
+- (void)recordTableViewController:(RecordTableViewController *)sender 
+                needsUpdateFolder:(Folder *)folder 
+           setFormationFolderName:(NSString *)formationFolder
+{
+    //Update the folder
+    [folder setFormationFolderWithName:formationFolder];
+    
+    //Save the database
+    [self saveChangesToDatabase];
 }
 
 #pragma mark - RecordTVCAutosaver methods
@@ -264,8 +277,9 @@
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
         [segue.destinationViewController setTitle:folder.folderName];
         [segue.destinationViewController setDatabase:self.database];
-        [segue.destinationViewController setFolderName:folder.folderName];
+        [segue.destinationViewController setFolder:folder];
         [segue.destinationViewController setAutosaveDelegate:self];
+        [segue.destinationViewController setDelegate:self];
     }
     
     //Seguing to the modal formation folder tvc

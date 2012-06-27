@@ -28,6 +28,8 @@
 
 - (UIManagedDocument *)databaseForFormationPicker;
 
+- (NSString *)formationFolderName;
+
 @end
 
 @interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>

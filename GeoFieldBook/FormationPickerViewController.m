@@ -18,7 +18,7 @@
 @implementation FormationPickerViewController
 
 @synthesize database=_database;
-@synthesize formationFolder=_formationFolder;
+@synthesize folderName=_folderName;
 @synthesize pickerName=_pickerName;
 
 @synthesize delegate=_delegate;
@@ -30,8 +30,8 @@
     [self synchronizeWithFormationDatabase];
 }
 
-- (void)setFormationFolder:(Formation_Folder *)formationFolder {
-    _formationFolder=formationFolder;
+- (void)setFolderName:(NSString *)folderName {
+    _folderName=folderName;
     
     //Synchronize with the database
     [self synchronizeWithFormationDatabase];
@@ -67,7 +67,7 @@
 - (void)fetchFormationFromDatabase {
     //Fetch formation entities from the database
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    //request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.formationFolder.folderName];
+    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.folderName];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
     NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
     

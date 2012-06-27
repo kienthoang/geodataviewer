@@ -26,6 +26,7 @@
 		020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBC315946B3D00EECC08 /* Record+Types.m */; };
 		020F06FC15982E570006B53B /* TrendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FB15982E570006B53B /* TrendPickerViewController.m */; };
 		020F06FF15982ED20006B53B /* PlungePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FE15982ED10006B53B /* PlungePickerViewController.m */; };
+		0221BDE1159A58EA0058C792 /* FormationFolderPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */; };
 		0222DB0015961D0D00699D62 /* Record+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DAFF15961D0D00699D62 /* Record+DictionaryKeys.m */; };
 		0222DB0415961D5D00699D62 /* Record+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB0315961D5D00699D62 /* Record+Modification.m */; };
 		0222DB0715961ED900699D62 /* Bedding+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB0615961ED900699D62 /* Bedding+Modification.m */; };
@@ -123,6 +124,8 @@
 		020F06FB15982E570006B53B /* TrendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendPickerViewController.m; sourceTree = "<group>"; };
 		020F06FD15982ED10006B53B /* PlungePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlungePickerViewController.h; sourceTree = "<group>"; };
 		020F06FE15982ED10006B53B /* PlungePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlungePickerViewController.m; sourceTree = "<group>"; };
+		0221BDDF159A58EA0058C792 /* FormationFolderPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderPickerViewController.h; sourceTree = "<group>"; };
+		0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderPickerViewController.m; sourceTree = "<group>"; };
 		0222DAFE15961D0D00699D62 /* Record+DictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DictionaryKeys.h"; sourceTree = "<group>"; };
 		0222DAFF15961D0D00699D62 /* Record+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DictionaryKeys.m"; sourceTree = "<group>"; };
 		0222DB0215961D5D00699D62 /* Record+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Modification.h"; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 			children = (
 				0222DB261596B9ED00699D62 /* FormationPickerViewController.h */,
 				0222DB271596B9ED00699D62 /* FormationPickerViewController.m */,
+				0221BDDF159A58EA0058C792 /* FormationFolderPickerViewController.h */,
+				0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */,
 				0222DB291596BF2800699D62 /* StrikePickerViewController.h */,
 				0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */,
 				0222DB2C1596D95100699D62 /* DipPickerViewController.h */,
@@ -629,6 +634,7 @@
 				0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */,
 				0238588615999F0F00A0DB98 /* HomeViewController.m in Sources */,
 				023858891599A0CD00A0DB98 /* HomeMasterViewController.m in Sources */,
+				0221BDE1159A58EA0058C792 /* FormationFolderPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

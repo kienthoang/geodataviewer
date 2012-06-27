@@ -12,9 +12,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiF-xZ-szT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="lPn-Sp-wsV" customClass="HomeMasterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iq5-WG-QEK">
-                        <rect key="frame" x="0.0" y="20" width="320" height="832"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ubi-qt-lf3"/>
                     <connections>
@@ -30,15 +31,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U81-0z-h1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="hyk-D0-hEg" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V91-lt-z0c">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="703" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" image="GeoFieldBookFrontPage.png" id="pDB-4x-p9z">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="748"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EF1-C1-Xov">
-                                <rect key="frame" x="111" y="786" width="202" height="168"/>
+                                <rect key="frame" x="111" y="530" width="202" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
                                 <state key="normal" title="S">
@@ -53,7 +54,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="amJ-Cr-OE6">
-                                <rect key="frame" x="470" y="786" width="202" height="168"/>
+                                <rect key="frame" x="405" y="530" width="202" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
                                 <state key="normal" title="G">
@@ -68,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="jh1-mj-TOF">
-                                <rect key="frame" x="715" y="961" width="18" height="19"/>
+                                <rect key="frame" x="650" y="705" width="18" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -80,12 +81,13 @@
                                 </state>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6OD-aA-ye9">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="toolbar" destination="6OD-aA-ye9" id="J7Y-UJ-9TY"/>
@@ -136,6 +138,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="folderNameTextField" destination="dom-rB-2mA" id="t72-Qd-jMR"/>
@@ -150,9 +153,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ti-Ft-q1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Uwh-l0-QS0" customClass="FolderTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bts-ND-NJo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="744"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" textLabel="Q9L-ti-N93" detailTextLabel="r3y-cP-dRj" style="IBUITableViewCellStyleSubtitle" id="ABX-2A-DqK">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -223,15 +227,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfm-Jg-D25" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="rqP-i8-UCo" customClass="FormationFolderTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0nz-Yq-xgl">
-                        <rect key="frame" x="0.0" y="44" width="768" height="936"/>
+                        <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" textLabel="aX7-rK-jy5" detailTextLabel="OPG-dX-d4C" style="IBUITableViewCellStyleSubtitle" id="g5m-A9-XLq">
-                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="748" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aX7-rK-jy5">
@@ -278,7 +283,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-5750" y="-3483"/>
+            <point key="canvasLocation" x="-5678" y="-2771"/>
         </scene>
         <!--Modal Record Type Selector-->
         <scene sceneID="SPc-17-h4d">
@@ -332,6 +337,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -340,7 +346,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6954" y="-4304"/>
+            <point key="canvasLocation" x="-6682" y="-4520"/>
         </scene>
         <!--Record Table View Controller-->
         <scene sceneID="qZz-Vz-aQF">
@@ -348,9 +354,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjP-xg-sN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="currentContext" id="kmo-3x-I3i" customClass="RecordTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="U2I-AS-shV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="744"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Record Cell" id="czt-Vw-1Fc">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -377,7 +384,13 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="efN-TL-eXw"/>
-                        <barButtonItem title="Set Location" style="plain" id="Ipl-an-wyO"/>
+                        <barButtonItem title="Set Location" style="plain" id="Ipl-an-wyO">
+                            <connections>
+                                <segue destination="rK8-xg-bur" kind="popover" identifier="Formation Folder Picker" popoverAnchorBarButtonItem="Ipl-an-wyO" id="JLu-Zh-8E0">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Jgh-O4-FtE"/>
                         <barButtonItem systemItem="action" id="EZ6-34-aBV"/>
                     </toolbarItems>
@@ -389,6 +402,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="setLocationButton" destination="Ipl-an-wyO" id="4Z4-GZ-130"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-7686" y="-5025"/>
@@ -399,7 +415,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KUw-ek-2CJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="LFc-wQ-Gyp" customClass="RecordViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="redraw" id="EF0-Dx-8q0">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="703" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SYZ-dV-H1C">
@@ -705,7 +721,7 @@
                                 </subviews>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="redraw" id="WsI-q1-BwC">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Q9B-Kc-CAU"/>
@@ -718,6 +734,7 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.81850798233695654" green="0.81850798233695654" blue="0.81850798233695654" alpha="1" colorSpace="calibratedRGB"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="d6s-9M-JS3">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="lU2-xy-pJz"/>
@@ -770,6 +787,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
                     <connections>
@@ -794,6 +812,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
                     <connections>
@@ -801,7 +820,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5543" y="-8066"/>
+            <point key="canvasLocation" x="-5663" y="-9186"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="VXG-wO-A5P">
@@ -823,25 +842,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAN-P1-ZzC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="eRh-oI-S81" customClass="InitialDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vIj-6S-4g9">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="20" width="703" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5vB-XH-Kqi">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="-256" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items/>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="eGp-3j-4ts">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items/>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" image="GeoFieldBookFrontPage.png" id="Zvt-z2-3VW">
-                                <rect key="frame" x="0.0" y="44" width="768" height="960"/>
+                                <rect key="frame" x="0.0" y="44" width="703" height="704"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
                     <connections>
@@ -866,6 +886,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="150" height="200"/>
                     <connections>
@@ -873,7 +894,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5703" y="-8949"/>
+            <point key="canvasLocation" x="-5823" y="-10069"/>
         </scene>
         <!--Dip Direction Picker View Controller-->
         <scene sceneID="gzM-LZ-3Za">
@@ -890,6 +911,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="100" height="200"/>
                     <connections>
@@ -897,7 +919,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5414" y="-7369"/>
+            <point key="canvasLocation" x="-5534" y="-8489"/>
         </scene>
         <!--Trend Picker View Controller-->
         <scene sceneID="Tjg-pS-3cq">
@@ -914,6 +936,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
                     <connections>
@@ -921,7 +944,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5344" y="-6689"/>
+            <point key="canvasLocation" x="-5464" y="-7809"/>
         </scene>
         <!--Plunge Picker View Controller-->
         <scene sceneID="Yff-Cv-Agq">
@@ -938,6 +961,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="150" height="200"/>
                     <connections>
@@ -945,7 +969,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5368" y="-6077"/>
+            <point key="canvasLocation" x="-5488" y="-7197"/>
         </scene>
         <!--Formation Folder View Controller-->
         <scene sceneID="vmK-no-er4">
@@ -953,7 +977,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBg-vb-ORc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="5rr-o1-mUY" customClass="FormationFolderViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dWf-7p-5TL">
-                        <rect key="frame" x="0.0" y="0.0" width="748" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation Folder Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5bZ-Tc-rc1">
@@ -970,7 +994,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="TeM-Y4-lvk">
-                                <rect key="frame" x="0.0" y="0.0" width="748" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="cancel" id="IPy-5y-uFy">
@@ -989,6 +1013,7 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="420" height="300"/>
                     <connections>
@@ -996,7 +1021,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-4497" y="-3725"/>
+            <point key="canvasLocation" x="-4425" y="-3013"/>
         </scene>
         <!--Formation Table View Controller-->
         <scene sceneID="E7H-Rg-1sX">
@@ -1004,15 +1029,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ecV-B0-A5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="PLg-aG-R2F" customClass="FormationTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7f5-cq-hJz">
-                        <rect key="frame" x="0.0" y="44" width="768" height="936"/>
+                        <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Cell" id="QFy-GT-yla">
-                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -1042,7 +1068,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-4471" y="-2889"/>
+            <point key="canvasLocation" x="-4399" y="-2177"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kRT-F4-Wi6">
@@ -1057,7 +1083,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YzA-Fd-WcI">
-                        <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -1065,7 +1091,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-7004" y="-3365"/>
+            <point key="canvasLocation" x="-7244" y="-2717"/>
         </scene>
         <!--Formation View Controller-->
         <scene sceneID="hH3-ve-g87">
@@ -1073,7 +1099,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eu-HI-bz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="IJY-xr-I7y" customClass="FormationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dzY-fa-knz">
-                        <rect key="frame" x="0.0" y="0.0" width="748" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="q8M-XG-tMO">
@@ -1090,7 +1116,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="laj-Wa-NcJ">
-                                <rect key="frame" x="0.0" y="0.0" width="748" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="cancel" id="6LQ-SY-8QL">
@@ -1109,6 +1135,7 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="420" height="300"/>
                     <connections>
@@ -1116,7 +1143,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3289" y="-2869"/>
+            <point key="canvasLocation" x="-3217" y="-2157"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mn7-s1-fup">
@@ -1130,7 +1157,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="N3E-a1-TXK">
-                        <rect key="frame" x="0.0" y="808" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="724" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -1155,6 +1182,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
                     <connections>
@@ -1162,7 +1190,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5263" y="-5818"/>
+            <point key="canvasLocation" x="-5383" y="-6938"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="qVl-Lc-KVd">
@@ -1179,6 +1207,7 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
                     <connections>
@@ -1186,7 +1215,32 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5263" y="-5002"/>
+            <point key="canvasLocation" x="-5383" y="-6122"/>
+        </scene>
+        <!--Formation Folder Picker View Controller-->
+        <scene sceneID="Dph-6C-M7x">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X6W-X8-kHL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="rK8-xg-bur" customClass="FormationFolderPickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5If-NH-h2u">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" id="Skb-ct-WgX">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                    <connections>
+                        <outlet property="pickerView" destination="Skb-ct-WgX" id="c5X-T0-E68"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-7407" y="-3826"/>
         </scene>
     </scenes>
     <resources>
@@ -1205,6 +1259,9 @@
         </class>
         <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
+        </class>
+        <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
         </class>
         <class className="FormationFolderTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
@@ -1265,10 +1322,14 @@
         </class>
         <class className="RecordTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="RecordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
@@ -1277,6 +1338,7 @@
                 <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
@@ -1307,7 +1369,7 @@
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
-        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

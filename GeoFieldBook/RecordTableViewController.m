@@ -7,16 +7,18 @@
 //
 
 #import "RecordTableViewController.h"
+#import "FormationFolderPickerViewController.h"
 #import "UISplitViewBarButtonPresenter.h"
 #import "ModalRecordTypeSelector.h"
 #import "GeoDatabaseManager.h"
 #import "RecordViewController.h"
 #import "Folder.h"
+
 #import "Record+Types.h"
 #import "Record+Creation.h"
 #import "Record+Modification.h"
-
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate>
+#import "Formation_Folder.h"
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
@@ -26,22 +28,26 @@
 @property (nonatomic,strong) Record *modifiedRecord;
 @property (nonatomic,strong) NSDictionary *recordModifiedInfo;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *setLocationButton;
+
 @end
 
 @implementation RecordTableViewController
 
-@synthesize folderName=_folderName;
+@synthesize folder=_folder;
 @synthesize database=_database;
 
 @synthesize modifiedRecord=_modifiedRecord;
 @synthesize recordModifiedInfo=_recordModifiedInfo;
+@synthesize setLocationButton = _setLocationButton;
 
 @synthesize autosaveDelegate=_autosaveDelegate;
+@synthesize delegate=_delegate;
 
 - (void)setupFetchedResultsController {
     //Set up the fetched results controller to fetch records
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
-    request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",self.folderName];
+    request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",self.folder.folderName];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -56,11 +62,15 @@
     }
 }
 
-- (void)setFolderName:(NSString *)folderName {
-    _folderName=folderName;
+- (void)setFolder:(Folder *)folder {
+    _folder=folder;
     
     //Set up fetchedResultsController
     [self setupFetchedResultsController];
+    
+    //Set the title of the set location button
+    NSString *formationFolderName=self.folder.formationFolder.folderName;
+    self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
 }
 
 - (id <UISplitViewBarButtonPresenter>)barButtonPresenter {
@@ -133,7 +143,8 @@
 
 //Create a new record entity with the specified record type
 - (void)createRecordForRecordType:(NSString *)recordType {
-    Record *record=[Record recordForRecordType:recordType andFolderName:self.folderName inManagedObjectContext:self.database.managedObjectContext];
+    Record *record=[Record recordForRecordType:recordType andFolderName:self.folder.folderName 
+                        inManagedObjectContext:self.database.managedObjectContext];
         
     //Save
     [self saveChangesToDatabase];
@@ -165,6 +176,20 @@
     
     //Save
     [self saveChangesToDatabase];
+}
+
+#pragma mark - FormationFolderPickerDelegate methods
+
+- (void)formationFolderPickerViewController:(FormationFolderPickerViewController *)sender 
+       userDidSelectFormationFolderWithName:(NSString *)formationFolderName 
+{
+    //Change the text of the set location button
+    self.setLocationButton.title=formationFolderName;
+    
+    //Save the formation folder name in the folder
+    [self.delegate recordTableViewController:self 
+                           needsUpdateFolder:self.folder
+                      setFormationFolderName:formationFolderName];
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -206,7 +231,19 @@
     return self.database;
 }
 
+- (NSString *)formationFolderName {
+    return self.setLocationButton.title;
+}
+
 #pragma mark - View lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Set the title of the set location button
+    NSString *formationFolderName=self.folder.formationFolder.folderName;
+    self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
     //Get the detail view controller
@@ -247,6 +284,8 @@
 	return YES;
 }
 
+#pragma mark - Prepare for segues
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //If seguing to a modal record type selector, set the destination controller's array of record types
     if ([segue.identifier isEqualToString:@"Select Record Type"]) {
@@ -273,6 +312,12 @@
         [segue.destinationViewController setRecord:record];
         
         //Set the delegate of the destination view controller to be self
+        [segue.destinationViewController setDelegate:self];
+    }
+    
+    //Seguing to the formation folder picker popover
+    else if ([segue.identifier isEqualToString:@"Formation Folder Picker"]) {
+        [segue.destinationViewController setDatabase:self.database];
         [segue.destinationViewController setDelegate:self];
     }
 }
@@ -344,6 +389,11 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
+}
+
+- (void)viewDidUnload {
+    [self setSetLocationButton:nil];
+    [super viewDidUnload];
 }
 
 @end

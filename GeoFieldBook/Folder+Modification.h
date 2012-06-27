@@ -12,4 +12,6 @@
 
 - (BOOL)changeFolderNameTo:(NSString *)newName;  //return true if the name change was successful
 
+- (BOOL)setFormationFolderWithName:(NSString *)formationFolder;
+
 @end

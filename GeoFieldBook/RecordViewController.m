@@ -179,10 +179,14 @@
     //Create a NSDictionary with the user-modified information
     NSMutableDictionary *recordDictionary=[NSMutableDictionary dictionary];
     [recordDictionary setObject:self.recordNameTextField.text forKey:RECORD_NAME];
-    [recordDictionary setObject:self.recordLatitudeLabel.text forKey:RECORD_LATITUDE];
-    [recordDictionary setObject:self.recordLongitudeLabel.text forKey:RECORD_LONGITUDE];
-    [recordDictionary setObject:self.recordDateLabel.text forKey:RECORD_DATE];
-    [recordDictionary setObject:self.recordTimeLabel.text forKey:RECORD_TIME];
+    if (self.recordLatitudeLabel.text)
+        [recordDictionary setObject:self.recordLatitudeLabel.text forKey:RECORD_LATITUDE];
+    if (self.recordLongitudeLabel.text)
+        [recordDictionary setObject:self.recordLongitudeLabel.text forKey:RECORD_LONGITUDE];
+    if (self.recordDateLabel.text)
+        [recordDictionary setObject:self.recordDateLabel.text forKey:RECORD_DATE];
+    if (self.recordTimeLabel.text)
+        [recordDictionary setObject:self.recordTimeLabel.text forKey:RECORD_TIME];
     [recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
     [recordDictionary setObject:self.dipTextField.text forKey:RECORD_DIP];
     [recordDictionary setObject:self.dipDirectionTextField.text forKey:RECORD_DIP_DIRECTION];
@@ -488,6 +492,9 @@
         
         //Set the name of the picker
         [segue.destinationViewController setPickerName:FORMATION_PICKER_NAME];
+        
+        //Set the name of the formation folder
+        [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
     }
     
     //Seguing to the formation picker view controller for the lower formation text field
@@ -500,6 +507,9 @@
         
         //Set the name of the picker
         [segue.destinationViewController setPickerName:LOWER_FORMATION_PICKER_NAME];
+        
+        //Set the name of the formation folder
+        [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
     }
     
     //Seguing to the formation picker view controller for the upper formation text field
@@ -512,6 +522,9 @@
         
         //Set the name of the picker
         [segue.destinationViewController setPickerName:UPPER_FORMATION_PICKER_NAME];
+        
+        //Set the name of the formation folder
+        [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
     }
 }
 
