@@ -21,4 +21,6 @@
 
 @property (nonatomic,weak) id <DipDirectionPickerDelegate> delegate;
 
+#define DIP_DIRECTION_PICKER_BLANK_OPTION @"None"
+
 @end

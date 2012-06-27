@@ -18,7 +18,7 @@
 
 - (NSArray *)dipDirectionComponentMatrix {
     //First component
-    NSArray *firstComponent=[NSArray arrayWithObjects:@"N", @"NE", @"E",@"SE" , @"S", @"SW", @"W", @"NW", nil];
+    NSArray *firstComponent=[NSArray arrayWithObjects: DIP_DIRECTION_PICKER_BLANK_OPTION,@"N", @"NE", @"E",@"SE" , @"S", @"SW", @"W", @"NW", nil];
     
     return [NSArray arrayWithObjects:firstComponent, nil];
 }
@@ -26,8 +26,9 @@
 - (void)handleUserSelection {
     [super handleUserSelection];
     
-    //Notify the delegate of user selection
-    [self.delegate dipDirectionPickerViewController:self userDidSelectDipDirectionValue:[self userSelection]];
+    //Notify the delegate of user selection if user did not select blank option; otherwise pass an empty stirng to the delegate
+    NSString *userSelection=[[self userSelection] isEqualToString:DIP_DIRECTION_PICKER_BLANK_OPTION] ? @"" : [self userSelection];
+    [self.delegate dipDirectionPickerViewController:self userDidSelectDipDirectionValue:userSelection];
 }
 
 #pragma mark - UIPickerViewDelegate methods

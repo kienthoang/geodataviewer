@@ -27,4 +27,6 @@
 
 @property (nonatomic,strong) id <FormationPickerDelegate> delegate;
 
+#define FORMATION_PICKER_BLANK_OPTION @"<None>"
+
 @end

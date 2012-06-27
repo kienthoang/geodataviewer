@@ -38,8 +38,9 @@
 }
 
 - (void)handleUserSelection {
-    //Notify the user of user selection
-    [self.delegate formationPickerViewController:self userDidSelectFormationWithName:[self userSelection]];
+    //Notify the user of user selection if user did not select the blank option; otherwise pass an empty string to the delegate
+    NSString *userSelection=[[self userSelection] isEqualToString:FORMATION_PICKER_BLANK_OPTION] ? @"" : [self userSelection];
+    [self.delegate formationPickerViewController:self userDidSelectFormationWithName:userSelection];
 }
 
 #pragma mark - UIPickerViewControllerDelegate
@@ -55,8 +56,11 @@
 #pragma mark - Setup the picker view
 
 - (NSArray *)pickerViewComponentMatrixFromFormations:(NSArray *)formations {
-    //Create an array of the names of all formations
     NSMutableArray *formationNames=[NSMutableArray arrayWithCapacity:[formations count]];
+    //Add blank option
+    [formationNames addObject:FORMATION_PICKER_BLANK_OPTION];
+    
+    //Add the names of the formations
     for (Formation *formation in formations)
         [formationNames addObject:formation.formationName];
     
