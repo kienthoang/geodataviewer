@@ -145,7 +145,6 @@
     
     //Show the record on the detail view
     [self performSegueWithIdentifier:@"Show Record" sender:[self.fetchedResultsController indexPathForObject:record]];
-
 }
 
 - (void)putDetailViewIntoEditingMode {
