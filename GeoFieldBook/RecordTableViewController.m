@@ -387,27 +387,6 @@
 
 #pragma mark - Table view data source
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"Record Cell";
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//    }
-//    
-//    // Configure the cell...
-//    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-//    cell.textLabel.text=record.name;
-//    cell.detailTextLabel.text=[NSString stringWithFormat:@"Folder: %@",record.folder.folderName];
-//    
-//    //Allow reordering of cell if the table view is in editing mode
-//    if (self.tableView.editing)
-//        cell.showsReorderControl=YES;
-//    
-//    return cell;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Record Cell";

@@ -403,8 +403,8 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="px3-OM-05o">
-                                            <rect key="frame" x="126" y="90" width="34" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="px3-OM-05o">
+                                            <rect key="frame" x="126" y="90" width="35" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1316,138 +1316,6 @@
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
         <image name="RecordVCBackground.jpg" width="536" height="688"/>
     </resources>
-    <classes>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="CustomRecordCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="image" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="DipDirectionPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipDirectionPickerViewController.h"/>
-        </class>
-        <class className="DipPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipPickerViewController.h"/>
-        </class>
-        <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
-        </class>
-        <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
-        </class>
-        <class className="FormationFolderTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
-        </class>
-        <class className="FormationFolderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="FormationPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationPickerViewController.h"/>
-        </class>
-        <class className="FormationTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationTableViewController.h"/>
-        </class>
-        <class className="FormationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="HomeMasterViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeMasterViewController.h"/>
-        </class>
-        <class className="HomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="InitialDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="ModalFolderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalFolderViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="folderDescriptionTextArea" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="folderNameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ModalRecordTypeSelector" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalRecordTypeSelector.h"/>
-            <relationships>
-                <relationship kind="outlet" name="recordTypePicker" candidateClass="UIPickerView"/>
-            </relationships>
-        </class>
-        <class className="PickerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PickerViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
-            </relationships>
-        </class>
-        <class className="PlungePickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlungePickerViewController.h"/>
-        </class>
-        <class className="RecordTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="RecordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="dateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dipTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="fieldObservationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="latitudeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="longitudeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="plungeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="recordImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="recordNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="recordTypeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="timeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="trendLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trendTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="upperFormationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="upperFormationTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="StrikePickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StrikePickerViewController.h"/>
-        </class>
-        <class className="TrendPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrendPickerViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
