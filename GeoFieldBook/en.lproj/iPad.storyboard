@@ -705,34 +705,30 @@
                                             <action selector="acquireData:" destination="LFc-wQ-Gyp" eventType="touchUpInside" id="Umh-VT-YyZ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" enabled="NO" id="Tie-9b-8ry">
-                                        <rect key="frame" x="464" y="181" width="157" height="31"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" enabled="NO" id="ak1-zA-FQA">
-                                        <rect key="frame" x="465" y="212" width="156" height="31"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" enabled="NO" id="XkJ-tQ-9ge">
-                                        <rect key="frame" x="465" y="245" width="153" height="31"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" enabled="NO" id="l5k-Vy-nPx">
-                                        <rect key="frame" x="466" y="277" width="148" height="31"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Latitude" minimumFontSize="17" id="LMN-BK-uhj">
+                                        <rect key="frame" x="464" y="181" width="128" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Longitude" minimumFontSize="17" id="CRH-l5-sJf">
+                                        <rect key="frame" x="464" y="212" width="128" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" minimumFontSize="17" id="V3o-8P-hdU">
+                                        <rect key="frame" x="464" y="245" width="97" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Time" minimumFontSize="17" id="Crt-5y-ydA">
+                                        <rect key="frame" x="464" y="276" width="128" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                             </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="redraw" id="WsI-q1-BwC">
@@ -756,6 +752,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="acquireButton" destination="Dxm-3N-8JA" id="KaY-6e-gG9"/>
+                        <outlet property="dateTextField" destination="V3o-8P-hdU" id="mCP-gO-dTs"/>
                         <outlet property="dipDirectionLabel" destination="YSI-LC-man" id="jXa-64-uj5"/>
                         <outlet property="dipDirectionTextField" destination="Vnu-9G-ONQ" id="yFD-Gd-UoE"/>
                         <outlet property="dipLabel" destination="Tr8-wc-AoC" id="QEh-bV-gps"/>
@@ -765,20 +762,20 @@
                         <outlet property="fieldObservationTextArea" destination="X91-79-4UG" id="ouP-K1-fG7"/>
                         <outlet property="formationLabel" destination="KcO-I2-ngB" id="QTV-mZ-Lr9"/>
                         <outlet property="formationTextField" destination="96G-kx-aRw" id="DLc-rY-Jib"/>
+                        <outlet property="latitudeTextField" destination="LMN-BK-uhj" id="VZ0-qp-TjY"/>
+                        <outlet property="longitudeTextField" destination="CRH-l5-sJf" id="Fee-bT-jzH"/>
                         <outlet property="lowerFormationLabel" destination="NaE-6s-Ecu" id="ZDs-1r-4vG"/>
                         <outlet property="lowerFormationTextField" destination="FMh-B9-XP0" id="RJC-aI-5wc"/>
+                        <outlet property="nameTextField" destination="Acc-26-RSJ" id="LXE-9i-eaY"/>
                         <outlet property="plungeLabel" destination="aHK-UX-lzU" id="EPG-Lh-kwj"/>
                         <outlet property="plungeTextField" destination="rtg-bf-3By" id="RAF-ob-H2U"/>
-                        <outlet property="recordDateLabel" destination="XkJ-tQ-9ge" id="kgU-fT-fr8"/>
                         <outlet property="recordImage" destination="aaB-i3-Dti" id="GxM-sm-VRu"/>
-                        <outlet property="recordLatitudeLabel" destination="Tie-9b-8ry" id="uH2-Gb-TMH"/>
-                        <outlet property="recordLongitudeLabel" destination="ak1-zA-FQA" id="Jp1-w9-3gJ"/>
                         <outlet property="recordNameTextField" destination="Acc-26-RSJ" id="T7f-lO-GtX"/>
-                        <outlet property="recordTimeLabel" destination="l5k-Vy-nPx" id="GvY-mz-u7B"/>
                         <outlet property="recordTypeLabel" destination="Fp8-aN-cYI" id="pBb-bM-MiF"/>
                         <outlet property="scrollView" destination="SYZ-dV-H1C" id="HZG-Ye-7Bi"/>
                         <outlet property="strikeLabel" destination="Cm1-zu-LdH" id="VXO-ZP-zK0"/>
                         <outlet property="strikeTextField" destination="d55-m2-TjO" id="WQK-ZR-Hx9"/>
+                        <outlet property="timeTextField" destination="Crt-5y-ydA" id="AJ4-nI-CR1"/>
                         <outlet property="toolbar" destination="WsI-q1-BwC" id="9iB-dk-xLo"/>
                         <outlet property="trendLabel" destination="NDk-Gh-Yt2" id="4l6-2j-TdZ"/>
                         <outlet property="trendTextField" destination="mpb-eR-t8c" id="gbH-Jd-zFs"/>
