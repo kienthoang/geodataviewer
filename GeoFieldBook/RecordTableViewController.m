@@ -16,9 +16,9 @@
 
 #import "Record+Types.h"
 #import "Record+Creation.h"
-#import "Record+Modification.h"
 #import "Record+Validation.h"
 #import "Record+NameEncoding.h"
+#import "Record+DateAndTimeFormatter.h"
 #import "Formation_Folder.h"
 
 @interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
@@ -278,7 +278,7 @@
         detailvc=nil;
     RecordViewController *detail=(RecordViewController *)detailvc;
     
-    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!!!!)
+    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!)
     if ([detail inEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
         //Get the record
         Record *modifiedRecord=[(RecordViewController *)detailvc record];
@@ -416,12 +416,12 @@
     
     //show the name, date and time
     cell.name.text=record.name;    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd";
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-    timeFormatter.dateFormat = @"HH:mm";   
-    cell.date.text=[dateFormatter stringFromDate:record.date];
-    cell.time.text = [timeFormatter stringFromDate:record.date];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    dateFormatter.dateFormat = @"yyyy-MM-dd";
+//    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+//    timeFormatter.dateFormat = @"HH:mm";   
+    cell.date.text=[Record dateFromNSDate:record.date];
+    cell.time.text = [Record timeFromNSDate:record.date];
     
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.imageData];
