@@ -2,7 +2,7 @@
 //  Formation.h
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 6/23/12.
+//  Created by Kien Hoang on 6/28/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -15,15 +15,20 @@
 
 @property (nonatomic, retain) NSString * formationName;
 @property (nonatomic, retain) NSNumber * formationSortNumber;
+@property (nonatomic, retain) NSSet *beddings;
 @property (nonatomic, retain) NSSet *faults;
 @property (nonatomic, retain) Formation_Folder *formationFolder;
 @property (nonatomic, retain) NSSet *joinSets;
 @property (nonatomic, retain) NSSet *lowerContacts;
 @property (nonatomic, retain) NSSet *upperContacts;
-@property (nonatomic, retain) NSSet *beddings;
 @end
 
 @interface Formation (CoreDataGeneratedAccessors)
+
+- (void)addBeddingsObject:(Bedding *)value;
+- (void)removeBeddingsObject:(Bedding *)value;
+- (void)addBeddings:(NSSet *)values;
+- (void)removeBeddings:(NSSet *)values;
 
 - (void)addFaultsObject:(Fault *)value;
 - (void)removeFaultsObject:(Fault *)value;
@@ -44,10 +49,5 @@
 - (void)removeUpperContactsObject:(Contact *)value;
 - (void)addUpperContacts:(NSSet *)values;
 - (void)removeUpperContacts:(NSSet *)values;
-
-- (void)addBeddingsObject:(Bedding *)value;
-- (void)removeBeddingsObject:(Bedding *)value;
-- (void)addBeddings:(NSSet *)values;
-- (void)removeBeddings:(NSSet *)values;
 
 @end

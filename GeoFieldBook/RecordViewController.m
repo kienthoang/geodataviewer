@@ -70,6 +70,8 @@
 
 @property (nonatomic, strong) UIPopoverController *imagePopover;
 
+@property (nonatomic,strong) NSDate *acquiredDate;
+
 //=====================================UI elements=======================================//
 
 @property (weak, nonatomic) IBOutlet UIImageView *recordImage;
@@ -169,6 +171,8 @@
 @synthesize currentImage = _currentImage;
 @synthesize imagePopover = _imagePopover;
 
+@synthesize acquiredDate=_acquireDate;
+
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
     //Update the bar button presenter
     [self updateSplitViewBarButtonPresenterWith:splitViewBarButtonItem];
@@ -219,9 +223,7 @@
     if (self.longitudeTextField.text)
         [recordDictionary setObject:self.longitudeTextField.text forKey:RECORD_LONGITUDE];
     if (self.dateTextField.text)
-        [recordDictionary setObject:self.dateTextField.text forKey:RECORD_DATE];
-    if (self.timeTextField.text)
-        [recordDictionary setObject:self.timeTextField.text forKey:RECORD_TIME];
+        [recordDictionary setObject:self.acquiredDate forKey:RECORD_DATE];
     [recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
     [recordDictionary setObject:self.dipTextField.text forKey:RECORD_DIP];
     [recordDictionary setObject:self.dipDirectionTextField.text forKey:RECORD_DIP_DIRECTION];
@@ -349,15 +351,14 @@
     //Only acquire data when self is in editing mode
     if (self.editing) {
         NSDate *now = [[NSDate alloc] init];
-        self.record.date = now;
         
+        //Save the acquired date
+        self.acquiredDate=now;
+      
         //reset the txtfields appropriately.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
-        [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
-        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
-        [timeFormatter setDateFormat:@"HH:mm:ss"];
-        [self.dateTextField setText:[dateFormatter stringFromDate:now ]]; 
-        [self.timeTextField setText:[timeFormatter stringFromDate:now ]]; 
+        self.dateTextField.text = [Record dateFromNSDate:now];
+        self.timeTextField.text = [Record timeFromNSDate:now]; 
+        
         
         //update the location. 
         //this will return immediatley and notifies the delegate with locationmanager:didupdate... 
@@ -816,8 +817,8 @@
     [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
     [timeFormatter setDateFormat:@"HH:mm:ss"];
-    [self.dateTextField setText:[dateFormatter stringFromDate:self.record.date ]]; 
-    [self.timeTextField setText:[timeFormatter stringFromDate:self.record.date ]]; 
+    [self.dateTextField setText:[dateFormatter stringFromDate:self.record.date]]; 
+    [self.timeTextField setText:[timeFormatter stringFromDate:self.record.date]]; 
     
     
     self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];

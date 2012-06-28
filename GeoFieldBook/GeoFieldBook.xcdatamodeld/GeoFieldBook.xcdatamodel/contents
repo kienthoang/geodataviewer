@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Bedding" representedClassName="Bedding" parentEntity="Record" syncable="YES">
         <relationship name="formation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="beddings" inverseEntity="Formation" syncable="YES"/>
     </entity>
@@ -21,7 +21,7 @@
     </entity>
     <entity name="Formation" representedClassName="Formation" syncable="YES">
         <attribute name="formationName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="formationSortNumber" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="formationSortNumber" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
         <relationship name="beddings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bedding" inverseName="formation" inverseEntity="Bedding" syncable="YES"/>
         <relationship name="faults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fault" inverseName="formation" inverseEntity="Fault" syncable="YES"/>
         <relationship name="formationFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Formation_Folder" inverseName="formations" inverseEntity="Formation_Folder" syncable="YES"/>

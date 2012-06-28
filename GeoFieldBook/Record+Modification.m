@@ -24,8 +24,7 @@
     self.strike=[numberFormatter numberFromString:[recordInfo objectForKey:RECORD_STRIKE]];
     self.dipDirection=[recordInfo objectForKey:RECORD_DIP_DIRECTION];
     self.fieldOservations=[recordInfo objectForKey:RECORD_FIELD_OBSERVATION];
-    //self.date=[recordInfo objectForKey:RECORD_DATE];
-    self.imageHashData=[recordInfo objectForKey:RECORD_IMAGE_HASH];
+    self.date=[recordInfo objectForKey:RECORD_DATE];
     
     return YES;
 }

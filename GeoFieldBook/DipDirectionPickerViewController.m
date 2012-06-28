@@ -16,12 +16,16 @@
 
 @synthesize delegate=_delegate;
 
+#pragma mark - Picker View State Initialization
+
 - (NSArray *)dipDirectionComponentMatrix {
     //First component
     NSArray *firstComponent=[NSArray arrayWithObjects: DIP_DIRECTION_PICKER_BLANK_OPTION,@"N", @"NE", @"E",@"SE" , @"S", @"SW", @"W", @"NW", nil];
     
     return [NSArray arrayWithObjects:firstComponent, nil];
 }
+
+#pragma mark - User Selection Manipulation
 
 - (void)handleUserSelection {
     [super handleUserSelection];

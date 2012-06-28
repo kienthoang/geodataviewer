@@ -19,12 +19,16 @@
 @synthesize componentMatrix=_componentMatrix;
 @synthesize initialSelectionEnabled=_initialSelectionEnabled;
 
+#pragma mark - Getters and Setters
+
 - (void)setComponentMatrix:(NSArray *)componentMatrix {
     _componentMatrix=componentMatrix;
     
     //Reload the picker view
     [self.pickerView reloadAllComponents];
 }
+
+#pragma mark - User Selection Manipulation
 
 - (NSString *)userSelection {
     NSString *selection=@"";

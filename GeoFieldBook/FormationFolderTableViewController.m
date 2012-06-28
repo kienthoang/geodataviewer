@@ -27,12 +27,16 @@
 @synthesize database=_database;
 @synthesize toBeDeletedFolder=_toBeDeletedFolder;
 
+#pragma mark - Getters and Setters
+
 - (void)setDatabase:(UIManagedDocument *)database {
     _database=database;
     
     //Setup the fectched results controller
     [self setupFetchedResultsController];
 }
+
+#pragma mark - Controller State Initialization
 
 - (void)setupFetchedResultsController {
     //Set up the request for fetched result controllers
@@ -84,7 +88,7 @@
     }
 }
 
-#pragma mark - Formation Folder Manipulation
+#pragma mark - Alert Generators
 
 //Put up an alert about some database failure with specified message
 - (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
@@ -100,6 +104,8 @@
     UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation folder with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [duplicationAlert show];
 }
+
+#pragma mark - Formation Folder Creation/Update/Deletion
 
 - (void)saveChangesToDatabase {
     //Save changes to database

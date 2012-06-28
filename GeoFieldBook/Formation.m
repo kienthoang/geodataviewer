@@ -2,7 +2,7 @@
 //  Formation.m
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 6/23/12.
+//  Created by Kien Hoang on 6/28/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -18,11 +18,11 @@
 
 @dynamic formationName;
 @dynamic formationSortNumber;
+@dynamic beddings;
 @dynamic faults;
 @dynamic formationFolder;
 @dynamic joinSets;
 @dynamic lowerContacts;
 @dynamic upperContacts;
-@dynamic beddings;
 
 @end

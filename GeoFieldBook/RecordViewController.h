@@ -12,6 +12,7 @@
 #import "Record+DictionaryKeys.h"
 #import "UISplitViewBarButtonPresenter.h"
 #import "Image.h"
+#import "Record+DateAndTimeFormatter.h"
 
 @class RecordViewController;
 

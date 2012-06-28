@@ -16,9 +16,9 @@
 
 #import "Record+Types.h"
 #import "Record+Creation.h"
-#import "Record+Modification.h"
 #import "Record+Validation.h"
 #import "Record+NameEncoding.h"
+#import "Record+DateAndTimeFormatter.h"
 #import "Formation_Folder.h"
 
 @interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
@@ -26,10 +26,15 @@
 - (void)createRecordForRecordType:(NSString *)recordType;
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
 - (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
+
 - (void)autosaveRecord:(Record *)record withNewRecordInfo:(NSDictionary *)recordInfo;
+
+#pragma mark - Temporary record's modified info
 
 @property (nonatomic,strong) Record *modifiedRecord;
 @property (nonatomic,strong) NSDictionary *recordModifiedInfo;
+
+#pragma mark - UI Outlets
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *setLocationButton;
 
@@ -47,6 +52,8 @@
 @synthesize autosaveDelegate=_autosaveDelegate;
 @synthesize delegate=_delegate;
 
+#pragma mark - Controller State Initialization
+
 - (void)setupFetchedResultsController {
     //Set up the fetched results controller to fetch records
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
@@ -55,6 +62,8 @@
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
+
+#pragma mark - Setters
 
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
@@ -88,50 +97,103 @@
     return detailvc;
 }
 
-- (void)autosaveRecord:(Record *)record 
-     withNewRecordInfo:(NSDictionary *)recordInfo 
-{
+#pragma mark - Autosave Controller
+
+- (UIAlertView *)autosaveAlertForValidationOfRecordInfo:(NSDictionary *)recordInfo {
+    UIAlertView *autosaveAlert=nil;
+    
     //If the record info passes the validations, show the alert; otherwise, show an alert with no confirm button
     NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
     if (![failedKeyNames count]) {
-        //Save the recordInfo dictionary in a temporary property
-        self.recordModifiedInfo=recordInfo;
-        
-        //Save the record in a temporary property
-        self.modifiedRecord=record;
-        
         //If the name of the record is not nil
         NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
         
         //Put up an alert to ask the user whether he/she wants to save
-        UIAlertView *autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
+        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
                                                               message:message 
                                                              delegate:self 
                                                     cancelButtonTitle:@"Don't Save" 
                                                     otherButtonTitles:@"Save", nil];
-        [autosaveAlert show];
     } else {
-        //Show the autosave fail alert
+        //Show the autosave fail alert with all the missing record info
         NSMutableArray *failedNames=[NSMutableArray array];
         for (NSString *failedKey in failedKeyNames)
             [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
         NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
-        UIAlertView *autosaveFailAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
+        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
                                                                   message:message 
                                                                  delegate:nil 
                                                         cancelButtonTitle:@"Dismiss" 
                                                         otherButtonTitles:nil];
-        [autosaveFailAlert show];
+    }
+    
+    return autosaveAlert;
+}
+
+- (void)autosaveRecord:(Record *)record 
+     withNewRecordInfo:(NSDictionary *)recordInfo 
+{
+    //Save the recordInfo dictionary in a temporary property
+    self.recordModifiedInfo=recordInfo;
+    
+    //Save the record in a temporary property
+    self.modifiedRecord=record;
+    
+    //Get and show the appropriate alert
+    UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordInfo];
+    [autosaveAlert show];
+}
+
+//Ask the folder tvc
+- (void)setupAutosaveBeforeGoingOffStack {
+    //Get the detail view controller
+    id detailvc=[self.splitViewController.viewControllers lastObject];
+    if (![detailvc isKindOfClass:[RecordViewController class]])
+        detailvc=nil;
+    RecordViewController *detail=(RecordViewController *)detailvc;
+    
+    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!!!!)
+    if ([detail inEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
+        //Get the record
+        Record *modifiedRecord=[(RecordViewController *)detailvc record];
+        NSDictionary *recordModifiedInfo=[(RecordViewController *)detailvc dictionaryFromForm];
+        UIManagedDocument *database=self.database;
+        
+        //Get the approriate alert view
+        UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordModifiedInfo];
+        
+        [self.autosaveDelegate recordTableViewController:self showAlert:autosaveAlert andExecuteBlockOnCancel:^{
+            //NSLog(@"Cancel autosave alert!");
+        } andExecuteBlock:^{
+            //Update the record info if the info passed validations
+            [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
+            
+            //Save changes to database
+            [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
+        } whenClickButtonWithTitle:@"Save"];
     }
 }
 
-#pragma mark - Record Creation/Deletion
+#pragma mark - Alert Generators
+
+//Put up an alert about some database failure with specified message
+- (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Database Error" 
+                                                  message:message 
+                                                 delegate:nil 
+                                        cancelButtonTitle:@"Dismiss" 
+                                        otherButtonTitles: nil];
+    [alert show];
+}
+
+#pragma mark - Record Creation/Update/Deletion
 
 - (void)saveChangesToDatabase {
     //Save changes to database
     [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (!success) {
             //handle errors
+            [self putUpDatabaseErrorAlertWithMessage:@"Could not save changes to the database. Please try again."];
         }
     }];
 }
@@ -147,6 +209,7 @@
     [self performSegueWithIdentifier:@"Show Record" sender:[self.fetchedResultsController indexPathForObject:record]];
 }
 
+//Put the right hand side (detail view) into editing mode, probably used when a new record is created
 - (void)putDetailViewIntoEditingMode {
     //Get the detail vc and if it's of RecordViewController class, put it into editing mode
     id detailvc=[self.splitViewController.viewControllers lastObject];
@@ -169,7 +232,7 @@
     [self putDetailViewIntoEditingMode];
 }
 
-//Modify a record wiht the specified record type
+//Modify a record with the specified record type
 - (void)modifyRecord:(Record *)record 
          withNewInfo:(NSDictionary *)recordInfo
 {
@@ -199,13 +262,13 @@
 - (void)formationFolderPickerViewController:(FormationFolderPickerViewController *)sender 
        userDidSelectFormationFolderWithName:(NSString *)formationFolderName 
 {
-    //Save the formation folder name in the folder if the returned formationFolderName is not empty
+    //Save the formation folder name in the folder if the returned formationFolderName is not empty (it's empty when user selects the empty option)
     if ([formationFolderName length])
         [self.delegate recordTableViewController:self 
                                needsUpdateFolder:self.folder
                           setFormationFolderName:formationFolderName];
     
-    //Change the text of the set location button
+    //Change the text of the set location button to show the new location
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
 }
 
@@ -278,7 +341,7 @@
         detailvc=nil;
     RecordViewController *detail=(RecordViewController *)detailvc;
     
-    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!!!!)
+    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!)
     if ([detail inEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
         //Get the record
         Record *modifiedRecord=[(RecordViewController *)detailvc record];
@@ -325,8 +388,15 @@
             } whenClickButtonWithTitle:@"Save"];
         }
     }
+    //Setup the autosaver if self is going off stack and the detail view is still in editing mode
+    [self setupAutosaveBeforeGoingOffStack];
     
     [super viewWillDisappear:animated];
+}
+
+- (void)viewDidUnload {
+    [self setSetLocationButton:nil];
+    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -416,12 +486,8 @@
     
     //show the name, date and time
     cell.name.text=record.name;    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd";
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-    timeFormatter.dateFormat = @"HH:mm";   
-    cell.date.text=[dateFormatter stringFromDate:record.date];
-    cell.time.text = [timeFormatter stringFromDate:record.date];
+    cell.date.text=[Record dateFromNSDate:record.date];
+    cell.time.text = [Record timeFromNSDate:record.date];
     
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
@@ -457,11 +523,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
-}
-
-- (void)viewDidUnload {
-    [self setSetLocationButton:nil];
-    [super viewDidUnload];
 }
 
 @end
