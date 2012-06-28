@@ -13,9 +13,11 @@
 #import "Formation+Modification.h"
 #import "TextInputFilter.h"
 
-@interface FormationTableViewController() <FormationViewControllerDelegate>
+@interface FormationTableViewController() <FormationViewControllerDelegate,NSFetchedResultsControllerDelegate>
 
 - (void)setupFetchedResultsController;
+
+@property (nonatomic) BOOL formationsWereReordered;
 
 @end
 
@@ -23,6 +25,8 @@
 
 @synthesize formationFolder=_formationFolder;
 @synthesize database=_database;
+
+@synthesize formationsWereReordered=_formationsWereReordered;
 
 #pragma mark - Getters and Setters
 
@@ -46,10 +50,13 @@
     //Setup the request
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
     request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.formationFolder];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationSortNumber" ascending:YES]];
     
     //Setup the feched results controller
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    //Set the fetched results controller's delegate to self
+    self.fetchedResultsController.delegate=self;
 }
 
 #pragma mark - Prepare for segues
@@ -132,11 +139,18 @@
     [self saveChangesToDatabase];
 }
 
+#pragma mark - Database-side Formation Reordering
+
+
 #pragma mark - Target-Action Handlers
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Toggle the table view's editing mode
     [self.tableView setEditing:!self.tableView.editing animated:YES];
+    
+    //Save any changes to database if editing mode is over
+    if (!self.editing)
+        [self saveChangesToDatabase];
     
     //Change the style of the button to edit or done
     sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
@@ -201,6 +215,34 @@ didAskToModifyFormationWithName:(NSString *)originalName
         [self deleteFormation:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+#pragma mark - Table View DataSource
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    return proposedDestinationIndexPath;
+}
+
+- (void)tableView:(UITableView *)tableView 
+moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath 
+      toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
+    
+    //Update the sort number of the formations
+    NSMutableArray *formations=[self.fetchedResultsController.fetchedObjects mutableCopy];
+    Formation *objectToMove=[formations objectAtIndex:sourceIndexPath.row];
+    [formations removeObjectAtIndex:sourceIndexPath.row];
+    [formations insertObject:objectToMove atIndex:destinationIndexPath.row];
+    for (int i=0;i<[formations count];i++) {
+        Formation *formation=[formations objectAtIndex:i];
+        formation.formationSortNumber=[NSNumber numberWithInt:i];
+    }
+}
+
 
 #pragma mark - View Controller Lifecycles
 
