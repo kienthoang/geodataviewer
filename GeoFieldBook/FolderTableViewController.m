@@ -25,14 +25,19 @@
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
 - (BOOL)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo;   //Modify a folder's name
-- (void)deleteFolder:(Folder *)folder;
-- (void)showInitialDetailView;
+- (void)deleteFolder:(Folder *)folder;   //Delete the specified folder
+- (void)showInitialDetailView;            //Put the G-mode initial view onto the right screen (detail view)
 
 - (id <UISplitViewBarButtonPresenter>)barButtonPresenter;
+
+#pragma mark - Temporary data of the autosaver
 
 @property (nonatomic,strong) autosaver_block_t autosaverCancelBlock;
 @property (nonatomic,strong) autosaver_block_t autosaverConfirmBlock;
 @property (nonatomic,strong) NSString *autosaverConfirmTitle;
+
+#pragma mark - Temporary "to-be-deleted" data
+
 @property (nonatomic,strong) Folder *toBeDeletedFolder;
 
 @end
@@ -47,6 +52,8 @@
 
 @synthesize database=_database;
 
+#pragma mark - Setters
+
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
         _database=database;
@@ -55,6 +62,8 @@
         [self normalizeDatabase];        
     }
 }
+
+#pragma mark - Controller State Initialization
 
 //Set up the FetchedResultsController to fetch folder entities from the database
 - (void)setupFetchedResultsController {
@@ -100,6 +109,8 @@
     [self performSegueWithIdentifier:@"Show Home Page" sender:self];
 }
 
+#pragma mark - Alert Generators
+
 //Put up an alert about some database failure with specified message
 - (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
     UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Database Error" 
@@ -108,6 +119,11 @@
                                         cancelButtonTitle:@"Dismiss" 
                                         otherButtonTitles: nil];
     [alert show];
+}
+
+- (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
+    UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A folder with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [duplicationAlert show];
 }
 
 #pragma mark - RecordTableViewControllerDelegate methods
@@ -179,11 +195,6 @@
 }
 
 #pragma mark - Folder Creation/Editing/Deletion
-
-- (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
-    UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A folder with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [duplicationAlert show];
-}
 
 - (void)saveChangesToDatabase {
     //Save changes to database
@@ -264,7 +275,7 @@
     return YES;
 }
 
-#pragma mark - prepare for segues
+#pragma mark - Prepare for segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Seguing to ModalNewFolderViewController
@@ -410,6 +421,7 @@
     [self barButtonPresenter].splitViewBarButtonItem=nil;
 }
 
+//Hide the master in portrait modes only
 -(BOOL)splitViewController:(UISplitViewController *)svc 
   shouldHideViewController:(UIViewController *)vc 
              inOrientation:(UIInterfaceOrientation)orientation

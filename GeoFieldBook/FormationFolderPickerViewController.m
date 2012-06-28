@@ -18,12 +18,16 @@
 @synthesize database=_database;
 @synthesize delegate=_delegate;
 
+#pragma mark - Getters and Setters
+
 - (void)setDatabase:(UIManagedDocument *)database {
     _database=database;
         
     //Synchronize with the database
     [self synchronizeWithFormationFolderDatabase];
 }
+
+#pragma mark - User Selection Manipulation
 
 - (void)handleUserSelection {
     //Notify the user of user selection if user did not picked the blank option; otherqise pass empty string to the delegate

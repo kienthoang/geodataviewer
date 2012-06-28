@@ -24,6 +24,8 @@
 @synthesize formationFolder=_formationFolder;
 @synthesize database=_database;
 
+#pragma mark - Getters and Setters
+
 - (void)setDatabase:(UIManagedDocument *)database {
     _database=database;
     
@@ -37,6 +39,8 @@
     //Setup fetched results controller
     [self setupFetchedResultsController];
 }
+
+#pragma mark - Controller State Initialization
 
 - (void)setupFetchedResultsController {
     //Setup the request
@@ -65,7 +69,7 @@
     }
 }
 
-#pragma mark - Formation Manipulation
+#pragma mark - Alert Generators
 
 //Put up an alert about some database failure with specified message
 - (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
@@ -81,6 +85,8 @@
     UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [duplicationAlert show];
 }
+
+#pragma mark - Formation Manipulation
 
 - (void)saveChangesToDatabase {
     //Save changes to database

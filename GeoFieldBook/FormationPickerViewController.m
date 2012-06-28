@@ -23,6 +23,8 @@
 
 @synthesize delegate=_delegate;
 
+#pragma mark - Getters and Setters
+
 - (void)setDatabase:(UIManagedDocument *)database {
     _database=database;
     
@@ -36,6 +38,8 @@
     //Synchronize with the database
     [self synchronizeWithFormationDatabase];
 }
+
+#pragma mark - User Selection Manipulation
 
 - (void)handleUserSelection {
     //Notify the user of user selection if user did not select the blank option; otherwise pass an empty string to the delegate
@@ -53,7 +57,7 @@
     [self handleUserSelection];
 }
 
-#pragma mark - Setup the picker view
+#pragma mark - Picker View State Initialization
 
 - (NSArray *)pickerViewComponentMatrixFromFormations:(NSArray *)formations {
     NSMutableArray *formationNames=[NSMutableArray arrayWithCapacity:[formations count]];

@@ -22,6 +22,8 @@
 @synthesize delegate=_delegate;
 @synthesize recordType=_recordType;
 
+#pragma mark - Getters and Setters
+
 //In case the recordTypePicker gets set to a new picker view, set the new one's delegate and data source to self
 - (void)setRecordTypePicker:(UIPickerView *)recordTypePicker {
     if (_recordTypePicker!=recordTypePicker) {
@@ -107,6 +109,5 @@
     //Dismiss self
     [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
-
 
 @end

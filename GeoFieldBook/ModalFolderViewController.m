@@ -66,8 +66,6 @@
     [self setFolderNameTextField:nil];
     [self setFolderDescriptionTextArea:nil];
     [super viewDidUnload];
-    
-    // Release any retained subviews of the main view. (generated automatically by xcode)
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -75,6 +73,8 @@
     // Return YES for supported orientations
 	return YES;
 }
+
+#pragma mark - Form Information Collectors
 
 //Create a dictionary of info of the new/modified folder
 - (NSDictionary *)dictionaryFromFolderForm {
