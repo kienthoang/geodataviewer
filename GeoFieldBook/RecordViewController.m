@@ -10,6 +10,7 @@
 #import "TextInputFilter.h"
 
 #import "Record.h"
+#import "Image+Creation.h"
 #import "RecordViewController.h"
 #import "Record+Modification.h"
 #import "Record+Validation.h"
@@ -65,7 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *browseButton;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *acquireDataButton;
-@property (weak, nonatomic) UIImage *image;
+@property (weak, nonatomic) UIImage *currentImage;
 
 @property (nonatomic, strong) UIPopoverController *imagePopover;
 
@@ -127,6 +128,7 @@
 @synthesize editButton = _editButton;
 
 @synthesize record=_record;
+@synthesize image = _image;
 
 @synthesize recordImage = _recordImage;
 @synthesize recordTypeLabel = _recordTypeLabel;
@@ -166,7 +168,7 @@
 @synthesize browseButton = _browseButton;
 @synthesize takePhotoButton = _takePhotoButton;
 @synthesize acquireDataButton = _acquireDataButton;
-@synthesize image = _image;
+@synthesize currentImage = _currentImage;
 @synthesize imagePopover = _imagePopover;
 
 @synthesize acquiredDate=_acquireDate;
@@ -210,6 +212,7 @@
     return self.editing;
 }
 
+
 //Creates and returns the user-modified info dictionary
 - (NSDictionary *)dictionaryFromForm {
     //Create a NSDictionary with the user-modified information
@@ -223,8 +226,7 @@
         NSDate *newDate=self.acquiredDate ? self.acquiredDate : self.record.date;
         [recordDictionary setObject:newDate forKey:RECORD_DATE];
     }
-    if (self.timeTextField.text)
-        [recordDictionary setObject:self.timeTextField.text forKey:RECORD_TIME];
+
     [recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
     [recordDictionary setObject:self.dipTextField.text forKey:RECORD_DIP];
     [recordDictionary setObject:self.dipDirectionTextField.text forKey:RECORD_DIP_DIRECTION];
@@ -238,8 +240,10 @@
     [recordDictionary setObject:self.upperFormationTextField.text forKey:RECORD_UPPER_FORMATION];
     
     //save the record image if it exists
-    if (self.image)
-        [recordDictionary setObject:UIImageJPEGRepresentation(self.image, 1.0) forKey:RECORD_IMAGE];
+    if (self.currentImage) {
+        NSData *imageEntity = UIImagePNGRepresentation(self.currentImage);//or jpg
+        self.record.image = [Image imageWithBinaryData:imageEntity inManagedObjectContext:self.record.managedObjectContext];
+    }
     
     return [recordDictionary copy];
 }
@@ -446,7 +450,7 @@
     if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (image)
     {
-        self.image = image;
+        self.currentImage = image;
         self.recordImage.image = image;
     }
     
@@ -789,10 +793,8 @@
 
 - (void)updateFormForRecord:(Record *)record {
     //set the image
-    [self.recordImage setImage:[UIImage imageWithData:record.imageData]];
-    NSMutableData *data=[NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-    CC_SHA256(record.imageData.bytes,record.imageData.length,data.mutableBytes);
-        
+    [self.recordImage setImage:[UIImage imageWithData:self.record.image.imageData]];
+    
     //Reset all the textfields to empty strings
     [self.textFields makeObjectsPerformSelector:@selector(setText:) withObject:@""];
     
@@ -809,10 +811,18 @@
     self.longitudeTextField.text=self.record.longitude;
     
     //filling in date and time
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
+    [timeFormatter setDateFormat:@"HH:mm:ss"];
+    [self.dateTextField setText:[dateFormatter stringFromDate:self.record.date]]; 
+    [self.timeTextField setText:[timeFormatter stringFromDate:self.record.date]]; 
+    
+
     if(record) {
         self.dateTextField.text = [Record dateFromNSDate:record.date];
         self.timeTextField.text = [Record timeFromNSDate:record.date];
-    } 
+    }
     
     self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
     self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];

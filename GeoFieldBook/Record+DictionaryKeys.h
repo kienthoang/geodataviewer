@@ -27,6 +27,6 @@
 #define RECORD_FIELD_OBSERVATION @"GeoFieldBook_Field_Observation"
 
 //added for record image
-#define RECORD_IMAGE @"GeoFieldBook_Record_Image"
+#define RECORD_IMAGE_HASH @"GeoFieldBook_Record_Image_Hash"
 
 @end

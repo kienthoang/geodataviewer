@@ -438,7 +438,7 @@
     cell.time.text = [Record timeFromNSDate:record.date];
     
     //show the image
-    UIImage *image = [[UIImage alloc] initWithData:record.imageData];
+    UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
     [cell.image setImage:image];
     
     //Allow reordering of cell if the table view is in editing mode

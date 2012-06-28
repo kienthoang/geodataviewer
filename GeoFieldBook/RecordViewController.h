@@ -11,6 +11,7 @@
 #import "Record+Creation.h"
 #import "Record+DictionaryKeys.h"
 #import "UISplitViewBarButtonPresenter.h"
+#import "Image.h"
 #import "Record+DateAndTimeFormatter.h"
 
 @class RecordViewController;
@@ -36,6 +37,7 @@
 @interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>
 
 @property (nonatomic,strong) Record *record;
+@property (nonatomic, strong) Image *image;
 @property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
 
 - (NSDictionary *)dictionaryFromForm;
