@@ -34,6 +34,11 @@
         <relationship name="folders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Folder" inverseName="formationFolder" inverseEntity="Folder" syncable="YES"/>
         <relationship name="formations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Formation" inverseName="formationFolder" inverseEntity="Formation" syncable="YES"/>
     </entity>
+    <entity name="Image" representedClassName="Image" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageHash" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="whoUses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="image" inverseEntity="Record" syncable="YES"/>
+    </entity>
     <entity name="JointSet" representedClassName="JointSet" parentEntity="Record" syncable="YES">
         <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="joinSets" inverseEntity="Formation" syncable="YES"/>
     </entity>
@@ -44,12 +49,13 @@
         <attribute name="dipDirection" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fieldOservations" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="idOnServer" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="imageHashData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="strike" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
+        <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="whoUses" inverseEntity="Image" syncable="YES"/>
     </entity>
     <elements>
         <element name="Bedding" positionX="171" positionY="597" width="128" height="60"/>
@@ -60,6 +66,7 @@
         <element name="Formation_Folder" positionX="-92" positionY="234" width="128" height="90"/>
         <element name="JointSet" positionX="198" positionY="720" width="128" height="60"/>
         <element name="Other" positionX="333" positionY="594" width="128" height="45"/>
-        <element name="Record" positionX="466" positionY="162" width="128" height="210"/>
+        <element name="Record" positionX="466" positionY="162" width="128" height="225"/>
+        <element name="Image" positionX="241" positionY="108" width="128" height="90"/>
     </elements>
 </model>

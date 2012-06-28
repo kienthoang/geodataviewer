@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Folder;
+@class Folder, Image;
 
 @interface Record : NSManagedObject
 
@@ -18,11 +18,12 @@
 @property (nonatomic, retain) NSString * dipDirection;
 @property (nonatomic, retain) NSString * fieldOservations;
 @property (nonatomic, retain) NSNumber * idOnServer;
-@property (nonatomic, retain) NSData * imageData;
+@property (nonatomic, retain) NSData * imageHashData;
 @property (nonatomic, retain) NSString * latitude;
 @property (nonatomic, retain) NSString * longitude;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * strike;
 @property (nonatomic, retain) Folder *folder;
+@property (nonatomic, strong) Image *image;
 
 @end

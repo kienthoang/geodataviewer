@@ -10,6 +10,7 @@
 #import "TextInputFilter.h"
 
 #import "Record.h"
+#import "Image+Creation.h"
 #import "RecordViewController.h"
 #import "Record+Modification.h"
 #import "Record+Validation.h"
@@ -65,7 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *browseButton;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *acquireDataButton;
-@property (weak, nonatomic) UIImage *image;
+@property (weak, nonatomic) UIImage *currentImage;
 
 @property (nonatomic, strong) UIPopoverController *imagePopover;
 
@@ -125,6 +126,7 @@
 @synthesize editButton = _editButton;
 
 @synthesize record=_record;
+@synthesize image = _image;
 
 @synthesize recordImage = _recordImage;
 @synthesize recordTypeLabel = _recordTypeLabel;
@@ -164,7 +166,7 @@
 @synthesize browseButton = _browseButton;
 @synthesize takePhotoButton = _takePhotoButton;
 @synthesize acquireDataButton = _acquireDataButton;
-@synthesize image = _image;
+@synthesize currentImage = _currentImage;
 @synthesize imagePopover = _imagePopover;
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
@@ -206,6 +208,7 @@
     return self.editing;
 }
 
+
 //Creates and returns the user-modified info dictionary
 - (NSDictionary *)dictionaryFromForm {
     //Create a NSDictionary with the user-modified information
@@ -232,8 +235,10 @@
     [recordDictionary setObject:self.upperFormationTextField.text forKey:RECORD_UPPER_FORMATION];
     
     //save the record image if it exists
-    if (self.image)
-        [recordDictionary setObject:UIImageJPEGRepresentation(self.image, 1.0) forKey:RECORD_IMAGE];
+    if (self.currentImage) {
+        NSData *imageEntity = UIImagePNGRepresentation(self.currentImage);//or jpg
+        self.record.image = [Image imageWithBinaryData:imageEntity inManagedObjectContext:self.record.managedObjectContext];
+    }
     
     return [recordDictionary copy];
 }
@@ -441,7 +446,7 @@
     if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (image)
     {
-        self.image = image;
+        self.currentImage = image;
         self.recordImage.image = image;
     }
     
@@ -788,11 +793,8 @@
 
 - (void)updateFormForRecord:(Record *)record {
     //set the image
-    [self.recordImage setImage:[UIImage imageWithData:record.imageData]];
-    NSMutableData *data=[NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-    CC_SHA256(record.imageData.bytes,record.imageData.length,data.mutableBytes);
-    
-    NSLog(@"Hash value: %@",data);
+    //self.record.image = [[Image alloc] init];
+    [self.recordImage setImage:[UIImage imageWithData:self.record.image.imageData]];
     
     //Reset all the textfields to empty strings
     [self.textFields makeObjectsPerformSelector:@selector(setText:) withObject:@""];

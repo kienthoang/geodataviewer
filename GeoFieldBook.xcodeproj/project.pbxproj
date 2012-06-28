@@ -74,7 +74,9 @@
 		029878071595BA4D000D71E7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029878061595BA4D000D71E7 /* Formation.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
-		2141DC17159C9AE1002518F9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141DC16159C9AE0002518F9 /* Record.m */; };
+		2132A5D4159CD26100009CB9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D3159CD26100009CB9 /* Record.m */; };
+		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
+		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B1FEEF159B58C200868F62 /* CustomRecordCell.m */; };
 		21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C309E0159B6C800066FC9B /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
@@ -212,8 +214,12 @@
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
-		2141DC15159C9ADF002518F9 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
-		2141DC16159C9AE0002518F9 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		2132A5D2159CD26100009CB9 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		2132A5D3159CD26100009CB9 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		2132A5D5159CD26200009CB9 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		2132A5D6159CD26200009CB9 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		2132A5D8159CD62200009CB9 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image+Creation.h"; path = "Image/Image+Creation.h"; sourceTree = "<group>"; };
+		2132A5D9159CD62200009CB9 /* Image+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Image+Creation.m"; path = "Image/Image+Creation.m"; sourceTree = "<group>"; };
 		2141DC18159CA275002518F9 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		21B1FEEE159B58C200868F62 /* CustomRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecordCell.h; sourceTree = "<group>"; };
 		21B1FEEF159B58C200868F62 /* CustomRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecordCell.m; sourceTree = "<group>"; };
@@ -427,6 +433,7 @@
 		0294E0D5159363050025219F /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				2132A5DB159CD63500009CB9 /* Image */,
 				0298C253159B432A0038E89C /* Bedding */,
 				0298C254159B433A0038E89C /* Contact */,
 				0298C258159B43860038E89C /* Fault */,
@@ -511,8 +518,8 @@
 		0298C256159B435B0038E89C /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				2141DC15159C9ADF002518F9 /* Record.h */,
-				2141DC16159C9AE0002518F9 /* Record.m */,
+				2132A5D2159CD26100009CB9 /* Record.h */,
+				2132A5D3159CD26100009CB9 /* Record.m */,
 				0222DB0215961D5D00699D62 /* Record+Modification.h */,
 				0222DB0315961D5D00699D62 /* Record+Modification.m */,
 				0222DAFE15961D0D00699D62 /* Record+DictionaryKeys.h */,
@@ -564,6 +571,17 @@
 				0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */,
 			);
 			name = "Formation Folder";
+			sourceTree = "<group>";
+		};
+		2132A5DB159CD63500009CB9 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				2132A5D5159CD26200009CB9 /* Image.h */,
+				2132A5D6159CD26200009CB9 /* Image.m */,
+				2132A5D8159CD62200009CB9 /* Image+Creation.h */,
+				2132A5D9159CD62200009CB9 /* Image+Creation.m */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -728,7 +746,9 @@
 				0298C25C159B43F30038E89C /* Record+Validation.m in Sources */,
 				0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */,
 				21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */,
-				2141DC17159C9AE1002518F9 /* Record.m in Sources */,
+				2132A5D4159CD26100009CB9 /* Record.m in Sources */,
+				2132A5D7159CD26200009CB9 /* Image.m in Sources */,
+				2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

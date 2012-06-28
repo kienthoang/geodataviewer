@@ -25,7 +25,7 @@
     self.dipDirection=[recordInfo objectForKey:RECORD_DIP_DIRECTION];
     self.fieldOservations=[recordInfo objectForKey:RECORD_FIELD_OBSERVATION];
     //self.date=[recordInfo objectForKey:RECORD_DATE];
-    self.imageData=[recordInfo objectForKey:RECORD_IMAGE];
+    self.imageHashData=[recordInfo objectForKey:RECORD_IMAGE_HASH];
     
     return YES;
 }

@@ -8,6 +8,7 @@
 
 #import "Record.h"
 #import "Folder.h"
+#import "Image.h"
 
 
 @implementation Record
@@ -17,11 +18,12 @@
 @dynamic dipDirection;
 @dynamic fieldOservations;
 @dynamic idOnServer;
-@dynamic imageData;
+@dynamic imageHashData;
 @dynamic latitude;
 @dynamic longitude;
 @dynamic name;
 @dynamic strike;
 @dynamic folder;
+@dynamic image;
 
 @end
