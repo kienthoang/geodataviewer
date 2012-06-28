@@ -11,7 +11,6 @@
 		020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7C15941FB400EECC08 /* Formation_Folder.m */; };
 		020EBB8015941FB400EECC08 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7F15941FB400EECC08 /* Fault.m */; };
 		020EBB8615941FB400EECC08 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8515941FB400EECC08 /* JointSet.m */; };
-		020EBB8915941FB400EECC08 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8815941FB400EECC08 /* Record.m */; };
 		020EBB8C15941FB400EECC08 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8B15941FB400EECC08 /* Other.m */; };
 		020EBB9215941FB400EECC08 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB9115941FB400EECC08 /* Contact.m */; };
 		020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB941594217A00EECC08 /* CoreDataTableViewController.m */; };
@@ -75,6 +74,7 @@
 		029878071595BA4D000D71E7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029878061595BA4D000D71E7 /* Formation.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
+		2141DC17159C9AE1002518F9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141DC16159C9AE0002518F9 /* Record.m */; };
 		21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B1FEEF159B58C200868F62 /* CustomRecordCell.m */; };
 		21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C309E0159B6C800066FC9B /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
@@ -99,8 +99,6 @@
 		020EBB7F15941FB400EECC08 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
 		020EBB8415941FB400EECC08 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
 		020EBB8515941FB400EECC08 /* JointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JointSet.m; sourceTree = "<group>"; };
-		020EBB8715941FB400EECC08 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
-		020EBB8815941FB400EECC08 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		020EBB8A15941FB400EECC08 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
 		020EBB8B15941FB400EECC08 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
 		020EBB9015941FB400EECC08 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -214,6 +212,9 @@
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
+		2141DC15159C9ADF002518F9 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		2141DC16159C9AE0002518F9 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		2141DC18159CA275002518F9 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		21B1FEEE159B58C200868F62 /* CustomRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecordCell.h; sourceTree = "<group>"; };
 		21B1FEEF159B58C200868F62 /* CustomRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecordCell.m; sourceTree = "<group>"; };
 		21C309E0159B6C800066FC9B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -333,7 +334,6 @@
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
-				21C309E0159B6C800066FC9B /* MobileCoreServices.framework */,
 				0294E09B159361060025219F /* GeoFieldBook */,
 				0294E0B9159361060025219F /* GeoFieldBookTests */,
 				0294E094159361060025219F /* Frameworks */,
@@ -353,6 +353,8 @@
 		0294E094159361060025219F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2141DC18159CA275002518F9 /* libcommonCrypto.dylib */,
+				21C309E0159B6C800066FC9B /* MobileCoreServices.framework */,
 				0294E0CE1593620B0025219F /* CoreLocation.framework */,
 				0294E0CC159362040025219F /* MapKit.framework */,
 				0294E0CA159361F50025219F /* CoreData.framework */,
@@ -509,8 +511,8 @@
 		0298C256159B435B0038E89C /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				020EBB8715941FB400EECC08 /* Record.h */,
-				020EBB8815941FB400EECC08 /* Record.m */,
+				2141DC15159C9ADF002518F9 /* Record.h */,
+				2141DC16159C9AE0002518F9 /* Record.m */,
 				0222DB0215961D5D00699D62 /* Record+Modification.h */,
 				0222DB0315961D5D00699D62 /* Record+Modification.m */,
 				0222DAFE15961D0D00699D62 /* Record+DictionaryKeys.h */,
@@ -680,7 +682,6 @@
 				020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */,
 				020EBB8015941FB400EECC08 /* Fault.m in Sources */,
 				020EBB8615941FB400EECC08 /* JointSet.m in Sources */,
-				020EBB8915941FB400EECC08 /* Record.m in Sources */,
 				020EBB8C15941FB400EECC08 /* Other.m in Sources */,
 				020EBB9215941FB400EECC08 /* Contact.m in Sources */,
 				020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */,
@@ -727,6 +728,7 @@
 				0298C25C159B43F30038E89C /* Record+Validation.m in Sources */,
 				0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */,
 				21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */,
+				2141DC17159C9AE1002518F9 /* Record.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,6 +831,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
 				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -840,6 +846,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
 				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

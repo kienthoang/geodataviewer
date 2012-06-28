@@ -26,4 +26,7 @@
 #define RECORD_DIP_DIRECTION @"GeoFieldBook_Record_Dip_Direction"
 #define RECORD_FIELD_OBSERVATION @"GeoFieldBook_Field_Observation"
 
+//added for record image
+#define RECORD_IMAGE @"GeoFieldBook_Record_Image"
+
 @end

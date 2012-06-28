@@ -2,7 +2,7 @@
 //  Record.h
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 6/21/12.
+//  Created by excel2011 on 6/28/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSString * dipDirection;
 @property (nonatomic, retain) NSString * fieldOservations;
 @property (nonatomic, retain) NSNumber * idOnServer;
-@property (nonatomic, retain) NSString * imageURL;
+@property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSString * latitude;
 @property (nonatomic, retain) NSString * longitude;
 @property (nonatomic, retain) NSString * name;

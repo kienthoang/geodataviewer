@@ -2,7 +2,7 @@
 //  Record.m
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 6/21/12.
+//  Created by excel2011 on 6/28/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 @dynamic dipDirection;
 @dynamic fieldOservations;
 @dynamic idOnServer;
-@dynamic imageURL;
+@dynamic imageData;
 @dynamic latitude;
 @dynamic longitude;
 @dynamic name;
