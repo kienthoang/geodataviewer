@@ -219,8 +219,10 @@
         [recordDictionary setObject:self.latitudeTextField.text forKey:RECORD_LATITUDE];
     if (self.longitudeTextField.text)
         [recordDictionary setObject:self.longitudeTextField.text forKey:RECORD_LONGITUDE];
-    if (self.dateTextField.text)
-        [recordDictionary setObject:self.acquiredDate forKey:RECORD_DATE];
+    if (self.dateTextField.text) {
+        NSDate *newDate=self.acquiredDate ? self.acquiredDate : self.record.date;
+        [recordDictionary setObject:newDate forKey:RECORD_DATE];
+    }
     if (self.timeTextField.text)
         [recordDictionary setObject:self.timeTextField.text forKey:RECORD_TIME];
     [recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
@@ -479,7 +481,6 @@
 {
     //Put up alerts if validations fail
     NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
-    NSLog(@"Invalid: %@",validationKeys);
     
     if ([validationKeys count] && alertsEnabled) {
         NSMutableArray *failedFieldNames=[NSMutableArray array];
@@ -741,12 +742,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    //If self is still in editing mode, notify the delegate before going off screen
-    if (self.editing && [self.delegate respondsToSelector:@selector(userDidNavigateAwayFrom:whileModifyingRecord:withNewRecordInfo:)]) {
-        //If the delegate has not been deallocated yet, pass the user-modified info to it
-        if (self.delegate)
-            [self.delegate userDidNavigateAwayFrom:self whileModifyingRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
-    }
+    //If self is still in editing mode and the delegate has not been kicked off the anvigation stack, notify the delegate before going off screen
+    if (self.editing && self.delegate)
+        [self.delegate userDidNavigateAwayFrom:self whileModifyingRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
 }
 
 - (void)viewDidUnload {
@@ -794,9 +792,7 @@
     [self.recordImage setImage:[UIImage imageWithData:record.imageData]];
     NSMutableData *data=[NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
     CC_SHA256(record.imageData.bytes,record.imageData.length,data.mutableBytes);
-    
-    NSLog(@"Hash value: %@",data);
-    
+        
     //Reset all the textfields to empty strings
     [self.textFields makeObjectsPerformSelector:@selector(setText:) withObject:@""];
     

@@ -313,6 +313,7 @@
            whileModifyingRecord:(Record *)record 
               withNewRecordInfo:(NSDictionary *)recordInfo
 {
+    NSLog(@"Navigating away but amster is still here!");
     [self autosaveRecord:record withNewRecordInfo:recordInfo];
 }
 
@@ -335,59 +336,6 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    //Get the detail view controller
-    id detailvc=[self.splitViewController.viewControllers lastObject];
-    if (![detailvc isKindOfClass:[RecordViewController class]])
-        detailvc=nil;
-    RecordViewController *detail=(RecordViewController *)detailvc;
-    
-    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!)
-    if ([detail inEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
-        //Get the record
-        Record *modifiedRecord=[(RecordViewController *)detailvc record];
-        NSDictionary *recordModifiedInfo=[(RecordViewController *)detailvc dictionaryFromForm];
-        UIManagedDocument *database=self.database;
-        
-        //If the name of the modified record is not nil or empty, setup the autosaver
-        UIAlertView *autosaveAlert=nil;
-        if ([[recordModifiedInfo objectForKey:RECORD_NAME] length]) {
-            NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordModifiedInfo];
-            if (![failedKeyNames count]) {
-                //If the name of the record is not nil
-                NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
-                
-                //Put up an alert to ask the user whether he/she wants to save
-                autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
-                                                                      message:message 
-                                                                     delegate:self 
-                                                            cancelButtonTitle:@"Don't Save" 
-                                                            otherButtonTitles:@"Save", nil];
-            } else {
-                //Show the autosave fail alert
-                NSMutableArray *failedNames=[NSMutableArray array];
-                for (NSString *failedKey in failedKeyNames)
-                    [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
-                NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
-                autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
-                                                                          message:message 
-                                                                         delegate:nil 
-                                                                cancelButtonTitle:@"Dismiss" 
-                                                                otherButtonTitles:nil];
-            }
-            
-            [self.autosaveDelegate recordTableViewController:self showAlert:autosaveAlert andExecuteBlockOnCancel:^{
-                NSLog(@"Cancel autosave alert!");
-            } andExecuteBlock:^{
-                //Update the record info if the info passed validations
-                if (![failedKeyNames count]) {
-                    [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
-                
-                    //Save changes to database
-                    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
-                }
-            } whenClickButtonWithTitle:@"Save"];
-        }
-    }
     //Setup the autosaver if self is going off stack and the detail view is still in editing mode
     [self setupAutosaveBeforeGoingOffStack];
     
