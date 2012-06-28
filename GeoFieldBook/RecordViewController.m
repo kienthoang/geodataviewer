@@ -31,6 +31,8 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#import <CommonCrypto/CommonDigest.h>
+
 @interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate>
 
 #define FORMATION_PICKER_NAME @"RecordViewController.Formation_Picker"
@@ -63,7 +65,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *browseButton;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *acquireDataButton;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) UIImage *image;
 
 @property (nonatomic, strong) UIPopoverController *imagePopover;
 
@@ -162,7 +164,7 @@
 @synthesize browseButton = _browseButton;
 @synthesize takePhotoButton = _takePhotoButton;
 @synthesize acquireDataButton = _acquireDataButton;
-@synthesize imageView = _imageView;
+@synthesize image = _image;
 @synthesize imagePopover = _imagePopover;
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
@@ -194,6 +196,7 @@
     //Set the items to be the toolbar's items
     self.toolbar.items=[items copy];
 }
+
 
 - (NSArray *)textFields {
     return [NSArray arrayWithObjects:self.recordNameTextField,self.strikeTextField,self.dipTextField,self.dipDirectionTextField,self.formationTextField,self.trendTextField,self.plungeTextField,self.lowerFormationTextField,self.upperFormationTextField, nil];
@@ -227,6 +230,10 @@
     [recordDictionary setObject:self.trendTextField.text forKey:RECORD_TREND];
     [recordDictionary setObject:self.lowerFormationTextField.text forKey:RECORD_LOWER_FORMATION];
     [recordDictionary setObject:self.upperFormationTextField.text forKey:RECORD_UPPER_FORMATION];
+    
+    //save the record image if it exists
+    if (self.image)
+        [recordDictionary setObject:UIImageJPEGRepresentation(self.image, 1.0) forKey:RECORD_IMAGE];
     
     return [recordDictionary copy];
 }
@@ -430,16 +437,15 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {	
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
     if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (image)
     {
-        self.imageView.image = image;
-        self.recordImage.image = image;//
+        self.image = image;
+        self.recordImage.image = image;
     }
     
     //save image
-    
-	
     
     [self dismissImagePicker];
 }
@@ -781,6 +787,13 @@
 #pragma mark - Set up the record form for each individual type of record
 
 - (void)updateFormForRecord:(Record *)record {
+    //set the image
+    [self.recordImage setImage:[UIImage imageWithData:record.imageData]];
+    NSMutableData *data=[NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(record.imageData.bytes,record.imageData.length,data.mutableBytes);
+    
+    NSLog(@"Hash value: %@",data);
+    
     //Reset all the textfields to empty strings
     [self.textFields makeObjectsPerformSelector:@selector(setText:) withObject:@""];
     
