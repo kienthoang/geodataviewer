@@ -486,10 +486,6 @@
     
     //show the name, date and time
     cell.name.text=record.name;    
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    dateFormatter.dateFormat = @"yyyy-MM-dd";
-//    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-//    timeFormatter.dateFormat = @"HH:mm";   
     cell.date.text=[Record dateFromNSDate:record.date];
     cell.time.text = [Record timeFromNSDate:record.date];
     
