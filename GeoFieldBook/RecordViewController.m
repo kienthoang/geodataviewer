@@ -820,6 +820,11 @@
     [self.dateTextField setText:[dateFormatter stringFromDate:self.record.date]]; 
     [self.timeTextField setText:[timeFormatter stringFromDate:self.record.date]]; 
     
+
+    if(record) {
+        self.dateTextField.text = [Record dateFromNSDate:record.date];
+        self.timeTextField.text = [Record timeFromNSDate:record.date];
+    }
     
     self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
     self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];
