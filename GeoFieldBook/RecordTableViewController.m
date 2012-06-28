@@ -14,6 +14,7 @@
 #import "RecordViewController.h"
 #import "Folder.h"
 
+#import "Record.h"
 #import "Record+Types.h"
 #import "Record+Creation.h"
 #import "Record+Validation.h"

@@ -10,10 +10,6 @@
 		0205C7AC159CD79900CA1223 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0205C7AB159CD79900CA1223 /* Formation.m */; };
 		020EBB5A15941F7C00EECC08 /* FolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB5915941F7C00EECC08 /* FolderTableViewController.m */; };
 		020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7C15941FB400EECC08 /* Formation_Folder.m */; };
-		020EBB8015941FB400EECC08 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7F15941FB400EECC08 /* Fault.m */; };
-		020EBB8615941FB400EECC08 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8515941FB400EECC08 /* JointSet.m */; };
-		020EBB8C15941FB400EECC08 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB8B15941FB400EECC08 /* Other.m */; };
-		020EBB9215941FB400EECC08 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB9115941FB400EECC08 /* Contact.m */; };
 		020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB941594217A00EECC08 /* CoreDataTableViewController.m */; };
 		020EBB991594259900EECC08 /* GeoDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB981594259900EECC08 /* GeoDatabaseManager.m */; };
 		020EBB9E15942CBB00EECC08 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB9D15942CBB00EECC08 /* RecordViewController.m */; };
@@ -52,6 +48,11 @@
 		0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587E1599747300A0DB98 /* Formation+Modification.m */; };
 		0238588615999F0F00A0DB98 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238588515999F0F00A0DB98 /* HomeViewController.m */; };
 		023858891599A0CD00A0DB98 /* HomeMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023858881599A0CD00A0DB98 /* HomeMasterViewController.m */; };
+		02712A4C159D010500510188 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4B159D010500510188 /* Bedding.m */; };
+		02712A50159D011300510188 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4F159D011300510188 /* Contact.m */; };
+		02712A53159D012100510188 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A52159D012100510188 /* Fault.m */; };
+		02712A56159D012F00510188 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A55159D012F00510188 /* JointSet.m */; };
+		02712A59159D013D00510188 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A58159D013D00510188 /* Other.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -71,16 +72,13 @@
 		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
 		029877FB1595740C000D71E7 /* InitialDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877FA1595740C000D71E7 /* InitialDetailViewController.m */; };
 		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
-		029878041595BA4D000D71E7 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 029878031595BA4C000D71E7 /* Bedding.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
-
 		2132A5D4159CD26100009CB9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D3159CD26100009CB9 /* Record.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
-		2141DC17159C9AE1002518F9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141DC16159C9AE0002518F9 /* Record.m */; };
+		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		21A87A13159CAAFE001A220E /* Record+DateAndTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */; };
-
 		21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B1FEEF159B58C200868F62 /* CustomRecordCell.m */; };
 		21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C309E0159B6C800066FC9B /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
@@ -103,14 +101,6 @@
 		020EBB5915941F7C00EECC08 /* FolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewController.m; sourceTree = "<group>"; };
 		020EBB7B15941FB400EECC08 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
 		020EBB7C15941FB400EECC08 /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
-		020EBB7E15941FB400EECC08 /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
-		020EBB7F15941FB400EECC08 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
-		020EBB8415941FB400EECC08 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
-		020EBB8515941FB400EECC08 /* JointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JointSet.m; sourceTree = "<group>"; };
-		020EBB8A15941FB400EECC08 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
-		020EBB8B15941FB400EECC08 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
-		020EBB9015941FB400EECC08 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		020EBB9115941FB400EECC08 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		020EBB931594217A00EECC08 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		020EBB941594217A00EECC08 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		020EBB971594259900EECC08 /* GeoDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDatabaseManager.h; sourceTree = "<group>"; };
@@ -186,6 +176,16 @@
 		0238588515999F0F00A0DB98 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		023858871599A0CC00A0DB98 /* HomeMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMasterViewController.h; sourceTree = "<group>"; };
 		023858881599A0CD00A0DB98 /* HomeMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMasterViewController.m; sourceTree = "<group>"; };
+		02712A4A159D010500510188 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
+		02712A4B159D010500510188 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
+		02712A4E159D011300510188 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		02712A4F159D011300510188 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		02712A51159D012100510188 /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
+		02712A52159D012100510188 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
+		02712A54159D012F00510188 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
+		02712A55159D012F00510188 /* JointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JointSet.m; sourceTree = "<group>"; };
+		02712A57159D013D00510188 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
+		02712A58159D013D00510188 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -212,8 +212,6 @@
 		029877F91595740C000D71E7 /* InitialDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialDetailViewController.h; sourceTree = "<group>"; };
 		029877FA1595740C000D71E7 /* InitialDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialDetailViewController.m; sourceTree = "<group>"; };
 		029877FD1595955E000D71E7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
-		029878021595BA4C000D71E7 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
-		029878031595BA4C000D71E7 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		0298C25A159B43F30038E89C /* Record+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Validation.h"; sourceTree = "<group>"; };
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
@@ -439,6 +437,8 @@
 		0294E0D5159363050025219F /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				02712A57159D013D00510188 /* Other.h */,
+				02712A58159D013D00510188 /* Other.m */,
 				2132A5DB159CD63500009CB9 /* Image */,
 				0298C253159B432A0038E89C /* Bedding */,
 				0298C254159B433A0038E89C /* Contact */,
@@ -448,8 +448,6 @@
 				0298C259159B43910038E89C /* Formation Folder */,
 				0298C257159B43790038E89C /* JointSet */,
 				0298C256159B435B0038E89C /* Record */,
-				020EBB8A15941FB400EECC08 /* Other.h */,
-				020EBB8B15941FB400EECC08 /* Other.m */,
 			);
 			name = NSManagedObject;
 			sourceTree = "<group>";
@@ -487,8 +485,8 @@
 		0298C253159B432A0038E89C /* Bedding */ = {
 			isa = PBXGroup;
 			children = (
-				029878021595BA4C000D71E7 /* Bedding.h */,
-				029878031595BA4C000D71E7 /* Bedding.m */,
+				02712A4A159D010500510188 /* Bedding.h */,
+				02712A4B159D010500510188 /* Bedding.m */,
 				0222DB0515961ED900699D62 /* Bedding+Modification.h */,
 				0222DB0615961ED900699D62 /* Bedding+Modification.m */,
 			);
@@ -498,8 +496,8 @@
 		0298C254159B433A0038E89C /* Contact */ = {
 			isa = PBXGroup;
 			children = (
-				020EBB9015941FB400EECC08 /* Contact.h */,
-				020EBB9115941FB400EECC08 /* Contact.m */,
+				02712A4E159D011300510188 /* Contact.h */,
+				02712A4F159D011300510188 /* Contact.m */,
 				0222DB0E159622DC00699D62 /* Contact+Modification.h */,
 				0222DB0F159622DC00699D62 /* Contact+Modification.m */,
 			);
@@ -547,8 +545,8 @@
 		0298C257159B43790038E89C /* JointSet */ = {
 			isa = PBXGroup;
 			children = (
-				020EBB8415941FB400EECC08 /* JointSet.h */,
-				020EBB8515941FB400EECC08 /* JointSet.m */,
+				02712A54159D012F00510188 /* JointSet.h */,
+				02712A55159D012F00510188 /* JointSet.m */,
 				0222DB141596305400699D62 /* JointSet+Description.h */,
 				0222DB151596305400699D62 /* JointSet+Description.m */,
 				0222DB0B1596229E00699D62 /* JointSet+Modification.h */,
@@ -560,8 +558,8 @@
 		0298C258159B43860038E89C /* Fault */ = {
 			isa = PBXGroup;
 			children = (
-				020EBB7E15941FB400EECC08 /* Fault.h */,
-				020EBB7F15941FB400EECC08 /* Fault.m */,
+				02712A51159D012100510188 /* Fault.h */,
+				02712A52159D012100510188 /* Fault.m */,
 				0222DB081596204300699D62 /* Fault+Modification.h */,
 				0222DB091596204300699D62 /* Fault+Modification.m */,
 			);
@@ -706,10 +704,6 @@
 				0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */,
 				020EBB5A15941F7C00EECC08 /* FolderTableViewController.m in Sources */,
 				020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */,
-				020EBB8015941FB400EECC08 /* Fault.m in Sources */,
-				020EBB8615941FB400EECC08 /* JointSet.m in Sources */,
-				020EBB8C15941FB400EECC08 /* Other.m in Sources */,
-				020EBB9215941FB400EECC08 /* Contact.m in Sources */,
 				020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */,
 				020EBB991594259900EECC08 /* GeoDatabaseManager.m in Sources */,
 				020EBB9E15942CBB00EECC08 /* RecordViewController.m in Sources */,
@@ -721,7 +715,6 @@
 				020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */,
 				029877F8159566E0000D71E7 /* Record+Creation.m in Sources */,
 				029877FB1595740C000D71E7 /* InitialDetailViewController.m in Sources */,
-				029878041595BA4D000D71E7 /* Bedding.m in Sources */,
 				0222DB0015961D0D00699D62 /* Record+DictionaryKeys.m in Sources */,
 				0222DB0415961D5D00699D62 /* Record+Modification.m in Sources */,
 				0222DB0715961ED900699D62 /* Bedding+Modification.m in Sources */,
@@ -756,9 +749,14 @@
 				2132A5D4159CD26100009CB9 /* Record.m in Sources */,
 				2132A5D7159CD26200009CB9 /* Image.m in Sources */,
 				2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */,
-				2141DC17159C9AE1002518F9 /* Record.m in Sources */,
+				2141DC17159C9AE1002518F9 /* (null) in Sources */,
 				21A87A13159CAAFE001A220E /* Record+DateAndTimeFormatter.m in Sources */,
 				0205C7AC159CD79900CA1223 /* Formation.m in Sources */,
+				02712A4C159D010500510188 /* Bedding.m in Sources */,
+				02712A50159D011300510188 /* Contact.m in Sources */,
+				02712A53159D012100510188 /* Fault.m in Sources */,
+				02712A56159D012F00510188 /* JointSet.m in Sources */,
+				02712A59159D013D00510188 /* Other.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

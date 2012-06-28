@@ -793,6 +793,7 @@
 
 - (void)updateFormForRecord:(Record *)record {
     //set the image
+    NSLog(@"image: %@",self.image);
     [self.recordImage setImage:[UIImage imageWithData:self.record.image.imageData]];
     
     //Reset all the textfields to empty strings
