@@ -27,7 +27,7 @@ typedef void (^autosaver_block_t)(void);
 @protocol RecordTableViewControllerDelegate <NSObject>
 
 - (void)recordTableViewController:(RecordTableViewController *)sender 
-                needsUpdateFolder:(Folder *)folderName 
+                needsUpdateFolder:(Folder *)folder 
            setFormationFolderName:(NSString *)formationFolder;
 
 @end

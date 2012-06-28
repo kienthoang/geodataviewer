@@ -15,6 +15,4 @@
 @property (nonatomic, weak) IBOutlet UILabel *time;
 @property (nonatomic, weak) IBOutlet UIImageView *image;
 
-
-
 @end

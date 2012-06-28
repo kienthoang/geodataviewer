@@ -16,6 +16,8 @@
 
 @synthesize delegate=_delegate;
 
+#pragma mark - Picker View State Initialization
+
 - (NSArray *)dipComponentMatrix {
     //First component
     NSArray *firstComponent=[NSArray arrayWithObjects:@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", nil];
@@ -25,6 +27,8 @@
         
     return [NSArray arrayWithObjects:firstComponent,secondComponent, nil];
 }
+
+#pragma mark - User Selection Manipulation
 
 - (void)handleUserSelection {
     [super handleUserSelection];
