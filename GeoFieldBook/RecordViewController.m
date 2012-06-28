@@ -813,13 +813,10 @@
     self.longitudeTextField.text=self.record.longitude;
     
     //filling in date and time
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
-    [timeFormatter setDateFormat:@"HH:mm:ss"];
-    [self.dateTextField setText:[dateFormatter stringFromDate:self.record.date ]]; 
-    [self.timeTextField setText:[timeFormatter stringFromDate:self.record.date ]]; 
-    
+    if(record) {
+        self.dateTextField.text = [Record dateFromNSDate:record.date];
+        self.timeTextField.text = [Record timeFromNSDate:record.date];
+    } 
     
     self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
     self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];
