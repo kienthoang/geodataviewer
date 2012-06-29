@@ -88,7 +88,6 @@
 #pragma mark - Form Input Fields
 
 @property (weak, nonatomic) IBOutlet UITextField *recordNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *latitudeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *longitudeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
@@ -130,12 +129,9 @@
 @synthesize editButton = _editButton;
 
 @synthesize record=_record;
-@synthesize image = _image;
-
 @synthesize imageView = _imageView;
 @synthesize recordTypeLabel = _recordTypeLabel;
 @synthesize recordNameTextField = _recordNameTextField;
-@synthesize nameTextField = _nameTextField;
 @synthesize latitudeTextField = _latitudeTextField;
 @synthesize longitudeTextField = _longitudeTextField;
 @synthesize dateTextField = _dateTextField;
@@ -789,7 +785,6 @@
     [self setFieldObservationLabel:nil];
     [self setAcquireButton:nil];
     [self setEditButton:nil];
-    [self setNameTextField:nil];
     [self setLatitudeTextField:nil];
     [self setLongitudeTextField:nil];
     [self setDateTextField:nil];

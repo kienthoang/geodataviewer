@@ -440,7 +440,7 @@
     
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
-    [cell.image setImage:image];
+    cell.recordImageView.image=image;
     
     //Allow reordering of cell if the table view is in editing mode
     if (self.tableView.editing)

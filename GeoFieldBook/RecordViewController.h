@@ -37,7 +37,6 @@
 @interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>
 
 @property (nonatomic,strong) Record *record;
-@property (nonatomic, strong) Image *image;
 @property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
 
 - (NSDictionary *)dictionaryFromForm;

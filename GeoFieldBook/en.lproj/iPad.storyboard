@@ -429,8 +429,8 @@
                                 </view>
                                 <connections>
                                     <outlet property="date" destination="WAV-7n-bcC" id="XQ3-d4-nxW"/>
-                                    <outlet property="image" destination="FHB-B0-ywg" id="7RA-Ky-N1b"/>
                                     <outlet property="name" destination="Wea-6k-hPN" id="uaz-Q7-do0"/>
+                                    <outlet property="recordImageView" destination="FHB-B0-ywg" id="jhz-pf-Olj"/>
                                     <outlet property="time" destination="GwZ-kw-lUZ" id="DL9-nx-ebe"/>
                                     <segue destination="LFc-wQ-Gyp" kind="replace" identifier="Show Record" splitViewControllerTargetIndex="1" id="euc-ax-lBC"/>
                                 </connections>
@@ -477,7 +477,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7659" y="-5030"/>
+            <point key="canvasLocation" x="-7600" y="-5022"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="hMg-tH-KZj">
@@ -828,7 +828,6 @@
                         <outlet property="longitudeTextField" destination="CRH-l5-sJf" id="Fee-bT-jzH"/>
                         <outlet property="lowerFormationLabel" destination="NaE-6s-Ecu" id="ZDs-1r-4vG"/>
                         <outlet property="lowerFormationTextField" destination="FMh-B9-XP0" id="RJC-aI-5wc"/>
-                        <outlet property="nameTextField" destination="Acc-26-RSJ" id="LXE-9i-eaY"/>
                         <outlet property="plungeLabel" destination="aHK-UX-lzU" id="EPG-Lh-kwj"/>
                         <outlet property="plungeTextField" destination="rtg-bf-3By" id="RAF-ob-H2U"/>
                         <outlet property="recordNameTextField" destination="Acc-26-RSJ" id="T7f-lO-GtX"/>

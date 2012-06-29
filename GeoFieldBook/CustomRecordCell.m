@@ -13,6 +13,6 @@
 @synthesize name = _name;
 @synthesize date = _date;
 @synthesize time = _time;
-@synthesize image = _image;
+@synthesize recordImageView=_recordImageView;
 
 @end
