@@ -7,11 +7,15 @@
 //
 
 #import "Formation_Folder+Creation.h"
+#import "TextInputFilter.h"
 
 @implementation Formation_Folder (Creation)
 
 + (Formation_Folder *)formationFolderForName:(NSString *)folderName inManagedObjectContext:(NSManagedObjectContext *)context {
     Formation_Folder *formationFolder=nil;
+    
+    //Filter folder name
+    folderName=[TextInputFilter filterDatabaseInputText:folderName];
     
     //Query to see if there is any Formation Folder in the database with the same name
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];

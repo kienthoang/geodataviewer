@@ -75,6 +75,7 @@
         UITableViewCell *cell=sender;
         Formation_Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
         [segue.destinationViewController setFormationFolder:folder.folderName];
+        [segue.destinationViewController navigationItem].title=folder.folderName;
     }
 }
 

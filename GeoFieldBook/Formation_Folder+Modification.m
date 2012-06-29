@@ -7,10 +7,14 @@
 //
 
 #import "Formation_Folder+Modification.h"
+#import "TextInputFilter.h"
 
 @implementation Formation_Folder (Modification)
 
 - (BOOL)changeFormationFolderNameTo:(NSString *)newName {
+    //Filter the new folder name
+    newName=[TextInputFilter filterDatabaseInputText:newName];
+    
     //If the new name is different from the old one, check for name duplication
     if (![newName isEqualToString:self.folderName]) {
         //Query the database to see if the any formation folder with the new name already exists

@@ -7,6 +7,7 @@
 //
 
 #import "Formation+Creation.h"
+#import "TextInputFilter.h"
 
 @implementation Formation (Creation)
 
@@ -14,6 +15,10 @@
       inFormationFolderWithName:(NSString *)folderName 
          inManagedObjectContext:(NSManagedObjectContext *)context
 {
+    //Filter formation and folder names
+    formationName=[TextInputFilter filterDatabaseInputText:formationName];
+    folderName=[TextInputFilter filterDatabaseInputText:folderName];
+    
     //Query for a formation with the specified name, if it exists, return nil
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
     request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",formationName];

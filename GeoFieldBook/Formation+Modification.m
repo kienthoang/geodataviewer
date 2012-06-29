@@ -7,10 +7,14 @@
 //
 
 #import "Formation+Modification.h"
+#import "TextInputFilter.h"
 
 @implementation Formation (Modification)
 
 - (BOOL)changeFormationNameTo:(NSString *)formationName {
+    //Filter formation name
+    formationName=[TextInputFilter filterDatabaseInputText:formationName];
+    
     //If the new name is different from the old name, check for name duplication
     if (![formationName isEqualToString:self.formationName]) {
         //Query the database to see if the any formation with the new name already exists

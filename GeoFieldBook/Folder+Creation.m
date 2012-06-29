@@ -8,13 +8,14 @@
 
 #import "Folder+Creation.h"
 #import "Folder+DictionaryKeys.h"
+#import "TextInputFilter.h"
 
 @implementation Folder (Creation)
 
 + (Folder *)folderWithInfo:(NSDictionary *)folderInfo inManagedObjectContext:(NSManagedObjectContext *)context {
     //Get info out of the dictionary
-    NSString *folderName=[folderInfo objectForKey:FOLDER_NAME];
-    NSString *folderDescription=[folderInfo objectForKey:FOLDER_DESCRIPTION];
+    NSString *folderName=[TextInputFilter filterDatabaseInputText:[folderInfo objectForKey:FOLDER_NAME]];
+    NSString *folderDescription=[TextInputFilter filterDatabaseInputText:[folderInfo objectForKey:FOLDER_DESCRIPTION]];
     
     //Query the database for the folder with folder name
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Folder"];

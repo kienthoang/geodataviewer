@@ -207,7 +207,6 @@
 }
 
 - (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo {
-    NSLog(@"Creating Folder!");
     //Create a folder entity with the specified name (after filtering), put up an alert if that returns nil (name duplicate) and return NO
     if (![Folder folderWithInfo:folderInfo inManagedObjectContext:self.database.managedObjectContext]) {
         [self putUpDuplicateNameAlertWithName:[folderInfo objectForKey:FOLDER_NAME]];
