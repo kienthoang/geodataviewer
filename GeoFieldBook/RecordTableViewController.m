@@ -154,7 +154,7 @@
     RecordViewController *detail=(RecordViewController *)detailvc;
     
     //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!!!!)
-    if ([detail inEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
+    if ([detail isInEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
         //Get the record
         Record *modifiedRecord=[(RecordViewController *)detailvc record];
         NSDictionary *recordModifiedInfo=[(RecordViewController *)detailvc dictionaryFromForm];

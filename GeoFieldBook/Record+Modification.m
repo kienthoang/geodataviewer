@@ -7,6 +7,7 @@
 //
 
 #import "Record+Modification.h"
+#import "Image+Creation.h"
 
 @implementation Record (Modification)
 
@@ -25,6 +26,10 @@
     self.dipDirection=[recordInfo objectForKey:RECORD_DIP_DIRECTION];
     self.fieldOservations=[recordInfo objectForKey:RECORD_FIELD_OBSERVATION];
     self.date=[recordInfo objectForKey:RECORD_DATE];
+    
+    //Update the image
+    NSData *imageData = [recordInfo objectForKey:RECORD_IMAGE_DATA];
+    self.image = [Image imageWithBinaryData:imageData inManagedObjectContext:self.managedObjectContext];
     
     return YES;
 }

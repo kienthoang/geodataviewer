@@ -36,46 +36,57 @@
 
 @interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate>
 
+//The names of the pickers
 #define FORMATION_PICKER_NAME @"RecordViewController.Formation_Picker"
 #define LOWER_FORMATION_PICKER_NAME @"RecordViewController.Lower_Formation_Picker"
 #define UPPER_FORMATION_PICKER_NAME @"RecordViewController.Upper_Formation_Picker"
 
-
-@property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
-
 - (void)updateSplitViewBarButtonPresenterWith:(UIBarButtonItem *)splitViewBarButtonItem;
 - (void)userDoneEditingRecord;         //handles when user finishes editing the record's info
 - (void)resignAllTextFieldsAndAreas;
+
+#pragma mark - Validation Mechanism Declarations
 
 - (BOOL)validateMandatoryFieldsOfInfo:(NSDictionary *)recordInfo 
                         alertsEnabled:(BOOL)alertsEnabled;
 
 - (BOOL)validatePresenceOfFields:(NSArray *)fields;
 
+#pragma mark - Form Setup Controller Method Declarations
+
+- (void)formSetupForBeddingType;
+- (void)formSetupForContactType;
+- (void)formSetupForJointSetType;
+- (void)formSetupForFaultType;
+- (void)formSetupForOtherType;
+
+- (void)updateFormForRecord:(Record *)record;
+
+#pragma mark - Private Properties
+
 @property (nonatomic) BOOL editing;
 @property (nonatomic,readonly) NSArray *textFields;
-
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (nonatomic, strong) CLLocationManager *locationManager; 
 @property (nonatomic, strong) NSTimer *gpsTimer;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *gatheringGPS; 
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *browseButton;
-@property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
-@property (weak, nonatomic) IBOutlet UIButton *acquireDataButton;
-@property (weak, nonatomic) UIImage *currentImage;
-
-@property (nonatomic, strong) UIPopoverController *imagePopover;
-
 @property (nonatomic,strong) NSDate *acquiredDate;
 
-//=====================================UI elements=======================================//
+#pragma mark - Non-interactive UI Elements
 
-@property (weak, nonatomic) IBOutlet UIImageView *recordImage;
-@property (weak, nonatomic) IBOutlet UILabel *recordTypeLabel;
+@property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *gatheringGPS; 
+@property (nonatomic, strong) UIPopoverController *imagePopover;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+#pragma mark - Buttons
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *browseButton;
+@property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *acquireButton;
+
+#pragma mark - Form Input Fields
+
 @property (weak, nonatomic) IBOutlet UITextField *recordNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *latitudeTextField;
@@ -86,35 +97,26 @@
 @property (weak, nonatomic) IBOutlet UITextField *dipTextField;
 @property (weak, nonatomic) IBOutlet UITextField *formationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dipDirectionTextField;
+@property (weak, nonatomic) IBOutlet UITextField *upperFormationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *lowerFormationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *trendTextField;
+@property (weak, nonatomic) IBOutlet UITextField *plungeTextField;
+
 @property (weak, nonatomic) IBOutlet UITextView *fieldObservationTextArea;
+
+#pragma mark - Form Labels
+
+@property (weak, nonatomic) IBOutlet UILabel *recordTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *formationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *strikeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dipDirectionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *trendLabel;
-@property (weak, nonatomic) IBOutlet UITextField *trendTextField;
 @property (weak, nonatomic) IBOutlet UILabel *plungeLabel;
-@property (weak, nonatomic) IBOutlet UITextField *plungeTextField;
 @property (weak, nonatomic) IBOutlet UILabel *lowerFormationLabel;
-@property (weak, nonatomic) IBOutlet UITextField *lowerFormationTextField;
 @property (weak, nonatomic) IBOutlet UILabel *upperFormationLabel;
-@property (weak, nonatomic) IBOutlet UITextField *upperFormationTextField;
 @property (weak, nonatomic) IBOutlet UILabel *fieldObservationLabel;
-@property (weak, nonatomic) IBOutlet UIButton *acquireButton;
 
-//=========================================================================================//
-
-//==================================Form Setup methods for UI elements=======================================//
-
-- (void)formSetupForBeddingType;
-- (void)formSetupForContactType;
-- (void)formSetupForJointSetType;
-- (void)formSetupForFaultType;
-- (void)formSetupForOtherType;
-
-- (void)updateFormForRecord:(Record *)record;
-
-//===========================================================================================================//
 
 @end
 
@@ -130,7 +132,7 @@
 @synthesize record=_record;
 @synthesize image = _image;
 
-@synthesize recordImage = _recordImage;
+@synthesize imageView = _imageView;
 @synthesize recordTypeLabel = _recordTypeLabel;
 @synthesize recordNameTextField = _recordNameTextField;
 @synthesize nameTextField = _nameTextField;
@@ -167,11 +169,11 @@
 
 @synthesize browseButton = _browseButton;
 @synthesize takePhotoButton = _takePhotoButton;
-@synthesize acquireDataButton = _acquireDataButton;
-@synthesize currentImage = _currentImage;
 @synthesize imagePopover = _imagePopover;
 
 @synthesize acquiredDate=_acquireDate;
+
+#pragma mark - Getters and Setters
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
     //Update the bar button presenter
@@ -208,55 +210,66 @@
     return [NSArray arrayWithObjects:self.recordNameTextField,self.strikeTextField,self.dipTextField,self.dipDirectionTextField,self.formationTextField,self.trendTextField,self.plungeTextField,self.lowerFormationTextField,self.upperFormationTextField, nil];
 }
 
-- (BOOL)inEdittingMode {
+- (BOOL)isInEdittingMode {
     return self.editing;
 }
 
-
-//Creates and returns the user-modified info dictionary
-- (NSDictionary *)dictionaryFromForm {
-    //Create a NSDictionary with the user-modified information
-    NSMutableDictionary *recordDictionary=[NSMutableDictionary dictionary];
-    [recordDictionary setObject:self.recordNameTextField.text forKey:RECORD_NAME];
-    if (self.latitudeTextField.text)
-        [recordDictionary setObject:self.latitudeTextField.text forKey:RECORD_LATITUDE];
-    if (self.longitudeTextField.text)
-        [recordDictionary setObject:self.longitudeTextField.text forKey:RECORD_LONGITUDE];
-    if (self.dateTextField.text) {
-        NSDate *newDate=self.acquiredDate ? self.acquiredDate : self.record.date;
-        [recordDictionary setObject:newDate forKey:RECORD_DATE];
-    }
-
-    [recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
-    [recordDictionary setObject:self.dipTextField.text forKey:RECORD_DIP];
-    [recordDictionary setObject:self.dipDirectionTextField.text forKey:RECORD_DIP_DIRECTION];
-    [recordDictionary setObject:self.formationTextField.text forKey:RECORD_FORMATION];
-    [recordDictionary setObject:self.fieldObservationTextArea.text forKey:RECORD_FIELD_OBSERVATION];
-    
-    //Specific update for specific of records
-    [recordDictionary setObject:self.plungeTextField.text forKey:RECORD_PLUNGE];
-    [recordDictionary setObject:self.trendTextField.text forKey:RECORD_TREND];
-    [recordDictionary setObject:self.lowerFormationTextField.text forKey:RECORD_LOWER_FORMATION];
-    [recordDictionary setObject:self.upperFormationTextField.text forKey:RECORD_UPPER_FORMATION];
-    
-    //save the record image if it exists
-    if (self.currentImage) {
-        NSData *imageEntity = UIImagePNGRepresentation(self.currentImage);//or jpg
-        self.record.image = [Image imageWithBinaryData:imageEntity inManagedObjectContext:self.record.managedObjectContext];
-    }
-    
-    return [recordDictionary copy];
-}
-
-- (void)userDoneEditingRecord {
-    [self.delegate recordViewController:self userDidModifyRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
-}
+#pragma mark - Helpers
 
 //Resign all text fields and text areas
 - (void)resignAllTextFieldsAndAreas {
     [self.textFields makeObjectsPerformSelector:@selector(resignFirstResponder)];
     [self.fieldObservationTextArea resignFirstResponder];
 }
+
+#pragma mark - Form Information Extractors and Processors
+
+- (void)dictionary:(NSMutableDictionary *)dictionary 
+         setObject:(id)object 
+            forKey:(NSString *)key 
+{
+    //Insert the object-key pair into the dictionary if the object is not nil
+    if (object)
+        [dictionary setObject:object forKey:key];
+}
+
+//Creates and returns the user-modified info dictionary
+- (NSDictionary *)dictionaryFromForm {
+    //Create a NSDictionary with the user-modified information
+    NSMutableDictionary *recordDictionary=[NSMutableDictionary dictionary];
+    
+    //Start inserting user-modified information into the dictionary using the custom method (to avoid inserting nil)
+    [self dictionary:recordDictionary setObject:self.latitudeTextField.text forKey:RECORD_LATITUDE];
+    [self dictionary:recordDictionary setObject:self.longitudeTextField.text forKey:RECORD_LONGITUDE];
+    [self dictionary:recordDictionary setObject:self.acquiredDate forKey:RECORD_DATE];
+
+    [self dictionary:recordDictionary setObject:self.recordNameTextField.text forKey:RECORD_NAME];
+    [self dictionary:recordDictionary setObject:self.strikeTextField.text forKey:RECORD_STRIKE];
+    [self dictionary:recordDictionary setObject:self.dipTextField.text forKey:RECORD_DIP];
+    [self dictionary:recordDictionary setObject:self.dipDirectionTextField.text forKey:RECORD_DIP_DIRECTION];
+    [self dictionary:recordDictionary setObject:self.formationTextField.text forKey:RECORD_FORMATION];
+    [self dictionary:recordDictionary setObject:self.fieldObservationTextArea.text forKey:RECORD_FIELD_OBSERVATION];
+    
+    //Specific update for specific of records
+    [self dictionary:recordDictionary setObject:self.plungeTextField.text forKey:RECORD_PLUNGE];
+    [self dictionary:recordDictionary setObject:self.trendTextField.text forKey:RECORD_TREND];
+    [self dictionary:recordDictionary setObject:self.lowerFormationTextField.text forKey:RECORD_LOWER_FORMATION];
+    [self dictionary:recordDictionary setObject:self.upperFormationTextField.text forKey:RECORD_UPPER_FORMATION];
+    
+    //Insert the image data
+    NSData *imageData=self.imageView.image ? UIImagePNGRepresentation(self.imageView.image) : nil;
+    [self dictionary:recordDictionary setObject:imageData forKey:RECORD_IMAGE_DATA];
+    
+    return [recordDictionary copy];
+}
+
+- (void)userDoneEditingRecord {
+    //Send the dictionary info to the delegate for updating
+    [self.delegate recordViewController:self 
+                    userDidModifyRecord:self.record 
+                      withNewRecordInfo:[self dictionaryFromForm]];
+}
+
 
 #pragma mark - Gesture Handlers
 
@@ -272,211 +285,6 @@
     [self setEditing:!self.editing animated:YES];
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    [super setEditing:editing animated:YES];
-    
-    //If the record name is empty, focus on its text field and the user wants the editing mode
-    self.recordNameTextField.text=[TextInputFilter filterDatabaseInputText:self.recordNameTextField.text];
-    if (![self.recordNameTextField.text length] && !editing) 
-        [self.recordNameTextField becomeFirstResponder];
-    
-    //Else proceed as normal
-    else {
-        _editing=editing;
-        
-        //Change the style of the edit button to edit or done
-        self.editButton.style=self.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-        self.editButton.title=self.editing ? @"Done" : @"Edit";
-        
-        //If in editing mode, enable all the text fields; otherwise, disable them (YES is 1, NO is 0)
-        for (UITextField *textField in self.textFields)
-            textField.enabled=self.editing;
-        
-        //Enable or disable the text area
-        self.fieldObservationTextArea.editable=editing;
-        self.fieldObservationTextArea.backgroundColor=self.editing ? [UIColor whiteColor] : [UIColor clearColor];
-        
-        //enable or disable the take photo, browse photo, and acquire data buttons depending on whether or not edit has been pressed
-        self.browseButton.enabled = self.editing;
-        self.takePhotoButton.enabled = self.editing;
-        self.acquireDataButton.enabled = self.editing;
-        
-        //set the acquire button for editing
-        self.acquireButton.enabled = editing;
-        
-        if (editing) {            
-            //Make the background color of the textfields white
-            [self.textFields makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor whiteColor]];
-            
-            //Add border to the textfields
-            for (UITextField *textField in self.textFields)
-                textField.borderStyle=UITextBorderStyleRoundedRect;
-            
-        } else {
-            //Make the background color of the textfields clear
-            [self.textFields makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor clearColor]];
-            
-            //Remove borders of the textfields
-            for (UITextField *textField in self.textFields)
-                textField.borderStyle=UITextBorderStyleNone;
-            
-            //Proceed to updating the record with the user-modified info if it passes the validations
-            NSDictionary *recordInfo=[self dictionaryFromForm];
-            NSArray *optionalFields=self.textFields;
-            
-            //If the info passes the validations, update the record
-            if ([self validateMandatoryFieldsOfInfo:recordInfo 
-                                      alertsEnabled:YES]) 
-            {
-                //Validate optional fields
-                if ([self validatePresenceOfFields:optionalFields])
-                    [self userDoneEditingRecord];
-                else {
-                    //Force the editing mode back
-                    [self setEditing:YES animated:YES];
-                    
-                    //Show a warning alert
-                    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Some fields have not been populated yet. Do you want to continue?" delegate:self cancelButtonTitle:@"Go Back" otherButtonTitles:@"Continue", nil];
-                    [alert show];
-                }
-            }
-            
-            //Else put up an alert view
-            else {
-                //Else force reset self's editing mode
-                [self setEditing:YES animated:YES];
-            }
-        }
-    }
-}
-
-- (IBAction)acquireData:(UIBarButtonItem *)sender {    
-    //Only acquire data when self is in editing mode
-    if (self.editing) {
-        NSDate *now = [[NSDate alloc] init];
-        
-        //Save the acquired date
-        self.acquiredDate=now;
-      
-        //reset the txtfields appropriately.
-        self.dateTextField.text = [Record dateFromNSDate:now];
-        self.timeTextField.text = [Record timeFromNSDate:now]; 
-        
-        
-        //update the location. 
-        //this will return immediatley and notifies the delegate with locationmanager:didupdate... 
-        [self.locationManager startUpdatingLocation];
-        
-        //Set up the timer to respond every ten seconds and not to repeat. When timer is called, the locationManager is finished and the Activity Indicator is hidden
-        self.gpsTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
-        [self.gatheringGPS startAnimating];
-        //        [self.gatheringGPS setHidden:NO];
-    }
-}
-
--(void) timerFired{
-    [self.gatheringGPS stopAnimating];
-    //    [self.gatheringGPS setHidden:YES];
-    [self.locationManager stopUpdatingLocation];    
-}
-
--(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
-    //here, save the current location
-    NSString* latitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.latitude];
-    NSString* longitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.longitude];
-    [self.latitudeTextField setText:latitudeText];
-    [self.longitudeTextField setText:longitudeText];
-    
-    //then stop the delegate
-    [self.locationManager stopUpdatingHeading];
-    
-}
-
--(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    
-    NSLog(@"Location grabing error %@, %@", error, [error userInfo]);
-    
-    //loop for about 5 times then give an alert
-}
-
-#pragma mark - Acquire Data, Browse Photos, Take Photo Buttons
-
-- (IBAction)browsePressed:(UIButton *)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-    {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        //popover
-        self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
-        [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    }
-}	
-
-#define IMAGE_IN_POPOVER YES
-- (IBAction)takePhoto:(UIButton *)sender
-{
-    if (!self.imagePopover && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
-        if ([mediaTypes containsObject:(NSString *)kUTTypeImage]) {
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-            picker.allowsEditing = NO;//no editing
-            if (IMAGE_IN_POPOVER) {
-                self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
-                [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-            } else {
-                [self presentModalViewController:picker animated:YES];
-            }
-        }
-    }
-}
-
-- (void)dismissImagePicker
-{	
-    [self.imagePopover dismissPopoverAnimated:YES];
-    
-    self.imagePopover = nil;
-    
-    [self dismissModalViewControllerAnimated:YES];
-    
-}
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{	
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    
-    if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    if (image)
-    {
-        self.currentImage = image;
-        self.recordImage.image = image;
-    }
-    
-    //save image
-    
-    [self dismissImagePicker];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissImagePicker];
-}
-
-#pragma mark - UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //If the alert view is a warning about fields being left blank
-    if ([alertView.title isEqualToString:@"Missing Information"]) {
-        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
-            //End editing mode
-            self.editing=NO;
-            [self userDoneEditingRecord];
-        }
-    }
-}
-
 #pragma mark - Form Validations
 
 //Return NO if the info failed the validations; put up alerts if desired
@@ -485,16 +293,17 @@
 {
     //Put up alerts if validations fail
     NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
-    
     if ([validationKeys count] && alertsEnabled) {
+        //Get the name of the fields that do not pass validations
         NSMutableArray *failedFieldNames=[NSMutableArray array];
-        for (NSString *failedKey in validationKeys) {
+        for (NSString *failedKey in validationKeys)
             [failedFieldNames addObject:[Record nameForDictionaryKey:failedKey]];
-        }
         
+        //Set up the alert
         NSString *alertMessage=[NSString stringWithFormat:@"The following information is missing: %@",[failedFieldNames componentsJoinedByString:@", "]];
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Invalid Information" message:alertMessage delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
         [alert show];
+        
         return NO;
     }
     
@@ -511,7 +320,222 @@
     return YES;
 }
 
-#pragma mark - Handles when the keyboard slides up
+#pragma mark - Editing Mode Controllers
+
+- (void)toggleEnableOfFormInputFields {
+    //Change the style of the edit button to edit or done
+    self.editButton.style=self.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    self.editButton.title=self.editing ? @"Done" : @"Edit";
+    
+    //If in editing mode, enable all the text fields; otherwise, disable them
+    for (UITextField *textField in self.textFields)
+        textField.enabled=self.editing;
+    
+    //Enable or disable the text area
+    self.fieldObservationTextArea.editable=self.editing;
+    self.fieldObservationTextArea.backgroundColor=self.editing ? [UIColor whiteColor] : [UIColor clearColor];
+    
+    //enable or disable the take photo, browse photo, and acquire data buttons depending on whether or not edit has been pressed
+    self.browseButton.enabled = self.editing;
+    self.takePhotoButton.enabled = self.editing;
+    self.acquireButton.enabled = self.editing;
+}
+
+- (void)styleFormInputFields {
+    if (self.editing) {            
+        //Make the background color of the textfields white
+        [self.textFields makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor whiteColor]];
+        
+        //Add border to the textfields
+        for (UITextField *textField in self.textFields)
+            textField.borderStyle=UITextBorderStyleRoundedRect;
+        
+    } else {
+        //Make the background color of the textfields clear
+        [self.textFields makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor clearColor]];
+        
+        //Remove borders of the textfields
+        for (UITextField *textField in self.textFields)
+            textField.borderStyle=UITextBorderStyleNone;
+    }
+}
+
+- (void)processFormInputs {
+    NSDictionary *recordInfo=[self dictionaryFromForm];
+    NSArray *optionalFields=self.textFields;
+    
+    //If the info passes the validations, update the record
+    if ([self validateMandatoryFieldsOfInfo:recordInfo alertsEnabled:YES]) 
+    {
+        //Validate optional fields
+        if ([self validatePresenceOfFields:optionalFields])
+            [self userDoneEditingRecord];
+        else {
+            //Force the editing mode back
+            [self setEditing:YES animated:YES];
+            
+            //Show a warning alert
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Some fields have not been populated yet. Do you want to continue?" delegate:self cancelButtonTitle:@"Go Back" otherButtonTitles:@"Continue", nil];
+            [alert show];
+        }
+    }
+    
+    //Else force reset self's editing mode
+    else 
+        [self setEditing:YES animated:YES];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:YES];
+
+    _editing=editing;
+    
+    //Toggle enable/disable dependending on whether self is in editing mode or not
+    [self toggleEnableOfFormInputFields];
+    
+    //Style input fields accordingly to editing
+    [self styleFormInputFields];
+    
+    //If the editing mode is over, process the newly modified info
+    if (!self.editing) [self processFormInputs];
+}
+
+#pragma mark - Location-based Information Processors
+
+-(void) setUpLocationManager {
+    [self.gatheringGPS setHidesWhenStopped:YES];
+    self.locationManager = [[CLLocationManager alloc] init];
+    if(!self.locationManager) NSLog(@"initialized here");
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone; 
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; //accuracy in 100 meters    
+    //stop the location manager
+    [self.locationManager stopUpdatingHeading];
+}
+
+- (IBAction)acquireData:(UIBarButtonItem *)sender {    
+    //Only acquire data when self is in editing mode
+    if (self.editing) {
+        //Save the acquired date
+        self.acquiredDate=[[NSDate alloc] init];
+      
+        //reset the txtfields appropriately.
+        self.dateTextField.text = [Record dateFromNSDate:self.acquiredDate];
+        self.timeTextField.text = [Record timeFromNSDate:self.acquiredDate]; 
+        
+        //update the location. 
+        //this will return immediatley and notifies the delegate with locationmanager:didupdate... 
+        [self.locationManager startUpdatingLocation];
+        
+        //Set up the timer to respond every ten seconds and not to repeat. When timer is called, the locationManager is finished and the Activity Indicator is hidden
+        self.gpsTimer = [NSTimer scheduledTimerWithTimeInterval:RECORD_DEFAULT_GPS_STABLILIZING_INTERVAL_LENGTH 
+                                                         target:self 
+                                                       selector:@selector(timerFired) 
+                                                       userInfo:nil 
+                                                        repeats:NO];
+        [self.gatheringGPS startAnimating];
+    }
+}
+
+-(void) timerFired{
+    //Stop animating
+    [self.gatheringGPS stopAnimating];
+    [self.locationManager stopUpdatingLocation];    
+}
+
+-(void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    //here, save the current location
+    NSString *latitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.latitude];
+    NSString *longitudeText = [NSString stringWithFormat:@"%3.5f", newLocation.coordinate.longitude];
+    [self.latitudeTextField setText:latitudeText];
+    [self.longitudeTextField setText:longitudeText];
+    
+    //then stop the delegate
+    [self.locationManager stopUpdatingHeading];
+    
+}
+
+-(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{    
+    NSLog(@"Location grabing error %@, %@", error, [error userInfo]);
+}
+
+#pragma mark - Take Photo/Browse Handlers
+
+- (IBAction)browsePressed:(UIButton *)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        //Setup the image picker
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        //Show the image picker as popover
+        self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
+        [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}	
+
+#define IMAGE_IN_POPOVER YES
+
+- (IBAction)takePhoto:(UIButton *)sender {
+    if (!self.imagePopover && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        if ([mediaTypes containsObject:(NSString *)kUTTypeImage]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            picker.allowsEditing = NO;//no editing
+            if (IMAGE_IN_POPOVER) {
+                self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
+                [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            } 
+            else
+                [self presentModalViewController:picker animated:YES];
+        }
+    }
+}
+
+//Dismiss the image picker
+- (void)dismissImagePicker
+{	
+    //Dismiss both the picker and the modal to be sure
+    [self.imagePopover dismissPopoverAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
+    self.imagePopover = nil;
+    
+}
+
+//Handles when user already selected an image
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{	
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    self.imageView.image = image;
+    
+    [self dismissImagePicker];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    //Dismiss the image picker on cancel
+    [self dismissImagePicker];
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If the alert view is a warning about fields being left blank
+    if ([alertView.title isEqualToString:@"Missing Information"]) {
+        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
+            //End editing mode
+            self.editing=NO;
+            [self userDoneEditingRecord];
+        }
+    }
+}
+
+#pragma mark - Keyboard Notification Handlers
 
 - (void)registerForKeyboardNotifications {
     //Get the NSNotificationCenter and set self up to receive notifications when the keyboard slides in and slides out
@@ -698,18 +722,6 @@
     }
 }
 
-#pragma mark - Set up the location manager
--(void) setUpLocationManager {
-    [self.gatheringGPS setHidesWhenStopped:YES];
-    self.locationManager = [[CLLocationManager alloc] init];
-    if(!self.locationManager) NSLog(@"initialized here");
-    self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = kCLDistanceFilterNone; 
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; //accuracy in 100 meters    
-    //stop the location manager
-    [self.locationManager stopUpdatingHeading];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -748,11 +760,13 @@
     
     //If self is still in editing mode and the delegate has not been kicked off the anvigation stack, notify the delegate before going off screen
     if (self.editing && self.delegate)
-        [self.delegate userDidNavigateAwayFrom:self whileModifyingRecord:self.record withNewRecordInfo:[self dictionaryFromForm]];
+        [self.delegate userDidNavigateAwayFrom:self 
+                          whileModifyingRecord:self.record 
+                             withNewRecordInfo:[self dictionaryFromForm]];
 }
 
 - (void)viewDidUnload {
-    [self setRecordImage:nil];
+    [self setImageView:nil];
     [self setRecordTypeLabel:nil];
     [self setRecordNameTextField:nil];
     [self setDipTextField:nil];
@@ -791,14 +805,33 @@
 
 #pragma mark - Set up the record form for each individual type of record
 
-- (void)updateFormForRecord:(Record *)record {
+- (void)populateFormWithInfoOfRecord:(Record *)record {
+    //Fill in the information from the record
+    self.recordNameTextField.text=self.record.name;
+    self.latitudeTextField.text=self.record.latitude;
+    self.longitudeTextField.text=self.record.longitude;
+    
     //set the image
-    NSLog(@"image: %@",self.image);
-    [self.recordImage setImage:[UIImage imageWithData:self.record.image.imageData]];
+    self.imageView.image=[UIImage imageWithData:self.record.image.imageData];
     
-    //Reset all the textfields to empty strings
-    [self.textFields makeObjectsPerformSelector:@selector(setText:) withObject:@""];
+    //Set the date and time
+    self.dateTextField.text = [Record dateFromNSDate:record.date];
+    self.timeTextField.text = [Record timeFromNSDate:record.date];
+    self.acquiredDate=self.record.date;
     
+    //Set the strike and dip
+    self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
+    self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];
+    
+    //Set the dip direction and field observation
+    self.dipDirectionTextField.text=self.record.dipDirection;
+    self.fieldObservationTextArea.text=self.record.fieldOservations;
+    
+    //Set the record type
+    self.recordTypeLabel.text=[self.record.class description];
+}
+
+- (void)updateFormForRecord:(Record *)record {
     //Clear the color of the field observation text area
     self.fieldObservationTextArea.backgroundColor=[UIColor clearColor];
     
@@ -806,30 +839,8 @@
     NSSet *hiddenFields=[NSSet setWithObjects:self.trendTextField,self.trendLabel,self.plungeLabel,self.plungeTextField,self.formationLabel,self.formationTextField,self.lowerFormationLabel,self.lowerFormationTextField,self.upperFormationLabel,self.upperFormationTextField, nil];
     [hiddenFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
     
-    //Fill in the information from the record
-    self.recordNameTextField.text=self.record.name ? self.record.name : @"";
-    self.latitudeTextField.text=self.record.latitude;
-    self.longitudeTextField.text=self.record.longitude;
-    
-    //filling in date and time
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"]; 
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
-    [timeFormatter setDateFormat:@"HH:mm:ss"];
-    [self.dateTextField setText:[dateFormatter stringFromDate:self.record.date]]; 
-    [self.timeTextField setText:[timeFormatter stringFromDate:self.record.date]]; 
-    
-
-    if(record) {
-        self.dateTextField.text = [Record dateFromNSDate:record.date];
-        self.timeTextField.text = [Record timeFromNSDate:record.date];
-    }
-    
-    self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
-    self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];
-    self.dipDirectionTextField.text=self.record.dipDirection ? self.record.dipDirection : @"";
-    self.fieldObservationTextArea.text=self.record.fieldOservations ? self.record.fieldOservations : @"";
-    self.recordTypeLabel.text=[self.record.class description];
+    //populate the common information shared by all types of records
+    [self populateFormWithInfoOfRecord:record];
     
     //Setup the textfields and labels depending on the type of record
     if ([record isKindOfClass:[Bedding class]]) {
