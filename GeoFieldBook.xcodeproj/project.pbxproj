@@ -289,8 +289,6 @@
 				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
 				020EBBB81594611A00EECC08 /* RecordTableViewController.h */,
 				020EBBB91594611A00EECC08 /* RecordTableViewController.m */,
-				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
-				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
 				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
 				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
 				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
@@ -341,6 +339,15 @@
 			name = "Picker View Controllers";
 			sourceTree = "<group>";
 		};
+		024097A2159D373F00855D33 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
+				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +390,7 @@
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
+				024097A2159D373F00855D33 /* Custom Views */,
 				029877FC1595954D000D71E7 /* Images */,
 				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
 				029877F015955CB2000D71E7 /* Protocols */,
