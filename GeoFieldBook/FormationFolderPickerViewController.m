@@ -22,7 +22,7 @@
 
 - (void)setDatabase:(UIManagedDocument *)database {
     _database=database;
-        
+            
     //Synchronize with the database
     [self synchronizeWithFormationFolderDatabase];
 }

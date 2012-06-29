@@ -79,18 +79,8 @@
 }
 
 - (void)normalizeDatabase {
-    //If the managed document has not been saved to disk, save it
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[self.database.fileURL path]]) {
-        [self.database saveToURL:self.database.fileURL 
-                forSaveOperation:UIDocumentSaveForCreating 
-               completionHandler:^(BOOL sucess){
-                   //Set up the fetched result controller
-                   [self setupFetchedResultsController];                   
-               }];
-    }
-    
     //If the managed document is closed, open it
-    else if (self.database.documentState==UIDocumentStateClosed) {
+    if (self.database.documentState==UIDocumentStateClosed) {
         [self.database openWithCompletionHandler:^(BOOL success){
             //Set up the fetched result controller
             [self setupFetchedResultsController];
