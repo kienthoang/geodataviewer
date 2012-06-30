@@ -864,6 +864,8 @@
 		0294E0C5159361060025219F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
 				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
@@ -872,6 +874,8 @@
 					"\"$(SDKROOT)/usr/lib/system\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "65168178-1D9E-4F5C-A45A-54D48C7A44EE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65168178-1D9E-4F5C-A45A-54D48C7A44EE";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -879,6 +883,7 @@
 		0294E0C6159361060025219F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
 				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
@@ -887,6 +892,7 @@
 					"\"$(SDKROOT)/usr/lib/system\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "70C9F55C-B768-45BC-9609-4FEAEE1B4C41";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

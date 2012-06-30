@@ -658,18 +658,23 @@
     if ([segue.identifier isEqualToString:@"Strike Picker"]) {
         //Will send initial value to strike picker text field only if its value is currently 0
         [segue.destinationViewController setInitialSelectionEnabled:[self.strikeTextField.text isEqualToString:@"0"]];
+        [segue.destinationViewController setPreviousSelection:self.strikeTextField.text];
     } else if ([segue.identifier isEqualToString:@"Dip Picker"]) {
-        //Will send initiali value to dip text field only if its value is currently 0
+        //Will send initial value to dip text field only if its value is currently 0
         [segue.destinationViewController setInitialSelectionEnabled:[self.dipTextField.text isEqualToString:@"0"]];
+        [segue.destinationViewController setPreviousSelection:self.dipTextField.text];
     } else if ([segue.identifier isEqualToString:@"Dip Direction Picker"]) {
         //Will send initial value to dip direction text field only if it's currently blank (no direction selected)
         [segue.destinationViewController setInitialSelectionEnabled:![self.dipDirectionTextField.text length]];
+        [segue.destinationViewController setPreviousSelection:self.dipDirectionTextField.text];
     } else if ([segue.identifier isEqualToString:@"Trend Picker"]) {
         //Will send initial value to trend text field only if it's currently blank (no value selected)
-        [segue.destinationViewController setInitialSelectionEnabled:![self.trendTextField.text length]];
+        [segue.destinationViewController setInitialSelectionEnabled:![self.trendTextField.text length]];\
+        [segue.destinationViewController setPreviousSelection:self.trendTextField.text];
     } else if ([segue.identifier isEqualToString:@"Plunge Picker"]) {
         //Will send initial value to plunge picker text field only if it's currently blank
         [segue.destinationViewController setInitialSelectionEnabled:![self.plungeTextField.text length]];
+        [segue.destinationViewController setPreviousSelection:self.plungeTextField.text];
     }
     
     //Seguing to the formation picker view controller for the formation text field
@@ -685,6 +690,9 @@
         
         //Set the name of the formation folder
         [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
+        
+        //Set the previously selected formation name
+        [segue.destinationViewController setPreviousSelection:self.formationTextField.text];
     }
     
     //Seguing to the formation picker view controller for the lower formation text field
@@ -700,6 +708,9 @@
         
         //Set the name of the formation folder
         [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
+        
+        //Set the previously selected formation name
+        [segue.destinationViewController setPreviousSelection:self.lowerFormationTextField.text];
     }
     
     //Seguing to the formation picker view controller for the upper formation text field
@@ -715,6 +726,9 @@
         
         //Set the name of the formation folder
         [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
+        
+        //Set the previously selected formation name
+        [segue.destinationViewController setPreviousSelection:self.upperFormationTextField.text];
     }
 }
 

@@ -42,8 +42,9 @@
             }
             
             //Set the name of the record
-            record.name=@"New Record";
+            record.name=@"";
             record.folder=folder;
+            record.image=nil;
         }
     }
     

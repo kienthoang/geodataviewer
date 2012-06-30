@@ -55,7 +55,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="strike" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
-        <relationship name="image" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="whoUses" inverseEntity="Image" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="whoUses" inverseEntity="Image" syncable="YES"/>
     </entity>
     <elements>
         <element name="Bedding" positionX="171" positionY="597" width="128" height="60"/>

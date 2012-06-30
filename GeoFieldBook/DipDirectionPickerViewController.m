@@ -35,6 +35,11 @@
     [self.delegate dipDirectionPickerViewController:self userDidSelectDipDirectionValue:userSelection];
 }
 
+//Return the array that contains the direction (only object)
+- (NSArray *)userSelectedComponentsFromSelection:(NSString *)previousSelection {
+    return [NSArray arrayWithObject:previousSelection];
+}
+
 #pragma mark - UIPickerViewDelegate methods
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {

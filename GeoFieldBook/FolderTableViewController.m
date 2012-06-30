@@ -40,6 +40,10 @@
 
 @property (nonatomic,strong) Folder *toBeDeletedFolder;
 
+#pragma mark - Popover Controllers
+
+@property (nonatomic,weak) UIPopoverController *formationPopoverController;
+
 @end
 
 @implementation FolderTableViewController 
@@ -51,6 +55,8 @@
 @synthesize toBeDeletedFolder=_toBeDeletedFolder;
 
 @synthesize database=_database;
+
+@synthesize formationPopoverController=_formationPopoverController;
 
 #pragma mark - Setters
 
@@ -124,9 +130,6 @@
 {
     //Update the folder
     [folder setFormationFolderWithName:formationFolder];
-    
-    //Save the database
-    [self saveChangesToDatabase];
 }
 
 #pragma mark - RecordTVCAutosaver methods
@@ -258,6 +261,13 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //Save any change to database
+    [self saveChangesToDatabase];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Support all orientations
@@ -297,6 +307,14 @@
         //Set the database of the formation folder tvc to self's database
         UINavigationController *navigationController=segue.destinationViewController;
         [(FormationFolderTableViewController *)navigationController.topViewController setDatabase:self.database];
+        
+        //If the formation popover is already there, dismiss it
+        if (self.formationPopoverController.isPopoverVisible)
+            [self.formationPopoverController dismissPopoverAnimated:YES];
+        
+        //Save the popover controller
+        UIStoryboardPopoverSegue *popoverSegue=(UIStoryboardPopoverSegue *)segue;
+        self.formationPopoverController=popoverSegue.popoverController;
     }
 }
 

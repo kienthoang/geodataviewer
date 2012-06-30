@@ -35,6 +35,10 @@
     [self.delegate formationFolderPickerViewController:self userDidSelectFormationFolderWithName:userSelection];
 }
 
+- (NSArray *)userSelectedComponentsFromSelection:(NSString *)previousSelection {
+    return [NSArray arrayWithObject:previousSelection];
+}
+
 #pragma mark - UIPickerViewControllerDelegate
 
 - (void)pickerView:(UIPickerView *)pickerView 
