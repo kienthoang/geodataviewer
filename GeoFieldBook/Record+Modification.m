@@ -11,11 +11,8 @@
 
 @implementation Record (Modification)
 
-- (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo 
+- (void)updateWithNewRecordInfo:(NSDictionary *)recordInfo 
 {
-    if (![recordInfo count])
-        return NO;
-    
     //Update info
     NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
     self.name=[recordInfo objectForKey:RECORD_NAME];
@@ -27,11 +24,10 @@
     self.fieldOservations=[recordInfo objectForKey:RECORD_FIELD_OBSERVATION];
     self.date=[recordInfo objectForKey:RECORD_DATE];
     
-    //Update the image
-    NSData *imageData = [recordInfo objectForKey:RECORD_IMAGE_DATA];
-    self.image = [Image imageWithBinaryData:imageData inManagedObjectContext:self.managedObjectContext];
-    
-    return YES;
+    //Update the image if it's not NSNULL
+    id imageData = [recordInfo objectForKey:RECORD_IMAGE_DATA];
+    if ([imageData isKindOfClass:[NSData class]])
+        self.image = [Image imageWithBinaryData:imageData inManagedObjectContext:self.managedObjectContext];    
 }
 
 @end

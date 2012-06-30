@@ -13,34 +13,45 @@
 
 @implementation Contact (Modification)
 
-- (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo {
+- (void)updateWithNewRecordInfo:(NSDictionary *)recordInfo {
     [super updateWithNewRecordInfo:recordInfo];
     
-    //Update the lower formation if it exists in database
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",[recordInfo objectForKey:RECORD_LOWER_FORMATION]];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
-    NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
-    if ([results count]) {
-        Formation *lowerFormation=[results lastObject];
-        self.lowerFormation=lowerFormation;
-    } else {
-        return false;
-    }
+    NSFetchRequest *request=nil;
+    NSArray *results=nil;
     
-    //Update the upper formation if it exists in database
-    request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",[recordInfo objectForKey:RECORD_UPPER_FORMATION]];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
-    results=[self.managedObjectContext executeFetchRequest:request error:NULL];
-    if ([results count]) {
-        Formation *upperFormation=[results lastObject];
-        self.upperFormation=upperFormation;
-    } else {
-        return false;
-    }
+    //If the lower formation name is an empty string, nillify this record's lower formation
+    NSString *lowerFormationName=[recordInfo objectForKey:RECORD_LOWER_FORMATION];
+    if (!lowerFormationName.length)
+        self.lowerFormation=nil;
     
-    return true;
+    //Else, update the lower formation if it exists in database
+    else {
+        request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
+        request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",lowerFormationName];
+        request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
+        results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+        if ([results count]) {
+            Formation *lowerFormation=[results lastObject];
+            self.lowerFormation=lowerFormation;
+        }
+    }
+     
+    //If the lower formation name is an empty string, nillify this record's lower formation
+    NSString *upperFormationName=[recordInfo objectForKey:RECORD_UPPER_FORMATION];
+    if (!upperFormationName.length)
+        self.upperFormation=nil;
+    
+    //Else, update the upper formation if it exists in database
+    else {
+        request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
+        request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",upperFormationName];
+        request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
+        results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+        if ([results count]) {
+            Formation *upperFormation=[results lastObject];
+            self.upperFormation=upperFormation;
+        }    
+    }
 }
 
 @end

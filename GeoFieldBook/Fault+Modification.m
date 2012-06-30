@@ -13,26 +13,29 @@
 
 @implementation Fault (Modification)
 
-- (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo {
+- (void)updateWithNewRecordInfo:(NSDictionary *)recordInfo {
     [super updateWithNewRecordInfo:recordInfo];
 
     //Update trend and plunge
     self.trend=[recordInfo objectForKey:RECORD_TREND];
     self.plunge=[recordInfo objectForKey:RECORD_PLUNGE];
     
-    //Update the formation if it exists in database
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",[recordInfo objectForKey:RECORD_FORMATION]];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
-    NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
-    if ([results count]) {
-        Formation *formation=[results lastObject];
-        self.formation=formation;
-    } else {
-        return false;
-    }
+    //If the formation name is nil, nilly this record's formation
+    NSString *formationName=[recordInfo objectForKey:RECORD_FORMATION];
+    if (!formationName.length)
+        self.formation=nil;
     
-    return true;
+    //Else, update the formation if it exists in database
+    else {
+        NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
+        request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",formationName];
+        request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
+        NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
+        if ([results count]) {
+            Formation *formation=[results lastObject];
+            self.formation=formation;
+        }
+    }
 }
 
 @end

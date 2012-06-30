@@ -32,6 +32,8 @@
 
 - (NSString *)formationFolderName;
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated validationEnabled:(BOOL)validationEnabled;
+
 @end
 
 @interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>

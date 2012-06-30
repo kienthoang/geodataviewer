@@ -15,6 +15,6 @@
 
 @interface Record (Modification)
 
-- (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo;        //Updates self with the user-modified record info dictionary, whose keys are specified in Record+DictionaryKeys.h as macros
+- (void)updateWithNewRecordInfo:(NSDictionary *)recordInfo;        //Updates self with the user-modified record info dictionary, whose keys are specified in Record+DictionaryKeys.h as macros
 
 @end

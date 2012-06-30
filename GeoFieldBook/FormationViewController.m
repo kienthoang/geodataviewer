@@ -8,7 +8,7 @@
 
 #import "FormationViewController.h"
 
-@interface FormationViewController ()
+@interface FormationViewController() <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
@@ -52,6 +52,20 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    //If the text field is the name text field
+    if (textField==self.nameTextField) {
+        //If the text field's text is not empty, click done for the user and return YES
+        [self donePressed:nil];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - View Controller Lifecycles
 
 - (void)viewDidLoad {
@@ -61,6 +75,10 @@
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    //Set the delegate of the name text field to be self
+    self.nameTextField.delegate=self;
+    self.nameTextField.returnKeyType=UIReturnKeyDone;
     
     //Set the name text field to be the first responder
     [self.nameTextField becomeFirstResponder];

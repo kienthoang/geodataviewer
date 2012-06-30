@@ -38,6 +38,7 @@
 #pragma mark - UI Outlets
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *setLocationButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 #pragma mark - Popover Controllers
 
@@ -53,6 +54,7 @@
 @synthesize modifiedRecord=_modifiedRecord;
 @synthesize recordModifiedInfo=_recordModifiedInfo;
 @synthesize setLocationButton = _setLocationButton;
+@synthesize editButton = _editButton;
 
 @synthesize autosaveDelegate=_autosaveDelegate;
 @synthesize delegate=_delegate;
@@ -227,7 +229,7 @@
 - (void)putDetailViewIntoEditingMode {
     //Get the detail vc and if it's of RecordViewController class, put it into editing mode
     id detailvc=[self.splitViewController.viewControllers lastObject];
-         [detailvc setEditing:YES animated:YES];
+         [detailvc setEditing:YES animated:YES validationEnabled:NO];
 }
 
 //Create a new record entity with the specified record type
@@ -255,15 +257,7 @@
          withNewInfo:(NSDictionary *)recordInfo
 {
     //Update the record
-    [record updateWithNewRecordInfo:recordInfo];
-    
-    //Save changes to database
-    [self saveChangesToDatabase:self.database completion:^(BOOL success){
-        if (success) {
-            //highlight the newly created record
-            [self highlightRecord:record];
-        }
-    }];
+    [record updateWithNewRecordInfo:recordInfo];    
 }
 
 //Delete the record at the specified index path in the table
@@ -323,9 +317,6 @@
 {
     //Modify the specified record with the specified info
     [self modifyRecord:record withNewInfo:recordInfo];
-    
-    //Dismiss the modal view controller
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
@@ -363,6 +354,7 @@
 
 - (void)viewDidUnload {
     [self setSetLocationButton:nil];
+    [self setEditButton:nil];
     [super viewDidUnload];
 }
 
@@ -377,8 +369,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //If seguing to a modal record type selector, set the destination controller's array of record types
     if ([segue.identifier isEqualToString:@"Select Record Type"]) {
+        //Prepare the segue's destination
         [segue.destinationViewController setRecordTypes:[Record allRecordTypes]];
         [segue.destinationViewController setDelegate:self];
+        
+        //End the table view's editing mode if the table is in editing mode
+        if (self.tableView.editing)
+            [self editPressed:self.editButton];
     } else if ([segue.identifier isEqualToString:@"Show Record"]) {
         //Transfer the bar button item over
         id <UISplitViewBarButtonPresenter> detailvc=[self barButtonPresenter];

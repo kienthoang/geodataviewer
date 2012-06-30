@@ -10,6 +10,6 @@
 
 @interface Fault (Modification)
 
-- (BOOL)updateWithNewRecordInfo:(NSDictionary *)recordInfo;
+- (void)updateWithNewRecordInfo:(NSDictionary *)recordInfo;
 
 @end

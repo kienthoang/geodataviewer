@@ -69,6 +69,7 @@
 @property (nonatomic, strong) CLLocationManager *locationManager; 
 @property (nonatomic, strong) NSTimer *gpsTimer;
 @property (nonatomic,strong) NSDate *acquiredDate;
+@property (nonatomic,weak) UIImage *acquiredImage;
 
 #pragma mark - Non-interactive UI Elements
 
@@ -127,6 +128,7 @@
 @synthesize gpsTimer = _gpsTimer;
 @synthesize gatheringGPS = _gatheringGPS;
 @synthesize editButton = _editButton;
+@synthesize acquiredImage=_acquiredImage;
 
 @synthesize record=_record;
 @synthesize imageView = _imageView;
@@ -253,7 +255,7 @@
     [self dictionary:recordDictionary setObject:self.upperFormationTextField.text forKey:RECORD_UPPER_FORMATION];
     
     //Insert the image data
-    NSData *imageData=self.imageView.image ? UIImagePNGRepresentation(self.imageView.image) : nil;
+    NSData *imageData=self.acquiredImage ? UIImageJPEGRepresentation(self.acquiredImage,0.5) : nil;
     [self dictionary:recordDictionary setObject:imageData forKey:RECORD_IMAGE_DATA];
     
     return [recordDictionary copy];
@@ -264,6 +266,7 @@
     [self.delegate recordViewController:self 
                     userDidModifyRecord:self.record 
                       withNewRecordInfo:[self dictionaryFromForm]];
+    
 }
 
 
@@ -278,7 +281,7 @@
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Toggle the editting mode
-    [self setEditing:!self.editing animated:YES];
+    [self setEditing:!self.editing animated:YES validationEnabled:YES];
 }
 
 #pragma mark - Form Validations
@@ -322,7 +325,7 @@
     //Change the style of the edit button to edit or done
     self.editButton.style=self.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
     self.editButton.title=self.editing ? @"Done" : @"Edit";
-    
+        
     //If in editing mode, enable all the text fields; otherwise, disable them
     for (UITextField *textField in self.textFields)
         textField.enabled=self.editing;
@@ -356,33 +359,36 @@
     }
 }
 
-- (void)processFormInputs {
-    NSDictionary *recordInfo=[self dictionaryFromForm];
-    NSArray *optionalFields=self.textFields;
-    
-    //If the info passes the validations, update the record
-    if ([self validateMandatoryFieldsOfInfo:recordInfo alertsEnabled:YES]) 
-    {
-        //Validate optional fields
-        if ([self validatePresenceOfFields:optionalFields])
-            [self userDoneEditingRecord];
-        else {
-            //Force the editing mode back
-            [self setEditing:YES animated:YES];
-            
-            //Show a warning alert
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Some fields have not been populated yet. Do you want to continue?" delegate:self cancelButtonTitle:@"Go Back" otherButtonTitles:@"Continue", nil];
-            [alert show];
+- (void)processFormInputsWithValidationEnabled:(BOOL)validationEnabled {
+    //Go through the validations if validation enabled is YES
+    if (validationEnabled) {
+        NSDictionary *recordInfo=[self dictionaryFromForm];
+        NSArray *optionalFields=self.textFields;
+        
+        //If the info passes the validations, update the record
+        if ([self validateMandatoryFieldsOfInfo:recordInfo alertsEnabled:YES]) 
+        {
+            //Validate optional fields
+            if ([self validatePresenceOfFields:optionalFields])
+                [self userDoneEditingRecord];
+            else {
+                //Force the editing mode back
+                [self setEditing:YES animated:YES validationEnabled:NO];
+                
+                //Show a warning alert
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Missing Information" message:@"Some fields have not been populated yet. Do you want to continue?" delegate:self cancelButtonTitle:@"Go Back" otherButtonTitles:@"Continue", nil];
+                [alert show];
+            }
         }
+        
+        //Else force reset self's editing mode
+        else 
+            [self setEditing:YES animated:YES validationEnabled:NO];
     }
-    
-    //Else force reset self's editing mode
-    else 
-        [self setEditing:YES animated:YES];
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    [super setEditing:editing animated:YES];
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated validationEnabled:(BOOL)validationEnabled {
+    //[super setEditing:editing animated:YES];
 
     _editing=editing;
     
@@ -393,7 +399,8 @@
     [self styleFormInputFields];
     
     //If the editing mode is over, process the newly modified info
-    if (!self.editing) [self processFormInputs];
+    if (!self.editing) 
+        [self processFormInputsWithValidationEnabled:(BOOL)validationEnabled];
 }
 
 #pragma mark - Location-based Information Processors
@@ -508,6 +515,7 @@
     
     if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
     self.imageView.image = image;
+    self.acquiredImage=image;
     
     [self dismissImagePicker];
 }
@@ -524,8 +532,10 @@
     //If the alert view is a warning about fields being left blank
     if ([alertView.title isEqualToString:@"Missing Information"]) {
         if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
-            //End editing mode
-            self.editing=NO;
+            //End editing mode without going through the validations again
+            [self setEditing:NO animated:YES validationEnabled:NO];
+            
+            //Process the form inputs
             [self userDoneEditingRecord];
         }
     }

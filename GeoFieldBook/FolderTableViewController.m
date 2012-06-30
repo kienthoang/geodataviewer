@@ -44,9 +44,14 @@
 
 @property (nonatomic,weak) UIPopoverController *formationPopoverController;
 
+#pragma mark - Buttons
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+
 @end
 
 @implementation FolderTableViewController 
+@synthesize editButton = _editButton;
 
 @synthesize autosaverCancelBlock=_autosaverCancelBlock;
 @synthesize autosaverConfirmTitle=_autosaverConfirmTitle;
@@ -282,6 +287,10 @@
         //Set the delegate of the destination controller
         [segue.destinationViewController setDelegate:self];
         
+        //End the table view's editing mode if the table is in editing mode
+        if (self.tableView.editing)
+            [self editPressed:self.editButton];
+        
         //Set the folder of the destination controller if the table view is in editting mode
         if (self.tableView.editing) {
             UITableViewCell *cell=(UITableViewCell *)sender;
@@ -311,6 +320,10 @@
         //If the formation popover is already there, dismiss it
         if (self.formationPopoverController.isPopoverVisible)
             [self.formationPopoverController dismissPopoverAnimated:YES];
+        
+        //End the table view's editing mode if the table is in editing mode
+        if (self.tableView.editing)
+            [self editPressed:self.editButton];
         
         //Save the popover controller
         UIStoryboardPopoverSegue *popoverSegue=(UIStoryboardPopoverSegue *)segue;
@@ -436,4 +449,8 @@
     return UIInterfaceOrientationIsPortrait(orientation);
 }
 
+- (void)viewDidUnload {
+    [self setEditButton:nil];
+    [super viewDidUnload];
+}
 @end

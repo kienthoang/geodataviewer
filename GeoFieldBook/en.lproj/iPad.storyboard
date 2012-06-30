@@ -134,7 +134,7 @@
                                 <rect key="frame" x="20" y="117" width="500" height="31"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="0gH-py-yYq">
                                 <rect key="frame" x="20" y="229" width="500" height="154"/>
@@ -232,6 +232,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="editButton" destination="tqj-i6-PiN" id="qtX-Dl-Dib"/>
                         <segue destination="eRh-oI-S81" kind="replace" identifier="Show Home Page" splitViewControllerTargetIndex="1" id="6WH-XF-oBt"/>
                     </connections>
                 </tableViewController>
@@ -473,6 +474,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="editButton" destination="PL1-Ih-t0C" id="Em2-sa-NNg"/>
                         <outlet property="setLocationButton" destination="Ipl-an-wyO" id="4Z4-GZ-130"/>
                     </connections>
                 </tableViewController>
@@ -494,7 +496,7 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="RecordVCBackground.jpg" id="7RR-Dg-4S7">
                                         <rect key="frame" x="5" y="20" width="768" height="960"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="redraw" id="aaB-i3-Dti">
                                         <rect key="frame" x="28" y="26" width="296" height="247"/>
@@ -1062,11 +1064,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Formation Folder Name" minimumFontSize="17" id="rcg-cg-uav">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Formation Folder Name" minimumFontSize="17" clearButtonMode="whileEditing" id="rcg-cg-uav">
                                 <rect key="frame" x="20" y="197" width="379" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="TeM-Y4-lvk">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
@@ -1188,7 +1190,7 @@
                                 <rect key="frame" x="20" y="197" width="379" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="laj-Wa-NcJ">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
@@ -1343,6 +1345,9 @@
         </class>
         <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
@@ -1408,6 +1413,7 @@
         <class className="RecordTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>

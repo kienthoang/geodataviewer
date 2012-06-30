@@ -8,7 +8,7 @@
 
 #import "FormationFolderViewController.h"
 
-@interface FormationFolderViewController()
+@interface FormationFolderViewController() <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
@@ -48,6 +48,20 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    //If the text field is the name text field
+    if (textField==self.nameTextField) {
+        //If the text field's text is not empty, click done for the user and return YES
+        [self donePressed:nil];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - Gesture Handlers
 
 //Workaround to dismiss the keyboard when double clicking out because the keyboard is kinda messed up in a modal view controller
@@ -72,6 +86,10 @@
     
     //Set the name text field to be the first responder
     [self.nameTextField becomeFirstResponder];
+    
+    //Set the delegate of the name text field to be self
+    self.nameTextField.delegate=self;
+    self.nameTextField.returnKeyType=UIReturnKeyDone;
     
     //If the folder name is not nil, set the text of the name text field
     if (self.folderName)
