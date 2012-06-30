@@ -480,7 +480,8 @@
 #define IMAGE_IN_POPOVER YES
 
 - (IBAction)takePhoto:(UIButton *)sender {
-    if (!self.imagePopover && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    //Allow the user to take the photo if camera is available
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
         if ([mediaTypes containsObject:(NSString *)kUTTypeImage]) {
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -489,6 +490,10 @@
             picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
             picker.allowsEditing = NO;//no editing
             if (IMAGE_IN_POPOVER) {
+                //Dismiss the old popover if it's still on screen
+                [self dismissImagePicker];
+                
+                //Set up a new popover
                 self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
                 [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             } 
@@ -501,22 +506,24 @@
 //Dismiss the image picker
 - (void)dismissImagePicker
 {	
-    //Dismiss both the picker and the modal to be sure
-    [self.imagePopover dismissPopoverAnimated:YES];
-    [self dismissModalViewControllerAnimated:YES];
-    self.imagePopover = nil;
+    //Dismiss the picker if it's on screen
+    if (self.imagePopover.isPopoverVisible) {
+        [self.imagePopover dismissPopoverAnimated:YES];
+        self.imagePopover = nil;
+    }
     
 }
 
 //Handles when user already selected an image
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {	
+    //Get the image the user picked and save that in a property
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    
     if (!image) image = [info objectForKey:UIImagePickerControllerOriginalImage];
     self.imageView.image = image;
     self.acquiredImage=image;
     
+    //Dismiss the image picker
     [self dismissImagePicker];
 }
 
