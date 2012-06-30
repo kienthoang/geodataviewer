@@ -44,6 +44,10 @@
 
 @property (nonatomic,weak) UIPopoverController *formationFolderPopoverController;
 
+#pragma mark - Currently active record
+
+@property (nonatomic,weak) Record *chosenRecord;
+
 @end
 
 @implementation RecordTableViewController
@@ -60,6 +64,8 @@
 @synthesize delegate=_delegate;
 
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
+
+@synthesize chosenRecord=_chosenRecord;
 
 #pragma mark - Controller State Initialization
 
@@ -257,7 +263,16 @@
          withNewInfo:(NSDictionary *)recordInfo
 {
     //Update the record
-    [record updateWithNewRecordInfo:recordInfo];    
+    [record updateWithNewRecordInfo:recordInfo];
+    
+    //Save changes to database
+    [self saveChangesToDatabase:self.database completion:^(BOOL success){
+        if (success) {
+            //highlight the newly modified record if it's also the currently chosen record
+            if (record==self.chosenRecord)
+                [self highlightRecord:record];
+        }
+    }];
 }
 
 //Delete the record at the specified index path in the table
@@ -395,6 +410,9 @@
         //Set up the record for the record view controller
         Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
         [segue.destinationViewController setRecord:record];
+        
+        //Save the chosen record
+        self.chosenRecord=record;
         
         //Set the delegate of the destination view controller to be self
         [segue.destinationViewController setDelegate:self];
