@@ -399,14 +399,14 @@
     self.imageView.image = image;
     self.acquiredImage=image;
     
+    //Dismiss the image picker
+    [self dismissImagePicker];
+    
     //Save the photo into the photo library if the image was taken
     if (self.hasTakenImage) {
         UIImageWriteToSavedPhotosAlbum(self.acquiredImage, nil, nil, nil);
         self.hasTakenImage=NO;
     }
-    
-    //Dismiss the image picker
-    [self dismissImagePicker];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
