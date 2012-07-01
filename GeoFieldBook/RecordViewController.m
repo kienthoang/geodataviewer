@@ -86,6 +86,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *browseButton;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *acquireButton;
+@property (weak, nonatomic) UIButton *imagePickerPresenter;
 
 #pragma mark - Form Input Fields
 
@@ -170,6 +171,7 @@
 @synthesize browseButton = _browseButton;
 @synthesize takePhotoButton = _takePhotoButton;
 @synthesize imagePopover = _imagePopover;
+@synthesize imagePickerPresenter=_imagePickerPresenter;
 
 @synthesize acquiredDate=_acquireDate;
 
@@ -348,6 +350,9 @@
         //Show the image picker as popover
         self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
         [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+        //Specify user has pressed browse button
+        self.imagePickerPresenter=self.browseButton;
     }
 }	
 
@@ -359,6 +364,7 @@
         NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
         if ([mediaTypes containsObject:(NSString *)kUTTypeImage]) {
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.view.contentMode=UIViewContentModeRedraw;
             picker.delegate = self;
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
             picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
@@ -369,13 +375,17 @@
                 
                 //Set up a new popover
                 self.imagePopover = [[UIPopoverController alloc] initWithContentViewController:picker];
-                [self.imagePopover presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                [self.imagePopover presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             } 
             else
                 [self presentModalViewController:picker animated:YES];
         }
         
+        //Set has taken image to YES (for saving later)
         self.hasTakenImage=YES;
+        
+        //Specify that the image picker presenter is the sender
+        self.imagePickerPresenter=sender;
     }
 }
 
@@ -387,7 +397,6 @@
         [self.imagePopover dismissPopoverAnimated:YES];
         self.imagePopover = nil;
     }
-    
 }
 
 //Handles when user already selected an image
@@ -787,6 +796,24 @@
         [self.delegate userDidNavigateAwayFrom:self 
                           whileModifyingRecord:self.record 
                              withNewRecordInfo:[self dictionaryFromForm]];
+}
+
+- (void)viewWillLayoutSubviews {
+    //If the image picker popover is still on screen, adjust its frame
+    if (self.imagePopover.isPopoverVisible) {
+        if (self.imagePickerPresenter!=self.browseButton) {
+            //Get the content view controlelr (an image picker)
+            UIImagePickerController *imagePicker=(UIImagePickerController *)self.imagePopover.contentViewController;
+        
+            //Resize the popover when in portrait mode
+            if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
+                [self.imagePopover setPopoverContentSize:CGSizeMake(imagePicker.view.frame.size.height, imagePicker.view.frame.size.width)];
+            }
+        }
+        
+        //Reposition the popover
+        [self.imagePopover presentPopoverFromRect:self.imagePickerPresenter.bounds inView:self.imagePickerPresenter permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    }
 }
 
 - (void)viewDidUnload {

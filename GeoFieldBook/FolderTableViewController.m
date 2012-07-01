@@ -43,6 +43,7 @@
 #pragma mark - Popover Controllers
 
 @property (nonatomic,weak) UIPopoverController *formationPopoverController;
+@property (nonatomic,strong) UIPopoverController *folderInfoPopoverController;
 
 #pragma mark - Buttons
 
@@ -62,6 +63,7 @@
 @synthesize database=_database;
 
 @synthesize formationPopoverController=_formationPopoverController;
+@synthesize folderInfoPopoverController=_folderInfoPopoverController;
 
 #pragma mark - Setters
 
@@ -383,7 +385,18 @@
     NSString *recordCounter=[folder.records count]>1 ? @"Records" : @"Record";
     cell.detailTextLabel.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
     
+    //Add gesture recognizer for long press
+    UILongPressGestureRecognizer *longPressRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnTableCell:)];
+    [cell addGestureRecognizer:longPressRecognizer];
+    
     return cell;
+}
+
+- (void)longPressOnTableCell:(UILongPressGestureRecognizer *)longPress {
+    //Show a popover
+    //UITableViewCell *cell=(UITableViewCell *)longPress.view;
+    //Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    //cell.textLabel.text=folder.folderDescription;
 }
 
 #pragma mark - Table view delegate

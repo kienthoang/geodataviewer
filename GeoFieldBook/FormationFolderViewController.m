@@ -90,6 +90,7 @@
     //Set the delegate of the name text field to be self
     self.nameTextField.delegate=self;
     self.nameTextField.returnKeyType=UIReturnKeyDone;
+    self.nameTextField.enablesReturnKeyAutomatically=YES;
     
     //If the folder name is not nil, set the text of the name text field
     if (self.folderName)

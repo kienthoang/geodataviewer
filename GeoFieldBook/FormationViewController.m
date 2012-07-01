@@ -79,6 +79,7 @@
     //Set the delegate of the name text field to be self
     self.nameTextField.delegate=self;
     self.nameTextField.returnKeyType=UIReturnKeyDone;
+    self.nameTextField.enablesReturnKeyAutomatically=YES;
     
     //Set the name text field to be the first responder
     [self.nameTextField becomeFirstResponder];
