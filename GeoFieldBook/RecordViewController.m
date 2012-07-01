@@ -503,11 +503,21 @@
     //If the info passes the validations, update the record
     if ([self validateMandatoryFieldsOfInfo:recordInfo alertsEnabled:YES])
         [self userDoneEditingRecord];
+    else 
+        [self setEditing:YES animated:YES validationEnabled:NO];
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated validationEnabled:(BOOL)validationEnabled {    
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated validationEnabled:(BOOL)validationEnabled { 
+    _editing=editing;
+    
+    //Toggle enable/disable dependending on whether self is in editing mode or not
+    [self toggleEnableOfFormInputFields];
+    
+    //Style input fields accordingly to editing
+    [self styleFormInputFields];
+    
     //If the editing mode is over, process the newly modified info
-    if (self.editing && !editing) {
+    if (!self.editing) {
         //Stop updating location if still updating
         [self timerFired];
         
@@ -518,14 +528,6 @@
             //Process without validations
             [self userDoneEditingRecord];
     }
-    
-    _editing=editing;
-    
-    //Toggle enable/disable dependending on whether self is in editing mode or not
-    [self toggleEnableOfFormInputFields];
-    
-    //Style input fields accordingly to editing
-    [self styleFormInputFields];
 }
 
 #pragma mark - UIAlertViewDelegate methods

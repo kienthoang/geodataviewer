@@ -7,6 +7,7 @@
 //
 
 #import "Formation+Modification.h"
+#import "Formation_Folder.h"
 #import "TextInputFilter.h"
 
 @implementation Formation (Modification)
@@ -19,7 +20,7 @@
     if (![formationName isEqualToString:self.formationName]) {
         //Query the database to see if the any formation with the new name already exists
         NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-        request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",formationName];
+        request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@ && formationFolder.folderName=%@",formationName,self.formationFolder.folderName];
         request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
         NSArray *results=[self.managedObjectContext executeFetchRequest:request error:NULL];
         

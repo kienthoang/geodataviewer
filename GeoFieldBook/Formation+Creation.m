@@ -19,24 +19,25 @@
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
     folderName=[TextInputFilter filterDatabaseInputText:folderName];
     
-    //Query for a formation with the specified name, if it exists, return nil
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",formationName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
-    NSArray *results=[context executeFetchRequest:request error:NULL];
-    if ([results count] || !results)
-        return nil;
-    
     //Query for the folder with the specified name, if it does not exist return nil
-    request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
     request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",folderName];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
-    results=[context executeFetchRequest:request error:NULL];
+    NSArray *results=[context executeFetchRequest:request error:NULL];
     if (![results count])
         return nil;
     
-    //Create a new formation
     Formation_Folder *formationFolder=[results lastObject];
+    
+    //Query for a formation with the specified name, if it exists, return nil
+    request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
+    request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@ && formationFolder.folderName=%@",formationName,folderName];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    results=[context executeFetchRequest:request error:NULL];
+    if ([results count] || !results)
+        return nil;
+    
+    //Create a new formation
     Formation *formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
     formation.formationName=formationName;
     formation.formationFolder=formationFolder;

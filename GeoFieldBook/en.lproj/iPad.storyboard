@@ -498,7 +498,7 @@
                                         <rect key="frame" x="5" y="20" width="768" height="960"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="redraw" id="aaB-i3-Dti">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="aaB-i3-Dti">
                                         <rect key="frame" x="28" y="26" width="296" height="247"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>

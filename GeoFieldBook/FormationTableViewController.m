@@ -89,7 +89,7 @@
 }
 
 - (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
-    UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation with the name '%@' already exists in this folder!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [duplicationAlert show];
 }
 
@@ -105,13 +105,19 @@
     }];
 }
 
-- (void)createNewFormationWithName:(NSString *)formationName {
+- (BOOL)createNewFormationWithName:(NSString *)formationName {
     //create a new formation, if that returns nil (name duplicate), put up an alert
     if (![Formation formationForName:formationName inFormationFolderWithName:self.formationFolder inManagedObjectContext:self.database.managedObjectContext])
+    {
         [self putUpDuplicateNameAlertWithName:formationName];
+        return NO;
+    }
+    
+    [self saveChangesToDatabase];
+    return YES;
 }
 
-- (void)modifyFormationWithName:(NSString *)originalName toName:(NSString *)newName {
+- (BOOL)modifyFormationWithName:(NSString *)originalName toName:(NSString *)newName {
     //Filter new name
     newName=[TextInputFilter filterDatabaseInputText:newName];
     
@@ -123,12 +129,14 @@
     }
     
     //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
-    if (![selectedFormation changeFormationNameTo:newName])
+    if (![selectedFormation changeFormationNameTo:newName]) {
         [self putUpDuplicateNameAlertWithName:newName];
+        return NO;
+    }
     
     //Else, save
-    else
-        [self saveChangesToDatabase];
+    [self saveChangesToDatabase];
+    return YES;
 }
 
 - (void)deleteFormation:(Formation *)formation {
@@ -162,22 +170,22 @@
 - (void)formationViewController:(FormationViewController *)sender 
       didObtainNewFormationName:(NSString *)formationName
 {
-    //Create a new formation with the specified name
-    [self createNewFormationWithName:formationName];
-    
-    //Dismiss the modal
-    [self dismissModalViewControllerAnimated:YES];
+    //Create a new formation with the specified name and if that returns YES (success), dismiss the modal
+    if ([self createNewFormationWithName:formationName]) {
+        //Dismiss the modal
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (void)formationViewController:(FormationViewController *)sender 
 didAskToModifyFormationWithName:(NSString *)originalName 
              andObtainedNewName:(NSString *)formationName
 {
-    //Modify the formation with the specified original name
-    [self modifyFormationWithName:originalName toName:formationName];
-    
-    //Dismiss the modal
-    [self dismissModalViewControllerAnimated:YES];
+    //Modify the formation with the specified original name and if that returns YES (success), dismiss the modal
+    if ([self modifyFormationWithName:originalName toName:formationName]) {
+        //Dismiss the modal
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - TableViewControllerDataSource methods
