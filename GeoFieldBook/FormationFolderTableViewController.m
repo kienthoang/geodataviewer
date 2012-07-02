@@ -31,7 +31,7 @@
 
 - (void)setDatabase:(UIManagedDocument *)database {
     _database=database;
-    
+        
     //Setup the fectched results controller
     [self setupFetchedResultsController];
 }

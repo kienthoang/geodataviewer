@@ -26,7 +26,6 @@
 - (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
 - (BOOL)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;   //Delete the specified folder
-- (void)showInitialDetailView;            //Put the G-mode initial view onto the right screen (detail view)
 
 - (id <UISplitViewBarButtonPresenter>)barButtonPresenter;
 
@@ -107,11 +106,6 @@
     }
 }
 
-//Put up the initial detail view (the one with the geology logo) on the detail view
-- (void)showInitialDetailView {
-    [self performSegueWithIdentifier:@"Show Home Page" sender:self];
-}
-
 #pragma mark - Alert Generators
 
 //Put up an alert about some database failure with specified message
@@ -154,10 +148,12 @@
     self.autosaverCancelBlock=cancelBlock;
     self.autosaverConfirmBlock=confirmBlock;
     self.autosaverConfirmTitle=buttonTitle;
-    
+        
     //Show the alert
     [alertView show];
 }
+
+#pragma mark - UIAlertViewDelegate Methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     //If the alert view is the delete folder alert and user clicks "Continue", delete the folder
@@ -175,9 +171,6 @@
             //Execute the confirm block and unset it
             self.autosaverConfirmBlock();
             self.autosaverConfirmBlock=nil;
-            
-            //Show home view
-            [self showInitialDetailView];
         }
         
         //If user canceled the alert view, execute the cancel block and put up the initial detail view controller on the detail side
@@ -187,9 +180,6 @@
             
             //Nillify cancel block
             self.autosaverCancelBlock=nil;
-            
-            //Show home view
-            [self showInitialDetailView];
         }
     }
 }
@@ -252,11 +242,6 @@
     
     //Disable swiping (which'd show the master)
     self.splitViewController.presentsWithGesture=NO;
-    
-    //Workaround to make the detail view go on full screen
-//    UIWindow *window=[UIApplication sharedApplication].keyWindow;
-//    [self.splitViewController.view removeFromSuperview];
-//    [window addSubview:[[self.splitViewController.viewControllers lastObject] view]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -327,25 +312,6 @@
         [segue.destinationViewController setFolder:folder];
         [segue.destinationViewController setAutosaveDelegate:self];
         [segue.destinationViewController setDelegate:self];
-    }
-    
-    //Seguing to the modal formation folder tvc
-    else if ([segue.identifier isEqualToString:@"Show Formation Folders"]) {
-        //Set the database of the formation folder tvc to self's database
-        UINavigationController *navigationController=segue.destinationViewController;
-        [(FormationFolderTableViewController *)navigationController.topViewController setDatabase:self.database];
-        
-        //If the formation popover is already there, dismiss it
-        if (self.formationPopoverController.isPopoverVisible)
-            [self.formationPopoverController dismissPopoverAnimated:YES];
-        
-        //End the table view's editing mode if the table is in editing mode
-        if (self.tableView.editing)
-            [self editPressed:self.editButton];
-        
-        //Save the popover controller
-        UIStoryboardPopoverSegue *popoverSegue=(UIStoryboardPopoverSegue *)segue;
-        self.formationPopoverController=popoverSegue.popoverController;
     }
 }
 
@@ -447,6 +413,8 @@
 {
     //The master popover
     UIPopoverController *masterPopover=[[UIPopoverController alloc] initWithContentViewController:pc.contentViewController];
+    masterPopover.passthroughViews=[NSArray array];
+    masterPopover.delegate=nil;
     [[self barButtonPresenter] setMasterPopoverController:masterPopover];
 }
 

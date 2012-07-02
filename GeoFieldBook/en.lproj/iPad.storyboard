@@ -124,14 +124,6 @@
                                 <segue destination="bjl-xY-1vQ" kind="modal" identifier="Add/Edit Folder" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="C0h-XZ-idy"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="orb-gL-eT7"/>
-                        <barButtonItem title=" Formations" id="uZN-m2-0jc">
-                            <connections>
-                                <segue destination="efl-9D-qlf" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="uZN-m2-0jc" id="HV3-27-GSF">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Folders" id="fc4-75-BDf">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="tqj-i6-PiN">
@@ -140,7 +132,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="500"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="editButton" destination="tqj-i6-PiN" id="qtX-Dl-Dib"/>
@@ -213,7 +205,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-6926" y="-4371"/>
+            <point key="canvasLocation" x="-5990" y="21"/>
         </scene>
         <!--Modal Record Type Selector-->
         <scene sceneID="SPc-17-h4d">
@@ -381,7 +373,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="500"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="editButton" destination="PL1-Ih-t0C" id="Em2-sa-NNg"/>
@@ -397,7 +389,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KUw-ek-2CJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController wantsFullScreenLayout="YES" id="LFc-wQ-Gyp" customClass="RecordViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EF0-Dx-8q0">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SYZ-dV-H1C">
@@ -406,15 +398,15 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="RecordVCBackground.jpg" id="7RR-Dg-4S7">
                                         <rect key="frame" x="5" y="1" width="1200" height="1003"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="aaB-i3-Dti">
-                                        <rect key="frame" x="43" y="7" width="475" height="294"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="35" y="66" width="475" height="294"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="redraw" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CT2-6D-cfZ">
-                                        <rect key="frame" x="139" y="318" width="88" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="131" y="377" width="88" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="Browse">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -428,8 +420,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="redraw" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AS2-54-wHM">
-                                        <rect key="frame" x="342" y="318" width="95" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="311" y="377" width="95" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="Take Photo">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -443,78 +435,78 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Name:" lineBreakMode="tailTruncation" minimumFontSize="10" id="PQQ-Q7-Khd">
-                                        <rect key="frame" x="636" y="144" width="69" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="628" y="134" width="69" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="32"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Latitude:" lineBreakMode="tailTruncation" minimumFontSize="10" id="8Ws-ny-tiV">
-                                        <rect key="frame" x="618" y="180" width="98" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="610" y="170" width="98" height="21"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="23"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Longitude:" lineBreakMode="tailTruncation" minimumFontSize="10" id="oKn-ih-wWB">
-                                        <rect key="frame" x="598" y="209" width="108" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="590" y="199" width="108" height="26"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Date:" lineBreakMode="tailTruncation" minimumFontSize="10" id="cgD-L4-nLP">
-                                        <rect key="frame" x="647" y="236" width="59" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="639" y="226" width="59" height="37"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Time:" lineBreakMode="tailTruncation" minimumFontSize="10" id="4Ut-A0-Ioc">
-                                        <rect key="frame" x="644" y="273" width="60" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="636" y="263" width="60" height="28"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="30"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="14" clearButtonMode="whileEditing" id="Acc-26-RSJ">
-                                        <rect key="frame" x="720" y="140" width="237" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="712" y="130" width="237" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Strike:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Cm1-zu-LdH">
-                                        <rect key="frame" x="540" y="335" width="75" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="532" y="394" width="75" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Dip:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Tr8-wc-AoC">
-                                        <rect key="frame" x="565" y="384" width="68" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="557" y="443" width="68" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Dip Direction:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YSI-LC-man">
-                                        <rect key="frame" x="741" y="383" width="146" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="733" y="442" width="146" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Formation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="KcO-I2-ngB">
-                                        <rect key="frame" x="772" y="330" width="115" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="764" y="389" width="115" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Strike" minimumFontSize="17" id="d55-m2-TjO">
-                                        <rect key="frame" x="623" y="335" width="79" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="615" y="394" width="79" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -525,8 +517,8 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dip" minimumFontSize="17" id="hgi-10-nm5">
-                                        <rect key="frame" x="623" y="382" width="79" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="615" y="441" width="79" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -537,8 +529,8 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dip Direction" minimumFontSize="17" id="Vnu-9G-ONQ">
-                                        <rect key="frame" x="900" y="381" width="145" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="892" y="440" width="145" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -549,8 +541,8 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Formation" minimumFontSize="16" id="96G-kx-aRw">
-                                        <rect key="frame" x="900" y="330" width="145" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="892" y="389" width="145" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -561,29 +553,29 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Trend:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NDk-Gh-Yt2">
-                                        <rect key="frame" x="598" y="452" width="73" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="590" y="511" width="73" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Plunge:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="aHK-UX-lzU">
-                                        <rect key="frame" x="730" y="452" width="157" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="722" y="511" width="157" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Upper Formation:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jcP-iM-PaQ">
-                                        <rect key="frame" x="645" y="522" width="174" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="637" y="581" width="174" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Plunge" minimumFontSize="17" id="rtg-bf-3By">
-                                        <rect key="frame" x="918" y="451" width="101" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="910" y="510" width="101" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -594,8 +586,8 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Upper Formation" minimumFontSize="17" id="c93-8P-FW6">
-                                        <rect key="frame" x="838" y="521" width="172" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="830" y="580" width="172" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -606,8 +598,8 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Trend" minimumFontSize="17" id="mpb-eR-t8c">
-                                        <rect key="frame" x="688" y="451" width="103" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="680" y="510" width="103" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -618,29 +610,29 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Field Observation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="yQP-S4-lTa">
-                                        <rect key="frame" x="84" y="396" width="180" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="76" y="455" width="180" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="24"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" showsHorizontalScrollIndicator="NO" editable="NO" id="X91-79-4UG">
-                                        <rect key="frame" x="55" y="436" width="539" height="215"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="47" y="495" width="539" height="215"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Record Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" highlighted="YES" id="Fp8-aN-cYI">
-                                        <rect key="frame" x="526" y="35" width="506" height="69"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="523" y="53" width="506" height="69"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" name="Marion-Bold" family="Marion" pointSize="46"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="redraw" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dxm-3N-8JA">
-                                        <rect key="frame" x="811" y="287" width="98" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="803" y="277" width="98" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                         <state key="normal" title="Acquire Data">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -654,36 +646,36 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Latitude" minimumFontSize="17" id="LMN-BK-uhj">
-                                        <rect key="frame" x="720" y="175" width="128" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="712" y="165" width="128" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Longitude" minimumFontSize="17" id="CRH-l5-sJf">
-                                        <rect key="frame" x="720" y="206" width="128" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="712" y="196" width="128" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" minimumFontSize="17" id="V3o-8P-hdU">
-                                        <rect key="frame" x="720" y="239" width="97" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="712" y="229" width="97" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Time" minimumFontSize="17" id="Crt-5y-ydA">
-                                        <rect key="frame" x="720" y="270" width="128" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="712" y="260" width="128" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="ymq-S1-taP">
-                                        <rect key="frame" x="889" y="206" width="20" height="20"/>
+                                        <rect key="frame" x="881" y="196" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </activityIndicatorView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="redraw" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Lower Formation" minimumFontSize="17" id="FMh-B9-XP0">
-                                        <rect key="frame" x="843" y="590" width="176" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="835" y="649" width="176" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -694,12 +686,36 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" text="Lower Formation:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NaE-6s-Ecu">
-                                        <rect key="frame" x="655" y="590" width="167" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="647" y="649" width="167" height="29"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="iOL-Tp-ZaQ">
+                                        <rect key="frame" x="22" y="0.0" width="1023" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <items>
+                                            <barButtonItem title="Folders" width="68" id="omX-n2-Zl6">
+                                                <connections>
+                                                    <action selector="presentMaster:" destination="LFc-wQ-Gyp" id="UMF-1W-LfZ"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Formations" id="Tbv-qC-3Dd">
+                                                <connections>
+                                                    <segue destination="efl-9D-qlf" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="Tbv-qC-3Dd" id="yv4-3e-cRQ">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="4KA-NV-C0M"/>
+                                            <barButtonItem title="Edit" width="69" id="M97-hl-1T5">
+                                                <connections>
+                                                    <action selector="editPressed:" destination="LFc-wQ-Gyp" id="4Mf-77-TFe"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -709,19 +725,8 @@
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Q9B-Kc-CAU"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="d6s-9M-JS3">
-                        <barButtonItem key="leftBarButtonItem" title="Test" width="68" id="omX-n2-Zl6">
-                            <connections>
-                                <action selector="presentMaster:" destination="LFc-wQ-Gyp" id="UMF-1W-LfZ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" width="69" id="M97-hl-1T5">
-                            <connections>
-                                <action selector="editPressed:" destination="LFc-wQ-Gyp" id="4Mf-77-TFe"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationItem key="navigationItem" id="d6s-9M-JS3"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="acquireButton" destination="Dxm-3N-8JA" id="KaY-6e-gG9"/>
@@ -758,7 +763,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8910" y="-1"/>
+            <point key="canvasLocation" x="-9078" y="2143"/>
         </scene>
         <!--Strike Picker View Controller-->
         <scene sceneID="ovW-L9-di4">
@@ -783,7 +788,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7514" y="-1589"/>
+            <point key="canvasLocation" x="-6905" y="1419"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="neq-Dd-nPE">
@@ -808,7 +813,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5602" y="-738"/>
+            <point key="canvasLocation" x="-4673" y="2942"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="VXG-wO-A5P">
@@ -847,7 +852,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6543" y="-1605"/>
+            <point key="canvasLocation" x="-5614" y="2075"/>
         </scene>
         <!--Dip Direction Picker View Controller-->
         <scene sceneID="gzM-LZ-3Za">
@@ -872,7 +877,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5473" y="-41"/>
+            <point key="canvasLocation" x="-4544" y="3639"/>
         </scene>
         <!--Trend Picker View Controller-->
         <scene sceneID="Tjg-pS-3cq">
@@ -897,7 +902,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5403" y="639"/>
+            <point key="canvasLocation" x="-4474" y="4319"/>
         </scene>
         <!--Plunge Picker View Controller-->
         <scene sceneID="Yff-Cv-Agq">
@@ -922,7 +927,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6336" y="1251"/>
+            <point key="canvasLocation" x="-5407" y="4931"/>
         </scene>
         <!--Formation Folder View Controller-->
         <scene sceneID="vmK-no-er4">
@@ -974,7 +979,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5673" y="-4613"/>
+            <point key="canvasLocation" x="-4737" y="-221"/>
         </scene>
         <!--Formation Table View Controller-->
         <scene sceneID="E7H-Rg-1sX">
@@ -1021,7 +1026,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-5647" y="-3777"/>
+            <point key="canvasLocation" x="-4711" y="615"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kRT-F4-Wi6">
@@ -1044,7 +1049,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-8492" y="-4317"/>
+            <point key="canvasLocation" x="-7556" y="75"/>
         </scene>
         <!--Formation View Controller-->
         <scene sceneID="hH3-ve-g87">
@@ -1096,7 +1101,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-4097" y="-3757"/>
+            <point key="canvasLocation" x="-3161" y="635"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mn7-s1-fup">
@@ -1104,7 +1109,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUl-r4-MM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController modalPresentationStyle="formSheet" toolbarHidden="NO" id="ATM-Rf-lLX" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="500"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Wnf-Vv-Sc3">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1144,7 +1149,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6231" y="1510"/>
+            <point key="canvasLocation" x="-5302" y="5190"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="qVl-Lc-KVd">
@@ -1169,7 +1174,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6111" y="2478"/>
+            <point key="canvasLocation" x="-5182" y="6158"/>
         </scene>
         <!--Formation Folder Picker View Controller-->
         <scene sceneID="Dph-6C-M7x">
@@ -1202,31 +1207,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HzL-x8-gpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="bR5-eP-ybf" customClass="InitialDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xRi-62-fEY">
-                        <rect key="frame" x="0.0" y="64" width="703" height="704"/>
+                        <rect key="frame" x="0.0" y="20" width="703" height="748"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="LZj-xZ-s5w">
-                                <rect key="frame" x="0.0" y="-300" width="703" height="44"/>
+                                <rect key="frame" x="0.0" y="-256" width="703" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items/>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" image="GeoFieldBookFrontPage.png" id="fCc-Vf-J2h">
-                                <rect key="frame" x="0.0" y="44" width="703" height="660"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="44" width="703" height="704"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="pY1-e7-PTe">
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem title="Folders" width="65" id="JSv-fC-Mw5">
+                                        <connections>
+                                            <action selector="presentMaster:" destination="bR5-eP-ybf" id="Q8B-6N-OlZ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Formations" id="ARI-r5-bW1">
+                                        <connections>
+                                            <segue destination="K4c-o6-Ecw" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="ARI-r5-bW1" id="W1W-YI-rxo">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="1qC-zT-fpy">
-                        <barButtonItem key="leftBarButtonItem" title="Test" width="65" id="JSv-fC-Mw5">
-                            <connections>
-                                <action selector="presentMaster:" destination="bR5-eP-ybf" id="Q8B-6N-OlZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="1qC-zT-fpy"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="geofieldbookLogo" destination="fCc-Vf-J2h" id="zZf-Eh-tAa"/>
                         <segue destination="LFc-wQ-Gyp" kind="push" identifier="Show Record Info" id="YEc-40-dtY"/>
                     </connections>
                 </viewController>
@@ -1237,7 +1256,7 @@
         <scene sceneID="TWd-TZ-edg">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="trG-xh-o8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="OMU-XQ-p1G" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="OMU-XQ-p1G" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="kbO-WO-2Gc">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -1251,11 +1270,380 @@
             </objects>
             <point key="canvasLocation" x="-10964" y="-41"/>
         </scene>
+        <!--Formation Folder Table View Controller - Formation Folders-->
+        <scene sceneID="ozc-9T-NrV">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AbY-aR-eVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="7wW-l7-Odi" customClass="FormationFolderTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Scr-Et-bdE">
+                        <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" textLabel="mgj-RC-Uay" detailTextLabel="MbS-wy-Mj0" style="IBUITableViewCellStyleSubtitle" id="fHq-aa-vsN">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mgj-RC-Uay">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MbS-wy-Mj0">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="bTt-pZ-hvV" kind="push" identifier="Show Formations" id="NAC-s2-hZr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7wW-l7-Odi" id="P6m-F9-jaN"/>
+                            <outlet property="delegate" destination="7wW-l7-Odi" id="UfW-Cb-UQ9"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Add Folder" id="oZa-OQ-s2x">
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="mID-1H-tZM" kind="modal" identifier="Formation Folder Manipulation" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="lgo-eY-tGN"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Formation Folders" id="Lab-rh-YaM">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="W3z-IT-od0">
+                            <connections>
+                                <action selector="editPressed:" destination="7wW-l7-Odi" id="ZSp-tO-0sG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-7512" y="-1995"/>
+        </scene>
+        <!--Formation Folder View Controller-->
+        <scene sceneID="sx2-0p-cS8">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dbc-ov-RFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="mID-1H-tZM" customClass="FormationFolderViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gWI-OL-bUO">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation Folder Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WvN-Ql-604">
+                                <rect key="frame" x="20" y="137" width="984" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Formation Folder Name" minimumFontSize="17" clearButtonMode="whileEditing" id="M0j-ct-Gst">
+                                <rect key="frame" x="20" y="197" width="379" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="otP-oh-pn3">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="B06-me-EJn">
+                                        <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="mID-1H-tZM" id="EK3-g6-sY4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="xoe-Dg-Ng5"/>
+                                    <barButtonItem systemItem="done" id="F5o-R7-wgh">
+                                        <connections>
+                                            <action selector="donePressed:" destination="mID-1H-tZM" id="cao-u1-qbm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="420" height="300"/>
+                    <connections>
+                        <outlet property="nameTextField" destination="M0j-ct-Gst" id="rhS-pT-stb"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-6259" y="-2237"/>
+        </scene>
+        <!--Formation Table View Controller-->
+        <scene sceneID="giG-Sv-hiB">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lb8-Kf-oWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="bTt-pZ-hvV" customClass="FormationTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Bg1-VZ-TJc">
+                        <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Cell" id="aMI-lP-lii">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bTt-pZ-hvV" id="bfp-Ga-UEf"/>
+                            <outlet property="delegate" destination="bTt-pZ-hvV" id="j9e-Zv-39R"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Add Formation" id="1b6-K0-Mqc">
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="ajM-7B-Dnf" kind="modal" identifier="Formation Manipulation" modalPresentationStyle="currentContext" id="ioV-8A-gBT"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="bzj-6M-Nxp">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Z3g-mL-kli">
+                            <connections>
+                                <action selector="editPressed:" destination="bTt-pZ-hvV" id="mrM-hZ-PON"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-6233" y="-1401"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Ji-Zw-FkS">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yC1-SY-6eC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController toolbarHidden="NO" id="K4c-o6-Ecw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="500"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="E5g-gW-ShG">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ccf-EH-kSz">
+                        <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="7wW-l7-Odi" kind="relationship" relationship="rootViewController" id="8rE-vg-5zm"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-9078" y="-1941"/>
+        </scene>
+        <!--Formation View Controller-->
+        <scene sceneID="Rw2-Wx-pEO">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7G-5J-iMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="ajM-7B-Dnf" customClass="FormationViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ixd-QQ-X77">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4J1-1G-Uhq">
+                                <rect key="frame" x="20" y="137" width="984" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Formation Name" minimumFontSize="17" id="e9p-l3-f3q">
+                                <rect key="frame" x="20" y="197" width="379" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="APf-2c-hWQ">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="4C0-D3-rj3">
+                                        <color key="tintColor" red="0.74644027219999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="ajM-7B-Dnf" id="plK-tY-ahc"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="PuS-pY-xcM"/>
+                                    <barButtonItem systemItem="done" id="Vyf-xO-Eh5">
+                                        <connections>
+                                            <action selector="donePressed:" destination="ajM-7B-Dnf" id="vxW-B7-MAo"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="420" height="300"/>
+                    <connections>
+                        <outlet property="nameTextField" destination="e9p-l3-f3q" id="O0E-BS-tEs"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-4683" y="-1381"/>
+        </scene>
     </scenes>
     <resources>
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
         <image name="RecordVCBackground.jpg" width="536" height="688"/>
     </resources>
+    <classes>
+        <class className="CoreDataTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="CustomRecordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="DipDirectionPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipDirectionPickerViewController.h"/>
+        </class>
+        <class className="DipPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipPickerViewController.h"/>
+        </class>
+        <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
+        </class>
+        <class className="FormationFolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
+        </class>
+        <class className="FormationFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FormationPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationPickerViewController.h"/>
+        </class>
+        <class className="FormationTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationTableViewController.h"/>
+        </class>
+        <class className="FormationViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="InitialDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="geofieldbookLogo" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="ModalFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="folderDescriptionTextArea" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="folderNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ModalRecordTypeSelector" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalRecordTypeSelector.h"/>
+            <relationships>
+                <relationship kind="outlet" name="recordTypePicker" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+        <class className="PickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+        <class className="PlungePickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlungePickerViewController.h"/>
+        </class>
+        <class className="RecordTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="RecordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="browseButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="fieldObservationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="latitudeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="longitudeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="plungeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="takePhotoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="trendLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="trendTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="upperFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upperFormationTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="StrikePickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StrikePickerViewController.h"/>
+        </class>
+        <class className="TrendPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrendPickerViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

@@ -127,6 +127,29 @@
     return detailvc;
 }
 
+#pragma mark - Detail View Manipulators
+
+- (void)updateDetailViewWithRowOfIndexPath:(NSIndexPath *)indexPath {
+    //If the current detail view vc is not a RecordViewController, push it
+    RecordViewController *recordDetailVC=[self recordDetailViewController];
+    if (!recordDetailVC) {
+        UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+        id detailvc=detailNav.topViewController;
+        [detailvc performSegueWithIdentifier:@"Show Record Info" sender:self];
+        recordDetailVC=[self recordDetailViewController];
+    }
+    
+    //Set up the record for the record view controller
+    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    recordDetailVC.record=record;
+    
+    //Save the chosen record
+    self.chosenRecord=record;
+    
+    //Set the delegate of the destination view controller to be self
+    recordDetailVC.delegate=self;
+}
+
 #pragma mark - Autosave Controller
 
 - (UIAlertView *)autosaveAlertForValidationOfRecordInfo:(NSDictionary *)recordInfo {
@@ -177,16 +200,17 @@
 //Ask the folder tvc
 - (void)setupAutosaveBeforeGoingOffStack {
     //Get the detail view controller
-    id detailvc=[self.splitViewController.viewControllers lastObject];
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id detailvc=detailNav.topViewController;
     if (![detailvc isKindOfClass:[RecordViewController class]])
         detailvc=nil;
     RecordViewController *detail=(RecordViewController *)detailvc;
     
     //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!!!!)
-    if ([detail isInEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {
+    if ([detail isInEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {        
         //Get the record
-        Record *modifiedRecord=[(RecordViewController *)detailvc record];
-        NSDictionary *recordModifiedInfo=[(RecordViewController *)detailvc dictionaryFromForm];
+        Record *modifiedRecord=detail.record;
+        NSDictionary *recordModifiedInfo=[detail dictionaryFromForm];
         UIManagedDocument *database=self.database;
         
         //Get the approriate alert view
@@ -194,9 +218,15 @@
         
         [self.autosaveDelegate recordTableViewController:self showAlert:autosaveAlert andExecuteBlockOnCancel:^{
             //NSLog(@"Cancel autosave alert!");
+            
+            //Put the detail into non-editing mode
+            [detail setEditing:NO animated:YES];
         } andExecuteBlock:^{
             //Update the record info if the info passed validations
             [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
+            
+            //Put the detail into non-editing mode
+            [detail setEditing:NO animated:YES];
             
             //Save changes to database
             [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
@@ -235,19 +265,24 @@
     }];
 }
 
-- (void)highlightRecord:(Record *)record {
+- (void)highlightRecord:(Record *)record updateDetailView:(BOOL)willUpdateDetailView {
     //get ithe index path of the specified record
     NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
     
     //Select the new record
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    
+    //Update the detail view
+    if (willUpdateDetailView)
+        [self updateDetailViewWithRowOfIndexPath:indexPath];
 }
 
 //Put the right hand side (detail view) into editing mode, probably used when a new record is created
 - (void)putDetailViewIntoEditingMode {
     //Get the detail vc and if it's of RecordViewController class, put it into editing mode
-    id detailvc=[self.splitViewController.viewControllers lastObject];
-         [detailvc setEditing:YES animated:YES validationEnabled:NO];
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id detailvc=detailNav.topViewController;
+         [detailvc setEditing:YES animated:YES];
 }
 
 //Create a new record entity with the specified record type
@@ -255,14 +290,11 @@
     Record *record=[Record recordForRecordType:recordType andFolderName:self.folder.folderName 
                         inManagedObjectContext:self.database.managedObjectContext];
     
-    //highlight the newly created record
-    [self highlightRecord:record];
-    
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
-            //highlight the newly created record
-            [self highlightRecord:record];
+            //highlight the newly created record and update the detail view accordingly
+            [self highlightRecord:record updateDetailView:YES];
             
             //Put the detail view (now showing the newly created record's info) into editing mode
             [self putDetailViewIntoEditingMode];
@@ -281,9 +313,9 @@
     Record *chosenRecord=self.chosenRecord;
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
-            //highlight the newly modified record if it's also the currently chosen record
+            //highlight the newly modified record if it's also the currently chosen record and update the detail view accordingly
             if (record==chosenRecord)
-                [self highlightRecord:record];
+                [self highlightRecord:record updateDetailView:YES];
         }
     }];
 }
@@ -367,9 +399,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Highlight current selected record
+    //Highlight current selected record but won't update the detail view
     if (self.chosenRecord)
-        [self highlightRecord:self.chosenRecord];
+        [self highlightRecord:self.chosenRecord updateDetailView:NO];
     
     //Set the title of the set location button
     NSString *formationFolderName=self.folder.formationFolder.folderName;
@@ -495,24 +527,8 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //If the current detail view vc is not a RecordViewController, push it
-    RecordViewController *recordDetailVC=[self recordDetailViewController];
-    if (!recordDetailVC) {
-        UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-        id detailvc=detailNav.topViewController;
-        [detailvc performSegueWithIdentifier:@"Show Record Info" sender:self];
-        recordDetailVC=[self recordDetailViewController];
-    }
-        
-    //Set up the record for the record view controller
-    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    recordDetailVC.record=record;
-        
-    //Save the chosen record
-    self.chosenRecord=record;
-    
-    //Set the delegate of the destination view controller to be self
-    recordDetailVC.delegate=self;
+    //Update the detail view
+    [self updateDetailViewWithRowOfIndexPath:indexPath];
 }
 
 @end

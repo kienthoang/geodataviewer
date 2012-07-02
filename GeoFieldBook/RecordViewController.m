@@ -23,6 +23,9 @@
 #import "Fault.h"
 #import "Other.h"
 
+#import "FormationFolderTableViewController.h"
+#import "GeoDatabaseManager.h"
+
 #import "StrikePickerViewController.h"
 #import "DipPickerViewController.h"
 #import "DipDirectionPickerViewController.h"
@@ -70,6 +73,8 @@
 @property (nonatomic,strong) NSDate *acquiredDate;
 @property (nonatomic,weak) UIImage *acquiredImage;
 @property (nonatomic) BOOL hasTakenImage;
+
+@property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 
 #pragma mark - Non-interactive UI Elements
 
@@ -131,6 +136,8 @@
 @synthesize acquiredImage=_acquiredImage;
 @synthesize hasTakenImage=_hasTakenImage;
 
+@synthesize formationFolderPopoverController=_formationFolderPopoverController;
+
 @synthesize record=_record;
 @synthesize imageView = _imageView;
 @synthesize recordTypeLabel = _recordTypeLabel;
@@ -175,6 +182,12 @@
 @synthesize masterPopoverController=_masterPopoverController;
 
 #pragma mark - Getters and Setters
+
+- (void)setMasterPopoverController:(UIPopoverController *)masterPopoverController {
+    _masterPopoverController=masterPopoverController;
+    
+    NSLog(@"Setting master popover: %@",masterPopoverController);
+}
 
 - (void)setRecord:(Record *)record {
     //If the previous record is not nil, show an autosave alert
@@ -433,10 +446,15 @@
 
 - (IBAction)presentMaster:(UIBarButtonItem *)sender {
     if (self.masterPopoverController) {
-        if (![self.masterPopoverController isPopoverVisible])
-            [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        else
-            [self.masterPopoverController dismissPopoverAnimated:YES];
+        //Dismiss the formation folder popover if it's visible on screen
+        if (self.formationFolderPopoverController.isPopoverVisible)
+            [self.formationFolderPopoverController dismissPopoverAnimated:YES];
+                
+        //Dismiss the keyboard
+        [self resignAllTextFieldsAndAreas];
+        
+        //Present the master popover
+        [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];        
     }
 }
 
@@ -748,6 +766,36 @@
         //Set the previously selected formation name
         [segue.destinationViewController setPreviousSelection:self.upperFormationTextField.text];
     }
+    
+    //Seguing to the modal formation folder tvc
+    else if ([segue.identifier isEqualToString:@"Show Formation Folders"]) {
+        //Get the destination view controller
+        UINavigationController *navigationController=segue.destinationViewController;
+        FormationFolderTableViewController *destinationViewController=(FormationFolderTableViewController *)navigationController.topViewController;
+        
+        //Dismiss the old popover if its still visible
+        if (self.formationFolderPopoverController.isPopoverVisible)
+            [self.formationFolderPopoverController dismissPopoverAnimated:YES];
+        
+        //Save the popover
+        self.formationFolderPopoverController=[(UIStoryboardPopoverSegue *)segue popoverController];
+        
+        //Get the shared database
+        UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+        
+        //Open the database if it's still closed
+        if (database.documentState==UIDocumentStateClosed) {
+            [database openWithCompletionHandler:^(BOOL success){
+                destinationViewController.database=database;
+            }];
+        } else if (database.documentState==UIDocumentStateNormal) {
+            destinationViewController.database=database;
+        }
+        
+        //Dismiss the master popover if it's visible on the screen
+        if (self.masterPopoverController.isPopoverVisible)
+            [self.masterPopoverController dismissPopoverAnimated:NO];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -763,7 +811,6 @@
     
     //initialize and set up location services
     [self setUpLocationManager];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated   
@@ -828,7 +875,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-	return YES;
+	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 #pragma mark - Set up the record form for each individual type of record
