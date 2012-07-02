@@ -183,12 +183,6 @@
 
 #pragma mark - Getters and Setters
 
-- (void)setMasterPopoverController:(UIPopoverController *)masterPopoverController {
-    _masterPopoverController=masterPopoverController;
-    
-    NSLog(@"Setting master popover: %@",masterPopoverController);
-}
-
 - (void)setRecord:(Record *)record {
     //If the previous record is not nil, show an autosave alert
     //If self is still in editing mode and the delegate has not been kicked off the anvigation stack, notify the delegate before going off screen
@@ -448,13 +442,13 @@
     if (self.masterPopoverController) {
         //Dismiss the formation folder popover if it's visible on screen
         if (self.formationFolderPopoverController.isPopoverVisible)
-            [self.formationFolderPopoverController dismissPopoverAnimated:YES];
-                
+            [self.formationFolderPopoverController dismissPopoverAnimated:NO];
+
         //Dismiss the keyboard
         [self resignAllTextFieldsAndAreas];
         
         //Present the master popover
-        [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];        
+        [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];  
     }
 }
 
@@ -605,7 +599,7 @@
         CGRect aRect=self.view.frame;
         aRect.size.height-=keyboardSize.height;
         if (!CGRectContainsPoint(aRect, self.fieldObservationTextArea.frame.origin)) {
-            CGPoint scrollPoint=CGPointMake(0.0,keyboardSize.height-self.fieldObservationTextArea.frame.origin.y);
+            CGPoint scrollPoint=CGPointMake(0.0,self.fieldObservationTextArea.frame.origin.y-self.fieldObservationLabel.frame.size.height);
             [self.scrollView setContentOffset:scrollPoint animated:YES];
         }
     }
@@ -775,7 +769,12 @@
         
         //Dismiss the old popover if its still visible
         if (self.formationFolderPopoverController.isPopoverVisible)
-            [self.formationFolderPopoverController dismissPopoverAnimated:YES];
+            [self.formationFolderPopoverController dismissPopoverAnimated:NO];
+        
+        //Dismiss the master popover if it's visible on the screen
+        if (self.masterPopoverController.isPopoverVisible) {
+            [self.masterPopoverController dismissPopoverAnimated:NO];
+        }
         
         //Save the popover
         self.formationFolderPopoverController=[(UIStoryboardPopoverSegue *)segue popoverController];
@@ -791,10 +790,6 @@
         } else if (database.documentState==UIDocumentStateNormal) {
             destinationViewController.database=database;
         }
-        
-        //Dismiss the master popover if it's visible on the screen
-        if (self.masterPopoverController.isPopoverVisible)
-            [self.masterPopoverController dismissPopoverAnimated:NO];
     }
 }
 
@@ -821,6 +816,14 @@
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //Present the master popover
+    [self.masterPopoverController dismissPopoverAnimated:NO];
+    //[self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)viewWillLayoutSubviews {

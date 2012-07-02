@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -708,6 +707,17 @@
                                                     </segue>
                                                 </connections>
                                             </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="nDa-rN-wFU"/>
+                                            <barButtonItem style="plain" id="9o3-1G-Rsn">
+                                                <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Y7X-Be-IoD">
+                                                    <rect key="frame" x="438" y="7" width="147" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <segments>
+                                                        <segment title="Data"/>
+                                                        <segment title="Map"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="4KA-NV-C0M"/>
                                             <barButtonItem title="Edit" width="69" id="M97-hl-1T5">
                                                 <connections>
@@ -1235,6 +1245,18 @@
                                             </segue>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YKI-De-NTa"/>
+                                    <barButtonItem style="plain" id="XNT-7v-4UD">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Cni-9L-vsZ">
+                                            <rect key="frame" x="279" y="7" width="145" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Data"/>
+                                                <segment title="Map"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="etg-fb-QcX"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -1568,6 +1590,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="geofieldbookLogo" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>

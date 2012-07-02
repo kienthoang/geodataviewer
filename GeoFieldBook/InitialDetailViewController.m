@@ -7,6 +7,7 @@
 //
 
 #import "InitialDetailViewController.h"
+#import "RecordViewController.h"
 #import "FormationFolderTableViewController.h"
 #import "GeoDatabaseManager.h"
 
@@ -17,6 +18,8 @@
 
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
+
 @end
 
 @implementation InitialDetailViewController
@@ -26,6 +29,7 @@
 
 @synthesize masterPopoverController=_masterPopoverController;
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
+@synthesize masterPresenter = _masterPresenter;
 
 - (IBAction)presentMaster:(UIBarButtonItem *)sender {
     if (self.masterPopoverController) {
@@ -43,9 +47,16 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //If seguing to a record view controller
     if ([segue.identifier isEqualToString:@"Show Record Info"]) {
-        if (self.masterPopoverController) {
+        if (self.masterPopoverController) 
+        {
+            //Dismiss the master popover if it's visible on the screen
+            if (self.masterPopoverController.isPopoverVisible)
+                [self.masterPopoverController dismissPopoverAnimated:NO];
+            
             //Transfer the master popover over
-            [segue.destinationViewController setMasterPopoverController:self.masterPopoverController];
+            UIPopoverController *masterPopoverController=[[UIPopoverController alloc] initWithContentViewController:self.masterPopoverController.contentViewController];
+            masterPopoverController.delegate=nil;
+            [segue.destinationViewController setMasterPopoverController:masterPopoverController];
         }
     }
     
@@ -99,6 +110,7 @@
 
 - (void)viewDidUnload {
     [self setGeofieldbookLogo:nil];
+    [self setMasterPresenter:nil];
     [super viewDidUnload];
 }
 @end
