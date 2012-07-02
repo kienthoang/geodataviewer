@@ -244,6 +244,21 @@
 
 #pragma mark - View lifecycle
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    //Set the delegate of the split vc to be self
+    self.splitViewController.delegate=self;
+    
+    //Disable swiping (which'd show the master)
+    self.splitViewController.presentsWithGesture=NO;
+    
+    //Workaround to make the detail view go on full screen
+//    UIWindow *window=[UIApplication sharedApplication].keyWindow;
+//    [self.splitViewController.view removeFromSuperview];
+//    [window addSubview:[[self.splitViewController.viewControllers lastObject] view]];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
@@ -256,16 +271,6 @@
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
         } 
     }];
-    
-    //Set self to be the split view's delegate
-    self.splitViewController.delegate=self;
-    
-    //Perform a segue to the initial view controller if no autosaver blocks are set
-    if (![[self.splitViewController.viewControllers lastObject] isKindOfClass:[InitialDetailViewController class]]) 
-    {
-        if (!self.autosaverCancelBlock || !self.autosaverConfirmBlock)
-            [self showInitialDetailView];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -279,6 +284,17 @@
 {
     // Support all orientations
     return YES;
+}
+
+#pragma mark - Target-Action Handlers
+
+- (IBAction)editPressed:(UIBarButtonItem *)sender {
+    //Set the table view to editting mode
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+
+    //Change the style of the button to edit or done
+    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    sender.title=self.tableView.editing ? @"Done" : @"Edit";
 }
 
 #pragma mark - Prepare for segues
@@ -331,17 +347,6 @@
         UIStoryboardPopoverSegue *popoverSegue=(UIStoryboardPopoverSegue *)segue;
         self.formationPopoverController=popoverSegue.popoverController;
     }
-}
-
-#pragma mark - Target-Action Handlers
-
-- (IBAction)editPressed:(UIBarButtonItem *)sender {
-    //Set the table view to editting mode
-    [self.tableView setEditing:!self.tableView.editing animated:YES];
-
-    //Change the style of the button to edit or done
-    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-    sender.title=self.tableView.editing ? @"Done" : @"Edit";
 }
 
 #pragma mark - ModalFolderDelegate methods
@@ -424,7 +429,8 @@
 
 - (id <UISplitViewBarButtonPresenter>)barButtonPresenter {
     //Get the detail view controller
-    id detailvc=[self.splitViewController.viewControllers lastObject];
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id detailvc=detailNav.topViewController;
     
     //if the detail view controller does not want to be the splitview bar button presenter, set detailvc to nil
     if (![detailvc conformsToProtocol:@protocol(UISplitViewBarButtonPresenter)]) {
@@ -439,27 +445,17 @@
          withBarButtonItem:(UIBarButtonItem *)barButtonItem 
       forPopoverController:(UIPopoverController *)pc
 {
-    //Set the bar button item's title to self's title
-    barButtonItem.title=self.navigationController.topViewController.navigationItem.title;
-    
-    //Put up the button
-    [self barButtonPresenter].splitViewBarButtonItem = barButtonItem;
+    //The master popover
+    UIPopoverController *masterPopover=[[UIPopoverController alloc] initWithContentViewController:pc.contentViewController];
+    [[self barButtonPresenter] setMasterPopoverController:masterPopover];
 }
 
-- (void)splitViewController:(UISplitViewController *)svc 
-     willShowViewController:(UIViewController *)navigation 
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem 
-{
-    //Take the button off
-    [self barButtonPresenter].splitViewBarButtonItem=nil;
-}
-
-//Hide the master in portrait modes only
+//Hide the master in all modes
 -(BOOL)splitViewController:(UISplitViewController *)svc 
   shouldHideViewController:(UIViewController *)vc 
              inOrientation:(UIInterfaceOrientation)orientation
 {
-    return UIInterfaceOrientationIsPortrait(orientation);
+    return YES;
 }
 
 - (void)viewDidUnload {

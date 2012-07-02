@@ -10,6 +10,6 @@
 
 @protocol UISplitViewBarButtonPresenter <NSObject>
 
-@property (nonatomic,strong) UIBarButtonItem *splitViewBarButtonItem; 
+@property (nonatomic,strong) UIPopoverController *masterPopoverController;
 
 @end

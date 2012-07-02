@@ -43,7 +43,6 @@
 #define LOWER_FORMATION_PICKER_NAME @"RecordViewController.Lower_Formation_Picker"
 #define UPPER_FORMATION_PICKER_NAME @"RecordViewController.Upper_Formation_Picker"
 
-- (void)updateSplitViewBarButtonPresenterWith:(UIBarButtonItem *)splitViewBarButtonItem;
 - (void)userDoneEditingRecord;         //handles when user finishes editing the record's info
 - (void)resignAllTextFieldsAndAreas;
 
@@ -119,7 +118,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *upperFormationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fieldObservationLabel;
 
-
 @end
 
 @implementation RecordViewController
@@ -164,7 +162,6 @@
 @synthesize editing=_editing;
 
 @synthesize toolbar=_toolbar;
-@synthesize splitViewBarButtonItem=_splitViewBarButtonItem;
 
 @synthesize delegate=_delegate;
 
@@ -175,38 +172,31 @@
 
 @synthesize acquiredDate=_acquireDate;
 
+@synthesize masterPopoverController=_masterPopoverController;
+
 #pragma mark - Getters and Setters
 
-- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem {
-    //Update the bar button presenter
-    [self updateSplitViewBarButtonPresenterWith:splitViewBarButtonItem];
-    
-    _splitViewBarButtonItem=splitViewBarButtonItem;
-}
-
 - (void)setRecord:(Record *)record {
+    //If the previous record is not nil, show an autosave alert
+    //If self is still in editing mode and the delegate has not been kicked off the anvigation stack, notify the delegate before going off screen
+    if (self.record && self.editing && self.delegate) 
+    {
+        //Notify the delegate of the changes in the record info
+        [self.delegate userDidNavigateAwayFrom:self 
+                          whileModifyingRecord:self.record 
+                             withNewRecordInfo:[self dictionaryFromForm]];
+        
+        //End editing mode
+        [self setEditing:NO animated:YES];
+    }
+    
     _record=record;
     
     //Update the text fields and labels
     [self updateFormForRecord:self.record];
+    
+    [self.view setNeedsDisplay];
 }
-
-- (void)updateSplitViewBarButtonPresenterWith:(UIBarButtonItem *)splitViewBarButtonItem {
-    //Add the button to the toolbar
-    NSMutableArray *items=[self.toolbar.items mutableCopy];
-    
-    //Remove the old button if it exists
-    if (self.splitViewBarButtonItem)
-        [items removeObject:self.splitViewBarButtonItem];
-    
-    //Add the new button on the leftmost if it's not nil
-    if (splitViewBarButtonItem)
-        [items insertObject:splitViewBarButtonItem atIndex:0];
-    
-    //Set the items to be the toolbar's items
-    self.toolbar.items=[items copy];
-}
-
 
 - (NSArray *)textFields {
     return [NSArray arrayWithObjects:self.recordNameTextField,self.strikeTextField,self.dipTextField,self.dipDirectionTextField,self.formationTextField,self.trendTextField,self.plungeTextField,self.lowerFormationTextField,self.upperFormationTextField, nil];
@@ -358,6 +348,16 @@
 
 #define IMAGE_IN_POPOVER YES
 
+//Dismiss the image picker
+- (void)dismissImagePicker
+{	
+    //Dismiss the picker if it's on screen
+    if (self.imagePopover.isPopoverVisible) {
+        [self.imagePopover dismissPopoverAnimated:YES];
+        self.imagePopover = nil;
+    }
+}
+
 - (IBAction)takePhoto:(UIButton *)sender {
     //Allow the user to take the photo if camera is available
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -386,16 +386,6 @@
         
         //Specify that the image picker presenter is the sender
         self.imagePickerPresenter=sender;
-    }
-}
-
-//Dismiss the image picker
-- (void)dismissImagePicker
-{	
-    //Dismiss the picker if it's on screen
-    if (self.imagePopover.isPopoverVisible) {
-        [self.imagePopover dismissPopoverAnimated:YES];
-        self.imagePopover = nil;
     }
 }
 
@@ -435,7 +425,19 @@
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Toggle the editting mode
-    [self setEditing:!self.editing animated:YES validationEnabled:YES];
+    if (self.editing)
+        [self endEditingModeAndSaveWithValidationsEnabled:YES];
+    else 
+        [self setEditing:YES animated:YES];
+}
+
+- (IBAction)presentMaster:(UIBarButtonItem *)sender {
+    if (self.masterPopoverController) {
+        if (![self.masterPopoverController isPopoverVisible])
+            [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        else
+            [self.masterPopoverController dismissPopoverAnimated:YES];
+    }
 }
 
 #pragma mark - Form Validations
@@ -513,10 +515,10 @@
     if ([self validateMandatoryFieldsOfInfo:recordInfo alertsEnabled:YES])
         [self userDoneEditingRecord];
     else 
-        [self setEditing:YES animated:YES validationEnabled:NO];
+        [self setEditing:YES animated:YES];
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated validationEnabled:(BOOL)validationEnabled { 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated { 
     _editing=editing;
     
     //Toggle enable/disable dependending on whether self is in editing mode or not
@@ -525,18 +527,22 @@
     //Style input fields accordingly to editing
     [self styleFormInputFields];
     
-    //If the editing mode is over, process the newly modified info
-    if (!self.editing) {
-        //Stop updating location if still updating
+    //Stop updating location if still updating and self goes out of editing mode
+    if (!self.editing && [self.gatheringGPS isAnimating])
         [self timerFired];
-        
-        if (validationEnabled)
-            //Process the user input with validations
-            [self processFormInputsWithValidations];
-        else
-            //Process without validations
-            [self userDoneEditingRecord];
-    }
+}
+
+- (void)endEditingModeAndSaveWithValidationsEnabled:(BOOL)validationEnabled {
+    //End editing mode
+    [self setEditing:NO animated:YES];
+    
+    //Process form inputs
+    if (validationEnabled)
+        //Process the user input with validations
+        [self processFormInputsWithValidations];
+    else
+        //Process without validations
+        [self userDoneEditingRecord];
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -546,10 +552,7 @@
     if ([alertView.title isEqualToString:@"Missing Information"]) {
         if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
             //End editing mode without going through the validations again
-            [self setEditing:NO animated:YES validationEnabled:NO];
-            
-            //Process the form inputs
-            [self userDoneEditingRecord];
+            [self endEditingModeAndSaveWithValidationsEnabled:NO];
         }
     }
 }
@@ -657,14 +660,6 @@
         //Set the text of the formation text field
         self.upperFormationTextField.text=formationName;
     }
-}
-
-#pragma mark - UINavigationControllerDelegate methods
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)newMaster animated:(BOOL)animated {
-    //Change the splitview button's title if it exists
-    if (self.splitViewBarButtonItem)
-        self.splitViewBarButtonItem.title=newMaster.navigationItem.title;
 }
 
 #pragma mark - Prepare for segues
@@ -775,27 +770,10 @@
 {
     [super viewWillAppear:animated];
     
-    //Set self to be the master's navigation controller's delegate to change the button's title when a push segue in master happens
-    UINavigationController *masterNavigation=[self.splitViewController.viewControllers objectAtIndex:0];
-    masterNavigation.delegate=self;
-    
-    //Update the bar button presenter if self.splitViewBarButtonItem exists (transferred from somewhere else when this vc got segued to)
-    [self updateSplitViewBarButtonPresenterWith:self.splitViewBarButtonItem];
-    
     //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
     [self.view addGestureRecognizer:tapGestureRecognizer];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    //If self is still in editing mode and the delegate has not been kicked off the anvigation stack, notify the delegate before going off screen
-    if (self.editing && self.delegate)
-        [self.delegate userDidNavigateAwayFrom:self 
-                          whileModifyingRecord:self.record 
-                             withNewRecordInfo:[self dictionaryFromForm]];
 }
 
 - (void)viewWillLayoutSubviews {

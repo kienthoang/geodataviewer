@@ -53,7 +53,6 @@ static GeoDatabaseManager *standardDatabaseManager;
                    forSaveOperation:UIDocumentSaveForCreating 
                   completionHandler:^(BOOL success){
                       if (success) {
-                          NSLog(@"Database created: %@",self.geoFieldBookDatabase);
                           if (self.completionBlockForFetchingDatabase)
                               self.completionBlockForFetchingDatabase(YES);
                       } else {

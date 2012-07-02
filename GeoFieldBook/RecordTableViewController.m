@@ -30,6 +30,8 @@
 
 - (void)autosaveRecord:(Record *)record withNewRecordInfo:(NSDictionary *)recordInfo;
 
+- (RecordViewController *)recordDetailViewController;
+
 #pragma mark - Temporary record's modified info
 
 @property (nonatomic,strong) Record *modifiedRecord;
@@ -76,6 +78,19 @@
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+}
+
+#pragma mark - Getters
+
+- (RecordViewController *)recordDetailViewController {
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id recordDetailVC=detailNav.topViewController;
+    
+    //Set the record detail vc to nil if the current detail view vc is of class RecordViewController
+    if (![recordDetailVC isKindOfClass:[RecordViewController class]])
+        recordDetailVC=nil;
+    
+    return recordDetailVC;
 }
 
 #pragma mark - Setters
@@ -226,9 +241,6 @@
     
     //Select the new record
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-    
-    //Show the record on the detail view
-    [self performSegueWithIdentifier:@"Show Record" sender:[self.fetchedResultsController indexPathForObject:record]];
 }
 
 //Put the right hand side (detail view) into editing mode, probably used when a new record is created
@@ -266,10 +278,11 @@
     [record updateWithNewRecordInfo:recordInfo];
     
     //Save changes to database
+    Record *chosenRecord=self.chosenRecord;
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
             //highlight the newly modified record if it's also the currently chosen record
-            if (record==self.chosenRecord)
+            if (record==chosenRecord)
                 [self highlightRecord:record];
         }
     }];
@@ -329,7 +342,7 @@
 - (void)recordViewController:(RecordViewController *)sender 
          userDidModifyRecord:(Record *)record 
            withNewRecordInfo:(NSDictionary *)recordInfo
-{
+{    
     //Modify the specified record with the specified info
     [self modifyRecord:record withNewInfo:recordInfo];
 }
@@ -353,6 +366,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //Highlight current selected record
+    if (self.chosenRecord)
+        [self highlightRecord:self.chosenRecord];
     
     //Set the title of the set location button
     NSString *formationFolderName=self.folder.formationFolder.folderName;
@@ -378,6 +395,23 @@
 	return YES;
 }
 
+#pragma mark - Target-Action Handlers
+
+- (IBAction)editPressed:(UIBarButtonItem *)sender {
+    //Set the table view to editting mode
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+    
+    //Change the style of the button to edit or done
+    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    sender.title=self.tableView.editing ? @"Done" : @"Edit";
+}
+
+- (IBAction)controlPressed:(UIBarButtonItem *)sender {
+    //Set up an action sheet of control buttons
+    UIActionSheet *controlActionSheet=[[UIActionSheet alloc] initWithTitle:@"Control Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Importing Records",@"Exporting Records",@"Set Location", nil];
+    [controlActionSheet showInView:self.view];
+}
+
 #pragma mark - Prepare for segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -390,31 +424,6 @@
         //End the table view's editing mode if the table is in editing mode
         if (self.tableView.editing)
             [self editPressed:self.editButton];
-    } else if ([segue.identifier isEqualToString:@"Show Record"]) {
-        //Transfer the bar button item over
-        id <UISplitViewBarButtonPresenter> detailvc=[self barButtonPresenter];
-        if (detailvc)
-            [segue.destinationViewController setSplitViewBarButtonItem:[detailvc splitViewBarButtonItem]];
-        
-        
-        NSIndexPath *indexPath=nil;
-        //if the sender is a table view cell
-        if ([sender isKindOfClass:[UITableViewCell class]])
-            indexPath=[self.tableView indexPathForCell:sender];
-        
-        //else if the sender is an index path (probably sent by the createRecordWithRecordType method)
-        else if ([sender isKindOfClass:[NSIndexPath class]])
-            indexPath=(NSIndexPath *)sender;
-        
-        //Set up the record for the record view controller
-        Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-        [segue.destinationViewController setRecord:record];
-        
-        //Save the chosen record
-        self.chosenRecord=record;
-        
-        //Set the delegate of the destination view controller to be self
-        [segue.destinationViewController setDelegate:self];
     }
     
     //Seguing to the formation folder picker popover
@@ -436,22 +445,6 @@
     }
 }
 
-#pragma mark - Target-Action Handlers
-
-- (IBAction)editPressed:(UIBarButtonItem *)sender {
-    //Set the table view to editting mode
-    [self.tableView setEditing:!self.tableView.editing animated:YES];
-    
-    //Change the style of the button to edit or done
-    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-    sender.title=self.tableView.editing ? @"Done" : @"Edit";
-}
-
-- (IBAction)controlPressed:(UIBarButtonItem *)sender {
-    //Set up an action sheet of control buttons
-    UIActionSheet *controlActionSheet=[[UIActionSheet alloc] initWithTitle:@"Control Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Importing Records",@"Exporting Records",@"Set Location", nil];
-    [controlActionSheet showInView:self.view];
-}
 
 #pragma mark - ModalRecordTypeSelectorDelegate methods
 
@@ -499,6 +492,27 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     if (editingStyle==UITableViewCellEditingStyleDelete) {
         [self deleteRecordAtIndexPath:indexPath];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the current detail view vc is not a RecordViewController, push it
+    RecordViewController *recordDetailVC=[self recordDetailViewController];
+    if (!recordDetailVC) {
+        UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+        id detailvc=detailNav.topViewController;
+        [detailvc performSegueWithIdentifier:@"Show Record Info" sender:self];
+        recordDetailVC=[self recordDetailViewController];
+    }
+        
+    //Set up the record for the record view controller
+    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    recordDetailVC.record=record;
+        
+    //Save the chosen record
+    self.chosenRecord=record;
+    
+    //Set the delegate of the destination view controller to be self
+    recordDetailVC.delegate=self;
 }
 
 @end

@@ -11,6 +11,8 @@
 
 @interface FormationFolderPickerViewController ()
 
+- (void)synchronizeWithFormationFolderDatabase;
+
 @end
 
 @implementation FormationFolderPickerViewController

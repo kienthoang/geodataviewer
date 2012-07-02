@@ -79,16 +79,6 @@
     }
 }
 
-#pragma mark - UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //If user clicked "Continue" (in the delete formation folder alert view), delete the folder
-    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
-        [self deleteFormationFolder:self.toBeDeletedFolder];
-        self.toBeDeletedFolder=nil;
-    }
-}
-
 #pragma mark - Alert Generators
 
 //Put up an alert about some database failure with specified message
@@ -158,6 +148,16 @@
     
     //Save
     [self saveChangesToDatabase];
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If user clicked "Continue" (in the delete formation folder alert view), delete the folder
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
+        [self deleteFormationFolder:self.toBeDeletedFolder];
+        self.toBeDeletedFolder=nil;
+    }
 }
 
 #pragma mark - Target-Action Handlers
