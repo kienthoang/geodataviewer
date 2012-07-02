@@ -72,6 +72,8 @@
 		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
+		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
+		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
 		2132A5D4159CD26100009CB9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D3159CD26100009CB9 /* Record.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
@@ -210,6 +212,11 @@
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
+		2128E73B15A2366F00B277F9 /* GeoMapAnnotationProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoMapAnnotationProvider.h; sourceTree = "<group>"; };
+		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
+		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
+		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GeoFilter.h; sourceTree = "<group>"; };
+		2128E74215A238F900B277F9 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
 		2132A5D2159CD26100009CB9 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		2132A5D3159CD26100009CB9 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		2132A5D5159CD26200009CB9 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -270,6 +277,8 @@
 				020EBB981594259900EECC08 /* GeoDatabaseManager.m */,
 				020EBBAD15944F4500EECC08 /* TextInputFilter.h */,
 				020EBBAE15944F4500EECC08 /* TextInputFilter.m */,
+				2128E74115A238F900B277F9 /* GeoFilter.h */,
+				2128E74215A238F900B277F9 /* GeoFilter.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -380,6 +389,7 @@
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
+				2128E73D15A2378000B277F9 /* MKAnnotation */,
 				024097A2159D373F00855D33 /* Custom Views */,
 				029877FC1595954D000D71E7 /* Images */,
 				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
@@ -454,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */,
+				2128E73B15A2366F00B277F9 /* GeoMapAnnotationProvider.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -575,6 +586,15 @@
 				0238587215995FB200A0DB98 /* Formation_Folder+Modification.m */,
 			);
 			name = "Formation Folder";
+			sourceTree = "<group>";
+		};
+		2128E73D15A2378000B277F9 /* MKAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */,
+				2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */,
+			);
+			name = MKAnnotation;
 			sourceTree = "<group>";
 		};
 		2132A5DB159CD63500009CB9 /* Image */ = {
@@ -753,6 +773,8 @@
 				02712A53159D012100510188 /* Fault.m in Sources */,
 				02712A56159D012F00510188 /* JointSet.m in Sources */,
 				02712A59159D013D00510188 /* Other.m in Sources */,
+				2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */,
+				2128E74315A238F900B277F9 /* GeoFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

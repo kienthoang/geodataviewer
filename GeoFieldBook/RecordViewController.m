@@ -123,9 +123,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *upperFormationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fieldObservationLabel;
 
+
+#pragma mark - Map View
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 @end
 
 @implementation RecordViewController
+@synthesize mapView = _mapView;
 
 @synthesize scrollView = _scrollView;
 
@@ -450,6 +456,18 @@
         //Present the master popover
         [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];  
     }
+}
+
+#pragma mark - Data Map Switch
+
+#warning - Toggle Data Map Implementation
+- (IBAction)toggleDataMap:(UIBarButtonItem *)dataMapSwitch {
+    //Check the current state (data or map?)
+    
+    //Toggle show or hide the map accordingly
+    
+    //If the map is on screen, ask the appropriate delegate for the annotations to show
+    
 }
 
 #pragma mark - Form Validations
@@ -795,6 +813,7 @@
 
 #pragma mark - View lifecycle
 
+#warning - Set self as the delegate and data source of the map view
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -872,6 +891,7 @@
     [self setLongitudeTextField:nil];
     [self setDateTextField:nil];
     [self setTimeTextField:nil];
+    [self setMapView:nil];
     [super viewDidUnload];
 }
 

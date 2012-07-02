@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+
 #import "CoreLocation/CoreLocation.h"
 #import "Record+Creation.h"
 #import "Record+DictionaryKeys.h"

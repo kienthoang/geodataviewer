@@ -426,8 +426,16 @@
     return YES;
 }
 
-- (void)viewDidUnload {
-    [self setEditButton:nil];
-    [super viewDidUnload];
+#pragma mark - GeoMapAnnotationProvider Protocol methods
+
+#warning - Records for map view
+- (NSArray *)recordsForMapView:(MKMapView *)mapView {
+    //Get the array of records from the fetched results controller
+    
+    //Do the filtering (by folders)
+    
+    //return the records
+    return nil;
 }
+
 @end

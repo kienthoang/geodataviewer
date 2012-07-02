@@ -502,6 +502,11 @@
     // Configure the cell...
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
     
+//    if (self.tableView.editing)
+//        cell.selectionStyle=UITableViewCellSelectionStyleBlue;
+//    else
+//        cell.selectionStyle=UITableViewCellEditingStyleNone;
+    
     //show the name, date and time
     cell.name.text=[NSString stringWithFormat:@"%@ (%@)",record.name,[record.class description]];    
     cell.date.text=[Record dateFromNSDate:record.date];
@@ -529,6 +534,16 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //Update the detail view
     [self updateDetailViewWithRowOfIndexPath:indexPath];
+}
+
+#warning - Records for map view
+- (NSArray *)recordsForMapView:(MKMapView *)mapView {
+    //Get the array of records from the fetched results controller
+    
+    //Do the filtering (by records???????????)
+    
+    //return the records
+    return nil;
 }
 
 @end

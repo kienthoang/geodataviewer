@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 #import "UISplitViewBarButtonPresenter.h"
+#import "GeoMapAnnotationProvider.h"
 
-@interface FolderTableViewController : CoreDataTableViewController  //Making this inherit the FetchedResultsController from CoreDataTVC
+@interface FolderTableViewController : CoreDataTableViewController <GeoMapAnnotationProvider>  //Making this inherit the FetchedResultsController from CoreDataTVC
 
 @property (nonatomic,strong) UIManagedDocument *database;   //The database to fetch folders from
 
