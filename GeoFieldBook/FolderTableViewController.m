@@ -48,6 +48,8 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
+@property (strong, nonatomic) NSSet *selectedFolders;
+
 @end
 
 @implementation FolderTableViewController 
@@ -63,6 +65,8 @@
 
 @synthesize formationPopoverController=_formationPopoverController;
 @synthesize folderInfoPopoverController=_folderInfoPopoverController;
+
+@synthesize selectedFolders=_selectedFolders;
 
 #pragma mark - Setters
 
@@ -431,11 +435,18 @@
 #warning - Records for map view
 - (NSArray *)recordsForMapView:(MKMapView *)mapView {
     //Get the array of records from the fetched results controller
+    [self setupFetchedResultsController];
+    [self.fetchedResultsController performFetch:nil];
+    NSArray *fetchedRecords = self.fetchedResultsController.fetchedObjects;
     
     //Do the filtering (by folders)
     
+    NSPredicate *filterPredicate = [NSPredicate predicateWithBlock:^(id folderName, NSDictionary *bindings){
+        return [self.selectedFolders containsObject:folderName];
+    }];
+    
     //return the records
-    return nil;
+    return [fetchedRecords filteredArrayUsingPredicate:filterPredicate];
 }
 
 @end
