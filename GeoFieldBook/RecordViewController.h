@@ -16,6 +16,8 @@
 #import "Image.h"
 #import "Record+DateAndTimeFormatter.h"
 
+#import "GeoMapAnnotationProvider.h"
+
 @class RecordViewController;
 
 @protocol RecordViewControllerDelegate <NSObject>
@@ -43,9 +45,14 @@
 @property (nonatomic,strong) Record *record;
 @property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
 
+@property (nonatomic,weak) id <GeoMapAnnotationProvider> mapDelegate;
+
 - (NSDictionary *)dictionaryFromForm;
 - (BOOL) isInEdittingMode;
 
 #define RECORD_DEFAULT_GPS_STABLILIZING_INTERVAL_LENGTH 12
+
+#define DATA_MODE_SEGMENTED_CONTROL_INDEX 0
+#define MAP_MODE_SEGMENTED_CONTROL_INDEX 1
 
 @end
