@@ -15,10 +15,14 @@
 #import "GeoDatabaseManager.h"
 #import "UISplitViewBarButtonPresenter.h"
 
+#import "RecordViewController.h"
+
 #import "Folder.h"
 #import "Folder+Creation.h"
 #import "Folder+Modification.h"
 #import "Folder+DictionaryKeys.h"
+
+#import "GeoFilter.h"
 
 @interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate>
 
@@ -28,6 +32,8 @@
 - (void)deleteFolder:(Folder *)folder;   //Delete the specified folder
 
 - (id <UISplitViewBarButtonPresenter>)barButtonPresenter;
+
+@property (nonatomic, strong) GeoFilter *geoFilter;
 
 #pragma mark - Temporary data of the autosaver
 
@@ -51,6 +57,9 @@
 @end
 
 @implementation FolderTableViewController 
+
+@synthesize geoFilter=_geoFilter;
+
 @synthesize editButton = _editButton;
 
 @synthesize autosaverCancelBlock=_autosaverCancelBlock;
@@ -234,6 +243,16 @@
 
 #pragma mark - View lifecycle
 
+- (RecordViewController *)detailRecordViewController {
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id detail=detailNav.topViewController;
+    
+    if (![detail isKindOfClass:[RecordViewController class]])
+        detail=nil;
+    
+    return detail;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     
@@ -256,6 +275,9 @@
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
         } 
     }];
+    
+    //Set self as the map delegate of the detail record view controller
+    [self detailRecordViewController].mapDelegate=self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -428,10 +450,17 @@
 
 #pragma mark - GeoMapAnnotationProvider Protocol methods
 
-- (NSArray *)recordsForMapView:(MKMapView *)mapView {
+- (NSArray *)recordsForMapView:(MKMapView *)mapView
+{
+    //Get the array of records 
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
+    request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"folder.folderName" ascending:YES], [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES], nil];
+    NSArray *records=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    //Do the filtering (by folders)
     
     //return the records
-    return nil;
+    return [self.geoFilter filterRecordCollection:records];
 }
 
 @end
