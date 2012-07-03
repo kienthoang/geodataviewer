@@ -23,6 +23,8 @@
 #import "Folder+DictionaryKeys.h"
 
 #import "GeoFilter.h"
+#import "CheckBox.h"
+#import "CustomFolderCell.h"
 
 @interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate>
 
@@ -366,21 +368,26 @@
 {
     static NSString *CellIdentifier = @"Folder Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomFolderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[CustomFolderCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
-    cell.textLabel.text=folder.folderName;
+    cell.title.text=folder.folderName;
     NSString *recordCounter=[folder.records count]>1 ? @"Records" : @"Record";
-    cell.detailTextLabel.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
+    cell.subTitie.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
     
     //Add gesture recognizer for long press
     UILongPressGestureRecognizer *longPressRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnTableCell:)];
     [cell addGestureRecognizer:longPressRecognizer];
+    
+    //checkbox
+    CheckBox *cb = [[CheckBox alloc] initWithFrame:cell.checkBox.frame];
+    cb.tag = indexPath.row;
+    [cell.contentView addSubview:cb]; 
     
     return cell;
 }
