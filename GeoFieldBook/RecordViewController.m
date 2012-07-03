@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <CommonCrypto/CommonDigest.h>
 
 #import "TextInputFilter.h"
 
@@ -35,11 +37,9 @@
 
 #import "Image+Creation.h"
 
-#import <MobileCoreServices/MobileCoreServices.h>
+#import "MKGeoRecordAnnotation.h"
 
-#import <CommonCrypto/CommonDigest.h>
-
-@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate>
+@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,MKMapViewDelegate>
 
 //The names of the pickers
 #define FORMATION_PICKER_NAME @"RecordViewController.Formation_Picker"
@@ -91,6 +91,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *acquireButton;
 @property (weak, nonatomic) UIButton *imagePickerPresenter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
 
 #pragma mark - Form Input Fields
 
@@ -131,6 +134,9 @@
 @end
 
 @implementation RecordViewController
+
+@synthesize mapDelegate=_mapDelegate;
+
 @synthesize mapView = _mapView;
 
 @synthesize scrollView = _scrollView;
@@ -182,6 +188,8 @@
 @synthesize takePhotoButton = _takePhotoButton;
 @synthesize imagePopover = _imagePopover;
 @synthesize imagePickerPresenter=_imagePickerPresenter;
+@synthesize masterPresenter = _masterPresenter;
+@synthesize dataMapSwitch = _dataMapSwitch;
 
 @synthesize acquiredDate=_acquireDate;
 
@@ -460,14 +468,43 @@
 
 #pragma mark - Data Map Switch
 
-#warning - Toggle Data Map Implementation
-- (IBAction)toggleDataMap:(UIBarButtonItem *)dataMapSwitch {
-    //Check the current state (data or map?)
+- (void)updateMap {
+    //Get the records for the map
+    NSArray *records=[self.mapDelegate recordsForMapView:self.mapView];
+        
+    //Get the array of annotations
+    NSMutableArray *annotations=[NSMutableArray array];
+    for (Record *record in records) {
+        MKGeoRecordAnnotation *annotation=[MKGeoRecordAnnotation annotationForRecord:record];
+        [annotations addObject:annotation];
+    }
     
+    //Update the annotations of the map view if the returned array of annotations is different from the old one
+    if (![self.mapView.annotations isEqualToArray:annotations]) {
+        if (self.mapView.annotations)
+            [self.mapView removeAnnotations:self.mapView.annotations];
+        if (annotations)
+            [self.mapView addAnnotations:annotations];
+    }
+}
+
+- (void)toggleDataMapModeWithSegmentedControl:(UISegmentedControl *)control {
+    //Check the state of the data/map segmented control
+    if (self.dataMapSwitch.selectedSegmentIndex==DATA_MODE_SEGMENTED_CONTROL_INDEX) {
+        //Hide the map
+        self.mapView.hidden=YES;
+    } else {
+        //Show the map
+        self.mapView.hidden=NO;
+        
+        //Update the map
+        [self updateMap];
+    }
+}
+
+- (IBAction)toggleDataMap:(id)dataMapControl {
     //Toggle show or hide the map accordingly
-    
-    //If the map is on screen, ask the appropriate delegate for the annotations to show
-    
+    [self toggleDataMapModeWithSegmentedControl:dataMapControl];    
 }
 
 #pragma mark - Form Validations
@@ -813,9 +850,15 @@
 
 #pragma mark - View lifecycle
 
-#warning - Set self as the delegate and data source of the map view
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Set self as the delegate of the map view
+    self.mapView.delegate=self;
+    
+    //Hide the map view if in data mode
+    if (self.dataMapSwitch.selectedSegmentIndex==DATA_MODE_SEGMENTED_CONTROL_INDEX)
+        self.mapView.hidden=YES;
     
     //Update the form
     [self updateFormForRecord:self.record];
@@ -842,7 +885,7 @@
     
     //Present the master popover
     [self.masterPopoverController dismissPopoverAnimated:NO];
-    //[self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -892,6 +935,7 @@
     [self setDateTextField:nil];
     [self setTimeTextField:nil];
     [self setMapView:nil];
+    [self setMasterPresenter:nil];
     [super viewDidUnload];
 }
 
@@ -1009,6 +1053,22 @@
     NSSet *hiddenFields=[NSSet setWithObjects:self.strikeLabel,self.dipLabel,self.dipDirectionLabel,self.formationLabel, nil];
     for (UITextField *textField in hiddenFields)
         textField.hidden=YES;
+}
+
+#pragma mark - MKMapViewDelegate methods
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    static NSString *ANNOTATION_VIEW_REUSE_IDENTIFIER=@"Record Annotation View";
+    MKAnnotationView *annotationView=[self.mapView dequeueReusableAnnotationViewWithIdentifier:ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    
+    if (!annotationView) {
+        annotationView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:ANNOTATION_VIEW_REUSE_IDENTIFIER];
+        annotationView.canShowCallout=YES;
+    }
+    
+    annotationView.annotation=annotation;
+    
+    return annotationView;
 }
 
 @end

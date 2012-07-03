@@ -148,6 +148,10 @@
     
     //Set the delegate of the destination view controller to be self
     recordDetailVC.delegate=self;
+    
+    //Set the map delegate of the record vc to self
+    if ([recordDetailVC respondsToSelector:@selector(setMapDelegate:)])
+        [recordDetailVC setMapDelegate:self];
 }
 
 #pragma mark - Autosave Controller
@@ -396,6 +400,15 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //Set the map delegate of the record vc to self
+    RecordViewController *recordDetailVC=[self recordDetailViewController];
+    if ([recordDetailVC respondsToSelector:@selector(setMapDelegate:)])
+        [recordDetailVC setMapDelegate:self];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -502,11 +515,6 @@
     // Configure the cell...
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
     
-//    if (self.tableView.editing)
-//        cell.selectionStyle=UITableViewCellSelectionStyleBlue;
-//    else
-//        cell.selectionStyle=UITableViewCellEditingStyleNone;
-    
     //show the name, date and time
     cell.name.text=[NSString stringWithFormat:@"%@ (%@)",record.name,[record.class description]];    
     cell.date.text=[Record dateFromNSDate:record.date];
@@ -536,14 +544,14 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     [self updateDetailViewWithRowOfIndexPath:indexPath];
 }
 
-#warning - Records for map view
 - (NSArray *)recordsForMapView:(MKMapView *)mapView {
     //Get the array of records from the fetched results controller
+    NSArray *records=self.fetchedResultsController.fetchedObjects;
     
     //Do the filtering (by records???????????)
     
     //return the records
-    return nil;
+    return records;
 }
 
 @end
