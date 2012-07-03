@@ -15,6 +15,8 @@
 #import "GeoDatabaseManager.h"
 #import "UISplitViewBarButtonPresenter.h"
 
+#import "RecordViewController.h"
+
 #import "Folder.h"
 #import "Folder+Creation.h"
 #import "Folder+Modification.h"
@@ -234,6 +236,16 @@
 
 #pragma mark - View lifecycle
 
+- (RecordViewController *)detailRecordViewController {
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id detail=detailNav.topViewController;
+    
+    if (![detail isKindOfClass:[RecordViewController class]])
+        detail=nil;
+    
+    return detail;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     
@@ -256,6 +268,9 @@
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
         } 
     }];
+    
+    //Set self as the map delegate of the detail record view controller
+    [self detailRecordViewController].mapDelegate=self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -429,12 +444,15 @@
 #pragma mark - GeoMapAnnotationProvider Protocol methods
 
 - (NSArray *)recordsForMapView:(MKMapView *)mapView {
-    //Get the array of records from the fetched results controller
+    //Get the array of records 
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSArray *records=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
     
     //Do the filtering (by folders)
     
     //return the records
-    return nil;
+    return records;
 }
 
 @end

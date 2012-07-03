@@ -400,15 +400,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    //Set the map delegate of the record vc to self
-    RecordViewController *recordDetailVC=[self recordDetailViewController];
-    if ([recordDetailVC respondsToSelector:@selector(setMapDelegate:)])
-        [recordDetailVC setMapDelegate:self];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -419,6 +410,11 @@
     //Set the title of the set location button
     NSString *formationFolderName=self.folder.formationFolder.folderName;
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
+    
+    //Set the map delegate of the record vc to self
+    RecordViewController *recordDetailVC=[self recordDetailViewController];
+    if ([recordDetailVC respondsToSelector:@selector(setMapDelegate:)])
+        [recordDetailVC setMapDelegate:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {    
