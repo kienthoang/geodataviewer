@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface CustomFolderCell : UITableViewCell
 @property (nonatomic,weak) IBOutlet UILabel *title;
 @property (nonatomic,weak) IBOutlet UILabel *subTitie;
 @property (nonatomic,weak) IBOutlet UIView *checkBox;
+
 @end
