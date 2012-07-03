@@ -446,7 +446,7 @@
 - (NSArray *)recordsForMapView:(MKMapView *)mapView {
     //Get the array of records 
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"folder.folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],nil];
     NSArray *records=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
     
     //Do the filtering (by folders)
