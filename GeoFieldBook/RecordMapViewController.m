@@ -70,6 +70,9 @@
     
     //Ask the delegate for records to display
     self.records=[self.mapDelegate recordsForMapViewController:self];
+    
+    //Show user location
+    self.mapView.showsUserLocation=YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,8 +95,11 @@
 #pragma mark - MKMapViewDelegate methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
+    
     //Get an annotation view
-    MKAnnotationView *annotationView=[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    MKPinAnnotationView *annotationView=(MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
     if (!annotationView) {
         annotationView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
         annotationView.canShowCallout=YES;
