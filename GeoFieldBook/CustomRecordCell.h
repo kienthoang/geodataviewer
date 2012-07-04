@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CheckBox.h"
 
 @interface CustomRecordCell : UITableViewCell
 
@@ -14,5 +15,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *date;
 @property (nonatomic, weak) IBOutlet UILabel *time;
 @property (nonatomic, weak) IBOutlet UIImageView *recordImageView;
+@property (nonatomic, weak) IBOutlet UILabel *type;
+@property (nonatomic, weak) IBOutlet UIView *checkBox;
 
 @end

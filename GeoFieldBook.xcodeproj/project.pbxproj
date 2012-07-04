@@ -84,7 +84,11 @@
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		21A87A13159CAAFE001A220E /* Record+DateAndTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */; };
 		21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B1FEEF159B58C200868F62 /* CustomRecordCell.m */; };
+		21B3A76115A34FA400CD06B0 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B3A75E15A34FA400CD06B0 /* CheckBox.m */; };
+		21B3A76215A34FA400CD06B0 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B3A75F15A34FA400CD06B0 /* checked.png */; };
+		21B3A76315A34FA400CD06B0 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B3A76015A34FA400CD06B0 /* unchecked.png */; };
 		21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C309E0159B6C800066FC9B /* MobileCoreServices.framework */; };
+		21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC474D15A3789E00F245FF /* CustomFolderCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -240,7 +244,13 @@
 		21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DateAndTimeFormatter.m"; sourceTree = "<group>"; };
 		21B1FEEE159B58C200868F62 /* CustomRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecordCell.h; sourceTree = "<group>"; };
 		21B1FEEF159B58C200868F62 /* CustomRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecordCell.m; sourceTree = "<group>"; };
+		21B3A75D15A34FA400CD06B0 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckBox.h; path = "../../untitled folder 2/CheckBox.h"; sourceTree = "<group>"; };
+		21B3A75E15A34FA400CD06B0 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckBox.m; path = "../../untitled folder 2/CheckBox.m"; sourceTree = "<group>"; };
+		21B3A75F15A34FA400CD06B0 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = "../../untitled folder 2/checked.png"; sourceTree = "<group>"; };
+		21B3A76015A34FA400CD06B0 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unchecked.png; path = "../../untitled folder 2/unchecked.png"; sourceTree = "<group>"; };
 		21C309E0159B6C800066FC9B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		21FC474C15A3789E00F245FF /* CustomFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFolderCell.h; sourceTree = "<group>"; };
+		21FC474D15A3789E00F245FF /* CustomFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFolderCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +371,10 @@
 		024097A2159D373F00855D33 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				21B3A75D15A34FA400CD06B0 /* CheckBox.h */,
+				21B3A75E15A34FA400CD06B0 /* CheckBox.m */,
+				21FC474C15A3789E00F245FF /* CustomFolderCell.h */,
+				21FC474D15A3789E00F245FF /* CustomFolderCell.m */,
 				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
 				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
 			);
@@ -492,6 +506,8 @@
 		029877FC1595954D000D71E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				21B3A75F15A34FA400CD06B0 /* checked.png */,
+				21B3A76015A34FA400CD06B0 /* unchecked.png */,
 				029877FD1595955E000D71E7 /* RecordVCBackground.jpg */,
 				0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */,
 			);
@@ -703,6 +719,8 @@
 				0294E0A9159361060025219F /* iPad.storyboard in Resources */,
 				029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */,
 				0222DB1C1596487800699D62 /* GeoFieldBookFrontPage.png in Resources */,
+				21B3A76215A34FA400CD06B0 /* checked.png in Resources */,
+				21B3A76315A34FA400CD06B0 /* unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,6 +817,8 @@
 				0298968E15A38EB700E51C27 /* InitialMapSegmentViewController.m in Sources */,
 				0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */,
 				0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */,
+				21B3A76115A34FA400CD06B0 /* CheckBox.m in Sources */,
+				21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

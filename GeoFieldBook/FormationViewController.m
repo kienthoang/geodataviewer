@@ -33,7 +33,7 @@
 }
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
-    //If the formation name text field is blank, focus on it isntead of returning
+    //If the formation name text field is blank, focus on it instead of returning
     if (![self.nameTextField.text length])
         [self.nameTextField becomeFirstResponder];
     

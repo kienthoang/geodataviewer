@@ -7,6 +7,7 @@
 //
 
 #import "GeoFilter.h"
+#import "Record.h"
 
 @interface GeoFilter()
 
@@ -27,6 +28,8 @@
 
 - (void)userDidSelectFolderName:(NSString *)folderName {
     //Add the selected folder name to the set
+    
+    //add the records i
 }
 
 - (NSSet *)selectedRecordTypes {
@@ -40,7 +43,14 @@
 - (NSArray *)filterRecordCollection:(NSArray *)records {
     //iterate through the given records and filter out records of types that were not selected by the user
     
-    return nil;
+    NSMutableSet *filtered = nil;
+    for (Record *r in records) {
+        if ([self.selectedFolderName containsObject:r] && [self.selectedRecordTypes containsObject:[NSString stringWithFormat:@""]]) {//record type???
+            [filtered addObject:r];
+        }
+    }
+    
+    return [filtered allObjects];
 }
 
 @end
