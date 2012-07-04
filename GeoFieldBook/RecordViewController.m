@@ -38,6 +38,7 @@
 #import "Image+Creation.h"
 
 #import "MKGeoRecordAnnotation.h"
+#import "FilterByRecordTypeController.h"
 
 @interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate>
 
@@ -742,7 +743,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //Update the form
     [self updateFormForRecord:self.record];
     
