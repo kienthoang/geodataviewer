@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
 
 @end
 
@@ -23,6 +24,7 @@
 @synthesize toolbar=_toolbar;
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 @synthesize masterPresenter=_masterPresenter;
+@synthesize dataMapSwitch = _dataMapSwitch;
 
 @synthesize masterPopoverController=_masterPopoverController;
 
@@ -64,6 +66,9 @@
     //Swap to the record view controller if it's not the current view controller
     if (self.topViewController!=[self.viewControllers objectAtIndex:0])
         [self swapToViewControllerAtSegmentIndex:0];
+    
+    //Change the selected index of the UISegmentControl
+    self.dataMapSwitch.selectedSegmentIndex=0; 
     
     //Put the record view controller into edit mode
     RecordViewController *recordDetail=(RecordViewController *)self.topViewController;
@@ -196,4 +201,8 @@
 	return YES;
 }
 
+- (void)viewDidUnload {
+    [self setDataMapSwitch:nil];
+    [super viewDidUnload];
+}
 @end

@@ -335,6 +335,14 @@
         //Update the map view
         [[self dataMapSegmentDetail] updateMapWithRecords:[self records]];
     }];
+    
+    //If the deleted record is the currently chosen record, pop the record view controller off screen
+    if (record==self.chosenRecord) {
+        DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+        [dataMapSegmentDetail pushInitialViewController];
+        [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];
+        
+    }
 }
 
 #pragma mark - FormationFolderPickerDelegate methods
