@@ -15,7 +15,8 @@
 #import "GeoDatabaseManager.h"
 #import "UISplitViewBarButtonPresenter.h"
 
-#import "RecordViewController.h"
+#import "InitialMapSegmentViewController.h"
+#import "DataMapSegmentViewController.h"
 
 #import "Folder.h"
 #import "Folder+Creation.h"
@@ -236,12 +237,9 @@
 
 #pragma mark - View lifecycle
 
-- (RecordViewController *)detailRecordViewController {
+- (id)detailViewController {
     UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
     id detail=detailNav.topViewController;
-    
-    if (![detail isKindOfClass:[RecordViewController class]])
-        detail=nil;
     
     return detail;
 }
@@ -256,9 +254,20 @@
     self.splitViewController.presentsWithGesture=NO;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)setSelfAsRecordMapDelegate {
+    //Set self as the map delegate of the detail record view controller
+    id detailvc=[self detailViewController];
+    if ([detailvc respondsToSelector:@selector(setRecordMapViewControllerMapDelegate:)])
+        [detailvc setRecordMapViewControllerMapDelegate:self];
+    
+    //Update the records shown on the map
+    if ([detailvc respondsToSelector:@selector(updateMapWithRecords:)])
+        [detailvc updateMapWithRecords:[self records]];
+}
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
     //Set up the database using the GeoDatabaseManager fetch method=====>the block will get called only the first time the database gets created
     //success is YES if the database saving process succeeded or NO otherwise
     self.database=[[GeoDatabaseManager standardDatabaseManager] fetchDatabaseFromDisk:self completion:^(BOOL success){
@@ -269,8 +278,15 @@
         } 
     }];
     
-    //Set self as the map delegate of the detail record view controller
-    [self detailRecordViewController].mapDelegate=self;
+    //Set self as the delegate of the record map view
+    [self setSelfAsRecordMapDelegate];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Set self as the delegate of the record map view
+    [self setSelfAsRecordMapDelegate];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -375,6 +391,7 @@
     UILongPressGestureRecognizer *longPressRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnTableCell:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
+    
     return cell;
 }
 
@@ -443,7 +460,7 @@
 
 #pragma mark - GeoMapAnnotationProvider Protocol methods
 
-- (NSArray *)recordsForMapView:(MKMapView *)mapView {
+- (NSArray *)records {
     //Get the array of records 
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
     request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"folder.folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],nil];
@@ -453,6 +470,10 @@
     
     //return the records
     return records;
+}
+
+- (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
+    return [self records];
 }
 
 @end

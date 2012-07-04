@@ -39,7 +39,7 @@
 
 #import "MKGeoRecordAnnotation.h"
 
-@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,MKMapViewDelegate>
+@interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate>
 
 //The names of the pickers
 #define FORMATION_PICKER_NAME @"RecordViewController.Formation_Picker"
@@ -86,14 +86,11 @@
 
 #pragma mark - Buttons
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *browseButton;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *acquireButton;
 @property (weak, nonatomic) UIButton *imagePickerPresenter;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
-
-@property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
 
 #pragma mark - Form Input Fields
 
@@ -126,18 +123,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *upperFormationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fieldObservationLabel;
 
-
-#pragma mark - Map View
-
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
 @end
 
 @implementation RecordViewController
-
-@synthesize mapDelegate=_mapDelegate;
-
-@synthesize mapView = _mapView;
 
 @synthesize scrollView = _scrollView;
 
@@ -189,7 +177,6 @@
 @synthesize imagePopover = _imagePopover;
 @synthesize imagePickerPresenter=_imagePickerPresenter;
 @synthesize masterPresenter = _masterPresenter;
-@synthesize dataMapSwitch = _dataMapSwitch;
 
 @synthesize acquiredDate=_acquireDate;
 
@@ -464,47 +451,6 @@
         //Present the master popover
         [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];  
     }
-}
-
-#pragma mark - Data Map Switch
-
-- (void)updateMap {
-    //Get the records for the map
-    NSArray *records=[self.mapDelegate recordsForMapView:self.mapView];
-        
-    //Get the array of annotations
-    NSMutableArray *annotations=[NSMutableArray array];
-    for (Record *record in records) {
-        MKGeoRecordAnnotation *annotation=[MKGeoRecordAnnotation annotationForRecord:record];
-        [annotations addObject:annotation];
-    }
-    
-    //Update the annotations of the map view if the returned array of annotations is different from the old one
-    if (![self.mapView.annotations isEqualToArray:annotations]) {
-        if (self.mapView.annotations)
-            [self.mapView removeAnnotations:self.mapView.annotations];
-        if (annotations)
-            [self.mapView addAnnotations:annotations];
-    }
-}
-
-- (void)toggleDataMapModeWithSegmentedControl:(UISegmentedControl *)control {
-    //Check the state of the data/map segmented control
-    if (self.dataMapSwitch.selectedSegmentIndex==DATA_MODE_SEGMENTED_CONTROL_INDEX) {
-        //Hide the map
-        self.mapView.hidden=YES;
-    } else {
-        //Show the map
-        self.mapView.hidden=NO;
-        
-        //Update the map
-        [self updateMap];
-    }
-}
-
-- (IBAction)toggleDataMap:(id)dataMapControl {
-    //Toggle show or hide the map accordingly
-    [self toggleDataMapModeWithSegmentedControl:dataMapControl];    
 }
 
 #pragma mark - Form Validations
@@ -853,13 +799,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Set self as the delegate of the map view
-    self.mapView.delegate=self;
-    
-    //Hide the map view if in data mode
-    if (self.dataMapSwitch.selectedSegmentIndex==DATA_MODE_SEGMENTED_CONTROL_INDEX)
-        self.mapView.hidden=YES;
-    
     //Update the form
     [self updateFormForRecord:self.record];
     
@@ -868,25 +807,12 @@
     
     //initialize and set up location services
     [self setUpLocationManager];
-}
-
-- (void)viewWillAppear:(BOOL)animated   
-{
-    [super viewWillAppear:animated];
     
     //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
     [self.view addGestureRecognizer:tapGestureRecognizer];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Present the master popover
-    [self.masterPopoverController dismissPopoverAnimated:NO];
-    [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
+} 
 
 - (void)viewWillLayoutSubviews {
     //If the image picker popover is still on screen, adjust its frame
@@ -934,7 +860,6 @@
     [self setLongitudeTextField:nil];
     [self setDateTextField:nil];
     [self setTimeTextField:nil];
-    [self setMapView:nil];
     [self setMasterPresenter:nil];
     [super viewDidUnload];
 }
@@ -1053,22 +978,6 @@
     NSSet *hiddenFields=[NSSet setWithObjects:self.strikeLabel,self.dipLabel,self.dipDirectionLabel,self.formationLabel, nil];
     for (UITextField *textField in hiddenFields)
         textField.hidden=YES;
-}
-
-#pragma mark - MKMapViewDelegate methods
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    static NSString *ANNOTATION_VIEW_REUSE_IDENTIFIER=@"Record Annotation View";
-    MKAnnotationView *annotationView=[self.mapView dequeueReusableAnnotationViewWithIdentifier:ANNOTATION_VIEW_REUSE_IDENTIFIER];
-    
-    if (!annotationView) {
-        annotationView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:ANNOTATION_VIEW_REUSE_IDENTIFIER];
-        annotationView.canShowCallout=YES;
-    }
-    
-    annotationView.annotation=annotation;
-    
-    return annotationView;
 }
 
 @end

@@ -70,6 +70,10 @@
 		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
 		029877FB1595740C000D71E7 /* InitialDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877FA1595740C000D71E7 /* InitialDetailViewController.m */; };
 		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
+		0298968B15A375B500E51C27 /* GeoSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298968A15A375B500E51C27 /* GeoSegmentViewController.m */; };
+		0298968E15A38EB700E51C27 /* InitialMapSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298968D15A38EB700E51C27 /* InitialMapSegmentViewController.m */; };
+		0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969015A38F4C00E51C27 /* RecordMapViewController.m */; };
+		0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969315A408B100E51C27 /* DataMapSegmentViewController.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
@@ -208,14 +212,22 @@
 		029877F91595740C000D71E7 /* InitialDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialDetailViewController.h; sourceTree = "<group>"; };
 		029877FA1595740C000D71E7 /* InitialDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialDetailViewController.m; sourceTree = "<group>"; };
 		029877FD1595955E000D71E7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
+		0298968915A375B500E51C27 /* GeoSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoSegmentViewController.h; sourceTree = "<group>"; };
+		0298968A15A375B500E51C27 /* GeoSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoSegmentViewController.m; sourceTree = "<group>"; };
+		0298968C15A38EB700E51C27 /* InitialMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialMapSegmentViewController.h; sourceTree = "<group>"; };
+		0298968D15A38EB700E51C27 /* InitialMapSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialMapSegmentViewController.m; sourceTree = "<group>"; };
+		0298968F15A38F4C00E51C27 /* RecordMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewController.h; sourceTree = "<group>"; };
+		0298969015A38F4C00E51C27 /* RecordMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordMapViewController.m; sourceTree = "<group>"; };
+		0298969215A408B100E51C27 /* DataMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentViewController.h; sourceTree = "<group>"; };
+		0298969315A408B100E51C27 /* DataMapSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMapSegmentViewController.m; sourceTree = "<group>"; };
+		0298969515A40EB800E51C27 /* GeoMapAnnotationProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoMapAnnotationProvider.h; sourceTree = "<group>"; };
 		0298C25A159B43F30038E89C /* Record+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Validation.h"; sourceTree = "<group>"; };
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
-		2128E73B15A2366F00B277F9 /* GeoMapAnnotationProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoMapAnnotationProvider.h; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
-		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GeoFilter.h; sourceTree = "<group>"; };
+		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
 		2128E74215A238F900B277F9 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
 		2132A5D2159CD26100009CB9 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		2132A5D3159CD26100009CB9 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
@@ -266,6 +278,8 @@
 				020EBB941594217A00EECC08 /* CoreDataTableViewController.m */,
 				0222DB221596B40C00699D62 /* PickerViewController.h */,
 				0222DB231596B40C00699D62 /* PickerViewController.m */,
+				0298968915A375B500E51C27 /* GeoSegmentViewController.h */,
+				0298968A15A375B500E51C27 /* GeoSegmentViewController.m */,
 			);
 			name = "View Controller Prototypes";
 			sourceTree = "<group>";
@@ -293,9 +307,9 @@
 				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
 				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
 				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
-				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
 				020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */,
 				023858651599233F00A0DB98 /* FormationFolderTableViewController.h */,
+				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
 				0238586815994DF100A0DB98 /* FormationFolderViewController.h */,
 				0238586915994DF200A0DB98 /* FormationFolderViewController.m */,
 				0238587415996B5B00A0DB98 /* FormationTableViewController.h */,
@@ -313,6 +327,12 @@
 				029877FA1595740C000D71E7 /* InitialDetailViewController.m */,
 				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
 				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
+				0298968F15A38F4C00E51C27 /* RecordMapViewController.h */,
+				0298969015A38F4C00E51C27 /* RecordMapViewController.m */,
+				0298968C15A38EB700E51C27 /* InitialMapSegmentViewController.h */,
+				0298968D15A38EB700E51C27 /* InitialMapSegmentViewController.m */,
+				0298969215A408B100E51C27 /* DataMapSegmentViewController.h */,
+				0298969315A408B100E51C27 /* DataMapSegmentViewController.m */,
 			);
 			name = "Detail View Controllers";
 			sourceTree = "<group>";
@@ -464,7 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */,
-				2128E73B15A2366F00B277F9 /* GeoMapAnnotationProvider.h */,
+				0298969515A40EB800E51C27 /* GeoMapAnnotationProvider.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -775,6 +795,10 @@
 				02712A59159D013D00510188 /* Other.m in Sources */,
 				2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */,
 				2128E74315A238F900B277F9 /* GeoFilter.m in Sources */,
+				0298968B15A375B500E51C27 /* GeoSegmentViewController.m in Sources */,
+				0298968E15A38EB700E51C27 /* InitialMapSegmentViewController.m in Sources */,
+				0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */,
+				0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

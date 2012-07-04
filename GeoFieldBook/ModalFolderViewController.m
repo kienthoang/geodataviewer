@@ -86,10 +86,6 @@
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
     [self.view addGestureRecognizer:tapGestureRecognizer];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     //Focus on the folder name text field
     [self.folderNameTextField becomeFirstResponder];
