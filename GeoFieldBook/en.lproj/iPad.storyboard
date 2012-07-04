@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -239,7 +238,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="250" height="275"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-6769" y="-257"/>
+            <point key="canvasLocation" x="-6265" y="575"/>
         </scene>
         <!--Formation Folder Table View Controller - Formation Folders-->
         <scene sceneID="56r-Yf-LiQ">
@@ -305,7 +304,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-5438" y="1501"/>
+            <point key="canvasLocation" x="-6662" y="-2623"/>
         </scene>
         <!--Modal Record Type Selector-->
         <scene sceneID="SPc-17-h4d">
@@ -848,7 +847,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8146" y="3699"/>
+            <point key="canvasLocation" x="-7946" y="2731"/>
         </scene>
         <!--Strike Picker View Controller-->
         <scene sceneID="ovW-L9-di4">
@@ -873,7 +872,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5961" y="2979"/>
+            <point key="canvasLocation" x="-6097" y="1651"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="neq-Dd-nPE">
@@ -898,7 +897,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3729" y="4502"/>
+            <point key="canvasLocation" x="-3529" y="3534"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="VXG-wO-A5P">
@@ -937,7 +936,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-4670" y="3635"/>
+            <point key="canvasLocation" x="-4470" y="2667"/>
         </scene>
         <!--Dip Direction Picker View Controller-->
         <scene sceneID="gzM-LZ-3Za">
@@ -962,7 +961,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3600" y="5199"/>
+            <point key="canvasLocation" x="-3400" y="4231"/>
         </scene>
         <!--Trend Picker View Controller-->
         <scene sceneID="Tjg-pS-3cq">
@@ -987,7 +986,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3530" y="5879"/>
+            <point key="canvasLocation" x="-3330" y="4911"/>
         </scene>
         <!--Plunge Picker View Controller-->
         <scene sceneID="Yff-Cv-Agq">
@@ -1012,7 +1011,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-4463" y="6491"/>
+            <point key="canvasLocation" x="-4263" y="5523"/>
         </scene>
         <!--Formation Folder View Controller-->
         <scene sceneID="vmK-no-er4">
@@ -1064,7 +1063,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-4185" y="1259"/>
+            <point key="canvasLocation" x="-4801" y="-3189"/>
         </scene>
         <!--Formation Table View Controller-->
         <scene sceneID="E7H-Rg-1sX">
@@ -1111,7 +1110,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-4159" y="2095"/>
+            <point key="canvasLocation" x="-4311" y="-2169"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kRT-F4-Wi6">
@@ -1134,7 +1133,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-7004" y="1555"/>
+            <point key="canvasLocation" x="-8652" y="-2633"/>
         </scene>
         <!--Formation View Controller-->
         <scene sceneID="hH3-ve-g87">
@@ -1186,7 +1185,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-681" y="1651"/>
+            <point key="canvasLocation" x="-2681" y="-2205"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mn7-s1-fup">
@@ -1234,7 +1233,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-4358" y="6750"/>
+            <point key="canvasLocation" x="-4158" y="5782"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="qVl-Lc-KVd">
@@ -1259,7 +1258,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5182" y="6158"/>
+            <point key="canvasLocation" x="-4982" y="5190"/>
         </scene>
         <!--Formation Folder Picker View Controller-->
         <scene sceneID="Dph-6C-M7x">
@@ -1316,7 +1315,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8367" y="-1705"/>
+            <point key="canvasLocation" x="-7575" y="-1145"/>
         </scene>
         <!--Record Map View Controller-->
         <scene sceneID="FuB-nF-Ci1">
@@ -1357,7 +1356,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8385" y="-241"/>
+            <point key="canvasLocation" x="-7777" y="597"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TWd-TZ-edg">
@@ -1371,314 +1370,11 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HQq-lP-jzS" kind="relationship" relationship="rootViewController" id="Qef-MK-y9g"/>
+                        <segue destination="tgm-XQ-kdK" kind="relationship" relationship="rootViewController" id="Vz9-T4-03i"/>
                     </connections>
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="-10964" y="-41"/>
-        </scene>
-        <!--Initial Map Segment View Controller-->
-        <scene sceneID="Qwc-Nk-4QI">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZKX-d9-SXE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="HQq-lP-jzS" customClass="InitialMapSegmentViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aPh-pt-v27">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="pY1-e7-PTe">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <barButtonItem title="Folders" width="65" id="JSv-fC-Mw5">
-                                        <connections>
-                                            <action selector="presentMaster:" destination="HQq-lP-jzS" id="Ukt-wL-ASa"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Formations" id="ARI-r5-bW1">
-                                        <connections>
-                                            <segue destination="K4c-o6-Ecw" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="ARI-r5-bW1" id="W1W-YI-rxo">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YKI-De-NTa"/>
-                                    <barButtonItem style="plain" id="XNT-7v-4UD">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Cni-9L-vsZ">
-                                            <rect key="frame" x="439" y="7" width="145" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <segments>
-                                                <segment title="Data"/>
-                                                <segment title="Map"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="dataMapSegmentIndexDidChange:" destination="HQq-lP-jzS" eventType="valueChanged" id="0vK-9z-jxb"/>
-                                            </connections>
-                                        </segmentedControl>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="etg-fb-QcX"/>
-                                </items>
-                            </toolbar>
-                            <view contentMode="scaleToFill" id="8f0-21-1DS">
-                                <rect key="frame" x="0.0" y="44" width="1024" height="704"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Yl6-V9-ChK"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="contentView" destination="8f0-21-1DS" id="PiL-kY-4ID"/>
-                        <outlet property="masterPresenter" destination="JSv-fC-Mw5" id="gH3-ON-u2P"/>
-                        <outlet property="toolbar" destination="pY1-e7-PTe" id="Jap-Tw-8rz"/>
-                        <segue destination="tgm-XQ-kdK" kind="push" identifier="Data Map Segment Controller" id="Suv-k5-VFz"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="-9721" y="-97"/>
-        </scene>
-        <!--Formation Folder Table View Controller - Formation Folders-->
-        <scene sceneID="ozc-9T-NrV">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AbY-aR-eVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="7wW-l7-Odi" customClass="FormationFolderTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Scr-Et-bdE">
-                        <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" textLabel="mgj-RC-Uay" detailTextLabel="MbS-wy-Mj0" style="IBUITableViewCellStyleSubtitle" id="fHq-aa-vsN">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mgj-RC-Uay">
-                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MbS-wy-Mj0">
-                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <connections>
-                                    <segue destination="bTt-pZ-hvV" kind="push" identifier="Show Formations" id="NAC-s2-hZr"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="7wW-l7-Odi" id="P6m-F9-jaN"/>
-                            <outlet property="delegate" destination="7wW-l7-Odi" id="UfW-Cb-UQ9"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Add Folder" id="oZa-OQ-s2x">
-                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="mID-1H-tZM" kind="modal" identifier="Formation Folder Manipulation" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="lgo-eY-tGN"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="Formation Folders" id="Lab-rh-YaM">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="W3z-IT-od0">
-                            <connections>
-                                <action selector="editPressed:" destination="7wW-l7-Odi" id="ZSp-tO-0sG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="-7292" y="-3131"/>
-        </scene>
-        <!--Formation Folder View Controller-->
-        <scene sceneID="sx2-0p-cS8">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dbc-ov-RFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="mID-1H-tZM" customClass="FormationFolderViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gWI-OL-bUO">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation Folder Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WvN-Ql-604">
-                                <rect key="frame" x="20" y="137" width="984" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Formation Folder Name" minimumFontSize="17" clearButtonMode="whileEditing" id="M0j-ct-Gst">
-                                <rect key="frame" x="20" y="197" width="379" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                            </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="otP-oh-pn3">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <barButtonItem systemItem="cancel" id="B06-me-EJn">
-                                        <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="cancelPressed:" destination="mID-1H-tZM" id="EK3-g6-sY4"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="xoe-Dg-Ng5"/>
-                                    <barButtonItem systemItem="done" id="F5o-R7-wgh">
-                                        <connections>
-                                            <action selector="donePressed:" destination="mID-1H-tZM" id="cao-u1-qbm"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="420" height="300"/>
-                    <connections>
-                        <outlet property="nameTextField" destination="M0j-ct-Gst" id="rhS-pT-stb"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="-6039" y="-3373"/>
-        </scene>
-        <!--Formation Table View Controller-->
-        <scene sceneID="giG-Sv-hiB">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lb8-Kf-oWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="bTt-pZ-hvV" customClass="FormationTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Bg1-VZ-TJc">
-                        <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Cell" id="aMI-lP-lii">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="bTt-pZ-hvV" id="bfp-Ga-UEf"/>
-                            <outlet property="delegate" destination="bTt-pZ-hvV" id="j9e-Zv-39R"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Add Formation" id="1b6-K0-Mqc">
-                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="ajM-7B-Dnf" kind="modal" identifier="Formation Manipulation" modalPresentationStyle="currentContext" id="ioV-8A-gBT"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" id="bzj-6M-Nxp">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Z3g-mL-kli">
-                            <connections>
-                                <action selector="editPressed:" destination="bTt-pZ-hvV" id="mrM-hZ-PON"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="-6013" y="-2537"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="3Ji-Zw-FkS">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yC1-SY-6eC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController toolbarHidden="NO" id="K4c-o6-Ecw" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <value key="contentSizeForViewInPopover" type="size" width="200" height="500"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="E5g-gW-ShG">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ccf-EH-kSz">
-                        <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="7wW-l7-Odi" kind="relationship" relationship="rootViewController" id="8rE-vg-5zm"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="-8650" y="-3109"/>
-        </scene>
-        <!--Formation View Controller-->
-        <scene sceneID="Rw2-Wx-pEO">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7G-5J-iMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="ajM-7B-Dnf" customClass="FormationViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ixd-QQ-X77">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4J1-1G-Uhq">
-                                <rect key="frame" x="20" y="137" width="984" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Formation Name" minimumFontSize="17" id="e9p-l3-f3q">
-                                <rect key="frame" x="20" y="197" width="379" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                            </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="APf-2c-hWQ">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <barButtonItem systemItem="cancel" id="4C0-D3-rj3">
-                                        <color key="tintColor" red="0.74644027219999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="cancelPressed:" destination="ajM-7B-Dnf" id="plK-tY-ahc"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="PuS-pY-xcM"/>
-                                    <barButtonItem systemItem="done" id="Vyf-xO-Eh5">
-                                        <connections>
-                                            <action selector="donePressed:" destination="ajM-7B-Dnf" id="vxW-B7-MAo"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="420" height="300"/>
-                    <connections>
-                        <outlet property="nameTextField" destination="e9p-l3-f3q" id="O0E-BS-tEs"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="-4463" y="-2517"/>
         </scene>
         <!--Data Map Segment View Controller-->
         <scene sceneID="zn7-To-boj">
@@ -1743,181 +1439,13 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8465" y="1767"/>
+            <point key="canvasLocation" x="-9825" y="-49"/>
         </scene>
     </scenes>
     <resources>
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
         <image name="RecordVCBackground.jpg" width="536" height="688"/>
     </resources>
-    <classes>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="CustomFolderCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFolderCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="checkBox" candidateClass="UIView"/>
-                <relationship kind="outlet" name="subTitie" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="CustomRecordCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="checkBox" candidateClass="UIView"/>
-                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="recordImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="type" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="DataMapSegmentViewController" superclassName="GeoSegmentViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DataMapSegmentViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="DipDirectionPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipDirectionPickerViewController.h"/>
-        </class>
-        <class className="DipPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipPickerViewController.h"/>
-        </class>
-        <class className="FilterByRecordTypeController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterByRecordTypeController.h"/>
-        </class>
-        <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
-        </class>
-        <class className="FormationFolderTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
-        </class>
-        <class className="FormationFolderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="FormationPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationPickerViewController.h"/>
-        </class>
-        <class className="FormationTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationTableViewController.h"/>
-        </class>
-        <class className="FormationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="GeoSegmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoSegmentViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="InitialDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="geofieldbookLogo" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="InitialMapSegmentViewController" superclassName="GeoSegmentViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialMapSegmentViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="ModalFolderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalFolderViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="folderDescriptionTextArea" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="folderNameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ModalRecordTypeSelector" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalRecordTypeSelector.h"/>
-            <relationships>
-                <relationship kind="outlet" name="recordTypePicker" candidateClass="UIPickerView"/>
-            </relationships>
-        </class>
-        <class className="PickerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PickerViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
-            </relationships>
-        </class>
-        <class className="PlungePickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlungePickerViewController.h"/>
-        </class>
-        <class className="RecordMapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordMapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-        <class className="RecordTableViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="RecordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="browseButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="dateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dipTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="fieldObservationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="latitudeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="longitudeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="plungeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="recordNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="recordTypeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="takePhotoButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="trendLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trendTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="upperFormationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="upperFormationTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="StrikePickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StrikePickerViewController.h"/>
-        </class>
-        <class className="TrendPickerViewController" superclassName="PickerViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrendPickerViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

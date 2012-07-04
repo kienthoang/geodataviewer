@@ -26,6 +26,14 @@
 
 @synthesize masterPopoverController=_masterPopoverController;
 
+#pragma mark - Getters and Setters
+
+- (UIViewController *)detailSideViewController {
+    return [self.viewControllers objectAtIndex:0];
+}
+
+#pragma mark - Data Forward Mechanisms
+
 - (void)setRecordMapViewControllerMapDelegate:(id<GeoMapAnnotationProvider>)mapDelegate {
     //Set the map delegate of the record map view controller
     RecordMapViewController *recordMap=[self.viewControllers lastObject];
@@ -33,21 +41,23 @@
 }
 
 - (void)setRecordViewControllerDelegate:(id <RecordViewControllerDelegate>)delegate {
-    //Set the delegate of the record detail vc
-    RecordViewController *recordDetail=[self.viewControllers objectAtIndex:0];
-    recordDetail.delegate=delegate;
+    //Set the delegate of the record detail vc if it's in the view controller array
+    id recordDetail=[self.viewControllers objectAtIndex:0];
+    if ([recordDetail isKindOfClass:[RecordViewController class]])
+        [(RecordViewController *)recordDetail setDelegate:delegate];
 }
 
 - (void)updateMapWithRecords:(NSArray *)records {
-    //Set the records of the record map view controller
+    //Set the records of the record map view controller if it's in the view controller array
     RecordMapViewController *recordMap=[self.viewControllers lastObject];
     recordMap.records=records;
 }
 
 - (void)updateRecordDetailViewWithRecord:(Record *)record {
     //Set the record of the record detail vc
-    RecordViewController *recordDetail=[self.viewControllers objectAtIndex:0];
-    recordDetail.record=record;
+    id recordDetail=[self.viewControllers objectAtIndex:0];
+    if ([recordDetail isKindOfClass:[RecordViewController class]])
+        [(RecordViewController *)recordDetail setRecord:record];
 }
 
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
@@ -56,16 +66,37 @@
     [super swapToViewControllerAtSegmentIndex:segmentIndex];
     
     //If the swapped in view controller is the record view controller put up the edit button
-    RecordViewController *recordDetail=[self.viewControllers objectAtIndex:0];
+    id dataDetail=[self.viewControllers objectAtIndex:0];
     NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
-    if (!segmentIndex)
-        [toolbarItems addObject:recordDetail.editButton];
+    if ([dataDetail isKindOfClass:[RecordViewController class]]) {
+        RecordViewController *recordDetail=(RecordViewController *)dataDetail;
+        
+        if (!segmentIndex)
+            [toolbarItems addObject:recordDetail.editButton];
+        else
+            [toolbarItems removeObject:recordDetail.editButton];
+    }
     
-    //Else take the edit button off
-    else
-        [toolbarItems removeObject:recordDetail.editButton];
+    //If the button on the rightmost of the toolbar is the edit button, take it off
+    else {
+    UIBarButtonItem *rightMostButton=[toolbarItems lastObject];
+    if ([rightMostButton.title isEqualToString:@"Edit"])
+        [toolbarItems removeObject:rightMostButton];
+    }
     
-    self.toolbar.items=[toolbarItems copy];    
+    //Set the tolbar
+    self.toolbar.items=[toolbarItems copy];  
+}
+
+- (void)pushRecordViewController {
+    //Replace the current data view controller with the record view controller
+    RecordViewController *recordDetail=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
+    [self replaceViewControllerAtSegmentIndex:0 withViewController:recordDetail];
+}
+
+- (void)pushInitialViewController {
+    InitialDetailViewController *initialDetail=[self.storyboard instantiateViewControllerWithIdentifier:INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
+    [self replaceViewControllerAtSegmentIndex:0 withViewController:initialDetail];
 }
 
 #pragma mark - Target-Action Handlers
@@ -126,13 +157,13 @@
     [super awakeFromNib];
     
     //Instantiate the initial view controller
-    RecordViewController *recordDetail=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
+    InitialDetailViewController *initialDetail=[self.storyboard instantiateViewControllerWithIdentifier:INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
     
     //Instantiate the record map view controller
     RecordMapViewController *recordMap=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_MAP_VIEW_CONTROLLER_IDENTIFIER];
     
     //Set the view controllers
-    self.viewControllers=[NSArray arrayWithObjects:recordDetail,recordMap, nil];
+    self.viewControllers=[NSArray arrayWithObjects:initialDetail,recordMap, nil];
 }
 
 - (void)viewDidLoad {

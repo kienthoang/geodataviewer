@@ -65,6 +65,9 @@
     //Set the delegate of the map view
     self.mapView.delegate=self;
     
+    //Switch map to satellite mode
+    self.mapView.mapType=MKMapTypeSatellite;
+    
     //Ask the delegate for records to display
     self.records=[self.mapDelegate recordsForMapViewController:self];
 }

@@ -12,8 +12,6 @@
 #import "ModalRecordTypeSelector.h"
 #import "GeoDatabaseManager.h"
 #import "Folder.h"
-
-#import "InitialMapSegmentViewController.h"
 #import "DataMapSegmentViewController.h"
 
 #import "Record.h"
@@ -132,12 +130,8 @@
 - (void)updateDetailViewWithRowOfIndexPath:(NSIndexPath *)indexPath {
     //If the current detail view vc is not a RecordViewController, push it
     DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-    if (!dataMapSegmentDetail) {
-        UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-        id detailvc=detailNav.topViewController;
-        [detailvc performSegueWithIdentifier:@"Data Map Segment Controller" sender:self];
-        dataMapSegmentDetail=[self dataMapSegmentDetail];
-    }
+    if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]])
+        [dataMapSegmentDetail pushRecordViewController];
     
     //Set up the record for the record view controller
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -150,8 +144,11 @@
     [dataMapSegmentDetail setRecordViewControllerDelegate:self];
     
     //Set the map delegate of the record vc to self
-    if ([dataMapSegmentDetail respondsToSelector:@selector(setRecordMapViewControllerMapDelegate:)])
-        [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
+    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
+    
+    //If the top view controller of the data map segment controller is nil, push the record view controller on screen
+    if (!dataMapSegmentDetail.topViewController)
+        [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];
 }
 
 #pragma mark - Autosave Controller

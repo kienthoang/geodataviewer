@@ -14,8 +14,6 @@
 #import "TextInputFilter.h"
 #import "GeoDatabaseManager.h"
 #import "UISplitViewBarButtonPresenter.h"
-
-#import "InitialMapSegmentViewController.h"
 #import "DataMapSegmentViewController.h"
 
 #import "Folder.h"
@@ -75,7 +73,18 @@
 @synthesize formationPopoverController=_formationPopoverController;
 @synthesize folderInfoPopoverController=_folderInfoPopoverController;
 
-#pragma mark - Setters
+#pragma mark - Getters and Setters
+
+- (DataMapSegmentViewController *)dataMapSegmentDetail {
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id dataMapSegmentDetail=detailNav.topViewController;
+    
+    //Set the record detail vc to nil if the current detail view vc is of class RecordViewController
+    if (![dataMapSegmentDetail isKindOfClass:[DataMapSegmentViewController class]])
+        dataMapSegmentDetail=nil;
+    
+    return dataMapSegmentDetail;
+}
 
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
@@ -295,6 +304,13 @@
     
     //Set self as the delegate of the record map view
     [self setSelfAsRecordMapDelegate];
+    
+    //Push the initial view controller back on screen
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentDetail];
+    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[InitialDetailViewController class]])
+        [dataMapSegmentVC pushInitialViewController];
+    if (!dataMapSegmentVC.topViewController)
+        [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
