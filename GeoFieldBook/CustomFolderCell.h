@@ -13,5 +13,6 @@
 @property (nonatomic,weak) IBOutlet UILabel *title;
 @property (nonatomic,weak) IBOutlet UILabel *subTitie;
 @property (nonatomic,weak) IBOutlet UIView *checkBox;
+@property (nonatomic,weak) IBOutlet UIImageView *image;
 
 @end

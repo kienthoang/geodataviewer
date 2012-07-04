@@ -16,5 +16,4 @@
 @synthesize recordImageView = _recordImageView;
 @synthesize type = _type;
 @synthesize checkBox = _checkBox;
-
 @end

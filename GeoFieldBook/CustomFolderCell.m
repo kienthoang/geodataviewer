@@ -13,5 +13,6 @@
 @synthesize title=_title;
 @synthesize subTitie=_subTitie;
 @synthesize checkBox=_checkBox;
+@synthesize image = _image;
 
 @end
