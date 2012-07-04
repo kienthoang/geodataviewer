@@ -77,21 +77,44 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ti-Ft-q1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController modalPresentationStyle="formSheet" id="Uwh-l0-QS0" customClass="FolderTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bts-ND-NJo">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" id="bts-ND-NJo">
                         <rect key="frame" x="0.0" y="64" width="320" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" id="ABX-2A-DqK" customClass="CustomFolderCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" rowHeight="71" id="ABX-2A-DqK" customClass="CustomFolderCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="h2I-YE-R2P">
+                                            <rect key="frame" x="73" y="4" width="179" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="kpd-3q-6KJ">
+                                            <rect key="frame" x="73" y="25" width="132" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <imageView contentMode="scaleToFill" id="376-Jj-GTw" customClass="CheckBox">
+                                            <rect key="frame" x="20" y="16" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
+                                    <outlet property="checkBox" destination="376-Jj-GTw" id="W0B-RP-bBH"/>
+                                    <outlet property="subTitie" destination="kpd-3q-6KJ" id="BM0-ya-1mi"/>
+                                    <outlet property="title" destination="h2I-YE-R2P" id="jH4-EI-5iG"/>
                                     <segue destination="kmo-3x-I3i" kind="push" identifier="Show Records" id="W6g-bL-9Ea"/>
                                 </connections>
                             </tableViewCell>
@@ -123,7 +146,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-10262" y="-4465"/>
+            <point key="canvasLocation" x="-10230" y="-4571"/>
         </scene>
         <!--Filter By Record Type Controller-->
         <scene sceneID="70s-hd-efC">
@@ -1550,8 +1573,7 @@
         <class className="CustomFolderCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFolderCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="checkBox" candidateClass="UIView"/>
-                <relationship kind="outlet" name="image" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="subTitie" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="title" candidateClass="UILabel"/>
             </relationships>

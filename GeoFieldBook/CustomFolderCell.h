@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CheckBox.h"
 
 @interface CustomFolderCell : UITableViewCell
 @property (nonatomic,weak) IBOutlet UILabel *title;
 @property (nonatomic,weak) IBOutlet UILabel *subTitie;
-@property (nonatomic,weak) IBOutlet UIView *checkBox;
-@property (nonatomic,weak) IBOutlet UIImageView *image;
+@property (nonatomic,weak) IBOutlet UIImageView *checkBox;
 
 @end

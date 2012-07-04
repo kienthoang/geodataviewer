@@ -17,12 +17,5 @@
 @synthesize type = _type;
 @synthesize checkBox = _checkBox;
 
-- (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-    
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] 
-                                   initWithTarget:self.checkBox action:@selector(toggle:)];
-    [self.checkBox addGestureRecognizer:tgr];
-}
 
 @end
