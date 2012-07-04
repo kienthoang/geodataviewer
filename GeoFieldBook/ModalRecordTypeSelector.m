@@ -52,12 +52,16 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     //Set self as the delegate and data source of the record picker view
     self.recordTypePicker.delegate=self;
     self.recordTypePicker.dataSource=self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     //Resize self to fit the master view
     self.view.superview.frame=CGRectMake(0, 0, 300, 380);

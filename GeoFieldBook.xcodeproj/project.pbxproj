@@ -70,6 +70,10 @@
 		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
 		029877FB1595740C000D71E7 /* InitialDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877FA1595740C000D71E7 /* InitialDetailViewController.m */; };
 		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
+		0298968B15A375B500E51C27 /* GeoSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298968A15A375B500E51C27 /* GeoSegmentViewController.m */; };
+		0298968E15A38EB700E51C27 /* InitialMapSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298968D15A38EB700E51C27 /* InitialMapSegmentViewController.m */; };
+		0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969015A38F4C00E51C27 /* RecordMapViewController.m */; };
+		0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969315A408B100E51C27 /* DataMapSegmentViewController.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
@@ -80,9 +84,6 @@
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		21A87A13159CAAFE001A220E /* Record+DateAndTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */; };
 		21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B1FEEF159B58C200868F62 /* CustomRecordCell.m */; };
-		21B3A76115A34FA400CD06B0 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B3A75E15A34FA400CD06B0 /* CheckBox.m */; };
-		21B3A76215A34FA400CD06B0 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B3A75F15A34FA400CD06B0 /* checked.png */; };
-		21B3A76315A34FA400CD06B0 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B3A76015A34FA400CD06B0 /* unchecked.png */; };
 		21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C309E0159B6C800066FC9B /* MobileCoreServices.framework */; };
 		21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC474D15A3789E00F245FF /* CustomFolderCell.m */; };
 		21FC475515A4244000F245FF /* FilterByRecordTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC475415A4244000F245FF /* FilterByRecordTypeController.m */; };
@@ -213,11 +214,19 @@
 		029877F91595740C000D71E7 /* InitialDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialDetailViewController.h; sourceTree = "<group>"; };
 		029877FA1595740C000D71E7 /* InitialDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialDetailViewController.m; sourceTree = "<group>"; };
 		029877FD1595955E000D71E7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
+		0298968915A375B500E51C27 /* GeoSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoSegmentViewController.h; sourceTree = "<group>"; };
+		0298968A15A375B500E51C27 /* GeoSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoSegmentViewController.m; sourceTree = "<group>"; };
+		0298968C15A38EB700E51C27 /* InitialMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialMapSegmentViewController.h; sourceTree = "<group>"; };
+		0298968D15A38EB700E51C27 /* InitialMapSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialMapSegmentViewController.m; sourceTree = "<group>"; };
+		0298968F15A38F4C00E51C27 /* RecordMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewController.h; sourceTree = "<group>"; };
+		0298969015A38F4C00E51C27 /* RecordMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordMapViewController.m; sourceTree = "<group>"; };
+		0298969215A408B100E51C27 /* DataMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentViewController.h; sourceTree = "<group>"; };
+		0298969315A408B100E51C27 /* DataMapSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMapSegmentViewController.m; sourceTree = "<group>"; };
+		0298969515A40EB800E51C27 /* GeoMapAnnotationProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoMapAnnotationProvider.h; sourceTree = "<group>"; };
 		0298C25A159B43F30038E89C /* Record+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Validation.h"; sourceTree = "<group>"; };
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
-		2128E73B15A2366F00B277F9 /* GeoMapAnnotationProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoMapAnnotationProvider.h; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
@@ -233,10 +242,6 @@
 		21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DateAndTimeFormatter.m"; sourceTree = "<group>"; };
 		21B1FEEE159B58C200868F62 /* CustomRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecordCell.h; sourceTree = "<group>"; };
 		21B1FEEF159B58C200868F62 /* CustomRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecordCell.m; sourceTree = "<group>"; };
-		21B3A75D15A34FA400CD06B0 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckBox.h; path = "../../untitled folder 2/CheckBox.h"; sourceTree = "<group>"; };
-		21B3A75E15A34FA400CD06B0 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckBox.m; path = "../../untitled folder 2/CheckBox.m"; sourceTree = "<group>"; };
-		21B3A75F15A34FA400CD06B0 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = "../../untitled folder 2/checked.png"; sourceTree = "<group>"; };
-		21B3A76015A34FA400CD06B0 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unchecked.png; path = "../../untitled folder 2/unchecked.png"; sourceTree = "<group>"; };
 		21C309E0159B6C800066FC9B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		21FC474C15A3789E00F245FF /* CustomFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFolderCell.h; sourceTree = "<group>"; };
 		21FC474D15A3789E00F245FF /* CustomFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFolderCell.m; sourceTree = "<group>"; };
@@ -279,6 +284,8 @@
 				020EBB941594217A00EECC08 /* CoreDataTableViewController.m */,
 				0222DB221596B40C00699D62 /* PickerViewController.h */,
 				0222DB231596B40C00699D62 /* PickerViewController.m */,
+				0298968915A375B500E51C27 /* GeoSegmentViewController.h */,
+				0298968A15A375B500E51C27 /* GeoSegmentViewController.m */,
 			);
 			name = "View Controller Prototypes";
 			sourceTree = "<group>";
@@ -306,9 +313,9 @@
 				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
 				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
 				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
-				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
 				020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */,
 				023858651599233F00A0DB98 /* FormationFolderTableViewController.h */,
+				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
 				0238586815994DF100A0DB98 /* FormationFolderViewController.h */,
 				0238586915994DF200A0DB98 /* FormationFolderViewController.m */,
 				0238587415996B5B00A0DB98 /* FormationTableViewController.h */,
@@ -326,6 +333,12 @@
 				029877FA1595740C000D71E7 /* InitialDetailViewController.m */,
 				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
 				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
+				0298968F15A38F4C00E51C27 /* RecordMapViewController.h */,
+				0298969015A38F4C00E51C27 /* RecordMapViewController.m */,
+				0298968C15A38EB700E51C27 /* InitialMapSegmentViewController.h */,
+				0298968D15A38EB700E51C27 /* InitialMapSegmentViewController.m */,
+				0298969215A408B100E51C27 /* DataMapSegmentViewController.h */,
+				0298969315A408B100E51C27 /* DataMapSegmentViewController.m */,
 			);
 			name = "Detail View Controllers";
 			sourceTree = "<group>";
@@ -354,8 +367,6 @@
 		024097A2159D373F00855D33 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				21B3A75D15A34FA400CD06B0 /* CheckBox.h */,
-				21B3A75E15A34FA400CD06B0 /* CheckBox.m */,
 				21FC474C15A3789E00F245FF /* CustomFolderCell.h */,
 				21FC474D15A3789E00F245FF /* CustomFolderCell.m */,
 				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
@@ -483,7 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */,
-				2128E73B15A2366F00B277F9 /* GeoMapAnnotationProvider.h */,
+				0298969515A40EB800E51C27 /* GeoMapAnnotationProvider.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -491,8 +502,6 @@
 		029877FC1595954D000D71E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				21B3A75F15A34FA400CD06B0 /* checked.png */,
-				21B3A76015A34FA400CD06B0 /* unchecked.png */,
 				029877FD1595955E000D71E7 /* RecordVCBackground.jpg */,
 				0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */,
 			);
@@ -704,8 +713,6 @@
 				0294E0A9159361060025219F /* iPad.storyboard in Resources */,
 				029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */,
 				0222DB1C1596487800699D62 /* GeoFieldBookFrontPage.png in Resources */,
-				21B3A76215A34FA400CD06B0 /* checked.png in Resources */,
-				21B3A76315A34FA400CD06B0 /* unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,7 +805,10 @@
 				02712A59159D013D00510188 /* Other.m in Sources */,
 				2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */,
 				2128E74315A238F900B277F9 /* GeoFilter.m in Sources */,
-				21B3A76115A34FA400CD06B0 /* CheckBox.m in Sources */,
+				0298968B15A375B500E51C27 /* GeoSegmentViewController.m in Sources */,
+				0298968E15A38EB700E51C27 /* InitialMapSegmentViewController.m in Sources */,
+				0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */,
+				0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */,
 				21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */,
 				21FC475515A4244000F245FF /* FilterByRecordTypeController.m in Sources */,
 			);

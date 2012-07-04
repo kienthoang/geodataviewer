@@ -11,8 +11,10 @@
 #import "UISplitViewBarButtonPresenter.h"
 #import "ModalRecordTypeSelector.h"
 #import "GeoDatabaseManager.h"
-#import "RecordViewController.h"
 #import "Folder.h"
+
+#import "InitialMapSegmentViewController.h"
+#import "DataMapSegmentViewController.h"
 
 #import "Record.h"
 #import "Record+Types.h"
@@ -22,8 +24,6 @@
 #import "Record+DateAndTimeFormatter.h"
 #import "Formation_Folder.h"
 
-#import "CheckBox.h"
-
 @interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
@@ -31,8 +31,6 @@
 - (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
 
 - (void)autosaveRecord:(Record *)record withNewRecordInfo:(NSDictionary *)recordInfo;
-
-- (RecordViewController *)recordDetailViewController;
 
 #pragma mark - Temporary record's modified info
 
@@ -84,15 +82,15 @@
 
 #pragma mark - Getters
 
-- (RecordViewController *)recordDetailViewController {
+- (DataMapSegmentViewController *)dataMapSegmentDetail {
     UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id recordDetailVC=detailNav.topViewController;
+    id dataMapSegmentDetail=detailNav.topViewController;
     
     //Set the record detail vc to nil if the current detail view vc is of class RecordViewController
-    if (![recordDetailVC isKindOfClass:[RecordViewController class]])
-        recordDetailVC=nil;
+    if (![dataMapSegmentDetail isKindOfClass:[DataMapSegmentViewController class]])
+        dataMapSegmentDetail=nil;
     
-    return recordDetailVC;
+    return dataMapSegmentDetail;
 }
 
 #pragma mark - Setters
@@ -133,27 +131,27 @@
 
 - (void)updateDetailViewWithRowOfIndexPath:(NSIndexPath *)indexPath {
     //If the current detail view vc is not a RecordViewController, push it
-    RecordViewController *recordDetailVC=[self recordDetailViewController];
-    if (!recordDetailVC) {
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+    if (!dataMapSegmentDetail) {
         UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
         id detailvc=detailNav.topViewController;
-        [detailvc performSegueWithIdentifier:@"Show Record Info" sender:self];
-        recordDetailVC=[self recordDetailViewController];
+        [detailvc performSegueWithIdentifier:@"Data Map Segment Controller" sender:self];
+        dataMapSegmentDetail=[self dataMapSegmentDetail];
     }
     
     //Set up the record for the record view controller
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    recordDetailVC.record=record;
+    [dataMapSegmentDetail updateRecordDetailViewWithRecord:record];
     
     //Save the chosen record
     self.chosenRecord=record;
     
     //Set the delegate of the destination view controller to be self
-    recordDetailVC.delegate=self;
+    [dataMapSegmentDetail setRecordViewControllerDelegate:self];
     
     //Set the map delegate of the record vc to self
-    if ([recordDetailVC respondsToSelector:@selector(setMapDelegate:)])
-        [recordDetailVC setMapDelegate:self];
+    if ([dataMapSegmentDetail respondsToSelector:@selector(setRecordMapViewControllerMapDelegate:)])
+        [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
 }
 
 #pragma mark - Autosave Controller
@@ -414,9 +412,14 @@
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
     
     //Set the map delegate of the record vc to self
-    RecordViewController *recordDetailVC=[self recordDetailViewController];
-    if ([recordDetailVC respondsToSelector:@selector(setMapDelegate:)])
-        [recordDetailVC setMapDelegate:self];
+    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
+    id detailvc=detailNav.topViewController;
+    if ([detailvc respondsToSelector:@selector(setMapDelegate:)])
+        [detailvc setMapDelegate:self];
+    
+    //Update the map view
+    if ([detailvc respondsToSelector:@selector(updateMapWithRecords:)])
+        [detailvc updateMapWithRecords:[self records]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {    
@@ -511,12 +514,7 @@
     }
     
     // Configure the cell...
-    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    //checkbox
-    CheckBox *cb = [[CheckBox alloc] initWithFrame:cell.checkBox.frame];
-    cb.tag = indexPath.row;
-    [cell.contentView addSubview:cb];   
+    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];  
         
     //show the name, date and time
     cell.name.text=[NSString stringWithFormat:@"%@",record.name];
@@ -548,7 +546,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     [self updateDetailViewWithRowOfIndexPath:indexPath];
 }
 
-- (NSArray *)recordsForMapView:(MKMapView *)mapView {
+- (NSArray *)records {
     //Get the array of records from the fetched results controller
     NSArray *records=self.fetchedResultsController.fetchedObjects;
     
@@ -556,6 +554,11 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     
     //return the records
     return records;
+}
+
+- (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
+    
+    return [self records];
 }
 
 @end

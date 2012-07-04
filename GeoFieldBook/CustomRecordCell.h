@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CheckBox.h"
 
 @interface CustomRecordCell : UITableViewCell
 
