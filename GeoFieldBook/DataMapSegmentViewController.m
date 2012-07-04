@@ -95,7 +95,7 @@
     //If the button on the rightmost of the toolbar is the edit button, take it off
     else {
     UIBarButtonItem *rightMostButton=[toolbarItems lastObject];
-    if ([rightMostButton.title isEqualToString:@"Edit"])
+    if ([rightMostButton.title isEqualToString:@"Edit"] || [rightMostButton.title isEqualToString:@"Done"])
         [toolbarItems removeObject:rightMostButton];
     }
     
@@ -110,6 +110,8 @@
 }
 
 - (void)pushInitialViewController {
+    //
+    
     InitialDetailViewController *initialDetail=[self.storyboard instantiateViewControllerWithIdentifier:INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
     [self replaceViewControllerAtSegmentIndex:0 withViewController:initialDetail];
 }
