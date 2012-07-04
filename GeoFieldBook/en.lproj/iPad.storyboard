@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -239,7 +239,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="250" height="275"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-6265" y="575"/>
+            <point key="canvasLocation" x="-6273" y="-489"/>
         </scene>
         <!--Formation Folder Table View Controller - Formation Folders-->
         <scene sceneID="56r-Yf-LiQ">
@@ -392,7 +392,7 @@
                                             <rect key="frame" x="53" y="8" width="100" height="73"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Record Name &amp; type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Wea-6k-hPN">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Record Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Wea-6k-hPN">
                                             <rect key="frame" x="161" y="-2" width="297" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -414,14 +414,14 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WAV-7n-bcC">
-                                            <rect key="frame" x="232" y="40" width="106" height="21"/>
+                                            <rect key="frame" x="212" y="40" width="106" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="GwZ-kw-lUZ">
-                                            <rect key="frame" x="232" y="59" width="119" height="21"/>
+                                            <rect key="frame" x="212" y="59" width="119" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -439,7 +439,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="PIb-Rx-kos">
-                                            <rect key="frame" x="232" y="20" width="42" height="21"/>
+                                            <rect key="frame" x="212" y="20" width="88" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -864,6 +864,84 @@
             </objects>
             <point key="canvasLocation" x="-7946" y="2731"/>
         </scene>
+        <!--Map Record Info View Controller-->
+        <scene sceneID="neR-GK-FNx">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="isT-SW-XCr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="Record Info Popover" id="Ugj-UV-Pja" customClass="MKMapRecordInfoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sRU-Ag-5WK">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="HYr-pJ-bf4">
+                                <rect key="frame" x="6" y="9" width="147" height="93"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Record Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="DKL-ew-2Ow">
+                                <rect key="frame" x="161" y="0.0" width="297" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LrY-L0-598">
+                                <rect key="frame" x="162" y="52" width="34" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="lLh-C1-sw8">
+                                <rect key="frame" x="161" y="81" width="35" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="KSO-eR-8B6">
+                                <rect key="frame" x="207" y="52" width="106" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="uvO-7H-t3B">
+                                <rect key="frame" x="207" y="81" width="119" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="08Z-xe-1AQ">
+                                <rect key="frame" x="161" y="30" width="43" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="p18-Py-R7b">
+                                <rect key="frame" x="207" y="30" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="400"/>
+                    <connections>
+                        <outlet property="imageView" destination="HYr-pJ-bf4" id="JZL-Ld-s1Z"/>
+                        <outlet property="recordDate" destination="KSO-eR-8B6" id="dd8-61-6ag"/>
+                        <outlet property="recordName" destination="DKL-ew-2Ow" id="Phd-c3-D6Z"/>
+                        <outlet property="recordTime" destination="uvO-7H-t3B" id="t3h-SV-dVd"/>
+                        <outlet property="recordType" destination="p18-Py-R7b" id="jG3-SH-td1"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-6265" y="1031"/>
+        </scene>
         <!--Strike Picker View Controller-->
         <scene sceneID="ovW-L9-di4">
             <objects>
@@ -887,7 +965,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6097" y="1651"/>
+            <point key="canvasLocation" x="-6041" y="2195"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="neq-Dd-nPE">
@@ -1546,6 +1624,16 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="geofieldbookLogo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MKMapRecordInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MKMapRecordInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="recordDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordType" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="ModalFolderViewController" superclassName="UIViewController">
