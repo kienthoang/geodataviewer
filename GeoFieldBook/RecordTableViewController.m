@@ -280,10 +280,7 @@
 
 //Put the right hand side (detail view) into editing mode, probably used when a new record is created
 - (void)putDetailViewIntoEditingMode {
-    //Get the detail vc and if it's of RecordViewController class, put it into editing mode
-    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id detailvc=detailNav.topViewController;
-         [detailvc setEditing:YES animated:YES];
+    [[self dataMapSegmentDetail] putRecordViewControllerIntoEditingMode];
 }
 
 //Create a new record entity with the specified record type
@@ -299,6 +296,9 @@
             
             //Put the detail view (now showing the newly created record's info) into editing mode
             [self putDetailViewIntoEditingMode];
+            
+            //Update the map view
+            [[self dataMapSegmentDetail] updateMapWithRecords:[self records]];
         }
     }];
 }
@@ -317,6 +317,9 @@
             //highlight the newly modified record if it's also the currently chosen record and update the detail view accordingly
             if (record==chosenRecord)
                 [self highlightRecord:record updateDetailView:YES];
+            
+            //Update the map view
+            [[self dataMapSegmentDetail] updateMapWithRecords:[self records]];
         }
     }];
 }
@@ -328,7 +331,10 @@
     [self.database.managedObjectContext deleteObject:record];
     
     //Save changes to database
-    [self saveChangesToDatabase:self.database completion:^(BOOL success){}];
+    [self saveChangesToDatabase:self.database completion:^(BOOL success){
+        //Update the map view
+        [[self dataMapSegmentDetail] updateMapWithRecords:[self records]];
+    }];
 }
 
 #pragma mark - FormationFolderPickerDelegate methods
@@ -409,14 +415,11 @@
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
     
     //Set the map delegate of the record vc to self
-    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id detailvc=detailNav.topViewController;
-    if ([detailvc respondsToSelector:@selector(setMapDelegate:)])
-        [detailvc setMapDelegate:self];
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentDetail];
+    [dataMapSegmentVC setRecordMapViewControllerMapDelegate:self];
     
     //Update the map view
-    if ([detailvc respondsToSelector:@selector(updateMapWithRecords:)])
-        [detailvc updateMapWithRecords:[self records]];
+    [dataMapSegmentVC updateMapWithRecords:[self records]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {    

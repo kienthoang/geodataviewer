@@ -24,6 +24,7 @@
 - (void)setRecordViewControllerDelegate:(id <RecordViewControllerDelegate>)delegate;
 - (void)updateMapWithRecords:(NSArray *)records;
 - (void)updateRecordDetailViewWithRecord:(Record *)record;
+- (void)putRecordViewControllerIntoEditingMode;
 
 - (void)pushInitialViewController;
 - (void)pushRecordViewController;

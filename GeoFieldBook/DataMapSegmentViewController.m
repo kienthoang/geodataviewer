@@ -60,6 +60,16 @@
         [(RecordViewController *)recordDetail setRecord:record];
 }
 
+- (void)putRecordViewControllerIntoEditingMode {
+    //Swap to the record view controller if it's not the current view controller
+    if (self.topViewController!=[self.viewControllers objectAtIndex:0])
+        [self swapToViewControllerAtSegmentIndex:0];
+    
+    //Put the record view controller into edit mode
+    RecordViewController *recordDetail=(RecordViewController *)self.topViewController;
+    [recordDetail setEditing:YES animated:YES];
+}
+
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
 - (void)swapToViewControllerAtSegmentIndex:(int)segmentIndex {
