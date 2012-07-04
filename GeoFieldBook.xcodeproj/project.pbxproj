@@ -85,6 +85,7 @@
 		21B3A76315A34FA400CD06B0 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21B3A76015A34FA400CD06B0 /* unchecked.png */; };
 		21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C309E0159B6C800066FC9B /* MobileCoreServices.framework */; };
 		21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC474D15A3789E00F245FF /* CustomFolderCell.m */; };
+		21FC475515A4244000F245FF /* FilterByRecordTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC475415A4244000F245FF /* FilterByRecordTypeController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +240,8 @@
 		21C309E0159B6C800066FC9B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		21FC474C15A3789E00F245FF /* CustomFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFolderCell.h; sourceTree = "<group>"; };
 		21FC474D15A3789E00F245FF /* CustomFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFolderCell.m; sourceTree = "<group>"; };
+		21FC475315A4244000F245FF /* FilterByRecordTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterByRecordTypeController.h; sourceTree = "<group>"; };
+		21FC475415A4244000F245FF /* FilterByRecordTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterByRecordTypeController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +403,8 @@
 			isa = PBXGroup;
 			children = (
 				0294E0A7159361060025219F /* iPad.storyboard */,
+				21FC475315A4244000F245FF /* FilterByRecordTypeController.h */,
+				21FC475415A4244000F245FF /* FilterByRecordTypeController.m */,
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
@@ -795,6 +800,7 @@
 				2128E74315A238F900B277F9 /* GeoFilter.m in Sources */,
 				21B3A76115A34FA400CD06B0 /* CheckBox.m in Sources */,
 				21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */,
+				21FC475515A4244000F245FF /* FilterByRecordTypeController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

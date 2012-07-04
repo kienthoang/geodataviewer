@@ -39,6 +39,8 @@
 
 #import "MKGeoRecordAnnotation.h"
 
+#import "FilterByRecordTypeController.h"
+
 @interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,MKMapViewDelegate>
 
 //The names of the pickers
@@ -83,6 +85,7 @@
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *gatheringGPS; 
 @property (nonatomic, strong) UIPopoverController *imagePopover;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) UIPopoverController *filterPopover;
 
 #pragma mark - Buttons
 
@@ -130,7 +133,7 @@
 #pragma mark - Map View
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
+@property (weak, nonatomic) IBOutlet UIButton *filterButton;
 @end
 
 @implementation RecordViewController
@@ -138,6 +141,7 @@
 @synthesize mapDelegate=_mapDelegate;
 
 @synthesize mapView = _mapView;
+@synthesize filterButton=_filterButton;
 
 @synthesize scrollView = _scrollView;
 
@@ -190,6 +194,7 @@
 @synthesize imagePickerPresenter=_imagePickerPresenter;
 @synthesize masterPresenter = _masterPresenter;
 @synthesize dataMapSwitch = _dataMapSwitch;
+@synthesize filterPopover = _filterPopover;
 
 @synthesize acquiredDate=_acquireDate;
 
@@ -493,9 +498,11 @@
     if (self.dataMapSwitch.selectedSegmentIndex==DATA_MODE_SEGMENTED_CONTROL_INDEX) {
         //Hide the map
         self.mapView.hidden=YES;
+        self.filterButton.hidden=YES;
     } else {
         //Show the map
         self.mapView.hidden=NO;
+        self.filterButton.hidden=NO;
         
         //Update the map
         [self updateMap];
@@ -858,7 +865,10 @@
     
     //Hide the map view if in data mode
     if (self.dataMapSwitch.selectedSegmentIndex==DATA_MODE_SEGMENTED_CONTROL_INDEX)
+    {
         self.mapView.hidden=YES;
+        self.filterButton.hidden=YES;
+    }
     
     //Update the form
     [self updateFormForRecord:self.record];
@@ -1069,6 +1079,23 @@
     annotationView.annotation=annotation;
     
     return annotationView;
+}
+
+#pragma mark - Filter By Record Type
+- (IBAction)filterPressed:(UIButton *)sender {
+    NSLog(@"Filter Pressed!");
+    FilterByRecordTypeController *filter = [[FilterByRecordTypeController alloc] initWithStyle:UITableViewStylePlain];
+   //            _colorPicker.delegate = self;
+    self.filterPopover = [[UIPopoverController alloc] 
+                                    initWithContentViewController:filter];               
+    self.filterPopover.popoverContentSize = CGSizeMake(200.0,200.0);
+    UIView* popoverView = [[UIView alloc]
+                           initWithFrame:CGRectMake(sender.frame.origin.x,sender.frame.origin.y-310,200, 300)];
+    [self.view addSubview:popoverView];
+    NSLog(@"Size %f, %f", self.view.frame.size.height, self.view.frame.size.width);
+    [self.filterPopover presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+
 }
 
 @end
