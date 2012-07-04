@@ -18,15 +18,20 @@
 @property (nonatomic,weak) UIPopoverController *filterPopover;
 @property (nonatomic,strong) UIPopoverController *annotationCalloutPopover;
 
+@property (nonatomic,strong) NSArray *mapAnnotations;
+
 #define RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER @"Record Annotation View"
 
 @end
 
 @implementation RecordMapViewController
 
-@synthesize mapView = _mapView;
 @synthesize records=_records;
+@synthesize selectedRecord=_selectedRecord;
+
+@synthesize mapView = _mapView;
 @synthesize mapDelegate=_mapDelegate;
+@synthesize mapAnnotations=_mapAnnotations;
 
 @synthesize filterPopover=_filterPopover;
 @synthesize annotationCalloutPopover=_annotationCalloutPopover;
@@ -44,6 +49,34 @@
     //Add new annotations
     if ([annotations count])
         [self.mapView addAnnotations:[annotations copy]];
+    
+    //Save the annotations
+    self.mapAnnotations=self.mapView.annotations;
+}
+
+- (void)setSelectedRecord:(Record *)selectedRecord {
+    //Deselect the previous record if it's not nil
+    if (self.selectedRecord) {
+        for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+            if (annotation.record=self.selectedRecord) {
+                [self.mapView deselectAnnotation:annotation animated:YES];
+                break;
+            }
+        }
+    }
+    
+    //Save the new selected record
+    _selectedRecord=selectedRecord;
+            
+    //Select the pin corresponding to the record
+    for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+        if (annotation.record=self.selectedRecord) {
+            self.mapView.centerCoordinate=annotation.coordinate;
+            [self.mapView deselectAnnotation:annotation animated:YES];
+            [self.mapView selectAnnotation:annotation animated:YES];
+            break;
+        }
+    }
 }
 
 #pragma mark - Getters and Setters
@@ -140,7 +173,7 @@
     MKGeoRecordAnnotation *annotation=view.annotation;
     recordInfo.record=annotation.record;
     self.annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
-    self.annotationCalloutPopover.popoverContentSize=CGSizeMake(300, 120);
+    self.annotationCalloutPopover.popoverContentSize=CGSizeMake(300, 110);
     [self.annotationCalloutPopover presentPopoverFromRect:view.bounds 
                                        inView:view 
                      permittedArrowDirections:UIPopoverArrowDirectionAny 

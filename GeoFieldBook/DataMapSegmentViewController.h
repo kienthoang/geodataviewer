@@ -25,6 +25,7 @@
 - (void)updateMapWithRecords:(NSArray *)records;
 - (void)updateRecordDetailViewWithRecord:(Record *)record;
 - (void)putRecordViewControllerIntoEditingMode;
+- (void)selectRecordInMap:(Record *)record;
 
 - (void)pushInitialViewController;
 - (void)pushRecordViewController;

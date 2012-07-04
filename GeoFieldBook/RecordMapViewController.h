@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "GeoMapAnnotationProvider.h"
+#import "Record.h"
 
 @interface RecordMapViewController : UIViewController
 
 @property (nonatomic,weak) id <GeoMapAnnotationProvider> mapDelegate;
 @property (nonatomic,strong) NSArray *records;
+@property (nonatomic,strong) Record *selectedRecord;
 
 @end

@@ -338,9 +338,13 @@
     
     //If the deleted record is the currently chosen record, pop the record view controller off screen
     if (record==self.chosenRecord) {
+        //Push the initial record vc
         DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
         [dataMapSegmentDetail pushInitialViewController];
-        [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];
+        
+        //If there is no view on screen, swap to the initial view
+        if (!dataMapSegmentDetail.topViewController)
+            [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];
         
     }
 }
@@ -550,9 +554,17 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     }
 }
 
+- (void)selectAnnotationInMapCorrespondingToRecordAtIndexPath:(NSIndexPath *)indexPath {
+    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    [[self dataMapSegmentDetail] selectRecordInMap:record];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //Update the detail view
     [self updateDetailViewWithRowOfIndexPath:indexPath];
+    
+    //Update the map to call the callout of the annotation view corresponding to the selected record
+    [self selectAnnotationInMapCorrespondingToRecordAtIndexPath:indexPath];
 }
 
 - (NSArray *)records {

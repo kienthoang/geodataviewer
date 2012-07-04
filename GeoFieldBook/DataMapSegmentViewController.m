@@ -75,6 +75,11 @@
     [recordDetail setEditing:YES animated:YES];
 }
 
+- (void)selectRecordInMap:(Record *)record {
+    RecordMapViewController *recordMap=[self.viewControllers lastObject];
+    recordMap.selectedRecord=record;
+}
+
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
 - (void)swapToViewControllerAtSegmentIndex:(int)segmentIndex {
@@ -109,9 +114,7 @@
     [self replaceViewControllerAtSegmentIndex:0 withViewController:recordDetail];
 }
 
-- (void)pushInitialViewController {
-    //
-    
+- (void)pushInitialViewController {    
     InitialDetailViewController *initialDetail=[self.storyboard instantiateViewControllerWithIdentifier:INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
     [self replaceViewControllerAtSegmentIndex:0 withViewController:initialDetail];
 }
@@ -188,14 +191,6 @@
     
     //Show the initial detail view controller
     [self swapToViewControllerAtSegmentIndex:0];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Present the master popover
-    [self.masterPopoverController dismissPopoverAnimated:NO];
-    [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
