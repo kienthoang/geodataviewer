@@ -24,8 +24,6 @@
 #import "Record+DateAndTimeFormatter.h"
 #import "Formation_Folder.h"
 
-#import "CheckBox.h"
-
 @interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
@@ -512,12 +510,7 @@
     }
     
     // Configure the cell...
-    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    //checkbox
-    CheckBox *cb = [[CheckBox alloc] initWithFrame:cell.checkBox.frame];
-    cb.tag = indexPath.row;
-    [cell.contentView addSubview:cb];   
+    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];  
         
     //show the name, date and time
     cell.name.text=[NSString stringWithFormat:@"%@",record.name];

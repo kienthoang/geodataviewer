@@ -24,7 +24,6 @@
 #import "Folder+DictionaryKeys.h"
 
 #import "GeoFilter.h"
-#import "CheckBox.h"
 #import "CustomFolderCell.h"
 
 @interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate>
@@ -400,11 +399,6 @@
     UILongPressGestureRecognizer *longPressRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnTableCell:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
-    //checkbox config
-    CheckBox *cb = [[CheckBox alloc] initWithFrame:cell.checkBox.frame];
-    cb.tag = indexPath.row;
-    [cell.contentView addSubview:cb]; 
-    
     return cell;
 }
 
@@ -477,6 +471,9 @@
     //Get the array of records 
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
     request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"folder.folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],nil];
+    NSArray *records=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    return records;
 }
 
 - (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
