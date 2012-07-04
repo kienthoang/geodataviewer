@@ -416,6 +416,10 @@
     id detailvc=detailNav.topViewController;
     if ([detailvc respondsToSelector:@selector(setMapDelegate:)])
         [detailvc setMapDelegate:self];
+    
+    //Update the map view
+    if ([detailvc respondsToSelector:@selector(updateMapWithRecords:)])
+        [detailvc updateMapWithRecords:[self records]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {    
@@ -542,7 +546,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     [self updateDetailViewWithRowOfIndexPath:indexPath];
 }
 
-- (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
+- (NSArray *)records {
     //Get the array of records from the fetched results controller
     NSArray *records=self.fetchedResultsController.fetchedObjects;
     
@@ -550,6 +554,11 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     
     //return the records
     return records;
+}
+
+- (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
+    
+    return [self records];
 }
 
 @end
