@@ -16,4 +16,12 @@
 @synthesize recordImageView = _recordImageView;
 @synthesize type = _type;
 @synthesize checkBox = _checkBox;
+
+
+-(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    NSLog(@"initwithstyle");
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    return self;
+}
 @end
