@@ -981,21 +981,4 @@
         textField.hidden=YES;
 }
 
-//#pragma mark - Filter By Record Type
-//- (IBAction)filterPressed:(UIButton *)sender {
-//    NSLog(@"Filter Pressed!");
-//    FilterByRecordTypeController *filter = [[FilterByRecordTypeController alloc] initWithStyle:UITableViewStylePlain];
-//   //            _colorPicker.delegate = self;
-//    self.filterPopover = [[UIPopoverController alloc] 
-//                                    initWithContentViewController:filter];               
-//    self.filterPopover.popoverContentSize = CGSizeMake(200.0,200.0);
-//    UIView* popoverView = [[UIView alloc]
-//                           initWithFrame:CGRectMake(sender.frame.origin.x,sender.frame.origin.y-310,200, 300)];
-//    [self.view addSubview:popoverView];
-//    NSLog(@"Size %f, %f", self.view.frame.size.height, self.view.frame.size.width);
-//    [self.filterPopover presentPopoverFromRect:sender.bounds inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//    
-//
-//}
-
 @end

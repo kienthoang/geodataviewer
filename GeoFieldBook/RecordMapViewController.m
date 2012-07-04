@@ -7,11 +7,13 @@
 //
 
 #import "RecordMapViewController.h"
+#import "FilterByRecordTypeController.h"
 #import "MKGeoRecordAnnotation.h"
 
 @interface RecordMapViewController() <MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) UIPopoverController *filterPopover;
 
 #define RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER @"Record Annotation View"
 
@@ -22,6 +24,8 @@
 @synthesize mapView = _mapView;
 @synthesize records=_records;
 @synthesize mapDelegate=_mapDelegate;
+
+@synthesize filterPopover=_filterPopover;
 
 - (void)updateMapView {
     //Convert the array of records into annotations

@@ -10,7 +10,4 @@
 
 @interface FilterByRecordTypeController : UITableViewController
 
-@property (nonatomic, strong) NSArray *choices;
-//@property (nonatomic, strong) id
-
 @end
