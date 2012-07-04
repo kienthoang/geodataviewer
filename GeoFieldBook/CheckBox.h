@@ -13,5 +13,4 @@
 @property (nonatomic, strong) UIImage *unchecked;
 @property (nonatomic) BOOL isChecked;
 
--(void) viewDidLoad;
 @end

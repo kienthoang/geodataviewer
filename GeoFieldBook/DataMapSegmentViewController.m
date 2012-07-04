@@ -94,9 +94,9 @@
     
     //If the button on the rightmost of the toolbar is the edit button, take it off
     else {
-    UIBarButtonItem *rightMostButton=[toolbarItems lastObject];
-    if ([rightMostButton.title isEqualToString:@"Edit"] || [rightMostButton.title isEqualToString:@"Done"])
-        [toolbarItems removeObject:rightMostButton];
+        UIBarButtonItem *rightMostButton=[toolbarItems lastObject];
+        if ([rightMostButton.title isEqualToString:@"Edit"] || [rightMostButton.title isEqualToString:@"Done"])
+            [toolbarItems removeObject:rightMostButton];
     }
     
     //Set the tolbar

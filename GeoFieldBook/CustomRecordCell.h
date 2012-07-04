@@ -18,6 +18,4 @@
 @property (nonatomic, weak) IBOutlet UILabel *type;
 @property (nonatomic, weak) IBOutlet CheckBox *checkBox;
 
-
--(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 @end

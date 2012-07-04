@@ -531,8 +531,6 @@
     cell.date.text=[Record dateFromNSDate:record.date];
     cell.time.text = [Record timeFromNSDate:record.date];
 
-    //checkbox
-    [cell.checkBox viewDidLoad];
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
     cell.recordImageView.image=image;

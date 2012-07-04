@@ -13,26 +13,19 @@
 @synthesize unchecked = _unchecked;
 @synthesize isChecked = _isChecked;
 
-
 -(void) awakeFromNib {
     [super awakeFromNib];
+    
     //set up the images
+    self.isChecked=YES;
     self.checked = [UIImage imageNamed:@"checked.png"];
     self.unchecked = [UIImage imageNamed:@"unchecked.png"];
     self.image = self.checked;
-    
-    self.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] 
-                                   initWithTarget:self action:@selector(toggle:)];
-    [self addGestureRecognizer:tgr];
 }
 
--(void) viewDidLoad {
-    
-}
--(void) toggle:(UITapGestureRecognizer *)tgr {
+-(void)toggle:(UITapGestureRecognizer *)tgr {
     self.isChecked=!self.isChecked;
-    self.image = self.isChecked ? self.checked : self.unchecked;
+    self.image = self.isChecked ? self.checked : self.unchecked;    
 }
 
 @end

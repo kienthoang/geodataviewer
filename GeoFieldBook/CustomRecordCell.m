@@ -17,11 +17,12 @@
 @synthesize type = _type;
 @synthesize checkBox = _checkBox;
 
-
--(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    NSLog(@"initwithstyle");
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
     
-    return self;
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] 
+                                   initWithTarget:self.checkBox action:@selector(toggle:)];
+    [self.checkBox addGestureRecognizer:tgr];
 }
+
 @end
