@@ -74,11 +74,8 @@
 @property (nonatomic,weak) UIImage *acquiredImage;
 @property (nonatomic) BOOL hasTakenImage;
 
-@property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
-
 #pragma mark - Non-interactive UI Elements
 
-@property (weak,nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *gatheringGPS; 
 @property (nonatomic, strong) UIPopoverController *imagePopover;
@@ -90,7 +87,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *acquireButton;
 @property (weak, nonatomic) UIButton *imagePickerPresenter;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
 
 #pragma mark - Form Input Fields
 
@@ -136,8 +132,6 @@
 @synthesize acquiredImage=_acquiredImage;
 @synthesize hasTakenImage=_hasTakenImage;
 
-@synthesize formationFolderPopoverController=_formationFolderPopoverController;
-
 @synthesize record=_record;
 @synthesize imageView = _imageView;
 @synthesize recordTypeLabel = _recordTypeLabel;
@@ -168,19 +162,14 @@
 
 @synthesize editing=_editing;
 
-@synthesize toolbar=_toolbar;
-
 @synthesize delegate=_delegate;
 
 @synthesize browseButton = _browseButton;
 @synthesize takePhotoButton = _takePhotoButton;
 @synthesize imagePopover = _imagePopover;
 @synthesize imagePickerPresenter=_imagePickerPresenter;
-@synthesize masterPresenter = _masterPresenter;
 
 @synthesize acquiredDate=_acquireDate;
-
-@synthesize masterPopoverController=_masterPopoverController;
 
 #pragma mark - Getters and Setters
 
@@ -437,20 +426,6 @@
         [self endEditingModeAndSaveWithValidationsEnabled:YES];
     else 
         [self setEditing:YES animated:YES];
-}
-
-- (IBAction)presentMaster:(UIBarButtonItem *)sender {
-    if (self.masterPopoverController) {
-        //Dismiss the formation folder popover if it's visible on screen
-        if (self.formationFolderPopoverController.isPopoverVisible)
-            [self.formationFolderPopoverController dismissPopoverAnimated:NO];
-
-        //Dismiss the keyboard
-        [self resignAllTextFieldsAndAreas];
-        
-        //Present the master popover
-        [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];  
-    }
 }
 
 #pragma mark - Form Validations
@@ -761,37 +736,6 @@
         //Set the previously selected formation name
         [segue.destinationViewController setPreviousSelection:self.upperFormationTextField.text];
     }
-    
-    //Seguing to the modal formation folder tvc
-    else if ([segue.identifier isEqualToString:@"Show Formation Folders"]) {
-        //Get the destination view controller
-        UINavigationController *navigationController=segue.destinationViewController;
-        FormationFolderTableViewController *destinationViewController=(FormationFolderTableViewController *)navigationController.topViewController;
-        
-        //Dismiss the old popover if its still visible
-        if (self.formationFolderPopoverController.isPopoverVisible)
-            [self.formationFolderPopoverController dismissPopoverAnimated:NO];
-        
-        //Dismiss the master popover if it's visible on the screen
-        if (self.masterPopoverController.isPopoverVisible) {
-            [self.masterPopoverController dismissPopoverAnimated:NO];
-        }
-        
-        //Save the popover
-        self.formationFolderPopoverController=[(UIStoryboardPopoverSegue *)segue popoverController];
-        
-        //Get the shared database
-        UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
-        
-        //Open the database if it's still closed
-        if (database.documentState==UIDocumentStateClosed) {
-            [database openWithCompletionHandler:^(BOOL success){
-                destinationViewController.database=database;
-            }];
-        } else if (database.documentState==UIDocumentStateNormal) {
-            destinationViewController.database=database;
-        }
-    }
 }
 
 #pragma mark - View lifecycle
@@ -860,7 +804,6 @@
     [self setLongitudeTextField:nil];
     [self setDateTextField:nil];
     [self setTimeTextField:nil];
-    [self setMasterPresenter:nil];
     [super viewDidUnload];
 }
 

@@ -65,8 +65,17 @@
 }
 
 - (void)popViewControllerAtSegmentIndex:(int)segmentIndex {
-    //Remove the view controller at the specified segment index from the array of view controllers
+    //If the popped view controller is still on screen, pull it off screen
+    UIViewController *viewController=[self.viewControllers objectAtIndex:segmentIndex];
+    if (self.currentViewController==viewController) {
+        [self.currentViewController.view removeFromSuperview];
+        self.currentViewController=nil;
+    }
     
+    //Remove the view controller at the specified segment index from the array of view controllers
+    NSMutableArray *viewControllers=[self.viewControllers mutableCopy];
+    [viewControllers removeObjectAtIndex:segmentIndex];
+    self.viewControllers=[viewControllers copy];
 }
 
 - (void)pushViewController:(UIViewController *)viewController {
@@ -76,7 +85,9 @@
 
 - (void)insertViewController:(UIViewController *)viewController atSegmentIndex:(int)segmentIndex {
     //Insert the specified view controller at the specified index in the view controller array
-    
+    NSMutableArray *viewControllers=[self.viewControllers mutableCopy];
+    [viewControllers insertObject:viewController atIndex:segmentIndex];
+    self.viewControllers=[viewControllers copy];
 }
 
 - (void)replaceViewControllerAtSegmentIndex:(int)segmentIndex withViewController:(UIViewController *)viewController {

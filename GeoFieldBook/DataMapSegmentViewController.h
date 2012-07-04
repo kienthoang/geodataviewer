@@ -9,6 +9,7 @@
 #import "GeoSegmentViewController.h"
 #import "GeoMapAnnotationProvider.h"
 #import "RecordMapViewController.h"
+#import "UISplitViewBarButtonPresenter.h"
 #import "RecordViewController.h"
 #import "Record.h"
 

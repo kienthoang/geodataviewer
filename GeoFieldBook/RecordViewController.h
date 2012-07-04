@@ -12,7 +12,6 @@
 #import "CoreLocation/CoreLocation.h"
 #import "Record+Creation.h"
 #import "Record+DictionaryKeys.h"
-#import "UISplitViewBarButtonPresenter.h"
 #import "Image.h"
 #import "Record+DateAndTimeFormatter.h"
 
@@ -40,7 +39,7 @@
 
 @end
 
-@interface RecordViewController : UIViewController <UISplitViewBarButtonPresenter>
+@interface RecordViewController : UIViewController
 
 @property (nonatomic,strong) Record *record;
 @property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
