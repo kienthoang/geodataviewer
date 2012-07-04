@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
 
 @end
 
@@ -23,6 +24,7 @@
 @synthesize toolbar=_toolbar;
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 @synthesize masterPresenter=_masterPresenter;
+@synthesize dataMapSwitch = _dataMapSwitch;
 
 @synthesize masterPopoverController=_masterPopoverController;
 
@@ -65,6 +67,9 @@
     if (self.topViewController!=[self.viewControllers objectAtIndex:0])
         [self swapToViewControllerAtSegmentIndex:0];
     
+    //Change the selected index of the UISegmentControl
+    self.dataMapSwitch.selectedSegmentIndex=0; 
+    
     //Put the record view controller into edit mode
     RecordViewController *recordDetail=(RecordViewController *)self.topViewController;
     [recordDetail setEditing:YES animated:YES];
@@ -90,7 +95,7 @@
     //If the button on the rightmost of the toolbar is the edit button, take it off
     else {
     UIBarButtonItem *rightMostButton=[toolbarItems lastObject];
-    if ([rightMostButton.title isEqualToString:@"Edit"])
+    if ([rightMostButton.title isEqualToString:@"Edit"] || [rightMostButton.title isEqualToString:@"Done"])
         [toolbarItems removeObject:rightMostButton];
     }
     
@@ -105,6 +110,8 @@
 }
 
 - (void)pushInitialViewController {
+    //
+    
     InitialDetailViewController *initialDetail=[self.storyboard instantiateViewControllerWithIdentifier:INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
     [self replaceViewControllerAtSegmentIndex:0 withViewController:initialDetail];
 }
@@ -196,4 +203,8 @@
 	return YES;
 }
 
+- (void)viewDidUnload {
+    [self setDataMapSwitch:nil];
+    [super viewDidUnload];
+}
 @end

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ES7-g5-leR">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -1448,6 +1449,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contentView" destination="aMT-Nw-iDO" id="ohf-K4-xSu"/>
+                        <outlet property="dataMapSwitch" destination="XGh-ou-XMH" id="aJV-qH-xg2"/>
                         <outlet property="masterPresenter" destination="rTC-NM-nsT" id="5hb-Gg-U3f"/>
                         <outlet property="toolbar" destination="t5O-sL-r4p" id="sAJ-3i-opT"/>
                     </connections>
@@ -1490,6 +1492,7 @@
         <class className="DataMapSegmentViewController" superclassName="GeoSegmentViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DataMapSegmentViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="dataMapSwitch" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
