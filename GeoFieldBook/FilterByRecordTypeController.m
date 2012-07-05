@@ -9,13 +9,24 @@
 #import "FilterByRecordTypeController.h"
 #import <Foundation/Foundation.h>
 
-@interface FilterByRecordTypeController ()
 
+
+@interface FilterByRecordTypeController ()
+@property (nonatomic, strong) NSMutableSet *selectedRecordTypes;
 @end
 
 @implementation FilterByRecordTypeController
+@synthesize selectedRecordTypes=_selectedRecordTypes;
+@synthesize delegate = _delegate;
 
 #pragma mark - View Controller Lifecycles
+
+- (void) viewWillDisappear:(BOOL)animated {
+    //call the delegate's method that will show only the record types in the set    
+    if(self.delegate){
+        [self.delegate updateMapViewByShowing:self.selectedRecordTypes];
+    }
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -26,12 +37,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    //initialize the set if not initialized
+    if(!self.selectedRecordTypes)
+        self.selectedRecordTypes = [[NSMutableSet alloc] init];
     
-    if(cell.accessoryType == UITableViewCellAccessoryNone)
+    //toggle and keep a track of the selected record types
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell.accessoryType == UITableViewCellAccessoryNone){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    else if(cell.accessoryType == UITableViewCellAccessoryCheckmark && cell.isSelected)
+        [self.selectedRecordTypes addObject:cell.textLabel.text];
+    }
+    else if(cell.accessoryType == UITableViewCellAccessoryCheckmark && cell.isSelected){
         cell.accessoryType = UITableViewCellAccessoryNone;
+        [self.selectedRecordTypes removeObject:cell.textLabel.text];
+    }
 }
+
+
 
 @end
