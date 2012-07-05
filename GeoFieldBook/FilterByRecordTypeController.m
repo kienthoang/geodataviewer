@@ -12,7 +12,7 @@
 
 
 @interface FilterByRecordTypeController ()
-@property (nonatomic, strong) NSMutableSet *selectedRecordTypes;
+
 @end
 
 @implementation FilterByRecordTypeController
@@ -28,6 +28,16 @@
     }
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    //need to redo this
+    
+    for(int i = 0; i<[self.tableView numberOfRowsInSection:0]; i++) {
+        if([self.selectedRecordTypes containsObject:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]].textLabel.text]){
+            [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]].accessoryType = UITableViewCellAccessoryCheckmark;
+        }     
+    }
+}
+          
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
    return YES;

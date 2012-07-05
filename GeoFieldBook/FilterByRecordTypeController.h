@@ -16,5 +16,5 @@
 
 @interface FilterByRecordTypeController : UITableViewController
 @property (nonatomic, strong) id<FilterRecordsByType> delegate;
-
+@property (nonatomic, strong) NSMutableSet *selectedRecordTypes;
 @end

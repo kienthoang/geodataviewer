@@ -380,6 +380,8 @@
 				21FC474D15A3789E00F245FF /* CustomFolderCell.m */,
 				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
 				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
+				21989D6715A4D27C001CF847 /* CheckBox.h */,
+				21989D6815A4D27C001CF847 /* CheckBox.m */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -423,8 +425,6 @@
 			isa = PBXGroup;
 			children = (
 				0294E0A7159361060025219F /* iPad.storyboard */,
-				21989D6715A4D27C001CF847 /* CheckBox.h */,
-				21989D6815A4D27C001CF847 /* CheckBox.m */,
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,

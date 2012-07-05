@@ -37,7 +37,7 @@
     //Convert the array of records into annotations
     NSMutableArray *annotations=[NSMutableArray arrayWithCapacity:self.records.count];
     for (Record *record in self.records){
-        if([self.recordsTypesToDisplay containsObject:[record.class description]]){
+        if([self.recordsTypesToDisplay containsObject:[record.class description]] || !self.recordsTypesToDisplay){
             [annotations addObject:[MKGeoRecordAnnotation annotationForRecord:record]];
     
         }
@@ -73,8 +73,8 @@
     [super viewDidLoad];
     
     //show all record types in the beginning
-    if(!self.recordsTypesToDisplay)
-        self.recordsTypesToDisplay = [[NSMutableSet alloc] initWithObjects:@"Bedding", @"Contact", @"Fault", @"Joint Set", @"Others", nil];
+//    if(!self.recordsTypesToDisplay)
+//        self.recordsTypesToDisplay = [[NSMutableSet alloc] initWithObjects:@"Bedding", @"Contact", @"Fault", @"Joint Set", @"Others", nil];
     //Set the delegate of the map view
     self.mapView.delegate=self;
     
@@ -160,12 +160,12 @@
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"Filter By Record Type"]){
         [[segue destinationViewController] setDelegate:self];
+        [[segue destinationViewController] setSelectedRecordTypes:self.recordsTypesToDisplay];
     }
 }
 
 #pragma mark - FilterByRecordType delegate method
 -(void) updateMapViewByShowing:(NSMutableSet *)recordTypesSelected {
-//    NSLog(@"delegate called");
     self.recordsTypesToDisplay = recordTypesSelected;
     [self updateMapView];
 }
