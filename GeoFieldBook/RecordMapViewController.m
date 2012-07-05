@@ -37,28 +37,33 @@
 @synthesize annotationCalloutPopover=_annotationCalloutPopover;
 
 - (void)updateMapView {
-    //Convert the array of records into annotations
-    NSMutableArray *annotations=[NSMutableArray arrayWithCapacity:self.records.count];
-    for (Record *record in self.records)
-        [annotations addObject:[MKGeoRecordAnnotation annotationForRecord:record]];
-    
-    //Remove the old annotations
-    if (self.mapView.annotations)
-        [self.mapView removeAnnotations:self.mapView.annotations];
-    
-    //Add new annotations
-    if ([annotations count])
-        [self.mapView addAnnotations:[annotations copy]];
-    
-    //Save the annotations
-    self.mapAnnotations=self.mapView.annotations;
+    if ([self.records count]) {
+        //Convert the array of records into annotations
+        NSMutableArray *annotations=[NSMutableArray arrayWithCapacity:self.records.count];
+        for (Record *record in self.records)
+            [annotations addObject:[MKGeoRecordAnnotation annotationForRecord:record]];
+        
+        //Remove the old annotations
+        if (self.mapView.annotations)
+            [self.mapView removeAnnotations:self.mapView.annotations];
+        
+        //Add new annotations
+        if ([annotations count])
+            [self.mapView addAnnotations:[annotations copy]];
+        
+        //Save the annotations
+        self.mapAnnotations=self.mapView.annotations;
+        
+        //Set the location span of the map
+        self.mapView.region=[self regionFromLocations];
+    }
 }
 
 - (void)setSelectedRecord:(Record *)selectedRecord {
     //Deselect the previous record if it's not nil
     if (self.selectedRecord) {
         for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
-            if (annotation.record=self.selectedRecord) {
+            if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==self.selectedRecord) {
                 [self.mapView deselectAnnotation:annotation animated:YES];
                 break;
             }
@@ -70,9 +75,10 @@
             
     //Select the pin corresponding to the record
     for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
-        if (annotation.record=self.selectedRecord) {
+        if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==self.selectedRecord) {
+            //Set the location span and the center of the map
+            self.mapView.region=[self regionFromLocations];
             self.mapView.centerCoordinate=annotation.coordinate;
-            [self.mapView deselectAnnotation:annotation animated:YES];
             [self.mapView selectAnnotation:annotation animated:YES];
             break;
         }
@@ -82,9 +88,11 @@
 #pragma mark - Getters and Setters
 
 - (void)setRecords:(NSArray *)records {
-    _records=records;
-    
-    [self updateMapView];
+    if (_records!=records) {
+        _records=records;
+        
+        [self updateMapView];
+    }
 }
 
 - (void)setMapView:(MKMapView *)mapView {
@@ -107,7 +115,7 @@
     
     //Ask the delegate for records to display
     self.records=[self.mapDelegate recordsForMapViewController:self];
-    
+        
     //Show user location
     self.mapView.showsUserLocation=YES;
 }
@@ -173,11 +181,37 @@
     MKGeoRecordAnnotation *annotation=view.annotation;
     recordInfo.record=annotation.record;
     self.annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
-    self.annotationCalloutPopover.popoverContentSize=CGSizeMake(300, 110);
+    self.annotationCalloutPopover.popoverContentSize=CGSizeMake(330, 110);
     [self.annotationCalloutPopover presentPopoverFromRect:view.bounds 
                                        inView:view 
                      permittedArrowDirections:UIPopoverArrowDirectionAny 
                                      animated:YES];
+}
+
+#pragma mark - Determine span of map view
+
+- (MKCoordinateRegion)regionFromLocations {
+    // Get the upper and lower coordinates for the location span
+    CLLocationCoordinate2D upper=[[self.mapAnnotations objectAtIndex:0] coordinate];
+    CLLocationCoordinate2D lower=[[self.mapAnnotations objectAtIndex:0] coordinate];
+    for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+        if (annotation.coordinate.longitude>upper.longitude) upper.longitude=annotation.coordinate.longitude;
+        if (annotation.coordinate.latitude>upper.latitude) upper.latitude=annotation.coordinate.latitude;
+        if (annotation.coordinate.longitude<lower.longitude) lower.longitude=annotation.coordinate.longitude;
+        if (annotation.coordinate.latitude<lower.latitude) lower.latitude=annotation.coordinate.latitude;
+    }
+    
+    // Set the spans for the location span
+    MKCoordinateSpan locationSpan;
+    locationSpan.latitudeDelta=upper.latitude-lower.latitude;
+    locationSpan.longitudeDelta=upper.longitude-lower.longitude;
+    
+    // Determine the center of the location span
+    CLLocationCoordinate2D locationCenter;
+    locationCenter.longitude=(upper.longitude+lower.longitude)/2;
+    locationCenter.latitude=(upper.latitude+lower.latitude)/2;
+    
+    return MKCoordinateRegionMake(locationCenter, locationSpan);
 }
 
 @end

@@ -128,24 +128,27 @@
 
 #pragma mark - Detail View Manipulators
 
-- (void)updateDetailViewWithRowOfIndexPath:(NSIndexPath *)indexPath {
+- (void)selectAnnotationInMapCorrespondingToRecord:(Record *)record {
+    [[self dataMapSegmentDetail] selectRecordInMap:record];
+}
+
+- (void)updateDelegatesOfRecordAndMapViewControllers {
+    //Set the delegate of the destination view controller to be self
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+    [dataMapSegmentDetail setRecordViewControllerDelegate:self];
+    
+    //Set the map delegate of the record vc to self
+    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
+}
+
+- (void)updateDetailViewWithRecord:(Record *)record {
     //If the current detail view vc is not a RecordViewController, push it
     DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
     if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]])
         [dataMapSegmentDetail pushRecordViewController];
     
     //Set up the record for the record view controller
-    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
     [dataMapSegmentDetail updateRecordDetailViewWithRecord:record];
-    
-    //Save the chosen record
-    self.chosenRecord=record;
-    
-    //Set the delegate of the destination view controller to be self
-    [dataMapSegmentDetail setRecordViewControllerDelegate:self];
-    
-    //Set the map delegate of the record vc to self
-    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
     
     //If the top view controller of the data map segment controller is nil, push the record view controller on screen
     if (!dataMapSegmentDetail.topViewController)
@@ -276,7 +279,7 @@
     
     //Update the detail view
     if (willUpdateDetailView)
-        [self updateDetailViewWithRowOfIndexPath:indexPath];
+        [self updateDetailViewWithRecord:record];
 }
 
 //Put the right hand side (detail view) into editing mode, probably used when a new record is created
@@ -549,22 +552,22 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
  forRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     //If editting style is delete, delete the corresponding record
-    if (editingStyle==UITableViewCellEditingStyleDelete) {
+    if (editingStyle==UITableViewCellEditingStyleDelete)
         [self deleteRecordAtIndexPath:indexPath];
-    }
-}
-
-- (void)selectAnnotationInMapCorrespondingToRecordAtIndexPath:(NSIndexPath *)indexPath {
-    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    [[self dataMapSegmentDetail] selectRecordInMap:record];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //Save the chosen record
+    self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    
     //Update the detail view
-    [self updateDetailViewWithRowOfIndexPath:indexPath];
+    [self updateDetailViewWithRecord:self.chosenRecord];
+    
+    //Set the delegates of the map and record view controllers
+    [self updateDelegatesOfRecordAndMapViewControllers];
     
     //Update the map to call the callout of the annotation view corresponding to the selected record
-    [self selectAnnotationInMapCorrespondingToRecordAtIndexPath:indexPath];
+    [self selectAnnotationInMapCorrespondingToRecord:self.chosenRecord];
 }
 
 - (NSArray *)records {
@@ -578,7 +581,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 - (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
-    
     return [self records];
 }
 

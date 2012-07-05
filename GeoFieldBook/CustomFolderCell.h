@@ -11,7 +11,7 @@
 
 @interface CustomFolderCell : UITableViewCell
 @property (nonatomic,weak) IBOutlet UILabel *title;
-@property (nonatomic,weak) IBOutlet UILabel *subTitie;
+@property (nonatomic,weak) IBOutlet UILabel *subtitle;
 @property (nonatomic,weak) IBOutlet UIImageView *checkBox;
 
 @end

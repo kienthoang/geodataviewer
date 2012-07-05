@@ -11,7 +11,7 @@
 @implementation CustomFolderCell
 
 @synthesize title=_title;
-@synthesize subTitie=_subTitie;
+@synthesize subtitle=_subtitle;
 @synthesize checkBox=_checkBox;
 
 @end

@@ -269,17 +269,18 @@
     
     //Disable swiping (which'd show the master)
     self.splitViewController.presentsWithGesture=NO;
+    
+    //Set self as the delegate of the record map view
+    [self setSelfAsRecordMapDelegate];
 }
 
 - (void)setSelfAsRecordMapDelegate {
     //Set self as the map delegate of the detail record view controller
-    id detailvc=[self detailViewController];
-    if ([detailvc respondsToSelector:@selector(setRecordMapViewControllerMapDelegate:)])
-        [detailvc setRecordMapViewControllerMapDelegate:self];
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
     
     //Update the records shown on the map
-    if ([detailvc respondsToSelector:@selector(updateMapWithRecords:)])
-        [detailvc updateMapWithRecords:[self records]];
+    [dataMapSegmentDetail updateMapWithRecords:[self records]];
 }
 
 - (void)viewDidLoad {
@@ -292,11 +293,8 @@
         if (!success) {
             //Put up an alert
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
-        } 
+        }
     }];
-    
-    //Set self as the delegate of the record map view
-    [self setSelfAsRecordMapDelegate];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -409,7 +407,7 @@
     cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
     cell.title.text=folder.folderName;
     NSString *recordCounter=[folder.records count]>1 ? @"Records" : @"Record";
-    cell.subTitie.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
+    cell.subtitle.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
     
     //Add gesture recognizer for long press
     UILongPressGestureRecognizer *longPressRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnTableCell:)];
