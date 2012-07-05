@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CheckBox : UIImageView
+
 @property (nonatomic, strong) UIImage *checked;
 @property (nonatomic, strong) UIImage *unchecked;
 @property (nonatomic) BOOL isChecked;

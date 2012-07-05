@@ -15,7 +15,7 @@
 #import "Image.h"
 #import "Record+DateAndTimeFormatter.h"
 
-#import "GeoMapAnnotationProvider.h"
+#import "GeoMapDelegate.h"
 
 @class RecordViewController;
 

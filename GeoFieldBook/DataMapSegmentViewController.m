@@ -40,7 +40,7 @@
 
 #pragma mark - Data Forward Mechanisms
 
-- (void)setRecordMapViewControllerMapDelegate:(id<GeoMapAnnotationProvider>)mapDelegate {
+- (void)setRecordMapViewControllerMapDelegate:(id<GeoMapDelegate>)mapDelegate {
     //Set the map delegate of the record map view controller
     RecordMapViewController *recordMap=[self.viewControllers lastObject];
     recordMap.mapDelegate=mapDelegate;

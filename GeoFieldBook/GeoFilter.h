@@ -7,15 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 @interface GeoFilter : NSObject
 
 - (void)userDidSelectRecordType:(NSString *)recordType;   //Add user's selection
 - (void)userDidDeselectRecordType:(NSString *)recordType;
 
-- (NSArray *)filterRecordCollection:(NSArray *)records;    //Filters the specified array of records and returns the results
+- (void)userDidSelectFolderWithName:(NSString *)folderName;   //Add user's selection
+- (void)userDidDeselectFolderWithName:(NSString *)folderName;
+
+- (NSArray *)filterRecordCollectionByRecordType:(NSArray *)records;    //Filters the specified array of records and returns the results
+- (NSArray *)filterRecordCollectionByFolder:(NSArray *)records;    //Filters the specified array of records and returns the results
 
 @property (nonatomic,readonly) NSArray *allRecordTypes;
 @property (nonatomic,strong) NSArray *selectedRecordTypes;
+
+@property (nonatomic,strong) NSArray *selectedFolderNames;
 
 @end

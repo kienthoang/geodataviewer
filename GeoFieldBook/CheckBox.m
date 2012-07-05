@@ -21,15 +21,6 @@
     self.checked = [UIImage imageNamed:@"checked.png"];
     self.unchecked = [UIImage imageNamed:@"unchecked.png"];
     self.image = self.checked;
-    
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] 
-                                   initWithTarget:self action:@selector(toggle:)];
-    [self addGestureRecognizer:tgr];
-}
-
--(void)toggle:(UITapGestureRecognizer *)tgr {
-    self.isChecked=!self.isChecked;
-    self.image = self.isChecked ? self.checked : self.unchecked;    
 }
 
 @end

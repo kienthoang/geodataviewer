@@ -10,7 +10,7 @@
 #import "CoreDataTableViewController.h"
 #import "Record+Modification.h"
 #import "CustomRecordCell.h"
-#import "GeoMapAnnotationProvider.h"
+#import "GeoMapDelegate.h"
 
 @class RecordTableViewController;
 
@@ -33,7 +33,7 @@ typedef void (^autosaver_block_t)(void);
 
 @end
 
-@interface RecordTableViewController : CoreDataTableViewController <GeoMapAnnotationProvider>
+@interface RecordTableViewController : CoreDataTableViewController <GeoMapDelegate>
 
 @property (nonatomic,strong) Folder *folder;
 @property (nonatomic,strong) UIManagedDocument *database;

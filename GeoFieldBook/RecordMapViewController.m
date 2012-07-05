@@ -48,7 +48,7 @@
 
 - (void)updateMapView {
     //Filter the records
-    NSArray *records=[self.recordFilter filterRecordCollection:self.records];
+    NSArray *records=[self.recordFilter filterRecordCollectionByRecordType:self.records];
     
     //Remove the old annotations
     if (self.mapView.annotations)
@@ -152,6 +152,22 @@
         
     //Show user location
     self.mapView.showsUserLocation=YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //Notify the delegate
+    if ([self.mapDelegate respondsToSelector:@selector(mapViewControllerDidAppearOnScreen:)])
+        [self.mapDelegate mapViewControllerDidAppearOnScreen:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    //Notify the delegate
+    if ([self.mapDelegate respondsToSelector:@selector(mapViewControllerDidDisappear:)])
+        [self.mapDelegate mapViewControllerDidDisappear:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

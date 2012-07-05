@@ -7,7 +7,7 @@
 //
 
 #import "GeoSegmentViewController.h"
-#import "GeoMapAnnotationProvider.h"
+#import "GeoMapDelegate.h"
 #import "RecordMapViewController.h"
 #import "UISplitViewBarButtonPresenter.h"
 #import "InitialDetailViewController.h"
@@ -20,7 +20,7 @@
 #define RECORD_DETAIL_VIEW_CONTROLLER_IDENTIFIER @"Record Detail View Controller"
 #define RECORD_MAP_VIEW_CONTROLLER_IDENTIFIER @"Record Map View Controller"
 
-- (void)setRecordMapViewControllerMapDelegate:(id <GeoMapAnnotationProvider>)mapDelegate;
+- (void)setRecordMapViewControllerMapDelegate:(id <GeoMapDelegate>)mapDelegate;
 - (void)setRecordViewControllerDelegate:(id <RecordViewControllerDelegate>)delegate;
 - (void)updateMapWithRecords:(NSArray *)records;
 - (void)updateRecordDetailViewWithRecord:(Record *)record;

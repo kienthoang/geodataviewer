@@ -25,7 +25,7 @@
 #import "GeoFilter.h"
 #import "CustomFolderCell.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate>
+@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
@@ -34,7 +34,8 @@
 
 - (id <UISplitViewBarButtonPresenter>)barButtonPresenter;
 
-@property (nonatomic, strong) GeoFilter *geoFilter;
+@property (nonatomic, strong) GeoFilter *recordFilter;
+@property (nonatomic) BOOL mapDidAppear;
 
 #pragma mark - Temporary data of the autosaver
 
@@ -59,8 +60,8 @@
 
 @implementation FolderTableViewController 
 
-@synthesize geoFilter=_geoFilter;
-
+@synthesize recordFilter=_recordFilter;
+@synthesize mapDidAppear=_mapDidAppear;
 @synthesize editButton = _editButton;
 
 @synthesize autosaverCancelBlock=_autosaverCancelBlock;
@@ -94,6 +95,13 @@
         //Make sure the document is open and set up the fetched result controller
         [self normalizeDatabase];        
     }
+}
+
+- (GeoFilter *)recordFilter {
+    if (!_recordFilter)
+        _recordFilter=[[GeoFilter alloc] init];
+    
+    return _recordFilter;
 }
 
 #pragma mark - Controller State Initialization
@@ -272,15 +280,13 @@
     self.splitViewController.presentsWithGesture=NO;
 }
 
-- (void)setSelfAsRecordMapDelegate {
+- (void)updateMapDetail {
     //Set self as the map delegate of the detail record view controller
-    id detailvc=[self detailViewController];
-    if ([detailvc respondsToSelector:@selector(setRecordMapViewControllerMapDelegate:)])
-        [detailvc setRecordMapViewControllerMapDelegate:self];
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
     
     //Update the records shown on the map
-    if ([detailvc respondsToSelector:@selector(updateMapWithRecords:)])
-        [detailvc updateMapWithRecords:[self records]];
+    [dataMapSegmentDetail updateMapWithRecords:[self records]];
 }
 
 - (void)viewDidLoad {
@@ -297,14 +303,14 @@
     }];
     
     //Set self as the delegate of the record map view
-    [self setSelfAsRecordMapDelegate];
+    [self updateMapDetail];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     //Set self as the delegate of the record map view
-    [self setSelfAsRecordMapDelegate];
+    [self updateMapDetail];
     
     //Push the initial view controller back on screen
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentDetail];
@@ -420,14 +426,21 @@
     
     // Configure the cell
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.folder=folder;
     cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
-    cell.title.text=folder.folderName;
-    NSString *recordCounter=[folder.records count]>1 ? @"Records" : @"Record";
-    cell.subTitie.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
+    
+    //Set self to the delegate of the cell
+    cell.delegate=self;
     
     //Add gesture recognizer for long press
     UILongPressGestureRecognizer *longPressRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnTableCell:)];
     [cell addGestureRecognizer:longPressRecognizer];
+    
+    //Show/Hide the checkboxes
+    if (self.mapDidAppear)
+        [cell showCheckBoxAnimated:NO];
+    else
+        [cell hideCheckBoxAnimated:NO];
     
     return cell;
 }
@@ -495,13 +508,16 @@
     return YES;
 }
 
-#pragma mark - GeoMapAnnotationProvider Protocol methods
+#pragma mark - GeoMapDelegate Protocol methods
 
 - (NSArray *)records {
     //Get the array of records 
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
     request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"folder.folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],nil];
     NSArray *records=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    //Filter the array of records
+    records=[self.recordFilter filterRecordCollectionByFolder:records];
     
     return records;
 }
@@ -521,6 +537,32 @@
     
     //navigate to the record table view controller
     [self performSegueWithIdentifier:@"Show Records" sender:record];
+}
+
+- (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController {
+    self.mapDidAppear=YES;
+    [self.tableView reloadData];
+}
+
+- (void)mapViewControllerDidDisappear:(UIViewController *)mapViewController {
+    self.mapDidAppear=NO;
+    [self.tableView reloadData];
+}
+
+#pragma mark - CustomFolderCellDelegate methods
+
+- (void)folderCell:(CustomFolderCell *)sender userDidSelectDidCheckBoxForRecord:(Folder *)folder {
+    [self.recordFilter userDidSelectFolderWithName:folder.folderName];
+    
+    //Update the map view
+    [self updateMapDetail];
+}
+
+- (void)folderCell:(CustomFolderCell *)sender userDidDeselectDidCheckBoxForRecord:(Folder *)folder {
+    [self.recordFilter userDidDeselectFolderWithName:folder.folderName];
+    
+    //Update the map view
+    [self updateMapDetail];
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  GeoMapAnnotationProvider.h
+//  GeoMapDelegate.h
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 7/4/12.
@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "Record.h"
 
-@protocol GeoMapAnnotationProvider <NSObject>
+@protocol GeoMapDelegate <NSObject>
 
 - (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController;
 - (void)mapViewController:(UIViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView;
+
+@optional
+
+- (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController;
+- (void)mapViewControllerDidDisappear:(UIViewController *)mapViewController;
 
 @end

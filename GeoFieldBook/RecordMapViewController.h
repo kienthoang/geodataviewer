@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GeoMapAnnotationProvider.h"
+#import "GeoMapDelegate.h"
 
 @interface RecordMapViewController : UIViewController
 
 @property (nonatomic,strong) NSArray *records;
 @property (nonatomic,strong) Record *selectedRecord;
-@property (nonatomic,weak) id <GeoMapAnnotationProvider> mapDelegate;
+@property (nonatomic,weak) id <GeoMapDelegate> mapDelegate;
 
 @end

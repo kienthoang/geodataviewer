@@ -8,10 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "CheckBox.h"
+#import "Folder.h"
+
+@class CustomFolderCell;
+
+@protocol CustomFolderCellDelegate
+
+- (void)folderCell:(CustomFolderCell *)sender userDidSelectDidCheckBoxForRecord:(Folder *)folder;
+- (void)folderCell:(CustomFolderCell *)sender userDidDeselectDidCheckBoxForRecord:(Folder *)folder;
+
+@end
 
 @interface CustomFolderCell : UITableViewCell
+
 @property (nonatomic,weak) IBOutlet UILabel *title;
-@property (nonatomic,weak) IBOutlet UILabel *subTitie;
+@property (nonatomic,weak) IBOutlet UILabel *subtitle;
 @property (nonatomic,weak) IBOutlet UIImageView *checkBox;
+@property (nonatomic,strong) Folder *folder;
+
+@property (nonatomic,weak) id <CustomFolderCellDelegate> delegate;
+
+- (void)hideCheckBoxAnimated:(BOOL)animated;
+- (void)showCheckBoxAnimated:(BOOL)animated;
 
 @end
