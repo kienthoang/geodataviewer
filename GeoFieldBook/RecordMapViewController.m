@@ -188,6 +188,9 @@
                             permittedArrowDirections:UIPopoverArrowDirectionAny 
                                             animated:YES];
     self.annotationCalloutPopover=annotationCalloutPopover;
+    
+    //Notify the map delegate of user's selection
+    //[self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:annotation.record switchToDataView:NO];
 }
 
 #pragma mark - Determine span of map view
@@ -222,7 +225,7 @@
  userDidTapOnAccessoryViewForRecord:(Record *)record 
 {
     //Notify the delegate
-    [self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record];
+    [self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record switchToDataView:YES];
     
     //Dismiss the callout popover
     [self.annotationCalloutPopover dismissPopoverAnimated:NO];

@@ -587,12 +587,15 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     return [self records];
 }
 
-- (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record {
+- (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView {
+    //Switch to record view controller detail
+    if (willSwitchToDataView) {
+        [self setupDetailView];
+        [[self dataMapSegmentDetail] swapToViewControllerAtSegmentIndex:0];
+    }
+    
     //Set the currently chosen record
     self.chosenRecord=record;  
-    
-    //Switch to record view controller detail
-    [[self dataMapSegmentDetail] swapToViewControllerAtSegmentIndex:0];
 }
 
 @end

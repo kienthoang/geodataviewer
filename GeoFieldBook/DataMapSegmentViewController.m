@@ -16,6 +16,7 @@
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *importExportButton;
 
 @end
 
@@ -25,6 +26,7 @@
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 @synthesize masterPresenter=_masterPresenter;
 @synthesize dataMapSwitch = _dataMapSwitch;
+@synthesize importExportButton = _importExportButton;
 
 @synthesize masterPopoverController=_masterPopoverController;
 
@@ -124,14 +126,14 @@
 
 #pragma mark - Target-Action Handlers
 
-- (IBAction)presentMaster:(UIBarButtonItem *)sender {
+- (IBAction)presentMaster:(UIButton *)sender {
     if (self.masterPopoverController) {
         //Dismiss the formation folder popover if it's visible on screen
         if (self.formationFolderPopoverController.isPopoverVisible)
             [self.formationFolderPopoverController dismissPopoverAnimated:YES];
         
         //Present the master popover
-        [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+        [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
     }
 }
 
@@ -192,6 +194,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Change the look of the master presenter
+    UIButton *masterPresenterCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [masterPresenterCustomView setImage:[UIImage imageNamed:@"folder.png"] forState:UIControlStateNormal];
+    masterPresenterCustomView.frame=CGRectMake(0, 0, 32, 32);
+    [masterPresenterCustomView addTarget:self action:@selector(presentMaster:) forControlEvents:UIControlEventTouchUpInside];
+    self.masterPresenter.customView=masterPresenterCustomView;
+    
+    //Change the look of the import/export button
+    UIButton *importExportCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [importExportCustomView setImage:[UIImage imageNamed:@"import-export.png"] forState:UIControlStateNormal];
+    importExportCustomView.frame=CGRectMake(0, 0, 25, 25);
+    self.importExportButton.customView=importExportCustomView;    
+    
     //Show the initial detail view controller
     [self swapToViewControllerAtSegmentIndex:0];
 }
@@ -203,6 +218,7 @@
 
 - (void)viewDidUnload {
     [self setDataMapSwitch:nil];
+    [self setImportExportButton:nil];
     [super viewDidUnload];
 }
 @end

@@ -12,6 +12,6 @@
 @protocol GeoMapAnnotationProvider <NSObject>
 
 - (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController;
-- (void)mapViewController:(UIViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record;
+- (void)mapViewController:(UIViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView;
 
 @end
