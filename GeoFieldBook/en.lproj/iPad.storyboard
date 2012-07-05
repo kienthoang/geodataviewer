@@ -139,7 +139,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="editButton" destination="tqj-i6-PiN" id="qtX-Dl-Dib"/>
@@ -1526,6 +1526,7 @@
                                             <action selector="presentMaster:" destination="tgm-XQ-kdK" id="Kxe-iE-jxO"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="23" style="plain" systemItem="fixedSpace" id="Vlf-ed-FSF"/>
                                     <barButtonItem style="plain" systemItem="compose" id="LFz-KE-lFF">
                                         <connections>
                                             <segue destination="efl-9D-qlf" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="LFz-KE-lFF" id="He8-Yf-a86">
@@ -1533,7 +1534,7 @@
                                             </segue>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="kkd-tO-wD3"/>
+                                    <barButtonItem width="22" style="plain" systemItem="fixedSpace" id="kkd-tO-wD3"/>
                                     <barButtonItem style="plain" systemItem="action" id="RP3-ad-ElH"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="VrV-kj-FAy"/>
                                     <barButtonItem style="plain" id="AfF-Yc-mwK">
@@ -1569,6 +1570,7 @@
                     <connections>
                         <outlet property="contentView" destination="aMT-Nw-iDO" id="ohf-K4-xSu"/>
                         <outlet property="dataMapSwitch" destination="XGh-ou-XMH" id="aJV-qH-xg2"/>
+                        <outlet property="formationButton" destination="LFz-KE-lFF" id="9PZ-bb-smZ"/>
                         <outlet property="importExportButton" destination="RP3-ad-ElH" id="jI8-h5-Bde"/>
                         <outlet property="masterPresenter" destination="rTC-NM-nsT" id="5hb-Gg-U3f"/>
                         <outlet property="toolbar" destination="t5O-sL-r4p" id="sAJ-3i-opT"/>
@@ -1612,6 +1614,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DataMapSegmentViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="dataMapSwitch" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="formationButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>

@@ -78,6 +78,7 @@
 		02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */; };
 		02AC0F9515A5408300FBA9D3 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9415A5408300FBA9D3 /* folder.png */; };
 		02AC0F9715A541D400FBA9D3 /* import-export.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9615A541D400FBA9D3 /* import-export.png */; };
+		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
 		2132A5D4159CD26100009CB9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D3159CD26100009CB9 /* Record.m */; };
@@ -234,6 +235,7 @@
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		02AC0F9615A541D400FBA9D3 /* import-export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import-export.png"; sourceTree = "<group>"; };
+		02AC0F9815A5483700FBA9D3 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */,
 				02AC0F9615A541D400FBA9D3 /* import-export.png */,
 				02AC0F9415A5408300FBA9D3 /* folder.png */,
+				02AC0F9815A5483700FBA9D3 /* formation.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				21989D6515A4D20C001CF847 /* unchecked.png in Resources */,
 				02AC0F9515A5408300FBA9D3 /* folder.png in Resources */,
 				02AC0F9715A541D400FBA9D3 /* import-export.png in Resources */,
+				02AC0F9915A5483700FBA9D3 /* formation.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
