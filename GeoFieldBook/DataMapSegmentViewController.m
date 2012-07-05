@@ -154,6 +154,12 @@
     //Show UIActionSheet with import/export options
     UIActionSheet *importExportActionSheet=[[UIActionSheet alloc] initWithTitle:@"Import/Export" delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Import Records",@"Export Records",@"Import Formations",@"Export Formations", nil];
     [importExportActionSheet showInView:self.contentView];
+    
+    //Dismiss all the popovers
+    if (self.masterPopoverController.isPopoverVisible)
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    if (self.formationFolderPopoverController.isPopoverVisible)
+        [self.formationFolderPopoverController dismissPopoverAnimated:YES];
 }
 
 - (IBAction)dataMapSegmentIndexDidChange:(UISegmentedControl *)sender {

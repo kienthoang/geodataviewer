@@ -318,6 +318,11 @@
         [dataMapSegmentVC pushInitialViewController];
     if (!dataMapSegmentVC.topViewController)
         [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
+    
+    //Update the table cells
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+    self.mapDidAppear=[dataMapSegmentDetail.topViewController isKindOfClass:[RecordMapViewController class]] ? YES : NO;
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
