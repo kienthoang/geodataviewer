@@ -12,7 +12,7 @@
 #import "MKMapRecordInfoViewController.h"
 #import "Image.h"
 
-@interface RecordMapViewController() <MKMapViewDelegate>
+@interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate>
 
 @property (weak,nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic,weak) UIPopoverController *filterPopover;
@@ -180,12 +180,14 @@
     MKMapRecordInfoViewController *recordInfo=[self.storyboard instantiateViewControllerWithIdentifier:@"Record Info Popover"];
     MKGeoRecordAnnotation *annotation=view.annotation;
     recordInfo.record=annotation.record;
-    self.annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
-    self.annotationCalloutPopover.popoverContentSize=CGSizeMake(330, 110);
-    [self.annotationCalloutPopover presentPopoverFromRect:view.bounds 
-                                       inView:view 
-                     permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                     animated:YES];
+    recordInfo.delegate=self;
+    UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
+    annotationCalloutPopover.popoverContentSize=CGSizeMake(330, 110);
+    [annotationCalloutPopover presentPopoverFromRect:view.bounds 
+                                              inView:view 
+                            permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                            animated:YES];
+    self.annotationCalloutPopover=annotationCalloutPopover;
 }
 
 #pragma mark - Determine span of map view
@@ -212,6 +214,18 @@
     locationCenter.latitude=(upper.latitude+lower.latitude)/2;
     
     return MKCoordinateRegionMake(locationCenter, locationSpan);
+}
+
+#pragma mark - MKMapRecordInfoViewControllerDelegate methods
+
+- (void)mapRecordInfoViewController:(MKMapRecordInfoViewController *)sender 
+ userDidTapOnAccessoryViewForRecord:(Record *)record 
+{
+    //Notify the delegate
+    [self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record];
+    
+    //Dismiss the callout popover
+    [self.annotationCalloutPopover dismissPopoverAnimated:NO];
 }
 
 @end

@@ -126,11 +126,18 @@
     return detailvc;
 }
 
-#pragma mark - Detail View Manipulators
-
-- (void)selectAnnotationInMapCorrespondingToRecord:(Record *)record {
-    [[self dataMapSegmentDetail] selectRecordInMap:record];
+- (void)setChosenRecord:(Record *)chosenRecord {
+    _chosenRecord=chosenRecord;
+    
+    //Set up the record for the record view controller
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+    [dataMapSegmentDetail updateRecordDetailViewWithRecord:self.chosenRecord];
+    
+    //Update the map
+    [dataMapSegmentDetail selectRecordInMap:self.chosenRecord];
 }
+
+#pragma mark - Detail View Manipulators
 
 - (void)updateDelegatesOfRecordAndMapViewControllers {
     //Set the delegate of the destination view controller to be self
@@ -141,14 +148,11 @@
     [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
 }
 
-- (void)updateDetailViewWithRecord:(Record *)record {
+- (void)setupDetailView {
     //If the current detail view vc is not a RecordViewController, push it
     DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
     if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]])
         [dataMapSegmentDetail pushRecordViewController];
-    
-    //Set up the record for the record view controller
-    [dataMapSegmentDetail updateRecordDetailViewWithRecord:record];
     
     //If the top view controller of the data map segment controller is nil, push the record view controller on screen
     if (!dataMapSegmentDetail.topViewController)
@@ -279,7 +283,7 @@
     
     //Update the detail view
     if (willUpdateDetailView)
-        [self updateDetailViewWithRecord:record];
+        self.chosenRecord=record;
 }
 
 //Put the right hand side (detail view) into editing mode, probably used when a new record is created
@@ -557,18 +561,17 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //Update the detail view
+    [self setupDetailView];
+    
     //Save the chosen record
     self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    //Update the detail view
-    [self updateDetailViewWithRecord:self.chosenRecord];
-    
     //Set the delegates of the map and record view controllers
     [self updateDelegatesOfRecordAndMapViewControllers];
-    
-    //Update the map to call the callout of the annotation view corresponding to the selected record
-    [self selectAnnotationInMapCorrespondingToRecord:self.chosenRecord];
 }
+
+#pragma mark - GeoMapAnnotationProvider protocol methods
 
 - (NSArray *)records {
     //Get the array of records from the fetched results controller
@@ -582,6 +585,14 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 - (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
     return [self records];
+}
+
+- (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record {
+    //Set the currently chosen record
+    self.chosenRecord=record;  
+    
+    //Switch to record view controller detail
+    [[self dataMapSegmentDetail] swapToViewControllerAtSegmentIndex:0];
 }
 
 @end

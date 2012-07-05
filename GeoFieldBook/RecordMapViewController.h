@@ -12,8 +12,8 @@
 
 @interface RecordMapViewController : UIViewController
 
-@property (nonatomic,weak) id <GeoMapAnnotationProvider> mapDelegate;
 @property (nonatomic,strong) NSArray *records;
 @property (nonatomic,strong) Record *selectedRecord;
+@property (nonatomic,weak) id <GeoMapAnnotationProvider> mapDelegate;
 
 @end

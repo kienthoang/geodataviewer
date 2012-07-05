@@ -494,4 +494,8 @@
     return [self records];
 }
 
+- (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record {
+    
+}
+
 @end

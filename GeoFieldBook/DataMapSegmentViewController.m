@@ -105,7 +105,10 @@
     }
     
     //Set the tolbar
-    self.toolbar.items=[toolbarItems copy];  
+    self.toolbar.items=[toolbarItems copy]; 
+    
+    //Be sure the UISegmentControl show the correct segment index
+    self.dataMapSwitch.selectedSegmentIndex=segmentIndex;
 }
 
 - (void)pushRecordViewController {
