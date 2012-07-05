@@ -17,6 +17,8 @@
 - (void)userDidSelectFolderWithName:(NSString *)folderName;   //Add user's selection
 - (void)userDidDeselectFolderWithName:(NSString *)folderName;
 
+- (void)changeFolderName:(NSString *)originalName toFolderName:(NSString *)newName;
+
 - (NSArray *)filterRecordCollectionByRecordType:(NSArray *)records;    //Filters the specified array of records and returns the results
 - (NSArray *)filterRecordCollectionByFolder:(NSArray *)records;    //Filters the specified array of records and returns the results
 

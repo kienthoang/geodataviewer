@@ -29,6 +29,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     //Add gesture recognizer to the checkbox
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] 
                                    initWithTarget:self action:@selector(toggleCheckbox:)];

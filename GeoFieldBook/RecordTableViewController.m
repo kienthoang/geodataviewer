@@ -126,10 +126,13 @@
     //Setup the detail view
     [self setupDetailView];
     
+    //Set the delegates of the map and record view controllers
+    [self updateDelegatesOfRecordAndMapViewControllers];
+    
     //Set up the record for the record view controller
     DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
     [dataMapSegmentDetail updateRecordDetailViewWithRecord:self.chosenRecord];
-    
+        
     //Update the map
     [dataMapSegmentDetail selectRecordInMap:self.chosenRecord];
 }
@@ -308,9 +311,6 @@
             
             //Put the detail view (now showing the newly created record's info) into editing mode
             [self putDetailViewIntoEditingMode];
-            
-            //Update the map view
-            [[self dataMapSegmentDetail] updateMapWithRecords:[self records]];
         }
     }];
 }
@@ -430,10 +430,8 @@
     if (self.chosenRecord) {
         //If the data side is not record view controller yet, push it on screen
         DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-        if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]]) {
+        if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]])
             [self updateRecordAndMapDetails];
-            [self updateDelegatesOfRecordAndMapViewControllers];
-        }
         
         [self highlightRecord:self.chosenRecord updateDetailView:NO];
     }
@@ -482,7 +480,7 @@
 
 - (IBAction)controlPressed:(UIBarButtonItem *)sender {
     //Set up an action sheet of control buttons
-    UIActionSheet *controlActionSheet=[[UIActionSheet alloc] initWithTitle:@"Control Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Importing Records",@"Exporting Records",@"Set Location", nil];
+    UIActionSheet *controlActionSheet=[[UIActionSheet alloc] initWithTitle:@"Control Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Set Location",@"Control Option 1",@"Control Option 2", nil];
     [controlActionSheet showInView:self.view];
 }
 
@@ -575,9 +573,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     
     //Save the chosen record
     self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    //Set the delegates of the map and record view controllers
-    [self updateDelegatesOfRecordAndMapViewControllers];
 }
 
 #pragma mark - GeoMapAnnotationProvider protocol methods

@@ -47,10 +47,19 @@
         NSMutableArray *selectedFolderNames=[NSMutableArray arrayWithCapacity:[results count]];
         for (Folder *folder in results)
             [selectedFolderNames addObject:folder.folderName];
-        _selectedFolderNames=[selectedFolderNames copy];
+        _selectedFolderNames=[selectedFolderNames copy];        
     }
     
     return _selectedFolderNames;
+}
+
+- (void)changeFolderName:(NSString *)originalName toFolderName:(NSString *)newName {
+    if ([self.selectedFolderNames containsObject:originalName]) {
+        NSMutableArray *selectedFolderNames=[self.selectedFolderNames mutableCopy];
+        [selectedFolderNames removeObject:originalName];
+        [selectedFolderNames addObject:newName];
+        self.selectedFolderNames=[selectedFolderNames copy];
+    }    
 }
 
 #pragma mark - Select/Deselect Record Types

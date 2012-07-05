@@ -192,7 +192,7 @@
     
     //Update the text fields and labels
     [self updateFormForRecord:self.record];
-    
+        
     [self.view setNeedsDisplay];
 }
 
@@ -688,7 +688,7 @@
     else if ([segue.identifier isEqualToString:@"Formation Picker"]) {
         //Set the database of the formation picker
         [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
-        
+                
         //Set initialSelection for the formation picker if the current record has no formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.formationTextField.text length]];
         

@@ -201,6 +201,12 @@
     }
 }
 
+#pragma mark - Gesture Handlers
+
+- (void)showMasterPopover:(UITapGestureRecognizer *)tapGesture {
+    [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)awakeFromNib {
@@ -245,6 +251,10 @@
     
     //Show the initial detail view controller
     [self swapToViewControllerAtSegmentIndex:0];
+    
+    //Add gesture to call the master
+    UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMasterPopover:)];
+    [self.view addGestureRecognizer:longPressGestureRecognizer];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

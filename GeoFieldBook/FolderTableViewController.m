@@ -22,6 +22,8 @@
 #import "Folder+Modification.h"
 #import "Folder+DictionaryKeys.h"
 
+#import "CheckBox.h"
+
 #import "GeoFilter.h"
 #import "CustomFolderCell.h"
 
@@ -191,6 +193,9 @@
             //Delete the folder
             [self deleteFolder:self.toBeDeletedFolder];
             self.toBeDeletedFolder=nil;
+            
+            //Update the map
+            [self updateMapDetail];
         }
     }
     
@@ -233,13 +238,21 @@
     }
         
     //Else, save
-    else
+    else 
         [self saveChangesToDatabase];
+    
+    //Update the record filter (add the name of the newly created folder)
+    [self.recordFilter userDidSelectFolderWithName:[folderInfo objectForKey:FOLDER_NAME]];
+    
+    //Reload
+    [self.tableView reloadData];
     
     return YES;
 }
 
 - (BOOL)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo {
+    NSString *originalName=folder.folderName;
+    
     //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert and return NO
     if (![folder updateWithNewInfo:folderInfo]) {
         [self putUpDuplicateNameAlertWithName:[folderInfo objectForKey:FOLDER_NAME]];
@@ -250,15 +263,27 @@
     else
         [self saveChangesToDatabase];
     
+    //Update the filter
+    [self.recordFilter changeFolderName:originalName toFolderName:[folderInfo objectForKey:FOLDER_NAME]];
+    
+    //Reload
+    [self.tableView reloadData];
+    
     return YES;
 }
 
 - (void)deleteFolder:(Folder *)folder {
+    //Update the record filter
+    [self.recordFilter userDidDeselectFolderWithName:folder.folderName];
+    
     //Delete the folder
     [self.database.managedObjectContext deleteObject:folder];
     
     //Save
     [self saveChangesToDatabase];
+    
+    //Reload
+    [self.tableView reloadData];
 }
 
 #pragma mark - View lifecycle
@@ -357,16 +382,13 @@
         //Set the delegate of the destination controller
         [segue.destinationViewController setDelegate:self];
         
-        //End the table view's editing mode if the table is in editing mode
-        if (self.tableView.editing)
-            [self editPressed:self.editButton];
-        
         //Set the folder of the destination controller if the table view is in editting mode
         if (self.tableView.editing) {
             UITableViewCell *cell=(UITableViewCell *)sender;
             Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             [segue.destinationViewController setFolder:folder];
-        }
+            [self editPressed:self.editButton];
+        }            
     }
     
     //Seguing to the RecordTableViewController
@@ -433,6 +455,8 @@
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.folder=folder;
     cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
+    CheckBox *checkbox=(CheckBox *)cell.checkBox;
+    checkbox.image=[self.recordFilter.selectedFolderNames containsObject:folder.folderName] ? checkbox.checked : checkbox.unchecked;
     
     //Set self to the delegate of the cell
     cell.delegate=self;

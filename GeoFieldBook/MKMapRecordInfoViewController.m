@@ -8,6 +8,7 @@
 
 #import "MKMapRecordInfoViewController.h"
 #import "Record+DateAndTimeFormatter.h"
+#import "Formation.h"
 
 @interface MKMapRecordInfoViewController()
 
@@ -16,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *recordType;
 @property (weak, nonatomic) IBOutlet UILabel *recordDate;
 @property (weak, nonatomic) IBOutlet UILabel *recordTime;
+@property (weak, nonatomic) IBOutlet UILabel *formation;
+@property (weak, nonatomic) IBOutlet UILabel *dipDirection;
+@property (weak, nonatomic) IBOutlet UILabel *dip;
+@property (weak, nonatomic) IBOutlet UILabel *strike;
 
 @end
 
@@ -26,6 +31,10 @@
 @synthesize recordType=_recordType;
 @synthesize recordDate=_recordDate;
 @synthesize recordTime=_recordTime;
+@synthesize formation = _formation;
+@synthesize dipDirection = _dipDirection;
+@synthesize dip = _dip;
+@synthesize strike = _strike;
 
 @synthesize delegate=_delegate;
 
@@ -49,7 +58,12 @@
     self.recordName.text=self.record.name;
     self.recordType.text=[self.record.class description];
     self.recordDate.text=[Record dateFromNSDate:self.record.date];
-    self.recordTime.text = [Record timeFromNSDate:self.record.date];
+    self.recordTime.text=[Record timeFromNSDate:self.record.date];
+    id record=self.record;
+    self.formation.text=[record respondsToSelector:@selector(formation:)] ? [(Formation *)[record formation] formationName] : @"N/A";
+    self.dip.text=self.record.dip ? [NSString stringWithFormat:@"%@",self.record.dip] : @"N/A";
+    self.strike.text=self.record.strike ? [NSString stringWithFormat:@"%@",self.record.strike] : @"N/A";
+    self.dipDirection.text=self.record.dipDirection ? self.record.dipDirection : @"N/A";
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -63,6 +77,10 @@
     [self setRecordType:nil];
     [self setRecordDate:nil];
     [self setRecordTime:nil];
+    [self setFormation:nil];
+    [self setDipDirection:nil];
+    [self setDip:nil];
+    [self setStrike:nil];
     [super viewDidUnload];
 }
 @end
