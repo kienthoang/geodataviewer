@@ -11,13 +11,11 @@
 @interface GeoFilter : NSObject
 
 - (void)userDidSelectRecordType:(NSString *)recordType;   //Add user's selection
-
-- (void)userDidSelectFolderName:(NSString *)folderName;   //Add user's selection
-
-- (NSSet *)selectedRecordTypes;           //Returns the array of record types user selected
-
-- (NSSet *)selectedFolderNames;           //Returns the array of folder names user selected
+- (void)userDidDeselectRecordType:(NSString *)recordType;
 
 - (NSArray *)filterRecordCollection:(NSArray *)records;    //Filters the specified array of records and returns the results
+
+@property (nonatomic,readonly) NSArray *allRecordTypes;
+@property (nonatomic,strong) NSArray *selectedRecordTypes;
 
 @end

@@ -16,53 +16,59 @@
 @end
 
 @implementation FilterByRecordTypeController
+
+@synthesize allRecordTypes=_allRecordTypes;
 @synthesize selectedRecordTypes=_selectedRecordTypes;
 @synthesize delegate = _delegate;
 
-#pragma mark - View Controller Lifecycles
-
-- (void) viewWillDisappear:(BOOL)animated {
-    //call the delegate's method that will show only the record types in the set    
-    if(self.delegate){
-        [self.delegate updateMapViewByShowing:self.selectedRecordTypes];
-    }
-}
-
--(void) viewWillAppear:(BOOL)animated {
-    //need to redo this
-    
-    for(int i = 0; i<[self.tableView numberOfRowsInSection:0]; i++) {
-        if([self.selectedRecordTypes containsObject:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]].textLabel.text]){
-            [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]].accessoryType = UITableViewCellAccessoryCheckmark;
-        }     
-    }
-}
+#pragma mark - View Controller Lifecycle
           
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
    return YES;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - Table view data source
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //initialize the set if not initialized
-    if(!self.selectedRecordTypes)
-        self.selectedRecordTypes = [[NSMutableSet alloc] init];
-    
-    //toggle and keep a track of the selected record types
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    if(cell.accessoryType == UITableViewCellAccessoryNone){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        [self.selectedRecordTypes addObject:cell.textLabel.text];
-    }
-    else if(cell.accessoryType == UITableViewCellAccessoryCheckmark && cell.isSelected){
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        [self.selectedRecordTypes removeObject:cell.textLabel.text];
-    }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.allRecordTypes count];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Record Types";
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CELL_IDENTIFIER=@"Record Type Cell";
+    
+    UITableViewCell *cell=[self.tableView dequeueReusableCellWithIdentifier:CELL_IDENTIFIER];
+    if (!cell)
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_IDENTIFIER];
+    
+    //Set up cell
+    cell.textLabel.text=[self.allRecordTypes objectAtIndex:indexPath.row];
+    
+    //Toggle checkmark
+    if ([self.selectedRecordTypes containsObject:cell.textLabel.text])
+        cell.accessoryType=UITableViewCellAccessoryCheckmark;
+    else
+        cell.accessoryType=UITableViewCellAccessoryNone;
+    
+    return cell;
+}
+
+#pragma mark - Table View Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //Toggle checkmark
+    UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType=cell.accessoryType==UITableViewCellAccessoryCheckmark ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
+    
+    //Notify the delegate
+    if (cell.accessoryType==UITableViewCellAccessoryCheckmark)
+        [self.delegate filterByTypeController:self userDidSelectRecordType:cell.textLabel.text];
+    else 
+        [self.delegate filterByTypeController:self userDidDeselectRecordType:cell.textLabel.text];
+}
 
 @end

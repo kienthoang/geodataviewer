@@ -8,10 +8,10 @@
 
 #import "RecordMapViewController.h"
 #import "FilterByRecordTypeController.h"
+#import "GeoFilter.h"
 #import "MKGeoRecordAnnotation.h"
 #import "MKMapRecordInfoViewController.h"
 #import "Image.h"
-
 
 @interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate,FilterRecordsByType>
 
@@ -20,45 +20,77 @@
 @property (nonatomic,strong) UIPopoverController *annotationCalloutPopover;
 @property (nonatomic, strong) NSMutableSet *recordsTypesToDisplay;
 
+@property (nonatomic,strong) NSArray *mapAnnotations;
+
+@property (nonatomic,strong) GeoFilter *recordFilter;
+
 #define RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER @"Record Annotation View"
 
 @end
 
 @implementation RecordMapViewController
 
-@synthesize mapView = _mapView;
 @synthesize records=_records;
+@synthesize selectedRecord=_selectedRecord;
+
+@synthesize mapView = _mapView;
 @synthesize mapDelegate=_mapDelegate;
-@synthesize recordsTypesToDisplay=_recordsTypesToDisplay;
+@synthesize mapAnnotations=_mapAnnotations;
 
 @synthesize filterPopover=_filterPopover;
 @synthesize annotationCalloutPopover=_annotationCalloutPopover;
 
+@synthesize recordsTypesToDisplay=_recordsTypesToDisplay;
+
+@synthesize recordFilter=_recordFilter;
+
+#pragma mark - Map View Setup methods
+
 - (void)updateMapView {
-    //Convert the array of records into annotations
-    NSMutableArray *annotations=[NSMutableArray arrayWithCapacity:self.records.count];
-    for (Record *record in self.records){
-        if([self.recordsTypesToDisplay containsObject:[record.class description]] || !self.recordsTypesToDisplay){
-            [annotations addObject:[MKGeoRecordAnnotation annotationForRecord:record]];
-    
-        }
-    }
+    //Filter the records
+    NSArray *records=[self.recordFilter filterRecordCollection:self.records];
     
     //Remove the old annotations
     if (self.mapView.annotations)
         [self.mapView removeAnnotations:self.mapView.annotations];
     
-    //Add new annotations
-    if ([annotations count])
-        [self.mapView addAnnotations:[annotations copy]];
+    //Reset the saved annotations
+    self.mapAnnotations=[NSArray array];
+    
+    //Set up the annotations for the map view
+    if ([records count]) {
+        //Convert the array of records into annotations
+        NSMutableArray *annotations=[NSMutableArray arrayWithCapacity:records.count];
+        for (Record *record in records)
+            [annotations addObject:[MKGeoRecordAnnotation annotationForRecord:record]];
+        
+        //Add new annotations
+        if ([annotations count])
+            [self.mapView addAnnotations:[annotations copy]];
+        
+        //Save the annotations
+        self.mapAnnotations=self.mapView.annotations;
+        
+        //Set the location span of the map
+        self.mapView.region=[self regionFromLocations];
+    } 
 }
 
 #pragma mark - Getters and Setters
 
-- (void)setRecords:(NSArray *)records {
-    _records=records;
+- (GeoFilter *)recordFilter {
+    if (!_recordFilter)
+        _recordFilter=[[GeoFilter alloc] init];
     
-    [self updateMapView];
+    return _recordFilter;
+}
+
+- (void)setRecords:(NSArray *)records {
+    if (_records!=records) {
+        _records=records;
+        
+        [self updateMapView];
+    }
 }
 
 - (void)setMapView:(MKMapView *)mapView {
@@ -68,14 +100,47 @@
     [self updateMapView];
 }
 
+- (void)setSelectedRecord:(Record *)selectedRecord {
+    //Deselect the previous record if it's not nil
+    if (self.selectedRecord) {
+        for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+            if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==self.selectedRecord) {
+                [self.mapView deselectAnnotation:annotation animated:YES];
+                break;
+            }
+        }
+    }
+    
+    //Save the new selected record
+    _selectedRecord=selectedRecord;
+    
+    //Select the pin corresponding to the record
+    for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+        if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==self.selectedRecord) {
+            //Set the location span and the center of the map
+            self.mapView.region=[self regionFromLocations];
+            self.mapView.centerCoordinate=annotation.coordinate;
+            [self.mapView selectAnnotation:annotation animated:YES];
+            break;
+        }
+    }
+}
+
+#pragma mark - Prepare for Segues
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"Filter By Record Type"]){
+        [segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setSelectedRecordTypes:self.recordFilter.selectedRecordTypes];
+        [segue.destinationViewController setAllRecordTypes:self.recordFilter.allRecordTypes];
+    }
+}
+
 #pragma mark - View Controller Lifecycles
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //show all record types in the beginning
-//    if(!self.recordsTypesToDisplay)
-//        self.recordsTypesToDisplay = [[NSMutableSet alloc] initWithObjects:@"Bedding", @"Contact", @"Fault", @"Joint Set", @"Others", nil];
     //Set the delegate of the map view
     self.mapView.delegate=self;
     
@@ -84,7 +149,7 @@
     
     //Ask the delegate for records to display
     self.records=[self.mapDelegate recordsForMapViewController:self];
-    
+        
     //Show user location
     self.mapView.showsUserLocation=YES;
 }
@@ -128,10 +193,12 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     //Show the image
-    MKGeoRecordAnnotation *annotation=view.annotation;
-    Record *record=annotation.record;
-    UIImage *recordImage=[UIImage imageWithData:record.image.imageData];
-    [(UIImageView *)view.leftCalloutAccessoryView setImage:recordImage];
+    if (![view.annotation isKindOfClass:[MKUserLocation class]]) {
+        MKGeoRecordAnnotation *annotation=view.annotation;
+        Record *record=annotation.record;
+        UIImage *recordImage=[UIImage imageWithData:record.image.imageData];
+        [(UIImageView *)view.leftCalloutAccessoryView setImage:recordImage];
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control 
@@ -157,23 +224,49 @@
                             permittedArrowDirections:UIPopoverArrowDirectionAny 
                                             animated:YES];
     self.annotationCalloutPopover=annotationCalloutPopover;
-    
-    //Notify the map delegate of user's selection
-    //[self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:annotation.record switchToDataView:NO];
 }
 
-#pragma mark - segues
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"Filter By Record Type"]){
-        [[segue destinationViewController] setDelegate:self];
-        [[segue destinationViewController] setSelectedRecordTypes:self.recordsTypesToDisplay];
+#pragma mark - Determine span of map view
+
+- (MKCoordinateRegion)regionFromLocations {
+    // Get the upper and lower coordinates for the location span
+    CLLocationCoordinate2D upper=[[self.mapAnnotations objectAtIndex:0] coordinate];
+    CLLocationCoordinate2D lower=[[self.mapAnnotations objectAtIndex:0] coordinate];
+    for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+        if (annotation.coordinate.longitude>upper.longitude) upper.longitude=annotation.coordinate.longitude;
+        if (annotation.coordinate.latitude>upper.latitude) upper.latitude=annotation.coordinate.latitude;
+        if (annotation.coordinate.longitude<lower.longitude) lower.longitude=annotation.coordinate.longitude;
+        if (annotation.coordinate.latitude<lower.latitude) lower.latitude=annotation.coordinate.latitude;
     }
+    
+    // Set the spans for the location span
+    MKCoordinateSpan locationSpan;
+    locationSpan.latitudeDelta=upper.latitude-lower.latitude;
+    locationSpan.longitudeDelta=upper.longitude-lower.longitude;
+    
+    // Determine the center of the location span
+    CLLocationCoordinate2D locationCenter;
+    locationCenter.longitude=(upper.longitude+lower.longitude)/2;
+    locationCenter.latitude=(upper.latitude+lower.latitude)/2;
+    
+    return MKCoordinateRegionMake(locationCenter, locationSpan);
 }
 
 #pragma mark - FilterByRecordType delegate method
 
--(void) updateMapViewByShowing:(NSMutableSet *)recordTypesSelected {
-    self.recordsTypesToDisplay = recordTypesSelected;
+- (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidSelectRecordType:(NSString *)recordType {
+    //Add the selected record type
+    [self.recordFilter userDidSelectRecordType:recordType];
+    
+    //Update the map view
+    [self updateMapView];
+}
+
+- (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidDeselectRecordType:(NSString *)recordType {
+    //Remove the selected record type
+    [self.recordFilter userDidDeselectRecordType:recordType];
+    
+    //Update the map view
     [self updateMapView];
 }
 
@@ -188,4 +281,5 @@
     //Dismiss the callout popover
     [self.annotationCalloutPopover dismissPopoverAnimated:NO];
 }
+
 @end

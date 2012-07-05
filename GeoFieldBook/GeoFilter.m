@@ -8,49 +8,60 @@
 
 #import "GeoFilter.h"
 #import "Record.h"
+#import "Record+Types.h"
 
 @interface GeoFilter()
-
-@property (nonatomic,strong) NSSet *selectedRecordTypes;
-@property (nonatomic,strong) NSSet *selectedFolderName;
 
 @end
 
 @implementation GeoFilter
 
 @synthesize selectedRecordTypes=_selectedRecordTypes;
-@synthesize selectedFolderName=_selectedFolderName;
+
+#pragma mark - Getters and Setters
+
+- (NSArray *)allRecordTypes {
+    return [Record allRecordTypes];
+}
+
+- (NSArray *)selectedRecordTypes {
+    if (!_selectedRecordTypes)
+        _selectedRecordTypes=self.allRecordTypes;
+    
+    return _selectedRecordTypes;
+}
+
+#pragma mark - Select/Deselect Record Types
 
 - (void)userDidSelectRecordType:(NSString *)recordType {
-    //Add the selected record type to the set
-    
+    //Add the selected record type to the array of selected record types
+    if (![self.selectedRecordTypes containsObject:recordType]) {
+        NSMutableArray *selectedRecordTypes=[self.selectedRecordTypes mutableCopy];
+        [selectedRecordTypes addObject:recordType];
+        self.selectedRecordTypes=[selectedRecordTypes copy];
+    }
 }
 
-- (void)userDidSelectFolderName:(NSString *)folderName {
-    //Add the selected folder name to the set
-    
-    //add the records i
+- (void)userDidDeselectRecordType:(NSString *)recordType {
+    //Remove the selected record type from the array of selected record types
+    if ([self.selectedRecordTypes containsObject:recordType]) {
+        NSMutableArray *selectedRecordTypes=[self.selectedRecordTypes mutableCopy];
+        [selectedRecordTypes removeObject:recordType];
+        self.selectedRecordTypes=[selectedRecordTypes copy];
+    }
 }
 
-- (NSSet *)selectedRecordTypes {
-    return [self.selectedRecordTypes copy];
-}
-
-- (NSSet *)selectedFolderNames {
-    return [self.selectedFolderName copy];
-}
+#pragma mark - Filter Mechanisms
 
 - (NSArray *)filterRecordCollection:(NSArray *)records {
     //iterate through the given records and filter out records of types that were not selected by the user
-    
-    NSMutableSet *filtered = nil;
-    for (Record *r in records) {
-        if ([self.selectedFolderName containsObject:r] && [self.selectedRecordTypes containsObject:[NSString stringWithFormat:@""]]) {//record type???
-            [filtered addObject:r];
-        }
+    NSMutableArray *filteredRecords=[records mutableCopy];
+    for (Record *record in records) {
+        if (![self.selectedRecordTypes containsObject:[record.class description]])
+            [filteredRecords removeObject:record];
     }
     
-    return [filtered allObjects];
+    return [filteredRecords copy];
 }
 
 @end

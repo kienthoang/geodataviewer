@@ -79,6 +79,17 @@
     [recordDetail setEditing:YES animated:YES];
 }
 
+- (void)selectRecordInMap:(Record *)record {
+    RecordMapViewController *recordMap=[self.viewControllers lastObject];
+    recordMap.selectedRecord=record;
+}
+
+#pragma mark - UISplitViewBarButtonPresenter protocol methods
+
+- (void)presentMasterPopover {
+    [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
 - (void)swapToViewControllerAtSegmentIndex:(int)segmentIndex {
@@ -104,7 +115,7 @@
     }
     
     //Set the tolbar
-    self.toolbar.items=[toolbarItems copy]; 
+    self.toolbar.items=[toolbarItems copy];
     
     //Be sure the UISegmentControl show the correct segment index
     self.dataMapSwitch.selectedSegmentIndex=segmentIndex;
@@ -116,9 +127,7 @@
     [self replaceViewControllerAtSegmentIndex:0 withViewController:recordDetail];
 }
 
-- (void)pushInitialViewController {
-    //
-    
+- (void)pushInitialViewController {    
     InitialDetailViewController *initialDetail=[self.storyboard instantiateViewControllerWithIdentifier:INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
     [self replaceViewControllerAtSegmentIndex:0 withViewController:initialDetail];
 }
@@ -139,6 +148,12 @@
 - (IBAction)formationButtonPressed:(UIButton *)sender {
     //Segue to the formation folder popover
     [self performSegueWithIdentifier:@"Show Formation Folders" sender:self.formationButton];
+}
+
+- (IBAction)importExportButtonPressed:(UIButton *)sender {
+    //Show UIActionSheet with import/export options
+    UIActionSheet *importExportActionSheet=[[UIActionSheet alloc] initWithTitle:@"Import/Export" delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Import Records",@"Export Records",@"Import Formations",@"Export Formations", nil];
+    [importExportActionSheet showInView:self.contentView];
 }
 
 - (IBAction)dataMapSegmentIndexDidChange:(UISegmentedControl *)sender {
@@ -203,12 +218,15 @@
     [masterPresenterCustomView setImage:[UIImage imageNamed:@"folder.png"] forState:UIControlStateNormal];
     masterPresenterCustomView.frame=CGRectMake(0, 0, 32, 32);
     [masterPresenterCustomView addTarget:self action:@selector(presentMaster:) forControlEvents:UIControlEventTouchUpInside];
+    masterPresenterCustomView.showsTouchWhenHighlighted=YES;
     self.masterPresenter.customView=masterPresenterCustomView;
     
     //Change the look of the import/export button
     UIButton *importExportCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
     [importExportCustomView setImage:[UIImage imageNamed:@"import-export.png"] forState:UIControlStateNormal];
     importExportCustomView.frame=CGRectMake(0, 0, 25, 25);
+    [importExportCustomView addTarget:self action:@selector(importExportButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    importExportCustomView.showsTouchWhenHighlighted=YES;
     self.importExportButton.customView=importExportCustomView; 
     
     //Change the look of the formation button
@@ -216,18 +234,11 @@
     [formationButtonCustomView setImage:[UIImage imageNamed:@"formation.png"] forState:UIControlStateNormal];
     formationButtonCustomView.frame=CGRectMake(0, 0, 32, 32);
     [formationButtonCustomView addTarget:self action:@selector(formationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    formationButtonCustomView.showsTouchWhenHighlighted=YES;
     self.formationButton.customView=formationButtonCustomView;
     
     //Show the initial detail view controller
     [self swapToViewControllerAtSegmentIndex:0];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Present the master popover
-    [self.masterPopoverController dismissPopoverAnimated:NO];
-    [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -237,8 +248,6 @@
 
 - (void)viewDidUnload {
     [self setDataMapSwitch:nil];
-    [self setImportExportButton:nil];
-    [self setFormationButton:nil];
     [super viewDidUnload];
 }
 @end

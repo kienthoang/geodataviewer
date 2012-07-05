@@ -8,13 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol FilterRecordsByType <NSObject>
+@class FilterByRecordTypeController;
 
--(void) updateMapViewByShowing:(NSMutableSet *)recordTypesSelected;
+@protocol FilterRecordsByType
+
+- (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidSelectRecordType:(NSString *)recordType;
+- (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidDeselectRecordType:(NSString *)recordType;
 
 @end
 
 @interface FilterByRecordTypeController : UITableViewController
-@property (nonatomic, strong) id<FilterRecordsByType> delegate;
-@property (nonatomic, strong) NSMutableSet *selectedRecordTypes;
+
+@property (nonatomic,strong) id <FilterRecordsByType> delegate;
+@property (nonatomic,strong) NSArray *selectedRecordTypes;
+@property (nonatomic,strong) NSArray *allRecordTypes;
+
 @end

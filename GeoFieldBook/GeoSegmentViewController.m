@@ -41,6 +41,7 @@
     
     //Add the view of the specified view controller to self's view hierachy with parent-child vc relationship callbacks
     [self addChildViewController:viewController];
+    [viewController willMoveToParentViewController:self];
 
     //Remove the view of the current view controller from the view hierachy
     [self.currentViewController.view removeFromSuperview];

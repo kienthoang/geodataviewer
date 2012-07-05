@@ -45,10 +45,6 @@
 
 @property (nonatomic,weak) UIPopoverController *formationFolderPopoverController;
 
-#pragma mark - Currently active record
-
-@property (nonatomic,weak) Record *chosenRecord;
-
 @end
 
 @implementation RecordTableViewController
@@ -126,15 +122,23 @@
     return detailvc;
 }
 
-- (void)setChosenRecord:(Record *)chosenRecord {
-    _chosenRecord=chosenRecord;
+- (void)updateRecordAndMapDetails {
+    //Setup the detail view
+    [self setupDetailView];
     
     //Set up the record for the record view controller
     DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
     [dataMapSegmentDetail updateRecordDetailViewWithRecord:self.chosenRecord];
     
     //Update the map
-    //[dataMapSegmentDetail selectRecordInMap:self.chosenRecord];
+    [dataMapSegmentDetail selectRecordInMap:self.chosenRecord];
+}
+
+- (void)setChosenRecord:(Record *)chosenRecord {
+    _chosenRecord=chosenRecord;
+    
+    //Update the details
+    [self updateRecordAndMapDetails];
 }
 
 #pragma mark - Detail View Manipulators
@@ -156,7 +160,7 @@
     
     //If the top view controller of the data map segment controller is nil, push the record view controller on screen
     if (!dataMapSegmentDetail.topViewController)
-        [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];
+        [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];    
 }
 
 #pragma mark - Autosave Controller
@@ -423,8 +427,16 @@
     [super viewWillAppear:animated];
     
     //Highlight current selected record but won't update the detail view
-    if (self.chosenRecord)
+    if (self.chosenRecord) {
+        //If the data side is not record view controller yet, push it on screen
+        DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+        if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]]) {
+            [self updateRecordAndMapDetails];
+            [self updateDelegatesOfRecordAndMapViewControllers];
+        }
+        
         [self highlightRecord:self.chosenRecord updateDetailView:NO];
+    }
     
     //Set the title of the set location button
     NSString *formationFolderName=self.folder.formationFolder.folderName;
@@ -587,10 +599,8 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 - (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView {
     //Switch to record view controller detail
-    if (willSwitchToDataView) {
-        [self setupDetailView];
+    if (willSwitchToDataView)
         [[self dataMapSegmentDetail] swapToViewControllerAtSegmentIndex:0];
-    }
     
     //Set the currently chosen record
     self.chosenRecord=record;  

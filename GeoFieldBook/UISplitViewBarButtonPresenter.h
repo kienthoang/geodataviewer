@@ -12,4 +12,8 @@
 
 @property (nonatomic,strong) UIPopoverController *masterPopoverController;
 
+@optional
+
+- (void)presentMasterPopover;
+
 @end

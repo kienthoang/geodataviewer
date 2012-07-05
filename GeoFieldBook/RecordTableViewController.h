@@ -41,4 +41,8 @@ typedef void (^autosaver_block_t)(void);
 @property (nonatomic,weak) id <RecordTVCAutosaverDelegate> autosaveDelegate;
 @property (nonatomic,weak) id <RecordTableViewControllerDelegate> delegate;
 
+#pragma mark - Currently active record
+
+@property (nonatomic,strong) Record *chosenRecord;
+
 @end

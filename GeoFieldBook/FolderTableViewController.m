@@ -17,6 +17,7 @@
 #import "DataMapSegmentViewController.h"
 
 #import "Folder.h"
+#import "Record.h"
 #import "Folder+Creation.h"
 #import "Folder+Modification.h"
 #import "Folder+DictionaryKeys.h"
@@ -359,14 +360,27 @@
     
     //Seguing to the RecordTableViewController
     else if ([segue.identifier isEqualToString:@"Show Records"]) {
-        //Get the cell that activates the segue and set up the destination controller
-        UITableViewCell *cell=(UITableViewCell *)sender;
-        Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-        [segue.destinationViewController setTitle:folder.folderName];
+        //Common setup
         [segue.destinationViewController setDatabase:self.database];
-        [segue.destinationViewController setFolder:folder];
         [segue.destinationViewController setAutosaveDelegate:self];
         [segue.destinationViewController setDelegate:self];
+        
+        //Get the cell that activates the segue and set up the destination controller if the sender is a table cell
+        if ([sender isKindOfClass:[UITableViewCell class]]) {
+            UITableViewCell *cell=(UITableViewCell *)sender;
+            Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+            [segue.destinationViewController setTitle:folder.folderName];
+            [segue.destinationViewController setFolder:folder];
+        }
+        
+        //If the sender is a record
+        else if ([sender isKindOfClass:[Record class]]) {
+            Record *record=(Record *)sender;
+            Folder *folder=record.folder;
+            [segue.destinationViewController setTitle:folder.folderName];
+            [segue.destinationViewController setFolder:folder];
+            [segue.destinationViewController setChosenRecord:record];
+        }
     }
 }
 
@@ -497,7 +511,16 @@
 }
 
 - (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView {
+    //Put up the record vc
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+    [dataMapSegmentDetail pushRecordViewController];
     
+    //Show the master popover
+    if ([dataMapSegmentDetail respondsToSelector:@selector(presentMasterPopover)])
+        [dataMapSegmentDetail presentMasterPopover];
+    
+    //navigate to the record table view controller
+    [self performSegueWithIdentifier:@"Show Records" sender:record];
 }
 
 @end
