@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Record.h"
 
 @protocol GeoMapAnnotationProvider <NSObject>
 
 - (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController;
+- (void)mapViewController:(UIViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView;
 
 @end

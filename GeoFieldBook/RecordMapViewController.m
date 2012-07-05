@@ -12,7 +12,8 @@
 #import "MKMapRecordInfoViewController.h"
 #import "Image.h"
 
-@interface RecordMapViewController() <MKMapViewDelegate, FilterRecordsByType>
+
+@interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate,FilterRecordsByType>
 
 @property (weak,nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic,weak) UIPopoverController *filterPopover;
@@ -148,12 +149,17 @@
     MKMapRecordInfoViewController *recordInfo=[self.storyboard instantiateViewControllerWithIdentifier:@"Record Info Popover"];
     MKGeoRecordAnnotation *annotation=view.annotation;
     recordInfo.record=annotation.record;
-    self.annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
-    self.annotationCalloutPopover.popoverContentSize=CGSizeMake(300, 120);
-    [self.annotationCalloutPopover presentPopoverFromRect:view.bounds 
-                                       inView:view 
-                     permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                     animated:YES];
+    recordInfo.delegate=self;
+    UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
+    annotationCalloutPopover.popoverContentSize=CGSizeMake(330, 110);
+    [annotationCalloutPopover presentPopoverFromRect:view.bounds 
+                                              inView:view 
+                            permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                            animated:YES];
+    self.annotationCalloutPopover=annotationCalloutPopover;
+    
+    //Notify the map delegate of user's selection
+    //[self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:annotation.record switchToDataView:NO];
 }
 
 #pragma mark - segues
@@ -165,8 +171,21 @@
 }
 
 #pragma mark - FilterByRecordType delegate method
+
 -(void) updateMapViewByShowing:(NSMutableSet *)recordTypesSelected {
     self.recordsTypesToDisplay = recordTypesSelected;
     [self updateMapView];
+}
+
+#pragma mark - MKMapRecordInfoViewControllerDelegate methods
+
+- (void)mapRecordInfoViewController:(MKMapRecordInfoViewController *)sender 
+ userDidTapOnAccessoryViewForRecord:(Record *)record 
+{
+    //Notify the delegate
+    [self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record switchToDataView:YES];
+    
+    //Dismiss the callout popover
+    [self.annotationCalloutPopover dismissPopoverAnimated:NO];
 }
 @end

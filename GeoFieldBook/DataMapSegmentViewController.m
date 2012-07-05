@@ -16,6 +16,8 @@
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *masterPresenter;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *importExportButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
 
 @end
 
@@ -25,6 +27,8 @@
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 @synthesize masterPresenter=_masterPresenter;
 @synthesize dataMapSwitch = _dataMapSwitch;
+@synthesize importExportButton = _importExportButton;
+@synthesize formationButton = _formationButton;
 
 @synthesize masterPopoverController=_masterPopoverController;
 
@@ -100,7 +104,10 @@
     }
     
     //Set the tolbar
-    self.toolbar.items=[toolbarItems copy];  
+    self.toolbar.items=[toolbarItems copy]; 
+    
+    //Be sure the UISegmentControl show the correct segment index
+    self.dataMapSwitch.selectedSegmentIndex=segmentIndex;
 }
 
 - (void)pushRecordViewController {
@@ -118,15 +125,20 @@
 
 #pragma mark - Target-Action Handlers
 
-- (IBAction)presentMaster:(UIBarButtonItem *)sender {
+- (IBAction)presentMaster:(UIButton *)sender {
     if (self.masterPopoverController) {
         //Dismiss the formation folder popover if it's visible on screen
         if (self.formationFolderPopoverController.isPopoverVisible)
             [self.formationFolderPopoverController dismissPopoverAnimated:YES];
         
         //Present the master popover
-        [self.masterPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+        [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
     }
+}
+
+- (IBAction)formationButtonPressed:(UIButton *)sender {
+    //Segue to the formation folder popover
+    [self performSegueWithIdentifier:@"Show Formation Folders" sender:self.formationButton];
 }
 
 - (IBAction)dataMapSegmentIndexDidChange:(UISegmentedControl *)sender {
@@ -186,6 +198,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Change the look of the master presenter
+    UIButton *masterPresenterCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [masterPresenterCustomView setImage:[UIImage imageNamed:@"folder.png"] forState:UIControlStateNormal];
+    masterPresenterCustomView.frame=CGRectMake(0, 0, 32, 32);
+    [masterPresenterCustomView addTarget:self action:@selector(presentMaster:) forControlEvents:UIControlEventTouchUpInside];
+    self.masterPresenter.customView=masterPresenterCustomView;
+    
+    //Change the look of the import/export button
+    UIButton *importExportCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [importExportCustomView setImage:[UIImage imageNamed:@"import-export.png"] forState:UIControlStateNormal];
+    importExportCustomView.frame=CGRectMake(0, 0, 25, 25);
+    self.importExportButton.customView=importExportCustomView; 
+    
+    //Change the look of the formation button
+    UIButton *formationButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [formationButtonCustomView setImage:[UIImage imageNamed:@"formation.png"] forState:UIControlStateNormal];
+    formationButtonCustomView.frame=CGRectMake(0, 0, 32, 32);
+    [formationButtonCustomView addTarget:self action:@selector(formationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.formationButton.customView=formationButtonCustomView;
+    
     //Show the initial detail view controller
     [self swapToViewControllerAtSegmentIndex:0];
 }
@@ -205,6 +237,8 @@
 
 - (void)viewDidUnload {
     [self setDataMapSwitch:nil];
+    [self setImportExportButton:nil];
+    [self setFormationButton:nil];
     [super viewDidUnload];
 }
 @end
