@@ -56,7 +56,7 @@
     if (!self.checkBox.alpha) {
         //Animate if desired
         if (animated) {
-            [UIView animateWithDuration:0.5 animations:^(){
+            [UIView animateWithDuration:CHECK_BOX_ANIMATION_DURATION animations:^(){
                 //move the title and subtitle
                 self.title.transform=CGAffineTransformTranslate(self.title.transform, self.checkBox.frame.size.width, 0);
                 self.subtitle.transform=CGAffineTransformTranslate(self.subtitle.transform, self.checkBox.frame.size.width, 0);
@@ -78,7 +78,7 @@
 - (void)hideCheckBoxAnimated:(BOOL)animated {
     //Animate if desired
     if (animated) {
-        [UIView animateWithDuration:0.5 animations:^(){
+        [UIView animateWithDuration:CHECK_BOX_ANIMATION_DURATION animations:^(){
             //Move the title and subtitle only if they are not in their original positions (before checkbox is showed) 
             if (!CGAffineTransformIsIdentity(self.title.transform))
                 self.title.transform=CGAffineTransformTranslate(self.title.transform, -self.checkBox.frame.size.width, 0);

@@ -293,7 +293,7 @@
     
     //Add gesture to call the master
     UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMasterPopover:)];
-    [self.view addGestureRecognizer:longPressGestureRecognizer];
+    [self.contentView addGestureRecognizer:longPressGestureRecognizer];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -233,7 +233,6 @@
     recordInfo.record=annotation.record;
     recordInfo.delegate=self;
     UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
-    annotationCalloutPopover.popoverContentSize=CGSizeMake(335, 165);
     [annotationCalloutPopover presentPopoverFromRect:view.bounds 
                                               inView:view 
                             permittedArrowDirections:UIPopoverArrowDirectionAny 

@@ -22,7 +22,7 @@
     if (!self.checkBox.alpha) {
         //Animate if desired
         if (animated) {
-            [UIView animateWithDuration:0.5 animations:^(){
+            [UIView animateWithDuration:CHECK_BOX_ANIMATION_DURATION animations:^(){
                 //move the other views
                 for (UIView *view in self.contentView.subviews) {
                     if (view!=self.checkBox)
@@ -48,7 +48,7 @@
 - (void)hideCheckBoxAnimated:(BOOL)animated {
     //Animate if desired
     if (animated) {
-        [UIView animateWithDuration:0.5 animations:^(){
+        [UIView animateWithDuration:CHECK_BOX_ANIMATION_DURATION animations:^(){
             //move the other views
             for (UIView *view in self.contentView.subviews) {
                 if (view!=self.checkBox && !CGAffineTransformIsIdentity(view.transform))

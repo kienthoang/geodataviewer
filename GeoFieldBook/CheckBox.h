@@ -14,4 +14,6 @@
 @property (nonatomic, strong) UIImage *unchecked;
 @property (nonatomic) BOOL isChecked;
 
+#define CHECK_BOX_ANIMATION_DURATION 0.4
+
 @end

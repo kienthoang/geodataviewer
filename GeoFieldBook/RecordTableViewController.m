@@ -444,11 +444,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
     
     //Highlight current selected record but won't update the detail view
     if (self.chosenRecord) {
         //If the data side is not record view controller yet, push it on screen
-        DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
         if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]])
             [self updateRecordAndMapDetails];
         
@@ -460,11 +460,21 @@
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
     
     //Set the map delegate of the record vc to self
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentDetail];
-    [dataMapSegmentVC setRecordMapViewControllerMapDelegate:self];
+    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
     
     //Update the map view
-    [dataMapSegmentVC updateMapWithRecords:[self records]];
+    [dataMapSegmentDetail updateMapWithRecords:[self records]];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //Update mapDidAppear
+    if (!self.mapDidAppear) {
+        DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
+        self.mapDidAppear=[dataMapSegmentDetail.topViewController isKindOfClass:[RecordMapViewController class]];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {    

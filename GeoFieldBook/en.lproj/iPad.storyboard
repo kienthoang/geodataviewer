@@ -941,7 +941,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="250" height="600"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="335" height="170"/>
                     <connections>
                         <outlet property="dip" destination="HAv-ar-02q" id="nsV-Ug-G0k"/>
                         <outlet property="dipDirection" destination="Goy-Hw-tpy" id="IO5-7Y-C3g"/>
