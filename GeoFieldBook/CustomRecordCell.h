@@ -18,4 +18,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *type;
 @property (nonatomic, weak) IBOutlet CheckBox *checkBox;
 
+- (void)showCheckBoxAnimated:(BOOL)animated;
+- (void)hideCheckBoxAnimated:(BOOL)animated;
+
 @end

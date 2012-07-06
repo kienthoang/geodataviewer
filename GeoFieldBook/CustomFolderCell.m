@@ -52,13 +52,52 @@
 
 
 - (void)showCheckBoxAnimated:(BOOL)animated {
-    //Show check box
-    self.checkBox.hidden=NO;
+    //Only execute if alpha is 0
+    if (!self.checkBox.alpha) {
+        //Animate if desired
+        if (animated) {
+            [UIView animateWithDuration:0.5 animations:^(){
+                //move the title and subtitle
+                self.title.transform=CGAffineTransformTranslate(self.title.transform, self.checkBox.frame.size.width, 0);
+                self.subtitle.transform=CGAffineTransformTranslate(self.subtitle.transform, self.checkBox.frame.size.width, 0);
+                
+                //show checkbox
+                self.checkBox.alpha=1;
+            }];
+        } else {
+            //Show check box
+            self.checkBox.alpha=1;
+            
+            //move the title and subtitle
+            self.title.transform=CGAffineTransformTranslate(self.title.transform, self.checkBox.frame.size.width, 0);
+            self.subtitle.transform=CGAffineTransformTranslate(self.subtitle.transform, self.checkBox.frame.size.width, 0);
+        }
+    }
 }
 
 - (void)hideCheckBoxAnimated:(BOOL)animated {
-    //Hide check box
-    self.checkBox.hidden=YES;
+    //Animate if desired
+    if (animated) {
+        [UIView animateWithDuration:0.5 animations:^(){
+            //Move the title and subtitle only if they are not in their original positions (before checkbox is showed) 
+            if (!CGAffineTransformIsIdentity(self.title.transform))
+                self.title.transform=CGAffineTransformTranslate(self.title.transform, -self.checkBox.frame.size.width, 0);
+            if (!CGAffineTransformIsIdentity(self.subtitle.transform))
+                self.subtitle.transform=CGAffineTransformTranslate(self.subtitle.transform, -self.checkBox.frame.size.width, 0);
+            
+            //Hide the checkbox
+            self.checkBox.alpha=0;
+        }];
+    } else {
+        //Hide the checkbox
+        self.checkBox.alpha=0;
+        
+        //Move the title and subtitle only if they are not in their original positions (before checkbox is showed) 
+        if (!CGAffineTransformIsIdentity(self.title.transform))
+            self.title.transform=CGAffineTransformTranslate(self.title.transform, -self.checkBox.frame.size.width, 0);
+        if (!CGAffineTransformIsIdentity(self.subtitle.transform))
+            self.subtitle.transform=CGAffineTransformTranslate(self.subtitle.transform, -self.checkBox.frame.size.width, 0);
+    }
 }
 
 @end

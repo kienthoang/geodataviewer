@@ -467,9 +467,9 @@
     
     //Show/Hide the checkboxes
     if (self.mapDidAppear)
-        [cell showCheckBoxAnimated:NO];
+        [cell showCheckBoxAnimated:YES];
     else
-        [cell hideCheckBoxAnimated:NO];
+        [cell hideCheckBoxAnimated:YES];
     
     return cell;
 }

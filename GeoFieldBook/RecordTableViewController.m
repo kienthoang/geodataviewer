@@ -572,7 +572,10 @@
     checkbox.image=[self.selectedRecordTypes containsObject:[record.class description]] ? checkbox.checked : checkbox.unchecked;
     if (!self.selectedRecordTypes)
         checkbox.image=checkbox.checked;
-    checkbox.hidden=!self.mapDidAppear;
+    if (self.mapDidAppear)
+        [cell showCheckBoxAnimated:YES];
+    else
+        [cell hideCheckBoxAnimated:YES];
 
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
