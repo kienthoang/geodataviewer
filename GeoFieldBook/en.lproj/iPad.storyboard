@@ -1385,7 +1385,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="200"/>
                     <connections>
                         <outlet property="pickerView" destination="Skb-ct-WgX" id="c5X-T0-E68"/>
                     </connections>

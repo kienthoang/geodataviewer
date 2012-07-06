@@ -18,5 +18,6 @@
 
 - (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController;
 - (void)mapViewControllerDidDisappear:(UIViewController *)mapViewController;
+- (void)mapViewController:(UIViewController *)mapViewController userDidUpdateRecordTypeFilterList:(NSArray *)selectedRecordTypes;
 
 @end

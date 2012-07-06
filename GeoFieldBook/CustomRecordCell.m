@@ -17,10 +17,4 @@
 @synthesize type = _type;
 @synthesize checkBox = _checkBox;
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    self.checkBox.hidden=YES;
-}
-
 @end

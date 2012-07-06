@@ -45,6 +45,10 @@
 
 @property (nonatomic,weak) UIPopoverController *formationFolderPopoverController;
 
+#pragma mark - Filter related properties
+
+@property (nonatomic,strong) NSArray *selectedRecordTypes;
+
 @end
 
 @implementation RecordTableViewController
@@ -63,6 +67,8 @@
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 
 @synthesize chosenRecord=_chosenRecord;
+
+@synthesize selectedRecordTypes=_selectedRecordTypes;
 
 #pragma mark - Controller State Initialization
 
@@ -142,6 +148,15 @@
     
     //Update the details
     [self updateRecordAndMapDetails];
+}
+
+- (void)setSelectedRecordTypes:(NSArray *)selectedRecordTypes {
+    if (_selectedRecordTypes!=selectedRecordTypes) {
+        _selectedRecordTypes=selectedRecordTypes;
+        
+        if (self.selectedRecordTypes)
+            [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Detail View Manipulators
@@ -547,6 +562,12 @@
     cell.type.text=[record.class description];
     cell.date.text=[Record dateFromNSDate:record.date];
     cell.time.text = [Record timeFromNSDate:record.date];
+    
+    //Set up the checkbox
+    CheckBox *checkbox=cell.checkBox;
+    checkbox.image=[self.selectedRecordTypes containsObject:[record.class description]] ? checkbox.checked : checkbox.unchecked;
+    if (!self.selectedRecordTypes)
+        checkbox.image=checkbox.checked;
 
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
@@ -575,7 +596,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
-#pragma mark - GeoMapAnnotationProvider protocol methods
+#pragma mark - GeoMapDelegate protocol methods
 
 - (NSArray *)records {
     //Get the array of records from the fetched results controller
@@ -599,6 +620,12 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     
     //Set the currently chosen record
     self.chosenRecord=record;  
+}
+
+- (void)mapViewController:(UIViewController *)mapViewController userDidUpdateRecordTypeFilterList:(NSArray *)selectedRecordTypes 
+{
+    //Save the array of selected record types
+    self.selectedRecordTypes=selectedRecordTypes;
 }
 
 @end
