@@ -15,7 +15,6 @@
 
 @interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate,FilterRecordsByType>
 
-@property (weak,nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic,weak) UIPopoverController *filterPopover;
 @property (nonatomic,strong) UIPopoverController *annotationCalloutPopover;
 @property (nonatomic, strong) NSMutableSet *recordsTypesToDisplay;

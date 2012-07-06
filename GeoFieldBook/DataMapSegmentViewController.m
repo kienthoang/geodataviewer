@@ -92,6 +92,28 @@
 
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
+- (void)updateTrackingButtonForSegmentIndex:(int)segmentIndex {
+    //If change to map side, put up the tracking button
+    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
+    if (segmentIndex) {
+        RecordMapViewController *mapDetail=[self.viewControllers lastObject];
+        UIBarButtonItem *trackingButton=[[MKUserTrackingBarButtonItem alloc] initWithMapView:mapDetail.mapView];
+        [toolbarItems insertObject:trackingButton atIndex:[toolbarItems count]-1];
+        self.toolbar.items=[toolbarItems copy];
+    }
+    
+    //Else get rid of that button
+    else {
+        for (int index=0;index<[toolbarItems count];index++) {
+            UIBarButtonItem *item=[toolbarItems objectAtIndex:index];
+            if ([item isKindOfClass:[MKUserTrackingBarButtonItem class]])
+                [toolbarItems removeObject:item];
+        }
+        
+        self.toolbar.items=[toolbarItems copy];
+    }
+}
+
 - (void)swapToViewControllerAtSegmentIndex:(int)segmentIndex {
     [super swapToViewControllerAtSegmentIndex:segmentIndex];
     
@@ -109,9 +131,11 @@
     
     //If the button on the rightmost of the toolbar is the edit button, take it off
     else {
-        UIBarButtonItem *rightMostButton=[toolbarItems lastObject];
-        if ([rightMostButton.title isEqualToString:@"Edit"] || [rightMostButton.title isEqualToString:@"Done"])
-            [toolbarItems removeObject:rightMostButton];
+        for (int index=0;index<[toolbarItems count];index++) {
+            UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
+            if ([barButtonItem.title isEqualToString:@"Edit"] || [barButtonItem.title isEqualToString:@"Done"])
+                [toolbarItems removeObject:barButtonItem];
+        }
     }
     
     //Set the tolbar
@@ -119,6 +143,9 @@
     
     //Be sure the UISegmentControl show the correct segment index
     self.dataMapSwitch.selectedSegmentIndex=segmentIndex;
+    
+    //Update the tracking button
+    [self updateTrackingButtonForSegmentIndex:segmentIndex];
 }
 
 - (void)pushRecordViewController {
@@ -164,7 +191,7 @@
 
 - (IBAction)dataMapSegmentIndexDidChange:(UISegmentedControl *)sender {
     //Update the segment index
-    [self segmentController:sender indexDidChangeTo:sender.selectedSegmentIndex];
+    [self segmentController:sender indexDidChangeTo:sender.selectedSegmentIndex];    
 }
 
 #pragma mark - Prepare for segues

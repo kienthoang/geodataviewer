@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "GeoMapDelegate.h"
 
 @interface RecordMapViewController : UIViewController
@@ -14,5 +15,7 @@
 @property (nonatomic,strong) NSArray *records;
 @property (nonatomic,strong) Record *selectedRecord;
 @property (nonatomic,weak) id <GeoMapDelegate> mapDelegate;
+
+@property (weak,nonatomic) IBOutlet MKMapView *mapView;
 
 @end
