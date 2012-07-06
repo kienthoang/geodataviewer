@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *importExportButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *settingButton;
 
 @end
 
@@ -29,6 +30,7 @@
 @synthesize dataMapSwitch = _dataMapSwitch;
 @synthesize importExportButton = _importExportButton;
 @synthesize formationButton = _formationButton;
+@synthesize settingButton = _settingButton;
 
 @synthesize masterPopoverController=_masterPopoverController;
 
@@ -262,8 +264,8 @@
     
     //Change the look of the import/export button
     UIButton *importExportCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
-    [importExportCustomView setImage:[UIImage imageNamed:@"import-export.png"] forState:UIControlStateNormal];
-    importExportCustomView.frame=CGRectMake(0, 0, 25, 25);
+    [importExportCustomView setImage:[UIImage imageNamed:@"import_export.png"] forState:UIControlStateNormal];
+    importExportCustomView.frame=CGRectMake(0, 0, 24, 24);
     [importExportCustomView addTarget:self action:@selector(importExportButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     importExportCustomView.showsTouchWhenHighlighted=YES;
     self.importExportButton.customView=importExportCustomView; 
@@ -276,8 +278,18 @@
     formationButtonCustomView.showsTouchWhenHighlighted=YES;
     self.formationButton.customView=formationButtonCustomView;
     
+    //Change the look of the setting button
+    UIButton *settingButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [settingButtonCustomView setImage:[UIImage imageNamed:@"gear2.png"] forState:UIControlStateNormal];
+    settingButtonCustomView.frame=CGRectMake(0, 0, 30, 30);
+    //[settingButtonCustomView addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    settingButtonCustomView.showsTouchWhenHighlighted=YES;
+    self.settingButton.customView=settingButtonCustomView;
+    
     //Show the initial detail view controller
     [self swapToViewControllerAtSegmentIndex:0];
+    
+    //[self.toolbar setBackgroundImage:[UIImage imageNamed:@"stone-textures.jpeg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
     
     //Add gesture to call the master
     UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMasterPopover:)];
@@ -291,6 +303,7 @@
 
 - (void)viewDidUnload {
     [self setDataMapSwitch:nil];
+    [self setSettingButton:nil];
     [super viewDidUnload];
 }
 @end

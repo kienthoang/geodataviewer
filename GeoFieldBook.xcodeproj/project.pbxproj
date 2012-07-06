@@ -46,6 +46,10 @@
 		0238587915996F4A00A0DB98 /* FormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587815996F4900A0DB98 /* FormationViewController.m */; };
 		0238587C1599732000A0DB98 /* Formation+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587B1599731F00A0DB98 /* Formation+Creation.m */; };
 		0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587E1599747300A0DB98 /* Formation+Modification.m */; };
+		0249E2AD15A6A16100A7532E /* import_export.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AC15A6A16100A7532E /* import_export.png */; };
+		0249E2AF15A6A2D100A7532E /* gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AE15A6A2D100A7532E /* gear2.png */; };
+		0249E2B115A6A32300A7532E /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2B015A6A32300A7532E /* gear.png */; };
+		0249E2C215A6AD0300A7532E /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2C015A6AD0300A7532E /* iPad.storyboard */; };
 		02712A4C159D010500510188 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4B159D010500510188 /* Bedding.m */; };
 		02712A50159D011300510188 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4F159D011300510188 /* Contact.m */; };
 		02712A53159D012100510188 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A52159D012100510188 /* Fault.m */; };
@@ -57,7 +61,6 @@
 		0294E0A0159361060025219F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0294E09E159361060025219F /* InfoPlist.strings */; };
 		0294E0A2159361060025219F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0A1159361060025219F /* main.m */; };
 		0294E0A6159361060025219F /* GeoFieldBookAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */; };
-		0294E0A9159361060025219F /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0294E0A7159361060025219F /* iPad.storyboard */; };
 		0294E0B4159361060025219F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0B3159361060025219F /* SenTestingKit.framework */; };
 		0294E0B5159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E0B6159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
@@ -77,7 +80,6 @@
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
 		02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */; };
 		02AC0F9515A5408300FBA9D3 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9415A5408300FBA9D3 /* folder.png */; };
-		02AC0F9715A541D400FBA9D3 /* import-export.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9615A541D400FBA9D3 /* import-export.png */; };
 		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
@@ -184,6 +186,10 @@
 		0238587B1599731F00A0DB98 /* Formation+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Creation.m"; sourceTree = "<group>"; };
 		0238587D1599747200A0DB98 /* Formation+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation+Modification.h"; sourceTree = "<group>"; };
 		0238587E1599747300A0DB98 /* Formation+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Modification.m"; sourceTree = "<group>"; };
+		0249E2AC15A6A16100A7532E /* import_export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_export.png; sourceTree = "<group>"; };
+		0249E2AE15A6A2D100A7532E /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
+		0249E2B015A6A32300A7532E /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		0249E2C115A6AD0300A7532E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		02712A4A159D010500510188 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
 		02712A4B159D010500510188 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		02712A4E159D011300510188 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -204,7 +210,6 @@
 		0294E0A3159361060025219F /* GeoFieldBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoFieldBook-Prefix.pch"; sourceTree = "<group>"; };
 		0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookAppDelegate.h; sourceTree = "<group>"; };
 		0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookAppDelegate.m; sourceTree = "<group>"; };
-		0294E0A8159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		0294E0B2159361060025219F /* GeoFieldBookTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoFieldBookTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E0B3159361060025219F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0294E0BB159361060025219F /* GeoFieldBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoFieldBookTests-Info.plist"; sourceTree = "<group>"; };
@@ -226,7 +231,7 @@
 		0298969015A38F4C00E51C27 /* RecordMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordMapViewController.m; sourceTree = "<group>"; };
 		0298969215A408B100E51C27 /* DataMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentViewController.h; sourceTree = "<group>"; };
 		0298969315A408B100E51C27 /* DataMapSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMapSegmentViewController.m; sourceTree = "<group>"; };
-		0298969515A40EB800E51C27 /* GeoMapDelegate.h */ = {isa = PBXFileReference; path = GeoMapDelegate.h; sourceTree = "<group>"; };
+		0298969515A40EB800E51C27 /* GeoMapDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoMapDelegate.h; sourceTree = "<group>"; };
 		0298C25A159B43F30038E89C /* Record+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Validation.h"; sourceTree = "<group>"; };
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
@@ -234,7 +239,6 @@
 		02AC0F8815A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapRecordInfoViewController.h; sourceTree = "<group>"; };
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
-		02AC0F9615A541D400FBA9D3 /* import-export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import-export.png"; sourceTree = "<group>"; };
 		02AC0F9815A5483700FBA9D3 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
@@ -430,7 +434,7 @@
 		0294E09B159361060025219F /* GeoFieldBook */ = {
 			isa = PBXGroup;
 			children = (
-				0294E0A7159361060025219F /* iPad.storyboard */,
+				0249E2C015A6AD0300A7532E /* iPad.storyboard */,
 				020EBB9A15942C7900EECC08 /* Master View Controllers */,
 				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
@@ -521,9 +525,11 @@
 				21989D6315A4D20C001CF847 /* unchecked.png */,
 				029877FD1595955E000D71E7 /* RecordVCBackground.jpg */,
 				0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */,
-				02AC0F9615A541D400FBA9D3 /* import-export.png */,
 				02AC0F9415A5408300FBA9D3 /* folder.png */,
 				02AC0F9815A5483700FBA9D3 /* formation.png */,
+				0249E2AC15A6A16100A7532E /* import_export.png */,
+				0249E2B015A6A32300A7532E /* gear.png */,
+				0249E2AE15A6A2D100A7532E /* gear2.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -730,14 +736,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0294E0A0159361060025219F /* InfoPlist.strings in Resources */,
-				0294E0A9159361060025219F /* iPad.storyboard in Resources */,
 				029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */,
 				0222DB1C1596487800699D62 /* GeoFieldBookFrontPage.png in Resources */,
 				21989D6415A4D20C001CF847 /* checked.png in Resources */,
 				21989D6515A4D20C001CF847 /* unchecked.png in Resources */,
 				02AC0F9515A5408300FBA9D3 /* folder.png in Resources */,
-				02AC0F9715A541D400FBA9D3 /* import-export.png in Resources */,
 				02AC0F9915A5483700FBA9D3 /* formation.png in Resources */,
+				0249E2AD15A6A16100A7532E /* import_export.png in Resources */,
+				0249E2AF15A6A2D100A7532E /* gear2.png in Resources */,
+				0249E2B115A6A32300A7532E /* gear.png in Resources */,
+				0249E2C215A6AD0300A7532E /* iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,20 +867,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0249E2C015A6AD0300A7532E /* iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0249E2C115A6AD0300A7532E /* en */,
+			);
+			name = iPad.storyboard;
+			sourceTree = "<group>";
+		};
 		0294E09E159361060025219F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0294E09F159361060025219F /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		0294E0A7159361060025219F /* iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0294E0A8159361060025219F /* en */,
-			);
-			name = iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		0294E0BC159361060025219F /* InfoPlist.strings */ = {

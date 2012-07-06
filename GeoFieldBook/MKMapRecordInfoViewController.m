@@ -9,6 +9,8 @@
 #import "MKMapRecordInfoViewController.h"
 #import "Record+DateAndTimeFormatter.h"
 #import "Formation.h"
+#import "Other.h"
+#import "Contact.h"
 
 @interface MKMapRecordInfoViewController()
 
@@ -60,7 +62,7 @@
     self.recordDate.text=[Record dateFromNSDate:self.record.date];
     self.recordTime.text=[Record timeFromNSDate:self.record.date];
     id record=self.record;
-    self.formation.text=[record respondsToSelector:@selector(formation:)] ? [(Formation *)[record formation] formationName] : @"N/A";
+    self.formation.text=([record isKindOfClass:[Contact class]] || [record isKindOfClass:[Other class]]) ? @"N/A" : [(Formation *)[record formation] formationName];
     self.dip.text=self.record.dip ? [NSString stringWithFormat:@"%@",self.record.dip] : @"N/A";
     self.strike.text=self.record.strike ? [NSString stringWithFormat:@"%@",self.record.strike] : @"N/A";
     self.dipDirection.text=self.record.dipDirection ? self.record.dipDirection : @"N/A";

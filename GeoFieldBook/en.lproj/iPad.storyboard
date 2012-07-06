@@ -817,24 +817,24 @@
                                 <rect key="frame" x="6" y="9" width="147" height="93"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Record Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="DKL-ew-2Ow">
-                                <rect key="frame" x="161" y="0.0" width="297" height="34"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Record Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="DKL-ew-2Ow">
+                                <rect key="frame" x="161" y="0.0" width="165" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LrY-L0-598">
                                 <rect key="frame" x="162" y="52" width="34" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="lLh-C1-sw8">
                                 <rect key="frame" x="161" y="73" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
@@ -855,7 +855,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="08Z-xe-1AQ">
                                 <rect key="frame" x="161" y="30" width="43" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
@@ -882,28 +882,28 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Strike:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Srg-K6-VM7">
-                                <rect key="frame" x="196" y="110" width="49" height="21"/>
+                                <rect key="frame" x="206" y="110" width="49" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3OF-nF-a2k">
-                                <rect key="frame" x="253" y="110" width="42" height="21"/>
+                                <rect key="frame" x="263" y="110" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Dip:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="N5t-A4-0U5">
-                                <rect key="frame" x="196" y="139" width="49" height="21"/>
+                                <rect key="frame" x="206" y="139" width="49" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="HAv-ar-02q">
-                                <rect key="frame" x="253" y="139" width="42" height="21"/>
+                                <rect key="frame" x="263" y="139" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -912,7 +912,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Dip Direction:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="pQR-UE-wDB">
                                 <rect key="frame" x="11" y="139" width="104" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -926,12 +926,12 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NT6-pG-ewC">
                                 <rect key="frame" x="11" y="110" width="82" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3dv-Rh-rJV">
-                                <rect key="frame" x="101" y="110" width="95" height="21"/>
+                                <rect key="frame" x="101" y="110" width="87" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1497,12 +1497,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" style="plain" id="rTC-NM-nsT">
+                                    <barButtonItem title="Master" style="plain" id="rTC-NM-nsT">
                                         <connections>
                                             <action selector="presentMaster:" destination="tgm-XQ-kdK" id="Kxe-iE-jxO"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="23" style="plain" systemItem="fixedSpace" id="Vlf-ed-FSF"/>
+                                    <barButtonItem width="17" style="plain" systemItem="fixedSpace" id="Vlf-ed-FSF"/>
                                     <barButtonItem style="plain" systemItem="compose" id="LFz-KE-lFF">
                                         <connections>
                                             <segue destination="efl-9D-qlf" kind="popover" identifier="Show Formation Folders" popoverAnchorBarButtonItem="LFz-KE-lFF" id="He8-Yf-a86">
@@ -1510,8 +1510,10 @@
                                             </segue>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="25" style="plain" systemItem="fixedSpace" id="kkd-tO-wD3"/>
+                                    <barButtonItem width="17" style="plain" systemItem="fixedSpace" id="tZl-wm-a46"/>
                                     <barButtonItem style="plain" systemItem="action" id="RP3-ad-ElH"/>
+                                    <barButtonItem width="17" style="plain" systemItem="fixedSpace" id="gE9-3Q-umk"/>
+                                    <barButtonItem title="Setting" id="jKA-g2-ypG"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="VrV-kj-FAy"/>
                                     <barButtonItem style="plain" id="AfF-Yc-mwK">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="XGh-ou-XMH">
@@ -1549,6 +1551,7 @@
                         <outlet property="formationButton" destination="LFz-KE-lFF" id="9PZ-bb-smZ"/>
                         <outlet property="importExportButton" destination="RP3-ad-ElH" id="jI8-h5-Bde"/>
                         <outlet property="masterPresenter" destination="rTC-NM-nsT" id="5hb-Gg-U3f"/>
+                        <outlet property="settingButton" destination="jKA-g2-ypG" id="HAG-Zb-hXY"/>
                         <outlet property="toolbar" destination="t5O-sL-r4p" id="sAJ-3i-opT"/>
                     </connections>
                 </viewController>
@@ -1593,6 +1596,7 @@
                 <relationship kind="outlet" name="formationButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="settingButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>

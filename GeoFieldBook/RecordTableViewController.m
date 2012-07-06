@@ -31,6 +31,8 @@
 
 - (void)autosaveRecord:(Record *)record withNewRecordInfo:(NSDictionary *)recordInfo;
 
+@property (nonatomic) BOOL mapDidAppear;
+
 #pragma mark - Temporary record's modified info
 
 @property (nonatomic,strong) Record *modifiedRecord;
@@ -55,6 +57,8 @@
 
 @synthesize folder=_folder;
 @synthesize database=_database;
+
+@synthesize mapDidAppear=_mapDidAppear;
 
 @synthesize modifiedRecord=_modifiedRecord;
 @synthesize recordModifiedInfo=_recordModifiedInfo;
@@ -568,6 +572,7 @@
     checkbox.image=[self.selectedRecordTypes containsObject:[record.class description]] ? checkbox.checked : checkbox.unchecked;
     if (!self.selectedRecordTypes)
         checkbox.image=checkbox.checked;
+    checkbox.hidden=!self.mapDidAppear;
 
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
@@ -626,6 +631,16 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 {
     //Save the array of selected record types
     self.selectedRecordTypes=selectedRecordTypes;
+}
+
+- (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController {
+    self.mapDidAppear=YES;
+    [self.tableView reloadData];
+}
+
+- (void)mapViewControllerDidDisappear:(UIViewController *)mapViewController {
+    self.mapDidAppear=NO;
+    [self.tableView reloadData];
 }
 
 @end
