@@ -1,0 +1,174 @@
+//
+//  GeoFieldBookController.m
+//  GeoFieldBook
+//
+//  Created by Kien Hoang on 7/7/12.
+//  Copyright (c) 2012 Lafayette College. All rights reserved.
+//
+
+#import "GeoFieldBookController.h"
+#import "GeoFieldBookControllerSegue.h"
+#import "FormationFolderTableViewController.h"
+
+@interface GeoFieldBookController ()
+
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *importExportButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *popoverVCButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *settingButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *dataMapSwitch;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+
+@property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
+
+@end
+
+@implementation GeoFieldBookController
+@synthesize contentView = _contentView;
+@synthesize formationButton = _formationButton;
+@synthesize importExportButton = _importExportButton;
+@synthesize popoverVCButton = _popoverVCButton;
+@synthesize settingButton = _settingButton;
+@synthesize dataMapSwitch = _dataMapSwitch;
+@synthesize toolbar = _toolbar;
+
+@synthesize popoverViewController=_popoverViewController;
+@synthesize viewGroupController=_viewGroupController;
+
+@synthesize formationFolderPopoverController=_formationFolderPopoverController;
+
+#pragma mark - Target-Action Handlers
+
+- (IBAction)presentPopoverViewController:(UIButton *)popoverVCButtonCustomView 
+{
+    [self.popoverViewController presentPopoverFromBarButtonItem:self.popoverVCButton 
+                                       permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                       animated:YES];
+    
+    //Dismiss the formation folder popover if it's visible
+    if (self.formationFolderPopoverController.isPopoverVisible)
+        [self.formationFolderPopoverController dismissPopoverAnimated:NO];
+}
+
+- (IBAction)formationButtonPressed:(UIButton *)sender {
+    //Segue to the formation folder popover
+    [self performSegueWithIdentifier:@"Show Formation Folders" sender:self.formationButton];
+}
+
+- (IBAction)importExportButtonPressed:(UIButton *)sender {
+    //Show UIActionSheet with import/export options
+    UIActionSheet *importExportActionSheet=[[UIActionSheet alloc] initWithTitle:@"Import/Export" delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Import Records",@"Export Records",@"Import Formations",@"Export Formations", nil];
+    [importExportActionSheet showInView:self.contentView];
+    
+    //Dismiss all the popovers
+    if (self.popoverViewController.isPopoverVisible)
+        [self.popoverViewController dismissPopoverAnimated:YES];
+    if (self.formationFolderPopoverController.isPopoverVisible)
+        [self.formationFolderPopoverController dismissPopoverAnimated:YES];
+}
+
+#pragma mark - Prepare for Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue isKindOfClass:[GeoFieldBookControllerSegue class]]) {
+        //popover view controller setup
+        if ([segue.identifier isEqualToString:@"popoverViewController"]) {
+            UIViewController *popoverContent=[self.storyboard instantiateViewControllerWithIdentifier:@"folderRecordModelGroup"];
+            self.popoverViewController=[[UIPopoverController alloc] initWithContentViewController:popoverContent];
+        }
+        
+        //view group controller setup
+        else if ([segue.identifier isEqualToString:@"viewGroupController"])
+            self.viewGroupController=[self.storyboard instantiateViewControllerWithIdentifier:@"viewGroupController"];
+    }
+        
+    //Formation folder segue
+    if ([segue.identifier isEqualToString:@"Show Formation Folders"]) {
+        NSLog(@"Showing formation folders!");
+        //Dismiss the master popover if it's visible on the screen
+        if (self.popoverViewController.isPopoverVisible)
+            [self.popoverViewController dismissPopoverAnimated:NO];
+        
+        //Dismiss the old popover if its still visible
+        if (self.formationFolderPopoverController.isPopoverVisible)
+            [self.formationFolderPopoverController dismissPopoverAnimated:YES];
+        
+        //Save the popover
+        self.formationFolderPopoverController=[(UIStoryboardPopoverSegue *)segue popoverController];
+    }
+}
+
+#pragma mark - View Controller Lifecycle
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    //Instantiate the popover view controller
+    [self performSegueWithIdentifier:@"popoverViewController" sender:nil];
+    
+    //Instantiate the view group view controlelr
+    [self performSegueWithIdentifier:@"viewGroupController" sender:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //Change the look of the master presenter
+    UIButton *popoverVCButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [popoverVCButtonCustomView setImage:[UIImage imageNamed:@"folder.png"] forState:UIControlStateNormal];
+    popoverVCButtonCustomView.frame=CGRectMake(0, 0, 32, 32);
+    [popoverVCButtonCustomView addTarget:self action:@selector(presentPopoverViewController:) forControlEvents:UIControlEventTouchUpInside];
+    popoverVCButtonCustomView.showsTouchWhenHighlighted=YES;
+    self.popoverVCButton.customView=popoverVCButtonCustomView;
+    
+    //Change the look of the import/export button
+    UIButton *importExportCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [importExportCustomView setImage:[UIImage imageNamed:@"import_export.png"] forState:UIControlStateNormal];
+    importExportCustomView.frame=CGRectMake(0, 0, 24, 24);
+    [importExportCustomView addTarget:self action:@selector(importExportButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    importExportCustomView.showsTouchWhenHighlighted=YES;
+    self.importExportButton.customView=importExportCustomView; 
+    
+    //Change the look of the formation button
+    UIButton *formationButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [formationButtonCustomView setImage:[UIImage imageNamed:@"formation.png"] forState:UIControlStateNormal];
+    formationButtonCustomView.frame=CGRectMake(0, 0, 32, 32);
+    [formationButtonCustomView addTarget:self action:@selector(formationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    formationButtonCustomView.showsTouchWhenHighlighted=YES;
+    self.formationButton.customView=formationButtonCustomView;
+    
+    //Change the look of the setting button
+    UIButton *settingButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
+    [settingButtonCustomView setImage:[UIImage imageNamed:@"gear2.png"] forState:UIControlStateNormal];
+    settingButtonCustomView.frame=CGRectMake(0, 0, 30, 30);
+    //[settingButtonCustomView addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    settingButtonCustomView.showsTouchWhenHighlighted=YES;
+    self.settingButton.customView=settingButtonCustomView;
+    
+    //Show the initial detail view controller
+    //[self swapToViewControllerAtSegmentIndex:0];
+    
+    //[self.toolbar setBackgroundImage:[UIImage imageNamed:@"stone-textures.jpeg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    
+    //Add gesture to call the master
+    UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMasterPopover:)];
+    [self.contentView addGestureRecognizer:longPressGestureRecognizer];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return YES;
+}
+
+- (void)viewDidUnload {
+    [self setContentView:nil];
+    [self setFormationButton:nil];
+    [self setImportExportButton:nil];
+    [self setPopoverVCButton:nil];
+    [self setSettingButton:nil];
+    [self setDataMapSwitch:nil];
+    [self setToolbar:nil];
+    [super viewDidUnload];
+}
+@end

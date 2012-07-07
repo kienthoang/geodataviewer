@@ -163,34 +163,6 @@
 
 #pragma mark - Target-Action Handlers
 
-- (IBAction)presentMaster:(UIButton *)sender {
-    if (self.masterPopoverController) {
-        //Dismiss the formation folder popover if it's visible on screen
-        if (self.formationFolderPopoverController.isPopoverVisible)
-            [self.formationFolderPopoverController dismissPopoverAnimated:YES];
-        
-        //Present the master popover
-        [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
-    }
-}
-
-- (IBAction)formationButtonPressed:(UIButton *)sender {
-    //Segue to the formation folder popover
-    [self performSegueWithIdentifier:@"Show Formation Folders" sender:self.formationButton];
-}
-
-- (IBAction)importExportButtonPressed:(UIButton *)sender {
-    //Show UIActionSheet with import/export options
-    UIActionSheet *importExportActionSheet=[[UIActionSheet alloc] initWithTitle:@"Import/Export" delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Import Records",@"Export Records",@"Import Formations",@"Export Formations", nil];
-    [importExportActionSheet showInView:self.contentView];
-    
-    //Dismiss all the popovers
-    if (self.masterPopoverController.isPopoverVisible)
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    if (self.formationFolderPopoverController.isPopoverVisible)
-        [self.formationFolderPopoverController dismissPopoverAnimated:YES];
-}
-
 - (IBAction)dataMapSegmentIndexDidChange:(UISegmentedControl *)sender {
     //Update the segment index
     [self segmentController:sender indexDidChangeTo:sender.selectedSegmentIndex];    
@@ -249,51 +221,6 @@
     
     //Set the view controllers
     self.viewControllers=[NSArray arrayWithObjects:initialDetail,recordMap, nil];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    //Change the look of the master presenter
-    UIButton *masterPresenterCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
-    [masterPresenterCustomView setImage:[UIImage imageNamed:@"folder.png"] forState:UIControlStateNormal];
-    masterPresenterCustomView.frame=CGRectMake(0, 0, 32, 32);
-    [masterPresenterCustomView addTarget:self action:@selector(presentMaster:) forControlEvents:UIControlEventTouchUpInside];
-    masterPresenterCustomView.showsTouchWhenHighlighted=YES;
-    self.masterPresenter.customView=masterPresenterCustomView;
-    
-    //Change the look of the import/export button
-    UIButton *importExportCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
-    [importExportCustomView setImage:[UIImage imageNamed:@"import_export.png"] forState:UIControlStateNormal];
-    importExportCustomView.frame=CGRectMake(0, 0, 24, 24);
-    [importExportCustomView addTarget:self action:@selector(importExportButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    importExportCustomView.showsTouchWhenHighlighted=YES;
-    self.importExportButton.customView=importExportCustomView; 
-    
-    //Change the look of the formation button
-    UIButton *formationButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
-    [formationButtonCustomView setImage:[UIImage imageNamed:@"formation.png"] forState:UIControlStateNormal];
-    formationButtonCustomView.frame=CGRectMake(0, 0, 32, 32);
-    [formationButtonCustomView addTarget:self action:@selector(formationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    formationButtonCustomView.showsTouchWhenHighlighted=YES;
-    self.formationButton.customView=formationButtonCustomView;
-    
-    //Change the look of the setting button
-    UIButton *settingButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
-    [settingButtonCustomView setImage:[UIImage imageNamed:@"gear2.png"] forState:UIControlStateNormal];
-    settingButtonCustomView.frame=CGRectMake(0, 0, 30, 30);
-    //[settingButtonCustomView addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    settingButtonCustomView.showsTouchWhenHighlighted=YES;
-    self.settingButton.customView=settingButtonCustomView;
-    
-    //Show the initial detail view controller
-    [self swapToViewControllerAtSegmentIndex:0];
-    
-    //[self.toolbar setBackgroundImage:[UIImage imageNamed:@"stone-textures.jpeg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-    
-    //Add gesture to call the master
-    UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMasterPopover:)];
-    [self.contentView addGestureRecognizer:longPressGestureRecognizer];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

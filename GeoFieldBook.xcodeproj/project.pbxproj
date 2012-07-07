@@ -50,6 +50,8 @@
 		0249E2AF15A6A2D100A7532E /* gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AE15A6A2D100A7532E /* gear2.png */; };
 		0249E2B115A6A32300A7532E /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2B015A6A32300A7532E /* gear.png */; };
 		0249E2C215A6AD0300A7532E /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2C015A6AD0300A7532E /* iPad.storyboard */; };
+		0249E2E415A8EDF700A7532E /* GeoFieldBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */; };
+		0249E2E815A8EEF500A7532E /* GeoFieldBookControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0249E2E715A8EEF500A7532E /* GeoFieldBookControllerSegue.m */; };
 		02712A4C159D010500510188 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4B159D010500510188 /* Bedding.m */; };
 		02712A50159D011300510188 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4F159D011300510188 /* Contact.m */; };
 		02712A53159D012100510188 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A52159D012100510188 /* Fault.m */; };
@@ -190,6 +192,10 @@
 		0249E2AE15A6A2D100A7532E /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
 		0249E2B015A6A32300A7532E /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		0249E2C115A6AD0300A7532E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
+		0249E2E215A8EDF700A7532E /* GeoFieldBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookController.h; sourceTree = "<group>"; };
+		0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookController.m; sourceTree = "<group>"; };
+		0249E2E615A8EEF500A7532E /* GeoFieldBookControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookControllerSegue.h; sourceTree = "<group>"; };
+		0249E2E715A8EEF500A7532E /* GeoFieldBookControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookControllerSegue.m; sourceTree = "<group>"; };
 		02712A4A159D010500510188 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
 		02712A4B159D010500510188 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		02712A4E159D011300510188 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -320,7 +326,7 @@
 			name = Library;
 			sourceTree = "<group>";
 		};
-		020EBB9A15942C7900EECC08 /* Master View Controllers */ = {
+		020EBB9A15942C7900EECC08 /* Model MVC Group */ = {
 			isa = PBXGroup;
 			children = (
 				020EBB5815941F7C00EECC08 /* FolderTableViewController.h */,
@@ -340,10 +346,10 @@
 				0238587715996F4900A0DB98 /* FormationViewController.h */,
 				0238587815996F4900A0DB98 /* FormationViewController.m */,
 			);
-			name = "Master View Controllers";
+			name = "Model MVC Group";
 			sourceTree = "<group>";
 		};
-		020EBB9B15942C8F00EECC08 /* Detail View Controllers */ = {
+		020EBB9B15942C8F00EECC08 /* View MVC Group */ = {
 			isa = PBXGroup;
 			children = (
 				029877F91595740C000D71E7 /* InitialDetailViewController.h */,
@@ -359,7 +365,7 @@
 				0298969215A408B100E51C27 /* DataMapSegmentViewController.h */,
 				0298969315A408B100E51C27 /* DataMapSegmentViewController.m */,
 			);
-			name = "Detail View Controllers";
+			name = "View MVC Group";
 			sourceTree = "<group>";
 		};
 		0222DB251596B9B200699D62 /* Picker View Controllers */ = {
@@ -394,6 +400,15 @@
 				21989D6815A4D27C001CF847 /* CheckBox.m */,
 			);
 			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		0249E2E515A8EECB00A7532E /* Custom Segues */ = {
+			isa = PBXGroup;
+			children = (
+				0249E2E615A8EEF500A7532E /* GeoFieldBookControllerSegue.h */,
+				0249E2E715A8EEF500A7532E /* GeoFieldBookControllerSegue.m */,
+			);
+			name = "Custom Segues";
 			sourceTree = "<group>";
 		};
 		0294E086159361060025219F = {
@@ -435,8 +450,11 @@
 			isa = PBXGroup;
 			children = (
 				0249E2C015A6AD0300A7532E /* iPad.storyboard */,
-				020EBB9A15942C7900EECC08 /* Master View Controllers */,
-				020EBB9B15942C8F00EECC08 /* Detail View Controllers */,
+				0249E2E215A8EDF700A7532E /* GeoFieldBookController.h */,
+				0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */,
+				0249E2E515A8EECB00A7532E /* Custom Segues */,
+				020EBB9A15942C7900EECC08 /* Model MVC Group */,
+				020EBB9B15942C8F00EECC08 /* View MVC Group */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
 				2128E73D15A2378000B277F9 /* MKAnnotation */,
 				024097A2159D373F00855D33 /* Custom Views */,
@@ -845,6 +863,8 @@
 				21FC475515A4244000F245FF /* FilterByRecordTypeController.m in Sources */,
 				21989D6915A4D27C001CF847 /* CheckBox.m in Sources */,
 				02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */,
+				0249E2E415A8EDF700A7532E /* GeoFieldBookController.m in Sources */,
+				0249E2E815A8EEF500A7532E /* GeoFieldBookControllerSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
