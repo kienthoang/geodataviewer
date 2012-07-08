@@ -20,7 +20,10 @@
 #import "RecordViewControllerDelegate.h"
 #import "DataMapSegmentControllerDelegate.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate>
+#import "Record+Validation.h"
+#import "Record+NameEncoding.h"
+
+@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -31,6 +34,9 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
+
+@property (nonatomic, strong) NSDictionary *recordModifiedInfo;
+@property (nonatomic, strong) Record *modifiedRecord;
 
 @end
 
@@ -47,6 +53,9 @@
 @synthesize viewGroupController=_viewGroupController;
 
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
+
+@synthesize recordModifiedInfo=_recordModifiedInfo;
+@synthesize modifiedRecord=_modifiedRecord;
 
 #pragma mark - Target-Action Handlers
 
@@ -257,50 +266,51 @@
 
 #pragma mark - Autosave Controller
 
-//- (UIAlertView *)autosaveAlertForValidationOfRecordInfo:(NSDictionary *)recordInfo {
-//    UIAlertView *autosaveAlert=nil;
-//    
-//    //If the record info passes the validations, show the alert; otherwise, show an alert with no confirm button
-//    NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
-//    if (![failedKeyNames count]) {
-//        //If the name of the record is not nil
-//        NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
-//        
-//        //Put up an alert to ask the user whether he/she wants to save
-//        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
-//                                                              message:message 
-//                                                             delegate:self 
-//                                                    cancelButtonTitle:@"Don't Save" 
-//                                                    otherButtonTitles:@"Save", nil];
-//    } else {
-//        //Show the autosave fail alert with all the missing record info
-//        NSMutableArray *failedNames=[NSMutableArray array];
-//        for (NSString *failedKey in failedKeyNames)
-//            [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
-//        NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
-//        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
-//                                                                  message:message 
-//                                                                 delegate:nil 
-//                                                        cancelButtonTitle:@"Dismiss" 
-//                                                        otherButtonTitles:nil];
-//    }
-//    
-//    return autosaveAlert;
-//}
-//
-//- (void)autosaveRecord:(Record *)record 
-//     withNewRecordInfo:(NSDictionary *)recordInfo 
-//{
-//    //Save the recordInfo dictionary in a temporary property
-//    self.recordModifiedInfo=recordInfo;
-//    
-//    //Save the record in a temporary property
-//    self.modifiedRecord=record;
-//    
-//    //Get and show the appropriate alert
-//    UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordInfo];
-//    [autosaveAlert show];
-//}
+- (UIAlertView *)autosaveAlertForValidationOfRecordInfo:(NSDictionary *)recordInfo {
+    UIAlertView *autosaveAlert=nil;
+    
+    //If the record info passes the validations, show the alert; otherwise, show an alert with no confirm button
+    NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
+    if (![failedKeyNames count]) {
+        //If the name of the record is not nil
+        NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
+        
+        //Put up an alert to ask the user whether he/she wants to save
+        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
+                                                 message:message 
+                                                delegate:self 
+                                       cancelButtonTitle:@"Don't Save" 
+                                       otherButtonTitles:@"Save", nil];
+    } else {
+        //Show the autosave fail alert with all the missing record info
+        NSMutableArray *failedNames=[NSMutableArray array];
+        for (NSString *failedKey in failedKeyNames)
+            [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
+        NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
+        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
+                                                 message:message 
+                                                delegate:nil 
+                                       cancelButtonTitle:@"Dismiss" 
+                                       otherButtonTitles:nil];
+    }
+    
+    return autosaveAlert;
+}
+
+- (void)autosaveRecord:(Record *)record 
+     withNewRecordInfo:(NSDictionary *)recordInfo 
+{
+    //Save the recordInfo dictionary in a temporary property
+    self.recordModifiedInfo=recordInfo;
+    
+    //Save the record in a temporary property
+    self.modifiedRecord=record;
+    
+    //Get and show the appropriate alert
+    UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordInfo];
+    [autosaveAlert show];
+}
+
 
 #pragma mark - DataMapSegmentViewControllerDelegate protocol methods
 
