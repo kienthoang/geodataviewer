@@ -9,12 +9,8 @@
 #import "FolderTableViewController.h"
 #import "ModalFolderViewController.h"
 #import "RecordTableViewController.h"
-#import "InitialDetailViewController.h"
-#import "FormationFolderTableViewController.h"
 #import "TextInputFilter.h"
 #import "GeoDatabaseManager.h"
-#import "UISplitViewBarButtonPresenter.h"
-#import "DataMapSegmentViewController.h"
 
 #import "Folder.h"
 #import "Record.h"
@@ -27,14 +23,14 @@
 #import "GeoFilter.h"
 #import "CustomFolderCell.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate,UISplitViewControllerDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
+#import "ModelGroupNotificationNames.h"
+
+@interface FolderTableViewController() <ModalFolderDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
 - (BOOL)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo;   //Modify a folder's name
 - (void)deleteFolder:(Folder *)folder;   //Delete the specified folder
-
-- (id <UISplitViewBarButtonPresenter>)barButtonPresenter;
 
 @property (nonatomic, strong) GeoFilter *recordFilter;
 @property (nonatomic) BOOL mapDidAppear;
@@ -79,17 +75,6 @@
 
 #pragma mark - Getters and Setters
 
-- (DataMapSegmentViewController *)dataMapSegmentDetail {
-    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id dataMapSegmentDetail=detailNav.topViewController;
-    
-    //Set the record detail vc to nil if the current detail view vc is of class RecordViewController
-    if (![dataMapSegmentDetail isKindOfClass:[DataMapSegmentViewController class]])
-        dataMapSegmentDetail=nil;
-    
-    return dataMapSegmentDetail;
-}
-
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
         _database=database;
@@ -104,6 +89,16 @@
         _recordFilter=[[GeoFilter alloc] init];
     
     return _recordFilter;
+}
+
+#pragma mark - Notification Center
+
+- (void)postNotificationWithName:(NSString *)name andUserInfo:(NSDictionary *)userInfo {
+    //Post the notification
+    NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
+    [center postNotificationName:name object:self userInfo:userInfo];
+    
+    NSLog(@"Posted notification with name: %@",name);
 }
 
 #pragma mark - Controller State Initialization
@@ -193,9 +188,6 @@
             //Delete the folder
             [self deleteFolder:self.toBeDeletedFolder];
             self.toBeDeletedFolder=nil;
-            
-            //Update the map
-            [self updateMapDetail];
         }
     }
     
@@ -284,35 +276,12 @@
     
     //Reload
     [self.tableView reloadData];
+    
+    //Send out a notification to indicate that the folder database has changed
+    [self postNotificationWithName:GeoNotificationModelGroupFolderDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
 #pragma mark - View lifecycle
-
-- (id)detailViewController {
-    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id detail=detailNav.topViewController;
-    
-    return detail;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    //Set the delegate of the split vc to be self
-    self.splitViewController.delegate=self;
-    
-    //Disable swiping (which'd show the master)
-    self.splitViewController.presentsWithGesture=NO;
-}
-
-- (void)updateMapDetail {
-    //Set self as the map delegate of the detail record view controller
-    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
-    
-    //Update the records shown on the map
-    [dataMapSegmentDetail updateMapWithRecords:[self records]];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -326,28 +295,6 @@
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
         } 
     }];
-    
-    //Set self as the delegate of the record map view
-    [self updateMapDetail];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    //Set self as the delegate of the record map view
-    [self updateMapDetail];
-    
-    //Push the initial view controller back on screen
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentDetail];
-    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[InitialDetailViewController class]])
-        [dataMapSegmentVC pushInitialViewController];
-    if (!dataMapSegmentVC.topViewController)
-        [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
-    
-    //Update the table cells
-    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-    self.mapDidAppear=[dataMapSegmentDetail.topViewController isKindOfClass:[RecordMapViewController class]] ? YES : NO;
-    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -502,41 +449,6 @@
     }
 }
 
-#pragma mark - UISplitViewControllerDelegate methods
-
-- (id <UISplitViewBarButtonPresenter>)barButtonPresenter {
-    //Get the detail view controller
-    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id detailvc=detailNav.topViewController;
-    
-    //if the detail view controller does not want to be the splitview bar button presenter, set detailvc to nil
-    if (![detailvc conformsToProtocol:@protocol(UISplitViewBarButtonPresenter)]) {
-        detailvc=nil;
-    }
-    
-    return detailvc;
-}
-
--(void)splitViewController:(UISplitViewController *)svc 
-    willHideViewController:(UIViewController *)navigation 
-         withBarButtonItem:(UIBarButtonItem *)barButtonItem 
-      forPopoverController:(UIPopoverController *)pc
-{
-    //The master popover
-    UIPopoverController *masterPopover=[[UIPopoverController alloc] initWithContentViewController:pc.contentViewController];
-    masterPopover.passthroughViews=[NSArray array];
-    masterPopover.delegate=nil;
-    [[self barButtonPresenter] setMasterPopoverController:masterPopover];
-}
-
-//Hide the master in all modes
--(BOOL)splitViewController:(UISplitViewController *)svc 
-  shouldHideViewController:(UIViewController *)vc 
-             inOrientation:(UIInterfaceOrientation)orientation
-{
-    return YES;
-}
-
 #pragma mark - GeoMapDelegate Protocol methods
 
 - (NSArray *)records {
@@ -555,19 +467,6 @@
     return [self records];
 }
 
-- (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView {
-    //Put up the record vc
-    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-    [dataMapSegmentDetail pushRecordViewController];
-    
-    //Show the master popover
-    if ([dataMapSegmentDetail respondsToSelector:@selector(presentMasterPopover)])
-        [dataMapSegmentDetail presentMasterPopover];
-    
-    //navigate to the record table view controller
-    [self performSegueWithIdentifier:@"Show Records" sender:record];
-}
-
 - (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController {
     self.mapDidAppear=YES;
     [self.tableView reloadData];
@@ -583,15 +482,15 @@
 - (void)folderCell:(CustomFolderCell *)sender userDidSelectDidCheckBoxForRecord:(Folder *)folder {
     [self.recordFilter userDidSelectFolderWithName:folder.folderName];
     
-    //Update the map view
-    [self updateMapDetail];
+    //Post a notification to indicate that the folder database has changed
+    [self postNotificationWithName:GeoNotificationModelGroupFolderDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
 - (void)folderCell:(CustomFolderCell *)sender userDidDeselectDidCheckBoxForRecord:(Folder *)folder {
     [self.recordFilter userDidDeselectFolderWithName:folder.folderName];
     
-    //Update the map view
-    [self updateMapDetail];
+    //Post a notification to indicate that the folder database has changed
+    [self postNotificationWithName:GeoNotificationModelGroupFolderDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
 @end

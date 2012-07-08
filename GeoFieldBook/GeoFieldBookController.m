@@ -9,8 +9,11 @@
 #import "GeoFieldBookController.h"
 #import "GeoFieldBookControllerSegue.h"
 #import "FormationFolderTableViewController.h"
+#import "DataMapSegmentViewController.h"
 
-@interface GeoFieldBookController ()
+#import "ModelGroupNotificationNames.h"
+
+@interface GeoFieldBookController()
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -68,6 +71,27 @@
         [self.formationFolderPopoverController dismissPopoverAnimated:YES];
 }
 
+- (IBAction)dataMapSwitchValueChanged:(UISegmentedControl *)sender {
+    //Notify the data map segment controller of the change
+    int segmentIndex=sender.selectedSegmentIndex;
+    DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+    [dataMapSegmentVC segmentController:sender indexDidChangeTo:segmentIndex];
+}
+
+#pragma mark - Model Group Notifcation Handlers
+
+- (void)modelGroupFolderDatabaseDidUpdate:(NSNotification *)notification {
+    NSLog(@"Folder Database Did Update!");
+}
+
+- (void)modelGroupRecordDatabaseDidUpdate:(NSNotification *)notification {
+    NSLog(@"Record Database Did Update!");
+}
+
+- (void)modelGroupDidCreateNewRecord:(NSNotification *)notification {
+    NSLog(@"Created New Record!");
+}
+
 #pragma mark - Prepare for Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -111,9 +135,29 @@
     [self performSegueWithIdentifier:@"viewGroupController" sender:nil];
 }
 
+- (void)registerForModelGroupNotifications {
+    //Register to receive notifications from the model group
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self 
+                           selector:@selector(modelGroupFolderDatabaseDidUpdate:) 
+                               name:GeoNotificationModelGroupFolderDatabaseDidChange 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(modelGroupRecordDatabaseDidUpdate:) 
+                               name:GeoNotificationModelGroupRecordDatabaseDidChange 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(modelGroupDidCreateNewRecord::) 
+                               name:GeoNotificationModelGroupDidCreateNewRecord 
+                             object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Register to receive notifications from the model group
+    [self registerForModelGroupNotifications];
+
     //Change the look of the master presenter
     UIButton *popoverVCButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
     [popoverVCButtonCustomView setImage:[UIImage imageNamed:@"folder.png"] forState:UIControlStateNormal];
@@ -146,14 +190,33 @@
     settingButtonCustomView.showsTouchWhenHighlighted=YES;
     self.settingButton.customView=settingButtonCustomView;
     
-    //Show the initial detail view controller
-    //[self swapToViewControllerAtSegmentIndex:0];
-    
     //[self.toolbar setBackgroundImage:[UIImage imageNamed:@"stone-textures.jpeg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
     
     //Add gesture to call the master
     UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMasterPopover:)];
     [self.contentView addGestureRecognizer:longPressGestureRecognizer];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Get the data map segment controller
+    DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+    
+    //Setup the view controller hierachy
+    [self addChildViewController:dataMapSegmentVC];
+    [self.viewGroupController willMoveToParentViewController:self];
+    
+    //Adjust the frame of the specified view controller's view
+    dataMapSegmentVC.view.frame=self.contentView.bounds;
+    
+    //Add the view of the data map segment
+    [self.contentView addSubview:dataMapSegmentVC.view];
+    [dataMapSegmentVC didMoveToParentViewController:self];
+    
+    //Put up the initial view
+    if (!dataMapSegmentVC.topViewController)
+        [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

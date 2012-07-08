@@ -10,6 +10,4 @@
 
 @interface FormationFolderTableViewController : CoreDataTableViewController
 
-@property (nonatomic,strong) UIManagedDocument *database;
-
 @end

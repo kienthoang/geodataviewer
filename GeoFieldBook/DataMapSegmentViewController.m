@@ -86,12 +86,6 @@
     recordMap.selectedRecord=record;
 }
 
-#pragma mark - UISplitViewBarButtonPresenter protocol methods
-
-- (void)presentMasterPopover {
-    [self.masterPopoverController presentPopoverFromBarButtonItem:self.masterPresenter permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
 - (void)updateTrackingButtonForSegmentIndex:(int)segmentIndex {
@@ -159,47 +153,6 @@
 - (void)pushInitialViewController {    
     InitialDetailViewController *initialDetail=[self.storyboard instantiateViewControllerWithIdentifier:INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
     [self replaceViewControllerAtSegmentIndex:0 withViewController:initialDetail];
-}
-
-#pragma mark - Target-Action Handlers
-
-- (IBAction)dataMapSegmentIndexDidChange:(UISegmentedControl *)sender {
-    //Update the segment index
-    [self segmentController:sender indexDidChangeTo:sender.selectedSegmentIndex];    
-}
-
-#pragma mark - Prepare for segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //Seguing to the modal formation folder tvc
-    if ([segue.identifier isEqualToString:@"Show Formation Folders"]) {
-        //Dismiss the master popover if it's visible on the screen
-        if (self.masterPopoverController.isPopoverVisible)
-            [self.masterPopoverController dismissPopoverAnimated:NO];
-        
-        //Get the destination view controller
-        UINavigationController *navigationController=segue.destinationViewController;
-        FormationFolderTableViewController *destinationViewController=(FormationFolderTableViewController *)navigationController.topViewController;
-        
-        //Dismiss the old popover if its still visible
-        if (self.formationFolderPopoverController.isPopoverVisible)
-            [self.formationFolderPopoverController dismissPopoverAnimated:YES];
-        
-        //Save the popover
-        self.formationFolderPopoverController=[(UIStoryboardPopoverSegue *)segue popoverController];
-        
-        //Get the shared database
-        UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
-        
-        //Open the database if it's still closed
-        if (database.documentState==UIDocumentStateClosed) {
-            [database openWithCompletionHandler:^(BOOL success){
-                destinationViewController.database=database;
-            }];
-        } else if (database.documentState==UIDocumentStateNormal) {
-            destinationViewController.database=database;
-        }
-    }
 }
 
 #pragma mark - Gesture Handlers

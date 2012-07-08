@@ -12,6 +12,8 @@
 #import "Formation_Folder+Creation.h"
 #import "Formation_Folder.h"
 #import "Formation_Folder+Modification.h"
+
+#import "GeoDatabaseManager.h"
 #import "TextInputFilter.h"
 
 @interface FormationFolderTableViewController() <FormationFolderViewControllerDelegate,UIAlertViewDelegate>
@@ -19,6 +21,7 @@
 - (void)setupFetchedResultsController;
 
 @property (nonatomic,strong) Formation_Folder *toBeDeletedFolder;
+@property (nonatomic,strong) UIManagedDocument *database;
 
 @end
 
@@ -237,6 +240,24 @@
 }
 
 #pragma mark - View Controller Lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //Load the database
+    UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+    if (database.documentState==UIDocumentStateClosed) {
+        [database openWithCompletionHandler:^(BOOL successful){
+            if (successful)
+                self.database=database;
+            else {
+                //Handle errors
+            }
+        }];
+    } 
+    else if (database.documentState==UIDocumentStateNormal) 
+        self.database=database;
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
