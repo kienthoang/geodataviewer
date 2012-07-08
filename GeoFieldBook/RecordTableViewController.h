@@ -19,7 +19,6 @@
 @property (nonatomic,strong) UIManagedDocument *database;
 
 @property (nonatomic,weak) id <RecordTableViewControllerDelegate> delegate;
-@property (nonatomic,weak) id <RecordTableViewControllerDelegate> controllerDelegate;
 
 #pragma mark - Currently active record
 

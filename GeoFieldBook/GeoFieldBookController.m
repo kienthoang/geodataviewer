@@ -16,8 +16,9 @@
 
 #import "ModelGroupNotificationNames.h"
 #import "RecordTableViewControllerDelegate.h"
+#import "RecordViewController.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate,RecordTableViewControllerDelegate>
+@interface GeoFieldBookController() <UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -88,9 +89,6 @@
        didShowViewController:(UIViewController *)viewController 
                     animated:(BOOL)animated
 {
-    if ([viewController isKindOfClass:[RecordTableViewController class]]) {
-        [(RecordTableViewController *)viewController setControllerDelegate:self];
-    }
 }
 
 #pragma mark - Model Group Notifcation Handlers
@@ -299,18 +297,5 @@
 //    UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordInfo];
 //    [autosaveAlert show];
 //}
-
-#pragma mark - RecordTableViewControllerDelegate protocol methods
-
-- (void)userDidSelectRecord:(Record *)record {
-    DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
-    //Push the record view controller on screen
-    [dataMapSegmentVC pushRecordViewController];
-    if (!dataMapSegmentVC.topViewController)
-        [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
-    
-    //Notify the view group
-    [dataMapSegmentVC updateRecordDetailViewWithRecord:record];    
-}
 
 @end

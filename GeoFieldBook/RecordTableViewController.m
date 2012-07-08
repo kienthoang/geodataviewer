@@ -65,8 +65,6 @@
 @synthesize editButton = _editButton;
 
 @synthesize delegate=_delegate;
-@synthesize controllerDelegate=_controllerDelegate;
-
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 
 @synthesize chosenRecord=_chosenRecord;
@@ -404,8 +402,9 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     if (self.chosenRecord!=[self.fetchedResultsController objectAtIndexPath:indexPath])
         self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    //Notify the controller
-    [self.controllerDelegate userDidSelectRecord:self.chosenRecord];
+    //Post a notification
+    NSDictionary *userInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.chosenRecord,GeoNotificationKeyModelGroupSelectedRecord, nil];
+    [self postNotificationWithName:GeoNotificationModelGroupDidSelectRecord andUserInfo:userInfo];
 }
 
 #pragma mark - Output of the model group

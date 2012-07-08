@@ -10,4 +10,8 @@
 
 @implementation DataMapSegmentControllerSegue
 
+- (void)perform {
+    //Do nothing
+}
+
 @end

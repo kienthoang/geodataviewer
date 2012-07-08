@@ -7,16 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Record.h"
 #import "Folder.h"
 
 @class RecordTableViewController;
 
 @protocol RecordTableViewControllerDelegate <NSObject>
-
-@optional
-
-- (void)userDidSelectRecord:(Record *)record;
 
 - (void)recordTableViewController:(RecordTableViewController *)sender 
                 needsUpdateFolder:(Folder *)folder 

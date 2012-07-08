@@ -802,7 +802,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8370" y="5403"/>
+            <point key="canvasLocation" x="-9578" y="4355"/>
         </scene>
         <!--Map Record Info View Controller-->
         <scene sceneID="neR-GK-FNx">
@@ -1445,12 +1445,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="nmm-8G-AQb" id="ogl-SI-hS3"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8608" y="2735"/>
+            <point key="canvasLocation" x="-8824" y="2447"/>
         </scene>
         <!--Geo Field Book Controller-->
         <scene sceneID="Mo4-bZ-Lyn">
@@ -1549,10 +1550,13 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contentView" destination="aMT-Nw-iDO" id="ohf-K4-xSu"/>
+                        <segue destination="bR5-eP-ybf" kind="custom" identifier="Initial View Controller" customClass="DataMapSegmentControllerSegue" id="euX-Ww-ygH"/>
+                        <segue destination="xF9-X9-Fow" kind="custom" identifier="Map View Controller" customClass="DataMapSegmentControllerSegue" id="Lcw-sy-lQU"/>
+                        <segue destination="LFc-wQ-Gyp" kind="custom" identifier="Record View Controller" customClass="DataMapSegmentControllerSegue" id="fwc-8g-Zpp"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-10705" y="1503"/>
+            <point key="canvasLocation" x="-10569" y="2071"/>
         </scene>
     </scenes>
     <resources>
@@ -1591,7 +1595,6 @@
                 <relationship kind="outlet" name="dataMapSwitch" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="formationButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="masterPresenter" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="settingButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>

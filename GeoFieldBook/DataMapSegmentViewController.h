@@ -15,8 +15,6 @@
 #import "RecordViewControllerDelegate.h"
 #import "RecordMapViewControllerDelegate.h"
 
-#import "DataMapSegmentViewControllerDelegate.h"
-
 @interface DataMapSegmentViewController : GeoSegmentViewController
 
 #define INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER @"Initial Detail View Controller"
@@ -34,6 +32,5 @@
 - (void)pushRecordViewController;
 
 @property (nonatomic,readonly) UIViewController *detailSideViewController;
-@property (nonatomic,weak) id <DataMapSegmentViewControllerDelegate> delegate;
 
 @end
