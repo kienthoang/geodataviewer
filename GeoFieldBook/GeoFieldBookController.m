@@ -20,6 +20,7 @@
 #import "RecordViewControllerDelegate.h"
 #import "DataMapSegmentControllerDelegate.h"
 
+#import "Record+Modification.h"
 #import "Record+Validation.h"
 #import "Record+NameEncoding.h"
 
@@ -100,6 +101,16 @@
        didShowViewController:(UIViewController *)viewController 
                     animated:(BOOL)animated
 {
+    //If the calling navigation controller controls the model MVC group
+    if (navigationController==self.popoverViewController.contentViewController) {
+        //If the recently pushed view controller is a folder tvc, swap the view MVC group to show the initial view
+        if ([viewController isKindOfClass:[FolderTableViewController class]]) {
+            DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+            [dataMapSegmentVC pushInitialViewController];
+            if (!dataMapSegmentVC.topViewController)
+                [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
+        }
+    }
 }
 
 #pragma mark - Model Group Notifcation Handlers
@@ -389,10 +400,33 @@
 }
 
 - (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
-           whileModifyingRecord:(Record *) 
+           whileModifyingRecord:(Record *)record
                     withNewInfo:(NSDictionary *)newInfo
 {
-    
+    //Put up the autosave alert
+    [self autosaveRecord:record withNewRecordInfo:newInfo];    
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Save"]) {
+        //Save the record info
+        if ([self recordTableViewController])
+            [[self recordTableViewController] modifyRecord:self.modifiedRecord withNewInfo:self.recordModifiedInfo];
+        else
+            [self.modifiedRecord updateWithNewRecordInfo:self.recordModifiedInfo]; 
+            
+        //Nillify the temporary record modified data
+        self.modifiedRecord=nil;
+        self.recordModifiedInfo=nil;
+    }
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView {
+    //Nillify the temporary record modified data
+    self.modifiedRecord=nil;
+    self.recordModifiedInfo=nil;
 }
 
 @end

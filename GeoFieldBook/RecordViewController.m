@@ -175,9 +175,8 @@
 #pragma mark - Getters and Setters
 
 - (void)setRecord:(Record *)record {
-    //If the previous record is not nil, show an autosave alert
-    //If self is still in editing mode and the delegate has not been kicked off the navigation stack, notify the delegate before going off screen
-    if (self.record && self.editing && self.delegate) {
+    //If the current record is not nil and self is still in editing mode, show an autosave alert
+    if (self.record && self.editing) {
         //End editing mode
         [self setEditing:NO animated:YES];
         
@@ -755,6 +754,21 @@
         
         //Reposition the popover
         [self.imagePopover presentPopoverFromRect:self.imagePickerPresenter.bounds inView:self.imagePickerPresenter permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //If the current record is not nil and self is still in editing mode, show an autosave alert
+    if (self.record && self.editing) {
+        //End editing mode
+        [self setEditing:NO animated:YES];
+        
+        //Notify the delegate
+        [self.delegate userDidNavigateAwayFrom:self 
+                          whileModifyingRecord:self.record 
+                                   withNewInfo:[self dictionaryFromForm]];
     }
 }
 
