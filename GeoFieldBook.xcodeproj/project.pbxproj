@@ -113,7 +113,6 @@
 /* Begin PBXFileReference section */
 		0205C7AA159CD79900CA1223 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		0205C7AB159CD79900CA1223 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
-		0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISplitViewBarButtonPresenter.h; sourceTree = "<group>"; };
 		020EBB5815941F7C00EECC08 /* FolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableViewController.h; sourceTree = "<group>"; };
 		020EBB5915941F7C00EECC08 /* FolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewController.m; sourceTree = "<group>"; };
 		020EBB7B15941FB400EECC08 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
@@ -200,6 +199,10 @@
 		0249E2E915A9007B00A7532E /* DataMapSegmentControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentControllerSegue.h; sourceTree = "<group>"; };
 		0249E2EA15A9007B00A7532E /* DataMapSegmentControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMapSegmentControllerSegue.m; sourceTree = "<group>"; };
 		0249E2ED15A9040800A7532E /* ModelGroupNotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelGroupNotificationNames.h; sourceTree = "<group>"; };
+		0249E2F815A944D300A7532E /* RecordMapViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordMapViewControllerDelegate.h; sourceTree = "<group>"; };
+		0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordViewControllerDelegate.h; sourceTree = "<group>"; };
+		026640C815A9EC2000026D88 /* DataMapSegmentViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentViewControllerDelegate.h; sourceTree = "<group>"; };
+		026640C915A9FC6100026D88 /* RecordTableViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		02712A4A159D010500510188 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
 		02712A4B159D010500510188 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		02712A4E159D011300510188 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -241,7 +244,6 @@
 		0298969015A38F4C00E51C27 /* RecordMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordMapViewController.m; sourceTree = "<group>"; };
 		0298969215A408B100E51C27 /* DataMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentViewController.h; sourceTree = "<group>"; };
 		0298969315A408B100E51C27 /* DataMapSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMapSegmentViewController.m; sourceTree = "<group>"; };
-		0298969515A40EB800E51C27 /* GeoMapDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoMapDelegate.h; sourceTree = "<group>"; };
 		0298C25A159B43F30038E89C /* Record+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Validation.h"; sourceTree = "<group>"; };
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
@@ -545,8 +547,10 @@
 		029877F015955CB2000D71E7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				0205E2B615954D02007D3B80 /* UISplitViewBarButtonPresenter.h */,
-				0298969515A40EB800E51C27 /* GeoMapDelegate.h */,
+				0249E2F815A944D300A7532E /* RecordMapViewControllerDelegate.h */,
+				0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */,
+				026640C915A9FC6100026D88 /* RecordTableViewControllerDelegate.h */,
+				026640C815A9EC2000026D88 /* DataMapSegmentViewControllerDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

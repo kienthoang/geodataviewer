@@ -8,11 +8,9 @@
 
 #import "RecordTableViewController.h"
 #import "FormationFolderPickerViewController.h"
-#import "UISplitViewBarButtonPresenter.h"
 #import "ModalRecordTypeSelector.h"
 #import "GeoDatabaseManager.h"
 #import "Folder.h"
-#import "DataMapSegmentViewController.h"
 
 #import "Record.h"
 #import "Record+Types.h"
@@ -22,14 +20,15 @@
 #import "Record+DateAndTimeFormatter.h"
 #import "Formation_Folder.h"
 #import "CheckBox.h"
+#import "Image.h"
 
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
+#import "ModelGroupNotificationNames.h"
+
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
 - (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
-
-- (void)autosaveRecord:(Record *)record withNewRecordInfo:(NSDictionary *)recordInfo;
 
 @property (nonatomic) BOOL mapDidAppear;
 
@@ -65,8 +64,8 @@
 @synthesize setLocationButton = _setLocationButton;
 @synthesize editButton = _editButton;
 
-@synthesize autosaveDelegate=_autosaveDelegate;
 @synthesize delegate=_delegate;
+@synthesize controllerDelegate=_controllerDelegate;
 
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 
@@ -83,19 +82,6 @@
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-}
-
-#pragma mark - Getters
-
-- (DataMapSegmentViewController *)dataMapSegmentDetail {
-    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id dataMapSegmentDetail=detailNav.topViewController;
-    
-    //Set the record detail vc to nil if the current detail view vc is of class RecordViewController
-    if (![dataMapSegmentDetail isKindOfClass:[DataMapSegmentViewController class]])
-        dataMapSegmentDetail=nil;
-    
-    return dataMapSegmentDetail;
 }
 
 #pragma mark - Setters
@@ -120,152 +106,12 @@
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
 }
 
-- (id <UISplitViewBarButtonPresenter>)barButtonPresenter {
-    //Get the detail view controller
-    id detailvc=[self.splitViewController.viewControllers lastObject];
-    
-    //if the detail view controller does not want to be the splitview bar button presenter, set detailvc to nil
-    if (![detailvc conformsToProtocol:@protocol(UISplitViewBarButtonPresenter)]) {
-        detailvc=nil;
-    }
-    
-    return detailvc;
-}
-
-- (void)updateRecordAndMapDetails {
-    //Setup the detail view
-    [self setupDetailView];
-    
-    //Set the delegates of the map and record view controllers
-    [self updateDelegatesOfRecordAndMapViewControllers];
-    
-    //Set up the record for the record view controller
-    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-    [dataMapSegmentDetail updateRecordDetailViewWithRecord:self.chosenRecord];
-        
-    //Update the map
-    [dataMapSegmentDetail selectRecordInMap:self.chosenRecord];
-}
-
-- (void)setChosenRecord:(Record *)chosenRecord {
-    _chosenRecord=chosenRecord;
-    
-    //Update the details
-    [self updateRecordAndMapDetails];
-}
-
 - (void)setSelectedRecordTypes:(NSArray *)selectedRecordTypes {
     if (_selectedRecordTypes!=selectedRecordTypes) {
         _selectedRecordTypes=selectedRecordTypes;
         
         if (self.selectedRecordTypes)
             [self.tableView reloadData];
-    }
-}
-
-#pragma mark - Detail View Manipulators
-
-- (void)updateDelegatesOfRecordAndMapViewControllers {
-    //Set the delegate of the destination view controller to be self
-    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-    [dataMapSegmentDetail setRecordViewControllerDelegate:self];
-    
-    //Set the map delegate of the record vc to self
-    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
-}
-
-- (void)setupDetailView {
-    //If the current detail view vc is not a RecordViewController, push it
-    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-    if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]])
-        [dataMapSegmentDetail pushRecordViewController];
-    
-    //If the top view controller of the data map segment controller is nil, push the record view controller on screen
-    if (!dataMapSegmentDetail.topViewController)
-        [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];    
-}
-
-#pragma mark - Autosave Controller
-
-- (UIAlertView *)autosaveAlertForValidationOfRecordInfo:(NSDictionary *)recordInfo {
-    UIAlertView *autosaveAlert=nil;
-    
-    //If the record info passes the validations, show the alert; otherwise, show an alert with no confirm button
-    NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
-    if (![failedKeyNames count]) {
-        //If the name of the record is not nil
-        NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
-        
-        //Put up an alert to ask the user whether he/she wants to save
-        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
-                                                              message:message 
-                                                             delegate:self 
-                                                    cancelButtonTitle:@"Don't Save" 
-                                                    otherButtonTitles:@"Save", nil];
-    } else {
-        //Show the autosave fail alert with all the missing record info
-        NSMutableArray *failedNames=[NSMutableArray array];
-        for (NSString *failedKey in failedKeyNames)
-            [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
-        NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
-        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
-                                                                  message:message 
-                                                                 delegate:nil 
-                                                        cancelButtonTitle:@"Dismiss" 
-                                                        otherButtonTitles:nil];
-    }
-    
-    return autosaveAlert;
-}
-
-- (void)autosaveRecord:(Record *)record 
-     withNewRecordInfo:(NSDictionary *)recordInfo 
-{
-    //Save the recordInfo dictionary in a temporary property
-    self.recordModifiedInfo=recordInfo;
-    
-    //Save the record in a temporary property
-    self.modifiedRecord=record;
-    
-    //Get and show the appropriate alert
-    UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordInfo];
-    [autosaveAlert show];
-}
-
-//Ask the folder tvc
-- (void)setupAutosaveBeforeGoingOffStack {
-    //Get the detail view controller
-    UINavigationController *detailNav=[self.splitViewController.viewControllers lastObject];
-    id detailvc=detailNav.topViewController;
-    if (![detailvc isKindOfClass:[RecordViewController class]])
-        detailvc=nil;
-    RecordViewController *detail=(RecordViewController *)detailvc;
-    
-    //If the detail vc is in editing mode and self is being kicked off the navigation stack (it's going away!!!!!!)
-    if ([detail isInEdittingMode] && ![self.navigationController.viewControllers containsObject:self]) {        
-        //Get the record
-        Record *modifiedRecord=detail.record;
-        NSDictionary *recordModifiedInfo=[detail dictionaryFromForm];
-        UIManagedDocument *database=self.database;
-        
-        //Get the approriate alert view
-        UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordModifiedInfo];
-        
-        [self.autosaveDelegate recordTableViewController:self showAlert:autosaveAlert andExecuteBlockOnCancel:^{
-            //NSLog(@"Cancel autosave alert!");
-            
-            //Put the detail into non-editing mode
-            [detail setEditing:NO animated:YES];
-        } andExecuteBlock:^{
-            //Update the record info if the info passed validations
-            [modifiedRecord updateWithNewRecordInfo:recordModifiedInfo];
-            
-            //Put the detail into non-editing mode
-            [detail setEditing:NO animated:YES];
-            
-            //Save changes to database
-            [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
-        } whenClickButtonWithTitle:@"Save"];
     }
 }
 
@@ -300,7 +146,7 @@
     }];
 }
 
-- (void)highlightRecord:(Record *)record updateDetailView:(BOOL)willUpdateDetailView {
+- (void)highlightRecord:(Record *)record {
     //get ithe index path of the specified record
     NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
     
@@ -308,13 +154,19 @@
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
     
     //Update the detail view
-    if (willUpdateDetailView)
-        self.chosenRecord=record;
+    self.chosenRecord=record;
+}
+
+- (void)postNotificationWithName:(NSString *)name andUserInfo:(NSDictionary *)userInfo {
+    //Post the notification
+    NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
+    [center postNotificationName:name object:self userInfo:userInfo];    
 }
 
 //Put the right hand side (detail view) into editing mode, probably used when a new record is created
 - (void)putDetailViewIntoEditingMode {
-    [[self dataMapSegmentDetail] putRecordViewControllerIntoEditingMode];
+    //Post a notification
+    [self postNotificationWithName:GeoNotificationModelGroupDidCreateNewRecord andUserInfo:[NSDictionary dictionary]];
 }
 
 //Create a new record entity with the specified record type
@@ -326,7 +178,7 @@
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
             //highlight the newly created record and update the detail view accordingly
-            [self highlightRecord:record updateDetailView:YES];
+            [self highlightRecord:record];
             
             //Put the detail view (now showing the newly created record's info) into editing mode
             [self putDetailViewIntoEditingMode];
@@ -347,10 +199,10 @@
         if (success) {
             //highlight the newly modified record if it's also the currently chosen record and update the detail view accordingly
             if (record==chosenRecord)
-                [self highlightRecord:record updateDetailView:YES];
+                [self highlightRecord:record];
             
-            //Update the map view
-            [[self dataMapSegmentDetail] updateMapWithRecords:[self records]];
+            //Post a notification to indicate that the record database has changed
+            [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
         }
     }];
 }
@@ -363,17 +215,13 @@
     
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
-        //Update the map view
-        [[self dataMapSegmentDetail] updateMapWithRecords:[self records]];
+        //Post a notification to indicate that the record database has changed
+        [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
     }];
     
-    //If the deleted record is the currently chosen record, pop the record view controller off screen
-    if (record==self.chosenRecord) {
-        DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-        [dataMapSegmentDetail pushInitialViewController];
-        [dataMapSegmentDetail swapToViewControllerAtSegmentIndex:0];
-        
-    }
+    //If the deleted record is the currently chosen record, post a notification
+    if (record==self.chosenRecord)
+        [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
 #pragma mark - FormationFolderPickerDelegate methods
@@ -415,73 +263,18 @@
     }
 }
 
-#pragma mark - RecordViewControllerDelegate methods
-
-- (void)recordViewController:(RecordViewController *)sender 
-         userDidModifyRecord:(Record *)record 
-           withNewRecordInfo:(NSDictionary *)recordInfo
-{    
-    //Modify the specified record with the specified info
-    [self modifyRecord:record withNewInfo:recordInfo];
-}
-
-- (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
-           whileModifyingRecord:(Record *)record 
-              withNewRecordInfo:(NSDictionary *)recordInfo
-{
-    [self autosaveRecord:record withNewRecordInfo:recordInfo];
-}
-
-- (UIManagedDocument *)databaseForFormationPicker {
-    return self.database;
-}
-
-- (NSString *)formationFolderName {
-    return self.setLocationButton.title;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
     
     //Highlight current selected record but won't update the detail view
-    if (self.chosenRecord) {
-        //If the data side is not record view controller yet, push it on screen
-        if (![dataMapSegmentDetail.detailSideViewController isKindOfClass:[RecordViewController class]])
-            [self updateRecordAndMapDetails];
-        
-        [self highlightRecord:self.chosenRecord updateDetailView:NO];
-    }
+    if (self.chosenRecord) 
+        [self highlightRecord:self.chosenRecord];
     
     //Set the title of the set location button
     NSString *formationFolderName=self.folder.formationFolder.folderName;
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
-    
-    //Set the map delegate of the record vc to self
-    [dataMapSegmentDetail setRecordMapViewControllerMapDelegate:self];
-    
-    //Update the map view
-    [dataMapSegmentDetail updateMapWithRecords:[self records]];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Update mapDidAppear
-    if (!self.mapDidAppear) {
-        DataMapSegmentViewController *dataMapSegmentDetail=[self dataMapSegmentDetail];
-        self.mapDidAppear=[dataMapSegmentDetail.topViewController isKindOfClass:[RecordMapViewController class]];
-        [self.tableView reloadData];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {    
-    //Setup the autosaver if self is going off stack and the detail view is still in editing mode
-    [self setupAutosaveBeforeGoingOffStack];
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidUnload {
@@ -607,53 +400,22 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //Update the detail view
-    [self setupDetailView];
-    
     //Save the chosen record
-    self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (self.chosenRecord!=[self.fetchedResultsController objectAtIndexPath:indexPath])
+        self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    //Notify the controller
+    [self.controllerDelegate userDidSelectRecord:self.chosenRecord];
 }
 
-#pragma mark - GeoMapDelegate protocol methods
+#pragma mark - Output of the model group
 
 - (NSArray *)records {
     //Get the array of records from the fetched results controller
     NSArray *records=self.fetchedResultsController.fetchedObjects;
-    
-    //Do the filtering (by records???????????)
-    
+        
     //return the records
     return records;
-}
-
-- (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
-    
-    return [self records];
-}
-
-- (void)mapViewController:(RecordMapViewController *)mapViewController userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView {
-    //Switch to record view controller detail
-    if (willSwitchToDataView)
-        [[self dataMapSegmentDetail] swapToViewControllerAtSegmentIndex:0];
-    
-    //Set the currently chosen record
-    self.chosenRecord=record;  
-}
-
-- (void)mapViewController:(UIViewController *)mapViewController userDidUpdateRecordTypeFilterList:(NSArray *)selectedRecordTypes 
-{
-    //Save the array of selected record types
-    self.selectedRecordTypes=selectedRecordTypes;
-}
-
-- (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController {
-    self.mapDidAppear=YES;
-    [self.tableView reloadData];
-}
-
-- (void)mapViewControllerDidDisappear:(UIViewController *)mapViewController {
-    self.mapDidAppear=NO;
-    [self.tableView reloadData];
 }
 
 @end

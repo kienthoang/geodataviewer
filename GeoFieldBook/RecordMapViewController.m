@@ -30,10 +30,8 @@
 @implementation RecordMapViewController
 
 @synthesize records=_records;
-@synthesize selectedRecord=_selectedRecord;
 
 @synthesize mapView = _mapView;
-@synthesize mapDelegate=_mapDelegate;
 @synthesize mapAnnotations=_mapAnnotations;
 
 @synthesize filterPopover=_filterPopover;
@@ -42,6 +40,9 @@
 @synthesize recordsTypesToDisplay=_recordsTypesToDisplay;
 
 @synthesize recordFilter=_recordFilter;
+@synthesize selectedRecord=_selectedRecord;
+
+@synthesize mapDelegate=_mapDelegate;
 
 #pragma mark - Map View Setup methods
 
@@ -145,28 +146,9 @@
     
     //Switch map to satellite mode
     self.mapView.mapType=MKMapTypeSatellite;
-    
-    //Ask the delegate for records to display
-    self.records=[self.mapDelegate recordsForMapViewController:self];
         
     //Show user location
     self.mapView.showsUserLocation=YES;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Notify the delegate
-    if ([self.mapDelegate respondsToSelector:@selector(mapViewControllerDidAppearOnScreen:)])
-        [self.mapDelegate mapViewControllerDidAppearOnScreen:self];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    //Notify the delegate
-    if ([self.mapDelegate respondsToSelector:@selector(mapViewControllerDidDisappear:)])
-        [self.mapDelegate mapViewControllerDidDisappear:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -271,13 +253,6 @@
 - (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidSelectRecordType:(NSString *)recordType {
     //Add the selected record type
     [self.recordFilter userDidSelectRecordType:recordType];
-    
-    //Update the map view
-    [self updateMapView];
-    
-    //Notify the map delegate
-    if ([self.mapDelegate respondsToSelector:@selector(mapViewController:userDidUpdateRecordTypeFilterList:)])
-        [self.mapDelegate mapViewController:self userDidUpdateRecordTypeFilterList:self.recordFilter.selectedRecordTypes];
 }
 
 - (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidDeselectRecordType:(NSString *)recordType {
@@ -286,10 +261,6 @@
     
     //Update the map view
     [self updateMapView];
-    
-    //Notify the map delegate
-    if ([self.mapDelegate respondsToSelector:@selector(mapViewController:userDidUpdateRecordTypeFilterList:)])
-        [self.mapDelegate mapViewController:self userDidUpdateRecordTypeFilterList:self.recordFilter.selectedRecordTypes];
 }
 
 #pragma mark - MKMapRecordInfoViewControllerDelegate methods
@@ -298,7 +269,7 @@
  userDidTapOnAccessoryViewForRecord:(Record *)record 
 {
     //Notify the delegate
-    [self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record switchToDataView:YES];
+    //[self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record switchToDataView:YES];
     
     //Dismiss the callout popover
     [self.annotationCalloutPopover dismissPopoverAnimated:NO];

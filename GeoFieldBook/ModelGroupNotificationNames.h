@@ -13,5 +13,8 @@
 #define GeoNotificationModelGroupFolderDatabaseDidChange @"ModelGroup.FolderTableViewController.DatabaseDidChange"
 #define GeoNotificationModelGroupDidCreateNewRecord @"ModelGroup.RecordTableViewController.DidCreateNewRecord"
 #define GeoNotificationModelGroupRecordDatabaseDidChange @"ModelGroup.RecordTableViewController.DatabaseDidChange"
+#define GeoNotificationModelGroupDidSelectRecord @"ModelGroup.RecordTableViewController.DidSelectRecord"
+
+#define GeoNotificationKeyModelGroupSelectedRecord @"ModelGroup.NotificationKey.SelectedRecord"
 
 @end

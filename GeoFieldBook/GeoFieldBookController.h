@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataMapSegmentViewControllerDelegate.h"
+#import "RecordTableViewControllerDelegate.h"
 
-@interface GeoFieldBookController : UIViewController
+@interface GeoFieldBookController : UIViewController <DataMapSegmentViewControllerDelegate>
 
 @property (nonatomic,strong) UIPopoverController *popoverViewController;
 @property (nonatomic,strong) UIViewController *viewGroupController;

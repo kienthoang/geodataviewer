@@ -25,7 +25,7 @@
 
 #import "ModelGroupNotificationNames.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate,RecordTVCAutosaverDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
+@interface FolderTableViewController() <ModalFolderDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
 
 - (void)normalizeDatabase;        //Make sure the database's document state is normal
 - (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
@@ -34,12 +34,6 @@
 
 @property (nonatomic, strong) GeoFilter *recordFilter;
 @property (nonatomic) BOOL mapDidAppear;
-
-#pragma mark - Temporary data of the autosaver
-
-@property (nonatomic,strong) autosaver_block_t autosaverCancelBlock;
-@property (nonatomic,strong) autosaver_block_t autosaverConfirmBlock;
-@property (nonatomic,strong) NSString *autosaverConfirmTitle;
 
 #pragma mark - Temporary "to-be-deleted" data
 
@@ -61,10 +55,6 @@
 @synthesize recordFilter=_recordFilter;
 @synthesize mapDidAppear=_mapDidAppear;
 @synthesize editButton = _editButton;
-
-@synthesize autosaverCancelBlock=_autosaverCancelBlock;
-@synthesize autosaverConfirmTitle=_autosaverConfirmTitle;
-@synthesize autosaverConfirmBlock=_autosaverConfirmBlock;
 
 @synthesize toBeDeletedFolder=_toBeDeletedFolder;
 
@@ -159,26 +149,6 @@
     [folder setFormationFolderWithName:formationFolder];
 }
 
-#pragma mark - RecordTVCAutosaver methods
-
-- (void)recordTableViewController:(RecordTableViewController *)sender 
-                        showAlert:(UIAlertView *)alertView 
-          andExecuteBlockOnCancel:(autosaver_block_t)cancelBlock 
-                  andExecuteBlock:(autosaver_block_t)confirmBlock 
-         whenClickButtonWithTitle:(NSString *)buttonTitle
-{
-    //Set the delegate of the alert to be self
-    alertView.delegate=self;
-    
-    //Save the blocks
-    self.autosaverCancelBlock=cancelBlock;
-    self.autosaverConfirmBlock=confirmBlock;
-    self.autosaverConfirmTitle=buttonTitle;
-        
-    //Show the alert
-    [alertView show];
-}
-
 #pragma mark - UIAlertViewDelegate Methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -188,24 +158,6 @@
             //Delete the folder
             [self deleteFolder:self.toBeDeletedFolder];
             self.toBeDeletedFolder=nil;
-        }
-    }
-    
-    else {
-        //If the user clicked on the confirm button (the button with the title sent by RecordViewController via its delegate protocol)
-        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:self.autosaverConfirmTitle]) {
-            //Execute the confirm block and unset it
-            self.autosaverConfirmBlock();
-            self.autosaverConfirmBlock=nil;
-        }
-        
-        //If user canceled the alert view, execute the cancel block and put up the initial detail view controller on the detail side
-        else if (buttonIndex==alertView.cancelButtonIndex) {
-            //Cancel button on the autosaver's alert view clicked
-            self.autosaverCancelBlock();
-            
-            //Nillify cancel block
-            self.autosaverCancelBlock=nil;
         }
     }
 }
@@ -342,7 +294,6 @@
     else if ([segue.identifier isEqualToString:@"Show Records"]) {
         //Common setup
         [segue.destinationViewController setDatabase:self.database];
-        [segue.destinationViewController setAutosaveDelegate:self];
         [segue.destinationViewController setDelegate:self];
         
         //Get the cell that activates the segue and set up the destination controller if the sender is a table cell

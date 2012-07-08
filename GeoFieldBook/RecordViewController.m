@@ -179,11 +179,6 @@
     //If self is still in editing mode and the delegate has not been kicked off the anvigation stack, notify the delegate before going off screen
     if (self.record && self.editing && self.delegate) 
     {
-        //Notify the delegate of the changes in the record info
-        [self.delegate userDidNavigateAwayFrom:self 
-                          whileModifyingRecord:self.record 
-                             withNewRecordInfo:[self dictionaryFromForm]];
-        
         //End editing mode
         [self setEditing:NO animated:YES];
     }
@@ -686,17 +681,11 @@
     
     //Seguing to the formation picker view controller for the formation text field
     else if ([segue.identifier isEqualToString:@"Formation Picker"]) {
-        //Set the database of the formation picker
-        [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
-                
         //Set initialSelection for the formation picker if the current record has no formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.formationTextField.text length]];
         
         //Set the name of the picker
         [segue.destinationViewController setPickerName:FORMATION_PICKER_NAME];
-        
-        //Set the name of the formation folder
-        [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
         
         //Set the previously selected formation name
         [segue.destinationViewController setPreviousSelection:self.formationTextField.text];
@@ -704,17 +693,11 @@
     
     //Seguing to the formation picker view controller for the lower formation text field
     else if ([segue.identifier isEqualToString:@"Lower Formation Picker"]) {
-        //Set the database of the lower formation picker
-        [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
-        
         //Set initialSelection for the formation picker if the current record has no lower formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.lowerFormationTextField.text length]];
         
         //Set the name of the picker
         [segue.destinationViewController setPickerName:LOWER_FORMATION_PICKER_NAME];
-        
-        //Set the name of the formation folder
-        [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
         
         //Set the previously selected formation name
         [segue.destinationViewController setPreviousSelection:self.lowerFormationTextField.text];
@@ -722,17 +705,11 @@
     
     //Seguing to the formation picker view controller for the upper formation text field
     else if ([segue.identifier isEqualToString:@"Upper Formation Picker"]) {
-        //Set the database of the formation picker
-        [segue.destinationViewController setDatabase:[self.delegate databaseForFormationPicker]];
-        
         //Set initialSelection for the formation picker if the current record has no upper formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.upperFormationTextField.text length]];
         
         //Set the name of the picker
         [segue.destinationViewController setPickerName:UPPER_FORMATION_PICKER_NAME];
-        
-        //Set the name of the formation folder
-        [segue.destinationViewController setFolderName:[self.delegate formationFolderName]];
         
         //Set the previously selected formation name
         [segue.destinationViewController setPreviousSelection:self.upperFormationTextField.text];

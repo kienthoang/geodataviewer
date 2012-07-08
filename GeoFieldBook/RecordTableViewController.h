@@ -10,36 +10,16 @@
 #import "CoreDataTableViewController.h"
 #import "Record+Modification.h"
 #import "CustomRecordCell.h"
-#import "GeoMapDelegate.h"
 
-@class RecordTableViewController;
+#import "RecordTableViewControllerDelegate.h"
 
-@protocol RecordTVCAutosaverDelegate <NSObject>
-
-typedef void (^autosaver_block_t)(void);
-
-- (void)recordTableViewController:(RecordTableViewController *)sender 
-                        showAlert:(UIAlertView *)alertView 
-          andExecuteBlockOnCancel:(autosaver_block_t)cancelBlock 
-                  andExecuteBlock:(autosaver_block_t)confirmBlock 
-         whenClickButtonWithTitle:(NSString *)buttonTitle;
-@end
-
-@protocol RecordTableViewControllerDelegate <NSObject>
-
-- (void)recordTableViewController:(RecordTableViewController *)sender 
-                needsUpdateFolder:(Folder *)folder 
-           setFormationFolderName:(NSString *)formationFolder;
-
-@end
-
-@interface RecordTableViewController : CoreDataTableViewController <GeoMapDelegate>
+@interface RecordTableViewController : CoreDataTableViewController
 
 @property (nonatomic,strong) Folder *folder;
 @property (nonatomic,strong) UIManagedDocument *database;
 
-@property (nonatomic,weak) id <RecordTVCAutosaverDelegate> autosaveDelegate;
 @property (nonatomic,weak) id <RecordTableViewControllerDelegate> delegate;
+@property (nonatomic,weak) id <RecordTableViewControllerDelegate> controllerDelegate;
 
 #pragma mark - Currently active record
 

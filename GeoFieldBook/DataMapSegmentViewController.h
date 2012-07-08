@@ -7,29 +7,33 @@
 //
 
 #import "GeoSegmentViewController.h"
-#import "GeoMapDelegate.h"
 #import "RecordMapViewController.h"
-#import "UISplitViewBarButtonPresenter.h"
 #import "InitialDetailViewController.h"
 #import "RecordViewController.h"
 #import "Record.h"
 
-@interface DataMapSegmentViewController : GeoSegmentViewController <UISplitViewBarButtonPresenter>
+#import "RecordViewControllerDelegate.h"
+#import "RecordMapViewControllerDelegate.h"
+
+#import "DataMapSegmentViewControllerDelegate.h"
+
+@interface DataMapSegmentViewController : GeoSegmentViewController
 
 #define INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER @"Initial Detail View Controller"
 #define RECORD_DETAIL_VIEW_CONTROLLER_IDENTIFIER @"Record Detail View Controller"
 #define RECORD_MAP_VIEW_CONTROLLER_IDENTIFIER @"Record Map View Controller"
 
-- (void)setRecordMapViewControllerMapDelegate:(id <GeoMapDelegate>)mapDelegate;
+- (void)setMapViewDelegate:(id <RecordMapViewControllerDelegate>)mapDelegate;
 - (void)setRecordViewControllerDelegate:(id <RecordViewControllerDelegate>)delegate;
 - (void)updateMapWithRecords:(NSArray *)records;
 - (void)updateRecordDetailViewWithRecord:(Record *)record;
 - (void)putRecordViewControllerIntoEditingMode;
-- (void)selectRecordInMap:(Record *)record;
+- (void)setMapSelectedRecord:(Record *)selectedRecord;
 
 - (void)pushInitialViewController;
 - (void)pushRecordViewController;
 
 @property (nonatomic,readonly) UIViewController *detailSideViewController;
+@property (nonatomic,weak) id <DataMapSegmentViewControllerDelegate> delegate;
 
 @end

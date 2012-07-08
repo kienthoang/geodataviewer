@@ -15,29 +15,7 @@
 #import "Image.h"
 #import "Record+DateAndTimeFormatter.h"
 
-#import "GeoMapDelegate.h"
-
-@class RecordViewController;
-
-@protocol RecordViewControllerDelegate <NSObject>
-
-- (void)recordViewController:(RecordViewController *)sender 
-         userDidModifyRecord:(Record *)record 
-           withNewRecordInfo:(NSDictionary *)recordInfo;
-
-@optional
-
-- (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
-           whileModifyingRecord:(Record *)record 
-              withNewRecordInfo:(NSDictionary *)recordInfo;
-
-- (UIManagedDocument *)databaseForFormationPicker;
-
-- (NSString *)formationFolderName;
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated validationEnabled:(BOOL)validationEnabled;
-
-@end
+#import "RecordViewControllerDelegate.h"
 
 @interface RecordViewController : UIViewController
 
