@@ -176,11 +176,15 @@
 
 - (void)setRecord:(Record *)record {
     //If the previous record is not nil, show an autosave alert
-    //If self is still in editing mode and the delegate has not been kicked off the anvigation stack, notify the delegate before going off screen
-    if (self.record && self.editing && self.delegate) 
-    {
+    //If self is still in editing mode and the delegate has not been kicked off the navigation stack, notify the delegate before going off screen
+    if (self.record && self.editing && self.delegate) {
         //End editing mode
         [self setEditing:NO animated:YES];
+        
+        //Notify the delegate
+        [self.delegate userDidNavigateAwayFrom:self 
+                          whileModifyingRecord:self.record 
+                                   withNewInfo:[self dictionaryFromForm]];
     }
     
     _record=record;

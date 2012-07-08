@@ -31,6 +31,8 @@
 @synthesize formationButton = _formationButton;
 @synthesize settingButton = _settingButton;
 
+@synthesize delegate=_delegate;
+
 #pragma mark - Getters and Setters
 
 - (UIViewController *)detailSideViewController {
@@ -85,27 +87,12 @@
 
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
-//- (void)updateTrackingButtonForSegmentIndex:(int)segmentIndex {
-//    //If change to map side, put up the tracking button
-//    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
-//    if (segmentIndex) {
-//        RecordMapViewController *mapDetail=[self.viewControllers lastObject];
-//        UIBarButtonItem *trackingButton=[[MKUserTrackingBarButtonItem alloc] initWithMapView:mapDetail.mapView];
-//        [toolbarItems insertObject:trackingButton atIndex:[toolbarItems count]-1];
-//        self.toolbar.items=[toolbarItems copy];
-//    }
-//    
-//    //Else get rid of that button
-//    else {
-//        for (int index=0;index<[toolbarItems count];index++) {
-//            UIBarButtonItem *item=[toolbarItems objectAtIndex:index];
-//            if ([item isKindOfClass:[MKUserTrackingBarButtonItem class]])
-//                [toolbarItems removeObject:item];
-//        }
-//        
-//        self.toolbar.items=[toolbarItems copy];
-//    }
-//}
+- (void)swapToViewControllerAtSegmentIndex:(int)segmentIndex {
+    [super swapToViewControllerAtSegmentIndex:segmentIndex];
+    
+    //Allow the delegate (the big controller) to jump in
+    [self.delegate dataMapSegmentController:self isSwitchingToViewController:[self.viewControllers objectAtIndex:segmentIndex]];
+}
 
 - (void)pushRecordViewController {
     [self performSegueWithIdentifier:@"Record View Controller" sender:nil];
@@ -172,10 +159,8 @@
         [viewControllers addObject:newViewController];
         self.viewControllers=[viewControllers copy];
     }
-    else if ([viewControllers objectAtIndex:index]) {
+    else if ([viewControllers objectAtIndex:index])
         [self replaceViewControllerAtSegmentIndex:index withViewController:newViewController];
-        NSLog(@"Replaced at index: %d %@",index,newViewController);
-    }
     else {
         [viewControllers insertObject:newViewController atIndex:index];
         self.viewControllers=[viewControllers copy];

@@ -15,10 +15,12 @@
 #import "FolderTableViewController.h"
 
 #import "ModelGroupNotificationNames.h"
-#import "RecordTableViewControllerDelegate.h"
 #import "RecordViewController.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate>
+#import "RecordViewControllerDelegate.h"
+#import "DataMapSegmentControllerDelegate.h"
+
+@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -117,8 +119,10 @@
         }
         
         //view group controller setup
-        else if ([segue.identifier isEqualToString:@"viewGroupController"])
+        else if ([segue.identifier isEqualToString:@"viewGroupController"]) {
             self.viewGroupController=[self.storyboard instantiateViewControllerWithIdentifier:@"viewGroupController"];
+            [(DataMapSegmentViewController *)self.viewGroupController setDelegate:self];
+        }
     }
         
     //Formation folder segue
@@ -297,5 +301,88 @@
 //    UIAlertView *autosaveAlert=[self autosaveAlertForValidationOfRecordInfo:recordInfo];
 //    [autosaveAlert show];
 //}
+
+#pragma mark - DataMapSegmentViewControllerDelegate protocol methods
+
+- (void)setupEditButtonForViewController:(UIViewController *)viewController {
+    //If the swapped in view controller is the record view controller put up the edit button
+    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
+    if ([viewController isKindOfClass:[RecordViewController class]]) {
+        RecordViewController *recordDetail=(RecordViewController *)viewController;
+        [toolbarItems addObject:recordDetail.editButton];
+    }
+    
+    //If the edit button is on the toolbar, take it off
+    else {
+        for (int index=0;index<[toolbarItems count];index++) {
+            UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
+            if ([barButtonItem.title isEqualToString:@"Edit"] || [barButtonItem.title isEqualToString:@"Done"])
+                [toolbarItems removeObject:barButtonItem];
+        }
+    }
+    
+    //Set the tolbar
+    self.toolbar.items=[toolbarItems copy];
+}
+
+- (void)setupTrackingButtonForViewController:(UIViewController *)viewController {
+    //If switched to the map, put up the tracking button
+    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
+    if ([viewController isKindOfClass:[RecordMapViewController class]]) {
+        RecordMapViewController *mapDetail=(RecordMapViewController *)viewController;
+        UIBarButtonItem *trackingButton=[[MKUserTrackingBarButtonItem alloc] initWithMapView:mapDetail.mapView];
+        [toolbarItems insertObject:trackingButton atIndex:[toolbarItems count]-1];
+    }
+    
+    //Else get rid of that button
+    else {
+        for (int index=0;index<[toolbarItems count];index++) {
+            UIBarButtonItem *item=[toolbarItems objectAtIndex:index];
+            if ([item isKindOfClass:[MKUserTrackingBarButtonItem class]])
+                [toolbarItems removeObject:item];
+        }
+    }
+    
+    //Set the tolbar
+    self.toolbar.items=[toolbarItems copy];
+}
+
+- (void)dataMapSegmentController:(DataMapSegmentViewController *)sender 
+     isSwitchingToViewController:(UIViewController *)viewController
+{
+    //Setup the buttons
+    [self setupEditButtonForViewController:viewController];
+    [self setupTrackingButtonForViewController:viewController];
+    
+    //Setup delegate for the record view controller
+    if ([viewController isKindOfClass:[RecordViewController class]])
+        [sender setRecordViewControllerDelegate:self];
+}
+
+#pragma mark - RecordViewControllerDelegate protocol methods
+
+- (RecordTableViewController *)recordTableViewController {
+    UINavigationController *navController=(UINavigationController *)self.popoverViewController.contentViewController;
+    id topViewController=navController.topViewController;
+    if (![topViewController isKindOfClass:[RecordTableViewController class]])
+        topViewController=nil;
+    
+    return topViewController;
+}
+
+- (void)recordViewController:(RecordViewController *)sender 
+         userDidModifyRecord:(Record *)record 
+           withNewRecordInfo:(NSDictionary *)recordInfo 
+{
+    //Call the record table view controller to update the given record with the given record info
+    [[self recordTableViewController] modifyRecord:record withNewInfo:recordInfo];
+}
+
+- (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
+           whileModifyingRecord:(Record *) 
+                    withNewInfo:(NSDictionary *)newInfo
+{
+    
+}
 
 @end

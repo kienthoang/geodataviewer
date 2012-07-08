@@ -202,6 +202,7 @@
 		0249E2F815A944D300A7532E /* RecordMapViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordMapViewControllerDelegate.h; sourceTree = "<group>"; };
 		0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordViewControllerDelegate.h; sourceTree = "<group>"; };
 		026640D315AA0B2E00026D88 /* RecordTableViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordTableViewControllerDelegate.h; sourceTree = "<group>"; };
+		026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentControllerDelegate.h; sourceTree = "<group>"; };
 		02712A4A159D010500510188 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
 		02712A4B159D010500510188 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		02712A4E159D011300510188 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -549,6 +550,7 @@
 				0249E2F815A944D300A7532E /* RecordMapViewControllerDelegate.h */,
 				0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */,
 				026640D315AA0B2E00026D88 /* RecordTableViewControllerDelegate.h */,
+				026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

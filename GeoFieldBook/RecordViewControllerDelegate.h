@@ -18,7 +18,7 @@
            withNewRecordInfo:(NSDictionary *)recordInfo;
 
 - (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
-           whileModifyingRecord:(Record *) 
+           whileModifyingRecord:(Record *)record 
                     withNewInfo:(NSDictionary *)newInfo;
 
 @end

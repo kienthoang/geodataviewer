@@ -24,4 +24,6 @@
 
 @property (nonatomic,strong) Record *chosenRecord;
 
+- (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
+
 @end
