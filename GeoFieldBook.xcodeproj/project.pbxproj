@@ -84,6 +84,8 @@
 		02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */; };
 		02AC0F9515A5408300FBA9D3 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9415A5408300FBA9D3 /* folder.png */; };
 		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
+		211B728815AB519300EC4C60 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 211B728715AB519300EC4C60 /* IEEngine.m */; };
+		211B728C15AB521400EC4C60 /* IEConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 211B728B15AB521400EC4C60 /* IEConflictHandler.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
 		2132A5D4159CD26100009CB9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D3159CD26100009CB9 /* Record.m */; };
@@ -252,6 +254,10 @@
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		02AC0F9815A5483700FBA9D3 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
+		211B728615AB519300EC4C60 /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEngine.h; path = GeoFieldBook/IEEngine.h; sourceTree = "<group>"; };
+		211B728715AB519300EC4C60 /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEEngine.m; path = GeoFieldBook/IEEngine.m; sourceTree = "<group>"; };
+		211B728A15AB521400EC4C60 /* IEConflictHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEConflictHandler.h; path = GeoFieldBook/IEConflictHandler.h; sourceTree = "<group>"; };
+		211B728B15AB521400EC4C60 /* IEConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEConflictHandler.m; path = GeoFieldBook/IEConflictHandler.m; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
@@ -473,6 +479,7 @@
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
 				0249E2E515A8EECB00A7532E /* Custom Segues */,
 				0249E2EC15A903BE00A7532E /* NSNotification Registrations */,
+				211B728D15AB522D00EC4C60 /* I/E */,
 				2128E73D15A2378000B277F9 /* MKAnnotation */,
 				024097A2159D373F00855D33 /* Custom Views */,
 				029877FC1595954D000D71E7 /* Images */,
@@ -681,6 +688,18 @@
 			name = "Formation Folder";
 			sourceTree = "<group>";
 		};
+		211B728D15AB522D00EC4C60 /* I/E */ = {
+			isa = PBXGroup;
+			children = (
+				211B728615AB519300EC4C60 /* IEEngine.h */,
+				211B728715AB519300EC4C60 /* IEEngine.m */,
+				211B728A15AB521400EC4C60 /* IEConflictHandler.h */,
+				211B728B15AB521400EC4C60 /* IEConflictHandler.m */,
+			);
+			name = I/E;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		2128E73D15A2378000B277F9 /* MKAnnotation */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,6 +904,8 @@
 				0249E2E415A8EDF700A7532E /* GeoFieldBookController.m in Sources */,
 				0249E2E815A8EEF500A7532E /* GeoFieldBookControllerSegue.m in Sources */,
 				0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */,
+				211B728815AB519300EC4C60 /* IEEngine.m in Sources */,
+				211B728C15AB521400EC4C60 /* IEConflictHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
