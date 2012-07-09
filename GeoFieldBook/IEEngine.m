@@ -2,7 +2,7 @@
 //  IEEngine.m
 //  GeoFieldBook
 //
-//  Created by excel 2011 on 7/9/12.
+//  Created by excel 2012 on 7/9/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -10,7 +10,8 @@
 
 @implementation IEEngine
 
-//@property (nonatomic, strong) IEConflictHandler *handler;
+@synthesize handler=_handler;
+
 
 
 @end

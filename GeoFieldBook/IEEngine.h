@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IEConflictHandler.h"
+
 
 @interface IEEngine : NSObject
+
+@property (nonatomic, strong) IEConflictHandler *handler;
+
+-(void) createRecordsFromCSVFiles:(NSArray *) files;
+-(void) createFormationsFromCSVFiles:(NSArray *) files;
 
 @end
