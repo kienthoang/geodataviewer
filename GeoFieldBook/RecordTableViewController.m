@@ -108,8 +108,19 @@
     if (_selectedRecordTypes!=selectedRecordTypes) {
         _selectedRecordTypes=selectedRecordTypes;
         
+        //Reload the checkboxes
         if (self.selectedRecordTypes)
             [self.tableView reloadData];
+    }
+}
+
+- (void)setChosenRecord:(Record *)chosenRecord {
+    if (_chosenRecord!=chosenRecord) {
+        _chosenRecord=chosenRecord;
+        
+        //Post a notification
+        NSDictionary *userInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.chosenRecord,GeoNotificationKeyModelGroupSelectedRecord, nil];
+        [self postNotificationWithName:GeoNotificationModelGroupDidSelectRecord andUserInfo:userInfo];
     }
 }
 
@@ -155,10 +166,8 @@
     NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
     
     //Select the new record
-    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-    
-    //Update the detail view
-    self.chosenRecord=record;
+    if (![indexPath isEqual:self.tableView.indexPathForSelectedRow])
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
 }
 
 - (void)postNotificationWithName:(NSString *)name andUserInfo:(NSDictionary *)userInfo {
@@ -181,6 +190,9 @@
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
+            //Choose the newly created record
+            self.chosenRecord=record;
+            
             //highlight the newly created record and update the detail view accordingly
             [self highlightRecord:record];
             
@@ -198,12 +210,10 @@
     [record updateWithNewRecordInfo:recordInfo];
     
     //Save changes to database
-    Record *chosenRecord=self.chosenRecord;
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
-            //highlight the newly modified record if it's also the currently chosen record and update the detail view accordingly
-            if (record==chosenRecord)
-                [self highlightRecord:record];
+            //Highlight the modified record
+            [self highlightRecord:record];
             
             //Post a notification to indicate that the record database has changed
             [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
@@ -217,15 +227,15 @@
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
     [self.database.managedObjectContext deleteObject:record];
     
+    //If the deleted record is the currently chosen record, set it to nil
+    if (record==self.chosenRecord)
+        self.chosenRecord=nil;
+    
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         //Post a notification to indicate that the record database has changed
         [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
     }];
-    
-    //If the deleted record is the currently chosen record, post a notification
-    if (record==self.chosenRecord)
-        [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
 #pragma mark - FormationFolderPickerDelegate methods
@@ -407,10 +417,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     //Save the chosen record
     if (self.chosenRecord!=[self.fetchedResultsController objectAtIndexPath:indexPath])
         self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    //Post a notification
-    NSDictionary *userInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.chosenRecord,GeoNotificationKeyModelGroupSelectedRecord, nil];
-    [self postNotificationWithName:GeoNotificationModelGroupDidSelectRecord andUserInfo:userInfo];
 }
 
 #pragma mark - Output of the model group

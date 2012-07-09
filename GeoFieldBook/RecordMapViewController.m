@@ -73,7 +73,7 @@
         
         //Set the location span of the map
         self.mapView.region=[self regionFromLocations];
-    } 
+    }
 }
 
 #pragma mark - Getters and Setters
@@ -86,11 +86,9 @@
 }
 
 - (void)setRecords:(NSArray *)records {
-    if (![_records isEqualToArray:records]) {
-        _records=records;
+    _records=records;
         
-        [self updateMapView];
-    }
+    [self updateMapView];
 }
 
 - (void)setMapView:(MKMapView *)mapView {
@@ -100,30 +98,41 @@
     [self updateMapView];
 }
 
-- (void)setSelectedRecord:(Record *)selectedRecord {
+- (void)deselectAnnotationForRecord:(Record *)selectedRecord {
     //Deselect the previous record if it's not nil
-    if (self.selectedRecord) {
+    if (selectedRecord) {
         for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
-            if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==self.selectedRecord) {
+            if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==selectedRecord) {
                 [self.mapView deselectAnnotation:annotation animated:YES];
                 break;
             }
         }
     }
+}
+
+- (void)selectAnnotationForRecord:(Record *)selectedRecord {
+    if (selectedRecord) {
+        for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+            if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==selectedRecord) {
+                //Set the location span and the center of the map
+                self.mapView.region=[self regionFromLocations];
+                self.mapView.centerCoordinate=annotation.coordinate;
+                [self.mapView selectAnnotation:annotation animated:YES];
+                break;
+            }
+        }
+    }
+}
+
+- (void)setSelectedRecord:(Record *)selectedRecord {
+    //Deselect current record
+    [self deselectAnnotationForRecord:self.selectedRecord];
     
     //Save the new selected record
     _selectedRecord=selectedRecord;
     
     //Select the pin corresponding to the record
-    for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
-        if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==self.selectedRecord) {
-            //Set the location span and the center of the map
-            self.mapView.region=[self regionFromLocations];
-            self.mapView.centerCoordinate=annotation.coordinate;
-            [self.mapView selectAnnotation:annotation animated:YES];
-            break;
-        }
-    }
+    [self selectAnnotationForRecord:self.selectedRecord];
 }
 
 #pragma mark - Prepare for Segues
@@ -149,13 +158,16 @@
         
     //Show user location
     self.mapView.showsUserLocation=YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     //Update records
     self.records=[self.mapDelegate recordsForMapViewController:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //Reselect the chosen record
+    [self selectAnnotationForRecord:self.selectedRecord];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -260,6 +272,9 @@
 - (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidSelectRecordType:(NSString *)recordType {
     //Add the selected record type
     [self.recordFilter userDidSelectRecordType:recordType];
+    
+    //Update the map view
+    [self updateMapView];
 }
 
 - (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidDeselectRecordType:(NSString *)recordType {

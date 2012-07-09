@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *importExportButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *popoverVCButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *settingButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *dataMapSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
@@ -59,6 +59,21 @@
 
 @synthesize recordModifiedInfo=_recordModifiedInfo;
 @synthesize modifiedRecord=_modifiedRecord;
+
+- (DataMapSegmentViewController *)dataMapSegmentViewController {
+    id dataMapSegmentViewController=self.viewGroupController;
+    
+    if (![dataMapSegmentViewController isKindOfClass:[DataMapSegmentViewController class]])
+        dataMapSegmentViewController=nil;
+    
+    return dataMapSegmentViewController;
+}
+
+- (void)swapToSegmentIndex:(int)segmentIndex {
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC swapToViewControllerAtSegmentIndex:segmentIndex];
+    [self.dataMapSwitch setSelectedSegmentIndex:segmentIndex];
+}
 
 #pragma mark - Target-Action Handlers
 
@@ -93,7 +108,7 @@
 - (IBAction)dataMapSwitchValueChanged:(UISegmentedControl *)sender {
     //Notify the data map segment controller of the change
     int segmentIndex=sender.selectedSegmentIndex;
-    DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
     [dataMapSegmentVC segmentController:sender indexDidChangeTo:segmentIndex];
 }
 
@@ -105,28 +120,58 @@
 {
     //If the calling navigation controller controls the model MVC group
     if (navigationController==self.popoverViewController.contentViewController) {
+        DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+        
         //If the recently pushed view controller is a folder tvc, swap the view MVC group to show the initial view
         if ([viewController isKindOfClass:[FolderTableViewController class]]) {
-            DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
             [dataMapSegmentVC pushInitialViewController];
             if (!dataMapSegmentVC.topViewController)
-                [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
+                [self swapToSegmentIndex:0];
         }
+        
+        //Update the map view
+        [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
+        [dataMapSegmentVC setMapSelectedRecord:nil];
     }
 }
 
 #pragma mark - Model Group Notifcation Handlers
 
 - (void)modelGroupFolderDatabaseDidUpdate:(NSNotification *)notification {
-    NSLog(@"Folder Database Did Update!");
+    //Update the map
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
 }
 
 - (void)modelGroupRecordDatabaseDidUpdate:(NSNotification *)notification {
-    NSLog(@"Record Database Did Update!");
+    //Update the map
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
+    
+    //Pop the detail record vc (if the chosen record got deleted)
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    if (!recordTVC.chosenRecord) {
+        [dataMapSegmentVC pushInitialViewController];
+        if (!dataMapSegmentVC.topViewController)
+            [self swapToSegmentIndex:0];
+    }
 }
 
 - (void)modelGroupDidCreateNewRecord:(NSNotification *)notification {
-    NSLog(@"Created New Record!");
+    //If the data side of the data map segment controller is not a record view controller, push rvc
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
+        [dataMapSegmentVC pushRecordViewController];
+    
+    //Serve the newly created record (currently chosen record as well) to the record view controller
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    [dataMapSegmentVC updateRecordDetailViewWithRecord:recordTVC.chosenRecord];
+    
+    //Switch to the data side
+    [self swapToSegmentIndex:0];
+    
+    //Put the record view controller in editing mode
+    [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
 }
 
 #pragma mark - Prepare for Segue
@@ -143,7 +188,7 @@
         //view group controller setup
         else if ([segue.identifier isEqualToString:@"viewGroupController"]) {
             self.viewGroupController=[self.storyboard instantiateViewControllerWithIdentifier:@"viewGroupController"];
-            DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+            DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
             [dataMapSegmentVC setDelegate:self];
             
             //Setup for the map view controller
@@ -247,7 +292,7 @@
     [super viewWillAppear:animated];
     
     //Get the data map segment controller
-    DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
     
     //Adjust the frame of the specified view controller's view
     dataMapSegmentVC.view.frame=self.contentView.bounds;
@@ -414,13 +459,17 @@
            whileModifyingRecord:(Record *)record
                     withNewInfo:(NSDictionary *)newInfo
 {
-    //Put up the autosave alert
-    [self autosaveRecord:record withNewRecordInfo:newInfo];    
+    //If the chosen record of the record tvc is not nil (meaning it has not been deleted yet), show the autosave alert
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    if (recordTVC.chosenRecord) {
+        //Put up the autosave alert
+        [self autosaveRecord:record withNewRecordInfo:newInfo]; 
+    }
 }
 
 #pragma mark - RecordMapViewControllerDelegate protocol methods
 
-- (NSArray *)recordsForMapViewController:(RecordMapViewController *)mapViewController {
+- (NSArray *)recordsFromModelGroup {
     //If the current TVC in the model group is the record table view controller
     id modelGroupTopVC=[self recordTableViewController];
     if (modelGroupTopVC) {
@@ -447,9 +496,30 @@
     return nil;
 }
 
+- (NSArray *)recordsForMapViewController:(RecordMapViewController *)mapViewController {
+    return [self recordsFromModelGroup];
+}
+
 - (void)mapViewController:(RecordMapViewController *)mapVC userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView 
 {
+    //Update the data side (push if it's not on screen somewhere)
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
+        [dataMapSegmentVC pushRecordViewController];
+    [dataMapSegmentVC updateRecordDetailViewWithRecord:record];
     
+    //Update the model group to reflect the changes
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    if (recordTVC)
+        [(RecordTableViewController *)recordTVC setChosenRecord:record];
+    else if ([self folderTableViewController]) {
+        FolderTableViewController *folderTVC=[self folderTableViewController];
+        [folderTVC performSegueWithIdentifier:@"Show Records" sender:record];
+    }
+    
+    //Switch to data view if desired
+    if (willSwitchToDataView)
+        [self swapToSegmentIndex:0];
 }
 
 #pragma mark - UIAlertViewDelegate methods

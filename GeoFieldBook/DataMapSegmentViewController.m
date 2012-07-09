@@ -58,7 +58,7 @@
 - (void)updateMapWithRecords:(NSArray *)records {
     //Set the records of the record map view controller if it's in the view controller array
     RecordMapViewController *recordMap=[self.viewControllers lastObject];
-    recordMap.records=records;
+    recordMap.records=records;    
 }
 
 - (void)setMapSelectedRecord:(Record *)selectedRecord {
@@ -96,10 +96,14 @@
 
 - (void)pushRecordViewController {
     [self performSegueWithIdentifier:@"Record View Controller" sender:nil];
+    if (!self.topViewController)
+        [self swapToViewControllerAtSegmentIndex:0];
 }
 
 - (void)pushInitialViewController {    
     [self performSegueWithIdentifier:@"Initial View Controller" sender:nil];
+    if (!self.topViewController)
+        [self swapToViewControllerAtSegmentIndex:0];
 }
 
 #pragma mark - KVO/NSNotification Managers
@@ -121,7 +125,7 @@
     [self updateRecordDetailViewWithRecord:selectedRecord];
     
     //Update the map
-    [self setMapSelectedRecord:selectedRecord];
+    [self setMapSelectedRecord:selectedRecord];    
 }
 
 - (void)registerForModelGroupNotifications {
@@ -164,9 +168,7 @@
     else {
         [viewControllers insertObject:newViewController atIndex:index];
         self.viewControllers=[viewControllers copy];
-    }
-    
-    NSLog(@"View Controllers: %@",self.viewControllers);
+    }    
 }
 
 #pragma mark - View Controller Lifecycle
