@@ -81,8 +81,8 @@
 - (void)setWillShowCheckboxes:(BOOL)willShowCheckboxes {
     _willShowCheckboxes=willShowCheckboxes;
     
-    //Reload the table view
-    [self.tableView reloadData];
+    //Reset the checkboxes
+    [self updateCheckboxes];
 }
 
 - (void)setDatabase:(UIManagedDocument *)database {
@@ -163,6 +163,7 @@
 }
 
 - (void)highlightRecord:(Record *)record {
+    NSLog(@"Highlighted record: %@",record);
     //get ithe index path of the specified record
     NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
     
@@ -283,14 +284,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Highlight current selected record but won't update the detail view
-    if (self.chosenRecord) 
-        [self highlightRecord:self.chosenRecord];
-    
     //Set the title of the set location button
     NSString *formationFolderName=self.folder.formationFolder.folderName;
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
 }
+
 
 - (void)viewDidUnload {
     [self setSetLocationButton:nil];
@@ -367,6 +365,23 @@
 
 #pragma mark - Table view data source
 
+- (void)updateCheckboxes {
+    //Iterate through the visible table cells and manage their checkboxes
+    for (CustomRecordCell *cell in self.tableView.visibleCells) {
+        Record *record=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+        
+        //Set up the checkbox
+        CheckBox *checkbox=cell.checkBox;
+        checkbox.image=[self.selectedRecordTypes containsObject:[record.class description]] ? checkbox.checked : checkbox.unchecked;
+        if (!self.selectedRecordTypes)
+            checkbox.image=checkbox.checked;
+        if (self.willShowCheckboxes)
+            [cell showCheckBoxAnimated:YES];
+        else
+            [cell hideCheckBoxAnimated:YES];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Record Cell";
@@ -384,16 +399,6 @@
     cell.type.text=[record.class description];
     cell.date.text=[Record dateFromNSDate:record.date];
     cell.time.text = [Record timeFromNSDate:record.date];
-    
-    //Set up the checkbox
-    CheckBox *checkbox=cell.checkBox;
-    checkbox.image=[self.selectedRecordTypes containsObject:[record.class description]] ? checkbox.checked : checkbox.unchecked;
-    if (!self.selectedRecordTypes)
-        checkbox.image=checkbox.checked;
-    if (self.willShowCheckboxes)
-        [cell showCheckBoxAnimated:YES];
-    else
-        [cell hideCheckBoxAnimated:YES];
 
     //show the image
     UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];

@@ -21,6 +21,7 @@
     self.checked = [UIImage imageNamed:@"checked.png"];
     self.unchecked = [UIImage imageNamed:@"unchecked.png"];
     self.image = self.checked;
+    self.alpha=0;
 }
 
 @end

@@ -341,7 +341,7 @@
     NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
     if (![failedKeyNames count]) {
         //If the name of the record is not nil
-        NSString *message=@"You are navigating away. Do you want to save the record you were editing?";
+        NSString *message=@"You navigated away. Do you want to save the record you were editing?";
         
         //Put up an alert to ask the user whether he/she wants to save
         autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
