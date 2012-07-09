@@ -657,7 +657,7 @@
 - (NSArray *)formationsForFormationPicker {
     //Fetch formation entities from the database
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.record.folder.folderName];
+    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.record.folder.formationFolder.folderName];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
     NSArray *results=[self.record.managedObjectContext executeFetchRequest:request error:NULL];
     
@@ -697,6 +697,9 @@
     
     //Seguing to the formation picker view controller for the formation text field
     else if ([segue.identifier isEqualToString:@"Formation Picker"]) {
+        //Set the formations for the formation picker
+        [(FormationPickerViewController *)segue.destinationViewController setFormations:[self formationsForFormationPicker]];
+                
         //Set initialSelection for the formation picker if the current record has no formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.formationTextField.text length]];
         
@@ -709,6 +712,9 @@
     
     //Seguing to the formation picker view controller for the lower formation text field
     else if ([segue.identifier isEqualToString:@"Lower Formation Picker"]) {
+        //Set the formations for the formation picker
+        [(FormationPickerViewController *)segue.destinationViewController setFormations:[self formationsForFormationPicker]];
+        
         //Set initialSelection for the formation picker if the current record has no lower formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.lowerFormationTextField.text length]];
         
@@ -721,6 +727,9 @@
     
     //Seguing to the formation picker view controller for the upper formation text field
     else if ([segue.identifier isEqualToString:@"Upper Formation Picker"]) {
+        //Set the formations for the formation picker
+        [(FormationPickerViewController *)segue.destinationViewController setFormations:[self formationsForFormationPicker]];
+        
         //Set initialSelection for the formation picker if the current record has no upper formation set yet
         [segue.destinationViewController setInitialSelectionEnabled:![self.upperFormationTextField.text length]];
         

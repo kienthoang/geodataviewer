@@ -536,10 +536,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Save"]) {
         //Save the record info
-        if ([self recordTableViewController])
-            [[self recordTableViewController] modifyRecord:self.modifiedRecord withNewInfo:self.recordModifiedInfo];
-        else
-            [self.modifiedRecord updateWithNewRecordInfo:self.recordModifiedInfo]; 
+        [self.modifiedRecord updateWithNewRecordInfo:self.recordModifiedInfo]; 
             
         //Nillify the temporary record modified data
         self.modifiedRecord=nil;

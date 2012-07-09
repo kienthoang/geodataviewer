@@ -31,6 +31,10 @@
     }
 }
 
+- (NSArray *)componentMatrix {
+    return [self pickerViewComponentMatrixFromFormations:self.formations];
+}
+
 #pragma mark - User Selection Manipulation
 
 - (void)handleUserSelection {
