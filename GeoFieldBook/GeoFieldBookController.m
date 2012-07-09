@@ -131,7 +131,17 @@
         
         //Update the map view
         [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
-        [dataMapSegmentVC setMapSelectedRecord:nil];        
+        [dataMapSegmentVC setMapSelectedRecord:nil];  
+        
+        //If switching to the record tvc and the map is on screen, show the checkboxes in the record tvc
+        RecordTableViewController *recordTVC=[self recordTableViewController];
+        if (recordTVC) {
+            DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+            if ([dataMapSegmentVC.topViewController isKindOfClass:[RecordMapViewController class]])
+                recordTVC.willShowCheckboxes=YES;
+            else
+                recordTVC.willShowCheckboxes=NO;
+        }
     }
 }
 
@@ -427,12 +437,21 @@
         [sender setRecordViewControllerDelegate:self];
     
     //If switching to the map, show the checkboxes (allow filter by folder) in the folder tvc
-    FolderTableViewController *folderTVC=[self folderTableViewController];
+    FolderTableViewController *folderTVC=[[(UINavigationController *)self.popoverViewController.contentViewController viewControllers] objectAtIndex:0];
     if (folderTVC) {
         if ([viewController isKindOfClass:[RecordMapViewController class]])
             folderTVC.willFilterByFolder=YES;
         else
             folderTVC.willFilterByFolder=NO;
+    }
+    
+    //If switching to the map, show the checkboxes in the record tvc
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    if (recordTVC) {
+        if ([viewController isKindOfClass:[RecordMapViewController class]])
+            recordTVC.willShowCheckboxes=YES;
+        else
+            recordTVC.willShowCheckboxes=NO;
     }
 }
 
@@ -529,6 +548,13 @@
     //Switch to data view if desired
     if (willSwitchToDataView)
         [self swapToSegmentIndex:0];
+}
+
+- (void)userDidChooseToDisplayRecordTypes:(NSArray *)selectedRecordTypes {
+    //Update the record tvc
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    if (recordTVC)
+        recordTVC.selectedRecordTypes=selectedRecordTypes;
 }
 
 #pragma mark - UIAlertViewDelegate methods

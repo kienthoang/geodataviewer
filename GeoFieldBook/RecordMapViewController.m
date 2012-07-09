@@ -278,6 +278,10 @@
     
     //Update the map view
     [self updateMapView];
+    
+    //Notify the delegate of the selected record types
+    if ([self.mapDelegate respondsToSelector:@selector(userDidChooseToDisplayRecordTypes:)])
+        [self.mapDelegate userDidChooseToDisplayRecordTypes:self.recordFilter.selectedRecordTypes];
 }
 
 - (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidDeselectRecordType:(NSString *)recordType {
@@ -286,6 +290,10 @@
     
     //Update the map view
     [self updateMapView];
+    
+    //Notify the delegate of the selected record types
+    if ([self.mapDelegate respondsToSelector:@selector(userDidChooseToDisplayRecordTypes:)])
+        [self.mapDelegate userDidChooseToDisplayRecordTypes:self.recordFilter.selectedRecordTypes];
 }
 
 #pragma mark - MKMapRecordInfoViewControllerDelegate methods

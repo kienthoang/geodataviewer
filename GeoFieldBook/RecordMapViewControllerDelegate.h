@@ -19,4 +19,8 @@
 - (void)mapViewController:(RecordMapViewController *)mapVC userDidSelectAnnotationForRecord:(Record *)record 
          switchToDataView:(BOOL)willSwitchToDataView;
 
+@optional
+
+- (void)userDidChooseToDisplayRecordTypes:(NSArray *)selectedRecordTypes;
+
 @end

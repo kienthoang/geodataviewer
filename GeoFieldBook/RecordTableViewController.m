@@ -30,8 +30,6 @@
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
 - (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
 
-@property (nonatomic) BOOL mapDidAppear;
-
 #pragma mark - Temporary record's modified info
 
 @property (nonatomic,strong) Record *modifiedRecord;
@@ -46,10 +44,6 @@
 
 @property (nonatomic,weak) UIPopoverController *formationFolderPopoverController;
 
-#pragma mark - Filter related properties
-
-@property (nonatomic,strong) NSArray *selectedRecordTypes;
-
 @end
 
 @implementation RecordTableViewController
@@ -57,7 +51,7 @@
 @synthesize folder=_folder;
 @synthesize database=_database;
 
-@synthesize mapDidAppear=_mapDidAppear;
+@synthesize willShowCheckboxes=_willShowCheckboxes;
 
 @synthesize modifiedRecord=_modifiedRecord;
 @synthesize recordModifiedInfo=_recordModifiedInfo;
@@ -84,6 +78,13 @@
 
 #pragma mark - Setters
 
+- (void)setWillShowCheckboxes:(BOOL)willShowCheckboxes {
+    _willShowCheckboxes=willShowCheckboxes;
+    
+    //Reload the table view
+    [self.tableView reloadData];
+}
+
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
         _database=database;
@@ -105,7 +106,7 @@
 }
 
 - (void)setSelectedRecordTypes:(NSArray *)selectedRecordTypes {
-    if (_selectedRecordTypes!=selectedRecordTypes) {
+    if (![_selectedRecordTypes isEqualToArray:selectedRecordTypes]) {
         _selectedRecordTypes=selectedRecordTypes;
         
         //Reload the checkboxes
@@ -389,7 +390,7 @@
     checkbox.image=[self.selectedRecordTypes containsObject:[record.class description]] ? checkbox.checked : checkbox.unchecked;
     if (!self.selectedRecordTypes)
         checkbox.image=checkbox.checked;
-    if (self.mapDidAppear)
+    if (self.willShowCheckboxes)
         [cell showCheckBoxAnimated:YES];
     else
         [cell hideCheckBoxAnimated:YES];
@@ -417,16 +418,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     //Save the chosen record
     if (self.chosenRecord!=[self.fetchedResultsController objectAtIndexPath:indexPath])
         self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
-}
-
-#pragma mark - Output of the model group
-
-- (NSArray *)records {
-    //Get the array of records from the fetched results controller
-    NSArray *records=self.fetchedResultsController.fetchedObjects;
-        
-    //return the records
-    return records;
 }
 
 @end
