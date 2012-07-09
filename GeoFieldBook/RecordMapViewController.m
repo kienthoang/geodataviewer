@@ -86,9 +86,12 @@
 }
 
 - (void)setRecords:(NSArray *)records {
-    _records=records;
+    //If the records actually changed
+    if (![_records isEqualToArray:records]) {
+        _records=records;
         
-    [self updateMapView];
+        [self updateMapView];
+    }
 }
 
 - (void)setMapView:(MKMapView *)mapView {

@@ -33,7 +33,6 @@
 - (void)deleteFolder:(Folder *)folder;   //Delete the specified folder
 
 @property (nonatomic, strong) GeoFilter *recordFilter;
-@property (nonatomic) BOOL mapDidAppear;
 
 #pragma mark - Temporary "to-be-deleted" data
 
@@ -53,7 +52,7 @@
 @implementation FolderTableViewController 
 
 @synthesize recordFilter=_recordFilter;
-@synthesize mapDidAppear=_mapDidAppear;
+@synthesize willFilterByFolder=_willFilterByFolder;
 @synthesize editButton = _editButton;
 
 @synthesize toBeDeletedFolder=_toBeDeletedFolder;
@@ -83,6 +82,13 @@
 
 - (NSArray *)selectedFolders {
     return [self.recordFilter selectedFolderNames];
+}
+
+- (void)setWillFilterByFolder:(BOOL)willFilterByFolder {
+    _willFilterByFolder=willFilterByFolder;
+    
+    //Reload the table view
+    [self.tableView reloadData];
 }
 
 #pragma mark - Notification Center
@@ -366,7 +372,7 @@
     [cell addGestureRecognizer:longPressRecognizer];
     
     //Show/Hide the checkboxes
-    if (self.mapDidAppear)
+    if (self.willFilterByFolder)
         [cell showCheckBoxAnimated:YES];
     else
         [cell hideCheckBoxAnimated:YES];
@@ -400,30 +406,6 @@
         UIAlertView *deleteAlert=[[UIAlertView alloc] initWithTitle:@"Delete Folder" message:@"You are about to delete an entire folder of records. Do you want to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
         [deleteAlert show];
     }
-}
-
-#pragma mark - GeoMapDelegate Protocol methods
-
-- (NSArray *)records {
-    //Get the array of records 
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
-    request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"folder.folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],nil];
-    NSArray *records=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
-    
-    //Filter the array of records
-    records=[self.recordFilter filterRecordCollectionByFolder:records];
-    
-    return records;
-}
-
-- (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController {
-    self.mapDidAppear=YES;
-    [self.tableView reloadData];
-}
-
-- (void)mapViewControllerDidDisappear:(UIViewController *)mapViewController {
-    self.mapDidAppear=NO;
-    [self.tableView reloadData];
 }
 
 #pragma mark - CustomFolderCellDelegate methods

@@ -14,4 +14,6 @@
 @property (nonatomic,strong) UIManagedDocument *database;   //The database to fetch folders from
 @property (nonatomic,readonly) NSArray *selectedFolders;
 
+@property (nonatomic) BOOL willFilterByFolder;
+
 @end

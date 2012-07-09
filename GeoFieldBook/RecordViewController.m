@@ -12,6 +12,8 @@
 #import "TextInputFilter.h"
 
 #import "Record.h"
+#import "Folder.h"
+
 #import "Image+Creation.h"
 #import "RecordViewController.h"
 #import "Record+Modification.h"
@@ -651,6 +653,16 @@
 }
 
 #pragma mark - Prepare for segues
+
+- (NSArray *)formationsForFormationPicker {
+    //Fetch formation entities from the database
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
+    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.record.folder.folderName];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
+    NSArray *results=[self.record.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    return results;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Strike picker segue

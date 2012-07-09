@@ -118,7 +118,7 @@
        didShowViewController:(UIViewController *)viewController 
                     animated:(BOOL)animated
 {
-    //If the calling navigation controller controls the model MVC group
+    //If the calling navigation controller controls the model MVC group and the new view controller is being pushed onto the navigation stack
     if (navigationController==self.popoverViewController.contentViewController) {
         DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
         
@@ -131,7 +131,7 @@
         
         //Update the map view
         [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
-        [dataMapSegmentVC setMapSelectedRecord:nil];
+        [dataMapSegmentVC setMapSelectedRecord:nil];        
     }
 }
 
@@ -425,6 +425,15 @@
     //Setup delegate for the record view controller
     if ([viewController isKindOfClass:[RecordViewController class]])
         [sender setRecordViewControllerDelegate:self];
+    
+    //If switching to the map, show the checkboxes (allow filter by folder) in the folder tvc
+    FolderTableViewController *folderTVC=[self folderTableViewController];
+    if (folderTVC) {
+        if ([viewController isKindOfClass:[RecordMapViewController class]])
+            folderTVC.willFilterByFolder=YES;
+        else
+            folderTVC.willFilterByFolder=NO;
+    }
 }
 
 #pragma mark - RecordViewControllerDelegate protocol methods

@@ -11,32 +11,24 @@
 
 @interface FormationPickerViewController() <UIPickerViewDelegate>
 
-- (void)synchronizeWithFormationDatabase;
-
 @end
 
 @implementation FormationPickerViewController
 
-@synthesize database=_database;
-@synthesize folderName=_folderName;
+@synthesize formations=_formations;
 @synthesize pickerName=_pickerName;
 
 @synthesize delegate=_delegate;
 
 #pragma mark - Getters and Setters
 
-- (void)setDatabase:(UIManagedDocument *)database {
-    _database=database;
+- (void)setFormations:(NSArray *)formations {
+    if (![_formations isEqualToArray:formations]) {
+        _formations=formations;
         
-    //Synchronize with the database
-    [self synchronizeWithFormationDatabase];
-}
-
-- (void)setFolderName:(NSString *)folderName {
-    _folderName=folderName;
-    
-    //Synchronize with the database
-    [self synchronizeWithFormationDatabase];
+        //Reload the picker
+        [self.pickerView reloadAllComponents];
+    }
 }
 
 #pragma mark - User Selection Manipulation
@@ -76,45 +68,14 @@
     return [NSArray arrayWithObject:[formationNames copy]];
 }
 
-- (void)fetchFormationFromDatabase {
-    //Fetch formation entities from the database
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.folderName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
-    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
-    
-    //Setup the component matrix (inherited from PickerViewController)
-    self.componentMatrix=[self pickerViewComponentMatrixFromFormations:results];
-}
-
-- (void)synchronizeWithFormationDatabase {
-    //Save the database if it has not been saved yet
-    NSFileManager *fileManager=[NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:[self.database.fileURL path]]) {
-        [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success){
-            if (success) {
-                //Start fetching formations
-                [self fetchFormationFromDatabase];
-            }
-        }];
-    } 
-
-    //If the database managed document is close, open it
-    else if (self.database.documentState==UIDocumentStateClosed) {
-        [self.database openWithCompletionHandler:^(BOOL success){
-            //Fetch formations
-            [self fetchFormationFromDatabase];
-        }];
-    } 
-
-    //If the document is already open, just proceed
-    else if (self.database.documentState==UIDocumentStateNormal) {
-        //Fetch formations
-        [self fetchFormationFromDatabase];
-    }
-}
-
 #pragma mark - View Controller Life Cycles
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //Load the components for the picker view
+    self.componentMatrix=[self pickerViewComponentMatrixFromFormations:self.formations];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
