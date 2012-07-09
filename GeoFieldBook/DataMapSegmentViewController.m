@@ -62,9 +62,9 @@
 }
 
 - (void)setMapSelectedRecord:(Record *)selectedRecord {
-    if ([self.detailSideViewController isKindOfClass:[RecordViewController class]]) {
-        RecordViewController *recordDetail=(RecordViewController *)self.detailSideViewController;
-        recordDetail.record=selectedRecord;
+    if ([self.viewControllers.lastObject isKindOfClass:[RecordMapViewController class]]) {
+        RecordMapViewController *mapDetail=(RecordMapViewController *)self.viewControllers.lastObject;
+        mapDetail.selectedRecord=selectedRecord;
     }
 }
 
@@ -165,6 +165,8 @@
         [viewControllers insertObject:newViewController atIndex:index];
         self.viewControllers=[viewControllers copy];
     }
+    
+    NSLog(@"View Controllers: %@",self.viewControllers);
 }
 
 #pragma mark - View Controller Lifecycle
@@ -179,6 +181,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Show the initial view
+    [self swapToViewControllerAtSegmentIndex:0];
     
     //Subscribe to Model Group
     [self registerForModelGroupNotifications];

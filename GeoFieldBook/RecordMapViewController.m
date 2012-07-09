@@ -86,7 +86,7 @@
 }
 
 - (void)setRecords:(NSArray *)records {
-    if (_records!=records) {
+    if (![_records isEqualToArray:records]) {
         _records=records;
         
         [self updateMapView];
@@ -149,6 +149,13 @@
         
     //Show user location
     self.mapView.showsUserLocation=YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Update records
+    self.records=[self.mapDelegate recordsForMapViewController:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -269,7 +276,7 @@
  userDidTapOnAccessoryViewForRecord:(Record *)record 
 {
     //Notify the delegate
-    //[self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record switchToDataView:YES];
+    [self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record switchToDataView:YES];
     
     //Dismiss the callout popover
     [self.annotationCalloutPopover dismissPopoverAnimated:NO];

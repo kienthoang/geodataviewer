@@ -460,8 +460,9 @@
     self.editButton.title=self.editing ? @"Done" : @"Edit";
         
     //If in editing mode, enable all the text fields; otherwise, disable them
-    for (UITextField *textField in self.textFields)
+    for (UITextField *textField in self.textFields) {
         textField.enabled=self.editing;
+    }
     
     //Enable or disable the text area
     self.fieldObservationTextArea.editable=self.editing;
@@ -736,7 +737,7 @@
     //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
-    [self.view addGestureRecognizer:tapGestureRecognizer];
+    [self.view addGestureRecognizer:tapGestureRecognizer];    
 } 
 
 - (void)viewWillLayoutSubviews {

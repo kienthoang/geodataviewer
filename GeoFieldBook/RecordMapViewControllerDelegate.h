@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Record.h"
 #import "RecordMapViewController.h"
 
 @class RecordMapViewController;
@@ -14,5 +15,8 @@
 @protocol RecordMapViewControllerDelegate <NSObject>
 
 - (NSArray *)recordsForMapViewController:(RecordMapViewController *)mapViewController;
+
+- (void)mapViewController:(RecordMapViewController *)mapVC userDidSelectAnnotationForRecord:(Record *)record 
+         switchToDataView:(BOOL)willSwitchToDataView;
 
 @end

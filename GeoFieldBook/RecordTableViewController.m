@@ -113,6 +113,12 @@
     }
 }
 
+#pragma mark - Getters
+
+- (NSArray *)selectedRecords {
+    return [self.fetchedResultsController fetchedObjects];
+}
+
 #pragma mark - Alert Generators
 
 //Put up an alert about some database failure with specified message

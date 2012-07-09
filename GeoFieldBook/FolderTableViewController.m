@@ -81,14 +81,16 @@
     return _recordFilter;
 }
 
+- (NSArray *)selectedFolders {
+    return [self.recordFilter selectedFolderNames];
+}
+
 #pragma mark - Notification Center
 
 - (void)postNotificationWithName:(NSString *)name andUserInfo:(NSDictionary *)userInfo {
     //Post the notification
     NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
-    [center postNotificationName:name object:self userInfo:userInfo];
-    
-    NSLog(@"Posted notification with name: %@",name);
+    [center postNotificationName:name object:self userInfo:userInfo];    
 }
 
 #pragma mark - Controller State Initialization
@@ -412,10 +414,6 @@
     records=[self.recordFilter filterRecordCollectionByFolder:records];
     
     return records;
-}
-
-- (NSArray *)recordsForMapViewController:(UIViewController *)mapViewController {
-    return [self records];
 }
 
 - (void)mapViewControllerDidAppearOnScreen:(UIViewController *)mapViewController {

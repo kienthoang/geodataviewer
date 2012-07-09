@@ -24,7 +24,9 @@
 #import "Record+Validation.h"
 #import "Record+NameEncoding.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate>
+#import "GeoDatabaseManager.h"
+
+@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -141,13 +143,17 @@
         //view group controller setup
         else if ([segue.identifier isEqualToString:@"viewGroupController"]) {
             self.viewGroupController=[self.storyboard instantiateViewControllerWithIdentifier:@"viewGroupController"];
-            [(DataMapSegmentViewController *)self.viewGroupController setDelegate:self];
+            DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
+            [dataMapSegmentVC setDelegate:self];
+            
+            //Setup for the map view controller
+            if ([[dataMapSegmentVC.viewControllers lastObject] isKindOfClass:[RecordMapViewController class]])
+                [dataMapSegmentVC setMapViewDelegate:self];
         }
     }
         
     //Formation folder segue
     if ([segue.identifier isEqualToString:@"Show Formation Folders"]) {
-        NSLog(@"Showing formation folders!");
         //Dismiss the master popover if it's visible on the screen
         if (self.popoverViewController.isPopoverVisible)
             [self.popoverViewController dismissPopoverAnimated:NO];
@@ -233,7 +239,7 @@
     //[self.toolbar setBackgroundImage:[UIImage imageNamed:@"stone-textures.jpeg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
     
     //Add gesture to call the master
-    UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMasterPopover:)];
+    UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(presentPopoverViewController:)];
     [self.contentView addGestureRecognizer:longPressGestureRecognizer];
 }
 
@@ -243,20 +249,16 @@
     //Get the data map segment controller
     DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
     
+    //Adjust the frame of the specified view controller's view
+    dataMapSegmentVC.view.frame=self.contentView.bounds;
+    
     //Setup the view controller hierachy
     [self addChildViewController:dataMapSegmentVC];
     [self.viewGroupController willMoveToParentViewController:self];
     
-    //Adjust the frame of the specified view controller's view
-    dataMapSegmentVC.view.frame=self.contentView.bounds;
-    
     //Add the view of the data map segment
     [self.contentView addSubview:dataMapSegmentVC.view];
-    [dataMapSegmentVC didMoveToParentViewController:self];
-    
-    //Put up the initial view
-    if (!dataMapSegmentVC.topViewController)
-        [dataMapSegmentVC swapToViewControllerAtSegmentIndex:0];
+    [dataMapSegmentVC didMoveToParentViewController:self];    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -391,6 +393,15 @@
     return topViewController;
 }
 
+- (FolderTableViewController *)folderTableViewController {
+    UINavigationController *navController=(UINavigationController *)self.popoverViewController.contentViewController;
+    id topViewController=navController.topViewController;
+    if (![topViewController isKindOfClass:[FolderTableViewController class]])
+        topViewController=nil;
+    
+    return topViewController;
+}
+
 - (void)recordViewController:(RecordViewController *)sender 
          userDidModifyRecord:(Record *)record 
            withNewRecordInfo:(NSDictionary *)recordInfo 
@@ -405,6 +416,40 @@
 {
     //Put up the autosave alert
     [self autosaveRecord:record withNewRecordInfo:newInfo];    
+}
+
+#pragma mark - RecordMapViewControllerDelegate protocol methods
+
+- (NSArray *)recordsForMapViewController:(RecordMapViewController *)mapViewController {
+    //If the current TVC in the model group is the record table view controller
+    id modelGroupTopVC=[self recordTableViewController];
+    if (modelGroupTopVC) {
+        return [(RecordTableViewController *)modelGroupTopVC selectedRecords];
+    }
+    
+    //Else if the current TVC in the model group is the folder table view controller
+    modelGroupTopVC=[self folderTableViewController];
+    if (modelGroupTopVC) {
+        NSMutableArray *records=[NSMutableArray array];
+        NSArray *selectedFolders=[(FolderTableViewController *)modelGroupTopVC selectedFolders];
+        UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+        for (NSString *folder in selectedFolders) {
+            NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
+            request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",folder];
+            request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+            NSArray *results=[database.managedObjectContext executeFetchRequest:request error:NULL];
+            [records addObjectsFromArray:results];
+        }
+        
+        return [records copy];
+    }
+    
+    return nil;
+}
+
+- (void)mapViewController:(RecordMapViewController *)mapVC userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView 
+{
+    
 }
 
 #pragma mark - UIAlertViewDelegate methods

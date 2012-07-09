@@ -12,5 +12,6 @@
 @interface FolderTableViewController : CoreDataTableViewController  //Making this inherit the FetchedResultsController from CoreDataTVC
 
 @property (nonatomic,strong) UIManagedDocument *database;   //The database to fetch folders from
+@property (nonatomic,readonly) NSArray *selectedFolders;
 
 @end
