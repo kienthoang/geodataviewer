@@ -70,8 +70,11 @@
 }
 
 - (void)swapToSegmentIndex:(int)segmentIndex {
+    //Swap to show the view controller at the given segment index
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
     [dataMapSegmentVC swapToViewControllerAtSegmentIndex:segmentIndex];
+    
+    //Make sure the data map switch stays consistent with the view controller showed in the view MVC group
     [self.dataMapSwitch setSelectedSegmentIndex:segmentIndex];
 }
 
