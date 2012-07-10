@@ -21,6 +21,7 @@
 		020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBC315946B3D00EECC08 /* Record+Types.m */; };
 		020F06FC15982E570006B53B /* TrendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FB15982E570006B53B /* TrendPickerViewController.m */; };
 		020F06FF15982ED20006B53B /* PlungePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FE15982ED10006B53B /* PlungePickerViewController.m */; };
+		02191EC615AC850600A5EB2B /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 02191EC515AC850600A5EB2B /* Record.m */; };
 		0221BDE1159A58EA0058C792 /* FormationFolderPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */; };
 		0221BDE5159A88170058C792 /* Folder+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDE4159A88170058C792 /* Folder+DictionaryKeys.m */; };
 		0221BDEB159A8CFC0058C792 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDEA159A8CFA0058C792 /* Folder.m */; };
@@ -88,7 +89,6 @@
 		211B728C15AB521400EC4C60 /* IEConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 211B728B15AB521400EC4C60 /* IEConflictHandler.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
-		2132A5D4159CD26100009CB9 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D3159CD26100009CB9 /* Record.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -141,6 +141,8 @@
 		020F06FB15982E570006B53B /* TrendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendPickerViewController.m; sourceTree = "<group>"; };
 		020F06FD15982ED10006B53B /* PlungePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlungePickerViewController.h; sourceTree = "<group>"; };
 		020F06FE15982ED10006B53B /* PlungePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlungePickerViewController.m; sourceTree = "<group>"; };
+		02191EC415AC850600A5EB2B /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		02191EC515AC850600A5EB2B /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		0221BDDF159A58EA0058C792 /* FormationFolderPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderPickerViewController.h; sourceTree = "<group>"; };
 		0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderPickerViewController.m; sourceTree = "<group>"; };
 		0221BDE3159A88170058C792 /* Folder+DictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+DictionaryKeys.h"; sourceTree = "<group>"; };
@@ -262,8 +264,6 @@
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
 		2128E74215A238F900B277F9 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
-		2132A5D2159CD26100009CB9 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
-		2132A5D3159CD26100009CB9 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		2132A5D5159CD26200009CB9 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		2132A5D6159CD26200009CB9 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		2132A5D8159CD62200009CB9 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image+Creation.h"; path = "Image/Image+Creation.h"; sourceTree = "<group>"; };
@@ -631,8 +631,8 @@
 		0298C256159B435B0038E89C /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				2132A5D2159CD26100009CB9 /* Record.h */,
-				2132A5D3159CD26100009CB9 /* Record.m */,
+				02191EC415AC850600A5EB2B /* Record.h */,
+				02191EC515AC850600A5EB2B /* Record.m */,
 				0222DB0215961D5D00699D62 /* Record+Modification.h */,
 				0222DB0315961D5D00699D62 /* Record+Modification.m */,
 				0222DAFE15961D0D00699D62 /* Record+DictionaryKeys.h */,
@@ -881,7 +881,6 @@
 				0298C25C159B43F30038E89C /* Record+Validation.m in Sources */,
 				0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */,
 				21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */,
-				2132A5D4159CD26100009CB9 /* Record.m in Sources */,
 				2132A5D7159CD26200009CB9 /* Image.m in Sources */,
 				2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */,
 				2141DC17159C9AE1002518F9 /* (null) in Sources */,
@@ -906,6 +905,7 @@
 				0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */,
 				211B728815AB519300EC4C60 /* IEEngine.m in Sources */,
 				211B728C15AB521400EC4C60 /* IEConflictHandler.m in Sources */,
+				02191EC615AC850600A5EB2B /* Record.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
