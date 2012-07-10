@@ -51,8 +51,12 @@
     NSArray *records=[self.recordFilter filterRecordCollectionByRecordType:self.records];
     
     //Remove the old annotations
-    if (self.mapView.annotations)
-        [self.mapView removeAnnotations:self.mapView.annotations];
+    if (self.mapView.annotations) {
+        for (id <MKAnnotation> annotation in self.mapView.annotations) {
+            if (![annotation isKindOfClass:[MKUserLocation class]])
+                [self.mapView removeAnnotation:annotation];
+        }
+    }
     
     //Reset the saved annotations
     self.mapAnnotations=[NSArray array];
