@@ -13,4 +13,7 @@
 @property (nonatomic,strong) UIPopoverController *popoverViewController;
 @property (nonatomic,strong) UIViewController *viewGroupController;
 
+#define IMPORT_EXPORT_ACTION_SHEET_TITLE @"Import/Export"
+#define RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Record Import TVC"
+
 @end

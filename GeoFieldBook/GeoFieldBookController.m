@@ -8,17 +8,19 @@
 
 #import "GeoFieldBookController.h"
 #import "GeoFieldBookControllerSegue.h"
-#import "FormationFolderTableViewController.h"
-#import "DataMapSegmentViewController.h"
 
 #import "RecordTableViewController.h"
 #import "FolderTableViewController.h"
+#import "FormationFolderTableViewController.h"
+#import "RecordImportTableViewController.h"
 
-#import "ModelGroupNotificationNames.h"
+#import "DataMapSegmentViewController.h"
 #import "RecordViewController.h"
 
 #import "RecordViewControllerDelegate.h"
 #import "DataMapSegmentControllerDelegate.h"
+
+#import "ModelGroupNotificationNames.h"
 
 #import "Record+Modification.h"
 #import "Record+Validation.h"
@@ -26,7 +28,7 @@
 
 #import "GeoDatabaseManager.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate>
+@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -36,14 +38,18 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
-@property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
-
 @property (nonatomic, strong) NSDictionary *recordModifiedInfo;
 @property (nonatomic, strong) Record *modifiedRecord;
+
+#pragma mark - Temporary Popover Controllers
+
+@property (nonatomic, strong) UIPopoverController *importRecordPopover;
+@property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 
 @end
 
 @implementation GeoFieldBookController
+
 @synthesize contentView = _contentView;
 @synthesize formationButton = _formationButton;
 @synthesize importExportButton = _importExportButton;
@@ -59,6 +65,8 @@
 
 @synthesize recordModifiedInfo=_recordModifiedInfo;
 @synthesize modifiedRecord=_modifiedRecord;
+
+@synthesize importRecordPopover=_importRecordPopover;
 
 - (DataMapSegmentViewController *)dataMapSegmentViewController {
     id dataMapSegmentViewController=self.viewGroupController;
@@ -78,34 +86,68 @@
     [self.dataMapSwitch setSelectedSegmentIndex:segmentIndex];
 }
 
+- (void)dismissAllVisiblePopoversAnimated:(BOOL)animated {
+    [self.formationFolderPopoverController dismissPopoverAnimated:NO];
+    [self.popoverViewController dismissPopoverAnimated:NO];
+    [self.importRecordPopover dismissPopoverAnimated:NO];
+    self.importRecordPopover=nil;
+}
+
+#pragma mark - UIActionSheetDelegate Protocol methods
+
+- (void)presentRecordImportPopover {
+    //Dismiss all visible popovers
+    [self dismissAllVisiblePopoversAnimated:NO];
+    
+    //Instantiate the record import popover
+    UIViewController *recordImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    self.importRecordPopover=[[UIPopoverController alloc] initWithContentViewController:recordImportTVC];
+    
+    //Present it
+    [self.importRecordPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If the given action sheet is the import/export action sheet
+    if ([actionSheet.title isEqualToString:IMPORT_EXPORT_ACTION_SHEET_TITLE]) {
+        //If user click import records
+        if (buttonIndex<actionSheet.numberOfButtons && [[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Records"])
+            [self presentRecordImportPopover];
+    }
+}
+
 #pragma mark - Target-Action Handlers
 
 - (IBAction)presentPopoverViewController:(UIButton *)popoverVCButtonCustomView 
 {
+    //Dismiss all visible popovers
+    [self dismissAllVisiblePopoversAnimated:NO];
+    
+    //Present
     [self.popoverViewController presentPopoverFromBarButtonItem:self.popoverVCButton 
                                        permittedArrowDirections:UIPopoverArrowDirectionAny 
                                                        animated:YES];
-    
-    //Dismiss the formation folder popover if it's visible
-    if (self.formationFolderPopoverController.isPopoverVisible)
-        [self.formationFolderPopoverController dismissPopoverAnimated:NO];
 }
 
 - (IBAction)formationButtonPressed:(UIButton *)sender {
+    //Dismiss all visible popovers
+    [self dismissAllVisiblePopoversAnimated:NO];
+    
     //Segue to the formation folder popover
     [self performSegueWithIdentifier:@"Show Formation Folders" sender:self.formationButton];
 }
 
 - (IBAction)importExportButtonPressed:(UIButton *)sender {
-    //Show UIActionSheet with import/export options
-    UIActionSheet *importExportActionSheet=[[UIActionSheet alloc] initWithTitle:@"Import/Export" delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Import Records",@"Export Records",@"Import Formations",@"Export Formations", nil];
-    [importExportActionSheet showInView:self.contentView];
+    //Dismiss all visible popovers
+    [self dismissAllVisiblePopoversAnimated:NO];
     
-    //Dismiss all the popovers
-    if (self.popoverViewController.isPopoverVisible)
-        [self.popoverViewController dismissPopoverAnimated:YES];
-    if (self.formationFolderPopoverController.isPopoverVisible)
-        [self.formationFolderPopoverController dismissPopoverAnimated:YES];
+    //Show UIActionSheet with import/export options
+    UIActionSheet *importExportActionSheet=[[UIActionSheet alloc] initWithTitle:IMPORT_EXPORT_ACTION_SHEET_TITLE 
+                                                                       delegate:self 
+                                                              cancelButtonTitle:@"Cancel" 
+                                                         destructiveButtonTitle:nil 
+                                                              otherButtonTitles:@"Import Records",@"Export Records",@"Import Formations",@"Export Formations", nil];
+    [importExportActionSheet showInView:self.contentView];
 }
 
 - (IBAction)dataMapSwitchValueChanged:(UISegmentedControl *)sender {

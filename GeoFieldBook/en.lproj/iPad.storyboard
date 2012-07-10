@@ -70,24 +70,24 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7572" y="-3589"/>
+            <point key="canvasLocation" x="-7532" y="-4181"/>
         </scene>
         <!--Folder Table View Controller - Folders-->
         <scene sceneID="p56-nE-sZ6">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ti-Ft-q1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController modalPresentationStyle="formSheet" id="Uwh-l0-QS0" customClass="FolderTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="bts-ND-NJo">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="60" sectionHeaderHeight="10" sectionFooterHeight="10" id="bts-ND-NJo">
                         <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" rowHeight="62" id="ABX-2A-DqK" customClass="CustomFolderCell">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="62"/>
+                                <rect key="frame" x="0.0" y="54" width="1024" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="61"/>
+                                    <rect key="frame" x="45" y="1" width="914" height="61"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="h2I-YE-R2P">
@@ -105,7 +105,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <imageView contentMode="scaleToFill" id="376-Jj-GTw" customClass="CheckBox">
-                                            <rect key="frame" x="8" y="16" width="30" height="30"/>
+                                            <rect key="frame" x="8" y="16" width="26" height="26"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
@@ -115,7 +115,6 @@
                                     <outlet property="checkBox" destination="376-Jj-GTw" id="W0B-RP-bBH"/>
                                     <outlet property="subtitle" destination="kpd-3q-6KJ" id="krK-YP-hoN"/>
                                     <outlet property="title" destination="h2I-YE-R2P" id="jH4-EI-5iG"/>
-                                    <segue destination="kmo-3x-I3i" kind="push" identifier="Show Records" id="W6g-bL-9Ea"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -125,28 +124,38 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Add Folder" id="xBX-na-cpH">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="39N-eQ-bgW"/>
+                        <barButtonItem title="Delete" width="120" id="x0c-NT-vLv">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="Uwh-l0-QS0" id="dK7-nY-HvR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7cg-FR-WxX"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Folders" id="fc4-75-BDf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="tqj-i6-PiN">
+                            <connections>
+                                <action selector="editPressed:" destination="Uwh-l0-QS0" id="H9F-XO-jka"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xBX-na-cpH">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="bjl-xY-1vQ" kind="modal" identifier="Add/Edit Folder" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="C0h-XZ-idy"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="Folders" id="fc4-75-BDf">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="tqj-i6-PiN">
-                            <connections>
-                                <action selector="editPressed:" destination="Uwh-l0-QS0" id="H9F-XO-jka"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="deleteButton" destination="x0c-NT-vLv" id="fvo-wM-W3o"/>
                         <outlet property="editButton" destination="tqj-i6-PiN" id="qtX-Dl-Dib"/>
+                        <segue destination="kmo-3x-I3i" kind="push" identifier="Show Records" id="DYB-10-x9y"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-8646" y="-1409"/>
+            <point key="canvasLocation" x="-8750" y="-2689"/>
         </scene>
         <!--Filter By Record Type Controller-->
         <scene sceneID="70s-hd-efC">
@@ -307,7 +316,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6354" y="-3778"/>
+            <point key="canvasLocation" x="-6138" y="-4138"/>
         </scene>
         <!--Record Table View Controller-->
         <scene sceneID="qZz-Vz-aQF">
@@ -446,7 +455,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-6992" y="-2542"/>
+            <point key="canvasLocation" x="-7448" y="-2606"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="hMg-tH-KZj">
@@ -1307,7 +1316,50 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10096" y="-1337"/>
+            <point key="canvasLocation" x="-10248" y="-2681"/>
+        </scene>
+        <!--Record Import Table View Controller-->
+        <scene sceneID="q1x-nj-RNJ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iHM-w7-6Bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="" id="8tf-9a-8AO" customClass="RecordImportTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QQF-wK-IvH">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Record Import Cell" textLabel="JpD-VR-f6V" style="IBUITableViewCellStyleDefault" id="sYl-79-mmA">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JpD-VR-f6V">
+                                            <rect key="frame" x="10" y="0.0" width="914" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8tf-9a-8AO" id="UhG-zv-r9I"/>
+                            <outlet property="delegate" destination="8tf-9a-8AO" id="W0F-z4-38v"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="X8h-y1-uIb">
+                        <barButtonItem key="rightBarButtonItem" title="Import" width="50" id="VPz-9T-tuf"/>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-9071" y="-1062"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="dbq-aM-UYl">
@@ -1382,7 +1434,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5711" y="-2914"/>
+            <point key="canvasLocation" x="-5679" y="-2578"/>
         </scene>
         <!--Initial Detail View Controller-->
         <scene sceneID="6R2-xh-iRe">
@@ -1520,6 +1572,7 @@
                         <outlet property="toolbar" destination="Zej-Ff-pi6" id="dJu-Gc-jEF"/>
                         <segue destination="ATM-Rf-lLX" kind="custom" identifier="popoverViewController" customClass="GeoFieldBookControllerSegue" id="YqS-Io-uSQ"/>
                         <segue destination="tgm-XQ-kdK" kind="custom" identifier="viewGroupController" customClass="GeoFieldBookControllerSegue" id="fIJ-OC-XU9"/>
+                        <segue destination="TMV-ag-Ybd" kind="custom" identifier="Import Record Popover" customClass="GeoFieldBookControllerSegue" id="VAd-Mc-Naw"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1554,6 +1607,24 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-10569" y="2071"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xz9-7j-2ys">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="71w-8j-zJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="Record Import TVC" id="TMV-ag-Ybd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="F27-9a-era">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8tf-9a-8AO" kind="relationship" relationship="rootViewController" id="eD1-5L-i5F"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-10301" y="-1062"/>
         </scene>
     </scenes>
     <resources>

@@ -27,16 +27,11 @@
 
 @interface FolderTableViewController() <ModalFolderDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
 
-- (void)normalizeDatabase;        //Make sure the database's document state is normal
-- (BOOL)createNewFolderWithInfo:(NSDictionary *)folderInfo;    //Create a folder in the database with the specified name
-- (BOOL)modifyFolder:(Folder *)folder withNewInfo:(NSDictionary *)folderInfo;   //Modify a folder's name
-- (void)deleteFolder:(Folder *)folder;   //Delete the specified folder
-
 @property (nonatomic, strong) GeoFilter *recordFilter;
 
 #pragma mark - Temporary "to-be-deleted" data
 
-@property (nonatomic,strong) Folder *toBeDeletedFolder;
+@property (nonatomic,strong) NSArray *toBeDeletedFolders;
 
 #pragma mark - Popover Controllers
 
@@ -46,6 +41,7 @@
 #pragma mark - Buttons
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
 @end
 
@@ -54,8 +50,9 @@
 @synthesize recordFilter=_recordFilter;
 @synthesize willFilterByFolder=_willFilterByFolder;
 @synthesize editButton = _editButton;
+@synthesize deleteButton = _deleteButton;
 
-@synthesize toBeDeletedFolder=_toBeDeletedFolder;
+@synthesize toBeDeletedFolders=_toBeDeletedFolders;
 
 @synthesize database=_database;
 
@@ -78,6 +75,13 @@
         _recordFilter=[[GeoFilter alloc] init];
     
     return _recordFilter;
+}
+
+- (NSArray *)toBeDeletedFolders {
+    if (!_toBeDeletedFolders)
+        _toBeDeletedFolders=[NSArray array];
+    
+    return _toBeDeletedFolders;
 }
 
 - (NSArray *)selectedFolders {
@@ -163,9 +167,8 @@
     //If the alert view is the delete folder alert and user clicks "Continue", delete the folder
     if ([alertView.title isEqualToString:@"Delete Folder"]) {
         if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
-            //Delete the folder
-            [self deleteFolder:self.toBeDeletedFolder];
-            self.toBeDeletedFolder=nil;
+            //Delete the selected folders
+            [self deleteFolders:self.toBeDeletedFolders];
         }
     }
 }
@@ -224,15 +227,20 @@
     return YES;
 }
 
-- (void)deleteFolder:(Folder *)folder {
-    //Update the record filter
-    [self.recordFilter userDidDeselectFolderWithName:folder.folderName];
+- (void)deleteFolders:(NSArray *)folders {
+    for (Folder *folder in folders) {
+        //Update the record filter
+        [self.recordFilter userDidDeselectFolderWithName:folder.folderName];
     
-    //Delete the folder
-    [self.database.managedObjectContext deleteObject:folder];
+        //Delete the folder
+        [self.database.managedObjectContext deleteObject:folder];
+    }
     
     //Save
     [self saveChangesToDatabase];
+    
+    //End editing mode
+    [self.tableView setEditing:NO animated:NO];
     
     //Reload
     [self.tableView reloadData];
@@ -242,6 +250,20 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)showDeleteButton {
+    //Hide the delete button
+    self.deleteButton.title=@"Delete";
+    self.deleteButton.style=UIBarButtonItemStyleBordered;
+    self.deleteButton.enabled=YES;
+}
+
+- (void)hideDeleteButton {
+    //Hide the delete button
+    self.deleteButton.title=@"";
+    self.deleteButton.style=UIBarButtonItemStylePlain;
+    self.deleteButton.enabled=NO;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -255,6 +277,9 @@
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
         } 
     }];
+    
+    //Hide delete button
+    [self hideDeleteButton];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -272,13 +297,46 @@
 
 #pragma mark - Target-Action Handlers
 
+- (void)reloadCheckboxesInVisibleCells {
+    for (CustomFolderCell *cell in self.tableView.visibleCells) {
+        if (self.tableView.editing)
+            [cell hideCheckBoxAnimated:YES];
+        else {
+            //Show/Hide the checkboxes
+            if (self.willFilterByFolder)
+                [cell showCheckBoxAnimated:YES];
+            else
+                [cell hideCheckBoxAnimated:YES];
+        }
+    }
+}
+
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Set the table view to editting mode
     [self.tableView setEditing:!self.tableView.editing animated:YES];
 
     //Change the style of the button to edit or done
     sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-    sender.title=self.tableView.editing ? @"Done" : @"Edit";
+    sender.title=self.tableView.editing ? @"Done" : @"Edit";    
+    
+    //Reload the checkboxes
+    [self reloadCheckboxesInVisibleCells];
+    
+    //Show the delete button if in editing mode
+    if (self.tableView.editing)
+        [self showDeleteButton];
+    else
+        [self hideDeleteButton];
+}
+
+- (IBAction)deletePressed:(UIBarButtonItem *)sender {
+    int numOfDeletedFolders=self.toBeDeletedFolders.count;
+    NSString *folderCounter=numOfDeletedFolders > 1 ? @"folders" : @"folder";
+    NSString *message=[NSString stringWithFormat:@"You are about to delete %d entire %@ of records. Do you want to continue?",numOfDeletedFolders,folderCounter];
+    
+    //Put up an alert
+    UIAlertView *deleteAlert=[[UIAlertView alloc] initWithTitle:@"Delete Folder" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+    [deleteAlert show];
 }
 
 #pragma mark - Prepare for segues
@@ -372,7 +430,7 @@
     [cell addGestureRecognizer:longPressRecognizer];
     
     //Show/Hide the checkboxes
-    if (self.willFilterByFolder)
+    if (self.willFilterByFolder && !self.tableView.editing)
         [cell showCheckBoxAnimated:YES];
     else
         [cell hideCheckBoxAnimated:YES];
@@ -396,15 +454,35 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    //If the editing style is delete, delete the corresponding folder
-    if (editingStyle==UITableViewCellEditingStyleDelete) {
-        //Get the selected folder and save it to delete later
-        self.toBeDeletedFolder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the table view is in editing mode, increment the count for delete
+    if (self.tableView.editing) {
+        //Add the selected folder to the delete list
+        Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSMutableArray *toBeDeletedFolders=[self.toBeDeletedFolders mutableCopy];
+        [toBeDeletedFolders addObject:folder];
+        self.toBeDeletedFolders=[toBeDeletedFolders copy];
         
-        //Put up an alert
-        UIAlertView *deleteAlert=[[UIAlertView alloc] initWithTitle:@"Delete Folder" message:@"You are about to delete an entire folder of records. Do you want to continue?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
-        [deleteAlert show];
+        //Update the title of the delete button
+        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",[self.toBeDeletedFolders count]];
+    }
+    
+    //If the table view is not in editing mode, segue to show the records
+    else
+        [self performSegueWithIdentifier:@"Show Records" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the table view is in editing mode, decrement the count for delete
+    if (self.tableView.editing) {
+        //Remove the selected folder from the delete list
+        Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSMutableArray *toBeDeletedFolders=[self.toBeDeletedFolders mutableCopy];
+        [toBeDeletedFolders removeObject:folder];
+        self.toBeDeletedFolders=[toBeDeletedFolders copy];
+        
+        //Update the title of the delete button
+        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",[self.toBeDeletedFolders count]];
     }
 }
 
@@ -424,4 +502,8 @@
     [self postNotificationWithName:GeoNotificationModelGroupFolderDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
+- (void)viewDidUnload {
+    [self setDeleteButton:nil];
+    [super viewDidUnload];
+}
 @end
