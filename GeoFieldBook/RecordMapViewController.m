@@ -166,13 +166,6 @@
     self.records=[self.mapDelegate recordsForMapViewController:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    //Reselect the chosen record
-    [self selectAnnotationForRecord:self.selectedRecord];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;

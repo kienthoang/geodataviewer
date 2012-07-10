@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *date;
 @property (nonatomic, weak) IBOutlet UILabel *time;
 @property (nonatomic, weak) IBOutlet UIImageView *recordImageView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic, weak) IBOutlet UILabel *type;
 @property (nonatomic, weak) IBOutlet CheckBox *checkBox;
 

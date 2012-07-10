@@ -24,11 +24,15 @@
 
 #import "ModelGroupNotificationNames.h"
 
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate>
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate,UIScrollViewDelegate>
 
 - (void)createRecordForRecordType:(NSString *)recordType;
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
 - (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
+
+#pragma mark - Image Cache
+
+@property (nonatomic,strong) NSMutableDictionary *imageCache;
 
 #pragma mark - Temporary record's modified info
 
@@ -47,6 +51,8 @@
 @end
 
 @implementation RecordTableViewController
+
+@synthesize imageCache=_imageCache;
 
 @synthesize folder=_folder;
 @synthesize database=_database;
@@ -116,19 +122,25 @@
 }
 
 - (void)setChosenRecord:(Record *)chosenRecord {
-    if (_chosenRecord!=chosenRecord) {
-        _chosenRecord=chosenRecord;
-        
-        //Post a notification
-        NSDictionary *userInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.chosenRecord,GeoNotificationKeyModelGroupSelectedRecord, nil];
-        [self postNotificationWithName:GeoNotificationModelGroupDidSelectRecord andUserInfo:userInfo];
-    }
+    _chosenRecord=chosenRecord;
+    
+    //Post a notification
+    NSDictionary *userInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.chosenRecord,GeoNotificationKeyModelGroupSelectedRecord, nil];
+    [self postNotificationWithName:GeoNotificationModelGroupDidSelectRecord andUserInfo:userInfo];
+
 }
 
 #pragma mark - Getters
 
 - (NSArray *)selectedRecords {
     return [self.fetchedResultsController fetchedObjects];
+}
+
+- (NSMutableDictionary *)imageCache {
+    if (!_imageCache)
+        _imageCache=[NSMutableDictionary dictionary];
+    
+    return _imageCache;
 }
 
 #pragma mark - Alert Generators
@@ -163,7 +175,6 @@
 }
 
 - (void)highlightRecord:(Record *)record {
-    NSLog(@"Highlighted record: %@",record);
     //get ithe index path of the specified record
     NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
     
@@ -284,11 +295,20 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    //highlight the currently chosen record
+    [self highlightRecord:self.chosenRecord];
+    
     //Set the title of the set location button
     NSString *formationFolderName=self.folder.formationFolder.folderName;
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //Flush the image cache
+    [self flushImageCache];
+}
 
 - (void)viewDidUnload {
     [self setSetLocationButton:nil];
@@ -399,15 +419,92 @@
     cell.type.text=[record.class description];
     cell.date.text=[Record dateFromNSDate:record.date];
     cell.time.text = [Record timeFromNSDate:record.date];
+    
+    //Hide the spinner (in case it's still animating as the cell has been reused)
+    cell.spinner.hidden=YES;
 
-    //show the image
-    UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
-    cell.recordImageView.image=image;
+    //Set the image to nil (for asyncronous image loading)
+    cell.recordImageView.image=nil;
+    
+    //Load the image asynchronously
+    [self loadImageForCell:cell withRecord:record];
     
     return cell;
 }
 
 #pragma mark - Table View Delegate
+
+- (void)cacheImage:(UIImage *)image forHashValue:(NSString *)hashValue {
+    //If the cache has more than 50 images, flush it
+    if ([self.imageCache count]>50)
+        [self flushImageCache];
+    
+    //Cache the given image
+    [self.imageCache setValue:image forKey:hashValue];
+}
+
+- (UIImage *)imageInCacheWithHashValue:(NSString *)hashValue {
+    return [self.imageCache objectForKey:hashValue];
+}
+
+- (void)flushImageCache {
+    self.imageCache=[NSMutableDictionary dictionary];
+}
+
+- (void)loadImageForCell:(CustomRecordCell *)cell withRecord:(Record *)record {
+    UIImage *image=[self imageInCacheWithHashValue:[NSString stringWithFormat:@"%@",record.image.imageHash]];
+    if (image)
+        cell.recordImageView.image=image;
+    
+    //Load and cache the image if it's not there
+    else {
+        //Show the spinner
+        cell.spinner.hidden=NO;
+        [cell.spinner startAnimating];
+        
+        //Load the image from database asynchronously
+        dispatch_queue_t image_loader=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(image_loader, ^{
+            UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
+            [self cacheImage:image forHashValue:[NSString stringWithFormat:@"%@",record.image.imageHash]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //Load the image
+                if (!cell.recordImageView.image) {
+                    cell.recordImageView.image=image;
+                    
+                    //Stop the spinner
+                    [cell.spinner stopAnimating];
+                    cell.spinner.hidden=YES;
+                }
+            });
+        });
+        
+        dispatch_release(image_loader);
+    }
+}
+
+- (void)loadImagesForCells:(NSArray *)cells {
+    for (CustomRecordCell *cell in cells) {
+        NSIndexPath *indexPath=[self.tableView indexPathForCell:cell];
+        Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        //Try to retrieve the image from the cache
+        [self loadImageForCell:cell withRecord:record];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        //Load images for visible cells
+        [self loadImagesForCells:self.tableView.visibleCells];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    //Load images for visible cells
+    [self loadImagesForCells:self.tableView.visibleCells];
+}
 
 - (void) tableView:(UITableView *)tableView 
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle 

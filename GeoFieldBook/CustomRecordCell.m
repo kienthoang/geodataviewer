@@ -16,6 +16,7 @@
 @synthesize recordImageView = _recordImageView;
 @synthesize type = _type;
 @synthesize checkBox = _checkBox;
+@synthesize spinner=_spinner;
 
 - (void)showCheckBoxAnimated:(BOOL)animated {
     //Only execute if alpha is 0
