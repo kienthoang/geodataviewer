@@ -11,12 +11,13 @@
 #import "TransientManagedObject.h"
 
 @interface TransientFormation : TransientManagedObject
-@property (nonatomic, retain) NSString * formationName;
-@property (nonatomic, retain) NSNumber * formationSortNumber;
-@property (nonatomic, retain) NSSet *beddings;
-@property (nonatomic, retain) NSSet *faults;
-@property (nonatomic, retain) TransientFormation_Folder *formationFolder;
-@property (nonatomic, retain) NSSet *joinSets;
-@property (nonatomic, retain) NSSet *lowerContacts;
-@property (nonatomic, retain) NSSet *upperContacts;
+@property (nonatomic, strong) NSString * formationName;
+@property (nonatomic, strong) NSString *formationFolderName;
+@property (nonatomic, strong) NSNumber * formationSortNumber;
+@property (nonatomic, strong) NSSet *beddings;
+@property (nonatomic, strong) NSSet *faults;
+@property (nonatomic, strong) TransientFormation_Folder *formationFolder;
+@property (nonatomic, strong) NSSet *joinSets;
+@property (nonatomic, strong) NSSet *lowerContacts;
+@property (nonatomic, strong) NSSet *upperContacts;
 @end

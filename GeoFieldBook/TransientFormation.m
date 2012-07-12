@@ -9,12 +9,13 @@
 #import "TransientFormation.h"
 
 @implementation TransientFormation
-@synthesize formationName;
-@synthesize formationSortNumber;
-@synthesize beddings;
-@synthesize faults;
-@synthesize formationFolder;
-@synthesize joinSets;
-@synthesize lowerContacts;
-@synthesize upperContacts;
+@synthesize formationName=_formationName;
+@synthesize formationFolderName=_formationFolderName;
+@synthesize formationSortNumber=_formationSortNumber;
+@synthesize beddings=_beddings;
+@synthesize faults=_faults;
+@synthesize formationFolder=_formationFolder;
+@synthesize joinSets=_joinSets;
+@synthesize lowerContacts=_lowerContacts;
+@synthesize upperContacts=_upperContacts;
 @end

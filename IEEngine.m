@@ -59,7 +59,7 @@
     
     //get paths to the selected files
     self.selectedFilePaths = [self getSelectedFilePaths:files];
-    NSLog(@"paths created");
+    
     for(NSString *path in self.selectedFilePaths) {//for each file
         NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
         //remove the first line which is simply the column headings
@@ -122,14 +122,37 @@
         }        
     }    
     //now call the handler and pass it the array of records created ... 
-    NSLog(@"now pass");
+    if(self.handler) [self.handler handleConflictsForArray:self.formations];
 }
 
 
 #pragma mark - Reading of Formation files
 -(void) createFormationsFromCSVFiles:(NSArray *) files
 {
-    //read and create transient formations
+    //get the complete file paths for the selected files that exist
+    self.selectedFilePaths=[self getSelectedFilePaths:files];
+    
+    //read each of those files line by line and create the formation objects and add it to self.formations array.
+    for(NSString *path in self.selectedFilePaths) {
+        //this is an array lines, which is an array of tokens
+        NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
+        //for each array of tokens 
+        for(NSMutableArray *record in lineRecordsInAFile) {
+            NSString *folder = [record objectAtIndex:0];
+            [record removeObjectAtIndex:0];
+            TransientFormation_Folder *newFormationFolder = [[TransientFormation_Folder alloc] init];
+            newFormationFolder.folderName = folder;
+            //for each token(formation) in such an array of line record(formation folder)
+            for(NSString *formation in  record) {
+                TransientFormation *newFormation = [[TransientFormation alloc] init];
+                newFormation.formationFolderName = folder;
+                newFormation.formationName = formation;
+                [self.formations addObject:newFormation];
+            }
+        }
+    }
+    //now call the conflict handler to take care of writing these to the database
+    if(self.handler) [self.handler handleConflictsForArray:self.formations];
     
 }
 
