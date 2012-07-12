@@ -49,6 +49,9 @@
 		022C3E1615AE757A004F0EDD /* ConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E1515AE757A004F0EDD /* ConflictHandler.m */; };
 		022C3E2115AE75E8004F0EDD /* TransientRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2015AE75E8004F0EDD /* TransientRecord.m */; };
 		022C3E2515AE7656004F0EDD /* TransientManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2415AE7655004F0EDD /* TransientManagedObject.m */; };
+		022C3E3415AE7806004F0EDD /* TransientFormation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */; };
+		022C3E3515AE7806004F0EDD /* TransientFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E3115AE7806004F0EDD /* TransientFormation.m */; };
+		022C3E3615AE7806004F0EDD /* TransientProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E3315AE7806004F0EDD /* TransientProject.m */; };
 		023858671599233F00A0DB98 /* FormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023858661599233F00A0DB98 /* FormationFolderTableViewController.m */; };
 		0238586A15994DF200A0DB98 /* FormationFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586915994DF200A0DB98 /* FormationFolderViewController.m */; };
 		0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */; };
@@ -207,6 +210,12 @@
 		022C3E2015AE75E8004F0EDD /* TransientRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientRecord.m; sourceTree = "<group>"; };
 		022C3E2315AE7655004F0EDD /* TransientManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientManagedObject.h; sourceTree = "<group>"; };
 		022C3E2415AE7655004F0EDD /* TransientManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientManagedObject.m; sourceTree = "<group>"; };
+		022C3E2E15AE7806004F0EDD /* TransientFormation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation_Folder.h; sourceTree = "<group>"; };
+		022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation_Folder.m; sourceTree = "<group>"; };
+		022C3E3015AE7806004F0EDD /* TransientFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation.h; sourceTree = "<group>"; };
+		022C3E3115AE7806004F0EDD /* TransientFormation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation.m; sourceTree = "<group>"; };
+		022C3E3215AE7806004F0EDD /* TransientProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientProject.h; sourceTree = "<group>"; };
+		022C3E3315AE7806004F0EDD /* TransientProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientProject.m; sourceTree = "<group>"; };
 		023858651599233F00A0DB98 /* FormationFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderTableViewController.h; sourceTree = "<group>"; };
 		023858661599233F00A0DB98 /* FormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderTableViewController.m; sourceTree = "<group>"; };
 		0238586815994DF100A0DB98 /* FormationFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderViewController.h; sourceTree = "<group>"; };
@@ -426,14 +435,17 @@
 			children = (
 				022C3E2315AE7655004F0EDD /* TransientManagedObject.h */,
 				022C3E2415AE7655004F0EDD /* TransientManagedObject.m */,
-				022C3DF915AE7525004F0EDD /* TransientBedding.h */,
-				022C3DFA15AE7525004F0EDD /* TransientBedding.m */,
-				022C3DFB15AE7525004F0EDD /* TransientContact.h */,
-				022C3DFC15AE7525004F0EDD /* TransientContact.m */,
-				022C3DFD15AE7525004F0EDD /* TransientFault.h */,
-				022C3DFE15AE7525004F0EDD /* TransientFault.m */,
-				022C3DFF15AE7525004F0EDD /* TransientImage.h */,
-				022C3E0015AE7525004F0EDD /* TransientImage.m */,
+				022C3E3815AE785E004F0EDD /* Image */,
+				022C3E3915AE7874004F0EDD /* Bedding */,
+				022C3E3A15AE7885004F0EDD /* Contact */,
+				022C3E3B15AE789D004F0EDD /* Fault */,
+				022C3E3C15AE78B9004F0EDD /* Folder */,
+				022C3E2E15AE7806004F0EDD /* TransientFormation_Folder.h */,
+				022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */,
+				022C3E3015AE7806004F0EDD /* TransientFormation.h */,
+				022C3E3115AE7806004F0EDD /* TransientFormation.m */,
+				022C3E3215AE7806004F0EDD /* TransientProject.h */,
+				022C3E3315AE7806004F0EDD /* TransientProject.m */,
 				022C3E0115AE7525004F0EDD /* TransientJointSet.h */,
 				022C3E0215AE7525004F0EDD /* TransientJointSet.m */,
 				022C3E0315AE7525004F0EDD /* TransientOther.h */,
@@ -442,6 +454,49 @@
 				022C3E2015AE75E8004F0EDD /* TransientRecord.m */,
 			);
 			name = TransientManagedObjects;
+			sourceTree = "<group>";
+		};
+		022C3E3815AE785E004F0EDD /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				022C3DFF15AE7525004F0EDD /* TransientImage.h */,
+				022C3E0015AE7525004F0EDD /* TransientImage.m */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		022C3E3915AE7874004F0EDD /* Bedding */ = {
+			isa = PBXGroup;
+			children = (
+				022C3DF915AE7525004F0EDD /* TransientBedding.h */,
+				022C3DFA15AE7525004F0EDD /* TransientBedding.m */,
+			);
+			name = Bedding;
+			sourceTree = "<group>";
+		};
+		022C3E3A15AE7885004F0EDD /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				022C3DFB15AE7525004F0EDD /* TransientContact.h */,
+				022C3DFC15AE7525004F0EDD /* TransientContact.m */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
+		022C3E3B15AE789D004F0EDD /* Fault */ = {
+			isa = PBXGroup;
+			children = (
+				022C3DFD15AE7525004F0EDD /* TransientFault.h */,
+				022C3DFE15AE7525004F0EDD /* TransientFault.m */,
+			);
+			name = Fault;
+			sourceTree = "<group>";
+		};
+		022C3E3C15AE78B9004F0EDD /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Folder;
 			sourceTree = "<group>";
 		};
 		024097A2159D373F00855D33 /* Custom Views */ = {
@@ -1012,6 +1067,9 @@
 				022C3E0A15AE7525004F0EDD /* TransientOther.m in Sources */,
 				022C3E1615AE757A004F0EDD /* ConflictHandler.m in Sources */,
 				022C3E2115AE75E8004F0EDD /* TransientRecord.m in Sources */,
+				022C3E3415AE7806004F0EDD /* TransientFormation_Folder.m in Sources */,
+				022C3E3515AE7806004F0EDD /* TransientFormation.m in Sources */,
+				022C3E3615AE7806004F0EDD /* TransientProject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

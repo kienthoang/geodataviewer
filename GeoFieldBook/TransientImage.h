@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TransientManagedObject.h"
 
-@interface TransientImage : NSObject
+@interface TransientImage : TransientManagedObject
 @property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSData * imageHash;
 @property (nonatomic, retain) NSSet *whoUses;
