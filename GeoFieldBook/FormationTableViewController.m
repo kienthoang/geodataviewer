@@ -15,8 +15,6 @@
 
 @interface FormationTableViewController() <FormationViewControllerDelegate,NSFetchedResultsControllerDelegate>
 
-- (void)setupFetchedResultsController;
-
 @property (nonatomic) BOOL formationsWereReordered;
 
 @end

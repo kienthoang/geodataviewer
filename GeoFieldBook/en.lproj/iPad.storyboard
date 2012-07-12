@@ -70,7 +70,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7532" y="-4181"/>
+            <point key="canvasLocation" x="-7772" y="-5109"/>
         </scene>
         <!--Folder Table View Controller - Folders-->
         <scene sceneID="p56-nE-sZ6">
@@ -125,7 +125,7 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="39N-eQ-bgW"/>
-                        <barButtonItem title="Delete" width="120" id="x0c-NT-vLv">
+                        <barButtonItem enabled="NO" title="Delete" width="120" id="x0c-NT-vLv">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="deletePressed:" destination="Uwh-l0-QS0" id="dK7-nY-HvR"/>
@@ -134,28 +134,29 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="7cg-FR-WxX"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Folders" id="fc4-75-BDf">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="tqj-i6-PiN">
-                            <connections>
-                                <action selector="editPressed:" destination="Uwh-l0-QS0" id="H9F-XO-jka"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xBX-na-cpH">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="xBX-na-cpH">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="bjl-xY-1vQ" kind="modal" identifier="Add/Edit Folder" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="C0h-XZ-idy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="tqj-i6-PiN">
+                            <connections>
+                                <action selector="editPressed:" destination="Uwh-l0-QS0" id="H9F-XO-jka"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addButton" destination="xBX-na-cpH" id="ppg-5D-zo4"/>
                         <outlet property="deleteButton" destination="x0c-NT-vLv" id="fvo-wM-W3o"/>
                         <outlet property="editButton" destination="tqj-i6-PiN" id="qtX-Dl-Dib"/>
                         <segue destination="kmo-3x-I3i" kind="push" identifier="Show Records" id="DYB-10-x9y"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-8750" y="-2689"/>
+            <point key="canvasLocation" x="-9006" y="-3597"/>
         </scene>
         <!--Filter By Record Type Controller-->
         <scene sceneID="70s-hd-efC">
@@ -316,24 +317,24 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6138" y="-4138"/>
+            <point key="canvasLocation" x="-6378" y="-5066"/>
         </scene>
         <!--Record Table View Controller-->
         <scene sceneID="qZz-Vz-aQF">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjP-xg-sN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="formSheet" id="kmo-3x-I3i" customClass="RecordTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="82" sectionHeaderHeight="22" sectionFooterHeight="22" id="U2I-AS-shV">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="85" sectionHeaderHeight="10" sectionFooterHeight="10" id="U2I-AS-shV">
                         <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Record Cell" rowHeight="82" id="czt-Vw-1Fc" customClass="CustomRecordCell">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="82"/>
+                            <tableViewCell contentMode="redraw" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Record Cell" rowHeight="82" id="czt-Vw-1Fc" customClass="CustomRecordCell">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="84"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="81"/>
+                                    <rect key="frame" x="45" y="1" width="914" height="81"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="FHB-B0-ywg">
@@ -400,7 +401,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="checkBox" destination="cA4-e3-b08" id="H6d-z8-TeF"/>
                                     <outlet property="date" destination="WAV-7n-bcC" id="XQ3-d4-nxW"/>
@@ -424,6 +424,12 @@
                                 <segue destination="Rcx-ao-SRb" kind="modal" identifier="Select Record Type" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="rqL-Ed-8l9"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Delete" width="100" id="R7I-Hk-hEC">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="kmo-3x-I3i" id="WUE-cT-hH5"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="efN-TL-eXw"/>
                         <barButtonItem title="Set Location" style="plain" id="Ipl-an-wyO">
                             <connections>
@@ -433,15 +439,9 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Jgh-O4-FtE"/>
-                        <barButtonItem title="Controls" id="EZ6-34-aBV">
-                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <connections>
-                                <action selector="controlPressed:" destination="kmo-3x-I3i" id="q2i-tn-hRh"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="snE-dY-fcY">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="PL1-Ih-t0C">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="PL1-Ih-t0C">
                             <connections>
                                 <action selector="editPressed:" destination="kmo-3x-I3i" id="W9G-dE-NhA"/>
                             </connections>
@@ -450,12 +450,14 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addButton" destination="cpv-Nu-y09" id="FEs-ij-sJL"/>
+                        <outlet property="deleteButton" destination="R7I-Hk-hEC" id="j4Y-kW-ALC"/>
                         <outlet property="editButton" destination="PL1-Ih-t0C" id="Em2-sa-NNg"/>
                         <outlet property="setLocationButton" destination="Ipl-an-wyO" id="4Z4-GZ-130"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7448" y="-2606"/>
+            <point key="canvasLocation" x="-7688" y="-3534"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="hMg-tH-KZj">
@@ -1302,7 +1304,8 @@
                 <navigationController storyboardIdentifier="folderRecordModelGroup" modalPresentationStyle="formSheet" toolbarHidden="NO" id="ATM-Rf-lLX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Wnf-Vv-Sc3">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="Wnf-Vv-Sc3">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1316,13 +1319,13 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10248" y="-2681"/>
+            <point key="canvasLocation" x="-10488" y="-3609"/>
         </scene>
-        <!--Record Import Table View Controller-->
+        <!--Record ImportTVC-->
         <scene sceneID="q1x-nj-RNJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHM-w7-6Bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="" id="8tf-9a-8AO" customClass="RecordImportTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="" id="8tf-9a-8AO" customClass="RecordImportTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QQF-wK-IvH">
                         <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1354,12 +1357,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="X8h-y1-uIb">
-                        <barButtonItem key="rightBarButtonItem" title="Import" width="50" id="VPz-9T-tuf"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Import" width="100" style="done" id="VPz-9T-tuf">
+                            <connections>
+                                <action selector="importPressed:" destination="8tf-9a-8AO" id="Lnd-sE-uC1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <connections>
+                        <outlet property="importButton" destination="VPz-9T-tuf" id="feS-o7-zVC"/>
+                    </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-9071" y="-1062"/>
+            <point key="canvasLocation" x="-9031" y="-2526"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="dbq-aM-UYl">
@@ -1434,7 +1444,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5679" y="-2578"/>
+            <point key="canvasLocation" x="-5919" y="-3506"/>
         </scene>
         <!--Initial Detail View Controller-->
         <scene sceneID="6R2-xh-iRe">
@@ -1573,6 +1583,7 @@
                         <segue destination="ATM-Rf-lLX" kind="custom" identifier="popoverViewController" customClass="GeoFieldBookControllerSegue" id="YqS-Io-uSQ"/>
                         <segue destination="tgm-XQ-kdK" kind="custom" identifier="viewGroupController" customClass="GeoFieldBookControllerSegue" id="fIJ-OC-XU9"/>
                         <segue destination="TMV-ag-Ybd" kind="custom" identifier="Import Record Popover" customClass="GeoFieldBookControllerSegue" id="VAd-Mc-Naw"/>
+                        <segue destination="9ut-5g-xp2" kind="custom" identifier="Import Formation Popover" customClass="GeoFieldBookControllerSegue" id="Bu7-VF-gJl"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1624,13 +1635,289 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10301" y="-1062"/>
+            <point key="canvasLocation" x="-10261" y="-2526"/>
+        </scene>
+        <!--Formation ImportTVC-->
+        <scene sceneID="nBD-Xt-9wU">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xWC-UW-0bN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="" id="Uu5-sC-dG8" customClass="FormationImportTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="O5p-y4-84t">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Import Cell" textLabel="UcK-xl-q6u" style="IBUITableViewCellStyleDefault" id="9L2-AX-G2L">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UcK-xl-q6u">
+                                            <rect key="frame" x="10" y="0.0" width="914" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Uu5-sC-dG8" id="oVm-Iz-lBw"/>
+                            <outlet property="delegate" destination="Uu5-sC-dG8" id="skx-gN-iTI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="p1i-xy-RXt">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Import" width="100" style="done" id="sEM-ku-xLX">
+                            <connections>
+                                <action selector="importPressed:" destination="Uu5-sC-dG8" id="W3I-N6-NEB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <connections>
+                        <outlet property="importButton" destination="sEM-ku-xLX" id="tvc-iU-jpp"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-8959" y="-1126"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JyD-ek-PpN">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EFy-e8-U0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="Formation Import TVC" id="9ut-5g-xp2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="arb-xW-QRU">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Uu5-sC-dG8" kind="relationship" relationship="rootViewController" id="tr4-ZU-r0X"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-10221" y="-1110"/>
         </scene>
     </scenes>
     <resources>
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
         <image name="RecordVCBackground.jpg" width="536" height="688"/>
     </resources>
+    <classes>
+        <class className="CheckBox" superclassName="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CheckBox.h"/>
+        </class>
+        <class className="CoreDataTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="CustomFolderCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFolderCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomRecordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="CheckBox"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="type" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="DataMapSegmentViewController" superclassName="GeoSegmentViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DataMapSegmentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataMapSwitch" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="formationButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="settingButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="DipDirectionPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipDirectionPickerViewController.h"/>
+        </class>
+        <class className="DipPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipPickerViewController.h"/>
+        </class>
+        <class className="FilterByRecordTypeController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterByRecordTypeController.h"/>
+        </class>
+        <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
+        </class>
+        <class className="FormationFolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
+        </class>
+        <class className="FormationFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FormationImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationImportTVC.h"/>
+        </class>
+        <class className="FormationPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationPickerViewController.h"/>
+        </class>
+        <class className="FormationTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationTableViewController.h"/>
+        </class>
+        <class className="FormationViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="GeoFieldBookController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoFieldBookController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="dataMapSwitch" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="formationButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="popoverVCButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="settingButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="GeoSegmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoSegmentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="ImportTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="InitialDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="geofieldbookLogo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MKMapRecordInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MKMapRecordInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dip" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipDirection" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="formation" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="recordDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordType" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strike" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ModalFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="folderDescriptionTextArea" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="folderNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ModalRecordTypeSelector" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalRecordTypeSelector.h"/>
+            <relationships>
+                <relationship kind="outlet" name="recordTypePicker" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+        <class className="PickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+        <class className="PlungePickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlungePickerViewController.h"/>
+        </class>
+        <class className="RecordImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordImportTVC.h"/>
+        </class>
+        <class className="RecordMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="RecordTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="RecordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="browseButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="dateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="fieldObservationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="latitudeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="longitudeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="plungeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="takePhotoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="trendLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="trendTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="upperFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upperFormationTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="StrikePickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StrikePickerViewController.h"/>
+        </class>
+        <class className="TrendPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrendPickerViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

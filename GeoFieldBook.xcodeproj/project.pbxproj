@@ -22,7 +22,7 @@
 		020F06FC15982E570006B53B /* TrendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FB15982E570006B53B /* TrendPickerViewController.m */; };
 		020F06FF15982ED20006B53B /* PlungePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FE15982ED10006B53B /* PlungePickerViewController.m */; };
 		02191EC615AC850600A5EB2B /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 02191EC515AC850600A5EB2B /* Record.m */; };
-		02191ECA15ACA8DD00A5EB2B /* RecordImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02191EC915ACA8DD00A5EB2B /* RecordImportTableViewController.m */; };
+		02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */; };
 		0221BDE1159A58EA0058C792 /* FormationFolderPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */; };
 		0221BDE5159A88170058C792 /* Folder+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDE4159A88170058C792 /* Folder+DictionaryKeys.m */; };
 		0221BDEB159A8CFC0058C792 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDEA159A8CFA0058C792 /* Folder.m */; };
@@ -60,6 +60,8 @@
 		02712A53159D012100510188 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A52159D012100510188 /* Fault.m */; };
 		02712A56159D012F00510188 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A55159D012F00510188 /* JointSet.m */; };
 		02712A59159D013D00510188 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A58159D013D00510188 /* Other.m */; };
+		027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */; };
+		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -144,8 +146,8 @@
 		020F06FE15982ED10006B53B /* PlungePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlungePickerViewController.m; sourceTree = "<group>"; };
 		02191EC415AC850600A5EB2B /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		02191EC515AC850600A5EB2B /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
-		02191EC815ACA8DD00A5EB2B /* RecordImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordImportTableViewController.h; sourceTree = "<group>"; };
-		02191EC915ACA8DD00A5EB2B /* RecordImportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTableViewController.m; sourceTree = "<group>"; };
+		02191EC815ACA8DD00A5EB2B /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
+		02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportTableViewController.m; sourceTree = "<group>"; };
 		0221BDDF159A58EA0058C792 /* FormationFolderPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderPickerViewController.h; sourceTree = "<group>"; };
 		0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderPickerViewController.m; sourceTree = "<group>"; };
 		0221BDE3159A88170058C792 /* Folder+DictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+DictionaryKeys.h"; sourceTree = "<group>"; };
@@ -220,6 +222,10 @@
 		02712A55159D012F00510188 /* JointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JointSet.m; sourceTree = "<group>"; };
 		02712A57159D013D00510188 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
 		02712A58159D013D00510188 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
+		027406BA15AE711200AD9EDC /* RecordImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordImportTVC.h; sourceTree = "<group>"; };
+		027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTVCViewController.m; sourceTree = "<group>"; };
+		027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationImportTVC.h; sourceTree = "<group>"; };
+		027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -344,24 +350,9 @@
 		020EBB9A15942C7900EECC08 /* Model MVC Group */ = {
 			isa = PBXGroup;
 			children = (
-				020EBB5815941F7C00EECC08 /* FolderTableViewController.h */,
-				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
-				020EBBB81594611A00EECC08 /* RecordTableViewController.h */,
-				020EBBB91594611A00EECC08 /* RecordTableViewController.m */,
-				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
-				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
-				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
-				020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */,
-				023858651599233F00A0DB98 /* FormationFolderTableViewController.h */,
-				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
-				0238586815994DF100A0DB98 /* FormationFolderViewController.h */,
-				0238586915994DF200A0DB98 /* FormationFolderViewController.m */,
-				0238587415996B5B00A0DB98 /* FormationTableViewController.h */,
-				0238587515996B5C00A0DB98 /* FormationTableViewController.m */,
-				0238587715996F4900A0DB98 /* FormationViewController.h */,
-				0238587815996F4900A0DB98 /* FormationViewController.m */,
-				02191EC815ACA8DD00A5EB2B /* RecordImportTableViewController.h */,
-				02191EC915ACA8DD00A5EB2B /* RecordImportTableViewController.m */,
+				027406B615AE6F5300AD9EDC /* Folder-Record Group */,
+				027406B515AE6F3F00AD9EDC /* Formation Group */,
+				027406B315AE6F2C00AD9EDC /* I/E Group */,
 			);
 			name = "Model MVC Group";
 			sourceTree = "<group>";
@@ -436,6 +427,49 @@
 				0249E2ED15A9040800A7532E /* ModelGroupNotificationNames.h */,
 			);
 			name = "NSNotification Registrations";
+			sourceTree = "<group>";
+		};
+		027406B315AE6F2C00AD9EDC /* I/E Group */ = {
+			isa = PBXGroup;
+			children = (
+				02191EC815ACA8DD00A5EB2B /* ImportTableViewController.h */,
+				02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */,
+				027406BA15AE711200AD9EDC /* RecordImportTVC.h */,
+				027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */,
+				027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */,
+				027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */,
+			);
+			name = "I/E Group";
+			sourceTree = "<group>";
+		};
+		027406B515AE6F3F00AD9EDC /* Formation Group */ = {
+			isa = PBXGroup;
+			children = (
+				023858651599233F00A0DB98 /* FormationFolderTableViewController.h */,
+				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
+				0238586815994DF100A0DB98 /* FormationFolderViewController.h */,
+				0238586915994DF200A0DB98 /* FormationFolderViewController.m */,
+				0238587415996B5B00A0DB98 /* FormationTableViewController.h */,
+				0238587515996B5C00A0DB98 /* FormationTableViewController.m */,
+				0238587715996F4900A0DB98 /* FormationViewController.h */,
+				0238587815996F4900A0DB98 /* FormationViewController.m */,
+			);
+			name = "Formation Group";
+			sourceTree = "<group>";
+		};
+		027406B615AE6F5300AD9EDC /* Folder-Record Group */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB5815941F7C00EECC08 /* FolderTableViewController.h */,
+				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
+				020EBBB81594611A00EECC08 /* RecordTableViewController.h */,
+				020EBBB91594611A00EECC08 /* RecordTableViewController.m */,
+				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
+				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
+				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
+				020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */,
+			);
+			name = "Folder-Record Group";
 			sourceTree = "<group>";
 		};
 		0294E086159361060025219F = {
@@ -911,7 +945,9 @@
 				211B728815AB519300EC4C60 /* IEEngine.m in Sources */,
 				211B728C15AB521400EC4C60 /* IEConflictHandler.m in Sources */,
 				02191EC615AC850600A5EB2B /* Record.m in Sources */,
-				02191ECA15ACA8DD00A5EB2B /* RecordImportTableViewController.m in Sources */,
+				02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */,
+				027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */,
+				027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

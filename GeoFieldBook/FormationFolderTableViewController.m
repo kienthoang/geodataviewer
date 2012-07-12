@@ -18,8 +18,6 @@
 
 @interface FormationFolderTableViewController() <FormationFolderViewControllerDelegate,UIAlertViewDelegate>
 
-- (void)setupFetchedResultsController;
-
 @property (nonatomic,strong) Formation_Folder *toBeDeletedFolder;
 @property (nonatomic,strong) UIManagedDocument *database;
 

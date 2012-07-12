@@ -25,7 +25,7 @@
 
 #import "ModelGroupNotificationNames.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate,UIAlertViewDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
+@interface FolderTableViewController() <ModalFolderDelegate,UIActionSheetDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
 
 @property (nonatomic, strong) GeoFilter *recordFilter;
 
@@ -42,6 +42,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end
 
@@ -51,6 +52,7 @@
 @synthesize willFilterByFolder=_willFilterByFolder;
 @synthesize editButton = _editButton;
 @synthesize deleteButton = _deleteButton;
+@synthesize addButton = _addButton;
 
 @synthesize toBeDeletedFolders=_toBeDeletedFolders;
 
@@ -161,18 +163,6 @@
     [folder setFormationFolderWithName:formationFolder];
 }
 
-#pragma mark - UIAlertViewDelegate Methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //If the alert view is the delete folder alert and user clicks "Continue", delete the folder
-    if ([alertView.title isEqualToString:@"Delete Folder"]) {
-        if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue"]) {
-            //Delete the selected folders
-            [self deleteFolders:self.toBeDeletedFolders];
-        }
-    }
-}
-
 #pragma mark - Folder Creation/Editing/Deletion
 
 - (void)saveChangesToDatabase {
@@ -239,31 +229,11 @@
     //Save
     [self saveChangesToDatabase];
     
-    //End editing mode
-    [self.tableView setEditing:NO animated:NO];
-    
-    //Reload
-    [self.tableView reloadData];
-    
     //Send out a notification to indicate that the folder database has changed
     [self postNotificationWithName:GeoNotificationModelGroupFolderDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
 #pragma mark - View lifecycle
-
-- (void)showDeleteButton {
-    //Hide the delete button
-    self.deleteButton.title=@"Delete";
-    self.deleteButton.style=UIBarButtonItemStyleBordered;
-    self.deleteButton.enabled=YES;
-}
-
-- (void)hideDeleteButton {
-    //Hide the delete button
-    self.deleteButton.title=@"";
-    self.deleteButton.style=UIBarButtonItemStylePlain;
-    self.deleteButton.enabled=NO;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -279,7 +249,7 @@
     }];
     
     //Hide delete button
-    [self hideDeleteButton];
+    [self hideButton:self.deleteButton enabled:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -297,46 +267,71 @@
 
 #pragma mark - Target-Action Handlers
 
-- (void)reloadCheckboxesInVisibleCells {
+- (void)showButton:(UIBarButtonItem *)button withTitle:(NSString *)title enabled:(BOOL)enabled {
+    //Show the button
+    button.title=title;
+    button.style=UIBarButtonItemStyleBordered;
+    button.enabled=enabled;    
+}
+
+- (void)hideButton:(UIBarButtonItem *)button enabled:(BOOL)enabled {
+    //Hide the button
+    button.title=@"";
+    button.style=UIBarButtonItemStylePlain;
+    button.enabled=enabled;
+}
+
+- (void)reloadCheckboxesInVisibleCellsForEditingMode:(BOOL)editing {
     for (CustomFolderCell *cell in self.tableView.visibleCells) {
-        if (self.tableView.editing)
+        if (editing || !self.willFilterByFolder)
             [cell hideCheckBoxAnimated:YES];
         else {
-            //Show/Hide the checkboxes
-            if (self.willFilterByFolder)
-                [cell showCheckBoxAnimated:YES];
-            else
-                [cell hideCheckBoxAnimated:YES];
+            //Show the checkboxes
+            [cell showCheckBoxAnimated:YES];
         }
+    }
+}
+
+- (void)setupUIForEditingMode:(BOOL)editing {
+    //Setup the buttons
+    [self setupButtonsForEditingMode:editing];
+    
+    //Reload the checkboxes
+    [self reloadCheckboxesInVisibleCellsForEditingMode:editing];
+}
+
+- (void)setupButtonsForEditingMode:(BOOL)editing {
+    //Set the style of the action button
+    self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    
+    //Show the delete button if in editing mode
+    if (editing)
+        [self showButton:self.deleteButton withTitle:@"Delete" enabled:NO];
+    else {
+        //Reset the list of to be deleted folders
+        self.toBeDeletedFolders=[NSArray array];
+        
+        //Hide the delete button
+        [self hideButton:self.deleteButton enabled:NO];
     }
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Set the table view to editting mode
     [self.tableView setEditing:!self.tableView.editing animated:YES];
-
-    //Change the style of the button to edit or done
-    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-    sender.title=self.tableView.editing ? @"Done" : @"Edit";    
     
-    //Reload the checkboxes
-    [self reloadCheckboxesInVisibleCells];
-    
-    //Show the delete button if in editing mode
-    if (self.tableView.editing)
-        [self showDeleteButton];
-    else
-        [self hideDeleteButton];
+    //Setup the UI
+    [self setupUIForEditingMode:self.tableView.editing];
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {
     int numOfDeletedFolders=self.toBeDeletedFolders.count;
-    NSString *folderCounter=numOfDeletedFolders > 1 ? @"folders" : @"folder";
-    NSString *message=[NSString stringWithFormat:@"You are about to delete %d entire %@ of records. Do you want to continue?",numOfDeletedFolders,folderCounter];
+    NSString *message=numOfDeletedFolders > 1 ? [NSString stringWithFormat:@"Are you sure you want to delete %d folders?",numOfDeletedFolders] : @"Are you sure you want to delete this folder?";
+    NSString *destructiveButtonTitle=numOfDeletedFolders > 1 ? @"Delete Folders" : @"Delete Folder";
     
     //Put up an alert
-    UIAlertView *deleteAlert=[[UIAlertView alloc] initWithTitle:@"Delete Folder" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
-    [deleteAlert show];
+    UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
+    [deleteActionSheet showInView:self.view];
 }
 
 #pragma mark - Prepare for segues
@@ -352,8 +347,7 @@
             UITableViewCell *cell=(UITableViewCell *)sender;
             Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             [segue.destinationViewController setFolder:folder];
-            [self editPressed:self.editButton];
-        }            
+        }
     }
     
     //Seguing to the RecordTableViewController
@@ -438,13 +432,6 @@
     return cell;
 }
 
-- (void)longPressOnTableCell:(UILongPressGestureRecognizer *)longPress {
-    //Show a popover
-    //UITableViewCell *cell=(UITableViewCell *)longPress.view;
-    //Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-    //cell.textLabel.text=folder.folderDescription;
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
@@ -464,7 +451,11 @@
         self.toBeDeletedFolders=[toBeDeletedFolders copy];
         
         //Update the title of the delete button
-        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",[self.toBeDeletedFolders count]];
+        int numFolders=self.toBeDeletedFolders.count;
+        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",numFolders];
+        
+        //Enable the delete button
+        self.deleteButton.enabled=numFolders>0;
     }
     
     //If the table view is not in editing mode, segue to show the records
@@ -482,7 +473,11 @@
         self.toBeDeletedFolders=[toBeDeletedFolders copy];
         
         //Update the title of the delete button
-        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",[self.toBeDeletedFolders count]];
+        int numFolders=self.toBeDeletedFolders.count;
+        self.deleteButton.title=numFolders ? [NSString stringWithFormat:@"Delete (%d)",numFolders] : @"Delete";
+        
+        //Disable the delete button if no record is selected
+        self.deleteButton.enabled=numFolders>0;
     }
 }
 
@@ -503,7 +498,24 @@
 }
 
 - (void)viewDidUnload {
-    [self setDeleteButton:nil];
+    [self setAddButton:nil];
     [super viewDidUnload];
 }
+ 
+#pragma mark - UIActionSheetDelegate protocol methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If the action sheet is the delete folder action sheet and user clicks "Delete Folders" or "Delete Folder", delete the folder(s)
+    NSSet *deleteButtonTitles=[NSSet setWithObjects:@"Delete Folders",@"Delete Folder", nil];
+    NSString *clickedButtonTitle=[actionSheet buttonTitleAtIndex:buttonIndex];
+    if (self.tableView.editing && [deleteButtonTitles containsObject:clickedButtonTitle]) {
+        //Delete the selected folders
+        [self deleteFolders:self.toBeDeletedFolders];
+        
+        //End editing mode
+        if (self.tableView.editing)
+            [self editPressed:self.editButton];
+    }
+}
+
 @end

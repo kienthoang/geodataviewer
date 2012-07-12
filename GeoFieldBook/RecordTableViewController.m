@@ -24,11 +24,7 @@
 
 #import "ModelGroupNotificationNames.h"
 
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate,UIScrollViewDelegate>
-
-- (void)createRecordForRecordType:(NSString *)recordType;
-- (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
-- (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath;
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 
 #pragma mark - Image Cache
 
@@ -39,10 +35,18 @@
 @property (nonatomic,strong) Record *modifiedRecord;
 @property (nonatomic,strong) NSDictionary *recordModifiedInfo;
 
+@property (nonatomic,strong) NSArray *toBeDeletedRecords;
+
 #pragma mark - UI Outlets
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *setLocationButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+
+#pragma mark - Temporary buttons
+
+@property (nonatomic,strong) UIBarButtonItem *hiddenButton;
 
 #pragma mark - Popover Controllers
 
@@ -61,8 +65,13 @@
 
 @synthesize modifiedRecord=_modifiedRecord;
 @synthesize recordModifiedInfo=_recordModifiedInfo;
+@synthesize toBeDeletedRecords=_toBeDeletedRecords;
+
 @synthesize setLocationButton = _setLocationButton;
 @synthesize editButton = _editButton;
+@synthesize deleteButton = _deleteButton;
+@synthesize addButton = _addButton;
+@synthesize hiddenButton=_hiddenButton;
 
 @synthesize delegate=_delegate;
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
@@ -88,7 +97,7 @@
     _willShowCheckboxes=willShowCheckboxes;
     
     //Reset the checkboxes
-    [self updateCheckboxes];
+    [self reloadCheckboxesInVisibleCellsForEditingMode:self.tableView.editing];
 }
 
 - (void)setDatabase:(UIManagedDocument *)database {
@@ -141,6 +150,13 @@
         _imageCache=[NSMutableDictionary dictionary];
     
     return _imageCache;
+}
+
+- (NSArray *)toBeDeletedRecords {
+    if (!_toBeDeletedRecords)
+        _toBeDeletedRecords=[NSArray array];
+    
+    return _toBeDeletedRecords;
 }
 
 #pragma mark - Alert Generators
@@ -234,15 +250,16 @@
     }];
 }
 
-//Delete the record at the specified index path in the table
-- (void)deleteRecordAtIndexPath:(NSIndexPath *)indexPath {
+//Delete the given records
+- (void)deleteRecords:(NSArray *)records {
     //Get the record and delete it
-    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    [self.database.managedObjectContext deleteObject:record];
+    for (Record *record in records) {
+        [self.database.managedObjectContext deleteObject:record];
     
-    //If the deleted record is the currently chosen record, set it to nil
-    if (record==self.chosenRecord)
-        self.chosenRecord=nil;
+        //If the deleted record is the currently chosen record, set it to nil
+        if (record==self.chosenRecord)
+            self.chosenRecord=nil;
+    }
     
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
@@ -266,31 +283,23 @@
     self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
 }
 
-#pragma mark - UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Save"]) {
-        //Save the record info
-        [self modifyRecord:self.modifiedRecord withNewInfo:self.recordModifiedInfo];
-    }
-}
-
 - (void)alertViewCancel:(UIAlertView *)alertView {
     //Nillify the temporary record modified data
     self.modifiedRecord=nil;
     self.recordModifiedInfo=nil;
 }
 
-#pragma mark - UIActionSheetDelegate methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //If user click set location
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Set Location"]) {
-        [self performSegueWithIdentifier:@"Formation Folder Picker" sender:self];
-    }
-}
-
 #pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    //Hide the delete button
+    self.hiddenButton=self.deleteButton;
+    NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
+    [toolbarItems removeObject:self.deleteButton];
+    self.toolbarItems=[toolbarItems copy];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -313,6 +322,8 @@
 - (void)viewDidUnload {
     [self setSetLocationButton:nil];
     [self setEditButton:nil];
+    [self setDeleteButton:nil];
+    [self setAddButton:nil];
     [super viewDidUnload];
 }
 
@@ -324,19 +335,57 @@
 
 #pragma mark - Target-Action Handlers
 
+- (void)reloadCheckboxesInVisibleCellsForEditingMode:(BOOL)editing {
+    for (CustomRecordCell *cell in self.tableView.visibleCells) {
+        if (editing || !self.willShowCheckboxes)
+            [cell hideCheckBoxAnimated:YES];
+        else {
+            //Show the checkboxes
+            [cell showCheckBoxAnimated:YES];
+        }
+    }
+}
+
+- (void)setupUIForEditingMode:(BOOL)editing {
+    //Setup the buttons
+    [self setupButtonsForEditingMode:editing];
+    
+    //Reload the checkboxes
+    [self reloadCheckboxesInVisibleCellsForEditingMode:editing];
+}
+
+- (void)setupButtonsForEditingMode:(BOOL)editing {
+    //Change the style of the action button
+    self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    
+    //Show/Hide add/delete button
+    UIBarButtonItem *hiddenButton=self.hiddenButton;
+    self.hiddenButton=editing ? self.addButton : self.deleteButton;
+    NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
+    if (editing)
+        [toolbarItems removeObject:self.addButton];
+    else
+        [toolbarItems removeObject:self.deleteButton];
+    [toolbarItems insertObject:hiddenButton atIndex:0];
+    self.toolbarItems=[toolbarItems copy];
+}
+
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     //Set the table view to editting mode
     [self.tableView setEditing:!self.tableView.editing animated:YES];
     
-    //Change the style of the button to edit or done
-    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-    sender.title=self.tableView.editing ? @"Done" : @"Edit";
+    //Set up the buttons
+    [self setupUIForEditingMode:self.tableView.editing];
 }
 
-- (IBAction)controlPressed:(UIBarButtonItem *)sender {
-    //Set up an action sheet of control buttons
-    UIActionSheet *controlActionSheet=[[UIActionSheet alloc] initWithTitle:@"Control Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Set Location",@"Control Option 1",@"Control Option 2", nil];
-    [controlActionSheet showInView:self.view];
+- (IBAction)deletePressed:(UIBarButtonItem *)sender {
+    int numOfDeletedRecords=self.toBeDeletedRecords.count;
+    NSString *message=numOfDeletedRecords > 1 ? [NSString stringWithFormat:@"Are you sure you want to delete %d records?",numOfDeletedRecords] : @"Are you sure you want to delete this record?";
+    NSString *destructiveButtonTitle=numOfDeletedRecords > 1 ? @"Delete Records" : @"Delete Record";
+    
+    //Put up an alert
+    UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
+    [deleteActionSheet showInView:self.view];
 }
 
 #pragma mark - Prepare for segues
@@ -385,23 +434,6 @@
 
 #pragma mark - Table view data source
 
-- (void)updateCheckboxes {
-    //Iterate through the visible table cells and manage their checkboxes
-    for (CustomRecordCell *cell in self.tableView.visibleCells) {
-        Record *record=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-        
-        //Set up the checkbox
-        CheckBox *checkbox=cell.checkBox;
-        checkbox.image=[self.selectedRecordTypes containsObject:[record.class description]] ? checkbox.checked : checkbox.unchecked;
-        if (!self.selectedRecordTypes)
-            checkbox.image=checkbox.checked;
-        if (self.willShowCheckboxes)
-            [cell showCheckBoxAnimated:YES];
-        else
-            [cell hideCheckBoxAnimated:YES];
-    }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Record Cell";
@@ -435,8 +467,8 @@
 #pragma mark - Table View Delegate
 
 - (void)cacheImage:(UIImage *)image forHashValue:(NSString *)hashValue {
-    //If the cache has more than 50 images, flush it
-    if ([self.imageCache count]>50)
+    //If the cache has more than 30 images, flush it
+    if ([self.imageCache count]>30)
         [self flushImageCache];
     
     //Cache the given image
@@ -506,20 +538,60 @@
     [self loadImagesForCells:self.tableView.visibleCells];
 }
 
-- (void) tableView:(UITableView *)tableView 
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle 
- forRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-    //If editting style is delete, delete the corresponding record
-    if (editingStyle==UITableViewCellEditingStyleDelete) {
-        [self deleteRecordAtIndexPath:indexPath];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the table view is in editing mode, increment the count for delete
+    if (self.tableView.editing) {
+        //Add the selected record to the delete list
+        Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSMutableArray *toBeDeletedRecords=[self.toBeDeletedRecords mutableCopy];
+        [toBeDeletedRecords addObject:folder];
+        self.toBeDeletedRecords=[toBeDeletedRecords copy];
+        
+        //Update the title of the delete button
+        int numRecords=self.toBeDeletedRecords.count;
+        self.deleteButton.title=numRecords ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
+        
+        //Enable the delete button
+        self.deleteButton.enabled=numRecords>0;
+    }
+    
+    //Else, save the chosen record
+    else if (self.chosenRecord!=[self.fetchedResultsController objectAtIndexPath:indexPath])
+        self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the table view is in editing mode, decrement the count for delete
+    if (self.tableView.editing) {
+        //Remove the selected folder from the delete list
+        Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSMutableArray *toBeDeletedRecords=[self.toBeDeletedRecords mutableCopy];
+        [toBeDeletedRecords removeObject:folder];
+        self.toBeDeletedRecords=[toBeDeletedRecords copy];
+         
+        //Update the title of the delete button
+        int numRecords=self.toBeDeletedRecords.count;
+        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",numRecords];
+        
+        //Enable the delete button
+        self.deleteButton.enabled=numRecords>0;
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //Save the chosen record
-    if (self.chosenRecord!=[self.fetchedResultsController objectAtIndexPath:indexPath])
-        self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
+#pragma mark - UIActionSheetDelegate protocol methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If the action sheet is the delete record action sheet and user clicks "Delete Records" or "Delete Record", delete the record(s)
+    NSSet *deleteButtonTitles=[NSSet setWithObjects:@"Delete Records",@"Delete Record", nil];
+    NSString *clickedButtonTitle=[actionSheet buttonTitleAtIndex:buttonIndex];
+    if (self.tableView.editing && [deleteButtonTitles containsObject:clickedButtonTitle]) {
+        //Delete the selected folders
+        [self deleteRecords:self.toBeDeletedRecords];
+        
+        //End editing mode
+        if (self.tableView.editing)
+            [self editPressed:self.editButton];
+    }
 }
 
 @end

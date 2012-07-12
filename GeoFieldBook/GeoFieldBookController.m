@@ -12,7 +12,7 @@
 #import "RecordTableViewController.h"
 #import "FolderTableViewController.h"
 #import "FormationFolderTableViewController.h"
-#import "RecordImportTableViewController.h"
+#import "ImportTableViewController.h"
 
 #import "DataMapSegmentViewController.h"
 #import "RecordViewController.h"
@@ -43,7 +43,7 @@
 
 #pragma mark - Temporary Popover Controllers
 
-@property (nonatomic, strong) UIPopoverController *importRecordPopover;
+@property (nonatomic, strong) UIPopoverController *importPopover;
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 
 @end
@@ -66,7 +66,7 @@
 @synthesize recordModifiedInfo=_recordModifiedInfo;
 @synthesize modifiedRecord=_modifiedRecord;
 
-@synthesize importRecordPopover=_importRecordPopover;
+@synthesize importPopover=_importPopover;
 
 - (DataMapSegmentViewController *)dataMapSegmentViewController {
     id dataMapSegmentViewController=self.viewGroupController;
@@ -89,8 +89,8 @@
 - (void)dismissAllVisiblePopoversAnimated:(BOOL)animated {
     [self.formationFolderPopoverController dismissPopoverAnimated:NO];
     [self.popoverViewController dismissPopoverAnimated:NO];
-    [self.importRecordPopover dismissPopoverAnimated:NO];
-    self.importRecordPopover=nil;
+    [self.importPopover dismissPopoverAnimated:NO];
+    self.importPopover=nil;
 }
 
 #pragma mark - UIActionSheetDelegate Protocol methods
@@ -101,18 +101,35 @@
     
     //Instantiate the record import popover
     UIViewController *recordImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
-    self.importRecordPopover=[[UIPopoverController alloc] initWithContentViewController:recordImportTVC];
+    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:recordImportTVC];
     
     //Present it
-    [self.importRecordPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)presentRecordFormationPopover {
+    //Dismiss all visible popovers
+    [self dismissAllVisiblePopoversAnimated:NO];
+    
+    //Instantiate the record import popover
+    UIViewController *folderImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FORMATION_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:folderImportTVC];
+    
+    //Present it
+    [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     //If the given action sheet is the import/export action sheet
     if ([actionSheet.title isEqualToString:IMPORT_EXPORT_ACTION_SHEET_TITLE]) {
-        //If user click import records
-        if (buttonIndex<actionSheet.numberOfButtons && [[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Records"])
-            [self presentRecordImportPopover];
+        if (buttonIndex<actionSheet.numberOfButtons) {
+            //If user click import records
+            if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Records"])
+                [self presentRecordImportPopover];
+            //If user click import formations
+            else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Formations"])
+                [self presentRecordFormationPopover];
+        }
     }
 }
 
