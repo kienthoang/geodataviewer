@@ -100,10 +100,36 @@
             record.longitude = [lineArray objectAtIndex:Longitude];
             record.strike = [lineArray objectAtIndex:Strike];
             
+            //separate by spaces to create a NSDate object from the string
+            NSString *date = [lineArray objectAtIndex:dateAndTime];
+            //remove leading and trailing spaces
+            date = [date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            date = [date stringByReplacingOccurrencesOfString:@"," withString:@""]; //remove comma(s), if any
+            NSArray *array = [date componentsSeparatedByString:@" "]; //separate by spaces
+            
+            typedef enum Months{Zero, January, February, March, April, May, June, July, August, September, October, November, December}Months; 
+            int month = (Months)[array objectAtIndex:1];
+                      
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            [comps setYear:[[array objectAtIndex:3] intValue]];
+            [comps setMonth:month];
+            [comps setDay:[[array objectAtIndex:2] intValue]];
+            NSArray *time = [[array objectAtIndex:4] componentsSeparatedByString:@":"];
+            [comps setHour:[[time objectAtIndex:0] intValue]];
+            [comps setMinute:[[time objectAtIndex:1] intValue]];
+            [comps setSecond:[[time objectAtIndex:2] intValue]];
+            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+            NSDate *newDate = [gregorian dateFromComponents:comps];    
+            //finally populate the date field
+            record.date = newDate;
+            
+            
             //separate the date&time string to populate the date and time strings in the transient records
             NSArray *dateTimeArray = [[lineArray objectAtIndex:dateAndTime] componentsSeparatedByString:@","];
             record.dateString = [NSString stringWithFormat:@"%@,%@",[dateTimeArray objectAtIndex:0],[dateTimeArray      objectAtIndex:1]];
             record.timeString = [dateTimeArray objectAtIndex:2];
+            
+            
             
             //to set the image, first get the image from the images directory
             NSArray *pathsArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -180,7 +206,6 @@
         [records addObject:[self parseLine:line]];
     }
     
-    NSLog(@"returning");
     return records;
 
 }
