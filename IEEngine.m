@@ -61,11 +61,21 @@
     self.selectedFilePaths = [self getSelectedFilePaths:files];
     
     for(NSString *path in self.selectedFilePaths) {//for each file
+        //this is an array of array
         NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
         //remove the first line which is simply the column headings
         [lineRecordsInAFile removeObjectAtIndex:0];
         //now create transient objects from the rest
+        
         for(id lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
+            
+            NSString *log = @"[";
+            for(NSString *s in lineArray) {
+                log = [log stringByAppendingFormat:@"%@, ",s];
+            }
+            
+            NSLog(@"Read Tokens: %@", log);
+            
             if([lineArray count]!=15){ //not enough/more fields in the record
                 NSLog(@"Corrupted record ignored!");
                 continue;
@@ -226,7 +236,9 @@
 
 -(NSArray *) parseLine:(NSString *) line 
 {
-//    //line = [[NSString alloc] initWithString:@"\"\"A,\"\"\"1,2,\"\"7,8\"\",7,\",C,\"\"\"hey, hey\"\"\",,\"\"\",\""]; //for testing
+    //log to see if each individual line (record) is extracted properly
+        NSLog(@"Individual record: %@", line);
+    
     NSMutableArray *values = [[line componentsSeparatedByString:@","] mutableCopy];
 
     values = [self separateRecordsOrFieldsByCountingQuotations:values];
