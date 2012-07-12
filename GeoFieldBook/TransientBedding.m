@@ -9,5 +9,7 @@
 #import "TransientBedding.h"
 
 @implementation TransientBedding
+
 @synthesize formation=_formation;
+
 @end

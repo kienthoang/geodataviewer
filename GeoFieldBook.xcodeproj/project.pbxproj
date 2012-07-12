@@ -48,6 +48,7 @@
 		022C3E0A15AE7525004F0EDD /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E0415AE7525004F0EDD /* TransientOther.m */; };
 		022C3E1615AE757A004F0EDD /* ConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E1515AE757A004F0EDD /* ConflictHandler.m */; };
 		022C3E2115AE75E8004F0EDD /* TransientRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2015AE75E8004F0EDD /* TransientRecord.m */; };
+		022C3E2515AE7656004F0EDD /* TransientManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2415AE7655004F0EDD /* TransientManagedObject.m */; };
 		023858671599233F00A0DB98 /* FormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023858661599233F00A0DB98 /* FormationFolderTableViewController.m */; };
 		0238586A15994DF200A0DB98 /* FormationFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586915994DF200A0DB98 /* FormationFolderViewController.m */; };
 		0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */; };
@@ -204,6 +205,8 @@
 		022C3E1515AE757A004F0EDD /* ConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConflictHandler.m; sourceTree = "<group>"; };
 		022C3E1F15AE75E8004F0EDD /* TransientRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientRecord.h; sourceTree = "<group>"; };
 		022C3E2015AE75E8004F0EDD /* TransientRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientRecord.m; sourceTree = "<group>"; };
+		022C3E2315AE7655004F0EDD /* TransientManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientManagedObject.h; sourceTree = "<group>"; };
+		022C3E2415AE7655004F0EDD /* TransientManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientManagedObject.m; sourceTree = "<group>"; };
 		023858651599233F00A0DB98 /* FormationFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderTableViewController.h; sourceTree = "<group>"; };
 		023858661599233F00A0DB98 /* FormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderTableViewController.m; sourceTree = "<group>"; };
 		0238586815994DF100A0DB98 /* FormationFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderViewController.h; sourceTree = "<group>"; };
@@ -421,6 +424,8 @@
 		022C3DF815AE74FD004F0EDD /* TransientManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
+				022C3E2315AE7655004F0EDD /* TransientManagedObject.h */,
+				022C3E2415AE7655004F0EDD /* TransientManagedObject.m */,
 				022C3DF915AE7525004F0EDD /* TransientBedding.h */,
 				022C3DFA15AE7525004F0EDD /* TransientBedding.m */,
 				022C3DFB15AE7525004F0EDD /* TransientContact.h */,
@@ -989,6 +994,7 @@
 				02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */,
 				027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */,
 				027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */,
+				022C3E2515AE7656004F0EDD /* TransientManagedObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

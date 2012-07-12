@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "TransientImage.h"
 #import "TransientProject.h"
+#import "TransientManagedObject.h"
 
-@interface TransientRecord : NSObject
+@interface TransientRecord : TransientManagedObject
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *project;
