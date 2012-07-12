@@ -440,18 +440,11 @@
 				022C3E3A15AE7885004F0EDD /* Contact */,
 				022C3E3B15AE789D004F0EDD /* Fault */,
 				022C3E3C15AE78B9004F0EDD /* Folder */,
-				022C3E2E15AE7806004F0EDD /* TransientFormation_Folder.h */,
-				022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */,
-				022C3E3015AE7806004F0EDD /* TransientFormation.h */,
-				022C3E3115AE7806004F0EDD /* TransientFormation.m */,
-				022C3E3215AE7806004F0EDD /* TransientProject.h */,
-				022C3E3315AE7806004F0EDD /* TransientProject.m */,
-				022C3E0115AE7525004F0EDD /* TransientJointSet.h */,
-				022C3E0215AE7525004F0EDD /* TransientJointSet.m */,
-				022C3E0315AE7525004F0EDD /* TransientOther.h */,
-				022C3E0415AE7525004F0EDD /* TransientOther.m */,
-				022C3E1F15AE75E8004F0EDD /* TransientRecord.h */,
-				022C3E2015AE75E8004F0EDD /* TransientRecord.m */,
+				022C3E4715AE797F004F0EDD /* Formation */,
+				022C3E4615AE7955004F0EDD /* Formation Folder */,
+				022C3E4815AE7993004F0EDD /* JointSet */,
+				022C3E4915AE79AC004F0EDD /* Record */,
+				022C3E4A15AE79C1004F0EDD /* Other */,
 			);
 			name = TransientManagedObjects;
 			sourceTree = "<group>";
@@ -495,8 +488,64 @@
 		022C3E3C15AE78B9004F0EDD /* Folder */ = {
 			isa = PBXGroup;
 			children = (
+				022C3E3215AE7806004F0EDD /* TransientProject.h */,
+				022C3E3315AE7806004F0EDD /* TransientProject.m */,
 			);
 			name = Folder;
+			sourceTree = "<group>";
+		};
+		022C3E4615AE7955004F0EDD /* Formation Folder */ = {
+			isa = PBXGroup;
+			children = (
+				022C3E2E15AE7806004F0EDD /* TransientFormation_Folder.h */,
+				022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */,
+			);
+			name = "Formation Folder";
+			sourceTree = "<group>";
+		};
+		022C3E4715AE797F004F0EDD /* Formation */ = {
+			isa = PBXGroup;
+			children = (
+				022C3E3015AE7806004F0EDD /* TransientFormation.h */,
+				022C3E3115AE7806004F0EDD /* TransientFormation.m */,
+			);
+			name = Formation;
+			sourceTree = "<group>";
+		};
+		022C3E4815AE7993004F0EDD /* JointSet */ = {
+			isa = PBXGroup;
+			children = (
+				022C3E0115AE7525004F0EDD /* TransientJointSet.h */,
+				022C3E0215AE7525004F0EDD /* TransientJointSet.m */,
+			);
+			name = JointSet;
+			sourceTree = "<group>";
+		};
+		022C3E4915AE79AC004F0EDD /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				022C3E1F15AE75E8004F0EDD /* TransientRecord.h */,
+				022C3E2015AE75E8004F0EDD /* TransientRecord.m */,
+			);
+			name = Record;
+			sourceTree = "<group>";
+		};
+		022C3E4A15AE79C1004F0EDD /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				022C3E0315AE7525004F0EDD /* TransientOther.h */,
+				022C3E0415AE7525004F0EDD /* TransientOther.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		022C3E4B15AE79D6004F0EDD /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				02712A57159D013D00510188 /* Other.h */,
+				02712A58159D013D00510188 /* Other.m */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		024097A2159D373F00855D33 /* Custom Views */ = {
@@ -678,8 +727,6 @@
 		0294E0D5159363050025219F /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
-				02712A57159D013D00510188 /* Other.h */,
-				02712A58159D013D00510188 /* Other.m */,
 				2132A5DB159CD63500009CB9 /* Image */,
 				0298C253159B432A0038E89C /* Bedding */,
 				0298C254159B433A0038E89C /* Contact */,
@@ -689,6 +736,7 @@
 				0298C259159B43910038E89C /* Formation Folder */,
 				0298C257159B43790038E89C /* JointSet */,
 				0298C256159B435B0038E89C /* Record */,
+				022C3E4B15AE79D6004F0EDD /* Other */,
 			);
 			name = NSManagedObject;
 			sourceTree = "<group>";
