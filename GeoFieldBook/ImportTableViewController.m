@@ -64,6 +64,12 @@
     
     //Put self into editing mode
     self.tableView.editing=YES;
+    
+    //Initialize the engine
+    self.engine=[[IEEngine alloc] init];
+    
+    //Initialize the conflict handler
+    self.conflictHandler=[[ConflictHandler alloc] init];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

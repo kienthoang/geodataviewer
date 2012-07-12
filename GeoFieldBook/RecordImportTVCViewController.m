@@ -53,20 +53,28 @@
     return cell;
 }
 
+#pragma mark - Target Action Handlers
+
+- (IBAction)importPressed:(UIBarButtonItem *)sender {
+    //Pass the selected csv files to the engine
+    [self.engine createRecordsFromCSVFiles:self.selectedCSVFiles];
+    self.engine.handler=self.conflictHandler;
+}
+
 #pragma mark - ConflictHandlerDelegate methods
 
 #pragma mark - ConflictHandlerDelegate protocol methods
-
-- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithRecords:(NSArray *)records {
-    //Put up alert
-    NSString *message=@"";
-    for (NSString *record in records) {
-        message=[message stringByAppendingString:[NSString stringWithFormat:@"Folder
-                                                  }
-                                                  }
-                                                  
-- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithFormations:(NSArray *)formations {
-                                                      
-}
+//
+//- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithRecords:(NSArray *)records {
+//    //Put up alert
+//    NSString *message=@"";
+//    for (NSString *record in records) {
+//        message=[message stringByAppendingString:[NSString stringWithFormat:@"Folder
+//                                                  }
+//                                                  }
+//                                                  
+//- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithFormations:(NSArray *)formations {
+//                                                      
+//}
 
 @end
