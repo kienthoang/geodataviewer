@@ -46,6 +46,7 @@
 		022C3E0815AE7525004F0EDD /* TransientImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E0015AE7525004F0EDD /* TransientImage.m */; };
 		022C3E0915AE7525004F0EDD /* TransientJointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E0215AE7525004F0EDD /* TransientJointSet.m */; };
 		022C3E0A15AE7525004F0EDD /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E0415AE7525004F0EDD /* TransientOther.m */; };
+		022C3E1615AE757A004F0EDD /* ConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E1515AE757A004F0EDD /* ConflictHandler.m */; };
 		023858671599233F00A0DB98 /* FormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023858661599233F00A0DB98 /* FormationFolderTableViewController.m */; };
 		0238586A15994DF200A0DB98 /* FormationFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586915994DF200A0DB98 /* FormationFolderViewController.m */; };
 		0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */; };
@@ -95,7 +96,6 @@
 		02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */; };
 		02AC0F9515A5408300FBA9D3 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9415A5408300FBA9D3 /* folder.png */; };
 		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
-		211B728C15AB521400EC4C60 /* IEConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 211B728B15AB521400EC4C60 /* IEConflictHandler.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
@@ -199,6 +199,8 @@
 		022C3E0215AE7525004F0EDD /* TransientJointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientJointSet.m; sourceTree = "<group>"; };
 		022C3E0315AE7525004F0EDD /* TransientOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientOther.h; sourceTree = "<group>"; };
 		022C3E0415AE7525004F0EDD /* TransientOther.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientOther.m; sourceTree = "<group>"; };
+		022C3E1415AE757A004F0EDD /* ConflictHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConflictHandler.h; sourceTree = "<group>"; };
+		022C3E1515AE757A004F0EDD /* ConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConflictHandler.m; sourceTree = "<group>"; };
 		023858651599233F00A0DB98 /* FormationFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderTableViewController.h; sourceTree = "<group>"; };
 		023858661599233F00A0DB98 /* FormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderTableViewController.m; sourceTree = "<group>"; };
 		0238586815994DF100A0DB98 /* FormationFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderViewController.h; sourceTree = "<group>"; };
@@ -285,8 +287,6 @@
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		02AC0F9815A5483700FBA9D3 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
-		211B728A15AB521400EC4C60 /* IEConflictHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEConflictHandler.h; path = GeoFieldBook/IEConflictHandler.h; sourceTree = "<group>"; };
-		211B728B15AB521400EC4C60 /* IEConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEConflictHandler.m; path = GeoFieldBook/IEConflictHandler.m; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
@@ -770,8 +770,8 @@
 			children = (
 				022C3DF515AE74EC004F0EDD /* IEEngine.h */,
 				022C3DF615AE74EC004F0EDD /* IEEngine.m */,
-				211B728A15AB521400EC4C60 /* IEConflictHandler.h */,
-				211B728B15AB521400EC4C60 /* IEConflictHandler.m */,
+				022C3E1415AE757A004F0EDD /* ConflictHandler.h */,
+				022C3E1515AE757A004F0EDD /* ConflictHandler.m */,
 			);
 			name = I/E;
 			path = ..;
@@ -980,7 +980,6 @@
 				0249E2E415A8EDF700A7532E /* GeoFieldBookController.m in Sources */,
 				0249E2E815A8EEF500A7532E /* GeoFieldBookControllerSegue.m in Sources */,
 				0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */,
-				211B728C15AB521400EC4C60 /* IEConflictHandler.m in Sources */,
 				02191EC615AC850600A5EB2B /* Record.m in Sources */,
 				02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */,
 				027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */,
@@ -1000,6 +999,7 @@
 				022C3E0815AE7525004F0EDD /* TransientImage.m in Sources */,
 				022C3E0915AE7525004F0EDD /* TransientJointSet.m in Sources */,
 				022C3E0A15AE7525004F0EDD /* TransientOther.m in Sources */,
+				022C3E1615AE757A004F0EDD /* ConflictHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
