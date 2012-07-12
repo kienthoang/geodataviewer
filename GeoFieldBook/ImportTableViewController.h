@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IEEngine.h"
+#import "ConflictHandler.h"
+#import "ConflictHandlerDelegate.h"
 
-@interface ImportTableViewController : UITableViewController
+@interface ImportTableViewController : UITableViewController <ConflictHandlerDelegate>
 
 @property (nonatomic,strong) NSArray *csvFileNames;
 @property (nonatomic,strong) NSArray *selectedCSVFiles;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *importButton;
+
+@property (nonatomic,strong) IEEngine *engine;
+@property (nonatomic,strong) ConflictHandler *conflictHandler;
 
 #define SECTION_FOOTER_HEIGHT 30
 

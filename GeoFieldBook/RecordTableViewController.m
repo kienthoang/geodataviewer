@@ -549,7 +549,7 @@
         
         //Update the title of the delete button
         int numRecords=self.toBeDeletedRecords.count;
-        self.deleteButton.title=numRecords ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
+        self.deleteButton.title=numRecords>0 ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
         
         //Enable the delete button
         self.deleteButton.enabled=numRecords>0;
@@ -571,7 +571,7 @@
          
         //Update the title of the delete button
         int numRecords=self.toBeDeletedRecords.count;
-        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",numRecords];
+        self.deleteButton.title=numRecords>0 ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
         
         //Enable the delete button
         self.deleteButton.enabled=numRecords>0;
