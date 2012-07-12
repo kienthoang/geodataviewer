@@ -24,6 +24,9 @@
 @synthesize sectionFooter=_sectionFooter;
 @synthesize importButton = _importButton;
 
+@synthesize engine=_engine;
+@synthesize conflictHandler=_conflictHandler;
+
 #pragma mark - Getters and Setters
 
 - (void)setCsvFileNames:(NSArray *)csvFileNames {
@@ -132,6 +135,14 @@
     
     //Enable/Disable the import button
     self.importButton.enabled=self.selectedCSVFiles.count>0;
+}
+
+#pragma mark - ConflictHandlerDelegate protocol methods
+
+- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithRecords:(NSArray *)records {
+}
+
+- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithFormations:(NSArray *)formations {
 }
 
 @end
