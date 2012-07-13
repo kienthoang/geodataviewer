@@ -7,6 +7,8 @@
 //
 
 #import "TransientRecord.h"
+#import "Record+DipDirectionValues.h"
+
 @implementation TransientRecord
 
 @synthesize date=_date;
@@ -23,23 +25,63 @@
 @synthesize folder=_folder;
 @synthesize image=_image;
 
-
--(BOOL) validateDate:(NSDate *)date 
-{
-    return NO;
+- (NSString *)setDipWithValidations:(NSString *)dipString {
+    //Convert the dip string into a number
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    self.dip=[numberFormatter numberFromString:dipString];
+    
+    //If that fails or the dip value is not in the allowed range, return an error message
+    return (self.dip &&  TransientRecordMinimumDip<=self.dip.intValue && self.dip.intValue<=TransientRecordMaximumDip) ? nil : [NSString stringWithFormat:@"Dip value of record with name %@ is invalid",self.name];
 }
 
--(BOOL) validateDip:(NSNumber *)dip
-{
-    return YES;
+- (NSString *)setStrikeWithValidations:(NSString *)strikeString {
+    //Convert the given string into a number
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    self.dip=[numberFormatter numberFromString:strikeString];
+    
+    //If that fails or the strike value is not in the range 0-360, return an error message
+    return (self.strike &&  TransientRecordMinimumStrike<=self.strike.intValue && self.strike.intValue<=TransientRecordMaximumStrike) ? nil : [NSString stringWithFormat:@"Strike value of record with name %@ is invalid",self.name];
 }
--(BOOL) validateStrike:(NSNumber *)strike
-{
-    return YES;
+
+- (NSString *)setFieldObservationWithValidations:(NSString *)fieldObservation {
+    //NO VALIDATION YET
+    self.fieldOservations=fieldObservation;
+    
+    return nil;
 }
--(BOOL) validateDipDirection:(NSString *)dipDirection 
-{
-    return YES;
+
+- (NSString *)setDipDirectionWithValidations:(NSString *)dipDirection {
+    //If the given dip direction is not in the allowed dip direction value list, report an error
+    NSArray *allowedDipDirectionValues=[Record allDipDirectionValues];
+    if (![allowedDipDirectionValues containsObject:dipDirection])
+        return [NSString stringWithFormat:@"Unrecognized dip direction for record with name %@",self.name];
+    
+    //Else save the dip direction
+    self.dipDirection=dipDirection;
+    
+    return nil;
+}
+
+- (NSString *)setLatitudeWithValidations:(NSString *)latitude {
+    //If the given latitude is not a number, return the error message
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    if (![numberFormatter numberFromString:latitude])
+        return [NSString stringWithFormat:@"Latitude of record with name %@ is invalid.",self.name];
+    
+    //Else save it
+    self.latitude=latitude;
+    return nil;
+}
+
+- (NSString *)setLongitudeWithValidations:(NSString *)longitude {
+    //If the given longitude is not a number, return the error message
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    if (![numberFormatter numberFromString:longitude])
+        return [NSString stringWithFormat:@"Longitude of record with name %@ is invalid.",self.name];
+    
+    //Else save it
+    self.longitude=longitude;
+    return nil;
 }
 
 @end

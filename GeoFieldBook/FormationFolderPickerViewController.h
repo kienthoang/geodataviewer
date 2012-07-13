@@ -22,6 +22,6 @@
 @property (nonatomic,strong) UIManagedDocument *database;
 @property (nonatomic,strong) id <FormationFolderPickerDelegate> delegate;
 
-#define FORMATION_FOLDER_PICKER_BLANK_OPTION @"<None>"
+#define FORMATION_FOLDER_PICKER_BLANK_OPTION @"None"
 
 @end

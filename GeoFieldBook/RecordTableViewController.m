@@ -368,6 +368,10 @@
         [toolbarItems removeObject:self.deleteButton];
     [toolbarItems insertObject:hiddenButton atIndex:0];
     self.toolbarItems=[toolbarItems copy];
+    
+    //Reset the title of the delete button and disable it
+    self.deleteButton.title=@"Delete";
+    self.deleteButton.enabled=NO;
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -376,6 +380,9 @@
     
     //Set up the buttons
     [self setupUIForEditingMode:self.tableView.editing];
+    
+    //Reset the array of to be deleted records
+    self.toBeDeletedRecords=nil;
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {

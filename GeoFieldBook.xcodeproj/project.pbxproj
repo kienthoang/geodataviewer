@@ -114,6 +114,8 @@
 		02F86EE915AF7014000A84D2 /* TransientRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EE715AF7014000A84D2 /* TransientRecord.m */; };
 		02F86EEC15AF7021000A84D2 /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEB15AF7021000A84D2 /* TransientOther.m */; };
 		02F86EED15AF7021000A84D2 /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEB15AF7021000A84D2 /* TransientOther.m */; };
+		02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */; };
+		02F86EF115AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
@@ -317,6 +319,8 @@
 		02F86EE715AF7014000A84D2 /* TransientRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientRecord.m; sourceTree = "<group>"; };
 		02F86EEA15AF7021000A84D2 /* TransientOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientOther.h; sourceTree = "<group>"; };
 		02F86EEB15AF7021000A84D2 /* TransientOther.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientOther.m; sourceTree = "<group>"; };
+		02F86EEE15AFA9CE000A84D2 /* Record+DipDirectionValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DipDirectionValues.h"; sourceTree = "<group>"; };
+		02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DipDirectionValues.m"; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
@@ -855,6 +859,8 @@
 				0298C25E159B45650038E89C /* Record+NameEncoding.m */,
 				21A87A11159CAAFD001A220E /* Record+DateAndTimeFormatter.h */,
 				21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */,
+				02F86EEE15AFA9CE000A84D2 /* Record+DipDirectionValues.h */,
+				02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -1128,6 +1134,7 @@
 				02F86EE415AF7004000A84D2 /* TransientJointSet.m in Sources */,
 				02F86EE815AF7014000A84D2 /* TransientRecord.m in Sources */,
 				02F86EEC15AF7021000A84D2 /* TransientOther.m in Sources */,
+				02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,6 +1155,7 @@
 				02F86EE515AF7004000A84D2 /* TransientJointSet.m in Sources */,
 				02F86EE915AF7014000A84D2 /* TransientRecord.m in Sources */,
 				02F86EED15AF7021000A84D2 /* TransientOther.m in Sources */,
+				02F86EF115AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

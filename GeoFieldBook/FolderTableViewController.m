@@ -314,6 +314,9 @@
         //Hide the delete button
         [self hideButton:self.deleteButton enabled:NO];
     }
+    
+    //Reset the title of the delete button
+    self.deleteButton.title=@"Delete";
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -322,6 +325,9 @@
     
     //Setup the UI
     [self setupUIForEditingMode:self.tableView.editing];
+    
+    //Reset the array of to be deleted folders
+    self.toBeDeletedFolders=nil;
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {

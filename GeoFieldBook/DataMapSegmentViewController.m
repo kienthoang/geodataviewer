@@ -41,6 +41,11 @@
 
 #pragma mark - Data Forward Mechanisms
 
+- (void)dismissKeyboardInDataSideView {
+    if ([self.detailSideViewController isKindOfClass:[RecordViewController class]])
+        [(RecordViewController *)self.detailSideViewController resignAllTextFieldsAndAreas];
+}
+
 - (void)setRecordViewControllerDelegate:(id <RecordViewControllerDelegate>)delegate {
     //Set the delegate of the record detail vc if it's in the view controller array
     id recordDetail=[self.viewControllers objectAtIndex:0];
@@ -83,6 +88,7 @@
     //Put the record view controller into edit mode
     RecordViewController *recordDetail=(RecordViewController *)self.topViewController;
     [recordDetail setEditing:YES animated:YES];
+    [recordDetail showKeyboard];
 }
 
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)

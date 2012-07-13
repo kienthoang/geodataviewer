@@ -33,6 +33,8 @@
 - (void)pushInitialViewController;
 - (void)pushRecordViewController;
 
+- (void)dismissKeyboardInDataSideView;
+
 @property (nonatomic,readonly) UIViewController *detailSideViewController;
 
 @property (nonatomic,weak) id <DataMapSegmentControllerDelegate> delegate;

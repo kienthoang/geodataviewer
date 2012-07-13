@@ -27,6 +27,9 @@
 - (NSDictionary *)dictionaryFromForm;
 - (BOOL) isInEdittingMode;
 
+- (void)showKeyboard;
+- (void)resignAllTextFieldsAndAreas;
+
 #define RECORD_DEFAULT_GPS_STABLILIZING_INTERVAL_LENGTH 12
 
 @end

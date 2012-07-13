@@ -11,12 +11,14 @@
 #import "TransientProject.h"
 #import "TransientManagedObject.h"
 
+#import "Record.h"
+
 @interface TransientRecord : TransientManagedObject
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *project;
 @property (nonatomic, strong) NSString * dateString;
-@property (nonatomic, strong) NSString *timeString;
+@property (nonatomic, strong) NSString * timeString;
 @property (nonatomic, strong) NSNumber * dip;
 @property (nonatomic, strong) NSString * dipDirection;
 @property (nonatomic, strong) NSString * fieldOservations;
@@ -27,9 +29,18 @@
 @property (nonatomic, strong) TransientProject *folder;
 @property (nonatomic, strong) TransientImage *image; 
 
--(BOOL) validateDate:(NSDate *)date;
--(BOOL) validateDip:(NSNumber *)dip;
--(BOOL) validateStrike:(NSNumber *)strike;
--(BOOL) validateDipDirection:(NSString *)dipDirection;
+#define TransientRecordMinimumDip 0
+#define TransientRecordMaximumDip 90
+#define TransientRecordMinimumStrike 0
+#define TransientRecordMaximumStrike 0
+
+#pragma mark - Setters with validations
+
+- (NSString *)setDipWithValidations:(NSString *)dipString;
+- (NSString *)setStrikeWithValidations:(NSString *)strikeString;
+- (NSString *)setFieldObservationWithValidations:(NSString *)fieldObservation;
+- (NSString *)setDipDirectionWithValidations:(NSString *)dipDirection;
+- (NSString *)setLatitudeWithValidations:(NSString *)latitude;
+- (NSString *)setLongitudeWithValidations:(NSString *)longitude;
 
 @end

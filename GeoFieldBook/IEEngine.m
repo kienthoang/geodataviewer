@@ -34,124 +34,152 @@
 @synthesize records=_records;
 @synthesize formations=_formations;
 
+//enum for columnHeadings
+typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike, Dip, dipDirection, Observations, Formation, lowerFormation, upperFormation, Trend, Plunge, imageName}columnHeadings;
 
 #pragma mark - getters for instance variables
 -(NSMutableArray *) projects {
-    if(!_records) _records = [[NSMutableArray alloc] init];
+    if(!_records) 
+        _records = [[NSMutableArray alloc] init];
+    
     return _records;
 }
 
 -(NSMutableArray *) formationFolders {
-    if(!_formations) _formations = [[NSMutableArray alloc] init];
+    if(!_formations) 
+        _formations = [[NSMutableArray alloc] init];
+    
     return _formations;
 }
 
 #pragma mark - Reading of Record Files
+
+- (TransientRecord *)recordForCSVLineTokenArray:(NSArray *)lineArray {
+    TransientRecord *record=nil;
+    
+    //identify the record type and populate record specific fields
+    if([[lineArray objectAtIndex:1] isEqualToString:@"Contact"]) {
+        record =[[TransientContact alloc] init];
+        [(TransientContact *)record setLowerFormation:[lineArray objectAtIndex:lowerFormation]];
+        [(TransientContact *)record setUpperFormation:[lineArray objectAtIndex:upperFormation]];
+    } else if ([[lineArray objectAtIndex:1] isEqualToString:@"Bedding"]) {
+        record = [[TransientBedding alloc] init];
+        [(TransientBedding *)record setFormation:[lineArray objectAtIndex:Formation]];
+    } else if([[lineArray objectAtIndex:1] isEqualToString:@"Joint Set"]) {
+        record = [[TransientJointSet alloc] init]; 
+        [(TransientJointSet *)record setFormation:[lineArray objectAtIndex:Formation]];
+    } else if([[lineArray objectAtIndex:1] isEqualToString:@"Fault"]) {
+        record = [[TransientFault alloc] init]; 
+        [(TransientFault *)record setPlunge:[lineArray objectAtIndex:Plunge]];
+        [(TransientFault *)record setTrend:[lineArray objectAtIndex:Trend]];
+        [(TransientFault *)record setFormation:[lineArray objectAtIndex:Formation]];
+    } else if([[lineArray objectAtIndex:1] isEqualToString:@"Other"]) {
+        record = [[TransientOther alloc] init];            
+    }
+    
+    //now populate the common fields for all the records
+    record.name = [lineArray objectAtIndex:Name];
+    record.dip = [lineArray objectAtIndex:Dip];
+    record.dipDirection = [lineArray objectAtIndex:dipDirection];
+    record.fieldOservations = [lineArray objectAtIndex:Observations];
+    record.latitude = [lineArray objectAtIndex:Latitude];
+    record.longitude = [lineArray objectAtIndex:Longitude];
+    record.strike = [lineArray objectAtIndex:Strike];
+    
+    //separate by spaces to create a NSDate object from the string
+    NSString *date = [lineArray objectAtIndex:dateAndTime];
+    //remove leading and trailing spaces
+    date = [date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    date = [date stringByReplacingOccurrencesOfString:@"," withString:@""]; //remove comma(s), if any
+    NSArray *array = [date componentsSeparatedByString:@" "]; //separate by spaces
+    
+    typedef enum Months{Zero, January, February, March, April, May, June, July, August, September, October, November, December}Months; 
+    int month = (Months)[array objectAtIndex:1];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setYear:[[array objectAtIndex:3] intValue]];
+    [comps setMonth:month];
+    [comps setDay:[[array objectAtIndex:2] intValue]];
+    NSArray *time = [[array objectAtIndex:4] componentsSeparatedByString:@":"];
+    [comps setHour:[[time objectAtIndex:0] intValue]];
+    [comps setMinute:[[time objectAtIndex:1] intValue]];
+    [comps setSecond:[[time objectAtIndex:2] intValue]];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *newDate = [gregorian dateFromComponents:comps];    
+    //finally populate the date field
+    record.date = newDate;
+    
+    
+    //separate the date&time string to populate the date and time strings in the transient records
+    NSArray *dateTimeArray = [[lineArray objectAtIndex:dateAndTime] componentsSeparatedByString:@","];
+    record.dateString = [NSString stringWithFormat:@"%@,%@",[dateTimeArray objectAtIndex:0],[dateTimeArray      objectAtIndex:1]];
+    record.timeString = [dateTimeArray objectAtIndex:2];
+    
+    
+    
+    //to set the image, first get the image from the images directory
+    NSArray *pathsArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [pathsArray objectAtIndex:0];
+    NSString *imageFilePath = [documentsDirectory stringByAppendingFormat:@"/images/%@", [lineArray objectAtIndex:imageName]];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:imageFilePath]){
+        NSString* content = [NSString stringWithContentsOfFile:imageFilePath encoding:NSUTF8StringEncoding error:nil];
+        //now set the image content
+        record.image.imageData = [content dataUsingEncoding:NSUTF8StringEncoding];
+        //imageHashData not saved. is it needed?
+    }
+    
+    return record;
+}
+
+- (NSArray *)constructRecordsFromCSVFileWithPath:(NSString *)path {
+    NSMutableArray *records;
+    
+    //this is an array of array
+    NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
+    
+    //remove the first line which is simply the column headings
+    [lineRecordsInAFile removeObjectAtIndex:0];
+    
+    //now create transient objects from the rest
+    for(NSArray *lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
+        
+        if(lineArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) //not enough/more fields in the record
+            NSLog(@"Corrupted record ignored!");
+        
+        else {
+            //Create a transient record from the line array
+            TransientRecord *record=[self recordForCSVLineTokenArray:lineArray];
+            
+            //add the record to the arra of records
+            [records addObject:record];
+        }
+    }
+    
+    return [records copy];
+}
+
 /*
  Column Headings:
  "Name, Type, Longitude, Latitude, Date&Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \r\n"
  */
--(void) createRecordsFromCSVFiles:(NSArray *) files
+-(void) createRecordsFromCSVFiles:(NSArray *)files
 {   
-    
-    //enum for columnHeadings
-    typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike, Dip, dipDirection, Observations, Formation, lowerFormation, upperFormation, Trend, Plunge, imageName}columnHeadings;   
-    
     //get paths to the selected files
     self.selectedFilePaths = [self getSelectedFilePaths:files];
     
-    for(NSString *path in self.selectedFilePaths) {//for each file
-        //this is an array of array
-        NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
-        //remove the first line which is simply the column headings
-        [lineRecordsInAFile removeObjectAtIndex:0];
-        //now create transient objects from the rest
+    //Iterate through each csv files and create transient records from each of them
+    for (NSString *path in self.selectedFilePaths) {
+        //Construct the records
+        NSArray *records=[self constructRecordsFromCSVFileWithPath:path];
         
-        for(id lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
-            
-            if([lineArray count]!=15){ //not enough/more fields in the record
-                NSLog(@"Corrupted record ignored!");
-                continue;
-            }
-            TransientRecord *record;
-            //identify the record type and populate record specific fields
-            if([[lineArray objectAtIndex:1] isEqualToString:@"Contact"]) {
-                record =[[TransientContact alloc] init];
-                [(TransientContact *)record setLowerFormation:[lineArray objectAtIndex:lowerFormation]];
-                [(TransientContact *)record setUpperFormation:[lineArray objectAtIndex:upperFormation]];
-            }else if ([[lineArray objectAtIndex:1] isEqualToString:@"Bedding"]) {
-                record = [[TransientBedding alloc] init];
-                [(TransientBedding *)record setFormation:[lineArray objectAtIndex:Formation]];
-            }else if([[lineArray objectAtIndex:1] isEqualToString:@"Joint Set"]) {
-                record = [[TransientJointSet alloc] init]; 
-                [(TransientJointSet *)record setFormation:[lineArray objectAtIndex:Formation]];
-            }else if([[lineArray objectAtIndex:1] isEqualToString:@"Fault"]) {
-                record = [[TransientFault alloc] init]; 
-                [(TransientFault *)record setPlunge:[lineArray objectAtIndex:Plunge]];
-                [(TransientFault *)record setTrend:[lineArray objectAtIndex:Trend]];
-                [(TransientFault *)record setFormation:[lineArray objectAtIndex:Formation]];
-            }else if([[lineArray objectAtIndex:1] isEqualToString:@"Other"]) {
-                record = [[TransientOther alloc] init];            
-            }
-            
-            //now populate the common fields for all the records
-            record.name = [lineArray objectAtIndex:Name];
-            record.dip = [lineArray objectAtIndex:Dip];
-            record.dipDirection = [lineArray objectAtIndex:dipDirection];
-            record.fieldOservations = [lineArray objectAtIndex:Observations];
-            record.latitude = [lineArray objectAtIndex:Latitude];
-            record.longitude = [lineArray objectAtIndex:Longitude];
-            record.strike = [lineArray objectAtIndex:Strike];
-            
-            //separate by spaces to create a NSDate object from the string
-            NSString *date = [lineArray objectAtIndex:dateAndTime];
-            //remove leading and trailing spaces
-            date = [date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            date = [date stringByReplacingOccurrencesOfString:@"," withString:@""]; //remove comma(s), if any
-            NSArray *array = [date componentsSeparatedByString:@" "]; //separate by spaces
-            
-            typedef enum Months{Zero, January, February, March, April, May, June, July, August, September, October, November, December}Months; 
-            int month = (Months)[array objectAtIndex:1];
-                      
-            NSDateComponents *comps = [[NSDateComponents alloc] init];
-            [comps setYear:[[array objectAtIndex:3] intValue]];
-            [comps setMonth:month];
-            [comps setDay:[[array objectAtIndex:2] intValue]];
-            NSArray *time = [[array objectAtIndex:4] componentsSeparatedByString:@":"];
-            [comps setHour:[[time objectAtIndex:0] intValue]];
-            [comps setMinute:[[time objectAtIndex:1] intValue]];
-            [comps setSecond:[[time objectAtIndex:2] intValue]];
-            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-            NSDate *newDate = [gregorian dateFromComponents:comps];    
-            //finally populate the date field
-            record.date = newDate;
-            
-            
-            //separate the date&time string to populate the date and time strings in the transient records
-            NSArray *dateTimeArray = [[lineArray objectAtIndex:dateAndTime] componentsSeparatedByString:@","];
-            record.dateString = [NSString stringWithFormat:@"%@,%@",[dateTimeArray objectAtIndex:0],[dateTimeArray      objectAtIndex:1]];
-            record.timeString = [dateTimeArray objectAtIndex:2];
-            
-            
-            
-            //to set the image, first get the image from the images directory
-            NSArray *pathsArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [pathsArray objectAtIndex:0];
-            NSString *imageFilePath = [documentsDirectory stringByAppendingFormat:@"/images/%@", [lineArray objectAtIndex:imageName]];
-            
-            if([[NSFileManager defaultManager] fileExistsAtPath:imageFilePath]){
-                NSString* content = [NSString stringWithContentsOfFile:imageFilePath encoding:NSUTF8StringEncoding error:nil];
-                //now set the image content
-                record.image.imageData = [content dataUsingEncoding:NSUTF8StringEncoding];
-                //imageHashData not saved. is it needed?
-            }
-            
-            //add the record to the arra of records
-            [self.records addObject:record];
-        }        
+        //Add them to self.records
+        [self.records addObjectsFromArray:records];
     }    
+    
     //now call the handler and pass it the array of records created ... 
-    if(self.handler) [self.handler handleConflictsForArray:self.formations];
+    if (self.handler) 
+        [self.handler handleConflictsForArray:self.records];
 }
 
 
@@ -213,21 +241,22 @@
 
 }
 
--(NSArray *)getSelectedFilePaths:(NSArray *) fileNames;
+-(NSArray *)getSelectedFilePaths:(NSArray *)fileNames;
 {   
+    //Get the document directory path
     NSMutableArray *paths = [[NSMutableArray alloc] init];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSArray *pathsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSString *documentsDirectory = [[pathsArray objectAtIndex:0] path];
     
-    NSArray *pathsArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [pathsArray objectAtIndex:0];
-    
-    for(NSString *file in fileNames) {
+    //Get the csv file paths from the document directory
+    for (NSString *file in fileNames)
         [paths addObject:[documentsDirectory stringByAppendingFormat:@"/%@",file]];
-    }
     
     return paths;
 }
 
--(NSArray *) parseLine:(NSString *) line 
+- (NSArray *)parseLine:(NSString *) line 
 {
     //log to see if each individual line (record) is extracted properly
         NSLog(@"Individual record: %@", line);

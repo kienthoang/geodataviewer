@@ -174,6 +174,10 @@
 
 @synthesize acquiredDate=_acquireDate;
 
+- (void)showKeyboard {
+    [self.recordNameTextField becomeFirstResponder];
+}
+
 #pragma mark - Getters and Setters
 
 - (void)setRecord:(Record *)record {
