@@ -32,6 +32,90 @@
         }
     }
     self.csvFileNames=csvFileNames;
+    
+    //Register to hear notifications from the conflict handler
+    [self registerForNotificationsForConflictHandler];
+}
+
+#pragma mark - UIAlertViewDelegate protocol methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //Folder Name Conflict
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Replace"]) {
+        ConflictHandler *conflictHandler=self.conflictHandler;
+        dispatch_queue_t conflict_handler_queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(conflict_handler_queue, ^{
+            //Handle the conflict
+            [conflictHandler userDidChooseToHandleFormationFolderNameConflictWith:ConflictHandleReplace];
+            
+            //If there is any unprocessed formations, continue
+            if (conflictHandler.transientFormations.count)
+                [conflictHandler processTransientFormations:conflictHandler.transientFormations 
+                                        andFormationFolders:conflictHandler.transientFormationFolders 
+                                   withValidationMessageLog:nil];
+        });
+    }
+    
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Keep Both"]) {
+        ConflictHandler *conflictHandler=self.conflictHandler;
+        dispatch_queue_t conflict_handler_queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(conflict_handler_queue, ^{
+            //Handle the conflict
+            [conflictHandler userDidChooseToHandleFolderNameConflictWith:ConflictHandleKeepBoth];
+            
+            //If there is any unprocessed records, continue
+            if (conflictHandler.transientRecords.count)
+                [conflictHandler processTransientRecords:conflictHandler.transientRecords 
+                                              andFolders:conflictHandler.transientFolders 
+                                withValidationMessageLog:nil];
+        });
+    }
+}
+
+#pragma mark - Handle Notifications
+
+- (void)registerForNotificationsForConflictHandler {
+    //Register to hear notifications from conflict handler
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self 
+                           selector:@selector(handleFolderNameConflict:) 
+                               name:GeoNotificationConflictHandlerFormationFolderNameConflictOccurs 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(handleValidationErrors:) 
+                               name:GeoNotificationConflictHandlerValidationErrorsOccur 
+                             object:nil];
+}
+
+- (void)handleFolderNameConflict:(NSNotification *)notification {
+    //Put up an alert in the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *duplicateFormationFolderName=self.conflictHandler.duplicateFormationFolderName;
+        NSString *alertTitle=[NSString stringWithFormat:@"Formation Folder With Name \"%@\" already exists!",duplicateFormationFolderName];
+        NSString *message=@"";
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:alertTitle 
+                                                      message:message 
+                                                     delegate:self 
+                                            cancelButtonTitle:@"Cancel" 
+                                            otherButtonTitles:@"Replace",@"Keep Both", nil];
+        [alert show];
+    });
+}
+
+- (void)handleValidationErrors:(NSNotification *)notification {
+    //Put up an alert in the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *userInfo=notification.userInfo;
+        NSArray *errorMessages=[userInfo objectForKey:GeoNotificationConflictHandlerValidationLogKey];
+        NSString *alertTitle=@"Importing Failed!";
+        NSString *message=[errorMessages componentsJoinedByString:@"\n"];;
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:alertTitle 
+                                                      message:message 
+                                                     delegate:self 
+                                            cancelButtonTitle:@"Dismiss" 
+                                            otherButtonTitles:nil];
+        [alert show];
+    });
 }
 
 #pragma mark - UITableViewDataSource protocol methods

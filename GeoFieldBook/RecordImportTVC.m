@@ -42,9 +42,33 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     //Folder Name Conflict
     if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Replace"]) {
-        [self.conflictHandler processTransientRecords:self.conflictHandler.transientRecords 
-                                           andFolders:self.conflictHandler.transientFolders 
-                             withValidationMessageLog:nil];
+        ConflictHandler *conflictHandler=self.conflictHandler;
+        dispatch_queue_t conflict_handler_queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(conflict_handler_queue, ^{
+            //Handle the conflict
+            [conflictHandler userDidChooseToHandleFolderNameConflictWith:ConflictHandleReplace];
+            
+            //If there is any unprocessed records, continue
+            if (conflictHandler.transientRecords.count)
+                [conflictHandler processTransientRecords:conflictHandler.transientRecords 
+                                                   andFolders:conflictHandler.transientFolders 
+                                     withValidationMessageLog:nil];
+        });
+    }
+    
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Keep Both"]) {
+        ConflictHandler *conflictHandler=self.conflictHandler;
+        dispatch_queue_t conflict_handler_queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(conflict_handler_queue, ^{
+            //Handle the conflict
+            [conflictHandler userDidChooseToHandleFolderNameConflictWith:ConflictHandleKeepBoth];
+            
+            //If there is any unprocessed records, continue
+            if (conflictHandler.transientRecords.count)
+                [conflictHandler processTransientRecords:conflictHandler.transientRecords 
+                                              andFolders:conflictHandler.transientFolders 
+                                withValidationMessageLog:nil];
+        });
     }
 }
 

@@ -80,7 +80,7 @@
         }
         
         //Save the processed folders if any (there is no duplicate in these)
-        NSArray *unprocessedRecords=nil;
+        NSArray *unprocessedRecords=records;
         if (processedFolders.count) {
             //Save the process folders
             [self saveTransientFolders:processedFolders];
@@ -140,7 +140,7 @@
         }
         
         //Save the processed folders if any (there is no duplicate in these)
-        NSArray *unprocessedFormations=nil;
+        NSArray *unprocessedFormations=formations;
         if (processedFolders.count) {
             //Save the process folders
             [self saveTransientFormationFolders:processedFolders];
@@ -150,11 +150,11 @@
         }
         
         //If the duplicate folder name is not nil, save the unprocessed transient formations and folders and notify the program
-        if (self.duplicateFolderName) {
+        if (self.duplicateFormationFolderName) {
             //Save the unprocessed transient folders and records
             self.transientFormations=unprocessedFormations;
             self.transientFormationFolders=[unprocessedFolders copy];
-            
+                        
             //Notify the program
             [self postNotificationWithName:GeoNotificationConflictHandlerFormationFolderNameConflictOccurs withUserInfo:[NSDictionary dictionary]];
         }
@@ -206,6 +206,34 @@
 }
 
 - (void)userDidChooseToHandleFormationFolderNameConflictWith:(HandleOption)handleOption {
+    NSArray *transientFolders=nil;
+    
+    //If user chose "Replace"
+    if (handleOption==ConflictHandleReplace) {
+        //Delete the folder in conflict
+        [self.database.managedObjectContext deleteObject:self.formationFolderInConflict];
+        
+        //Save the transient folder in conflict
+        transientFolders=[NSArray arrayWithObject:self.transientFormationFolderInConflict];
+        [self saveTransientFormationFolders:transientFolders];
+    }
+    
+    //If user chose "Keep Both"
+//    else if (handleOption==ConflictHandleKeepBoth) {
+//        //Rename the folders in conflict
+//        NSString *newTransientFolderName=[self renameFolder:self.folderInConflict andCorrespondingTransientFolder:self.transientFolderInConflict];
+//        transientFolders=[NSArray arrayWithObject:newTransientFolderName];
+//    }
+    
+    //Save the formations associated with the transient folder
+    self.transientFormations=[self saveTransientFormationsInFormationList:self.transientFormations withFormationFolderNames:transientFolders];
+    
+    //Unset the folders in conflict
+    self.formationFolderInConflict=nil;
+    self.transientFormationFolderInConflict=nil;
+    
+    //Save changes to database
+    [self saveDatabase:self.database];
 }
 
 #pragma mark - Renaming Schemes

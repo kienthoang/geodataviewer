@@ -19,8 +19,6 @@
     formation.formationName=self.formationName;
     formation.formationSortNumber=self.formationSortNumber;
     formation.formationFolder=[self.formationFolder saveFormationFolderToManagedObjectContext:context completion:completionHandler];
-
-    NSLog(@"Saved formation: %@",formation);
 }
 
 @end
