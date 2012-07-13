@@ -61,13 +61,13 @@
         dispatch_queue_t conflict_handler_queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(conflict_handler_queue, ^{
             //Handle the conflict
-            [conflictHandler userDidChooseToHandleFolderNameConflictWith:ConflictHandleKeepBoth];
+            [conflictHandler userDidChooseToHandleFormationFolderNameConflictWith:ConflictHandleKeepBoth];
             
             //If there is any unprocessed records, continue
-            if (conflictHandler.transientRecords.count)
-                [conflictHandler processTransientRecords:conflictHandler.transientRecords 
-                                              andFolders:conflictHandler.transientFolders 
-                                withValidationMessageLog:nil];
+            if (conflictHandler.transientFormations.count)
+                [conflictHandler processTransientFormations:conflictHandler.transientFormations 
+                                        andFormationFolders:conflictHandler.transientFormationFolders 
+                                   withValidationMessageLog:nil];
         });
     }
 }
@@ -140,12 +140,35 @@
 #pragma mark - Target Action Handlers
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
+    //Notify delegate of the start of the importing
+    [self.importDelegate importTableViewControllerDidStartImporting:self];
+    
+    __weak FormationImportTVC *weakSelf=self;
+    
     //Start importing in another thread
     dispatch_queue_t import_queue_t=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(import_queue_t, ^{
+        //Put up a spinner for the import button
+        __block UIActivityIndicatorView *spinner=nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+            UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
+            [spinner startAnimating];
+            weakSelf.navigationItem.rightBarButtonItem=spinnerBarButtonItem;
+        });
+        
         //Pass the selected csv files to the engine
         self.engine.handler=self.conflictHandler;
         [self.engine createFormationsFromCSVFiles:self.selectedCSVFiles];
+        
+        //Notify delegate of the completion of the importing
+        [self.importDelegate importTableViewControllerDidEndImporting:self];
+        
+        //Put the import button back again
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner stopAnimating];
+            weakSelf.navigationItem.rightBarButtonItem=weakSelf.importButton;
+        });
     });
     dispatch_release(import_queue_t);
 }
