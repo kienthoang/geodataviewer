@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIManagedDocument *database;
 
-- (BOOL)handleConflictsForArray:(NSArray *) items;
+- (BOOL) handleConflictsFor:(NSArray *)items
+                withFolders:(NSArray *) folderNames
+              errorMessages:(NSArray *) errors;
 
 @end
