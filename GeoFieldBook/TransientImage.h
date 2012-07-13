@@ -9,8 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "TransientManagedObject.h"
 
+#import "Image.h"
+
 @interface TransientImage : TransientManagedObject
+
 @property (nonatomic, retain) NSData * imageData;
 @property (nonatomic, retain) NSData * imageHash;
 @property (nonatomic, retain) NSSet *whoUses;
+
+- (Image *)saveImageToManagedObjectContext:(NSManagedObjectContext *)context 
+                                completion:(completion_handler_t)completionHandler;
+
 @end

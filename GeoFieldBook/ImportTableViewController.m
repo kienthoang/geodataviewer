@@ -7,6 +7,9 @@
 //
 
 #import "ImportTableViewController.h"
+#import "IEEngine.h"
+#import "ConflictHandler.h"
+#import "GeoDatabaseManager.h"
 
 @interface ImportTableViewController()
 
@@ -21,6 +24,9 @@
 
 @synthesize sectionFooter=_sectionFooter;
 @synthesize importButton = _importButton;
+
+@synthesize engine=_engine;
+@synthesize conflictHandler=_conflictHandler;
 
 #pragma mark - Getters and Setters
 
@@ -52,6 +58,7 @@
 #pragma mark - Target-Action Handlers
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
+   
 }
 
 #pragma mark - View Controller Lifecycle
@@ -61,6 +68,13 @@
     
     //Put self into editing mode
     self.tableView.editing=YES;
+    
+    //Initialize the engine
+    self.engine=[[IEEngine alloc] init];
+    
+    //Initialize the conflict handler
+    self.conflictHandler=[[ConflictHandler alloc] init];
+    self.conflictHandler.database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

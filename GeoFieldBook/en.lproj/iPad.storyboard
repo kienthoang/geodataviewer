@@ -1359,7 +1359,7 @@
                     <navigationItem key="navigationItem" id="X8h-y1-uIb">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Import" width="100" style="done" id="VPz-9T-tuf">
                             <connections>
-                                <action selector="importPressed:" destination="8tf-9a-8AO" id="Lnd-sE-uC1"/>
+                                <action selector="importPressed:" destination="8tf-9a-8AO" id="SYu-JH-KF4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1675,7 +1675,7 @@
                     <navigationItem key="navigationItem" id="p1i-xy-RXt">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Import" width="100" style="done" id="sEM-ku-xLX">
                             <connections>
-                                <action selector="importPressed:" destination="Uu5-sC-dG8" id="W3I-N6-NEB"/>
+                                <action selector="importPressed:" destination="Uu5-sC-dG8" id="QYc-H0-Bxj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

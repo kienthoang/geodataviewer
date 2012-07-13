@@ -9,6 +9,8 @@
 #import "TransientRecord.h"
 #import "TransientFormation.h"
 
+#import "JointSet.h"
+
 @interface TransientJointSet : TransientRecord
 @property (nonatomic, strong) TransientFormation *formation;
 

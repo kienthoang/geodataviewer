@@ -10,12 +10,15 @@
 
 @implementation TransientFormation
 @synthesize formationName=_formationName;
-@synthesize formationFolderName=_formationFolderName;
 @synthesize formationSortNumber=_formationSortNumber;
-@synthesize beddings=_beddings;
-@synthesize faults=_faults;
 @synthesize formationFolder=_formationFolder;
-@synthesize joinSets=_joinSets;
-@synthesize lowerContacts=_lowerContacts;
-@synthesize upperContacts=_upperContacts;
+
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context completion:(completion_handler_t)completionHandler
+{
+    Formation *formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
+    formation.formationName=self.formationName;
+    formation.formationSortNumber=self.formationSortNumber;
+    formation.formationFolder=[self.formationFolder saveFormationFolderToManagedObjectContext:context completion:completionHandler];
+}
+
 @end

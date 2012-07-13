@@ -9,5 +9,25 @@
 #import "TransientJointSet.h"
 
 @implementation TransientJointSet
+
 @synthesize formation=_formation;
+
+#pragma mark - Database Operations
+
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
+                        completion:(completion_handler_t)completionHandler
+{
+    //Create  a joint set
+    self.nsManagedRecord=[NSEntityDescription insertNewObjectForEntityForName:@"JointSet" inManagedObjectContext:context];
+    
+    //Call super to populate the common record info
+    [super saveToManagedObjectContext:context completion:completionHandler];
+    
+    //Populate formation
+    //[(JointSet *)self.nsManagedRecord setFormation:self.formation];
+    
+    //Call completion handler
+    completionHandler(self.nsManagedRecord);
+}
+
 @end

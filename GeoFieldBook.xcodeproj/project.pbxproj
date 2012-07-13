@@ -39,19 +39,7 @@
 		0222DB2B1596BF2800699D62 /* StrikePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */; };
 		0222DB2E1596D95100699D62 /* DipPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2D1596D95100699D62 /* DipPickerViewController.m */; };
 		0222DB311596DCC600699D62 /* DipDirectionPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB301596DCC600699D62 /* DipDirectionPickerViewController.m */; };
-		022C3DF715AE74EC004F0EDD /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3DF615AE74EC004F0EDD /* IEEngine.m */; };
-		022C3E0515AE7525004F0EDD /* TransientBedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3DFA15AE7525004F0EDD /* TransientBedding.m */; };
-		022C3E0615AE7525004F0EDD /* TransientContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3DFC15AE7525004F0EDD /* TransientContact.m */; };
-		022C3E0715AE7525004F0EDD /* TransientFault.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3DFE15AE7525004F0EDD /* TransientFault.m */; };
-		022C3E0815AE7525004F0EDD /* TransientImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E0015AE7525004F0EDD /* TransientImage.m */; };
-		022C3E0915AE7525004F0EDD /* TransientJointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E0215AE7525004F0EDD /* TransientJointSet.m */; };
-		022C3E0A15AE7525004F0EDD /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E0415AE7525004F0EDD /* TransientOther.m */; };
-		022C3E1615AE757A004F0EDD /* ConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E1515AE757A004F0EDD /* ConflictHandler.m */; };
-		022C3E2115AE75E8004F0EDD /* TransientRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2015AE75E8004F0EDD /* TransientRecord.m */; };
 		022C3E2515AE7656004F0EDD /* TransientManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2415AE7655004F0EDD /* TransientManagedObject.m */; };
-		022C3E3415AE7806004F0EDD /* TransientFormation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */; };
-		022C3E3515AE7806004F0EDD /* TransientFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E3115AE7806004F0EDD /* TransientFormation.m */; };
-		022C3E3615AE7806004F0EDD /* TransientProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 022C3E3315AE7806004F0EDD /* TransientProject.m */; };
 		023858671599233F00A0DB98 /* FormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023858661599233F00A0DB98 /* FormationFolderTableViewController.m */; };
 		0238586A15994DF200A0DB98 /* FormationFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586915994DF200A0DB98 /* FormationFolderViewController.m */; };
 		0238586D1599540100A0DB98 /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238586C1599540100A0DB98 /* Formation_Folder+Creation.m */; };
@@ -73,7 +61,7 @@
 		02712A53159D012100510188 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A52159D012100510188 /* Fault.m */; };
 		02712A56159D012F00510188 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A55159D012F00510188 /* JointSet.m */; };
 		02712A59159D013D00510188 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A58159D013D00510188 /* Other.m */; };
-		027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */; };
+		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
 		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
@@ -101,6 +89,35 @@
 		02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */; };
 		02AC0F9515A5408300FBA9D3 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9415A5408300FBA9D3 /* folder.png */; };
 		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
+		02F86EB415AF6E5B000A84D2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F86EB315AF6E5B000A84D2 /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		02F86EB815AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
+		02F86EB915AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
+		02F86EBC15AF6F37000A84D2 /* ConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EBB15AF6F37000A84D2 /* ConflictHandler.m */; };
+		02F86EBD15AF6F37000A84D2 /* ConflictHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EBB15AF6F37000A84D2 /* ConflictHandler.m */; };
+		02F86EC015AF6F6F000A84D2 /* TransientImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EBF15AF6F6F000A84D2 /* TransientImage.m */; };
+		02F86EC115AF6F6F000A84D2 /* TransientImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EBF15AF6F6F000A84D2 /* TransientImage.m */; };
+		02F86ECC15AF6FA0000A84D2 /* TransientBedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ECB15AF6FA0000A84D2 /* TransientBedding.m */; };
+		02F86ECD15AF6FA0000A84D2 /* TransientBedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ECB15AF6FA0000A84D2 /* TransientBedding.m */; };
+		02F86ED015AF6FB1000A84D2 /* TransientContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ECF15AF6FB1000A84D2 /* TransientContact.m */; };
+		02F86ED115AF6FB1000A84D2 /* TransientContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ECF15AF6FB1000A84D2 /* TransientContact.m */; };
+		02F86ED415AF6FC2000A84D2 /* TransientFault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ED315AF6FC2000A84D2 /* TransientFault.m */; };
+		02F86ED515AF6FC2000A84D2 /* TransientFault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ED315AF6FC2000A84D2 /* TransientFault.m */; };
+		02F86ED815AF6FD7000A84D2 /* TransientProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ED715AF6FD7000A84D2 /* TransientProject.m */; };
+		02F86ED915AF6FD7000A84D2 /* TransientProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86ED715AF6FD7000A84D2 /* TransientProject.m */; };
+		02F86EDC15AF6FE8000A84D2 /* TransientFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EDB15AF6FE8000A84D2 /* TransientFormation.m */; };
+		02F86EDD15AF6FE8000A84D2 /* TransientFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EDB15AF6FE8000A84D2 /* TransientFormation.m */; };
+		02F86EE015AF6FF6000A84D2 /* TransientFormation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EDF15AF6FF6000A84D2 /* TransientFormation_Folder.m */; };
+		02F86EE115AF6FF6000A84D2 /* TransientFormation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EDF15AF6FF6000A84D2 /* TransientFormation_Folder.m */; };
+		02F86EE415AF7004000A84D2 /* TransientJointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EE315AF7004000A84D2 /* TransientJointSet.m */; };
+		02F86EE515AF7004000A84D2 /* TransientJointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EE315AF7004000A84D2 /* TransientJointSet.m */; };
+		02F86EE815AF7014000A84D2 /* TransientRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EE715AF7014000A84D2 /* TransientRecord.m */; };
+		02F86EE915AF7014000A84D2 /* TransientRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EE715AF7014000A84D2 /* TransientRecord.m */; };
+		02F86EEC15AF7021000A84D2 /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEB15AF7021000A84D2 /* TransientOther.m */; };
+		02F86EED15AF7021000A84D2 /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEB15AF7021000A84D2 /* TransientOther.m */; };
+		02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */; };
+		02F86EF115AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */; };
+		02F86EF415AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */; };
+		02F86EF515AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
@@ -190,32 +207,8 @@
 		0222DB2D1596D95100699D62 /* DipPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipPickerViewController.m; sourceTree = "<group>"; };
 		0222DB2F1596DCC600699D62 /* DipDirectionPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipDirectionPickerViewController.h; sourceTree = "<group>"; };
 		0222DB301596DCC600699D62 /* DipDirectionPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipDirectionPickerViewController.m; sourceTree = "<group>"; };
-		022C3DF515AE74EC004F0EDD /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEEngine.h; sourceTree = "<group>"; };
-		022C3DF615AE74EC004F0EDD /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEEngine.m; sourceTree = "<group>"; };
-		022C3DF915AE7525004F0EDD /* TransientBedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientBedding.h; sourceTree = "<group>"; };
-		022C3DFA15AE7525004F0EDD /* TransientBedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientBedding.m; sourceTree = "<group>"; };
-		022C3DFB15AE7525004F0EDD /* TransientContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientContact.h; sourceTree = "<group>"; };
-		022C3DFC15AE7525004F0EDD /* TransientContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientContact.m; sourceTree = "<group>"; };
-		022C3DFD15AE7525004F0EDD /* TransientFault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFault.h; sourceTree = "<group>"; };
-		022C3DFE15AE7525004F0EDD /* TransientFault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFault.m; sourceTree = "<group>"; };
-		022C3DFF15AE7525004F0EDD /* TransientImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientImage.h; sourceTree = "<group>"; };
-		022C3E0015AE7525004F0EDD /* TransientImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientImage.m; sourceTree = "<group>"; };
-		022C3E0115AE7525004F0EDD /* TransientJointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientJointSet.h; sourceTree = "<group>"; };
-		022C3E0215AE7525004F0EDD /* TransientJointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientJointSet.m; sourceTree = "<group>"; };
-		022C3E0315AE7525004F0EDD /* TransientOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientOther.h; sourceTree = "<group>"; };
-		022C3E0415AE7525004F0EDD /* TransientOther.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientOther.m; sourceTree = "<group>"; };
-		022C3E1415AE757A004F0EDD /* ConflictHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConflictHandler.h; sourceTree = "<group>"; };
-		022C3E1515AE757A004F0EDD /* ConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConflictHandler.m; sourceTree = "<group>"; };
-		022C3E1F15AE75E8004F0EDD /* TransientRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientRecord.h; sourceTree = "<group>"; };
-		022C3E2015AE75E8004F0EDD /* TransientRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientRecord.m; sourceTree = "<group>"; };
 		022C3E2315AE7655004F0EDD /* TransientManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientManagedObject.h; sourceTree = "<group>"; };
 		022C3E2415AE7655004F0EDD /* TransientManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientManagedObject.m; sourceTree = "<group>"; };
-		022C3E2E15AE7806004F0EDD /* TransientFormation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation_Folder.h; sourceTree = "<group>"; };
-		022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation_Folder.m; sourceTree = "<group>"; };
-		022C3E3015AE7806004F0EDD /* TransientFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation.h; sourceTree = "<group>"; };
-		022C3E3115AE7806004F0EDD /* TransientFormation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation.m; sourceTree = "<group>"; };
-		022C3E3215AE7806004F0EDD /* TransientProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientProject.h; sourceTree = "<group>"; };
-		022C3E3315AE7806004F0EDD /* TransientProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientProject.m; sourceTree = "<group>"; };
 		023858651599233F00A0DB98 /* FormationFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderTableViewController.h; sourceTree = "<group>"; };
 		023858661599233F00A0DB98 /* FormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationFolderTableViewController.m; sourceTree = "<group>"; };
 		0238586815994DF100A0DB98 /* FormationFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationFolderViewController.h; sourceTree = "<group>"; };
@@ -260,7 +253,7 @@
 		02712A57159D013D00510188 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
 		02712A58159D013D00510188 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
 		027406BA15AE711200AD9EDC /* RecordImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordImportTVC.h; sourceTree = "<group>"; };
-		027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTVCViewController.m; sourceTree = "<group>"; };
+		027406BB15AE711200AD9EDC /* RecordImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTVC.m; sourceTree = "<group>"; };
 		027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationImportTVC.h; sourceTree = "<group>"; };
 		027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +295,36 @@
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		02AC0F9815A5483700FBA9D3 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
+		02F86EB315AF6E5B000A84D2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		02F86EB615AF6F09000A84D2 /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEngine.h; path = GeoFieldBook/IEEngine.h; sourceTree = "<group>"; };
+		02F86EB715AF6F09000A84D2 /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEEngine.m; path = GeoFieldBook/IEEngine.m; sourceTree = "<group>"; };
+		02F86EBA15AF6F37000A84D2 /* ConflictHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConflictHandler.h; path = GeoFieldBook/ConflictHandler.h; sourceTree = "<group>"; };
+		02F86EBB15AF6F37000A84D2 /* ConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConflictHandler.m; path = GeoFieldBook/ConflictHandler.m; sourceTree = "<group>"; };
+		02F86EBE15AF6F6F000A84D2 /* TransientImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientImage.h; sourceTree = "<group>"; };
+		02F86EBF15AF6F6F000A84D2 /* TransientImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientImage.m; sourceTree = "<group>"; };
+		02F86ECA15AF6FA0000A84D2 /* TransientBedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientBedding.h; sourceTree = "<group>"; };
+		02F86ECB15AF6FA0000A84D2 /* TransientBedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientBedding.m; sourceTree = "<group>"; };
+		02F86ECE15AF6FB1000A84D2 /* TransientContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientContact.h; sourceTree = "<group>"; };
+		02F86ECF15AF6FB1000A84D2 /* TransientContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientContact.m; sourceTree = "<group>"; };
+		02F86ED215AF6FC2000A84D2 /* TransientFault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFault.h; sourceTree = "<group>"; };
+		02F86ED315AF6FC2000A84D2 /* TransientFault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFault.m; sourceTree = "<group>"; };
+		02F86ED615AF6FD7000A84D2 /* TransientProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientProject.h; sourceTree = "<group>"; };
+		02F86ED715AF6FD7000A84D2 /* TransientProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientProject.m; sourceTree = "<group>"; };
+		02F86EDA15AF6FE8000A84D2 /* TransientFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation.h; sourceTree = "<group>"; };
+		02F86EDB15AF6FE8000A84D2 /* TransientFormation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation.m; sourceTree = "<group>"; };
+		02F86EDE15AF6FF6000A84D2 /* TransientFormation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation_Folder.h; sourceTree = "<group>"; };
+		02F86EDF15AF6FF6000A84D2 /* TransientFormation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation_Folder.m; sourceTree = "<group>"; };
+		02F86EE215AF7004000A84D2 /* TransientJointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientJointSet.h; sourceTree = "<group>"; };
+		02F86EE315AF7004000A84D2 /* TransientJointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientJointSet.m; sourceTree = "<group>"; };
+		02F86EE615AF7014000A84D2 /* TransientRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientRecord.h; sourceTree = "<group>"; };
+		02F86EE715AF7014000A84D2 /* TransientRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientRecord.m; sourceTree = "<group>"; };
+		02F86EEA15AF7021000A84D2 /* TransientOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientOther.h; sourceTree = "<group>"; };
+		02F86EEB15AF7021000A84D2 /* TransientOther.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientOther.m; sourceTree = "<group>"; };
+		02F86EEE15AFA9CE000A84D2 /* Record+DipDirectionValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DipDirectionValues.h"; sourceTree = "<group>"; };
+		02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DipDirectionValues.m"; sourceTree = "<group>"; };
+		02F86EF215AFCDD8000A84D2 /* ValidationMessageBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationMessageBoard.h; sourceTree = "<group>"; };
+		02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationMessageBoard.m; sourceTree = "<group>"; };
+		02F86EF615AFE13B000A84D2 /* IEConflictHandlerNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEConflictHandlerNotificationNames.h; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
@@ -331,6 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F86EB415AF6E5B000A84D2 /* iAd.framework in Frameworks */,
 				21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */,
 				0294E0CF1593620B0025219F /* CoreLocation.framework in Frameworks */,
 				0294E0CD159362040025219F /* MapKit.framework in Frameworks */,
@@ -376,6 +400,8 @@
 				020EBBAE15944F4500EECC08 /* TextInputFilter.m */,
 				2128E74115A238F900B277F9 /* GeoFilter.h */,
 				2128E74215A238F900B277F9 /* GeoFilter.m */,
+				02F86EF215AFCDD8000A84D2 /* ValidationMessageBoard.h */,
+				02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -452,8 +478,8 @@
 		022C3E3815AE785E004F0EDD /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				022C3DFF15AE7525004F0EDD /* TransientImage.h */,
-				022C3E0015AE7525004F0EDD /* TransientImage.m */,
+				02F86EBE15AF6F6F000A84D2 /* TransientImage.h */,
+				02F86EBF15AF6F6F000A84D2 /* TransientImage.m */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -461,8 +487,8 @@
 		022C3E3915AE7874004F0EDD /* Bedding */ = {
 			isa = PBXGroup;
 			children = (
-				022C3DF915AE7525004F0EDD /* TransientBedding.h */,
-				022C3DFA15AE7525004F0EDD /* TransientBedding.m */,
+				02F86ECA15AF6FA0000A84D2 /* TransientBedding.h */,
+				02F86ECB15AF6FA0000A84D2 /* TransientBedding.m */,
 			);
 			name = Bedding;
 			sourceTree = "<group>";
@@ -470,8 +496,8 @@
 		022C3E3A15AE7885004F0EDD /* Contact */ = {
 			isa = PBXGroup;
 			children = (
-				022C3DFB15AE7525004F0EDD /* TransientContact.h */,
-				022C3DFC15AE7525004F0EDD /* TransientContact.m */,
+				02F86ECE15AF6FB1000A84D2 /* TransientContact.h */,
+				02F86ECF15AF6FB1000A84D2 /* TransientContact.m */,
 			);
 			name = Contact;
 			sourceTree = "<group>";
@@ -479,8 +505,8 @@
 		022C3E3B15AE789D004F0EDD /* Fault */ = {
 			isa = PBXGroup;
 			children = (
-				022C3DFD15AE7525004F0EDD /* TransientFault.h */,
-				022C3DFE15AE7525004F0EDD /* TransientFault.m */,
+				02F86ED215AF6FC2000A84D2 /* TransientFault.h */,
+				02F86ED315AF6FC2000A84D2 /* TransientFault.m */,
 			);
 			name = Fault;
 			sourceTree = "<group>";
@@ -488,8 +514,8 @@
 		022C3E3C15AE78B9004F0EDD /* Folder */ = {
 			isa = PBXGroup;
 			children = (
-				022C3E3215AE7806004F0EDD /* TransientProject.h */,
-				022C3E3315AE7806004F0EDD /* TransientProject.m */,
+				02F86ED615AF6FD7000A84D2 /* TransientProject.h */,
+				02F86ED715AF6FD7000A84D2 /* TransientProject.m */,
 			);
 			name = Folder;
 			sourceTree = "<group>";
@@ -497,8 +523,8 @@
 		022C3E4615AE7955004F0EDD /* Formation Folder */ = {
 			isa = PBXGroup;
 			children = (
-				022C3E2E15AE7806004F0EDD /* TransientFormation_Folder.h */,
-				022C3E2F15AE7806004F0EDD /* TransientFormation_Folder.m */,
+				02F86EDE15AF6FF6000A84D2 /* TransientFormation_Folder.h */,
+				02F86EDF15AF6FF6000A84D2 /* TransientFormation_Folder.m */,
 			);
 			name = "Formation Folder";
 			sourceTree = "<group>";
@@ -506,8 +532,8 @@
 		022C3E4715AE797F004F0EDD /* Formation */ = {
 			isa = PBXGroup;
 			children = (
-				022C3E3015AE7806004F0EDD /* TransientFormation.h */,
-				022C3E3115AE7806004F0EDD /* TransientFormation.m */,
+				02F86EDA15AF6FE8000A84D2 /* TransientFormation.h */,
+				02F86EDB15AF6FE8000A84D2 /* TransientFormation.m */,
 			);
 			name = Formation;
 			sourceTree = "<group>";
@@ -515,8 +541,8 @@
 		022C3E4815AE7993004F0EDD /* JointSet */ = {
 			isa = PBXGroup;
 			children = (
-				022C3E0115AE7525004F0EDD /* TransientJointSet.h */,
-				022C3E0215AE7525004F0EDD /* TransientJointSet.m */,
+				02F86EE215AF7004000A84D2 /* TransientJointSet.h */,
+				02F86EE315AF7004000A84D2 /* TransientJointSet.m */,
 			);
 			name = JointSet;
 			sourceTree = "<group>";
@@ -524,8 +550,8 @@
 		022C3E4915AE79AC004F0EDD /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				022C3E1F15AE75E8004F0EDD /* TransientRecord.h */,
-				022C3E2015AE75E8004F0EDD /* TransientRecord.m */,
+				02F86EE615AF7014000A84D2 /* TransientRecord.h */,
+				02F86EE715AF7014000A84D2 /* TransientRecord.m */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -533,8 +559,8 @@
 		022C3E4A15AE79C1004F0EDD /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				022C3E0315AE7525004F0EDD /* TransientOther.h */,
-				022C3E0415AE7525004F0EDD /* TransientOther.m */,
+				02F86EEA15AF7021000A84D2 /* TransientOther.h */,
+				02F86EEB15AF7021000A84D2 /* TransientOther.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -576,6 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				0249E2ED15A9040800A7532E /* ModelGroupNotificationNames.h */,
+				02F86EF615AFE13B000A84D2 /* IEConflictHandlerNotificationNames.h */,
 			);
 			name = "NSNotification Registrations";
 			sourceTree = "<group>";
@@ -586,7 +613,7 @@
 				02191EC815ACA8DD00A5EB2B /* ImportTableViewController.h */,
 				02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */,
 				027406BA15AE711200AD9EDC /* RecordImportTVC.h */,
-				027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */,
+				027406BB15AE711200AD9EDC /* RecordImportTVC.m */,
 				027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */,
 				027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */,
 			);
@@ -645,6 +672,7 @@
 		0294E094159361060025219F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02F86EB315AF6E5B000A84D2 /* iAd.framework */,
 				2141DC18159CA275002518F9 /* libcommonCrypto.dylib */,
 				21C309E0159B6C800066FC9B /* MobileCoreServices.framework */,
 				0294E0CE1593620B0025219F /* CoreLocation.framework */,
@@ -837,6 +865,8 @@
 				0298C25E159B45650038E89C /* Record+NameEncoding.m */,
 				21A87A11159CAAFD001A220E /* Record+DateAndTimeFormatter.h */,
 				21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */,
+				02F86EEE15AFA9CE000A84D2 /* Record+DipDirectionValues.h */,
+				02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -881,10 +911,10 @@
 		211B728D15AB522D00EC4C60 /* I/E */ = {
 			isa = PBXGroup;
 			children = (
-				022C3DF515AE74EC004F0EDD /* IEEngine.h */,
-				022C3DF615AE74EC004F0EDD /* IEEngine.m */,
-				022C3E1415AE757A004F0EDD /* ConflictHandler.h */,
-				022C3E1515AE757A004F0EDD /* ConflictHandler.m */,
+				02F86EB615AF6F09000A84D2 /* IEEngine.h */,
+				02F86EB715AF6F09000A84D2 /* IEEngine.m */,
+				02F86EBA15AF6F37000A84D2 /* ConflictHandler.h */,
+				02F86EBB15AF6F37000A84D2 /* ConflictHandler.m */,
 			);
 			name = I/E;
 			path = ..;
@@ -1095,9 +1125,23 @@
 				0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */,
 				02191EC615AC850600A5EB2B /* Record.m in Sources */,
 				02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */,
-				027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */,
+				027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */,
 				027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */,
 				022C3E2515AE7656004F0EDD /* TransientManagedObject.m in Sources */,
+				02F86EB815AF6F09000A84D2 /* IEEngine.m in Sources */,
+				02F86EBC15AF6F37000A84D2 /* ConflictHandler.m in Sources */,
+				02F86EC015AF6F6F000A84D2 /* TransientImage.m in Sources */,
+				02F86ECC15AF6FA0000A84D2 /* TransientBedding.m in Sources */,
+				02F86ED015AF6FB1000A84D2 /* TransientContact.m in Sources */,
+				02F86ED415AF6FC2000A84D2 /* TransientFault.m in Sources */,
+				02F86ED815AF6FD7000A84D2 /* TransientProject.m in Sources */,
+				02F86EDC15AF6FE8000A84D2 /* TransientFormation.m in Sources */,
+				02F86EE015AF6FF6000A84D2 /* TransientFormation_Folder.m in Sources */,
+				02F86EE415AF7004000A84D2 /* TransientJointSet.m in Sources */,
+				02F86EE815AF7014000A84D2 /* TransientRecord.m in Sources */,
+				02F86EEC15AF7021000A84D2 /* TransientOther.m in Sources */,
+				02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
+				02F86EF415AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,18 +1150,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				0294E0C1159361060025219F /* GeoFieldBookTests.m in Sources */,
-				022C3DF715AE74EC004F0EDD /* IEEngine.m in Sources */,
-				022C3E0515AE7525004F0EDD /* TransientBedding.m in Sources */,
-				022C3E0615AE7525004F0EDD /* TransientContact.m in Sources */,
-				022C3E0715AE7525004F0EDD /* TransientFault.m in Sources */,
-				022C3E0815AE7525004F0EDD /* TransientImage.m in Sources */,
-				022C3E0915AE7525004F0EDD /* TransientJointSet.m in Sources */,
-				022C3E0A15AE7525004F0EDD /* TransientOther.m in Sources */,
-				022C3E1615AE757A004F0EDD /* ConflictHandler.m in Sources */,
-				022C3E2115AE75E8004F0EDD /* TransientRecord.m in Sources */,
-				022C3E3415AE7806004F0EDD /* TransientFormation_Folder.m in Sources */,
-				022C3E3515AE7806004F0EDD /* TransientFormation.m in Sources */,
-				022C3E3615AE7806004F0EDD /* TransientProject.m in Sources */,
+				02F86EB915AF6F09000A84D2 /* IEEngine.m in Sources */,
+				02F86EBD15AF6F37000A84D2 /* ConflictHandler.m in Sources */,
+				02F86EC115AF6F6F000A84D2 /* TransientImage.m in Sources */,
+				02F86ECD15AF6FA0000A84D2 /* TransientBedding.m in Sources */,
+				02F86ED115AF6FB1000A84D2 /* TransientContact.m in Sources */,
+				02F86ED515AF6FC2000A84D2 /* TransientFault.m in Sources */,
+				02F86ED915AF6FD7000A84D2 /* TransientProject.m in Sources */,
+				02F86EDD15AF6FE8000A84D2 /* TransientFormation.m in Sources */,
+				02F86EE115AF6FF6000A84D2 /* TransientFormation_Folder.m in Sources */,
+				02F86EE515AF7004000A84D2 /* TransientJointSet.m in Sources */,
+				02F86EE915AF7014000A84D2 /* TransientRecord.m in Sources */,
+				02F86EED15AF7021000A84D2 /* TransientOther.m in Sources */,
+				02F86EF115AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
+				02F86EF515AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

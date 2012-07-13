@@ -10,7 +10,10 @@
 #import "TransientRecord.h"
 #import "TransientFormation.h"
 
+#import "Bedding.h"
+
 @interface TransientBedding : TransientRecord
 
 @property (nonatomic, retain) TransientFormation *formation;
+
 @end

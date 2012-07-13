@@ -1,18 +1,19 @@
 //
-//  FormationImportTVC.m
+//  RecordImportTVC.m
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 7/11/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "FormationImportTVC.h"
+#import "RecordImportTVC.h"
+#import "IEConflictHandlerNotificationNames.h"
 
-@interface FormationImportTVC ()
+@interface RecordImportTVC() <UIAlertViewDelegate>
 
 @end
 
-@implementation FormationImportTVC
+@implementation RecordImportTVC
 
 #pragma mark - View Controller Lifecycle
 
@@ -25,15 +26,14 @@
     NSURL *documentDirURL=[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSArray *urls=[fileManager contentsOfDirectoryAtPath:[documentDirURL path] error:NULL];
     for (NSURL *url in urls) {
-        //If the file name has extension .formation.csv, add it to the array of csv files
+        //If the file name has extension .record.csv, add it to the array of csv files
         NSString *fileName=[url lastPathComponent];
-        if ([fileName hasSuffix:@".formation.csv"]) {
+        if ([fileName hasSuffix:@".record.csv"])
             [csvFileNames addObject:fileName];
-        }
     }
     self.csvFileNames=csvFileNames;
     
-    //Register to hear notifications from the conflict handler
+    //Register for notifications from conflict handler
     [self registerForNotificationsForConflictHandler];
 }
 
@@ -46,13 +46,13 @@
         dispatch_queue_t conflict_handler_queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(conflict_handler_queue, ^{
             //Handle the conflict
-            [conflictHandler userDidChooseToHandleFormationFolderNameConflictWith:ConflictHandleReplace];
+            [conflictHandler userDidChooseToHandleFolderNameConflictWith:ConflictHandleReplace];
             
-            //If there is any unprocessed formations, continue
-            if (conflictHandler.transientFormations.count)
-                [conflictHandler processTransientFormations:conflictHandler.transientFormations 
-                                        andFormationFolders:conflictHandler.transientFormationFolders 
-                                   withValidationMessageLog:nil];
+            //If there is any unprocessed records, continue
+            if (conflictHandler.transientRecords.count)
+                [conflictHandler processTransientRecords:conflictHandler.transientRecords 
+                                                   andFolders:conflictHandler.transientFolders 
+                                     withValidationMessageLog:nil];
         });
     }
     
@@ -79,7 +79,7 @@
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self 
                            selector:@selector(handleFolderNameConflict:) 
-                               name:GeoNotificationConflictHandlerFormationFolderNameConflictOccurs 
+                               name:GeoNotificationConflictHandlerFolderNameConflictOccurs 
                              object:nil];
     [notificationCenter addObserver:self 
                            selector:@selector(handleValidationErrors:) 
@@ -90,8 +90,8 @@
 - (void)handleFolderNameConflict:(NSNotification *)notification {
     //Put up an alert in the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *duplicateFormationFolderName=self.conflictHandler.duplicateFormationFolderName;
-        NSString *alertTitle=[NSString stringWithFormat:@"Formation Folder With Name \"%@\" already exists!",duplicateFormationFolderName];
+        NSString *duplicateFolderName=self.conflictHandler.duplicateFolderName;
+        NSString *alertTitle=[NSString stringWithFormat:@"Folder With Name \"%@\" already exists!",duplicateFolderName];
         NSString *message=@"";
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:alertTitle 
                                                       message:message 
@@ -121,12 +121,12 @@
 #pragma mark - UITableViewDataSource protocol methods
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Formation CSV Files";
+    return @"Record CSV Files";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Formation Import Cell";
+    static NSString *CellIdentifier = @"Record Import Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
@@ -145,7 +145,7 @@
     dispatch_async(import_queue_t, ^{
         //Pass the selected csv files to the engine
         self.engine.handler=self.conflictHandler;
-        [self.engine createFormationsFromCSVFiles:self.selectedCSVFiles];
+        [self.engine createRecordsFromCSVFiles:self.selectedCSVFiles];
     });
     dispatch_release(import_queue_t);
 }

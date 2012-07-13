@@ -8,6 +8,8 @@
 
 #import "TransientRecord.h"
 
+#import "Other.h"
+
 @interface TransientOther : TransientRecord
 
 @end

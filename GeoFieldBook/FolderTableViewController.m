@@ -170,6 +170,7 @@
     [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (!success) {
             //handle errors
+            NSLog(@"Database error: %@",self.database);
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to save changes to database. Please try to submit them again."];
         }
     }];
@@ -252,13 +253,6 @@
     [self hideButton:self.deleteButton enabled:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    //Save any change to database
-    [self saveChangesToDatabase];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Support all orientations
@@ -314,6 +308,9 @@
         //Hide the delete button
         [self hideButton:self.deleteButton enabled:NO];
     }
+    
+    //Reset the title of the delete button
+    self.deleteButton.title=@"Delete";
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -322,6 +319,9 @@
     
     //Setup the UI
     [self setupUIForEditingMode:self.tableView.editing];
+    
+    //Reset the array of to be deleted folders
+    self.toBeDeletedFolders=nil;
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {

@@ -9,8 +9,11 @@
 #import "TransientRecord.h"
 #import "TransientFormation.h"
 
+#import "Contact.h"
+
 @interface TransientContact : TransientRecord
 
 @property (nonatomic, strong) TransientFormation *lowerFormation;
 @property (nonatomic, strong) TransientFormation *upperFormation;
+
 @end

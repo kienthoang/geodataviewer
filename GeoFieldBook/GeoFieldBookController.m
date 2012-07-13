@@ -137,6 +137,9 @@
 
 - (IBAction)presentPopoverViewController:(UIButton *)popoverVCButtonCustomView 
 {
+    //Dismiss the keyboard in the view side
+    [[self dataMapSegmentViewController] dismissKeyboardInDataSideView];
+    
     //Dismiss all visible popovers
     [self dismissAllVisiblePopoversAnimated:NO];
     
@@ -244,6 +247,9 @@
     
     //Put the record view controller in editing mode
     [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
+    
+    //Dismiss the popover
+    [self.popoverViewController dismissPopoverAnimated:NO];
 }
 
 #pragma mark - Prepare for Segue

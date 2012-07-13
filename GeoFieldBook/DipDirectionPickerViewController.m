@@ -7,6 +7,7 @@
 //
 
 #import "DipDirectionPickerViewController.h"
+#import "Record+DipDirectionValues.h"
 
 @interface DipDirectionPickerViewController() <UIPickerViewDelegate>
 
@@ -20,9 +21,10 @@
 
 - (NSArray *)dipDirectionComponentMatrix {
     //First component
-    NSArray *firstComponent=[NSArray arrayWithObjects: DIP_DIRECTION_PICKER_BLANK_OPTION,@"N", @"NE", @"E",@"SE" , @"S", @"SW", @"W", @"NW", nil];
+    NSMutableArray *firstComponent=[NSMutableArray arrayWithObject:DIP_DIRECTION_PICKER_BLANK_OPTION];
+    [firstComponent addObjectsFromArray:[Record allDipDirectionValues]];
     
-    return [NSArray arrayWithObjects:firstComponent, nil];
+    return [NSArray arrayWithObjects:[firstComponent copy], nil];
 }
 
 #pragma mark - User Selection Manipulation
