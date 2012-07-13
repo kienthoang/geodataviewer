@@ -227,6 +227,7 @@
 		0238587B1599731F00A0DB98 /* Formation+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Creation.m"; sourceTree = "<group>"; };
 		0238587D1599747200A0DB98 /* Formation+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation+Modification.h"; sourceTree = "<group>"; };
 		0238587E1599747300A0DB98 /* Formation+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Modification.m"; sourceTree = "<group>"; };
+		0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		0249E2AC15A6A16100A7532E /* import_export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_export.png; sourceTree = "<group>"; };
 		0249E2AE15A6A2D100A7532E /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
 		0249E2B015A6A32300A7532E /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
@@ -776,6 +777,7 @@
 				0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */,
 				026640D315AA0B2E00026D88 /* RecordTableViewControllerDelegate.h */,
 				026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */,
+				0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

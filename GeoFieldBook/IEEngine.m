@@ -140,16 +140,18 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     //remove leading and trailing spaces
     date = [date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     date = [date stringByReplacingOccurrencesOfString:@"," withString:@""]; //remove comma(s), if any
-    NSArray *array = [date componentsSeparatedByString:@" "]; //separate by spaces
-    
+    NSArray *array = [date componentsSeparatedByString:@" "]; //separate by spaces    
     typedef enum Months{Zero, January, February, March, April, May, June, July, August, September, October, November, December}Months; 
-    int month = (Months)[array objectAtIndex:1];
-    
+    NSArray *keys = [[NSArray alloc] initWithObjects:@"January",@"February", @"March", @"April", @"May", @"June", @"July", @"August", @"September", @"October", @"November", @"December", nil];
+    NSArray *values = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:2],[NSNumber numberWithInt:3],[NSNumber numberWithInt:4],[NSNumber numberWithInt:5],[NSNumber numberWithInt:6],[NSNumber numberWithInt:7],[NSNumber numberWithInt:8],[NSNumber numberWithInt:9],[NSNumber numberWithInt:10],[NSNumber numberWithInt:11],[NSNumber numberWithInt:12], nil];
+    NSDictionary *months = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
+    
     [comps setYear:[[array objectAtIndex:3] intValue]];
-    [comps setMonth:month];
+    [comps setMonth:(NSInteger)[months valueForKey:[lineArray objectAtIndex:1]]];
     [comps setDay:[[array objectAtIndex:2] intValue]];
     NSArray *time = [[array objectAtIndex:4] componentsSeparatedByString:@":"];
+    
     [comps setHour:[[time objectAtIndex:0] intValue]];
     [comps setMinute:[[time objectAtIndex:1] intValue]];
     [comps setSecond:[[time objectAtIndex:2] intValue]];
@@ -174,7 +176,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         NSString* content = [NSString stringWithContentsOfFile:imageFilePath encoding:NSUTF8StringEncoding error:nil];
         //now set the image content
         record.image.imageData = [content dataUsingEncoding:NSUTF8StringEncoding];
-        //imageHashData not saved. is it needed?
     }
     
     //Set the folder

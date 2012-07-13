@@ -19,6 +19,8 @@
 
 @implementation ImportTableViewController
 
+@synthesize importDelegate=_importDelegate;
+
 @synthesize csvFileNames=_csvFileNames;
 @synthesize selectedCSVFiles=_selectedCSVFiles;
 

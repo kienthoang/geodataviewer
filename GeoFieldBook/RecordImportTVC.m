@@ -9,6 +9,8 @@
 #import "RecordImportTVC.h"
 #import "IEConflictHandlerNotificationNames.h"
 
+#import "TransientProject.h"
+
 @interface RecordImportTVC() <UIAlertViewDelegate>
 
 @end
@@ -140,12 +142,36 @@
 #pragma mark - Target Action Handlers
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
+    //Notify delegate of the start of the importing
+    NSLog(@"delegate: %@",self.importDelegate);
+    [self.importDelegate importTableViewControllerDidStartImporting:self];
+    
+    __weak RecordImportTVC *weakSelf=self;
+        
     //Start importing in another thread
     dispatch_queue_t import_queue_t=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(import_queue_t, ^{
+        //Put up a spinner for the import button
+        __block UIActivityIndicatorView *spinner=nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+            UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
+            [spinner startAnimating];
+            weakSelf.navigationItem.rightBarButtonItem=spinnerBarButtonItem;
+        });
+        
         //Pass the selected csv files to the engine
-        self.engine.handler=self.conflictHandler;
-        [self.engine createRecordsFromCSVFiles:self.selectedCSVFiles];
+        weakSelf.engine.handler=weakSelf.conflictHandler;
+        [weakSelf.engine createRecordsFromCSVFiles:weakSelf.selectedCSVFiles];
+        
+        //Notify delegate of the completion of the importing
+        [weakSelf.importDelegate importTableViewControllerDidEndImporting:weakSelf];
+        
+        //Put the import button back again
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner stopAnimating];
+            weakSelf.navigationItem.rightBarButtonItem=weakSelf.importButton;
+        });
     });
     dispatch_release(import_queue_t);
 }
