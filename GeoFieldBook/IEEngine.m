@@ -236,9 +236,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     for(NSString *line in allLines) {//skip the first line
         [records addObject:[self parseLine:line]];
     }
-        
+    
     return records;
-
+    
 }
 
 -(NSArray *)getSelectedFilePaths:(NSArray *)fileNames;
@@ -256,24 +256,24 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     return paths;
 }
 
-- (NSArray *)parseLine:(NSString *) line 
+- (NSArray *)parseLine:(NSString *) line
 {
     //log to see if each individual line (record) is extracted properly
-        NSLog(@"Individual record: %@", line);
+    NSLog(@"Individual record: %@", line);
     
     NSMutableArray *values = [[line componentsSeparatedByString:@","] mutableCopy];
-
-    values = [self separateRecordsOrFieldsByCountingQuotations:values];
+    
+    values = [self separateRecordsOrFieldsByCountingQuotations:values byAppending:@","];
     
     [self fixDoubleQuotationsWhileParsingLine:values];
     
     return values;
 }
 -(NSMutableArray *) fixNewLineCharactersInData:(NSArray *)records {
-    return [self separateRecordsOrFieldsByCountingQuotations:records];
+    return [self separateRecordsOrFieldsByCountingQuotations:records byAppending:@"\n"];
 }
 
--(NSMutableArray *) separateRecordsOrFieldsByCountingQuotations:(NSArray *) array {
+-(NSMutableArray *) separateRecordsOrFieldsByCountingQuotations:(NSArray *) array byAppending:(NSString *) separator {
     NSString *merged;
     NSString *current;
     BOOL repeat;
@@ -285,7 +285,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
             current = [copy objectAtIndex:i];
             int quotes = [[current componentsSeparatedByString:@"\""] count]-1; //number of quotes
             if(quotes%2) { // if odd, merge with the next string value
-                merged = [current stringByAppendingFormat:@",%@",[copy objectAtIndex:i+1]];
+                merged = [current stringByAppendingFormat:@"%@%@",separator,[copy objectAtIndex:i+1]];
                 [copy replaceObjectAtIndex:i withObject:merged];
                 [copy removeObjectAtIndex:i+1];
                 repeat = YES;
@@ -304,11 +304,17 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     NSString *current;
     for(int i = 0; i<[values count]; i++) {
         current = [values objectAtIndex:i];
-        if([current length]>1) {
+        if([[current componentsSeparatedByString:@","] count ] >1){ //if commas in the token data, , get rid of the enclosing quotes
+            NSRange range = NSMakeRange(1, [current length]-2);           
+            current = [current substringWithRange:range];
+        }
+        if([current length]>1) { //now replace all two double quote(s) with one.
             [values replaceObjectAtIndex:i withObject:[current stringByReplacingOccurrencesOfString:@"\"\"" 
                                                                                          withString:@"\""]]; 
         }        
     }
+    for(NSString *str in values)
+        NSLog(@"%@", str);
     return values;
 }
 @end
