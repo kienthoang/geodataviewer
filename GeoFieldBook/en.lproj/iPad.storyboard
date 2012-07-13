@@ -70,7 +70,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7772" y="-5109"/>
+            <point key="canvasLocation" x="-7836" y="-4465"/>
         </scene>
         <!--Folder Table View Controller - Folders-->
         <scene sceneID="p56-nE-sZ6">
@@ -195,17 +195,17 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfm-Jg-D25" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="rqP-i8-UCo" customClass="FormationFolderTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0nz-Yq-xgl">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0nz-Yq-xgl">
                         <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" textLabel="aX7-rK-jy5" detailTextLabel="OPG-dX-d4C" style="IBUITableViewCellStyleSubtitle" id="g5m-A9-XLq">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="43"/>
+                                    <rect key="frame" x="45" y="1" width="914" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aX7-rK-jy5">
@@ -225,9 +225,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="PLg-aG-R2F" kind="push" identifier="Show Formations" id="Dhj-CM-MeU"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -236,15 +233,21 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Add Folder" id="5Kq-VS-lzR">
+                        <barButtonItem title="Add Folder" width="120" id="5Kq-VS-lzR">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="5rr-o1-mUY" kind="modal" identifier="Formation Folder Manipulation" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="Gk8-fP-aTA"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem enabled="NO" title="Delete" width="120" id="qYt-GW-MGe">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="rqP-i8-UCo" id="JRk-gZ-zVy"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Formation Folders" id="3gP-S2-8wl">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="ooa-Kl-7co">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="ooa-Kl-7co">
                             <connections>
                                 <action selector="editPressed:" destination="rqP-i8-UCo" id="gz8-06-h64"/>
                             </connections>
@@ -252,6 +255,12 @@
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="5Kq-VS-lzR" id="4gC-zm-CtP"/>
+                        <outlet property="deleteButton" destination="qYt-GW-MGe" id="LGS-0I-U1I"/>
+                        <outlet property="editButton" destination="ooa-Kl-7co" id="0oE-gZ-hW4"/>
+                        <segue destination="PLg-aG-R2F" kind="push" identifier="Show Formations" id="MW8-IM-rKQ"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-9318" y="-5553"/>
@@ -317,7 +326,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6378" y="-5066"/>
+            <point key="canvasLocation" x="-6326" y="-4428"/>
         </scene>
         <!--Record Table View Controller-->
         <scene sceneID="qZz-Vz-aQF">
@@ -1180,17 +1189,17 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ecV-B0-A5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="PLg-aG-R2F" customClass="FormationTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7f5-cq-hJz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="7f5-cq-hJz">
                         <rect key="frame" x="0.0" y="44" width="1024" height="680"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Cell" id="QFy-GT-yla">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Cell" id="QFy-GT-yla">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <rect key="frame" x="45" y="1" width="901" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -1202,15 +1211,21 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Add Formation" id="AuG-Wp-ICM">
+                        <barButtonItem title="Add Formation" width="120" id="AuG-Wp-ICM">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="IJY-xr-I7y" kind="modal" identifier="Formation Manipulation" modalPresentationStyle="currentContext" id="Vov-6V-dI2"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem enabled="NO" title="Delete" width="120" id="FBa-5G-w6O">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="PLg-aG-R2F" id="rjx-cE-xFD"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="1Sj-2i-V8K">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="WxT-tz-Y8l">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="WxT-tz-Y8l">
                             <connections>
                                 <action selector="editPressed:" destination="PLg-aG-R2F" id="6Hz-8e-y0C"/>
                             </connections>
@@ -1218,9 +1233,14 @@
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="350" height="500"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="AuG-Wp-ICM" id="WVJ-fl-30R"/>
+                        <outlet property="deleteButton" destination="FBa-5G-w6O" id="4dc-sk-SjX"/>
+                        <outlet property="editButton" destination="WxT-tz-Y8l" id="9xj-qL-nHp"/>
+                    </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-6967" y="-5099"/>
+            <point key="canvasLocation" x="-6711" y="-5368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kRT-F4-Wi6">
@@ -1769,6 +1789,11 @@
         </class>
         <class className="FormationFolderTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="FormationFolderViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderViewController.h"/>
@@ -1784,6 +1809,11 @@
         </class>
         <class className="FormationTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="FormationViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationViewController.h"/>

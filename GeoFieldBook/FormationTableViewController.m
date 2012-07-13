@@ -13,9 +13,17 @@
 #import "Formation+Modification.h"
 #import "TextInputFilter.h"
 
-@interface FormationTableViewController() <FormationViewControllerDelegate,NSFetchedResultsControllerDelegate>
+@interface FormationTableViewController() <FormationViewControllerDelegate,NSFetchedResultsControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic) BOOL formationsWereReordered;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+
+@property (strong, nonatomic) UIBarButtonItem *hiddenButton;
+
+@property (strong, nonatomic) NSArray *toBeDeletedFormations;
 
 @end
 
@@ -24,7 +32,14 @@
 @synthesize formationFolder=_formationFolder;
 @synthesize database=_database;
 
+@synthesize addButton = _addButton;
+@synthesize deleteButton = _deleteButton;
+@synthesize editButton = _editButton;
+@synthesize hiddenButton=_hiddenButton;
+
 @synthesize formationsWereReordered=_formationsWereReordered;
+
+@synthesize toBeDeletedFormations=_toBeDeletedFormations;
 
 #pragma mark - Getters and Setters
 
@@ -40,6 +55,13 @@
     
     //Setup fetched results controller
     [self setupFetchedResultsController];
+}
+
+- (NSArray *)toBeDeletedFormations {
+    if (!_toBeDeletedFormations)
+        _toBeDeletedFormations=[NSArray array];
+    
+    return _toBeDeletedFormations;
 }
 
 #pragma mark - Controller State Initialization
@@ -137,30 +159,56 @@
     return YES;
 }
 
-- (void)deleteFormation:(Formation *)formation {
+- (void)deleteFormations:(NSArray *)formations {
     //Delete the folder
-    [self.database.managedObjectContext deleteObject:formation];
+    for (Formation *formation in formations)
+        [self.database.managedObjectContext deleteObject:formation];
     
     //Save
     [self saveChangesToDatabase];
 }
 
-#pragma mark - Database-side Formation Reordering
-
-
 #pragma mark - Target-Action Handlers
 
+- (void)setupButtonsForEditingMode:(BOOL)editing {
+    //Change the style of the action button
+    self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    
+    //Show/Hide add/delete button
+    UIBarButtonItem *hiddenButton=self.hiddenButton;
+    self.hiddenButton=editing ? self.addButton : self.deleteButton;
+    NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
+    if (editing)
+        [toolbarItems removeObject:self.addButton];
+    else
+        [toolbarItems removeObject:self.deleteButton];
+    [toolbarItems insertObject:hiddenButton atIndex:0];
+    self.toolbarItems=[toolbarItems copy];
+    
+    //Reset the title of the delete button and disable it
+    self.deleteButton.title=@"Delete";
+    self.deleteButton.enabled=NO;
+}
+
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
-    //Toggle the table view's editing mode
+    //Set the table view to editting mode
     [self.tableView setEditing:!self.tableView.editing animated:YES];
     
-    //Save any changes to database if editing mode is over
-    if (!self.editing)
-        [self saveChangesToDatabase];
+    //Set up the buttons
+    [self setupButtonsForEditingMode:self.tableView.editing];
     
-    //Change the style of the button to edit or done
-    sender.style=self.tableView.editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
-    sender.title=self.tableView.editing ? @"Done" : @"Edit";
+    //Reset the array of to be deleted records
+    self.toBeDeletedFormations=nil;
+}
+
+- (IBAction)deletePressed:(UIBarButtonItem *)sender {
+    int numOfDeletedFormations=self.toBeDeletedFormations.count;
+    NSString *message=numOfDeletedFormations > 1 ? [NSString stringWithFormat:@"Are you sure you want to delete %d formations?",numOfDeletedFormations] : @"Are you sure you want to delete this formation?";
+    NSString *destructiveButtonTitle=numOfDeletedFormations > 1 ? @"Delete Formations" : @"Delete Formation";
+    
+    //Put up an alert
+    UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
+    [deleteActionSheet showInView:self.view];
 }
 
 #pragma mark - Formation View Controller Delegate methods
@@ -195,11 +243,11 @@ didAskToModifyFormationWithName:(NSString *)originalName
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.accessoryType=UITableViewCellAccessoryDetailDisclosureButton;
     }
     
     // Configure the cell
     Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
     cell.textLabel.text = formation.formationName;
     
     return cell;
@@ -208,17 +256,43 @@ didAskToModifyFormationWithName:(NSString *)originalName
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    //If the table view is currently in editting mode, segue to the MoDalNewFolderViewController and set its 
+    //Segue to the MoDalNewFolderViewController
+    [self performSegueWithIdentifier:@"Formation Manipulation" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the table view is in editing mode, increment the count for delete
     if (self.tableView.editing) {
-        [self performSegueWithIdentifier:@"Formation Manipulation" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+        //Add the selected formation to the delete list
+        Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSMutableArray *toBeDeletedFormations=[self.toBeDeletedFormations mutableCopy];
+        [toBeDeletedFormations addObject:formation];
+        self.toBeDeletedFormations=[toBeDeletedFormations copy];
+        
+        //Update the title of the delete button
+        int numFormations=self.toBeDeletedFormations.count;
+        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",numFormations];
+        
+        //Enable the delete button
+        self.deleteButton.enabled=numFormations>0;
     }
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    //If the editing style is delete, delete the corresponding folder
-    if (editingStyle==UITableViewCellEditingStyleDelete) {
-        //Get the selected formation and delete it
-        [self deleteFormation:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //If the table view is in editing mode, decrement the count for delete
+    if (self.tableView.editing) {
+        //Remove the selected formation from the delete list
+        Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSMutableArray *toBeDeletedFormations=[self.toBeDeletedFormations mutableCopy];
+        [toBeDeletedFormations removeObject:formation];
+        self.toBeDeletedFormations=[toBeDeletedFormations copy];
+        
+        //Update the title of the delete button
+        int numFormations=self.toBeDeletedFormations.count;
+        self.deleteButton.title=numFormations ? [NSString stringWithFormat:@"Delete (%d)",numFormations] : @"Delete";
+        
+        //Enable the delete button
+        self.deleteButton.enabled=numFormations>0;
     }
 }
 
@@ -252,9 +326,35 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 #pragma mark - View Controller Lifecycles
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    //Hide the delete button
+    self.hiddenButton=self.deleteButton;
+    NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
+    [toolbarItems removeObject:self.deleteButton];
+    self.toolbarItems=[toolbarItems copy];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+#pragma mark - UIActionSheetDelegate protocol methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If the action sheet is the delete formation action sheet and user clicks "Delete Formations" or "Delete Formation", delete the formation(s)
+    NSSet *deleteButtonTitles=[NSSet setWithObjects:@"Delete Formations",@"Delete Formation", nil];
+    NSString *clickedButtonTitle=[actionSheet buttonTitleAtIndex:buttonIndex];
+    if (self.tableView.editing && [deleteButtonTitles containsObject:clickedButtonTitle]) {
+        //Delete the selected formations
+        [self deleteFormations:self.toBeDeletedFormations];
+        
+        //End editing mode
+        if (self.tableView.editing)
+            [self editPressed:self.editButton];
+    }
 }
 
 @end
