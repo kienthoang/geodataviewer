@@ -224,11 +224,15 @@
     }
     
     //If user chose "Keep Both"
-//    else if (handleOption==ConflictHandleKeepBoth) {
-//        //Rename the folders in conflict
-//        NSString *newTransientFolderName=[self renameFolder:self.folderInConflict andCorrespondingTransientFolder:self.transientFolderInConflict];
-//        transientFolders=[NSArray arrayWithObject:newTransientFolderName];
-//    }
+    else if (handleOption==ConflictHandleKeepBoth) {
+        //Rename
+        [self renameFormationFolder:self.formationFolderInConflict andCorrespondingTransientFormationFolder:self.transientFormationFolderInConflict];
+        
+        //Put the transient formation folder in conflict back for processing
+        NSMutableArray *transientFormationFolders=self.transientFormationFolders.mutableCopy;
+        [transientFormationFolders insertObject:self.transientFormationFolderInConflict atIndex:0];
+        self.transientFormationFolders=transientFormationFolders.copy;
+    }
     
     //Save the formations associated with the transient folder
     self.transientFormations=[self saveTransientFormationsInFormationList:self.transientFormations withFormationFolderNames:transientFolders];
@@ -256,6 +260,33 @@
                                                                      options:0 
                                                                        range:NSMakeRange(0, folder.folderName.length) 
                                                                 withTemplate:@"$2"];
+        int numberSuffix=[numberFormatter numberFromString:numberSuffixString].intValue+1;
+        newTransientFolderName=[renameRegex stringByReplacingMatchesInString:folder.folderName 
+                                                                     options:0 
+                                                                       range:NSMakeRange(0, folder.folderName.length) 
+                                                                withTemplate:@"$1"];
+        newTransientFolderName=[newTransientFolderName stringByAppendingFormat:@"(%d)",numberSuffix];
+        
+    } else {
+        newTransientFolderName=[newTransientFolderName stringByAppendingString:@" (1)"];
+    }
+    
+    transientFolder.folderName=newTransientFolderName;
+    return newTransientFolderName;
+}
+
+- (NSString *)renameFormationFolder:(Formation_Folder *)folder andCorrespondingTransientFormationFolder:(TransientFormation_Folder *)transientFolder {
+    NSRegularExpression *renameRegex=[[NSRegularExpression alloc] initWithPattern:@"(.+)\\s?\\((\\d*)\\)$" options:NSRegularExpressionDotMatchesLineSeparators error:NULL];
+    
+    //If there is already a renaming suffix number in the name of the folders in conflict, increment that number for the trasient folder
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    NSTextCheckingResult *match=[renameRegex firstMatchInString:folder.folderName options:0 range:NSMakeRange(0, folder.folderName.length)];
+    NSString *newTransientFolderName=transientFolder.folderName;
+    if (match) {
+        NSString *numberSuffixString=[renameRegex stringByReplacingMatchesInString:folder.folderName 
+                                                                           options:0 
+                                                                             range:NSMakeRange(0, folder.folderName.length) 
+                                                                      withTemplate:@"$2"];
         int numberSuffix=[numberFormatter numberFromString:numberSuffixString].intValue+1;
         newTransientFolderName=[renameRegex stringByReplacingMatchesInString:folder.folderName 
                                                                      options:0 

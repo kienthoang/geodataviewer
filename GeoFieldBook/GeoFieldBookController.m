@@ -19,6 +19,7 @@
 
 #import "RecordViewControllerDelegate.h"
 #import "DataMapSegmentControllerDelegate.h"
+#import "ImportTableViewControllerDelegate.h"
 
 #import "ModelGroupNotificationNames.h"
 
@@ -28,11 +29,11 @@
 
 #import "GeoDatabaseManager.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate>
+@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate,ImportTableViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *importExportButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *importExportButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *popoverVCButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *settingButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *dataMapSwitch;
@@ -57,6 +58,9 @@
 @synthesize settingButton = _settingButton;
 @synthesize dataMapSwitch = _dataMapSwitch;
 @synthesize toolbar = _toolbar;
+
+@synthesize importExportSpinner=_importExportSpinner;
+@synthesize importExportSpinnerBarButtonItem=_importExportSpinnerBarButtonItem;
 
 @synthesize popoverViewController=_popoverViewController;
 @synthesize viewGroupController=_viewGroupController;
@@ -100,20 +104,22 @@
     [self dismissAllVisiblePopoversAnimated:NO];
     
     //Instantiate the record import popover
-    UIViewController *recordImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    UINavigationController *recordImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    [(ImportTableViewController *)recordImportTVC.topViewController setImportDelegate:self];
     self.importPopover=[[UIPopoverController alloc] initWithContentViewController:recordImportTVC];
     
     //Present it
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-- (void)presentRecordFormationPopover {
+- (void)presentFormationImportPopover {
     //Dismiss all visible popovers
     [self dismissAllVisiblePopoversAnimated:NO];
     
     //Instantiate the record import popover
-    UIViewController *folderImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FORMATION_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
-    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:folderImportTVC];
+    UINavigationController *formationImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FORMATION_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    [(ImportTableViewController *)formationImportTVC.topViewController setImportDelegate:self];
+    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:formationImportTVC];
     
     //Present it
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -128,7 +134,7 @@
                 [self presentRecordImportPopover];
             //If user click import formations
             else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Formations"])
-                [self presentRecordFormationPopover];
+                [self presentFormationImportPopover];
         }
     }
 }
@@ -642,6 +648,39 @@
     //Nillify the temporary record modified data
     self.modifiedRecord=nil;
     self.recordModifiedInfo=nil;
+}
+
+#pragma mark - ImportTableViewControllerDelegate protocol methods
+
+- (void)importTableViewControllerDidStartImporting:(ImportTableViewController *)sender {
+    //Put up a spinner for the import button
+    __weak GeoFieldBookController *weakSelf=self;
+    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
+        [spinner startAnimating];
+        int index=[toolbarItems indexOfObject:weakSelf.importExportButton];
+        [toolbarItems removeObject:weakSelf.importExportButton];
+        [toolbarItems insertObject:spinnerBarButtonItem atIndex:index];
+        weakSelf.toolbar.items=toolbarItems.copy;
+        
+        weakSelf.importExportSpinner=spinner;
+        weakSelf.importExportSpinnerBarButtonItem=spinnerBarButtonItem;
+    });
+}
+
+- (void)importTableViewControllerDidEndImporting:(ImportTableViewController *)sender {
+    //Put up a spinner for the import button
+    __weak GeoFieldBookController *weakSelf=self;
+    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.importExportSpinner stopAnimating];
+        int index=[toolbarItems indexOfObject:weakSelf.importExportSpinnerBarButtonItem];
+        [toolbarItems removeObject:weakSelf.importExportSpinnerBarButtonItem];
+        [toolbarItems insertObject:weakSelf.importExportButton atIndex:index];
+        weakSelf.toolbar.items=toolbarItems.copy;
+    });
 }
 
 @end
