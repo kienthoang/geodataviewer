@@ -45,6 +45,24 @@
 @synthesize duplicateFolderName=_duplicateFolderName;
 @synthesize duplicateFormationFolderName=_duplicateFormationFolderName;
 
+#pragma mark - Getters and Setters
+
+- (void)setTransientRecords:(NSArray *)transientRecords {
+    _transientRecords=transientRecords;
+        
+    //Post a notification
+    if (!self.transientRecords.count)
+        [self postNotificationWithName:GeoNotificationConflictHandlerImportingDidEnd withUserInfo:[NSDictionary dictionary]];
+}
+
+- (void)setTransientFormations:(NSArray *)transientFormations {
+    _transientFormations=transientFormations;
+    
+    //Post a notification
+    if (!self.transientFormations.count)
+        [self postNotificationWithName:GeoNotificationConflictHandlerImportingDidEnd withUserInfo:[NSDictionary dictionary]];
+}
+
 #pragma mark - Process Transient Data
 
 - (void)processTransientRecords:(NSArray *)records 
@@ -88,13 +106,13 @@
             //Save the associated records
             unprocessedRecords=[self saveTransientRecordsInRecordList:records withFolderNames:processedFolders];
         }
+        
+        //Save the unprocessed transient folders and records
+        self.transientRecords=unprocessedRecords;
+        self.transientFolders=[unprocessedFolders copy];
                 
         //If the duplicate folder name is not nil, save the unprocessed transient records and folders and notify the program
-        if (self.duplicateFolderName) {
-            //Save the unprocessed transient folders and records
-            self.transientRecords=unprocessedRecords;
-            self.transientFolders=[unprocessedFolders copy];
-                        
+        if (self.duplicateFolderName) {            
             //Notify the program
             [self postNotificationWithName:GeoNotificationConflictHandlerFolderNameConflictOccurs withUserInfo:[NSDictionary dictionary]];
         }
@@ -149,12 +167,12 @@
             unprocessedFormations=[self saveTransientFormationsInFormationList:formations withFormationFolderNames:processedFolders];
         }
         
+        //Save the unprocessed transient folders and records
+        self.transientFormations=unprocessedFormations;
+        self.transientFormationFolders=[unprocessedFolders copy];
+        
         //If the duplicate folder name is not nil, save the unprocessed transient formations and folders and notify the program
         if (self.duplicateFormationFolderName) {
-            //Save the unprocessed transient folders and records
-            self.transientFormations=unprocessedFormations;
-            self.transientFormationFolders=[unprocessedFolders copy];
-                        
             //Notify the program
             [self postNotificationWithName:GeoNotificationConflictHandlerFormationFolderNameConflictOccurs withUserInfo:[NSDictionary dictionary]];
         }

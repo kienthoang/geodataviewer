@@ -10,9 +10,13 @@
 
 @interface FormationImportTVC ()
 
+@property (nonatomic,strong) UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation FormationImportTVC
+
+@synthesize spinner=_spinner;
 
 #pragma mark - View Controller Lifecycle
 
@@ -74,6 +78,18 @@
 
 #pragma mark - Handle Notifications
 
+- (void)importingDidEnd:(NSNotification *)notification {
+    //Notify delegate of the completion of the importing
+    [self.importDelegate importTableViewControllerDidEndImporting:self];
+        
+    //Put the import button back again
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.spinner stopAnimating];
+        self.spinner=nil;
+        self.navigationItem.rightBarButtonItem=self.importButton;
+    });
+}
+
 - (void)registerForNotificationsForConflictHandler {
     //Register to hear notifications from conflict handler
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
@@ -85,6 +101,10 @@
                            selector:@selector(handleValidationErrors:) 
                                name:GeoNotificationConflictHandlerValidationErrorsOccur 
                              object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(importingDidEnd:) 
+                               name:GeoNotificationConflictHandlerImportingDidEnd 
+                             object:nil];
 }
 
 - (void)handleFolderNameConflict:(NSNotification *)notification {
@@ -92,9 +112,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *duplicateFormationFolderName=self.conflictHandler.duplicateFormationFolderName;
         NSString *alertTitle=[NSString stringWithFormat:@"Formation Folder With Name \"%@\" already exists!",duplicateFormationFolderName];
-        NSString *message=@"";
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:alertTitle 
-                                                      message:message 
+                                                      message:nil 
                                                      delegate:self 
                                             cancelButtonTitle:@"Cancel" 
                                             otherButtonTitles:@"Replace",@"Keep Both", nil];
@@ -161,14 +180,8 @@
         self.engine.handler=self.conflictHandler;
         [self.engine createFormationsFromCSVFiles:self.selectedCSVFiles];
         
-        //Notify delegate of the completion of the importing
-        [self.importDelegate importTableViewControllerDidEndImporting:self];
-        
-        //Put the import button back again
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [spinner stopAnimating];
-            weakSelf.navigationItem.rightBarButtonItem=weakSelf.importButton;
-        });
+        //Save the spinner
+        self.spinner=spinner;
     });
     dispatch_release(import_queue_t);
 }

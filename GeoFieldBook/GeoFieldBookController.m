@@ -666,20 +666,25 @@
         weakSelf.toolbar.items=toolbarItems.copy;
         
         weakSelf.importExportSpinner=spinner;
-        weakSelf.importExportSpinnerBarButtonItem=spinnerBarButtonItem;
+        weakSelf.importExportSpinnerBarButtonItem=spinnerBarButtonItem; 
     });
 }
 
 - (void)importTableViewControllerDidEndImporting:(ImportTableViewController *)sender {
-    //Put up a spinner for the import button
+    //Hide spinner and put up the import button
     __weak GeoFieldBookController *weakSelf=self;
     NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
+        //Hide the spinner
         [weakSelf.importExportSpinner stopAnimating];
         int index=[toolbarItems indexOfObject:weakSelf.importExportSpinnerBarButtonItem];
         [toolbarItems removeObject:weakSelf.importExportSpinnerBarButtonItem];
         [toolbarItems insertObject:weakSelf.importExportButton atIndex:index];
         weakSelf.toolbar.items=toolbarItems.copy;
+        
+        //Put up an alert
+        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Finished Importing" message:nil delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [doneAlert show];
     });
 }
 

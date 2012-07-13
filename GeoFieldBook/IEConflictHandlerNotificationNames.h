@@ -12,6 +12,7 @@
 
 #define GeoNotificationConflictHandlerFolderNameConflictOccurs @"ConflictHandler.FolderNameConflictOccurs"
 #define GeoNotificationConflictHandlerFormationFolderNameConflictOccurs @"ConflictHandler.FormationFolderNameConflictOccurs"
+#define GeoNotificationConflictHandlerImportingDidEnd @"ConflictHandler.ImportingDidEnd"
 
 #define GeoNotificationConflictHandlerValidationErrorsOccur @"ConflictHandler.ValidationErrorsOccur"
 #define GeoNotificationConflictHandlerValidationLogKey @"ConflictHandler.ValidationLogKey"

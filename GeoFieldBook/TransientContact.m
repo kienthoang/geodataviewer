@@ -23,7 +23,8 @@
     [super saveToManagedObjectContext:context completion:completionHandler];
     
     //Populate formation
-    //[(JointSet *)self.nsManagedRecord setFormation:self.formation];
+    [(Contact *)self.nsManagedRecord setLowerFormation:[self.lowerFormation saveFormationToManagedObjectContext:context]];
+    [(Contact *)self.nsManagedRecord setUpperFormation:[self.upperFormation saveFormationToManagedObjectContext:context]];
     
     //Call completion handler
     completionHandler(self.nsManagedRecord);

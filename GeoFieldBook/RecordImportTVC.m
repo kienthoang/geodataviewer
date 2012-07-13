@@ -13,9 +13,13 @@
 
 @interface RecordImportTVC() <UIAlertViewDelegate>
 
+@property (nonatomic,strong) UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation RecordImportTVC
+
+@synthesize spinner=_spinner;
 
 #pragma mark - View Controller Lifecycle
 
@@ -87,6 +91,22 @@
                            selector:@selector(handleValidationErrors:) 
                                name:GeoNotificationConflictHandlerValidationErrorsOccur 
                              object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(importingDidEnd:) 
+                               name:GeoNotificationConflictHandlerImportingDidEnd 
+                             object:nil];
+}
+
+- (void)importingDidEnd:(NSNotification *)notification {
+    //Notify delegate of the completion of the importing
+    [self.importDelegate importTableViewControllerDidEndImporting:self];
+    
+    //Put the import button back again
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.spinner stopAnimating];
+        self.spinner=nil;
+        self.navigationItem.rightBarButtonItem=self.importButton;
+    });
 }
 
 - (void)handleFolderNameConflict:(NSNotification *)notification {
@@ -143,7 +163,6 @@
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
     //Notify delegate of the start of the importing
-    NSLog(@"delegate: %@",self.importDelegate);
     [self.importDelegate importTableViewControllerDidStartImporting:self];
     
     __weak RecordImportTVC *weakSelf=self;
@@ -164,14 +183,8 @@
         weakSelf.engine.handler=weakSelf.conflictHandler;
         [weakSelf.engine createRecordsFromCSVFiles:weakSelf.selectedCSVFiles];
         
-        //Notify delegate of the completion of the importing
-        [weakSelf.importDelegate importTableViewControllerDidEndImporting:weakSelf];
-        
-        //Put the import button back again
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [spinner stopAnimating];
-            weakSelf.navigationItem.rightBarButtonItem=weakSelf.importButton;
-        });
+        //Save the spinner
+        weakSelf.spinner=spinner;
     });
     dispatch_release(import_queue_t);
 }
