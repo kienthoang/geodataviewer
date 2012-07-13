@@ -9,6 +9,7 @@
 #import "ImportTableViewController.h"
 #import "IEEngine.h"
 #import "ConflictHandler.h"
+#import "GeoDatabaseManager.h"
 
 @interface ImportTableViewController()
 
@@ -73,6 +74,7 @@
     
     //Initialize the conflict handler
     self.conflictHandler=[[ConflictHandler alloc] init];
+    self.conflictHandler.database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

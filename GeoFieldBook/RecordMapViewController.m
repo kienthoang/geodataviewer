@@ -248,10 +248,12 @@
     CLLocationCoordinate2D upper=[[self.mapAnnotations objectAtIndex:0] coordinate];
     CLLocationCoordinate2D lower=[[self.mapAnnotations objectAtIndex:0] coordinate];
     for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
-        if (annotation.coordinate.longitude>upper.longitude) upper.longitude=annotation.coordinate.longitude;
-        if (annotation.coordinate.latitude>upper.latitude) upper.latitude=annotation.coordinate.latitude;
-        if (annotation.coordinate.longitude<lower.longitude) lower.longitude=annotation.coordinate.longitude;
-        if (annotation.coordinate.latitude<lower.latitude) lower.latitude=annotation.coordinate.latitude;
+        if (![annotation isKindOfClass:[MKUserLocation class]]) {
+            if (annotation.coordinate.longitude>upper.longitude) upper.longitude=annotation.coordinate.longitude;
+            if (annotation.coordinate.latitude>upper.latitude) upper.latitude=annotation.coordinate.latitude;
+            if (annotation.coordinate.longitude<lower.longitude) lower.longitude=annotation.coordinate.longitude;
+            if (annotation.coordinate.latitude<lower.latitude) lower.latitude=annotation.coordinate.latitude;
+        }
     }
     
     // Set the spans for the location span

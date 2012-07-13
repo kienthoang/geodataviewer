@@ -8,6 +8,7 @@
 
 #import "ConflictHandler.h"
 #import "TransientRecord.h"
+#import "TransientProject.h"
 #import "TransientFormation.h"
 #import <CoreData/CoreData.h>
 #import "Record.h"
@@ -16,394 +17,218 @@
 #import "Formation_Folder.h"
 #import "Image.h"
 
-@interface ConflictHandler () <UIAlertViewDelegate>
+@interface ConflictHandler() <UIAlertViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *thingsToAdd;
-@property (nonatomic, strong) NSMutableArray *foldersToAdd;
+@property (nonatomic,strong) Folder *folderInConflict;
+@property (nonatomic,strong) TransientProject *transientFolderInConflict;
+@property (nonatomic,strong) Formation_Folder *formationFolderInConflict;
+@property (nonatomic,strong) TransientFormation_Folder *transientFormationFolderInConflict;
 
 @end
 
 @implementation ConflictHandler
 
 @synthesize database=_database;
-@synthesize thingsToAdd=_thingsToAdd;
-@synthesize foldersToAdd = _foldersToAdd;
+@synthesize delegate=_delegate;
+
+@synthesize transientRecords=_transientRecords;
+@synthesize transientFolders=_transientFolders;
+
+@synthesize folderInConflict=_folderInConflict;
+@synthesize formationFolderInConflict=_formationFolderInConflict;
+@synthesize transientFolderInConflict=_transientFolderInConflict;
+@synthesize transientFormationFolderInConflict=_transientFormationFolderInConflict;
+
+@synthesize duplicateFolderName=_duplicateFolderName;
+@synthesize duplicateFormationFolderName=_duplicateFormationFolderName;
+
+#pragma mark - Process Transient Data
+
+- (void)processTransientRecords:(NSArray *)records 
+                     andFolders:(NSArray *)folders 
+       withValidationMessageLog:(NSArray *)validationLog
+{
+    //If the given array of transient records is not nil (i.e. no validation errors happened), process them
+    if (records) {
+        //Iterate through the given folders and check if there is any folder name duplicate
+        NSMutableArray *unprocessedFolders=[folders mutableCopy];
+        NSMutableArray *processedFolders=[NSMutableArray array];
+        for (int index=0;index<folders.count;index++) {
+            //Save the folder name if there is a duplicate
+            TransientProject *transientFolder=[folders objectAtIndex:index];
+            [unprocessedFolders removeObject:transientFolder];
+            Folder *duplicateFolder=[self queryDatabaseForFolderWithName:transientFolder.folderName];
+            if (duplicateFolder) {
+                //Save the duplicate folder name
+                self.duplicateFolderName=duplicateFolder.folderName;
+                
+                //Save the "real" folder that is in conflict
+                self.folderInConflict=duplicateFolder;
+                
+                //Save the transient folder in conflict
+                self.transientFolderInConflict=transientFolder;
+                                
+                //Break to give the user duplicate alerts one-by-one
+                break;
+            } 
+            
+            //Else add the folder to the list of processed folders
+            [processedFolders addObject:transientFolder];
+        }
+        
+        //Save the processed folders if any (there is no duplicate in these)
+        NSArray *unprocessedRecords=nil;
+        if (processedFolders.count) {
+            //Save the process folders
+            [self saveTransientFolders:processedFolders];
+            
+            //Save the associated records
+            unprocessedRecords=[self saveTransientRecordsInRecordList:records withFolderNames:processedFolders];
+        }
+                
+        //If the duplicate folder name is not nil, save the unprocessed transient records and folders and notify the program
+        if (self.duplicateFolderName) {
+            //Save the unprocessed transient folders and records
+            self.transientRecords=unprocessedRecords;
+            self.transientFolders=[unprocessedFolders copy];
+                        
+            //Notify the program
+            [self postNotificationWithName:GeoNotificationConflictHandlerFolderNameConflictOccurs withUserInfo:[NSDictionary dictionary]];
+        }
+    }
+    
+    //Else (some validation errors happened), cancel everything and notify the program
+    else {
+        NSDictionary *userInfo=[NSDictionary dictionaryWithObjectsAndKeys:validationLog,GeoNotificationConflictHandlerValidationLogKey, nil];
+        [self postNotificationWithName:GeoNotificationConflictHandlerValidationErrorsOccur withUserInfo:userInfo];
+    }
+}
+
+- (void)processTransientFormations:(NSArray *)formations 
+               andFormationFolders:(NSArray *)folders 
+          withValidationMessageLog:(NSArray *)validationLog 
+{
+}
 
 #pragma mark - Handle Conflicts
 
-- (BOOL) handleConflictsForArray:(NSArray *)items
-{
-    self.thingsToAdd=nil;
-    self.foldersToAdd=nil;
-    
-    if ([[items objectAtIndex:0] isKindOfClass:[TransientRecord class]]) {
-        [self handleConflictsForRecords:items];
-    }
-    else if ([[items objectAtIndex:0] isKindOfClass:[TransientFormation class]]) {
-        [self handleConflictsForFormations:items];
-    }
-    else {
-        //invalid type in array
-    }
-    return YES;
+- (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
 }
 
-- (void) handleConflictsForRecords:(NSArray *) transientRecords
-{
-    //fetch records from database
-    NSDictionary *recordsByFolder = [self fetchRecordsFromDatabase];
+- (void)userDidChooseToHandleFolderNameConflictWith:(HandleOption)handleOption {
+    NSArray *transientFolders=nil;
     
-    //if duplicate name in records ask user: duplicate, cancel
-    NSArray *duplicateRecordNames = [self findDuplicateRecordsInArray:transientRecords andDictionary:recordsByFolder];
-    
-    if ([duplicateRecordNames count] > 0) {
-        //alert user of duplicates and get response one by one
-        for (TransientRecord *duplicate in duplicateRecordNames) {
-            [self.thingsToAdd addObject:duplicate];
-            UIAlertView *duplicateRecordAlert = [self duplicateRecordAlert:duplicate];
-            [duplicateRecordAlert show];
-        }
+    //If user chose "Replace"
+    if (handleOption==ConflictHandleReplace) {
+        //Delete the folder in conflict
+        [self.database.managedObjectContext deleteObject:self.folderInConflict];
+        
+        //Save the transient folder in conflict
+        transientFolders=[NSArray arrayWithObject:self.transientFolderInConflict];
+        [self saveTransientFolders:transientFolders];
     }
     
-    //if any folders do not exist, create them
-    if (self.foldersToAdd) {
-        for (Folder *folder in self.foldersToAdd) {
-            //create and add it to the database
-        }
+    //If user chose "Keep Both"
+    else if (handleOption==ConflictHandleKeepBoth) {
+        //Rename the folders in conflict
+        NSString *newTransientFolderName=[self renameFolder:self.folderInConflict andCorrespondingTransientFolder:self.transientFolderInConflict];
+        transientFolders=[NSArray arrayWithObject:newTransientFolderName];
     }
     
-    //convert transientrecords to records
-    [self.thingsToAdd addObjectsFromArray:transientRecords];
-    self.thingsToAdd = [[self convertToRecords:self.thingsToAdd] copy];//all records to add to the database
+    //Save the records associated with the transient folder
+    self.transientRecords=[self saveTransientRecordsInRecordList:self.transientRecords withFolderNames:transientFolders];
     
-    //add records to the database
+    //Unset the folders in conflict
+    self.folderInConflict=nil;
+    self.transientFolderInConflict=nil;
     
-    //NSManagedObjectContext *context = [self.database managedObjectContext];
-    //[context save:nil];
-    
-    //update database
-    //save changes to database
-    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+    //Save changes to database
+    [self saveDatabase:self.database];
+}
+
+- (void)userDidChooseToHandleFormationFolderNameConflictWith:(HandleOption)handleOption {
+}
+
+#pragma mark - Renaming Schemes
+
+- (NSString *)renameFolder:(Folder *)folder andCorrespondingTransientFolder:(TransientProject *)transientFolder {
+    return nil;
+}
+
+#pragma mark - Database Operations
+
+- (void)saveDatabase:(UIManagedDocument *)database {
+    [database saveToURL:database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (!success) {
-            //error alert
-            [self errorSavingToDatabaseAlert];
-            NSLog(@"database not saved...");
+            //Handle errors
         }
     }];
-    
-    NSDictionary *testDictionary = [self fetchRecordsFromDatabase];
-    for (Record *r in [testDictionary allValues]) {
-        NSLog(@"Record Names: %@", r.name);
-    }
 }
 
-- (void) handleConflictsForFormations:(NSArray *) transientFormations
-{
-    //fetch formations from database
-    NSDictionary *formationsByFolder = [self fetchFormationsFromDatabase];
-    
-    //if duplicate name in records ask user: duplicate, cancel
-    NSArray *duplicateFormationNames = [self findDuplicateFormationsInArray:transientFormations andDictionary:formationsByFolder];
-    
-    if ([duplicateFormationNames count] > 0) {
-        //alert user of duplicates and get response
-        for (TransientFormation *duplicate in duplicateFormationNames) {
-            [self.thingsToAdd addObject:duplicate];
-            UIAlertView *duplicateFormationAlert = [self duplicateFormationAlert:duplicate];
-            [duplicateFormationAlert show];
-        }
-    }
-    
-    //if any folders do not exist, create them
-    if (self.foldersToAdd) {
-        for (Folder *folder in self.foldersToAdd) {
-            //add to database
-        }
-    }
-    
-    //convert transientformations to formations
-    [self.thingsToAdd addObjectsFromArray:transientFormations];
-    self.thingsToAdd = [[self convertToFormations:self.thingsToAdd] copy];//all formations to add to the database
-    
-    //add formations to the database
-    
-    //NSManagedObjectContext *context = [self.database managedObjectContext];
-    //[context save:nil];
-    
-    //update database
-    //save changes to database
-    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-        if (!success) {
-            //error alert
-            [self errorSavingToDatabaseAlert];
-            NSLog(@"database not saved...");
-        }
-    }];
-    
-    NSDictionary *testDictionary = [self fetchFormationsFromDatabase];
-    for (Formation *r in [testDictionary allValues]) {
-        NSLog(@"Formation Names: %@", r.formationName);
-    }
-    
-}
-
-#pragma mark - Convert Transient to Regular
-
-- (NSArray *)convertToFormations:(NSArray *) transientFormations
-{
-    NSMutableArray *formations;
-    
-    for (TransientFormation *f in transientFormations) {
-        Formation *newFormation;
-        newFormation.formationName=f.formationName;
-        newFormation.formationSortNumber=f.formationSortNumber;
-        newFormation.beddings=f.beddings;
-        newFormation.faults=f.faults;
-        newFormation.joinSets=f.joinSets;
-        newFormation.lowerContacts=f.lowerContacts;
-        newFormation.upperContacts=f.upperContacts;
+- (Folder *)queryDatabaseForFolderWithName:(NSString *)folderName {
+    //Query the database for a folder with the given named
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",folderName];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
         
-        Formation_Folder *newFormationFolder;
-        newFormationFolder.folderName=f.formationFolder.folderName;
-        newFormationFolder.formations=f.formationFolder.formations;
-        newFormationFolder.folders=f.formationFolder.folders;
-        
-        newFormation.formationFolder=newFormationFolder;
-    }
-    
-    return formations;
+    //If there is a result return it
+    return results.count>0 ? [results lastObject] : nil;
 }
 
-- (Folder *)convertFolder:(TransientProject *) old
-{
-    Folder *newFolder;
+- (BOOL)formationFolderExistsInDatabase:(NSString *)folderName {
+    //Query the database for a folder with the given named
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",folderName];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
     
-    newFolder.folderID=old.folderID;
-    newFolder.folderName=old.name;
-    newFolder.folderDescription=old.folderDescription;
-    
-    Formation_Folder *formationFolder;
-    formationFolder.folderName=old.formationFolder.folderName;
-    formationFolder.formations=old.formationFolder.formations;
-    formationFolder.folders=old.formationFolder.folders;
-    newFolder.formationFolder=formationFolder;
-    
-    newFolder.records=[[NSSet alloc] initWithArray:old.records];//array to set
-    
-    return newFolder;
+    //If there is a result return YES, else NO
+    return results.count>0;
 }
 
-- (Image *)convertImage:(TransientImage *) old
-{
-    Image *newImage;
-    
-    newImage.imageData=old.imageData;
-    newImage.imageHash=old.imageHash;
-    newImage.whoUses=old.whoUses;
-    
-    return newImage;
-}
+#pragma mark - Saving Operations
 
-- (NSArray *)convertToRecords:(NSArray *) transientRecords
+//Save the records in the record list that have given folder name and return the rest
+- (NSArray *)saveTransientRecordsInRecordList:(NSArray *)records withFolderNames:(NSArray *)folderNames
 {
-    NSMutableArray *records;
-    
-    for (TransientRecord *tr in transientRecords) {
-        Record *newRecord;
-        newRecord.date=tr.date;
-        newRecord.dip=tr.dip;
-        newRecord.dipDirection=tr.dipDirection;
-        newRecord.fieldOservations=tr.fieldOservations;
-        //newRecord.idOnServer=tr.idOnServer;
-        //newRecord.imageHashData=tr.imageHashData;
-        newRecord.latitude=tr.latitude;
-        newRecord.longitude=tr.longitude;
-        newRecord.name=tr.name;
-        newRecord.strike=tr.strike;
-        
-        newRecord.folder=[self convertFolder:tr.folder];
-        
-        newRecord.image=[self convertImage:tr.image];
-    }
-    
-    return records;
-}
-
-#pragma mark - Find Duplicates
-
--(NSArray *)findDuplicateRecordsInArray:(NSArray *) transientRecords andDictionary:(NSDictionary *) databaseRecords
-{
-    NSMutableArray *duplicateRecordNames;
-    
-    //filter by folder name then search for record names... databaseRecords is a 2d array
-    for (TransientRecord *r in transientRecords) {
-        
-        //find array with folder name or add folder as folder name to be added
-        NSArray *currentFolder = [databaseRecords objectForKey:r.folder.name];
-        if (currentFolder) {
+    NSMutableArray *unsavedRecords=[records mutableCopy];
+    for (TransientRecord *transientRecord in records) {
+        //Save the record if it has one of the given folder names
+        if ([folderNames containsObject:transientRecord.folder]) {
+            [self.database.managedObjectContext performBlock:^{
+                //Save the record
+                [transientRecord saveToManagedObjectContext:self.database.managedObjectContext completion:^(NSManagedObject *savedManagedObject){
+                }];
+            }];
             
-            //check for duplicate records
-            BOOL notFound=YES;
-            int i=0;
-            while (notFound && i < [currentFolder count])
-            {
-                Record *record = [currentFolder objectAtIndex:i];
-                if ([record.name isEqualToString:r.name]) {
-                    [duplicateRecordNames addObject:r.name];
-                    notFound=NO;
-                }
-                i++;
-            }
-        }
-        else {
-            
-            //add to new folder names
-            Folder *newFolder=[self convertFolder:r.folder];
-            [self.foldersToAdd addObject:newFolder];
+            //Mark it as saved
+            [unsavedRecords removeObject:transientRecord];
         }
     }
     
-    return duplicateRecordNames;
+    //Save database
+    [self saveDatabase:self.database];
+    
+    return [unsavedRecords copy];
 }
 
-- (NSArray *) findDuplicateFormationsInArray:(NSArray *)transientFormations andDictionary:(NSDictionary *) databaseFormations
+- (void)saveTransientFolders:(NSArray *)folders;
 {
-    NSMutableArray *duplicateFormationNames;
+    for (TransientProject *transientFolder in folders) {
+        //Save the folder (in the approrpiate thread since UIManagedDocument is not thread-safe)
+        [self.database.managedObjectContext performBlock:^{
+            [transientFolder saveToManagedObjectContext:self.database.managedObjectContext completion:^(NSManagedObject *savedManagedObject){
+                
+            }];
+        }];
+    }    
     
-    //filter by folder name then search for record names... databaseRecords is a 2d array
-    for (TransientFormation *r in transientFormations) {
-        
-        //find array with folder name or add folder as folder name to be added
-        NSArray *currentFolder = [databaseFormations objectForKey:r.formationFolder.folderName];
-        if (currentFolder) {
-            
-            //check for duplicate records
-            BOOL notFound=YES;
-            int i=0;
-            while (notFound && i < [currentFolder count])
-            {
-                Formation *formation = [currentFolder objectAtIndex:i];
-                if ([formation.formationName isEqualToString:r.formationName]) {
-                    [duplicateFormationNames addObject:r.formationName];
-                    notFound=NO;
-                }
-                i++;
-            }
-        }
-        else {
-            
-            //add to new folder names
-            Formation_Folder *newFolder;
-            
-            newFolder.folderName=r.formationFolder.folderName;
-            newFolder.formations=r.formationFolder.formations;
-            newFolder.folders=r.formationFolder.folders;
-            
-            [self.foldersToAdd addObject:newFolder];
-        }
-    }
-    
-    return duplicateFormationNames;
+    //Save database
+    [self saveDatabase:self.database];
 }
 
-#pragma mark - Fetch Data From Database
-
-- (NSDictionary *)fetchRecordsFromDatabase
-{
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
-    
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folder.folderName" ascending:YES]];
-    NSFetchedResultsController *fetchedResults =[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    //make 2d array based on folder names...
-    NSArray *fetchedRecords = fetchedResults.fetchedObjects;
-    NSMutableArray *mutableFetchedRecords;
-    NSMutableDictionary *recordsByFolder;
-    [mutableFetchedRecords addObject:[fetchedRecords objectAtIndex:0]];
-    for (int i = 1; i < [fetchedRecords count] ; i++) {
-        if ([[fetchedRecords objectAtIndex:i] isKindOfClass:[Record class]]) {
-            if ([((Record *)[fetchedRecords objectAtIndex:i]).folder.folderName isEqualToString: ((Record *)[mutableFetchedRecords objectAtIndex:(i-1)]).folder.folderName]) {
-                [mutableFetchedRecords addObject:[fetchedRecords objectAtIndex:i]];
-            }
-            else {
-                [recordsByFolder setValue:mutableFetchedRecords forKey:((Record*)[mutableFetchedRecords objectAtIndex:0]).folder.folderName];
-                [mutableFetchedRecords removeAllObjects];
-            }
-        }
-    }
-    
-    return recordsByFolder;
-}
-
-- (NSDictionary *) fetchFormationsFromDatabase
-{
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationFolder.folderName" ascending:YES]];
-    NSFetchedResultsController *fetchedResults =[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    //make 2d array based on folder names...
-    NSArray *fetchedFormations = fetchedResults.fetchedObjects;
-    NSMutableArray *mutableFetchedFormations;
-    NSMutableDictionary *formationsByFolder;
-    [mutableFetchedFormations addObject:[fetchedFormations objectAtIndex:0]];
-    for (int i = 1; i < [fetchedFormations count] ; i++) {
-        if ([[fetchedFormations objectAtIndex:i] isKindOfClass:[Record class]]) {
-            if ([((Record *)[fetchedFormations objectAtIndex:i]).folder.folderName isEqualToString: ((Record *)[mutableFetchedFormations objectAtIndex:(i-1)]).folder.folderName]) {
-                [mutableFetchedFormations addObject:[fetchedFormations objectAtIndex:i]];
-            }
-            else {
-                [formationsByFolder setValue:mutableFetchedFormations forKey:((Record*)[mutableFetchedFormations objectAtIndex:0]).folder.folderName];
-                [mutableFetchedFormations removeAllObjects];
-            }
-        }
-    }
-    
-    return formationsByFolder;
-}
-
-#pragma  mark - Alert Views
-
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Save Duplicate"]) {
-        //save with an appended number
-        
-        //[self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){}];
-    }
-}
-
-- (void) alertViewCancel:(UIAlertView *)alertView
-{
-    //
-    [self.thingsToAdd removeLastObject];
-}
-
-- (UIAlertView *) duplicateRecordAlert:(TransientRecord *) record
-{
-    UIAlertView *duplicateRecordAlert = [[UIAlertView alloc] initWithTitle:@"Duplicate Record" message:[NSString stringWithFormat:@"The record name %@ is a duplicate. Would you like to save another copy?", record.name] delegate:self cancelButtonTitle:@"Don't Save" otherButtonTitles:@"Save Duplicate", nil];
-    
-    return duplicateRecordAlert;
-}
-
-- (UIAlertView *) duplicateFormationAlert:(TransientFormation *) formation
-{
-    UIAlertView *duplicateFormationsAlert = [[UIAlertView alloc] initWithTitle:@"Duplicate Formation" message:[NSString stringWithFormat:@"The formation name %@ is a duplicate. Would you like to save another copy?", formation.formationName] delegate:self cancelButtonTitle:@"Don't Save" otherButtonTitles:@"Save Duplicate", nil];
-    
-    return duplicateFormationsAlert;
-}
-
-- (void) errorSavingToDatabaseAlert
-{
-    UIAlertView *saveFailAlert=[[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error saving data to the database" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [saveFailAlert show];
-}
-
-#pragma mark - Save the new Database
-
-- (void) saveRecords:(NSArray *) records
-{
-    
-}
 
 @end

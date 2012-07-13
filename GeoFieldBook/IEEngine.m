@@ -18,12 +18,17 @@
 #import "TransientFormation_Folder.h"
 #import "TransientProject.h"
 
+#import "ValidationMessageBoard.h"
 
 @interface IEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
 @property (nonatomic, strong) NSMutableArray *records;
 @property (nonatomic, strong) NSMutableArray *formations;
+@property (nonatomic, strong) NSArray *folders;
+@property (nonatomic, strong) NSArray *formationFolders;
+
+@property (nonatomic, strong) ValidationMessageBoard *validationMessageBoard;
 
 @end
 
@@ -33,11 +38,15 @@
 @synthesize selectedFilePaths=_selectedFilePaths;
 @synthesize records=_records;
 @synthesize formations=_formations;
+@synthesize folders=_folders;
+@synthesize formationFolders=_formationFolders;
+
+@synthesize validationMessageBoard=_validationMessageBoard;
 
 //enum for columnHeadings
-typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike, Dip, dipDirection, Observations, Formation, lowerFormation, upperFormation, Trend, Plunge, imageName}columnHeadings;
+typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike, Dip, dipDirection, Observations, FormationField, lowerFormation, upperFormation, Trend, Plunge, imageName}columnHeadings;
 
-#pragma mark - getters for instance variables
+#pragma mark - Getters
 -(NSMutableArray *) projects {
     if(!_records) 
         _records = [[NSMutableArray alloc] init];
@@ -52,9 +61,22 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     return _formations;
 }
 
+- (ValidationMessageBoard *)validationMessageBoard {
+    if (!_validationMessageBoard)
+        _validationMessageBoard=[[ValidationMessageBoard alloc] init];
+    
+    return _validationMessageBoard;
+}
+
+- (NSMutableArray *)records {
+    if (!_records)
+        _records=[NSMutableArray array];
+    return _records;
+}
+
 #pragma mark - Reading of Record Files
 
-- (TransientRecord *)recordForCSVLineTokenArray:(NSArray *)lineArray {
+- (TransientRecord *)recordForCSVLineTokenArray:(NSArray *)lineArray withFolderName:(NSString *)folderName {
     TransientRecord *record=nil;
     
     //identify the record type and populate record specific fields
@@ -64,27 +86,47 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         [(TransientContact *)record setUpperFormation:[lineArray objectAtIndex:upperFormation]];
     } else if ([[lineArray objectAtIndex:1] isEqualToString:@"Bedding"]) {
         record = [[TransientBedding alloc] init];
-        [(TransientBedding *)record setFormation:[lineArray objectAtIndex:Formation]];
+        [(TransientBedding *)record setFormation:[lineArray objectAtIndex:FormationField]];
     } else if([[lineArray objectAtIndex:1] isEqualToString:@"Joint Set"]) {
         record = [[TransientJointSet alloc] init]; 
-        [(TransientJointSet *)record setFormation:[lineArray objectAtIndex:Formation]];
+        [(TransientJointSet *)record setFormation:[lineArray objectAtIndex:FormationField]];
     } else if([[lineArray objectAtIndex:1] isEqualToString:@"Fault"]) {
         record = [[TransientFault alloc] init]; 
         [(TransientFault *)record setPlunge:[lineArray objectAtIndex:Plunge]];
         [(TransientFault *)record setTrend:[lineArray objectAtIndex:Trend]];
-        [(TransientFault *)record setFormation:[lineArray objectAtIndex:Formation]];
+        [(TransientFault *)record setFormation:[lineArray objectAtIndex:FormationField]];
     } else if([[lineArray objectAtIndex:1] isEqualToString:@"Other"]) {
         record = [[TransientOther alloc] init];            
     }
     
-    //now populate the common fields for all the records
+    //now populate the common fields for all the records and save the errors messages if there's any
+    NSString *errorMessage=nil;
     record.name = [lineArray objectAtIndex:Name];
-    record.dip = [lineArray objectAtIndex:Dip];
-    record.dipDirection = [lineArray objectAtIndex:dipDirection];
-    record.fieldOservations = [lineArray objectAtIndex:Observations];
-    record.latitude = [lineArray objectAtIndex:Latitude];
-    record.longitude = [lineArray objectAtIndex:Longitude];
-    record.strike = [lineArray objectAtIndex:Strike];
+    
+    //Set the strike value with validations
+    if ((errorMessage=[record setStrikeWithValidations:[lineArray objectAtIndex:Strike]]))
+        [self.validationMessageBoard addErrorWithMessage:errorMessage];
+    
+    //Set the dip value with validations
+    if ((errorMessage=[record setDipWithValidations:[lineArray objectAtIndex:Dip]]))
+        [self.validationMessageBoard addErrorWithMessage:errorMessage];
+
+    //Set the dip direction value with validations
+    if ((errorMessage=[record setDipDirectionWithValidations:[lineArray objectAtIndex:dipDirection]]))
+        [self.validationMessageBoard addErrorWithMessage:errorMessage];
+    
+    //Set the field observation value with validations
+    if ((errorMessage=[record setFieldObservationWithValidations:[lineArray objectAtIndex:Observations]]))
+        [self.validationMessageBoard addErrorWithMessage:errorMessage];
+    
+    //Set the latitude value with validations
+    if ((errorMessage=[record setLatitudeWithValidations:[lineArray objectAtIndex:Latitude]]))
+        [self.validationMessageBoard addErrorWithMessage:errorMessage];
+    
+    //Set the longitude value with validations
+    if ((errorMessage=[record setLongitudeWithValidations:[lineArray objectAtIndex:Longitude]]))
+        [self.validationMessageBoard addErrorWithMessage:errorMessage];
+    
     
     //separate by spaces to create a NSDate object from the string
     NSString *date = [lineArray objectAtIndex:dateAndTime];
@@ -115,13 +157,12 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     record.dateString = [NSString stringWithFormat:@"%@,%@",[dateTimeArray objectAtIndex:0],[dateTimeArray      objectAtIndex:1]];
     record.timeString = [dateTimeArray objectAtIndex:2];
     
-    
-    
     //to set the image, first get the image from the images directory
     NSArray *pathsArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [pathsArray objectAtIndex:0];
     NSString *imageFilePath = [documentsDirectory stringByAppendingFormat:@"/images/%@", [lineArray objectAtIndex:imageName]];
     
+    //Set the image
     if([[NSFileManager defaultManager] fileExistsAtPath:imageFilePath]){
         NSString* content = [NSString stringWithContentsOfFile:imageFilePath encoding:NSUTF8StringEncoding error:nil];
         //now set the image content
@@ -129,11 +170,19 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         //imageHashData not saved. is it needed?
     }
     
+    //Set the folder
+    for (TransientProject *folder in self.folders) {
+        if ([folder.folderName isEqualToString:folderName]) {
+            record.folder=folder;
+            break;
+        }
+    }
+    
     return record;
 }
 
 - (NSArray *)constructRecordsFromCSVFileWithPath:(NSString *)path {
-    NSMutableArray *records;
+    NSMutableArray *records=[NSMutableArray array];;
     
     //this is an array of array
     NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
@@ -149,7 +198,8 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         
         else {
             //Create a transient record from the line array
-            TransientRecord *record=[self recordForCSVLineTokenArray:lineArray];
+            NSString *folderName=[[[path lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
+            TransientRecord *record=[self recordForCSVLineTokenArray:lineArray withFolderName:folderName];
             
             //add the record to the arra of records
             [records addObject:record];
@@ -159,14 +209,29 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     return [records copy];
 }
 
+- (NSArray *)createFoldersFromCSVFiles:(NSArray *)files {
+    NSMutableArray *transientFolders=[NSMutableArray arrayWithCapacity:files.count];
+    for (NSString *csvFile in files) {
+        NSString *folderName=[[csvFile componentsSeparatedByString:@"."] objectAtIndex:0];
+        TransientProject *folder=[[TransientProject alloc] init];
+        folder.folderName=folderName;
+        [transientFolders addObject:folder];
+    }
+    
+    return [transientFolders copy];
+}
+
 /*
  Column Headings:
  "Name, Type, Longitude, Latitude, Date&Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \r\n"
  */
--(void) createRecordsFromCSVFiles:(NSArray *)files
+-(void)createRecordsFromCSVFiles:(NSArray *)files
 {   
     //get paths to the selected files
     self.selectedFilePaths = [self getSelectedFilePaths:files];
+    
+    //Create the folders
+    self.folders=[self createFoldersFromCSVFiles:files];
     
     //Iterate through each csv files and create transient records from each of them
     for (NSString *path in self.selectedFilePaths) {
@@ -175,15 +240,28 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         
         //Add them to self.records
         [self.records addObjectsFromArray:records];
-    }    
+    }
     
     //now call the handler and pass it the array of records created ... 
-    if (self.handler) 
-        [self.handler handleConflictsForArray:self.records];
+    //If there is any error message, pass nil to the handler as well as the error log
+    if (self.validationMessageBoard.errorCount) {
+        [self.handler processTransientRecords:nil 
+                                   andFolders:self.folders 
+                     withValidationMessageLog:self.validationMessageBoard.allMessages];
+        
+        //Reset the validation message board
+        [self.validationMessageBoard clearBoard];
+    }
+    else {
+        [self.handler processTransientRecords:self.records 
+                                   andFolders:self.folders 
+                     withValidationMessageLog:self.validationMessageBoard.warningMessages];
+
+    }
 }
 
-
 #pragma mark - Reading of Formation files
+
 -(void) createFormationsFromCSVFiles:(NSArray *) files
 {
     //get the complete file paths for the selected files that exist
@@ -194,7 +272,8 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         //this is an array lines, which is an array of tokens
         NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
         //for each array of tokens 
-        for(NSMutableArray *record in lineRecordsInAFile) {
+        for(int index=0;index<lineRecordsInAFile.count;index++) {
+            NSMutableArray *record=[lineRecordsInAFile objectAtIndex:index];
             NSString *folder = [record objectAtIndex:0];
             [record removeObjectAtIndex:0];
             TransientFormation_Folder *newFormationFolder = [[TransientFormation_Folder alloc] init];
@@ -208,12 +287,20 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
             }
         }
     }
-    //now call the conflict handler to take care of writing these to the database
-    if(self.handler) [self.handler handleConflictsForArray:self.formations];
     
+    //If there is any error message, pass nil to the handler as well as the error log
+    if (self.validationMessageBoard.errorCount)
+        [self.handler processTransientFormations:nil 
+                             andFormationFolders:nil 
+                        withValidationMessageLog:self.validationMessageBoard.allMessages];
+    else
+        [self.handler processTransientFormations:self.formations 
+                             andFormationFolders:nil 
+                        withValidationMessageLog:self.validationMessageBoard.warningMessages];
 }
 
 #pragma mark - CSV File Parsing
+
 -(NSArray *) getRecordsFromFile:(NSString *) filePath
 {
     NSMutableArray *records = [[NSMutableArray alloc] init]; //array(of lines) of arrays(of tokens in each line)
@@ -259,7 +346,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
 - (NSArray *)parseLine:(NSString *) line 
 {
     //log to see if each individual line (record) is extracted properly
-        NSLog(@"Individual record: %@", line);
+    //NSLog(@"Individual record: %@", line);
     
     NSMutableArray *values = [[line componentsSeparatedByString:@","] mutableCopy];
 

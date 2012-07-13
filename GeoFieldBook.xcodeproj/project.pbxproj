@@ -61,7 +61,7 @@
 		02712A53159D012100510188 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A52159D012100510188 /* Fault.m */; };
 		02712A56159D012F00510188 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A55159D012F00510188 /* JointSet.m */; };
 		02712A59159D013D00510188 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A58159D013D00510188 /* Other.m */; };
-		027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */; };
+		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
 		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
@@ -116,6 +116,8 @@
 		02F86EED15AF7021000A84D2 /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEB15AF7021000A84D2 /* TransientOther.m */; };
 		02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */; };
 		02F86EF115AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */; };
+		02F86EF415AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */; };
+		02F86EF515AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
@@ -251,7 +253,7 @@
 		02712A57159D013D00510188 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
 		02712A58159D013D00510188 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
 		027406BA15AE711200AD9EDC /* RecordImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordImportTVC.h; sourceTree = "<group>"; };
-		027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTVCViewController.m; sourceTree = "<group>"; };
+		027406BB15AE711200AD9EDC /* RecordImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTVC.m; sourceTree = "<group>"; };
 		027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationImportTVC.h; sourceTree = "<group>"; };
 		027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -321,6 +323,9 @@
 		02F86EEB15AF7021000A84D2 /* TransientOther.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientOther.m; sourceTree = "<group>"; };
 		02F86EEE15AFA9CE000A84D2 /* Record+DipDirectionValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DipDirectionValues.h"; sourceTree = "<group>"; };
 		02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DipDirectionValues.m"; sourceTree = "<group>"; };
+		02F86EF215AFCDD8000A84D2 /* ValidationMessageBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationMessageBoard.h; sourceTree = "<group>"; };
+		02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationMessageBoard.m; sourceTree = "<group>"; };
+		02F86EF615AFE13B000A84D2 /* IEConflictHandlerNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEConflictHandlerNotificationNames.h; sourceTree = "<group>"; };
 		2128E73E15A237AB00B277F9 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
@@ -396,6 +401,8 @@
 				020EBBAE15944F4500EECC08 /* TextInputFilter.m */,
 				2128E74115A238F900B277F9 /* GeoFilter.h */,
 				2128E74215A238F900B277F9 /* GeoFilter.m */,
+				02F86EF215AFCDD8000A84D2 /* ValidationMessageBoard.h */,
+				02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -596,6 +603,7 @@
 			isa = PBXGroup;
 			children = (
 				0249E2ED15A9040800A7532E /* ModelGroupNotificationNames.h */,
+				02F86EF615AFE13B000A84D2 /* IEConflictHandlerNotificationNames.h */,
 			);
 			name = "NSNotification Registrations";
 			sourceTree = "<group>";
@@ -606,7 +614,7 @@
 				02191EC815ACA8DD00A5EB2B /* ImportTableViewController.h */,
 				02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */,
 				027406BA15AE711200AD9EDC /* RecordImportTVC.h */,
-				027406BB15AE711200AD9EDC /* RecordImportTVCViewController.m */,
+				027406BB15AE711200AD9EDC /* RecordImportTVC.m */,
 				027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */,
 				027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */,
 			);
@@ -1119,7 +1127,7 @@
 				0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */,
 				02191EC615AC850600A5EB2B /* Record.m in Sources */,
 				02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */,
-				027406BC15AE711200AD9EDC /* RecordImportTVCViewController.m in Sources */,
+				027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */,
 				027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */,
 				022C3E2515AE7656004F0EDD /* TransientManagedObject.m in Sources */,
 				02F86EB815AF6F09000A84D2 /* IEEngine.m in Sources */,
@@ -1135,6 +1143,7 @@
 				02F86EE815AF7014000A84D2 /* TransientRecord.m in Sources */,
 				02F86EEC15AF7021000A84D2 /* TransientOther.m in Sources */,
 				02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
+				02F86EF415AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1165,7 @@
 				02F86EE915AF7014000A84D2 /* TransientRecord.m in Sources */,
 				02F86EED15AF7021000A84D2 /* TransientOther.m in Sources */,
 				02F86EF115AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
+				02F86EF515AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

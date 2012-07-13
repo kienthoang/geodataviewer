@@ -170,6 +170,7 @@
     [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
         if (!success) {
             //handle errors
+            NSLog(@"Database error: %@",self.database);
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to save changes to database. Please try to submit them again."];
         }
     }];
@@ -250,13 +251,6 @@
     
     //Hide delete button
     [self hideButton:self.deleteButton enabled:NO];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    //Save any change to database
-    [self saveChangesToDatabase];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

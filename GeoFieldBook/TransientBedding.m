@@ -12,4 +12,20 @@
 
 @synthesize formation=_formation;
 
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
+                        completion:(completion_handler_t)completionHandler
+{
+    //Create a bedding record
+    self.nsManagedRecord=[NSEntityDescription insertNewObjectForEntityForName:@"Bedding" inManagedObjectContext:context];
+    
+    //Call super to populate the common record info
+    [super saveToManagedObjectContext:context completion:completionHandler];
+    
+    //Populate formation
+    //[(JointSet *)self.nsManagedRecord setFormation:self.formation];
+    
+    //Call completion handler
+    completionHandler(self.nsManagedRecord);
+}
+
 @end

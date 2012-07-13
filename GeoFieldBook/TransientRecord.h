@@ -32,7 +32,7 @@
 #define TransientRecordMinimumDip 0
 #define TransientRecordMaximumDip 90
 #define TransientRecordMinimumStrike 0
-#define TransientRecordMaximumStrike 0
+#define TransientRecordMaximumStrike 360
 
 #pragma mark - Setters with validations
 
@@ -42,5 +42,10 @@
 - (NSString *)setDipDirectionWithValidations:(NSString *)dipDirection;
 - (NSString *)setLatitudeWithValidations:(NSString *)latitude;
 - (NSString *)setLongitudeWithValidations:(NSString *)longitude;
+
+@property (nonatomic,strong) Record *nsManagedRecord;
+
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
+                        completion:(completion_handler_t)completionHandler;
 
 @end

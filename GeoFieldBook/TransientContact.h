@@ -9,8 +9,14 @@
 #import "TransientRecord.h"
 #import "TransientFormation.h"
 
+#import "Contact.h"
+
 @interface TransientContact : TransientRecord
 
 @property (nonatomic, strong) TransientFormation *lowerFormation;
 @property (nonatomic, strong) TransientFormation *upperFormation;
+
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
+                        completion:(completion_handler_t)completionHandler;
+
 @end

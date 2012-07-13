@@ -8,6 +8,11 @@
 
 #import "TransientRecord.h"
 
+#import "Other.h"
+
 @interface TransientOther : TransientRecord
+
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
+                        completion:(completion_handler_t)completionHandler;
 
 @end

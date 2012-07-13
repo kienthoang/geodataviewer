@@ -7,11 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IEConflictHandlerNotificationNames.h"
+#import "ConflictHandlerDelegate.h"
 
 @interface ConflictHandler : NSObject
 
+typedef enum HandleOption {ConflictHandleReplace,ConflictHandleKeepBoth} HandleOption;
+
 @property (nonatomic, strong) UIManagedDocument *database;
 
-- (BOOL)handleConflictsForArray:(NSArray *) items;
+- (void)processTransientRecords:(NSArray *)records 
+                     andFolders:(NSArray *)folders 
+       withValidationMessageLog:(NSArray *)validationLog;
+
+- (void)processTransientFormations:(NSArray *)formations 
+               andFormationFolders:(NSArray *)folders 
+       withValidationMessageLog:(NSArray *)validationLog;
+
+- (void)userDidChooseToHandleFolderNameConflictWith:(HandleOption)handleOption;
+- (void)userDidChooseToHandleFormationFolderNameConflictWith:(HandleOption)handleOption;
+
+#pragma mark - Duplicate Temporary Data
+
+@property (nonatomic,strong) NSArray *transientRecords;
+@property (nonatomic,strong) NSArray *transientFolders;
+
+@property (nonatomic,strong) NSString *duplicateFolderName;
+@property (nonatomic,strong) NSString *duplicateFormationFolderName;
+
+@property (nonatomic,weak) id <ConflictHandlerDelegate> delegate;
 
 @end

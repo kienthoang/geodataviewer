@@ -13,7 +13,7 @@
 
 typedef void (^completion_handler_t)(NSManagedObject *managedObject);
 
-- (BOOL)saveToManagedObjectContext:(NSManagedObjectContext *)context 
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
                         completion:(completion_handler_t)completionHandler;
 
 @end

@@ -10,11 +10,10 @@
 
 @implementation TransientManagedObject
 
-- (BOOL)saveToManagedObjectContext:(NSManagedObjectContext *)context 
+- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
                         completion:(completion_handler_t)completionHandler
 {
     NSLog(@"Subclass of TransientManagedObject should override this method.");
-    return NO;
 }
 
 @end
