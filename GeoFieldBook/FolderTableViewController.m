@@ -25,7 +25,7 @@
 
 #import "ModelGroupNotificationNames.h"
 
-@interface FolderTableViewController() <ModalFolderDelegate,UIActionSheetDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate>
+@interface FolderTableViewController() <ModalFolderDelegate,UIActionSheetDelegate,RecordTableViewControllerDelegate,CustomFolderCellDelegate,NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) GeoFilter *recordFilter;
 
@@ -118,6 +118,7 @@
                                                                       managedObjectContext:self.database.managedObjectContext 
                                                                         sectionNameKeyPath:nil 
                                                                                  cacheName:nil];
+    self.fetchedResultsController.delegate=self;
 }
 
 - (void)normalizeDatabase {
@@ -500,6 +501,44 @@
 - (void)viewDidUnload {
     [self setAddButton:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate protocol methods
+
+- (void)controller:(NSFetchedResultsController *)controller 
+   didChangeObject:(id)anObject 
+       atIndexPath:(NSIndexPath *)indexPath 
+     forChangeType:(NSFetchedResultsChangeType)type 
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            //If a folder is inserted, add it to the filter
+            if (type==NSFetchedResultsChangeInsert) {
+                Folder *folder=[self.fetchedResultsController objectAtIndexPath:newIndexPath];
+                NSLog(@"Inserted Folders: %@",folder.folderName);
+                [self.recordFilter userDidSelectFolderWithName:folder.folderName];
+            }
+            
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
 }
  
 #pragma mark - UIActionSheetDelegate protocol methods

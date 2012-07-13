@@ -698,7 +698,7 @@
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
 				0249E2E515A8EECB00A7532E /* Custom Segues */,
 				0249E2EC15A903BE00A7532E /* NSNotification Registrations */,
-				211B728D15AB522D00EC4C60 /* I/E */,
+				211B728D15AB522D00EC4C60 /* Import/Export */,
 				2128E73D15A2378000B277F9 /* MKAnnotation */,
 				024097A2159D373F00855D33 /* Custom Views */,
 				029877FC1595954D000D71E7 /* Images */,
@@ -910,7 +910,7 @@
 			name = "Formation Folder";
 			sourceTree = "<group>";
 		};
-		211B728D15AB522D00EC4C60 /* I/E */ = {
+		211B728D15AB522D00EC4C60 /* Import/Export */ = {
 			isa = PBXGroup;
 			children = (
 				02F86EB615AF6F09000A84D2 /* IEEngine.h */,
@@ -918,7 +918,7 @@
 				02F86EBA15AF6F37000A84D2 /* ConflictHandler.h */,
 				02F86EBB15AF6F37000A84D2 /* ConflictHandler.m */,
 			);
-			name = I/E;
+			name = Import/Export;
 			path = ..;
 			sourceTree = "<group>";
 		};

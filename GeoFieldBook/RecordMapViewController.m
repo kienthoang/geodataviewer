@@ -122,7 +122,6 @@
         for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
             if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==selectedRecord) {
                 //Set the location span and the center of the map
-                self.mapView.region=[self regionFromLocations];
                 self.mapView.centerCoordinate=annotation.coordinate;
                 [self.mapView selectAnnotation:annotation animated:YES];
                 break;
