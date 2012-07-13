@@ -9,6 +9,8 @@
 #import "RecordImportTVC.h"
 #import "IEConflictHandlerNotificationNames.h"
 
+#import "TransientProject.h"
+
 @interface RecordImportTVC() <UIAlertViewDelegate>
 
 @end
