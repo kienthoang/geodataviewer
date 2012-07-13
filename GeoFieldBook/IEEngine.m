@@ -182,7 +182,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     //finally populate the date field
     record.date = newDate;
     
-    
     //separate the date&time string to populate the date and time strings in the transient records
     NSArray *dateTimeArray = [[lineArray objectAtIndex:dateAndTime] componentsSeparatedByString:@","];
     record.dateString = [NSString stringWithFormat:@"%@,%@",[dateTimeArray objectAtIndex:0],[dateTimeArray      objectAtIndex:1]];
@@ -311,6 +310,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         //Save the newly created transient formation folder
         [formationFolders addObject:newFormationFolder];
         
+        //Keep track of the sort number (formations will be sorted by the order they are in the csv file)
+        int sortNumber=0;
+        
         //for each token(formation) in such an array of line record(formation folder)
         for(NSString *formation in  record) {
             //if the formation name is not empty
@@ -318,6 +320,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
                 TransientFormation *newFormation = [[TransientFormation alloc] init];
                 newFormation.formationFolder = newFormationFolder;
                 newFormation.formationName = formation;
+                newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
                 [self.formations addObject:newFormation];
             }
         }

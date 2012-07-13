@@ -555,6 +555,10 @@
 {
     //Call the record table view controller to update the given record with the given record info
     [[self recordTableViewController] modifyRecord:record withNewInfo:recordInfo];
+    
+    //Call the popover if it's not visible
+    if (!self.popoverViewController.isPopoverVisible)
+        [self.popoverViewController presentPopoverFromBarButtonItem:self.popoverVCButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
