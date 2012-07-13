@@ -7,6 +7,7 @@
 //
 
 #import "TransientRecord.h"
+#import "TransientImage.h"
 #import "Record+DipDirectionValues.h"
 
 @implementation TransientRecord
@@ -48,7 +49,7 @@
         record.folder=[self.folder saveFolderToManagedObjectContext:context];
         
         //Associate with the image
-        
+        record.image=[self.image saveImageToManagedObjectContext:context completion:^(NSManagedObject *obj){}];
     }
 }
 
