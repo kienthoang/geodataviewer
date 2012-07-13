@@ -7,6 +7,7 @@
 //
 
 #import "TransientImage.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface TransientImage()
 
@@ -16,9 +17,8 @@
 
 @implementation TransientImage
 
-@synthesize imageData;
-@synthesize imageHash;
-@synthesize whoUses;
+@synthesize imageData=_imageData;
+@synthesize imageHash=_imageHash;
 
 @synthesize managedImage=_managedImage;
 
@@ -38,13 +38,24 @@
     return self.managedImage;
 }
 
+- (void)setImageData:(NSData *)imageData {
+    //Get the hash data
+    __weak TransientImage *weakSelf=self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableData *imageHashKey=[NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
+        CC_SHA256(imageData.bytes,imageData.length,imageHashKey.mutableBytes);
+        weakSelf.imageHash=imageHashKey;
+    });
+    
+    _imageData=imageData;
+}
+
 - (void)saveToManagedObjectContext:(NSManagedObjectContext *)context completion:(completion_handler_t)completionHandler
 {
     //Insert into the database
     self.managedImage=[NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:context];
     self.managedImage.imageData=self.imageData;
     self.managedImage.imageHash=self.imageHash;
-    self.managedImage.whoUses=self.whoUses;
 }
 
 @end

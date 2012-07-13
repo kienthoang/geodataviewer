@@ -189,15 +189,17 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     record.timeString = [dateTimeArray objectAtIndex:2];
     
     //to set the image, first get the image from the images directory
-    NSArray *pathsArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [pathsArray objectAtIndex:0];
-    NSString *imageFilePath = [documentsDirectory stringByAppendingFormat:@"/images/%@", [lineArray objectAtIndex:imageName]];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSArray *urlsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSString *documentsDirectory = [[urlsArray objectAtIndex:0] path];
+    NSString *imageFilePath = [documentsDirectory stringByAppendingFormat:@"/%@", [lineArray objectAtIndex:imageName]];
     
     //Set the image
     if([[NSFileManager defaultManager] fileExistsAtPath:imageFilePath]){
-        NSString* content = [NSString stringWithContentsOfFile:imageFilePath encoding:NSUTF8StringEncoding error:nil];
         //now set the image content
-        record.image.imageData = [content dataUsingEncoding:NSUTF8StringEncoding];
+        record.image=[[TransientImage alloc] init];
+        NSData *imageData=[NSData dataWithContentsOfFile:imageFilePath];
+        record.image.imageData = imageData;
     }
     
     //Set the folder
