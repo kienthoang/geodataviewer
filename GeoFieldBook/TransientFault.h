@@ -16,7 +16,4 @@
 @property (nonatomic, retain) NSString * trend;
 @property (nonatomic, retain) TransientFormation *formation;
 
-- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
-                        completion:(completion_handler_t)completionHandler;
-
 @end

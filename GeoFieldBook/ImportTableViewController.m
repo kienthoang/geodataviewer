@@ -145,12 +145,4 @@
     self.importButton.enabled=self.selectedCSVFiles.count>0;
 }
 
-#pragma mark - ConflictHandlerDelegate protocol methods
-
-- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithRecords:(NSArray *)records {
-}
-
-- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithFormations:(NSArray *)formations {
-}
-
 @end

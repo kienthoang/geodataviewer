@@ -126,18 +126,4 @@
     dispatch_release(import_queue_t);
 }
 
-#pragma mark - ConflictHandlerDelegate protocol methods
-//
-//- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithRecords:(NSArray *)records {
-//    //Put up alert
-//    NSString *message=@"";
-//    for (NSString *record in records) {
-//        message=[message stringByAppendingString:[NSString stringWithFormat:@"Folder
-//                                                  }
-//                                                  }
-//                                                  
-//- (void)conflictHandler:(ConflictHandler *)sender conflictDidHappenWithFormations:(NSArray *)formations {
-//                                                      
-//}
-
 @end

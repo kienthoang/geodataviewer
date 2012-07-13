@@ -54,11 +54,18 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     return _records;
 }
 
--(NSMutableArray *) formationFolders {
+-(NSMutableArray *) formations {
     if(!_formations) 
         _formations = [[NSMutableArray alloc] init];
     
     return _formations;
+}
+
+- (NSArray *)formationFolders {
+    if (!_formationFolders)
+        _formationFolders=[NSArray array];
+    
+    return _formationFolders;
 }
 
 - (ValidationMessageBoard *)validationMessageBoard {
@@ -185,7 +192,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     NSMutableArray *records=[NSMutableArray array];;
     
     //this is an array of array
-    NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
+    NSMutableArray *lineRecordsInAFile = [[self getLinesFromFile:path] mutableCopy];
     
     //remove the first line which is simply the column headings
     [lineRecordsInAFile removeObjectAtIndex:0];
@@ -262,46 +269,63 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
 
 #pragma mark - Reading of Formation files
 
--(void) createFormationsFromCSVFiles:(NSArray *) files
-{
-    //get the complete file paths for the selected files that exist
-    self.selectedFilePaths=[self getSelectedFilePaths:files];
+- (void)constructFormationsFromCSVFilePath:(NSString *)path {
+    //this is an array lines, which is an array of tokens
+    NSMutableArray *lineRecordsInAFile = [[self getLinesFromFile:path] mutableCopy];
     
-    //read each of those files line by line and create the formation objects and add it to self.formations array.
-    for(NSString *path in self.selectedFilePaths) {
-        //this is an array lines, which is an array of tokens
-        NSMutableArray *lineRecordsInAFile = [[self getRecordsFromFile:path] mutableCopy];
-        //for each array of tokens 
-        for(int index=0;index<lineRecordsInAFile.count;index++) {
-            NSMutableArray *record=[lineRecordsInAFile objectAtIndex:index];
-            NSString *folder = [record objectAtIndex:0];
-            [record removeObjectAtIndex:0];
-            TransientFormation_Folder *newFormationFolder = [[TransientFormation_Folder alloc] init];
-            newFormationFolder.folderName = folder;
-            //for each token(formation) in such an array of line record(formation folder)
-            for(NSString *formation in  record) {
+    //for each array of tokens 
+    NSMutableArray *formationFolders=[self.formationFolders mutableCopy];
+    for(int index=0;index<lineRecordsInAFile.count;index++) {
+        //Create one formation for each line
+        NSMutableArray *record=[lineRecordsInAFile objectAtIndex:index];
+        NSString *folder = [record objectAtIndex:0];
+        [record removeObjectAtIndex:0];
+        TransientFormation_Folder *newFormationFolder = [[TransientFormation_Folder alloc] init];
+        newFormationFolder.folderName = folder;
+        
+        //Save the newly created transient formation folder
+        [formationFolders addObject:newFormationFolder];
+        
+        //for each token(formation) in such an array of line record(formation folder)
+        for(NSString *formation in  record) {
+            //if the formation name is not empty
+            if (formation.length) {
                 TransientFormation *newFormation = [[TransientFormation alloc] init];
-                newFormation.formationFolderName = folder;
+                newFormation.formationFolder = newFormationFolder;
                 newFormation.formationName = formation;
                 [self.formations addObject:newFormation];
             }
         }
     }
     
+    self.formationFolders=formationFolders.copy;
+}
+
+- (void)createFormationsFromCSVFiles:(NSArray *) files
+{
+    //get the complete file paths for the selected files that exist
+    self.selectedFilePaths=[self getSelectedFilePaths:files];
+    
+    //read each of those files line by line and create the formation objects and add it to self.formations array.
+    for(NSString *path in self.selectedFilePaths) {
+        //Construct formations from the file path
+        [self constructFormationsFromCSVFilePath:path];
+    }
+        
     //If there is any error message, pass nil to the handler as well as the error log
     if (self.validationMessageBoard.errorCount)
         [self.handler processTransientFormations:nil 
-                             andFormationFolders:nil 
+                             andFormationFolders:nil
                         withValidationMessageLog:self.validationMessageBoard.allMessages];
     else
-        [self.handler processTransientFormations:self.formations 
-                             andFormationFolders:nil 
+        [self.handler processTransientFormations:self.formations.copy 
+                             andFormationFolders:self.formationFolders 
                         withValidationMessageLog:self.validationMessageBoard.warningMessages];
 }
 
 #pragma mark - CSV File Parsing
 
--(NSArray *) getRecordsFromFile:(NSString *) filePath
+-(NSArray *) getLinesFromFile:(NSString *) filePath
 {
     NSMutableArray *records = [[NSMutableArray alloc] init]; //array(of lines) of arrays(of tokens in each line)
     //if file does not exist, show error
@@ -320,12 +344,11 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     //fix the case where newline characters (record separators) appear in the data field themselves
     allLines = [self fixNewLineCharactersInData:allLines];
     
-    for(NSString *line in allLines) {//skip the first line
+    for(NSString *line in allLines) //skip the first line
         [records addObject:[self parseLine:line]];
-    }
-        
+    
     return records;
-
+    
 }
 
 -(NSArray *)getSelectedFilePaths:(NSArray *)fileNames;
@@ -343,24 +366,24 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     return paths;
 }
 
-- (NSArray *)parseLine:(NSString *) line 
+- (NSArray *)parseLine:(NSString *) line
 {
     //log to see if each individual line (record) is extracted properly
     //NSLog(@"Individual record: %@", line);
     
     NSMutableArray *values = [[line componentsSeparatedByString:@","] mutableCopy];
-
-    values = [self separateRecordsOrFieldsByCountingQuotations:values];
+    
+    values = [self separateRecordsOrFieldsByCountingQuotations:values byAppending:@","];
     
     [self fixDoubleQuotationsWhileParsingLine:values];
     
     return values;
 }
 -(NSMutableArray *) fixNewLineCharactersInData:(NSArray *)records {
-    return [self separateRecordsOrFieldsByCountingQuotations:records];
+    return [self separateRecordsOrFieldsByCountingQuotations:records byAppending:@"\n"];
 }
 
--(NSMutableArray *) separateRecordsOrFieldsByCountingQuotations:(NSArray *) array {
+-(NSMutableArray *) separateRecordsOrFieldsByCountingQuotations:(NSArray *) array byAppending:(NSString *) separator {
     NSString *merged;
     NSString *current;
     BOOL repeat;
@@ -372,7 +395,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
             current = [copy objectAtIndex:i];
             int quotes = [[current componentsSeparatedByString:@"\""] count]-1; //number of quotes
             if(quotes%2) { // if odd, merge with the next string value
-                merged = [current stringByAppendingFormat:@",%@",[copy objectAtIndex:i+1]];
+                merged = [current stringByAppendingFormat:@"%@%@",separator,[copy objectAtIndex:i+1]];
                 [copy replaceObjectAtIndex:i withObject:merged];
                 [copy removeObjectAtIndex:i+1];
                 repeat = YES;
@@ -391,11 +414,16 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     NSString *current;
     for(int i = 0; i<[values count]; i++) {
         current = [values objectAtIndex:i];
-        if([current length]>1) {
+        if([[current componentsSeparatedByString:@","] count ] >1){ //if commas in the token data, , get rid of the enclosing quotes
+            NSRange range = NSMakeRange(1, [current length]-2);           
+            current = [current substringWithRange:range];
+        }
+        if([current length]>1) { //now replace all two double quote(s) with one.
             [values replaceObjectAtIndex:i withObject:[current stringByReplacingOccurrencesOfString:@"\"\"" 
                                                                                          withString:@"\""]]; 
         }        
     }
+    
     return values;
 }
 @end

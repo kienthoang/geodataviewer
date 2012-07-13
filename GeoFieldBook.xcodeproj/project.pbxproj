@@ -291,7 +291,6 @@
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
-		029FA70415AF54B100A5BB66 /* ConflictHandlerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConflictHandlerDelegate.h; sourceTree = "<group>"; };
 		02AC0F8815A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapRecordInfoViewController.h; sourceTree = "<group>"; };
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
@@ -777,7 +776,6 @@
 				0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */,
 				026640D315AA0B2E00026D88 /* RecordTableViewControllerDelegate.h */,
 				026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */,
-				029FA70415AF54B100A5BB66 /* ConflictHandlerDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

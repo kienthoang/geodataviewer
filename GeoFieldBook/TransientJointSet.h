@@ -14,7 +14,4 @@
 @interface TransientJointSet : TransientRecord
 @property (nonatomic, strong) TransientFormation *formation;
 
-- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
-                        completion:(completion_handler_t)completionHandler;
-
 @end

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "IEEngine.h"
 #import "ConflictHandler.h"
-#import "ConflictHandlerDelegate.h"
 
 @interface ImportTableViewController : UITableViewController
 

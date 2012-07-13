@@ -52,4 +52,18 @@
     
     return cell;
 }
+
+#pragma mark - Target Action Handlers
+
+- (IBAction)importPressed:(UIBarButtonItem *)sender {
+    //Start importing in another thread
+    dispatch_queue_t import_queue_t=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(import_queue_t, ^{
+        //Pass the selected csv files to the engine
+        self.engine.handler=self.conflictHandler;
+        [self.engine createFormationsFromCSVFiles:self.selectedCSVFiles];
+    });
+    dispatch_release(import_queue_t);
+}
+
 @end

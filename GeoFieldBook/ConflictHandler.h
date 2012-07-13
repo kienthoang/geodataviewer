@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "IEConflictHandlerNotificationNames.h"
-#import "ConflictHandlerDelegate.h"
 
 @interface ConflictHandler : NSObject
 
@@ -32,9 +32,10 @@ typedef enum HandleOption {ConflictHandleReplace,ConflictHandleKeepBoth} HandleO
 @property (nonatomic,strong) NSArray *transientRecords;
 @property (nonatomic,strong) NSArray *transientFolders;
 
+@property (nonatomic,strong) NSArray *transientFormations;
+@property (nonatomic,strong) NSArray *transientFormationFolders;
+
 @property (nonatomic,strong) NSString *duplicateFolderName;
 @property (nonatomic,strong) NSString *duplicateFormationFolderName;
-
-@property (nonatomic,weak) id <ConflictHandlerDelegate> delegate;
 
 @end

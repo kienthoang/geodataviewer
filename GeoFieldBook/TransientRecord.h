@@ -45,7 +45,4 @@
 
 @property (nonatomic,strong) Record *nsManagedRecord;
 
-- (void)saveToManagedObjectContext:(NSManagedObjectContext *)context 
-                        completion:(completion_handler_t)completionHandler;
-
 @end
