@@ -13,7 +13,11 @@
 #import "Formation.h"
 
 @interface TransientFormation : TransientManagedObject
+
 @property (nonatomic, strong) NSString * formationName;
 @property (nonatomic, strong) NSNumber * formationSortNumber;
 @property (nonatomic, strong) TransientFormation_Folder *formationFolder;
+
+- (Formation *)saveFormationToManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end

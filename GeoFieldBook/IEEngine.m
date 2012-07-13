@@ -44,7 +44,7 @@
 @synthesize validationMessageBoard=_validationMessageBoard;
 
 //enum for columnHeadings
-typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike, Dip, dipDirection, Observations, FormationField, lowerFormation, upperFormation, Trend, Plunge, imageName}columnHeadings;
+typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
 
 #pragma mark - Getters
 -(NSMutableArray *) projects {
@@ -89,19 +89,41 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     //identify the record type and populate record specific fields
     if([[lineArray objectAtIndex:1] isEqualToString:@"Contact"]) {
         record =[[TransientContact alloc] init];
-        [(TransientContact *)record setLowerFormation:[lineArray objectAtIndex:lowerFormation]];
-        [(TransientContact *)record setUpperFormation:[lineArray objectAtIndex:upperFormation]];
+        
+        //Set lower formation
+        TransientFormation *lowerFormation=[[TransientFormation alloc] init];
+        lowerFormation.formationName=[lineArray objectAtIndex:LowerFormation];
+        [(TransientContact *)record setLowerFormation:lowerFormation];
+        
+        //Set upper formation
+        TransientFormation *upperFormation=[[TransientFormation alloc] init];
+        upperFormation.formationName=[lineArray objectAtIndex:UpperFormation];
+        [(TransientContact *)record setUpperFormation:upperFormation];
     } else if ([[lineArray objectAtIndex:1] isEqualToString:@"Bedding"]) {
         record = [[TransientBedding alloc] init];
-        [(TransientBedding *)record setFormation:[lineArray objectAtIndex:FormationField]];
+        
+        //Set formation
+        TransientFormation *formation=[[TransientFormation alloc] init];
+        formation.formationName=[lineArray objectAtIndex:FormationField];
+        [(TransientBedding *)record setFormation:formation];
     } else if([[lineArray objectAtIndex:1] isEqualToString:@"Joint Set"]) {
         record = [[TransientJointSet alloc] init]; 
-        [(TransientJointSet *)record setFormation:[lineArray objectAtIndex:FormationField]];
+        
+        //Set formation
+        TransientFormation *formation=[[TransientFormation alloc] init];
+        formation.formationName=[lineArray objectAtIndex:FormationField];
+        [(TransientJointSet *)record setFormation:formation];
     } else if([[lineArray objectAtIndex:1] isEqualToString:@"Fault"]) {
-        record = [[TransientFault alloc] init]; 
+        record = [[TransientFault alloc] init];
+        
+        //Set the plunge and trend
         [(TransientFault *)record setPlunge:[lineArray objectAtIndex:Plunge]];
         [(TransientFault *)record setTrend:[lineArray objectAtIndex:Trend]];
-        [(TransientFault *)record setFormation:[lineArray objectAtIndex:FormationField]];
+        
+        //Set formation
+        TransientFormation *formation=[[TransientFormation alloc] init];
+        formation.formationName=[lineArray objectAtIndex:FormationField];
+        [(TransientFault *)record setFormation:formation];
     } else if([[lineArray objectAtIndex:1] isEqualToString:@"Other"]) {
         record = [[TransientOther alloc] init];            
     }
@@ -184,7 +206,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
             break;
         }
     }
-    
+        
     return record;
 }
 

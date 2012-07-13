@@ -657,7 +657,7 @@
     __weak GeoFieldBookController *weakSelf=self;
     NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
         [spinner startAnimating];
         int index=[toolbarItems indexOfObject:weakSelf.importExportButton];

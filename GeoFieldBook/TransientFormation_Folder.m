@@ -10,8 +10,6 @@
 
 @interface TransientFormation_Folder()
 
-@property (nonatomic,strong) Formation_Folder *managedFormationFolder;
-
 @end
 
 @implementation TransientFormation_Folder
@@ -21,6 +19,23 @@
 @synthesize folders;
 
 @synthesize managedFormationFolder=_managedFormationFolder;
+
++ (Formation_Folder *)defaultFolderManagedObjectContext:(NSManagedObjectContext *)context {
+    //Query for the folder with the same name before saving
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",DEFAULT_FORMATION_FOLDER_NAME];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+    NSArray *results=[context executeFetchRequest:request error:NULL];
+    
+    if (results.count)
+        return [results lastObject];
+    
+    //Save folder
+    TransientFormation_Folder *folder=[[TransientFormation_Folder alloc] init];
+    folder.folderName=DEFAULT_FORMATION_FOLDER_NAME;
+    [folder saveToManagedObjectContext:context completion:^(NSManagedObject *folder){}];
+    return folder.managedFormationFolder;
+}
 
 - (Formation_Folder *)saveFormationFolderToManagedObjectContext:(NSManagedObjectContext *)context 
                                                      completion:(completion_handler_t)completionHandler

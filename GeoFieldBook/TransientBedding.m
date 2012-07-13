@@ -22,10 +22,11 @@
     [super saveToManagedObjectContext:context completion:completionHandler];
     
     //Populate formation
-    //[(JointSet *)self.nsManagedRecord setFormation:self.formation];
+    [(Bedding *)self.nsManagedRecord setFormation:[self.formation saveFormationToManagedObjectContext:context]];
     
     //Call completion handler
     completionHandler(self.nsManagedRecord);
 }
+
 
 @end
