@@ -11,7 +11,7 @@
 #import "ConflictHandler.h"
 #import "ConflictHandlerDelegate.h"
 
-@interface ImportTableViewController : UITableViewController <ConflictHandlerDelegate>
+@interface ImportTableViewController : UITableViewController
 
 @property (nonatomic,strong) NSArray *csvFileNames;
 @property (nonatomic,strong) NSArray *selectedCSVFiles;

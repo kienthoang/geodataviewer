@@ -69,13 +69,6 @@
         
         for(id lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
             
-            NSString *log = @"[";
-            for(NSString *s in lineArray) {
-                log = [log stringByAppendingFormat:@"%@, ",s];
-            }
-            
-            NSLog(@"Read Tokens: %@", log);
-            
             if([lineArray count]!=15){ //not enough/more fields in the record
                 NSLog(@"Corrupted record ignored!");
                 continue;
@@ -211,11 +204,11 @@
     NSArray *allLines = [content componentsSeparatedByCharactersInSet: [NSCharacterSet newlineCharacterSet]];
     //fix the case where newline characters (record separators) appear in the data field themselves
     allLines = [self fixNewLineCharactersInData:allLines];
-
+    
     for(NSString *line in allLines) {//skip the first line
         [records addObject:[self parseLine:line]];
     }
-    
+        
     return records;
 
 }
@@ -242,7 +235,7 @@
     NSMutableArray *values = [[line componentsSeparatedByString:@","] mutableCopy];
 
     values = [self separateRecordsOrFieldsByCountingQuotations:values];
-
+    
     [self fixDoubleQuotationsWhileParsingLine:values];
     
     return values;
@@ -271,25 +264,21 @@
                 break;
             }
         }
-        if(repeat) continue;
-        else break;
+        if(!repeat) 
+            break;
     }while (YES);
     
     return copy;
 }
 
 -(NSMutableArray *) fixDoubleQuotationsWhileParsingLine:(NSMutableArray *) values {
-    NSRange range;
     NSString *current;
     for(int i = 0; i<[values count]; i++) {
         current = [values objectAtIndex:i];
         if([current length]>1) {
-            range.location = 1;
-            range.length = [current length]-2;
-            [values replaceObjectAtIndex:i withObject:[[current substringWithRange:range] 
-                                                       stringByReplacingOccurrencesOfString:@"\"\"" 
-                                                       withString:@"\""]]; 
-        }
+            [values replaceObjectAtIndex:i withObject:[current stringByReplacingOccurrencesOfString:@"\"\"" 
+                                                                                         withString:@"\""]]; 
+        }        
     }
     return values;
 }
