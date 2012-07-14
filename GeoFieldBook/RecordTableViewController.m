@@ -317,6 +317,10 @@
     
     //Flush the image cache
     [self flushImageCache];
+    
+    //Switch out of editing mode
+    if (self.tableView.editing)
+        [self editPressed:self.editButton];
 }
 
 - (void)viewDidUnload {

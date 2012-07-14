@@ -254,6 +254,14 @@
     [self hideButton:self.deleteButton enabled:NO];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    //Switch out of editing mode
+    if (self.tableView.editing)
+        [self editPressed:self.editButton];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Support all orientations
@@ -309,9 +317,6 @@
         //Hide the delete button
         [self hideButton:self.deleteButton enabled:NO];
     }
-    
-    //Reset the title of the delete button
-    self.deleteButton.title=@"Delete";
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -448,7 +453,8 @@
         //Add the selected folder to the delete list
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
         NSMutableArray *toBeDeletedFolders=[self.toBeDeletedFolders mutableCopy];
-        [toBeDeletedFolders addObject:folder];
+        if (![toBeDeletedFolders containsObject:folder])
+            [toBeDeletedFolders addObject:folder];
         self.toBeDeletedFolders=[toBeDeletedFolders copy];
         
         //Update the title of the delete button
@@ -519,7 +525,6 @@
             //If a folder is inserted, add it to the filter
             if (type==NSFetchedResultsChangeInsert) {
                 Folder *folder=[self.fetchedResultsController objectAtIndexPath:newIndexPath];
-                NSLog(@"Inserted Folders: %@",folder.folderName);
                 [self.recordFilter userDidSelectFolderWithName:folder.folderName];
             }
             
