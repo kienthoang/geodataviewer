@@ -10,4 +10,6 @@
 
 @interface FormationFolderTableViewController : CoreDataTableViewController
 
+#define DEFAULT_BUTTON_SIZE 120
+
 @end

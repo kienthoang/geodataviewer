@@ -12,7 +12,7 @@
 
 @interface ConflictHandler : NSObject
 
-typedef enum HandleOption {ConflictHandleReplace,ConflictHandleKeepBoth} HandleOption;
+typedef enum HandleOption {ConflictHandleReplace,ConflictHandleKeepBoth,ConflictHandleCancel} HandleOption;
 
 @property (nonatomic, strong) UIManagedDocument *database;
 

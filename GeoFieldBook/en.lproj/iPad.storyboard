@@ -125,10 +125,20 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="39N-eQ-bgW"/>
+                        <barButtonItem title="Select All" width="90" id="WCi-6t-R0u">
+                            <connections>
+                                <action selector="selectAll:" destination="Uwh-l0-QS0" id="1ES-eS-9lp"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem enabled="NO" title="Delete" width="120" id="x0c-NT-vLv">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="deletePressed:" destination="Uwh-l0-QS0" id="dK7-nY-HvR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Select None" width="90" id="z8J-Nj-t2p">
+                            <connections>
+                                <action selector="selectNone:" destination="Uwh-l0-QS0" id="09Y-lJ-kym"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="7cg-FR-WxX"/>
@@ -152,11 +162,13 @@
                         <outlet property="addButton" destination="xBX-na-cpH" id="ppg-5D-zo4"/>
                         <outlet property="deleteButton" destination="x0c-NT-vLv" id="fvo-wM-W3o"/>
                         <outlet property="editButton" destination="tqj-i6-PiN" id="qtX-Dl-Dib"/>
+                        <outlet property="selectAllButton" destination="WCi-6t-R0u" id="pK2-Sw-yRH"/>
+                        <outlet property="selectNone" destination="z8J-Nj-t2p" id="CL8-55-9dj"/>
                         <segue destination="kmo-3x-I3i" kind="push" identifier="Show Records" id="DYB-10-x9y"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-9006" y="-3597"/>
+            <point key="canvasLocation" x="-9279" y="-3624"/>
         </scene>
         <!--Filter By Record Type Controller-->
         <scene sceneID="70s-hd-efC">
@@ -233,6 +245,12 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="5Bq-NK-tnR"/>
+                        <barButtonItem title="Select All" width="90" id="qs4-Yh-jju">
+                            <connections>
+                                <action selector="selectAll:" destination="rqP-i8-UCo" id="Gum-hP-2OG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem title="Add Folder" width="120" id="5Kq-VS-lzR">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -245,6 +263,12 @@
                                 <action selector="deletePressed:" destination="rqP-i8-UCo" id="JRk-gZ-zVy"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Select None" width="90" id="7ho-uh-Orv">
+                            <connections>
+                                <action selector="selectNone:" destination="rqP-i8-UCo" id="k9a-gv-jNH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="qS8-K3-ndC"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Formation Folders" id="3gP-S2-8wl">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="ooa-Kl-7co">
@@ -259,11 +283,13 @@
                         <outlet property="addButton" destination="5Kq-VS-lzR" id="4gC-zm-CtP"/>
                         <outlet property="deleteButton" destination="qYt-GW-MGe" id="LGS-0I-U1I"/>
                         <outlet property="editButton" destination="ooa-Kl-7co" id="0oE-gZ-hW4"/>
+                        <outlet property="selectAllButton" destination="qs4-Yh-jju" id="r8T-PE-fb3"/>
+                        <outlet property="selectNone" destination="7ho-uh-Orv" id="RwS-EG-esf"/>
                         <segue destination="PLg-aG-R2F" kind="push" identifier="Show Formations" id="MW8-IM-rKQ"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-9318" y="-5553"/>
+            <point key="canvasLocation" x="-9374" y="-6825"/>
         </scene>
         <!--Modal Record Type Selector-->
         <scene sceneID="SPc-17-h4d">
@@ -433,13 +459,23 @@
                                 <segue destination="Rcx-ao-SRb" kind="modal" identifier="Select Record Type" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="rqL-Ed-8l9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Delete" width="100" id="R7I-Hk-hEC">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="efN-TL-eXw"/>
+                        <barButtonItem title="Select All" width="90" id="0aj-cR-PSq">
+                            <connections>
+                                <action selector="selectAll:" destination="kmo-3x-I3i" id="V33-Ha-Mke"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" title="Delete" width="100" id="R7I-Hk-hEC">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="deletePressed:" destination="kmo-3x-I3i" id="WUE-cT-hH5"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="efN-TL-eXw"/>
+                        <barButtonItem title="Select None" width="90" id="0Yp-VY-nuO">
+                            <connections>
+                                <action selector="selectNone:" destination="kmo-3x-I3i" id="0SJ-Dh-N1Z"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem title="Set Location" style="plain" id="Ipl-an-wyO">
                             <connections>
                                 <segue destination="rK8-xg-bur" kind="popover" identifier="Formation Folder Picker" popoverAnchorBarButtonItem="Ipl-an-wyO" id="JLu-Zh-8E0">
@@ -462,6 +498,8 @@
                         <outlet property="addButton" destination="cpv-Nu-y09" id="FEs-ij-sJL"/>
                         <outlet property="deleteButton" destination="R7I-Hk-hEC" id="j4Y-kW-ALC"/>
                         <outlet property="editButton" destination="PL1-Ih-t0C" id="Em2-sa-NNg"/>
+                        <outlet property="selectAllButton" destination="0aj-cR-PSq" id="KwX-Zo-anC"/>
+                        <outlet property="selectNone" destination="0Yp-VY-nuO" id="hhs-Rf-iT6"/>
                         <outlet property="setLocationButton" destination="Ipl-an-wyO" id="4Z4-GZ-130"/>
                     </connections>
                 </tableViewController>
@@ -1182,7 +1220,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7457" y="-6119"/>
+            <point key="canvasLocation" x="-7513" y="-7391"/>
         </scene>
         <!--Formation Table View Controller-->
         <scene sceneID="E7H-Rg-1sX">
@@ -1211,6 +1249,12 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ttE-v3-ahx"/>
+                        <barButtonItem title="Select All" width="90" id="KHg-7D-xhL">
+                            <connections>
+                                <action selector="selectAll:" destination="PLg-aG-R2F" id="IIU-vu-18T"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem title="Add Formation" width="120" id="AuG-Wp-ICM">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -1223,6 +1267,12 @@
                                 <action selector="deletePressed:" destination="PLg-aG-R2F" id="rjx-cE-xFD"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Select None" width="90" id="cck-Mv-4cp">
+                            <connections>
+                                <action selector="selectNone:" destination="PLg-aG-R2F" id="rP5-JN-kRW"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="sXc-Ro-cVn"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="1Sj-2i-V8K">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="WxT-tz-Y8l">
@@ -1237,10 +1287,12 @@
                         <outlet property="addButton" destination="AuG-Wp-ICM" id="WVJ-fl-30R"/>
                         <outlet property="deleteButton" destination="FBa-5G-w6O" id="4dc-sk-SjX"/>
                         <outlet property="editButton" destination="WxT-tz-Y8l" id="9xj-qL-nHp"/>
+                        <outlet property="selectAllButton" destination="KHg-7D-xhL" id="3Kf-wB-PsD"/>
+                        <outlet property="selectNone" destination="cck-Mv-4cp" id="GOI-OC-ivU"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-6711" y="-5368"/>
+            <point key="canvasLocation" x="-7527" y="-6272"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kRT-F4-Wi6">
@@ -1263,7 +1315,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-11308" y="-5563"/>
+            <point key="canvasLocation" x="-11364" y="-6835"/>
         </scene>
         <!--Formation View Controller-->
         <scene sceneID="hH3-ve-g87">
@@ -1315,7 +1367,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5337" y="-5135"/>
+            <point key="canvasLocation" x="-5345" y="-6231"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mn7-s1-fup">
@@ -1347,7 +1399,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHM-w7-6Bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="" id="8tf-9a-8AO" customClass="RecordImportTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QQF-wK-IvH">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1376,16 +1428,42 @@
                             <outlet property="delegate" destination="8tf-9a-8AO" id="W0F-z4-38v"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="X8h-y1-uIb">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Import" width="100" style="done" id="VPz-9T-tuf">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="AHu-Im-t38"/>
+                        <barButtonItem enabled="NO" title="Delete" width="100" id="5tk-Hp-pb8">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="sZz-Qa-feh"/>
+                        <barButtonItem enabled="NO" title="Import" width="100" style="done" id="VPz-9T-tuf">
+                            <color key="tintColor" red="0.22152870188845752" green="0.2694055628396036" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="importPressed:" destination="8tf-9a-8AO" id="SYu-JH-KF4"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="32W-gg-aQW"/>
+                        <barButtonItem title="Add File" width="100" id="jTo-Xh-lrO">
+                            <color key="tintColor" red="1" green="0.49574802161570375" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="WQy-mu-cNv"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="X8h-y1-uIb">
+                        <barButtonItem key="leftBarButtonItem" title="Select All" width="100" id="80b-Om-pS0">
+                            <connections>
+                                <action selector="selectAll:" destination="8tf-9a-8AO" id="vyu-95-bac"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Select None" width="100" id="9Yv-1e-1zb">
+                            <connections>
+                                <action selector="selectNone:" destination="8tf-9a-8AO" id="Qwd-h2-tjq"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="importButton" destination="VPz-9T-tuf" id="feS-o7-zVC"/>
+                        <outlet property="addButton" destination="jTo-Xh-lrO" id="jSj-Hn-sH7"/>
+                        <outlet property="deleteButton" destination="5tk-Hp-pb8" id="a0y-Jz-vJh"/>
+                        <outlet property="importButton" destination="VPz-9T-tuf" id="QXg-8h-l5z"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1643,13 +1721,19 @@
         <scene sceneID="xz9-7j-2ys">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="71w-8j-zJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Record Import TVC" id="TMV-ag-Ybd" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Record Import TVC" toolbarHidden="NO" id="TMV-ag-Ybd" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="F27-9a-era">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="guI-rN-xh1">
+                        <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="8tf-9a-8AO" kind="relationship" relationship="rootViewController" id="eD1-5L-i5F"/>
                     </connections>
@@ -1663,7 +1747,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWC-UW-0bN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="" id="Uu5-sC-dG8" customClass="FormationImportTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="O5p-y4-84t">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1692,16 +1776,42 @@
                             <outlet property="delegate" destination="Uu5-sC-dG8" id="skx-gN-iTI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="p1i-xy-RXt">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Import" width="100" style="done" id="sEM-ku-xLX">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="C0L-Vo-UHg"/>
+                        <barButtonItem enabled="NO" title="Delete" width="100" id="wjE-wv-zss">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="ldN-xt-fuQ"/>
+                        <barButtonItem enabled="NO" title="Import" width="100" style="done" id="sEM-ku-xLX">
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="importPressed:" destination="Uu5-sC-dG8" id="QYc-H0-Bxj"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="RqA-cC-2AZ"/>
+                        <barButtonItem title="Add File" width="100" id="kzx-Zt-dTq">
+                            <color key="tintColor" red="1" green="0.49574802159999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="NrH-2b-Eip"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="p1i-xy-RXt">
+                        <barButtonItem key="leftBarButtonItem" title="Select All" width="100" id="xVB-JO-xnH">
+                            <connections>
+                                <action selector="selectAll:" destination="Uu5-sC-dG8" id="C8j-w0-2VY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Select None" width="100" id="uAZ-eK-74L">
+                            <connections>
+                                <action selector="selectNone:" destination="Uu5-sC-dG8" id="dYX-yz-Hvu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="importButton" destination="sEM-ku-xLX" id="tvc-iU-jpp"/>
+                        <outlet property="addButton" destination="kzx-Zt-dTq" id="cVf-mK-zom"/>
+                        <outlet property="deleteButton" destination="wjE-wv-zss" id="i51-Sr-ZRl"/>
+                        <outlet property="importButton" destination="sEM-ku-xLX" id="fMe-jg-u3i"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1711,13 +1821,17 @@
         <scene sceneID="JyD-ek-PpN">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EFy-e8-U0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Formation Import TVC" id="9ut-5g-xp2" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Formation Import TVC" toolbarHidden="NO" id="9ut-5g-xp2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="arb-xW-QRU">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6Cy-FY-LAO">
+                        <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Uu5-sC-dG8" kind="relationship" relationship="rootViewController" id="tr4-ZU-r0X"/>
                     </connections>
@@ -1782,6 +1896,8 @@
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
@@ -1793,6 +1909,8 @@
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="FormationFolderViewController" superclassName="UIViewController">
@@ -1813,6 +1931,8 @@
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="FormationViewController" superclassName="UIViewController">
@@ -1842,6 +1962,8 @@
         <class className="ImportTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportTableViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
@@ -1902,6 +2024,8 @@
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>

@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *selectAllButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *selectNone;
 
 @property (strong, nonatomic) UIBarButtonItem *hiddenButton;
 
@@ -36,6 +38,8 @@
 @synthesize deleteButton = _deleteButton;
 @synthesize editButton = _editButton;
 @synthesize hiddenButton=_hiddenButton;
+@synthesize selectAllButton = _selectAllButton;
+@synthesize selectNone = _selectNone;
 
 @synthesize formationsWereReordered=_formationsWereReordered;
 
@@ -62,6 +66,17 @@
         _toBeDeletedFormations=[NSArray array];
     
     return _toBeDeletedFormations;
+}
+
+- (void)setToBeDeletedFormations:(NSArray *)toBeDeletedFormations {
+    _toBeDeletedFormations=toBeDeletedFormations;
+    
+    //Update the title of the delete button
+    int numFormations=self.toBeDeletedFormations.count;
+    self.deleteButton.title=numFormations ? [NSString stringWithFormat:@"Delete (%d)",numFormations] : @"Delete";
+    
+    //Enable the delete button
+    self.deleteButton.enabled=numFormations>0;
 }
 
 #pragma mark - Controller State Initialization
@@ -170,6 +185,21 @@
 
 #pragma mark - Target-Action Handlers
 
+- (void)toggleSelectButtons {
+    //Setup the select buttons
+    NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
+    if (self.tableView.editing) {
+        [toolbarItems insertObject:self.selectAllButton atIndex:1];
+        [toolbarItems insertObject:self.selectNone atIndex:toolbarItems.count-1];
+    }
+    else {
+        [toolbarItems removeObject:self.selectAllButton];
+        [toolbarItems removeObject:self.selectNone];
+    }
+    
+    self.toolbarItems=toolbarItems.copy;
+}
+
 - (void)setupButtonsForEditingMode:(BOOL)editing {
     //Change the style of the action button
     self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
@@ -182,12 +212,15 @@
         [toolbarItems removeObject:self.addButton];
     else
         [toolbarItems removeObject:self.deleteButton];
-    [toolbarItems insertObject:hiddenButton atIndex:0];
+    [toolbarItems insertObject:hiddenButton atIndex:1];
     self.toolbarItems=[toolbarItems copy];
     
     //Reset the title of the delete button and disable it
     self.deleteButton.title=@"Delete";
     self.deleteButton.enabled=NO;
+    
+    //Set up select buttons
+    [self toggleSelectButtons];
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -209,6 +242,24 @@
     //Put up an alert
     UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
     [deleteActionSheet showInView:self.view];
+}
+
+- (IBAction)selectAll:(UIBarButtonItem *)sender {
+    //Select all the csv files
+    self.toBeDeletedFormations=self.fetchedResultsController.fetchedObjects;
+    
+    //Select all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView selectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (IBAction)selectNone:(UIBarButtonItem *)sender {
+    //Empty the selected csv files
+    self.toBeDeletedFormations=[NSArray array];
+    
+    //Deselect all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES];
 }
 
 #pragma mark - Formation View Controller Delegate methods
@@ -268,13 +319,6 @@ didAskToModifyFormationWithName:(NSString *)originalName
         NSMutableArray *toBeDeletedFormations=[self.toBeDeletedFormations mutableCopy];
         [toBeDeletedFormations addObject:formation];
         self.toBeDeletedFormations=[toBeDeletedFormations copy];
-        
-        //Update the title of the delete button
-        int numFormations=self.toBeDeletedFormations.count;
-        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",numFormations];
-        
-        //Enable the delete button
-        self.deleteButton.enabled=numFormations>0;
     }
 }
 
@@ -286,13 +330,6 @@ didAskToModifyFormationWithName:(NSString *)originalName
         NSMutableArray *toBeDeletedFormations=[self.toBeDeletedFormations mutableCopy];
         [toBeDeletedFormations removeObject:formation];
         self.toBeDeletedFormations=[toBeDeletedFormations copy];
-        
-        //Update the title of the delete button
-        int numFormations=self.toBeDeletedFormations.count;
-        self.deleteButton.title=numFormations ? [NSString stringWithFormat:@"Delete (%d)",numFormations] : @"Delete";
-        
-        //Enable the delete button
-        self.deleteButton.enabled=numFormations>0;
     }
 }
 
@@ -334,6 +371,9 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
     [toolbarItems removeObject:self.deleteButton];
     self.toolbarItems=[toolbarItems copy];
+    
+    //hide the select buttons
+    [self toggleSelectButtons];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -350,7 +390,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     if (self.tableView.editing && [deleteButtonTitles containsObject:clickedButtonTitle]) {
         //Delete the selected formations
         [self deleteFormations:self.toBeDeletedFormations];
-        
+                
         //End editing mode
         if (self.tableView.editing)
             [self editPressed:self.editButton];

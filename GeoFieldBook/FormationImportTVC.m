@@ -10,7 +10,7 @@
 
 @interface FormationImportTVC ()
 
-@property (nonatomic,strong) UIActivityIndicatorView *spinner;
+@property (nonatomic,strong) UIBarButtonItem *spinner;
 
 @end
 
@@ -74,20 +74,40 @@
                                    withValidationMessageLog:nil];
         });
     }
+    
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Cancel"]) {
+        [self.conflictHandler userDidChooseToHandleFolderNameConflictWith:ConflictHandleCancel];
+    }
 }
 
 #pragma mark - Handle Notifications
 
+- (void)putImportButtonBack {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Hide the spinner and put the import button
+        NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
+        int index=[toolbarItems indexOfObject:self.spinner];
+        [toolbarItems removeObjectAtIndex:index];
+        [toolbarItems insertObject:self.importButton atIndex:index];
+        self.toolbarItems=toolbarItems.copy;
+        self.spinner=nil;
+    });
+}
+
+- (void)importingWasCanceled:(NSNotification *)notification {
+    //Put the import button back
+    [self putImportButtonBack];
+    
+    //Notify delegate
+    [self.importDelegate importTableViewControllerDidCancelImporting:self];
+}
+
 - (void)importingDidEnd:(NSNotification *)notification {
     //Notify delegate of the completion of the importing
     [self.importDelegate importTableViewControllerDidEndImporting:self];
-        
+    
     //Put the import button back again
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.spinner stopAnimating];
-        self.spinner=nil;
-        self.navigationItem.rightBarButtonItem=self.importButton;
-    });
+    [self putImportButtonBack];
 }
 
 - (void)registerForNotificationsForConflictHandler {
@@ -104,6 +124,10 @@
     [notificationCenter addObserver:self 
                            selector:@selector(importingDidEnd:) 
                                name:GeoNotificationConflictHandlerImportingDidEnd 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(importingWasCanceled:) 
+                               name:GeoNotificationConflictHandlerImportingWasCanceled
                              object:nil];
 }
 
@@ -174,16 +198,42 @@
             UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
             [spinner startAnimating];
             weakSelf.navigationItem.rightBarButtonItem=spinnerBarButtonItem;
+            
+            //Save the spinner
+            weakSelf.spinner=spinnerBarButtonItem;
+            
+            //Hide the import button and put the spinner there
+            NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
+            
+            int index=[toolbarItems indexOfObject:self.importButton];
+            [toolbarItems removeObject:self.importButton];
+            [toolbarItems insertObject:spinnerBarButtonItem atIndex:index];
+            self.toolbarItems=toolbarItems.copy;
         });
         
         //Pass the selected csv files to the engine
-        self.engine.handler=self.conflictHandler;
-        [self.engine createFormationsFromCSVFiles:self.selectedCSVFiles];
-        
-        //Save the spinner
-        self.spinner=spinner;
+        weakSelf.engine.handler=weakSelf.conflictHandler;
+        [weakSelf.engine createFormationsFromCSVFiles:weakSelf.selectedCSVFiles];
     });
     dispatch_release(import_queue_t);
+}
+
+- (IBAction)selectAll:(UIBarButtonItem *)sender {
+    //Select all the csv files
+    self.selectedCSVFiles=self.csvFileNames;
+    
+    //Select all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView selectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (IBAction)selectNone:(UIBarButtonItem *)sender {
+    //Empty the selected csv files
+    self.selectedCSVFiles=[NSArray array];
+    
+    //Deselect all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES];
 }
 
 @end

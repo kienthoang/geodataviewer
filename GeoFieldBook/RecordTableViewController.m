@@ -39,10 +39,12 @@
 
 #pragma mark - UI Outlets
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *setLocationButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *setLocationButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *selectAllButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *selectNone;
 
 #pragma mark - Temporary buttons
 
@@ -72,6 +74,8 @@
 @synthesize deleteButton = _deleteButton;
 @synthesize addButton = _addButton;
 @synthesize hiddenButton=_hiddenButton;
+@synthesize selectAllButton = _selectAllButton;
+@synthesize selectNone = _selectNone;
 
 @synthesize delegate=_delegate;
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
@@ -137,6 +141,17 @@
     NSDictionary *userInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.chosenRecord,GeoNotificationKeyModelGroupSelectedRecord, nil];
     [self postNotificationWithName:GeoNotificationModelGroupDidSelectRecord andUserInfo:userInfo];
 
+}
+
+- (void)setToBeDeletedRecords:(NSArray *)toBeDeletedRecords {
+    _toBeDeletedRecords=toBeDeletedRecords;
+    
+    //Update the title of the delete button
+    int numRecords=self.toBeDeletedRecords.count;
+    self.deleteButton.title=numRecords>0 ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
+    
+    //Enable the delete button
+    self.deleteButton.enabled=numRecords>0;
 }
 
 #pragma mark - Getters
@@ -295,10 +310,8 @@
     [super viewDidLoad];
     
     //Hide the delete button
-    self.hiddenButton=self.deleteButton;
-    NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
-    [toolbarItems removeObject:self.deleteButton];
-    self.toolbarItems=[toolbarItems copy];
+    self.hiddenButton=self.addButton;
+    [self setupButtonsForEditingMode:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -358,6 +371,21 @@
     [self reloadCheckboxesInVisibleCellsForEditingMode:editing];
 }
 
+- (void)toggleSelectButtons {
+    //Setup the select buttons
+    NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
+    if (self.tableView.editing) {
+        [toolbarItems insertObject:self.selectAllButton atIndex:1];
+        [toolbarItems insertObject:self.selectNone atIndex:toolbarItems.count-1];
+    }
+    else {
+        [toolbarItems removeObject:self.selectAllButton];
+        [toolbarItems removeObject:self.selectNone];
+    }
+    
+    self.toolbarItems=toolbarItems.copy;
+}
+
 - (void)setupButtonsForEditingMode:(BOOL)editing {
     //Change the style of the action button
     self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
@@ -370,12 +398,26 @@
         [toolbarItems removeObject:self.addButton];
     else
         [toolbarItems removeObject:self.deleteButton];
-    [toolbarItems insertObject:hiddenButton atIndex:0];
-    self.toolbarItems=[toolbarItems copy];
+    
+    if (![toolbarItems containsObject:hiddenButton])
+        [toolbarItems insertObject:hiddenButton atIndex:(editing ? 2 : 0)];
     
     //Reset the title of the delete button and disable it
     self.deleteButton.title=@"Delete";
     self.deleteButton.enabled=NO;
+    
+    //Hide the set location button if in editing mode
+    if (editing)
+        [toolbarItems removeObject:self.setLocationButton];
+    else {
+        if (![toolbarItems containsObject:self.setLocationButton])
+            [toolbarItems insertObject:self.setLocationButton atIndex:2];
+    }
+    
+    self.toolbarItems=[toolbarItems copy];
+    
+    //Set up select buttons
+    [self toggleSelectButtons];
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -397,6 +439,24 @@
     //Put up an alert
     UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
     [deleteActionSheet showInView:self.view];
+}
+
+- (IBAction)selectAll:(UIBarButtonItem *)sender {
+    //Select all the csv files
+    self.toBeDeletedRecords=self.fetchedResultsController.fetchedObjects;
+    
+    //Select all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView selectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (IBAction)selectNone:(UIBarButtonItem *)sender {
+    //Empty the selected csv files
+    self.toBeDeletedRecords=[NSArray array];
+    
+    //Deselect all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES];
 }
 
 #pragma mark - Prepare for segues
@@ -557,13 +617,6 @@
         NSMutableArray *toBeDeletedRecords=[self.toBeDeletedRecords mutableCopy];
         [toBeDeletedRecords addObject:folder];
         self.toBeDeletedRecords=[toBeDeletedRecords copy];
-        
-        //Update the title of the delete button
-        int numRecords=self.toBeDeletedRecords.count;
-        self.deleteButton.title=numRecords>0 ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
-        
-        //Enable the delete button
-        self.deleteButton.enabled=numRecords>0;
     }
     
     //Else, save the chosen record
@@ -579,13 +632,6 @@
         NSMutableArray *toBeDeletedRecords=[self.toBeDeletedRecords mutableCopy];
         [toBeDeletedRecords removeObject:folder];
         self.toBeDeletedRecords=[toBeDeletedRecords copy];
-         
-        //Update the title of the delete button
-        int numRecords=self.toBeDeletedRecords.count;
-        self.deleteButton.title=numRecords>0 ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
-        
-        //Enable the delete button
-        self.deleteButton.enabled=numRecords>0;
     }
 }
 

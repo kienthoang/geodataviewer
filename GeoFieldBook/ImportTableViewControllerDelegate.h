@@ -14,5 +14,6 @@
 
 - (void)importTableViewControllerDidStartImporting:(ImportTableViewController *)sender;
 - (void)importTableViewControllerDidEndImporting:(ImportTableViewController *)sender;
+- (void)importTableViewControllerDidCancelImporting:(ImportTableViewController *)sender;
 
 @end

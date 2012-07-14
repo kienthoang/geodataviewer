@@ -11,9 +11,10 @@
 #import "ConflictHandler.h"
 #import "GeoDatabaseManager.h"
 
-@interface ImportTableViewController()
+@interface ImportTableViewController() <UIActionSheetDelegate>
 
 @property (nonatomic,strong) UILabel *sectionFooter;
+@property (nonatomic,strong) UIBarButtonItem *hiddenButton;
 
 @end
 
@@ -29,6 +30,10 @@
 
 @synthesize engine=_engine;
 @synthesize conflictHandler=_conflictHandler;
+
+@synthesize deleteButton=_deleteButton;
+@synthesize addButton=_addButton;
+@synthesize hiddenButton=_hiddenButton;
 
 #pragma mark - Getters and Setters
 
@@ -48,6 +53,18 @@
     return _selectedCSVFiles;
 }
 
+- (void)updateButtons {
+    int numFiles=self.selectedCSVFiles.count;
+    
+    //Update the import button
+    self.importButton.title=numFiles ? [NSString stringWithFormat:@"Import (%d)",numFiles] : @"Import";
+    self.importButton.enabled=numFiles>0;
+    
+    //Update the delete button
+    self.deleteButton.title=numFiles ? [NSString stringWithFormat:@"Delete (%d)",numFiles] : @"Delete";
+    self.deleteButton.enabled=numFiles>0;
+}
+
 - (void)setSelectedCSVFiles:(NSArray *)selectedCSVFiles {
     _selectedCSVFiles=selectedCSVFiles;
     
@@ -55,9 +72,22 @@
     int numOfFiles=[self.selectedCSVFiles count];
     NSString *fileCounter=numOfFiles>1 ? @"files" : @"file";
     self.sectionFooter.text=numOfFiles ? [NSString stringWithFormat:@"%d %@ selected.",numOfFiles,fileCounter] : @"No file selected.";
+    
+    //Update the buttons accordingly
+    [self updateButtons];
 }
 
 #pragma mark - Target-Action Handlers
+
+- (IBAction)deletePressed:(UIBarButtonItem *)sender {
+    int numOfDeletedFolders=self.selectedCSVFiles.count;
+    NSString *message=numOfDeletedFolders > 1 ? [NSString stringWithFormat:@"Are you sure you want to delete %d csv files?",numOfDeletedFolders] : @"Are you sure you want to delete this csv file?";
+    NSString *destructiveButtonTitle=numOfDeletedFolders > 1 ? @"Delete Files" : @"Delete File";
+    
+    //Put up an alert
+    UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
+    [deleteActionSheet showInView:self.view];
+}
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
    
@@ -131,9 +161,6 @@
     if (![selectedFileNames containsObject:fileName])
         [selectedFileNames addObject:fileName];
     self.selectedCSVFiles=[selectedFileNames copy];
-    
-    //Enable/Disable the import button
-    self.importButton.enabled=self.selectedCSVFiles.count>0;
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -142,9 +169,6 @@
     NSMutableArray *selectedFileNames=[self.selectedCSVFiles mutableCopy];
     [selectedFileNames removeObject:fileName];
     self.selectedCSVFiles=[selectedFileNames copy];
-    
-    //Enable/Disable the import button
-    self.importButton.enabled=self.selectedCSVFiles.count>0;
 }
 
 @end

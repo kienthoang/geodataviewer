@@ -224,10 +224,12 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     //now create transient objects from the rest
     for(NSArray *lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
         
-        if(lineArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) //not enough/more fields in the record
-            NSLog(@"Corrupted record ignored!");
+        if(lineArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) { //not enough/more fields in the record
+            //NSLog(@"Corrupted record ignored: %@",lineArray);
+        }
         
         else {
+            //NSLog(@"Ok file: %@",lineArray);
             //Create a transient record from the line array
             NSString *folderName=[[[path lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
             TransientRecord *record=[self recordForCSVLineTokenArray:lineArray withFolderName:folderName];
@@ -412,8 +414,8 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
 }
 
 -(NSMutableArray *) separateRecordsOrFieldsByCountingQuotations:(NSArray *) array byAppending:(NSString *) separator {
-    NSString *merged;
-    NSString *current;
+    NSString *merged=@"";
+    NSString *current=@"";
     BOOL repeat;
     NSMutableArray *copy = [array mutableCopy];
     do {
@@ -433,8 +435,8 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         }
         if(!repeat) 
             break;
-    }while (YES);
-    
+    } while (YES);
+        
     return copy;
 }
 

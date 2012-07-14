@@ -24,6 +24,9 @@
 
 @property (nonatomic,weak) id <ImportTableViewControllerDelegate> importDelegate;
 
+@property (nonatomic,weak) IBOutlet UIBarButtonItem *deleteButton;
+@property (nonatomic,weak) IBOutlet UIBarButtonItem *addButton;
+
 #define SECTION_FOOTER_HEIGHT 30
 
 @end

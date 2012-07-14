@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *selectAllButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *selectNone;
 
 @property (strong, nonatomic) UIBarButtonItem *hiddenButton;
 
@@ -36,6 +38,8 @@
 @synthesize addButton = _addButton;
 @synthesize deleteButton = _deleteButton;
 @synthesize editButton = _editButton;
+@synthesize selectAllButton = _selectAllButton;
+@synthesize selectNone = _selectNone;
 @synthesize hiddenButton=_hiddenButton;
 
 @synthesize toBeDeletedFolders=_toBeDeletedFolders;
@@ -54,6 +58,17 @@
         _toBeDeletedFolders=[NSArray array];
     
     return _toBeDeletedFolders;
+}
+
+- (void)setToBeDeletedFolders:(NSArray *)toBeDeletedFolders {
+    _toBeDeletedFolders=toBeDeletedFolders;
+    
+    //Update the title of the delete button
+    int numFolders=self.toBeDeletedFolders.count;
+    self.deleteButton.title=numFolders ? [NSString stringWithFormat:@"Delete (%d)",numFolders] : @"Delete";
+    
+    //Disable the delete button if no record is selected
+    self.deleteButton.enabled=numFolders>0;
 }
 
 #pragma mark - Controller State Initialization
@@ -174,6 +189,21 @@
 
 #pragma mark - Target-Action Handlers
 
+- (void)toggleSelectButtons {
+    //Setup the select buttons
+    NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
+    if (self.tableView.editing) {
+        [toolbarItems insertObject:self.selectAllButton atIndex:1];
+        [toolbarItems insertObject:self.selectNone atIndex:toolbarItems.count-1];
+    }
+    else {
+        [toolbarItems removeObject:self.selectAllButton];
+        [toolbarItems removeObject:self.selectNone];
+    }
+    
+    self.toolbarItems=toolbarItems.copy;
+}
+
 - (void)setupButtonsForEditingMode:(BOOL)editing {
     //Change the style of the action button
     self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
@@ -186,12 +216,15 @@
         [toolbarItems removeObject:self.addButton];
     else
         [toolbarItems removeObject:self.deleteButton];
-    [toolbarItems insertObject:hiddenButton atIndex:0];
+    [toolbarItems insertObject:hiddenButton atIndex:1];
     self.toolbarItems=[toolbarItems copy];
     
     //Reset the title of the delete button and disable it
     self.deleteButton.title=@"Delete";
     self.deleteButton.enabled=NO;
+    
+    //Set up select buttons
+    [self toggleSelectButtons];
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -213,6 +246,24 @@
     //Put up an alert
     UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
     [deleteActionSheet showInView:self.view];
+}
+
+- (IBAction)selectAll:(UIBarButtonItem *)sender {
+    //Select all the csv files
+    self.toBeDeletedFolders=self.fetchedResultsController.fetchedObjects;
+    
+    //Select all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView selectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (IBAction)selectNone:(UIBarButtonItem *)sender {
+    //Empty the selected csv files
+    self.toBeDeletedFolders=[NSArray array];
+    
+    //Deselect all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES];
 }
 
 #pragma mark - Formation Folder View Controller Delegate methods
@@ -276,13 +327,6 @@
         NSMutableArray *toBeDeletedFolders=[self.toBeDeletedFolders mutableCopy];
         [toBeDeletedFolders addObject:folder];
         self.toBeDeletedFolders=[toBeDeletedFolders copy];
-        
-        //Update the title of the delete button
-        int numFolders=self.toBeDeletedFolders.count;
-        self.deleteButton.title=[NSString stringWithFormat:@"Delete (%d)",numFolders];
-        
-        //Enable the delete button
-        self.deleteButton.enabled=numFolders>0;
     }
     
     //If the table view is not in editing mode, segue to show the records
@@ -298,13 +342,6 @@
         NSMutableArray *toBeDeletedFolders=[self.toBeDeletedFolders mutableCopy];
         [toBeDeletedFolders removeObject:folder];
         self.toBeDeletedFolders=[toBeDeletedFolders copy];
-        
-        //Update the title of the delete button
-        int numFolders=self.toBeDeletedFolders.count;
-        self.deleteButton.title=numFolders ? [NSString stringWithFormat:@"Delete (%d)",numFolders] : @"Delete";
-        
-        //Disable the delete button if no record is selected
-        self.deleteButton.enabled=numFolders>0;
     }
 }
 
@@ -333,6 +370,9 @@
     NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
     [toolbarItems removeObject:self.deleteButton];
     self.toolbarItems=[toolbarItems copy];
+    
+    //hide the select buttons
+    [self toggleSelectButtons];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -356,4 +396,9 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self setSelectAllButton:nil];
+    [self setSelectNone:nil];
+    [super viewDidUnload];
+}
 @end

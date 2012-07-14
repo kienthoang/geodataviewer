@@ -219,6 +219,14 @@
         self.transientFolders=transientFolders.copy;        
     }
     
+    //If user chose "Cancel"
+    else if (handleOption==ConflictHandleCancel) {
+        //Post a notification to indicate that the importing is canceled
+        [self postNotificationWithName:GeoNotificationConflictHandlerImportingWasCanceled withUserInfo:[NSDictionary dictionary]];
+        
+        return;
+    }
+    
     //Unset the folders in conflict
     self.duplicateFolderName=nil;
     self.folderInConflict=nil;
@@ -230,7 +238,7 @@
 
 - (void)userDidChooseToHandleFormationFolderNameConflictWith:(HandleOption)handleOption {
     NSArray *transientFolders=nil;
-    
+        
     //If user chose "Replace"
     if (handleOption==ConflictHandleReplace) {
         //Delete the folder in conflict
@@ -250,6 +258,14 @@
         NSMutableArray *transientFormationFolders=self.transientFormationFolders.mutableCopy;
         [transientFormationFolders insertObject:self.transientFormationFolderInConflict atIndex:0];
         self.transientFormationFolders=transientFormationFolders.copy;
+    } 
+    
+    //If user chose "Cancel"
+    else if (handleOption==ConflictHandleCancel) {
+        //Post a notification to indicate that the importing is canceled
+        [self postNotificationWithName:GeoNotificationConflictHandlerImportingWasCanceled withUserInfo:[NSDictionary dictionary]];
+        
+        return;
     }
     
     //Save the formations associated with the transient folder
