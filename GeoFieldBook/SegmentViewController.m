@@ -1,20 +1,20 @@
 //
-//  GeoSegmentViewController.m
+//  SegmentViewController.m
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 7/3/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "GeoSegmentViewController.h"
+#import "SegmentViewController.h"
 
-@interface GeoSegmentViewController()
+@interface SegmentViewController()
 
 @property (nonatomic,strong) UIViewController *currentViewController;
 
 @end
 
-@implementation GeoSegmentViewController
+@implementation SegmentViewController
 
 @synthesize contentView=_contentView;
 @synthesize viewControllers=_viewControllers;
@@ -50,6 +50,7 @@
             CATransition *transition=[CATransition animation];
             transition.type=kCATransitionPush;
             transition.subtype=animationOption==TransitionAnimationPushLeft ? kCATransitionFromLeft : kCATransitionFromRight;
+            transition.startProgress=0.2;
             [self.contentView.layer addAnimation:transition forKey:@"push-transition"];
         }
         

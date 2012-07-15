@@ -1,5 +1,5 @@
 //
-//  GeoSegmentViewController.h
+//  SegmentViewController.h
 //  GeoFieldBook
 //
 //  THIS IS A CONTAINER VIEW CONTROLLER
@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface GeoSegmentViewController : UIViewController
+@interface SegmentViewController : UIViewController
 
 @property (nonatomic,strong) IBOutlet UIView *contentView;
 @property (nonatomic,strong) NSArray *viewControllers;

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 
-#import "FolderTableViewControllerPrototype.h"
+#import "PrototypeFolderTableViewController.h"
 
-@interface FolderTableViewController : FolderTableViewControllerPrototype 
+@interface FolderTableViewController : PrototypeFolderTableViewController 
 
 @property (nonatomic,readonly) NSArray *selectedFolders;
 

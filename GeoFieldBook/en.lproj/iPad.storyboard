@@ -1963,26 +1963,31 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="9gs-NN-udG">
-                                <rect key="frame" x="0.0" y="0.0" width="506" height="704"/>
+                                <rect key="frame" x="0.0" y="0.0" width="511" height="704"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="sTq-JU-6dH">
-                                <rect key="frame" x="514" y="0.0" width="510" height="704"/>
+                                <rect key="frame" x="510" y="0.0" width="514" height="704"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="K4Y-7w-5Xb">
+                                <rect key="frame" x="510" y="0.0" width="1" height="704"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="l7R-yp-NFb"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="800" height="500"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="500" height="500"/>
                     <connections>
                         <outlet property="detailTableView" destination="sTq-JU-6dH" id="wYu-gR-AZu"/>
                         <outlet property="masterTableView" destination="9gs-NN-udG" id="J8N-wT-NZG"/>
-                        <segue destination="Oac-cG-hGt" kind="custom" identifier="masterTableViewController" customClass="DoubleTableViewControllerSegue" id="UdM-Tv-PXs"/>
                         <segue destination="yaF-yJ-OdO" kind="custom" identifier="detailTableViewController" customClass="DoubleTableViewControllerSegue" id="EnD-tR-ZKY"/>
+                        <segue destination="Oac-cG-hGt" kind="custom" identifier="masterTableViewController" customClass="DoubleTableViewControllerSegue" id="UdM-Tv-PXs"/>
                     </connections>
                 </viewController>
             </objects>
@@ -2055,11 +2060,11 @@
             </objects>
             <point key="canvasLocation" x="-7527" y="322"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Export Folder Table View Controller-->
         <scene sceneID="rFD-C0-RYJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16b-SJ-Jbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="Oac-cG-hGt" sceneMemberID="viewController">
+                <tableViewController id="Oac-cG-hGt" customClass="ExportFolderTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Yke-FJ-0DR">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2099,24 +2104,24 @@
                     </tableView>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7081" y="1570"/>
+            <point key="canvasLocation" x="-7057" y="1578"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Record Table View Controller-->
         <scene sceneID="rF9-Xf-aMH">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tll-Nk-vjV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="yaF-yJ-OdO" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="B3c-Ih-ken">
+                <tableViewController id="yaF-yJ-OdO" customClass="RecordTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="B3c-Ih-ken">
                         <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Record Cell" id="klT-oI-smz">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -2202,6 +2207,9 @@
         </class>
         <class className="DipPickerViewController" superclassName="PickerViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DipPickerViewController.h"/>
+        </class>
+        <class className="ExportFolderTableViewController" superclassName="FolderTableViewControllerPrototype">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportFolderTableViewController.h"/>
         </class>
         <class className="FilterByRecordTypeController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterByRecordTypeController.h"/>

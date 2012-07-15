@@ -1,18 +1,18 @@
 //
-//  FolderTableViewControllerPrototype.m
+//  PrototypeFolderTableViewController.m
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 7/14/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "FolderTableViewControllerPrototype.h"
+#import "PrototypeFolderTableViewController.h"
 
-@interface FolderTableViewControllerPrototype ()
+@interface PrototypeFolderTableViewController ()
 
 @end
 
-@implementation FolderTableViewControllerPrototype
+@implementation PrototypeFolderTableViewController
 
 @synthesize database=_database;
 

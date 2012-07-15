@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FolderTableViewControllerPrototype.h"
+#import "PrototypeFolderTableViewController.h"
 
 #import "FolderSelectTableViewControllerDelegate.h"
 
-@interface FolderSelectTableViewController : FolderTableViewControllerPrototype
+@interface FolderSelectTableViewController : PrototypeFolderTableViewController
 
 @property (nonatomic,weak) id <FolderSelectTableViewControllerDelegate> delegate;
 

@@ -1,5 +1,5 @@
 //
-//  FolderTableViewControllerPrototype.h
+//  PrototypeFolderTableViewController.h
 //  GeoFieldBook
 //
 //  Created by Kien Hoang on 7/14/12.
@@ -13,7 +13,7 @@
 
 #import "Folder.h"
 
-@interface FolderTableViewControllerPrototype : CoreDataTableViewController
+@interface PrototypeFolderTableViewController : CoreDataTableViewController
 
 @property (nonatomic,strong) UIManagedDocument *database;   //The database to fetch folders from
 

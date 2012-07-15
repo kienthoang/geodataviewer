@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "GeoSegmentViewController.h"
+#import "SegmentViewController.h"
 #import "RecordMapViewController.h"
 #import "InitialDetailViewController.h"
 #import "RecordViewController.h"
@@ -17,7 +17,7 @@
 
 #import "DataMapSegmentControllerDelegate.h"
 
-@interface DataMapSegmentViewController : GeoSegmentViewController
+@interface DataMapSegmentViewController : SegmentViewController
 
 #define INITIAL_DETAIL_VIEW_CONTROLLER_IDENTIFIER @"Initial Detail View Controller"
 #define RECORD_DETAIL_VIEW_CONTROLLER_IDENTIFIER @"Record Detail View Controller"

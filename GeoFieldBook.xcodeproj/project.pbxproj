@@ -64,11 +64,14 @@
 		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
 		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
-		028732F515B272D80001BBC2 /* FolderTableViewControllerPrototype.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */; };
+		028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
 		028732FE15B28FC80001BBC2 /* UIDoubleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732FD15B28FC80001BBC2 /* UIDoubleTableViewController.m */; };
 		0287330515B35EC30001BBC2 /* DoubleTableViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287330415B35EC30001BBC2 /* DoubleTableViewControllerSegue.m */; };
 		0287330815B369790001BBC2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0287330715B369790001BBC2 /* QuartzCore.framework */; };
+		0287330F15B378190001BBC2 /* ExportFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287330E15B378190001BBC2 /* ExportFolderTableViewController.m */; };
+		0287331215B378BA0001BBC2 /* PrototypeRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287331115B378BA0001BBC2 /* PrototypeRecordTableViewController.m */; };
+		0287331515B379FD0001BBC2 /* ExportDoubleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287331415B379FD0001BBC2 /* ExportDoubleTableViewController.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -87,7 +90,7 @@
 		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
 		029877FB1595740C000D71E7 /* InitialDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877FA1595740C000D71E7 /* InitialDetailViewController.m */; };
 		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
-		0298968B15A375B500E51C27 /* GeoSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298968A15A375B500E51C27 /* GeoSegmentViewController.m */; };
+		0298968B15A375B500E51C27 /* SegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298968A15A375B500E51C27 /* SegmentViewController.m */; };
 		0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969015A38F4C00E51C27 /* RecordMapViewController.m */; };
 		0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969315A408B100E51C27 /* DataMapSegmentViewController.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
@@ -266,8 +269,8 @@
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
-		028732F315B272D80001BBC2 /* FolderTableViewControllerPrototype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableViewControllerPrototype.h; sourceTree = "<group>"; };
-		028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewControllerPrototype.m; sourceTree = "<group>"; };
+		028732F315B272D80001BBC2 /* PrototypeFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeFolderTableViewController.h; sourceTree = "<group>"; };
+		028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeFolderTableViewController.m; sourceTree = "<group>"; };
 		028732F615B27E570001BBC2 /* FolderSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderSelectTableViewController.h; sourceTree = "<group>"; };
 		028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderSelectTableViewController.m; sourceTree = "<group>"; };
 		028732F915B2805F0001BBC2 /* FolderSelectTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderSelectTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -276,6 +279,12 @@
 		0287330315B35EC30001BBC2 /* DoubleTableViewControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleTableViewControllerSegue.h; sourceTree = "<group>"; };
 		0287330415B35EC30001BBC2 /* DoubleTableViewControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleTableViewControllerSegue.m; sourceTree = "<group>"; };
 		0287330715B369790001BBC2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0287330D15B378190001BBC2 /* ExportFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFolderTableViewController.h; sourceTree = "<group>"; };
+		0287330E15B378190001BBC2 /* ExportFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportFolderTableViewController.m; sourceTree = "<group>"; };
+		0287331015B378BA0001BBC2 /* PrototypeRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeRecordTableViewController.h; sourceTree = "<group>"; };
+		0287331115B378BA0001BBC2 /* PrototypeRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeRecordTableViewController.m; sourceTree = "<group>"; };
+		0287331315B379FD0001BBC2 /* ExportDoubleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportDoubleTableViewController.h; sourceTree = "<group>"; };
+		0287331415B379FD0001BBC2 /* ExportDoubleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportDoubleTableViewController.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -301,8 +310,8 @@
 		029877F91595740C000D71E7 /* InitialDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialDetailViewController.h; sourceTree = "<group>"; };
 		029877FA1595740C000D71E7 /* InitialDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialDetailViewController.m; sourceTree = "<group>"; };
 		029877FD1595955E000D71E7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
-		0298968915A375B500E51C27 /* GeoSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoSegmentViewController.h; sourceTree = "<group>"; };
-		0298968A15A375B500E51C27 /* GeoSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoSegmentViewController.m; sourceTree = "<group>"; };
+		0298968915A375B500E51C27 /* SegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentViewController.h; sourceTree = "<group>"; };
+		0298968A15A375B500E51C27 /* SegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentViewController.m; sourceTree = "<group>"; };
 		0298968F15A38F4C00E51C27 /* RecordMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewController.h; sourceTree = "<group>"; };
 		0298969015A38F4C00E51C27 /* RecordMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordMapViewController.m; sourceTree = "<group>"; };
 		0298969215A408B100E51C27 /* DataMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentViewController.h; sourceTree = "<group>"; };
@@ -406,10 +415,12 @@
 				020EBB941594217A00EECC08 /* CoreDataTableViewController.m */,
 				0222DB221596B40C00699D62 /* PickerViewController.h */,
 				0222DB231596B40C00699D62 /* PickerViewController.m */,
-				0298968915A375B500E51C27 /* GeoSegmentViewController.h */,
-				0298968A15A375B500E51C27 /* GeoSegmentViewController.m */,
-				028732F315B272D80001BBC2 /* FolderTableViewControllerPrototype.h */,
-				028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */,
+				0298968915A375B500E51C27 /* SegmentViewController.h */,
+				0298968A15A375B500E51C27 /* SegmentViewController.m */,
+				028732F315B272D80001BBC2 /* PrototypeFolderTableViewController.h */,
+				028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */,
+				0287331015B378BA0001BBC2 /* PrototypeRecordTableViewController.h */,
+				0287331115B378BA0001BBC2 /* PrototypeRecordTableViewController.m */,
 				028732FC15B28FC80001BBC2 /* UIDoubleTableViewController.h */,
 				028732FD15B28FC80001BBC2 /* UIDoubleTableViewController.m */,
 			);
@@ -693,6 +704,10 @@
 		028732FB15B28F720001BBC2 /* Export */ = {
 			isa = PBXGroup;
 			children = (
+				0287331315B379FD0001BBC2 /* ExportDoubleTableViewController.h */,
+				0287331415B379FD0001BBC2 /* ExportDoubleTableViewController.m */,
+				0287330D15B378190001BBC2 /* ExportFolderTableViewController.h */,
+				0287330E15B378190001BBC2 /* ExportFolderTableViewController.m */,
 			);
 			name = Export;
 			sourceTree = "<group>";
@@ -1164,7 +1179,7 @@
 				02712A59159D013D00510188 /* Other.m in Sources */,
 				2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */,
 				2128E74315A238F900B277F9 /* GeoFilter.m in Sources */,
-				0298968B15A375B500E51C27 /* GeoSegmentViewController.m in Sources */,
+				0298968B15A375B500E51C27 /* SegmentViewController.m in Sources */,
 				0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */,
 				0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */,
 				21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */,
@@ -1194,10 +1209,13 @@
 				02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
 				02F86EF415AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */,
 				028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */,
-				028732F515B272D80001BBC2 /* FolderTableViewControllerPrototype.m in Sources */,
+				028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */,
 				028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */,
 				028732FE15B28FC80001BBC2 /* UIDoubleTableViewController.m in Sources */,
 				0287330515B35EC30001BBC2 /* DoubleTableViewControllerSegue.m in Sources */,
+				0287330F15B378190001BBC2 /* ExportFolderTableViewController.m in Sources */,
+				0287331215B378BA0001BBC2 /* PrototypeRecordTableViewController.m in Sources */,
+				0287331515B379FD0001BBC2 /* ExportDoubleTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
