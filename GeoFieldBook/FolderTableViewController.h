@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreDataTableViewController.h"
-
 #import "PrototypeFolderTableViewController.h"
 
 @interface FolderTableViewController : PrototypeFolderTableViewController 

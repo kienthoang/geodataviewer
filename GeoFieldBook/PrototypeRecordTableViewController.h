@@ -6,8 +6,20 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 
+#import "Folder.h"
+#import "Record.h"
+
+#import "CustomRecordCell.h"
+
 @interface PrototypeRecordTableViewController : CoreDataTableViewController
+
+@property (nonatomic,strong) Folder *folder;
+@property (nonatomic,strong) UIManagedDocument *database;
+
+- (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message;
+- (void)loadImagesForCells:(NSArray *)cells;
 
 @end

@@ -7,16 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreDataTableViewController.h"
+#import "PrototypeRecordTableViewController.h"
 #import "Record+Modification.h"
 #import "CustomRecordCell.h"
 
 #import "RecordTableViewControllerDelegate.h"
 
-@interface RecordTableViewController : CoreDataTableViewController
-
-@property (nonatomic,strong) Folder *folder;
-@property (nonatomic,strong) UIManagedDocument *database;
+@interface RecordTableViewController : PrototypeRecordTableViewController
 
 @property (nonatomic) BOOL willShowCheckboxes;
 
@@ -32,6 +29,5 @@
 #pragma mark - Filter related properties
 
 @property (nonatomic,strong) NSArray *selectedRecordTypes;
-
 
 @end

@@ -31,8 +31,6 @@
 
 #pragma mark - Image Cache
 
-@property (nonatomic,strong) NSMutableDictionary *imageCache;
-
 #pragma mark - Temporary record's modified info
 
 @property (nonatomic,strong) Record *modifiedRecord;
@@ -61,11 +59,6 @@
 @end
 
 @implementation RecordTableViewController
-
-@synthesize imageCache=_imageCache;
-
-@synthesize folder=_folder;
-@synthesize database=_database;
 
 @synthesize willShowCheckboxes=_willShowCheckboxes;
 
@@ -109,26 +102,6 @@
     [self reloadCheckboxesInVisibleCellsForEditingMode:self.tableView.editing];
 }
 
-- (void)setDatabase:(UIManagedDocument *)database {
-    if (_database!=database) {
-        _database=database;
-        
-        //Set up fetchedResultsController
-        [self setupFetchedResultsController];
-    }
-}
-
-- (void)setFolder:(Folder *)folder {
-    _folder=folder;
-    
-    //Set up fetchedResultsController
-    [self setupFetchedResultsController];
-    
-    //Set the title of the set location button
-    NSString *formationFolderName=self.folder.formationFolder.folderName;
-    self.setLocationButton.title=[formationFolderName length] ? formationFolderName : @"Set Location";
-}
-
 - (void)setSelectedRecordTypes:(NSArray *)selectedRecordTypes {
     if (![_selectedRecordTypes isEqualToArray:selectedRecordTypes]) {
         _selectedRecordTypes=selectedRecordTypes;
@@ -170,7 +143,7 @@
 - (void)setSelectedRecords:(NSArray *)selectedRecords {
     if (selectedRecords) {
         _selectedRecords=selectedRecords;
-        
+                
         //Update the delete button
         [self updateDeleteButton];
         
@@ -183,32 +156,6 @@
 
 - (NSArray *)records {
     return self.fetchedResultsController.fetchedObjects;
-}
-
-- (NSMutableDictionary *)imageCache {
-    if (!_imageCache)
-        _imageCache=[NSMutableDictionary dictionary];
-    
-    return _imageCache;
-}
-
-- (NSArray *)selectedRecords {
-    if (!_selectedRecords)
-        _selectedRecords=[NSArray array];
-    
-    return _selectedRecords;
-}
-
-#pragma mark - Alert Generators
-
-//Put up an alert about some database failure with specified message
-- (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Database Error" 
-                                                  message:message 
-                                                 delegate:nil 
-                                        cancelButtonTitle:@"Dismiss" 
-                                        otherButtonTitles: nil];
-    [alert show];
 }
 
 #pragma mark - Record Creation/Update/Deletion
@@ -353,9 +300,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    //Flush the image cache
-    [self flushImageCache];
-    
     //Switch out of editing mode
     if (self.tableView.editing)
         [self editPressed:self.editButton];
@@ -367,12 +311,6 @@
     [self setDeleteButton:nil];
     [self setAddButton:nil];
     [super viewDidUnload];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-	return YES;
 }
 
 #pragma mark - Target-Action Handlers
@@ -484,7 +422,8 @@
     [self setupUIForEditingMode:self.tableView.editing];
     
     //Reset the array of to be deleted records
-    self.selectedRecords=[NSArray array];
+    if (self.tableView.editing)
+        self.selectedRecords=[NSArray array];
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {
@@ -569,99 +508,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark - Table view data source
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Record Cell";
-    
-    CustomRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[CustomRecordCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    // Configure the cell...
-    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];  
-        
-    //show the name, date and time
-    cell.name.text=[NSString stringWithFormat:@"%@",record.name];
-    cell.type.text=[record.class description];
-    cell.date.text=[Record dateFromNSDate:record.date];
-    cell.time.text = [Record timeFromNSDate:record.date];
-    
-    //Hide the spinner (in case it's still animating as the cell has been reused)
-    cell.spinner.hidden=YES;
-
-    //Set the image to nil (for asyncronous image loading)
-    cell.recordImageView.image=nil;
-    
-    //Load the image asynchronously
-    [self loadImageForCell:cell withRecord:record];
-    
-    return cell;
-}
-
 #pragma mark - Table View Delegate
-
-- (void)cacheImage:(UIImage *)image forHashValue:(NSString *)hashValue {
-    //If the cache has more than 30 images, flush it
-    if ([self.imageCache count]>30)
-        [self flushImageCache];
-    
-    //Cache the given image
-    [self.imageCache setValue:image forKey:hashValue];
-}
-
-- (UIImage *)imageInCacheWithHashValue:(NSString *)hashValue {
-    return [self.imageCache objectForKey:hashValue];
-}
-
-- (void)flushImageCache {
-    self.imageCache=[NSMutableDictionary dictionary];
-}
-
-- (void)loadImageForCell:(CustomRecordCell *)cell withRecord:(Record *)record {
-    UIImage *image=[self imageInCacheWithHashValue:[NSString stringWithFormat:@"%@",record.image.imageHash]];
-    if (image)
-        cell.recordImageView.image=image;
-    
-    //Load and cache the image if it's not there
-    else {
-        //Show the spinner
-        cell.spinner.hidden=NO;
-        [cell.spinner startAnimating];
-        
-        //Load the image from database asynchronously
-        dispatch_queue_t image_loader=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(image_loader, ^{
-            UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
-            [self cacheImage:image forHashValue:[NSString stringWithFormat:@"%@",record.image.imageHash]];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //Load the image
-                if (!cell.recordImageView.image) {
-                    cell.recordImageView.image=image;
-                    
-                    //Stop the spinner
-                    [cell.spinner stopAnimating];
-                    cell.spinner.hidden=YES;
-                }
-            });
-        });
-        
-        dispatch_release(image_loader);
-    }
-}
-
-- (void)loadImagesForCells:(NSArray *)cells {
-    for (CustomRecordCell *cell in cells) {
-        NSIndexPath *indexPath=[self.tableView indexPathForCell:cell];
-        Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
-        
-        //Try to retrieve the image from the cache
-        [self loadImageForCell:cell withRecord:record];
-    }
-}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (!decelerate) {
@@ -722,7 +569,7 @@
     //Move the selected folders to the destination folder
     for (Record *record in self.selectedRecords) {
         //Change the folder of the record
-        record.folder=folder;
+        record.folder=folder;        
     }
     
     //Reload the table
