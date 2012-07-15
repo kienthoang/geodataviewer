@@ -436,11 +436,15 @@
     if (![toolbarItems containsObject:hiddenButton])
         [toolbarItems insertObject:hiddenButton atIndex:(editing ? 2 : 0)];
     
+    self.toolbarItems=[toolbarItems copy];
+    
     //Reset the title of the delete button and disable it
     self.deleteButton.title=@"Delete";
     self.deleteButton.enabled=NO;
     
-    self.toolbarItems=[toolbarItems copy];
+    //Reset the title of the move button and disable it
+    self.moveButton.title=@"Move";
+    self.moveButton.enabled=NO;
 }
 
 - (void)toggleMoveButtonForEditingMode:(BOOL)editing {
@@ -480,7 +484,7 @@
     [self setupUIForEditingMode:self.tableView.editing];
     
     //Reset the array of to be deleted records
-    self.selectedRecords=nil;
+    self.selectedRecords=[NSArray array];
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {

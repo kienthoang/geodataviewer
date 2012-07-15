@@ -35,21 +35,60 @@
 
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
-- (void)showViewController:(UIViewController *)viewController {
-    //Adjust the frame of the specified view controller's view
-    viewController.view.frame=self.contentView.bounds;
-    
+- (void)showViewController:(UIViewController *)viewController withTransitionAnimationOption:(TransionAnimationOption)animationOption {
     //Add the view of the specified view controller to self's view hierachy with parent-child vc relationship callbacks
     [self addChildViewController:viewController];
     [viewController willMoveToParentViewController:self];
-
-    //Remove the view of the current view controller from the view hierachy
-    [self.currentViewController.view removeFromSuperview];
     
-    //Add the view of the new vc to the hierachy and set it as the current view controller
-    [self.contentView addSubview:viewController.view];
-    [viewController didMoveToParentViewController:self];
-    self.currentViewController=viewController;
+    UIViewAnimationOptions option=(animationOption!=TransitionAnimationPushLeft && animationOption!=TransitionAnimationPushRight) ? 1:0;
+    
+    if (self.currentViewController) {
+        if (option) 
+            option=animationOption==TransitionAnimationFlipLeft ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight;
+        else if (self.currentViewController) {
+            option=UIViewAnimationOptionCurveLinear;
+            CATransition *transition=[CATransition animation];
+            transition.type=kCATransitionPush;
+            transition.subtype=animationOption==TransitionAnimationPushLeft ? kCATransitionFromLeft : kCATransitionFromRight;
+            [self.contentView.layer addAnimation:transition forKey:@"push-transition"];
+        }
+        
+        [self transitionFromViewController:self.currentViewController toViewController:viewController duration:0.5 options:option animations:^{
+            //Adjust the frame of the specified view controller's view
+            viewController.view.frame=self.contentView.bounds;
+            
+            //Remove the view of the current view controller from the view hierachy
+            [self.currentViewController.view removeFromSuperview];
+            
+            //Add the view of the new vc to the hierachy and set it as the current view controller
+            [self.contentView addSubview:viewController.view];
+            
+        } completion:^(BOOL completed){
+            if (completed) {
+                //set the new view as the current view controller
+                [viewController didMoveToParentViewController:self];
+                self.currentViewController=viewController;
+            }
+        }];
+    } 
+    else {
+        //Some transition animation
+        CATransition *transition=[CATransition animation];
+        transition.type=kCATransitionFade;
+        transition.duration=0.4;
+        [self.contentView.layer addAnimation:transition forKey:@"fade-animation"];
+        
+        //Adjust the frame of the specified view controller's view
+        viewController.view.frame=self.contentView.bounds;
+        
+        //Remove the view of the current view controller from the view hierachy
+        [self.currentViewController.view removeFromSuperview];
+        
+        //Add the view of the new vc to the hierachy and set it as the current view controller
+        [self.contentView addSubview:viewController.view];
+        [viewController didMoveToParentViewController:self];
+        self.currentViewController=viewController;
+    }
 }
 
 - (void)segmentController:(UISegmentedControl *)segmentController indexDidChangeTo:(int)newIndex {    
@@ -62,7 +101,8 @@
     UIViewController *viewController=[self.viewControllers objectAtIndex:segmentIndex];
     
     //Show the view of the new view controller
-    [self showViewController:viewController];
+    TransionAnimationOption animationOption=segmentIndex ? TransitionAnimationPushRight : TransitionAnimationPushLeft;
+    [self showViewController:viewController withTransitionAnimationOption:animationOption];
 }
 
 - (void)popViewControllerAtSegmentIndex:(int)segmentIndex {

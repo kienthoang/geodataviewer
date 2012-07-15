@@ -45,6 +45,7 @@
 #pragma mark - Temporary Popover Controllers
 
 @property (nonatomic, strong) UIPopoverController *importPopover;
+@property (nonatomic, strong) UIPopoverController *exportPopover;
 @property (weak, nonatomic) UIPopoverController *formationFolderPopoverController;
 
 @end
@@ -71,6 +72,7 @@
 @synthesize modifiedRecord=_modifiedRecord;
 
 @synthesize importPopover=_importPopover;
+@synthesize exportPopover=_exportPopover;
 
 - (DataMapSegmentViewController *)dataMapSegmentViewController {
     id dataMapSegmentViewController=self.viewGroupController;
@@ -95,6 +97,8 @@
     [self.popoverViewController dismissPopoverAnimated:NO];
     [self.importPopover dismissPopoverAnimated:NO];
     self.importPopover=nil;
+    [self.exportPopover dismissPopoverAnimated:NO];
+    self.exportPopover=nil;
 }
 
 #pragma mark - UIActionSheetDelegate Protocol methods
@@ -125,16 +129,34 @@
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
+- (void)presentRecordExportPopover {
+    //Dismiss all visible popovers
+    [self dismissAllVisiblePopoversAnimated:NO];
+    
+    //Instantiate the record import popover
+    UINavigationController *recordExportTVC=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_EXPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    self.exportPopover=[[UIPopoverController alloc] initWithContentViewController:recordExportTVC];
+    
+    //Present it
+    [self.exportPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     //If the given action sheet is the import/export action sheet
     if ([actionSheet.title isEqualToString:IMPORT_EXPORT_ACTION_SHEET_TITLE]) {
         if (buttonIndex<actionSheet.numberOfButtons) {
-            //If user click import records
+            //If user clicked import records
             if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Records"])
                 [self presentRecordImportPopover];
-            //If user click import formations
+            
+            //If user clicked import formations
             else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Formations"])
                 [self presentFormationImportPopover];
+            
+            //If user clicked export records
+            else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Export Records"]) {
+                [self presentRecordExportPopover];
+            }
         }
     }
 }

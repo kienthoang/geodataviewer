@@ -66,6 +66,9 @@
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
 		028732F515B272D80001BBC2 /* FolderTableViewControllerPrototype.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
+		028732FE15B28FC80001BBC2 /* UIDoubleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732FD15B28FC80001BBC2 /* UIDoubleTableViewController.m */; };
+		0287330515B35EC30001BBC2 /* DoubleTableViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287330415B35EC30001BBC2 /* DoubleTableViewControllerSegue.m */; };
+		0287330815B369790001BBC2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0287330715B369790001BBC2 /* QuartzCore.framework */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -268,6 +271,11 @@
 		028732F615B27E570001BBC2 /* FolderSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderSelectTableViewController.h; sourceTree = "<group>"; };
 		028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderSelectTableViewController.m; sourceTree = "<group>"; };
 		028732F915B2805F0001BBC2 /* FolderSelectTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderSelectTableViewControllerDelegate.h; sourceTree = "<group>"; };
+		028732FC15B28FC80001BBC2 /* UIDoubleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDoubleTableViewController.h; sourceTree = "<group>"; };
+		028732FD15B28FC80001BBC2 /* UIDoubleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDoubleTableViewController.m; sourceTree = "<group>"; };
+		0287330315B35EC30001BBC2 /* DoubleTableViewControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubleTableViewControllerSegue.h; sourceTree = "<group>"; };
+		0287330415B35EC30001BBC2 /* DoubleTableViewControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleTableViewControllerSegue.m; sourceTree = "<group>"; };
+		0287330715B369790001BBC2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -366,6 +374,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0287330815B369790001BBC2 /* QuartzCore.framework in Frameworks */,
 				02F86EB415AF6E5B000A84D2 /* iAd.framework in Frameworks */,
 				21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */,
 				0294E0CF1593620B0025219F /* CoreLocation.framework in Frameworks */,
@@ -401,6 +410,8 @@
 				0298968A15A375B500E51C27 /* GeoSegmentViewController.m */,
 				028732F315B272D80001BBC2 /* FolderTableViewControllerPrototype.h */,
 				028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */,
+				028732FC15B28FC80001BBC2 /* UIDoubleTableViewController.h */,
+				028732FD15B28FC80001BBC2 /* UIDoubleTableViewController.m */,
 			);
 			name = "View Controller Prototypes";
 			sourceTree = "<group>";
@@ -608,6 +619,8 @@
 				0249E2E715A8EEF500A7532E /* GeoFieldBookControllerSegue.m */,
 				0249E2E915A9007B00A7532E /* DataMapSegmentControllerSegue.h */,
 				0249E2EA15A9007B00A7532E /* DataMapSegmentControllerSegue.m */,
+				0287330315B35EC30001BBC2 /* DoubleTableViewControllerSegue.h */,
+				0287330415B35EC30001BBC2 /* DoubleTableViewControllerSegue.m */,
 			);
 			name = "Custom Segues";
 			sourceTree = "<group>";
@@ -624,14 +637,8 @@
 		027406B315AE6F2C00AD9EDC /* I/E Group */ = {
 			isa = PBXGroup;
 			children = (
-				02191EC815ACA8DD00A5EB2B /* ImportTableViewController.h */,
-				02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */,
-				027406BA15AE711200AD9EDC /* RecordImportTVC.h */,
-				027406BB15AE711200AD9EDC /* RecordImportTVC.m */,
-				027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */,
-				027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */,
-				028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */,
-				028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */,
+				028732FB15B28F720001BBC2 /* Export */,
+				028732FA15B28F630001BBC2 /* Import */,
 			);
 			name = "I/E Group";
 			sourceTree = "<group>";
@@ -668,6 +675,28 @@
 			name = "Folder-Record Group";
 			sourceTree = "<group>";
 		};
+		028732FA15B28F630001BBC2 /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				02191EC815ACA8DD00A5EB2B /* ImportTableViewController.h */,
+				02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */,
+				027406BA15AE711200AD9EDC /* RecordImportTVC.h */,
+				027406BB15AE711200AD9EDC /* RecordImportTVC.m */,
+				027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */,
+				027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */,
+				028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */,
+				028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */,
+			);
+			name = Import;
+			sourceTree = "<group>";
+		};
+		028732FB15B28F720001BBC2 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Export;
+			sourceTree = "<group>";
+		};
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
@@ -690,6 +719,7 @@
 		0294E094159361060025219F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0287330715B369790001BBC2 /* QuartzCore.framework */,
 				02F86EB315AF6E5B000A84D2 /* iAd.framework */,
 				2141DC18159CA275002518F9 /* libcommonCrypto.dylib */,
 				21C309E0159B6C800066FC9B /* MobileCoreServices.framework */,
@@ -1166,6 +1196,8 @@
 				028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */,
 				028732F515B272D80001BBC2 /* FolderTableViewControllerPrototype.m in Sources */,
 				028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */,
+				028732FE15B28FC80001BBC2 /* UIDoubleTableViewController.m in Sources */,
+				0287330515B35EC30001BBC2 /* DoubleTableViewControllerSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
