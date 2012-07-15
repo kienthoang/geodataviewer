@@ -578,7 +578,7 @@
     //If the current TVC in the model group is the record table view controller
     id modelGroupTopVC=[self recordTableViewController];
     if (modelGroupTopVC) {
-        return [(RecordTableViewController *)modelGroupTopVC selectedRecords];
+        return [(RecordTableViewController *)modelGroupTopVC records];
     }
     
     //Else if the current TVC in the model group is the folder table view controller
@@ -594,7 +594,7 @@
             NSArray *results=[database.managedObjectContext executeFetchRequest:request error:NULL];
             [records addObjectsFromArray:results];
         }
-        
+                
         return [records copy];
     }
     

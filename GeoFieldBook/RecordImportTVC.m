@@ -8,6 +8,7 @@
 
 #import "RecordImportTVC.h"
 #import "IEConflictHandlerNotificationNames.h"
+#import "ModelGroupNotificationNames.h"
 
 #import "TransientProject.h"
 
@@ -131,6 +132,10 @@
     
     //Put the import button back again
     [self putImportButtonBack];
+    
+    //Notify the main controller that the folder database has changed
+    NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
+    [center postNotificationName:GeoNotificationModelGroupFolderDatabaseDidChange object:self];
 }
 
 - (void)handleFolderNameConflict:(NSNotification *)notification {

@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 
-@interface FolderTableViewController : CoreDataTableViewController  //Making this inherit the FetchedResultsController from CoreDataTVC
+#import "FolderTableViewControllerPrototype.h"
 
-@property (nonatomic,strong) UIManagedDocument *database;   //The database to fetch folders from
+@interface FolderTableViewController : FolderTableViewControllerPrototype 
+
 @property (nonatomic,readonly) NSArray *selectedFolders;
 
 @property (nonatomic) BOOL willFilterByFolder;

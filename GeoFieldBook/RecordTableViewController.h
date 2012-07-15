@@ -25,7 +25,7 @@
 #pragma mark - Currently active record
 
 @property (nonatomic,strong) Record *chosenRecord;
-@property (nonatomic,readonly) NSArray *selectedRecords;
+@property (nonatomic,readonly) NSArray *records;
 
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
 

@@ -70,7 +70,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7836" y="-4465"/>
+            <point key="canvasLocation" x="-8116" y="-5121"/>
         </scene>
         <!--Folder Table View Controller - Folders-->
         <scene sceneID="p56-nE-sZ6">
@@ -168,7 +168,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-9279" y="-3624"/>
+            <point key="canvasLocation" x="-9559" y="-4280"/>
         </scene>
         <!--Filter By Record Type Controller-->
         <scene sceneID="70s-hd-efC">
@@ -352,7 +352,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-6326" y="-4428"/>
+            <point key="canvasLocation" x="-6606" y="-5084"/>
         </scene>
         <!--Record Table View Controller-->
         <scene sceneID="qZz-Vz-aQF">
@@ -460,18 +460,24 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="efN-TL-eXw"/>
-                        <barButtonItem title="Select All" width="90" id="0aj-cR-PSq">
+                        <barButtonItem title="Select All" width="80" id="0aj-cR-PSq">
                             <connections>
                                 <action selector="selectAll:" destination="kmo-3x-I3i" id="V33-Ha-Mke"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem enabled="NO" title="Delete" width="100" id="R7I-Hk-hEC">
+                        <barButtonItem enabled="NO" title="Move" width="95" id="Dd1-od-thb">
+                            <color key="tintColor" red="0.35153099799999998" green="0.5125063004" blue="0.71934853830000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="dji-bb-LMD" kind="modal" identifier="Move Records" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="h9O-e1-r7b"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" title="Delete" width="95" id="R7I-Hk-hEC">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="deletePressed:" destination="kmo-3x-I3i" id="WUE-cT-hH5"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Select None" width="90" id="0Yp-VY-nuO">
+                        <barButtonItem title="Select None" width="85" id="0Yp-VY-nuO">
                             <connections>
                                 <action selector="selectNone:" destination="kmo-3x-I3i" id="0SJ-Dh-N1Z"/>
                             </connections>
@@ -498,13 +504,70 @@
                         <outlet property="addButton" destination="cpv-Nu-y09" id="FEs-ij-sJL"/>
                         <outlet property="deleteButton" destination="R7I-Hk-hEC" id="j4Y-kW-ALC"/>
                         <outlet property="editButton" destination="PL1-Ih-t0C" id="Em2-sa-NNg"/>
+                        <outlet property="moveButton" destination="Dd1-od-thb" id="aiq-u4-zhU"/>
                         <outlet property="selectAllButton" destination="0aj-cR-PSq" id="KwX-Zo-anC"/>
                         <outlet property="selectNone" destination="0Yp-VY-nuO" id="hhs-Rf-iT6"/>
                         <outlet property="setLocationButton" destination="Ipl-an-wyO" id="4Z4-GZ-130"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7688" y="-3534"/>
+            <point key="canvasLocation" x="-7968" y="-4190"/>
+        </scene>
+        <!--Folder Select Table View Controller-->
+        <scene sceneID="l4e-iB-UF7">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zcB-li-d2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="rlF-aG-TJy" customClass="FolderSelectTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="oLz-LN-8ni">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" textLabel="2Fj-yw-lDu" detailTextLabel="wfn-GV-Jnr" style="IBUITableViewCellStyleSubtitle" id="LlI-Py-PZJ">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Fj-yw-lDu">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wfn-GV-Jnr">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rlF-aG-TJy" id="qqs-rh-DJF"/>
+                            <outlet property="delegate" destination="rlF-aG-TJy" id="y9O-70-KZS"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Irt-wg-7n9">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="xBH-7d-yVk">
+                            <connections>
+                                <action selector="cancelPressed:" destination="rlF-aG-TJy" id="rjg-nC-J0a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="400"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-6717" y="-3139"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="4bF-3j-wbL">
@@ -549,7 +612,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7664" y="-2417"/>
+            <point key="canvasLocation" x="-7583" y="-985"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="hMg-tH-KZj">
@@ -1436,7 +1499,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10488" y="-3609"/>
+            <point key="canvasLocation" x="-10768" y="-4265"/>
         </scene>
         <!--Record ImportTVC-->
         <scene sceneID="q1x-nj-RNJ">
@@ -1518,7 +1581,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-9039" y="-2430"/>
+            <point key="canvasLocation" x="-8958" y="-998"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="dbq-aM-UYl">
@@ -1593,7 +1656,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5919" y="-3506"/>
+            <point key="canvasLocation" x="-6199" y="-4162"/>
         </scene>
         <!--Initial Detail View Controller-->
         <scene sceneID="6R2-xh-iRe">
@@ -1625,7 +1688,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8615" y="591"/>
+            <point key="canvasLocation" x="-8567" y="1471"/>
         </scene>
         <!--Record Map View Controller-->
         <scene sceneID="FuB-nF-Ci1">
@@ -1790,7 +1853,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10301" y="-2430"/>
+            <point key="canvasLocation" x="-10220" y="-998"/>
         </scene>
         <!--Formation ImportTVC-->
         <scene sceneID="nBD-Xt-9wU">
@@ -1872,7 +1935,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-8959" y="-1126"/>
+            <point key="canvasLocation" x="-8878" y="306"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JyD-ek-PpN">
@@ -1894,7 +1957,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10221" y="-1110"/>
+            <point key="canvasLocation" x="-10140" y="322"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="EyA-t9-3NH">
@@ -1939,7 +2002,25 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7608" y="-1110"/>
+            <point key="canvasLocation" x="-7527" y="322"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="s1p-Zs-mmI">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aOm-bS-EFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="dji-bb-LMD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="bhy-Df-4IH">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rlF-aG-TJy" kind="relationship" relationship="rootViewController" id="UuD-6o-mol"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-7947" y="-3139"/>
         </scene>
     </scenes>
     <resources>
@@ -1998,7 +2079,10 @@
         <class className="FilterByRecordTypeController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterByRecordTypeController.h"/>
         </class>
-        <class className="FolderTableViewController" superclassName="CoreDataTableViewController">
+        <class className="FolderSelectTableViewController" superclassName="FolderTableViewControllerPrototype">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderSelectTableViewController.h"/>
+        </class>
+        <class className="FolderTableViewController" superclassName="FolderTableViewControllerPrototype">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
@@ -2007,6 +2091,9 @@
                 <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
             </relationships>
+        </class>
+        <class className="FolderTableViewControllerPrototype" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewControllerPrototype.h"/>
         </class>
         <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
@@ -2132,6 +2219,7 @@
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="moveButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>

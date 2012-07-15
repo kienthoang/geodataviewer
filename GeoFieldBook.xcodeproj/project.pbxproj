@@ -64,6 +64,8 @@
 		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
 		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
+		028732F515B272D80001BBC2 /* FolderTableViewControllerPrototype.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */; };
+		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -261,6 +263,11 @@
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
+		028732F315B272D80001BBC2 /* FolderTableViewControllerPrototype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableViewControllerPrototype.h; sourceTree = "<group>"; };
+		028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewControllerPrototype.m; sourceTree = "<group>"; };
+		028732F615B27E570001BBC2 /* FolderSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderSelectTableViewController.h; sourceTree = "<group>"; };
+		028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderSelectTableViewController.m; sourceTree = "<group>"; };
+		028732F915B2805F0001BBC2 /* FolderSelectTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderSelectTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -392,6 +399,8 @@
 				0222DB231596B40C00699D62 /* PickerViewController.m */,
 				0298968915A375B500E51C27 /* GeoSegmentViewController.h */,
 				0298968A15A375B500E51C27 /* GeoSegmentViewController.m */,
+				028732F315B272D80001BBC2 /* FolderTableViewControllerPrototype.h */,
+				028732F415B272D80001BBC2 /* FolderTableViewControllerPrototype.m */,
 			);
 			name = "View Controller Prototypes";
 			sourceTree = "<group>";
@@ -649,6 +658,8 @@
 				020EBB5915941F7C00EECC08 /* FolderTableViewController.m */,
 				020EBBB81594611A00EECC08 /* RecordTableViewController.h */,
 				020EBBB91594611A00EECC08 /* RecordTableViewController.m */,
+				028732F615B27E570001BBC2 /* FolderSelectTableViewController.h */,
+				028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */,
 				020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */,
 				020EBBA015942E8800EECC08 /* ModalFolderViewController.m */,
 				020EBBBF159467F100EECC08 /* ModalRecordTypeSelector.h */,
@@ -785,6 +796,7 @@
 				026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */,
 				0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */,
 				028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */,
+				028732F915B2805F0001BBC2 /* FolderSelectTableViewControllerDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -1152,6 +1164,8 @@
 				02F86EF015AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
 				02F86EF415AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */,
 				028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */,
+				028732F515B272D80001BBC2 /* FolderTableViewControllerPrototype.m in Sources */,
+				028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

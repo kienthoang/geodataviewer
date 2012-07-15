@@ -24,7 +24,10 @@
 
 #import "ModelGroupNotificationNames.h"
 
-@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
+#import "FolderSelectTableViewController.h"
+#import "FolderSelectTableViewControllerDelegate.h"
+
+@interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UIAlertViewDelegate,FolderSelectTableViewControllerDelegate>
 
 #pragma mark - Image Cache
 
@@ -35,7 +38,7 @@
 @property (nonatomic,strong) Record *modifiedRecord;
 @property (nonatomic,strong) NSDictionary *recordModifiedInfo;
 
-@property (nonatomic,strong) NSArray *toBeDeletedRecords;
+@property (nonatomic,strong) NSArray *selectedRecords;
 
 #pragma mark - UI Outlets
 
@@ -43,6 +46,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *moveButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *selectAllButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *selectNone;
 
@@ -67,12 +71,13 @@
 
 @synthesize modifiedRecord=_modifiedRecord;
 @synthesize recordModifiedInfo=_recordModifiedInfo;
-@synthesize toBeDeletedRecords=_toBeDeletedRecords;
+@synthesize selectedRecords=_selectedRecords;
 
 @synthesize setLocationButton = _setLocationButton;
 @synthesize editButton = _editButton;
 @synthesize deleteButton = _deleteButton;
 @synthesize addButton = _addButton;
+@synthesize moveButton=_moveButton;
 @synthesize hiddenButton=_hiddenButton;
 @synthesize selectAllButton = _selectAllButton;
 @synthesize selectNone = _selectNone;
@@ -143,21 +148,41 @@
 
 }
 
-- (void)setToBeDeletedRecords:(NSArray *)toBeDeletedRecords {
-    _toBeDeletedRecords=toBeDeletedRecords;
-    
+- (void)updateDeleteButton {
     //Update the title of the delete button
-    int numRecords=self.toBeDeletedRecords.count;
+    int numRecords=self.selectedRecords.count;
     self.deleteButton.title=numRecords>0 ? [NSString stringWithFormat:@"Delete (%d)",numRecords] : @"Delete";
     
     //Enable the delete button
     self.deleteButton.enabled=numRecords>0;
 }
 
+- (void)updateMoveButton {
+    //Update the title of the move button
+    int numRecords=self.selectedRecords.count;
+    self.moveButton.title=numRecords>0 ? [NSString stringWithFormat:@"Move (%d)",numRecords] : @"Move";
+    
+    //Enable the delete button
+    self.moveButton.enabled=numRecords>0;
+}
+
+
+- (void)setSelectedRecords:(NSArray *)selectedRecords {
+    if (selectedRecords) {
+        _selectedRecords=selectedRecords;
+        
+        //Update the delete button
+        [self updateDeleteButton];
+        
+        //Update the move button
+        [self updateMoveButton];
+    }
+}
+
 #pragma mark - Getters
 
-- (NSArray *)selectedRecords {
-    return [self.fetchedResultsController fetchedObjects];
+- (NSArray *)records {
+    return self.fetchedResultsController.fetchedObjects;
 }
 
 - (NSMutableDictionary *)imageCache {
@@ -167,11 +192,11 @@
     return _imageCache;
 }
 
-- (NSArray *)toBeDeletedRecords {
-    if (!_toBeDeletedRecords)
-        _toBeDeletedRecords=[NSArray array];
+- (NSArray *)selectedRecords {
+    if (!_selectedRecords)
+        _selectedRecords=[NSArray array];
     
-    return _toBeDeletedRecords;
+    return _selectedRecords;
 }
 
 #pragma mark - Alert Generators
@@ -309,7 +334,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Hide the delete button
+    //Hide the buttons
     self.hiddenButton=self.addButton;
     [self setupButtonsForEditingMode:NO];
 }
@@ -371,10 +396,10 @@
     [self reloadCheckboxesInVisibleCellsForEditingMode:editing];
 }
 
-- (void)toggleSelectButtons {
+- (void)toggleSelectButtonsForEditingMode:(BOOL)editing {
     //Setup the select buttons
     NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
-    if (self.tableView.editing) {
+    if (editing) {
         [toolbarItems insertObject:self.selectAllButton atIndex:1];
         [toolbarItems insertObject:self.selectNone atIndex:toolbarItems.count-1];
     }
@@ -386,11 +411,20 @@
     self.toolbarItems=toolbarItems.copy;
 }
 
-- (void)setupButtonsForEditingMode:(BOOL)editing {
-    //Change the style of the action button
-    self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+- (void)toggleSetLocationButtonForEditingMode:(BOOL)editing {
+    //Hide the set location button if in editing mode
+    NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
+    if (editing)
+        [toolbarItems removeObject:self.setLocationButton];
+    else {
+        if (![toolbarItems containsObject:self.setLocationButton])
+            [toolbarItems insertObject:self.setLocationButton atIndex:2];
+    }
     
-    //Show/Hide add/delete button
+    self.toolbarItems=[toolbarItems copy];
+}
+
+- (void)toggleAddDeleteButtonsForEditingMode:(BOOL)editing {
     UIBarButtonItem *hiddenButton=self.hiddenButton;
     self.hiddenButton=editing ? self.addButton : self.deleteButton;
     NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
@@ -406,18 +440,36 @@
     self.deleteButton.title=@"Delete";
     self.deleteButton.enabled=NO;
     
-    //Hide the set location button if in editing mode
-    if (editing)
-        [toolbarItems removeObject:self.setLocationButton];
+    self.toolbarItems=[toolbarItems copy];
+}
+
+- (void)toggleMoveButtonForEditingMode:(BOOL)editing {
+    NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
+    if (!editing)
+        [toolbarItems removeObject:self.moveButton];
     else {
-        if (![toolbarItems containsObject:self.setLocationButton])
-            [toolbarItems insertObject:self.setLocationButton atIndex:2];
+        if (![toolbarItems containsObject:self.moveButton])
+            [toolbarItems insertObject:self.moveButton atIndex:2];
     }
     
     self.toolbarItems=[toolbarItems copy];
+}
+
+- (void)setupButtonsForEditingMode:(BOOL)editing {
+    //Change the style of the action button
+    self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    
+    //Show/Hide add/delete button
+    [self toggleAddDeleteButtonsForEditingMode:editing];
+    
+    //Set up the set location button
+    [self toggleSetLocationButtonForEditingMode:editing];
     
     //Set up select buttons
-    [self toggleSelectButtons];
+    [self toggleSelectButtonsForEditingMode:editing];
+    
+    //Set up the move button
+    [self toggleMoveButtonForEditingMode:editing];
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
@@ -428,11 +480,11 @@
     [self setupUIForEditingMode:self.tableView.editing];
     
     //Reset the array of to be deleted records
-    self.toBeDeletedRecords=nil;
+    self.selectedRecords=nil;
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {
-    int numOfDeletedRecords=self.toBeDeletedRecords.count;
+    int numOfDeletedRecords=self.selectedRecords.count;
     NSString *message=numOfDeletedRecords > 1 ? [NSString stringWithFormat:@"Are you sure you want to delete %d records?",numOfDeletedRecords] : @"Are you sure you want to delete this record?";
     NSString *destructiveButtonTitle=numOfDeletedRecords > 1 ? @"Delete Records" : @"Delete Record";
     
@@ -441,9 +493,13 @@
     [deleteActionSheet showInView:self.view];
 }
 
+- (IBAction)movePressed:(UIBarButtonItem *)sender {
+    
+}
+
 - (IBAction)selectAll:(UIBarButtonItem *)sender {
     //Select all the csv files
-    self.toBeDeletedRecords=self.fetchedResultsController.fetchedObjects;
+    self.selectedRecords=self.fetchedResultsController.fetchedObjects;
     
     //Select all the rows
     for (UITableViewCell *cell in self.tableView.visibleCells)
@@ -452,7 +508,7 @@
 
 - (IBAction)selectNone:(UIBarButtonItem *)sender {
     //Empty the selected csv files
-    self.toBeDeletedRecords=[NSArray array];
+    self.selectedRecords=[NSArray array];
     
     //Deselect all the rows
     for (UITableViewCell *cell in self.tableView.visibleCells)
@@ -489,6 +545,12 @@
         
         //Set the previously selected formation name
         [segue.destinationViewController setPreviousSelection:self.folder.formationFolder.folderName];
+    }
+    
+    //Seguing to the folder select tvc
+    else if ([segue.identifier isEqualToString:@"Move Records"]) {
+        UINavigationController *navigationController=(UINavigationController *)segue.destinationViewController;
+        [(FolderSelectTableViewController *)navigationController.topViewController setDelegate:self];        
     }
 }
 
@@ -614,9 +676,9 @@
     if (self.tableView.editing) {
         //Add the selected record to the delete list
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSMutableArray *toBeDeletedRecords=[self.toBeDeletedRecords mutableCopy];
-        [toBeDeletedRecords addObject:folder];
-        self.toBeDeletedRecords=[toBeDeletedRecords copy];
+        NSMutableArray *selectedRecords=[self.selectedRecords mutableCopy];
+        [selectedRecords addObject:folder];
+        self.selectedRecords=[selectedRecords copy];
     }
     
     //Else, save the chosen record
@@ -629,9 +691,9 @@
     if (self.tableView.editing) {
         //Remove the selected folder from the delete list
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSMutableArray *toBeDeletedRecords=[self.toBeDeletedRecords mutableCopy];
-        [toBeDeletedRecords removeObject:folder];
-        self.toBeDeletedRecords=[toBeDeletedRecords copy];
+        NSMutableArray *selectedRecords=[self.selectedRecords mutableCopy];
+        [selectedRecords removeObject:folder];
+        self.selectedRecords=[selectedRecords copy];
     }
 }
 
@@ -643,12 +705,27 @@
     NSString *clickedButtonTitle=[actionSheet buttonTitleAtIndex:buttonIndex];
     if (self.tableView.editing && [deleteButtonTitles containsObject:clickedButtonTitle]) {
         //Delete the selected folders
-        [self deleteRecords:self.toBeDeletedRecords];
+        [self deleteRecords:self.selectedRecords];
         
         //End editing mode
         if (self.tableView.editing)
             [self editPressed:self.editButton];
     }
+}
+#pragma mark - FolderSelectTableViewController Protocol methods
+
+- (void)folderSelectTVC:(FolderSelectTableViewController *)sender userDidSelectFolder:(Folder *)folder {
+    //Move the selected folders to the destination folder
+    for (Record *record in self.selectedRecords) {
+        //Change the folder of the record
+        record.folder=folder;
+    }
+    
+    //Reload the table
+    [self.tableView reloadData];
+    
+    //Dismiss the modal
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
