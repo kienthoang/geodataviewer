@@ -7,6 +7,8 @@
 //
 
 #import "ImportTableViewController.h"
+#import "CSVTableViewController.h"
+#import "CSVTableViewControllerDelegate.h"
 
 @interface RecordImportTVC : ImportTableViewController
 

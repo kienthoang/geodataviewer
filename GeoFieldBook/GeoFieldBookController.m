@@ -565,9 +565,8 @@
            whileModifyingRecord:(Record *)record
                     withNewInfo:(NSDictionary *)newInfo
 {
-    //If the chosen record of the record tvc is not nil (meaning it has not been deleted yet), show the autosave alert
-    RecordTableViewController *recordTVC=[self recordTableViewController];
-    if (recordTVC.chosenRecord) {
+    //If the given record has not been deleted yet, show the autosave alert
+    if (!record.isDeleted) {
         //Put up the autosave alert
         [self autosaveRecord:record withNewRecordInfo:newInfo]; 
     }

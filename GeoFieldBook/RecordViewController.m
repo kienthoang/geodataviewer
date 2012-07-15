@@ -795,6 +795,7 @@
         [self.delegate userDidNavigateAwayFrom:self 
                           whileModifyingRecord:self.record 
                                    withNewInfo:[self dictionaryFromForm]];
+        
     }
 }
 

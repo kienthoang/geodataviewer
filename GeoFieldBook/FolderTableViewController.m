@@ -41,7 +41,7 @@
 #pragma mark - Buttons
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *selectAllButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *selectNone;
@@ -267,10 +267,10 @@
     }];
     
     //Hide delete button
-    [self hideButton:self.deleteButton enabled:NO];
+    [self toggleDeleteButtonForEditingMode:self.tableView.editing];
     
     //hide the select buttons
-    [self toggleSelectButtons];
+    [self toggleSelectButtonsForEditingMode:self.tableView.editing];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -288,20 +288,6 @@
 }
 
 #pragma mark - Target-Action Handlers
-
-- (void)showButton:(UIBarButtonItem *)button withTitle:(NSString *)title enabled:(BOOL)enabled {
-    //Show the button
-    button.title=title;
-    button.style=UIBarButtonItemStyleBordered;
-    button.enabled=enabled;    
-}
-
-- (void)hideButton:(UIBarButtonItem *)button enabled:(BOOL)enabled {
-    //Hide the button
-    button.title=@"";
-    button.style=UIBarButtonItemStylePlain;
-    button.enabled=enabled;
-}
 
 - (void)reloadCheckboxesInVisibleCellsForEditingMode:(BOOL)editing {
     for (CustomFolderCell *cell in self.tableView.visibleCells) {
@@ -322,10 +308,10 @@
     [self reloadCheckboxesInVisibleCellsForEditingMode:editing];
 }
 
-- (void)toggleSelectButtons {
+- (void)toggleSelectButtonsForEditingMode:(BOOL)editing {
     //Setup the select buttons
     NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
-    if (self.tableView.editing) {
+    if (editing) {
         [toolbarItems insertObject:self.selectAllButton atIndex:1];
         [toolbarItems insertObject:self.selectNone atIndex:toolbarItems.count-1];
     }
@@ -337,23 +323,26 @@
     self.toolbarItems=toolbarItems.copy;
 }
 
+- (void)toggleDeleteButtonForEditingMode:(BOOL)editing {
+    //Setup the select buttons
+    NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
+    if (editing && ![toolbarItems containsObject:self.deleteButton])
+        [toolbarItems insertObject:self.deleteButton atIndex:1];
+    else if (!editing)
+        [toolbarItems removeObject:self.deleteButton];
+    
+    self.toolbarItems=toolbarItems.copy;
+}
+
 - (void)setupButtonsForEditingMode:(BOOL)editing {
     //Set the style of the action button
     self.editButton.style=editing ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
     
     //Show the delete button if in editing mode
-    if (editing)
-        [self showButton:self.deleteButton withTitle:@"Delete" enabled:NO];
-    else {
-        //Reset the list of to be deleted folders
-        self.toBeDeletedFolders=[NSArray array];
-        
-        //Hide the delete button
-        [self hideButton:self.deleteButton enabled:NO];
-    }
+    [self toggleDeleteButtonForEditingMode:self.tableView.editing];
     
     //Set up select buttons
-    [self toggleSelectButtons];
+    [self toggleSelectButtonsForEditingMode:self.tableView.editing];
 }
 
 - (IBAction)editPressed:(UIBarButtonItem *)sender {

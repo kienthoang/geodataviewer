@@ -506,6 +506,51 @@
             </objects>
             <point key="canvasLocation" x="-7688" y="-3534"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="4bF-3j-wbL">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lmi-9T-f2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="iBY-ew-wWJ" customClass="CSVTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="A2d-Ed-Tnl">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CSV File Cell" id="9OE-Kc-jNX">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iBY-ew-wWJ" id="gIz-a9-Y4f"/>
+                            <outlet property="delegate" destination="iBY-ew-wWJ" id="ZfD-rk-uBr"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="w5J-f0-qPv"/>
+                        <barButtonItem enabled="NO" title="Add File" width="120" style="done" id="dTT-8D-f6o">
+                            <connections>
+                                <action selector="addPressed:" destination="iBY-ew-wWJ" id="AZ3-WI-nVG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="XGN-Qx-OcY"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="oKC-kF-5L6"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="dTT-8D-f6o" id="ZFn-Kr-Y9a"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-7664" y="-2417"/>
+        </scene>
         <!--Record View Controller-->
         <scene sceneID="hMg-tH-KZj">
             <objects>
@@ -1432,6 +1477,9 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="AHu-Im-t38"/>
                         <barButtonItem enabled="NO" title="Delete" width="100" id="5tk-Hp-pb8">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="8tf-9a-8AO" id="80T-c9-OMg"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="sZz-Qa-feh"/>
                         <barButtonItem enabled="NO" title="Import" width="100" style="done" id="VPz-9T-tuf">
@@ -1443,6 +1491,9 @@
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="32W-gg-aQW"/>
                         <barButtonItem title="Add File" width="100" id="jTo-Xh-lrO">
                             <color key="tintColor" red="1" green="0.49574802161570375" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="iBY-ew-wWJ" kind="push" identifier="Add File" id="YeG-v3-Wiy"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="WQy-mu-cNv"/>
                     </toolbarItems>
@@ -1467,7 +1518,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-9031" y="-2526"/>
+            <point key="canvasLocation" x="-9039" y="-2430"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="dbq-aM-UYl">
@@ -1739,7 +1790,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10261" y="-2526"/>
+            <point key="canvasLocation" x="-10301" y="-2430"/>
         </scene>
         <!--Formation ImportTVC-->
         <scene sceneID="nBD-Xt-9wU">
@@ -1780,6 +1831,9 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="C0L-Vo-UHg"/>
                         <barButtonItem enabled="NO" title="Delete" width="100" id="wjE-wv-zss">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="Uu5-sC-dG8" id="5Du-bW-Jod"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="ldN-xt-fuQ"/>
                         <barButtonItem enabled="NO" title="Import" width="100" style="done" id="sEM-ku-xLX">
@@ -1791,6 +1845,9 @@
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="RqA-cC-2AZ"/>
                         <barButtonItem title="Add File" width="100" id="kzx-Zt-dTq">
                             <color key="tintColor" red="1" green="0.49574802159999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="dNQ-Wy-6Dx" kind="push" identifier="Add File" id="GCg-gA-Z8k"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="NrH-2b-Eip"/>
                     </toolbarItems>
@@ -1839,12 +1896,63 @@
             </objects>
             <point key="canvasLocation" x="-10221" y="-1110"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="EyA-t9-3NH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ru2-2q-TaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="dNQ-Wy-6Dx" customClass="CSVTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="HHc-Wz-109">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CSV File Cell" id="AEg-2h-Hqa">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dNQ-Wy-6Dx" id="g62-IX-AXY"/>
+                            <outlet property="delegate" destination="dNQ-Wy-6Dx" id="ezQ-XI-bcz"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="qf6-A2-188"/>
+                        <barButtonItem enabled="NO" title="Add File" width="120" style="done" id="1XB-QC-fQ8">
+                            <connections>
+                                <action selector="addPressed:" destination="dNQ-Wy-6Dx" id="DTh-G3-Gxy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="VYs-Zn-DYh"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="S97-tB-uob"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="1XB-QC-fQ8" id="hR6-1Z-O9P"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-7608" y="-1110"/>
+        </scene>
     </scenes>
     <resources>
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
         <image name="RecordVCBackground.jpg" width="536" height="688"/>
     </resources>
     <classes>
+        <class className="CSVTableViewController" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CSVTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
         <class className="CheckBox" superclassName="UIImageView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CheckBox.h"/>
         </class>

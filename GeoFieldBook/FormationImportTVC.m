@@ -8,7 +8,7 @@
 
 #import "FormationImportTVC.h"
 
-@interface FormationImportTVC ()
+@interface FormationImportTVC() <UIAlertViewDelegate,UIActionSheetDelegate,CSVTableViewControllerDelegate>
 
 @property (nonatomic,strong) UIBarButtonItem *spinner;
 
@@ -235,5 +235,82 @@
     for (UITableViewCell *cell in self.tableView.visibleCells)
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES];
 }
+
+- (IBAction)deletePressed:(UIBarButtonItem *)sender {
+    //Put up an actionsheet
+    int numOfDeletedCSVFiles=self.selectedCSVFiles.count;
+    NSString *message=numOfDeletedCSVFiles > 1 ? [NSString stringWithFormat:@"Are you sure you want to delete %d csv files?",numOfDeletedCSVFiles] : @"Are you sure you want to delete this csv file?";
+    NSString *destructiveButtonTitle=numOfDeletedCSVFiles > 1 ? @"Delete Files" : @"Delete File";
+    
+    //Put up an alert
+    UIActionSheet *deleteActionSheet=[[UIActionSheet alloc] initWithTitle:message delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:destructiveButtonTitle otherButtonTitles:nil];
+    [deleteActionSheet showInView:self.view];
+}
+
+- (void)deleteFilesWithNames:(NSArray *)fileNames {
+    //Get document dir's url
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSURL *documentDirURL=[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject;
+    
+    //Delete files with given names
+    NSMutableArray *csvFileNames=self.csvFileNames.mutableCopy;
+    for (NSString *fileName in fileNames) {
+        //Delete the file
+        NSURL *fileURL=[documentDirURL URLByAppendingPathComponent:fileName];
+        [fileManager removeItemAtURL:fileURL error:NULL];
+        
+        //Remove the file name from the list of csv files
+        [csvFileNames removeObject:fileName];
+    }
+    
+    self.csvFileNames=csvFileNames;
+}
+
+#pragma mark - UIActionSheetDelegate protocol methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //If the action sheet is the delete file action sheet and user clicks "Delete Files" or "Delete File", delete the file(s)
+    NSSet *deleteButtonTitles=[NSSet setWithObjects:@"Delete Files",@"Delete File", nil];
+    NSString *clickedButtonTitle=[actionSheet buttonTitleAtIndex:buttonIndex];
+    if (self.tableView.editing && [deleteButtonTitles containsObject:clickedButtonTitle]) {
+        //Delete selected files from the document directory
+        [self deleteFilesWithNames:self.selectedCSVFiles];
+        self.selectedCSVFiles=[NSArray array];
+    }
+}
+
+#pragma mark - Prepare for Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Add File"]) {
+        [segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setBlacklistedExtensions:[NSArray arrayWithObjects:@".record.csv",@".formation.csv",nil]];
+    }
+}
+
+#pragma mark - CSVTableViewControllerDelegate protocol methods
+
+- (void)csvTableViewController:(CSVTableViewController *)sender userDidChooseFilesWithNames:(NSArray *)fileNames {
+    //Rename the files to have .formation.csv extension
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSURL *documentDirURL=[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject;
+    NSMutableArray *csvFileNames=self.csvFileNames.mutableCopy;
+    for (NSString *fileName in fileNames) {
+        NSMutableArray *nameComponents=[fileName componentsSeparatedByString:@"."].mutableCopy;
+        [nameComponents removeLastObject];
+        NSString *localizedName=[nameComponents componentsJoinedByString:@"."];
+        NSString *newName=[localizedName stringByAppendingString:@".formation.csv"];
+        
+        [fileManager moveItemAtURL:[documentDirURL URLByAppendingPathComponent:fileName] toURL:[documentDirURL URLByAppendingPathComponent:newName] error:NULL];
+        [csvFileNames addObject:newName];
+    }
+    
+    //Set the csv file names
+    self.csvFileNames=csvFileNames.copy;
+    
+    //Pop navigation stack to self
+    [self.navigationController popToViewController:self animated:YES];
+}
+
 
 @end
