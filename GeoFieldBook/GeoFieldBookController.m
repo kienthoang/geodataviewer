@@ -722,6 +722,10 @@
         //Put up an alert
         UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Finished Importing" message:nil delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
         [doneAlert show];
+        
+        //Tell the folder tvc to reload its data
+        FolderTableViewController *folderTVC=[self folderTableViewController];
+        [folderTVC reloadVisibleCells];
     });
 }
 

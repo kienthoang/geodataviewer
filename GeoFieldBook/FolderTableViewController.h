@@ -15,4 +15,6 @@
 
 @property (nonatomic) BOOL willFilterByFolder;
 
+- (void)reloadVisibleCells;
+
 @end

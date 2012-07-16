@@ -210,6 +210,12 @@
     [self toggleSelectButtonsForEditingMode:self.tableView.editing];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self reloadVisibleCells];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -380,6 +386,11 @@
 }
 
 #pragma mark - Table view data source
+
+- (void)reloadVisibleCells {
+    for (CustomFolderCell *cell in self.tableView.visibleCells)
+        cell.folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
