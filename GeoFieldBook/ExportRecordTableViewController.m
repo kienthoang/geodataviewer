@@ -20,19 +20,17 @@
 #pragma mark - Getters and Setters
 
 - (void)setSelectedRecords:(NSSet *)selectedRecords {
-    if (![_selectedRecords isEqualToSet:selectedRecords]) {
-        _selectedRecords=selectedRecords;
-        
-        //Deselect all the rows
-        for (UITableViewCell *cell in self.tableView.visibleCells)
-            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES];
-        
-        //Select all the selected records in the table view
-        if (selectedRecords) {
-            for (Record *record in selectedRecords) {
-                NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
-                [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-            }
+    _selectedRecords=selectedRecords;
+    
+    //Deselect all the rows
+    for (UITableViewCell *cell in self.tableView.visibleCells)
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForCell:cell] animated:YES];
+    
+    //Select all the selected records in the table view
+    if (selectedRecords) {
+        for (Record *record in selectedRecords) {
+            NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:record];
+            [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
         }
     }
 }
