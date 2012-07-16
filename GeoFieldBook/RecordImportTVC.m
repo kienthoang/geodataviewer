@@ -167,6 +167,9 @@
                                             otherButtonTitles:nil];
         [alert show];
     });
+    
+    //Notify the delegate
+    [self importingWasCanceled:notification];
 }
 
 #pragma mark - UITableViewDataSource protocol methods
