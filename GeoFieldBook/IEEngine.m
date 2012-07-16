@@ -44,7 +44,7 @@
 @synthesize validationMessageBoard=_validationMessageBoard;
 
 //enum for columnHeadings
-typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
+typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
 
 #pragma mark - Getters
 -(NSMutableArray *) projects {
@@ -85,7 +85,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
 
 - (TransientRecord *)recordForCSVLineTokenArray:(NSArray *)lineArray withFolderName:(NSString *)folderName {
     TransientRecord *record=nil;
-    
     //identify the record type and populate record specific fields
     if([[lineArray objectAtIndex:1] isEqualToString:@"Contact"]) {
         record =[[TransientContact alloc] init];
@@ -158,34 +157,35 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
     
     
     //separate by spaces to create a NSDate object from the string
-    NSString *date = [lineArray objectAtIndex:dateAndTime];
-    //remove leading and trailing spaces
-    date = [date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    date = [date stringByReplacingOccurrencesOfString:@"," withString:@""]; //remove comma(s), if any
-    NSArray *array = [date componentsSeparatedByString:@" "]; //separate by spaces    
-    typedef enum Months{Zero, January, February, March, April, May, June, July, August, September, October, November, December}Months; 
+    NSString *dateColumn = [[lineArray objectAtIndex:Date] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *timeColumn = [[lineArray objectAtIndex:Time] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSArray *dateArray = [dateColumn componentsSeparatedByString:@"/"];
+    NSArray *timeArray = [timeColumn componentsSeparatedByString:@":"];
+ 
+    
     NSArray *keys = [[NSArray alloc] initWithObjects:@"January",@"February", @"March", @"April", @"May", @"June", @"July", @"August", @"September", @"October", @"November", @"December", nil];
     NSArray *values = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:2],[NSNumber numberWithInt:3],[NSNumber numberWithInt:4],[NSNumber numberWithInt:5],[NSNumber numberWithInt:6],[NSNumber numberWithInt:7],[NSNumber numberWithInt:8],[NSNumber numberWithInt:9],[NSNumber numberWithInt:10],[NSNumber numberWithInt:11],[NSNumber numberWithInt:12], nil];
+     
+    
     NSDictionary *months = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     
-    [comps setYear:[[array objectAtIndex:3] intValue]];
-    [comps setMonth:(NSInteger)[months valueForKey:[lineArray objectAtIndex:1]]];
-    [comps setDay:[[array objectAtIndex:2] intValue]];
-    NSArray *time = [[array objectAtIndex:4] componentsSeparatedByString:@":"];
+    [comps setYear:[[NSString stringWithFormat:@"20%@",[dateArray objectAtIndex:2]] intValue]];
+    [comps setMonth:(NSInteger)[months valueForKey:[dateArray objectAtIndex:0]]];
+    [comps setDay:[[dateArray objectAtIndex:1] intValue]];
     
-    [comps setHour:[[time objectAtIndex:0] intValue]];
-    [comps setMinute:[[time objectAtIndex:1] intValue]];
-    [comps setSecond:[[time objectAtIndex:2] intValue]];
+    [comps setHour:[[timeArray objectAtIndex:0] intValue]];
+    [comps setMinute:[[timeArray objectAtIndex:1] intValue]];
+    [comps setSecond:[[timeArray objectAtIndex:2] intValue]];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDate *newDate = [gregorian dateFromComponents:comps];    
+    NSDate *newDate = [gregorian dateFromComponents:comps]; 
+    
     //finally populate the date field
     record.date = newDate;
     
-    //separate the date&time string to populate the date and time strings in the transient records
-    NSArray *dateTimeArray = [[lineArray objectAtIndex:dateAndTime] componentsSeparatedByString:@","];
-    record.dateString = [NSString stringWithFormat:@"%@,%@",[dateTimeArray objectAtIndex:0],[dateTimeArray      objectAtIndex:1]];
-    record.timeString = [dateTimeArray objectAtIndex:2];
+    // populate the date and time strings in the transient records
+    record.dateString = [lineArray objectAtIndex:Date];
+    record.timeString = [lineArray objectAtIndex:Time];
     
     //to set the image, first get the image from the images directory
     NSFileManager *fileManager=[NSFileManager defaultManager];
@@ -229,7 +229,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
         }
         
         else {
-            //NSLog(@"Ok file: %@",lineArray);
             //Create a transient record from the line array
             NSString *folderName=[[[path lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
             TransientRecord *record=[self recordForCSVLineTokenArray:lineArray withFolderName:folderName];
@@ -256,7 +255,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
 
 /*
  Column Headings:
- "Name, Type, Longitude, Latitude, Date&Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \r\n"
+ "Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \r\n"
  */
 -(void)createRecordsFromCSVFiles:(NSArray *)files
 {   
@@ -443,6 +442,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, dateAndTime, Strike
 -(NSMutableArray *) fixDoubleQuotationsWhileParsingLine:(NSMutableArray *) values {
     NSString *current;
     for(int i = 0; i<[values count]; i++) {
+        
         current = [values objectAtIndex:i];
         if([[current componentsSeparatedByString:@","] count ] >1){ //if commas in the token data, , get rid of the enclosing quotes
             NSRange range = NSMakeRange(1, [current length]-2);           

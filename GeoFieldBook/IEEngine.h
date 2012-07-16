@@ -17,6 +17,6 @@
 -(void) createRecordsFromCSVFiles:(NSArray *)files; //passes the array of records to the ConflictaHandler
 -(void) createFormationsFromCSVFiles:(NSArray *)files; //passes the array of formations to the ConflictHandler
 
-#define NUMBER_OF_COLUMNS_PER_RECORD_LINE 15
+#define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16
 
 @end
