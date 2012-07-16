@@ -17,6 +17,7 @@
 #define RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Record Import TVC"
 #define FORMATION_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Formation Import TVC"
 #define RECORD_EXPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Record Export TVC"
+#define FORMATION_EXPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Formation Export TVC"
 
 @property (nonatomic,weak) UIActivityIndicatorView *importExportSpinner;
 @property (nonatomic,weak) UIBarButtonItem *importExportSpinnerBarButtonItem;

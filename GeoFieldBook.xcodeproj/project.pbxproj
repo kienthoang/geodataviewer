@@ -130,6 +130,10 @@
 		02F86EF515AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */; };
 		2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */; };
 		2128E74315A238F900B277F9 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2128E74215A238F900B277F9 /* GeoFilter.m */; };
+		212DD13615B46513000203AB /* ExportFormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD13515B46513000203AB /* ExportFormationFolderTableViewController.m */; };
+		212DD13A15B46577000203AB /* ExportFormationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD13915B46576000203AB /* ExportFormationTableViewController.m */; };
+		212DD13D15B468DC000203AB /* PrototypeFormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD13C15B468DC000203AB /* PrototypeFormationFolderTableViewController.m */; };
+		212DD14015B46907000203AB /* PrototypeFormationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD13F15B46907000203AB /* PrototypeFormationTableViewController.m */; };
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -362,6 +366,14 @@
 		2128E73F15A237AB00B277F9 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
 		2128E74115A238F900B277F9 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
 		2128E74215A238F900B277F9 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
+		212DD13415B46512000203AB /* ExportFormationFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFormationFolderTableViewController.h; sourceTree = "<group>"; };
+		212DD13515B46513000203AB /* ExportFormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportFormationFolderTableViewController.m; sourceTree = "<group>"; };
+		212DD13815B46575000203AB /* ExportFormationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFormationTableViewController.h; sourceTree = "<group>"; };
+		212DD13915B46576000203AB /* ExportFormationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportFormationTableViewController.m; sourceTree = "<group>"; };
+		212DD13B15B468DC000203AB /* PrototypeFormationFolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeFormationFolderTableViewController.h; sourceTree = "<group>"; };
+		212DD13C15B468DC000203AB /* PrototypeFormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeFormationFolderTableViewController.m; sourceTree = "<group>"; };
+		212DD13E15B46907000203AB /* PrototypeFormationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeFormationTableViewController.h; sourceTree = "<group>"; };
+		212DD13F15B46907000203AB /* PrototypeFormationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeFormationTableViewController.m; sourceTree = "<group>"; };
 		2132A5D5159CD26200009CB9 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		2132A5D6159CD26200009CB9 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		2132A5D8159CD62200009CB9 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image+Creation.h"; path = "Image/Image+Creation.h"; sourceTree = "<group>"; };
@@ -427,6 +439,10 @@
 				0287331115B378BA0001BBC2 /* PrototypeRecordTableViewController.m */,
 				028732FC15B28FC80001BBC2 /* UIDoubleTableViewController.h */,
 				028732FD15B28FC80001BBC2 /* UIDoubleTableViewController.m */,
+				212DD13B15B468DC000203AB /* PrototypeFormationFolderTableViewController.h */,
+				212DD13C15B468DC000203AB /* PrototypeFormationFolderTableViewController.m */,
+				212DD13E15B46907000203AB /* PrototypeFormationTableViewController.h */,
+				212DD13F15B46907000203AB /* PrototypeFormationTableViewController.m */,
 			);
 			name = "View Controller Prototypes";
 			sourceTree = "<group>";
@@ -714,6 +730,10 @@
 				0287330E15B378190001BBC2 /* ExportFolderTableViewController.m */,
 				0287331615B37FA90001BBC2 /* ExportRecordTableViewController.h */,
 				0287331715B37FA90001BBC2 /* ExportRecordTableViewController.m */,
+				212DD13415B46512000203AB /* ExportFormationFolderTableViewController.h */,
+				212DD13515B46513000203AB /* ExportFormationFolderTableViewController.m */,
+				212DD13815B46575000203AB /* ExportFormationTableViewController.h */,
+				212DD13915B46576000203AB /* ExportFormationTableViewController.m */,
 			);
 			name = Export;
 			sourceTree = "<group>";
@@ -1224,6 +1244,10 @@
 				0287331215B378BA0001BBC2 /* PrototypeRecordTableViewController.m in Sources */,
 				0287331515B379FD0001BBC2 /* ExportDoubleTableViewController.m in Sources */,
 				0287331815B37FAA0001BBC2 /* ExportRecordTableViewController.m in Sources */,
+				212DD13615B46513000203AB /* ExportFormationFolderTableViewController.m in Sources */,
+				212DD13A15B46577000203AB /* ExportFormationTableViewController.m in Sources */,
+				212DD13D15B468DC000203AB /* PrototypeFormationFolderTableViewController.m in Sources */,
+				212DD14015B46907000203AB /* PrototypeFormationTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

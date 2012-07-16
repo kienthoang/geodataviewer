@@ -143,6 +143,18 @@
     [self.exportPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
+- (void)presentFormationExportPopover {
+    //Dismiss all visible popovers
+    [self dismissAllVisiblePopoversAnimated:NO];
+    
+    //Instantiate the record import popover
+    UINavigationController *formationExportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FORMATION_EXPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    self.exportPopover=[[UIPopoverController alloc] initWithContentViewController:formationExportTVC];
+    
+    //Present it
+    [self.exportPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     //If the given action sheet is the import/export action sheet
     if ([actionSheet.title isEqualToString:IMPORT_EXPORT_ACTION_SHEET_TITLE]) {
@@ -158,6 +170,9 @@
             //If user clicked export records
             else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Export Records"]) {
                 [self presentRecordExportPopover];
+            }
+            else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Export Formations"]) {
+                [self presentFormationExportPopover];
             }
         }
     }
