@@ -52,7 +52,7 @@
     self.exportRecordTableViewController.folder=folder;
     
     //Pass the selected records to the export record tvc
-    self.exportRecordTableViewController.selectedRecords=[self.selectedRecordsForFolders objectForKey:folder.folderName];
+    self.exportRecordTableViewController.selectedRecords=[self.selectedRecordsForFolders objectForKey:folder.folderName];    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
