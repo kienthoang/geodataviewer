@@ -456,4 +456,18 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     return values;
 }
+
+#pragma mark - Creation of CSV files
+
+-(void) createCSVFilesFromRecords:(NSArray *)records
+{
+    
+}
+
+
+-(void) createCSVFilesFromFormations:(NSArray *)formations 
+{
+
+}
+
 @end
