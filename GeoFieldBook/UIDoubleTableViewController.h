@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIDoubleTableViewControllerChildren.h"
 
 @interface UIDoubleTableViewController : UIViewController
 
-@property (nonatomic,strong) UITableViewController *masterTableViewController;
-@property (nonatomic,strong) UITableViewController *detailTableViewController;
+@property (nonatomic,strong) UITableViewController<UIDoubleTableViewControllerChildren> *masterTableViewController;
+@property (nonatomic,strong) UITableViewController<UIDoubleTableViewControllerChildren> *detailTableViewController;
 
 #define DoubleTableViewControllerMasterSegueIdentifier @"masterTableViewController"
 #define DoubleTableViewControllerDetailSegueIdentifier @"detailTableViewController"

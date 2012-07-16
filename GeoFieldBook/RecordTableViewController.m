@@ -155,7 +155,12 @@
 #pragma mark - Getters
 
 - (NSArray *)records {
-    return self.fetchedResultsController.fetchedObjects;
+    //Set up the fetched results controller to fetch records
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",self.folder.folderName];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
+    
+    return [self.database.managedObjectContext executeFetchRequest:request error:NULL];
 }
 
 #pragma mark - Record Creation/Update/Deletion
@@ -225,14 +230,14 @@
     //Update the record
     [record updateWithNewRecordInfo:recordInfo];
     
+    //Post a notification to indicate that the record database has changed
+    [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
+    
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
             //Highlight the modified record
             [self highlightRecord:record];
-            
-            //Post a notification to indicate that the record database has changed
-            [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
         }
     }];
 }
@@ -571,6 +576,9 @@
         //Change the folder of the record
         record.folder=folder;        
     }
+    
+    //Post a notification
+    [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
     
     //Reload the table
     [self.tableView reloadData];

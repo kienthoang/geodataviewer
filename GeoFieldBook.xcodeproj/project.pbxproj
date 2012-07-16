@@ -72,6 +72,7 @@
 		0287330F15B378190001BBC2 /* ExportFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287330E15B378190001BBC2 /* ExportFolderTableViewController.m */; };
 		0287331215B378BA0001BBC2 /* PrototypeRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287331115B378BA0001BBC2 /* PrototypeRecordTableViewController.m */; };
 		0287331515B379FD0001BBC2 /* ExportDoubleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287331415B379FD0001BBC2 /* ExportDoubleTableViewController.m */; };
+		0287331815B37FAA0001BBC2 /* ExportRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0287331715B37FA90001BBC2 /* ExportRecordTableViewController.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -285,6 +286,9 @@
 		0287331115B378BA0001BBC2 /* PrototypeRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeRecordTableViewController.m; sourceTree = "<group>"; };
 		0287331315B379FD0001BBC2 /* ExportDoubleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportDoubleTableViewController.h; sourceTree = "<group>"; };
 		0287331415B379FD0001BBC2 /* ExportDoubleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportDoubleTableViewController.m; sourceTree = "<group>"; };
+		0287331615B37FA90001BBC2 /* ExportRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportRecordTableViewController.h; sourceTree = "<group>"; };
+		0287331715B37FA90001BBC2 /* ExportRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportRecordTableViewController.m; sourceTree = "<group>"; };
+		0288944415B382400062E6DA /* UIDoubleTableViewControllerChildren.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIDoubleTableViewControllerChildren.h; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -708,6 +712,8 @@
 				0287331415B379FD0001BBC2 /* ExportDoubleTableViewController.m */,
 				0287330D15B378190001BBC2 /* ExportFolderTableViewController.h */,
 				0287330E15B378190001BBC2 /* ExportFolderTableViewController.m */,
+				0287331615B37FA90001BBC2 /* ExportRecordTableViewController.h */,
+				0287331715B37FA90001BBC2 /* ExportRecordTableViewController.m */,
 			);
 			name = Export;
 			sourceTree = "<group>";
@@ -842,6 +848,7 @@
 				0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */,
 				028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */,
 				028732F915B2805F0001BBC2 /* FolderSelectTableViewControllerDelegate.h */,
+				0288944415B382400062E6DA /* UIDoubleTableViewControllerChildren.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -1216,6 +1223,7 @@
 				0287330F15B378190001BBC2 /* ExportFolderTableViewController.m in Sources */,
 				0287331215B378BA0001BBC2 /* PrototypeRecordTableViewController.m in Sources */,
 				0287331515B379FD0001BBC2 /* ExportDoubleTableViewController.m in Sources */,
+				0287331815B37FAA0001BBC2 /* ExportRecordTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

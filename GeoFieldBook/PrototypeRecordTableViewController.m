@@ -37,12 +37,31 @@
 
 #pragma mark - Setters
 
+- (void)normalizeDatabase {
+    //If the managed document is closed, open it
+    if (self.database.documentState==UIDocumentStateClosed) {
+        [self.database openWithCompletionHandler:^(BOOL success){
+            //Set up the fetched result controller
+            [self setupFetchedResultsController];
+        }];
+    }
+    
+    //Else if the managed document is open, just use it
+    else if (self.database.documentState==UIDocumentStateNormal) {
+        //Set up the fetched result controller
+        [self setupFetchedResultsController];
+    }
+}
+
 - (void)setDatabase:(UIManagedDocument *)database {
     if (_database!=database) {
         _database=database;
         
         //Set up fetchedResultsController
-        [self setupFetchedResultsController];
+        if (self.folder) {
+            //Make sure the document is open and set up the fetched result controller
+            [self normalizeDatabase]; 
+        }
     }
 }
 
@@ -50,7 +69,8 @@
     _folder=folder;
     
     //Set up fetchedResultsController
-    [self setupFetchedResultsController];
+    if (self.folder)
+        [self setupFetchedResultsController];
 }
 
 #pragma mark - Getters
@@ -75,6 +95,22 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    if (!self.database) {
+        //Set up the database using the GeoDatabaseManager fetch method=====>the block will get called only the first time the database gets created
+        //success is YES if the database saving process succeeded or NO otherwise
+        self.database=[[GeoDatabaseManager standardDatabaseManager] fetchDatabaseFromDisk:self completion:^(BOOL success){
+            //May be show up an alert if not success?
+            if (!success) {
+                //Put up an alert
+                [self putUpDatabaseErrorAlertWithMessage:@"Failed to access the database. Please make sure the database is not corrupted."];
+            } 
+        }];
+    }
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];

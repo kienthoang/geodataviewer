@@ -49,35 +49,38 @@
 - (void)updateMapView {
     //Filter the records
     NSArray *records=[self.recordFilter filterRecordCollectionByRecordType:self.records];
-    
+     
     //Remove the old annotations
     if (self.mapView.annotations) {
+        NSMutableArray *removedAnnotations=[NSMutableArray arrayWithCapacity:self.mapView.annotations.count];
         for (id <MKAnnotation> annotation in self.mapView.annotations) {
             if (![annotation isKindOfClass:[MKUserLocation class]])
-                [self.mapView removeAnnotation:annotation];
+                [removedAnnotations addObject:annotation];
         }
+        
+        [self.mapView removeAnnotations:removedAnnotations.copy];
     }
     
     //Reset the saved annotations
     self.mapAnnotations=[NSArray array];
     
+    self.mapView.centerCoordinate=self.mapView.userLocation.coordinate;
+    
     //Set up the annotations for the map view
-    if ([records count]) {
+    if (records.count) {
         //Convert the array of records into annotations
-        NSMutableArray *annotations=[NSMutableArray arrayWithCapacity:records.count];
         for (Record *record in records)
-            [annotations addObject:[MKGeoRecordAnnotation annotationForRecord:record]];
-        
-        //Add new annotations
-        if ([annotations count])
-            [self.mapView addAnnotations:[annotations copy]];
-        
+            [self.mapView addAnnotation:[MKGeoRecordAnnotation annotationForRecord:record]];
+
         //Save the annotations
         self.mapAnnotations=self.mapView.annotations;
         
         //Set the location span of the map
-        self.mapView.region=[self regionFromLocations];
-    }
+        self.mapView.region=[self regionFromLocationsUserLocationIncluded:NO];
+        
+        CLLocationCoordinate2D center = [self.mapView centerCoordinate];
+        [self.mapView setCenterCoordinate:center];
+    }    
 }
 
 #pragma mark - Getters and Setters
@@ -169,6 +172,13 @@
     self.records=[self.mapDelegate recordsForMapViewController:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Update the map view
+    self.records=[self.mapDelegate recordsForMapViewController:self];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
@@ -240,25 +250,46 @@
     self.annotationCalloutPopover=annotationCalloutPopover;
 }
 
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views { 
+    //Drop-pin animation
+    for (MKAnnotationView *view in views) {
+        CGRect endFrame = view.frame;
+        
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y - 300.0, view.frame.size.width, view.frame.size.height);
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [view setFrame:endFrame];
+        [UIView commitAnimations];
+        
+    }
+}
+
+
 #pragma mark - Determine span of map view
 
-- (MKCoordinateRegion)regionFromLocations {
+- (MKCoordinateRegion)regionFromLocationsUserLocationIncluded:(BOOL)userLocationIncluded {
     // Get the upper and lower coordinates for the location span
     CLLocationCoordinate2D upper=[[self.mapAnnotations objectAtIndex:0] coordinate];
     CLLocationCoordinate2D lower=[[self.mapAnnotations objectAtIndex:0] coordinate];
     for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
-        if (![annotation isKindOfClass:[MKUserLocation class]]) {
-            if (annotation.coordinate.longitude>upper.longitude) upper.longitude=annotation.coordinate.longitude;
-            if (annotation.coordinate.latitude>upper.latitude) upper.latitude=annotation.coordinate.latitude;
-            if (annotation.coordinate.longitude<lower.longitude) lower.longitude=annotation.coordinate.longitude;
-            if (annotation.coordinate.latitude<lower.latitude) lower.latitude=annotation.coordinate.latitude;
+        if (userLocationIncluded || (!userLocationIncluded && ![annotation isKindOfClass:[MKUserLocation class]])) {
+            if (annotation.coordinate.longitude>upper.longitude) 
+                upper.longitude=annotation.coordinate.longitude;
+            if (annotation.coordinate.latitude>upper.latitude) 
+                upper.latitude=annotation.coordinate.latitude;
+            if (annotation.coordinate.longitude<lower.longitude) 
+                lower.longitude=annotation.coordinate.longitude;
+            if (annotation.coordinate.latitude<lower.latitude) 
+                lower.latitude=annotation.coordinate.latitude;
         }
     }
     
     // Set the spans for the location span
     MKCoordinateSpan locationSpan;
-    locationSpan.latitudeDelta=upper.latitude-lower.latitude;
-    locationSpan.longitudeDelta=upper.longitude-lower.longitude;
+    locationSpan.latitudeDelta=upper.latitude-lower.latitude+0.01;
+    locationSpan.longitudeDelta=upper.longitude-lower.longitude+0.01;
     
     // Determine the center of the location span
     CLLocationCoordinate2D locationCenter;

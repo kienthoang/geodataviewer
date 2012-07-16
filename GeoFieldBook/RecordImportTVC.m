@@ -199,29 +199,32 @@
     //Start importing in another thread
     dispatch_queue_t import_queue_t=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(import_queue_t, ^{
+        NSArray *selectedCSVFiles=weakSelf.selectedCSVFiles;
+        
         //Put up a spinner for the import button
-        __block UIActivityIndicatorView *spinner=nil;
         dispatch_async(dispatch_get_main_queue(), ^{
-            spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+            UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
             UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
             [spinner startAnimating];
-            weakSelf.navigationItem.rightBarButtonItem=spinnerBarButtonItem;
             
             //Save the spinner
             weakSelf.spinner=spinnerBarButtonItem;
             
             //Hide the import button and put the spinner there
-            NSMutableArray *toolbarItems=self.toolbarItems.mutableCopy;
+            NSMutableArray *toolbarItems=weakSelf.toolbarItems.mutableCopy;
             
-            int index=[toolbarItems indexOfObject:self.importButton];
-            [toolbarItems removeObject:self.importButton];
+            int index=[toolbarItems indexOfObject:weakSelf.importButton];
+            [toolbarItems removeObject:weakSelf.importButton];
             [toolbarItems insertObject:spinnerBarButtonItem atIndex:index];
-            self.toolbarItems=toolbarItems.copy;
-        });
+            weakSelf.toolbarItems=toolbarItems.copy;
+            
+            //Unset selected records
+            [weakSelf selectNone:nil];
+        });     
         
         //Pass the selected csv files to the engine
         weakSelf.engine.handler=weakSelf.conflictHandler;
-        [weakSelf.engine createRecordsFromCSVFiles:weakSelf.selectedCSVFiles];
+        [weakSelf.engine createRecordsFromCSVFiles:selectedCSVFiles];
     });
     dispatch_release(import_queue_t);
 }

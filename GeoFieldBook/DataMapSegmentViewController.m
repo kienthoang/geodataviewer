@@ -86,7 +86,7 @@
         [self swapToViewControllerAtSegmentIndex:0];
     
     //Put the record view controller into edit mode
-    RecordViewController *recordDetail=(RecordViewController *)self.topViewController;
+    RecordViewController *recordDetail=(RecordViewController *)self.detailSideViewController;
     [recordDetail setEditing:YES animated:YES];
     [recordDetail showKeyboard];
 }

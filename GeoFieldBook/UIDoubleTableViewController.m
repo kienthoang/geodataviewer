@@ -28,16 +28,23 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Custom segues
     if ([segue.identifier isEqualToString:DoubleTableViewControllerMasterSegueIdentifier]) {
-        //Add the master table view to the left side view
-        self.masterTableViewController=segue.destinationViewController;
-        UITableViewController *masterTableViewController=self.masterTableViewController;
-        [masterTableViewController willMoveToParentViewController:self];
-        masterTableViewController.tableView.frame=self.masterTableView.bounds;
-       [self.masterTableView addSubview:masterTableViewController.tableView];
-        [masterTableViewController didMoveToParentViewController:self];
+        if ([segue.destinationViewController conformsToProtocol:@protocol(UIDoubleTableViewControllerChildren)]) {
+            //Connect to the master tvc
+            self.masterTableViewController=segue.destinationViewController;
+            self.masterTableViewController.doubleTableViewController=self;
+            
+            //Add the master table view to the left side view
+            UITableViewController *masterTableViewController=self.masterTableViewController;
+            [masterTableViewController willMoveToParentViewController:self];
+            masterTableViewController.tableView.frame=self.masterTableView.bounds;
+            [self.masterTableView addSubview:masterTableViewController.tableView];
+            [masterTableViewController didMoveToParentViewController:self];
+        }
     }
     else if ([segue.identifier isEqualToString:DoubleTableViewControllerDetailSegueIdentifier]) {
+        //Connect to the detail tvc
         self.detailTableViewController=segue.destinationViewController;
+        self.detailTableViewController.doubleTableViewController=self;
         
         //Add the detail table view to the right side view
         UITableViewController *detailTableViewController=self.detailTableViewController;

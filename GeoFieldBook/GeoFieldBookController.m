@@ -19,7 +19,9 @@
 
 #import "RecordViewControllerDelegate.h"
 #import "DataMapSegmentControllerDelegate.h"
+
 #import "ImportTableViewControllerDelegate.h"
+#import "RecordImportTVC.h"
 
 #import "ModelGroupNotificationNames.h"
 
@@ -266,12 +268,9 @@
     if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
         [dataMapSegmentVC pushRecordViewController];
     
-    //Serve the newly created record (currently chosen record as well) to the record view controller
-    RecordTableViewController *recordTVC=[self recordTableViewController];
-    [dataMapSegmentVC updateRecordDetailViewWithRecord:recordTVC.chosenRecord];
-    
     //Switch to the data side
-    [self swapToSegmentIndex:0];
+    if (![dataMapSegmentVC.topViewController isKindOfClass:[RecordViewController class]])
+        [self swapToSegmentIndex:0];
     
     //Put the record view controller in editing mode
     [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
@@ -693,6 +692,11 @@
         weakSelf.importExportSpinner=spinner;
         weakSelf.importExportSpinnerBarButtonItem=spinnerBarButtonItem; 
     });
+    
+    if ([sender isKindOfClass:[RecordImportTVC class]]) {
+        UINavigationController *modelNav=(UINavigationController *)self.popoverViewController.contentViewController;
+        [modelNav popToRootViewControllerAnimated:NO];
+    }
 }
 
 - (void)putImportExportButtonBack {

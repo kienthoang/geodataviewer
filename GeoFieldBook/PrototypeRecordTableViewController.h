@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 
+#import "GeoDatabaseManager.h"
+
 #import "Folder.h"
 #import "Record.h"
 
