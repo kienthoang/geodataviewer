@@ -44,10 +44,12 @@
     
     //Put the table view into editing mode
     self.tableView.editing=YES;
+    self.tableView.allowsMultipleSelection=YES;
 }
 
-#pragma mark - UITableViewControllerDelegate Protocol methods
-
-
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
 
 @end

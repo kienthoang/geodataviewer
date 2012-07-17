@@ -35,7 +35,7 @@
     return _selectedFormationsForFolders;
 }
 
-- (NSArray *)selectedRecords {
+- (NSArray *)selectedFormations {
     if (!_selectedFormations)
         _selectedFormations=[NSArray array];
     
@@ -89,6 +89,11 @@
     }
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad {
@@ -96,6 +101,7 @@
     
     //Put the table view into editing mode
     self.tableView.editing=YES;
+    self.tableView.allowsMultipleSelectionDuringEditing=YES;
 }
 
 @end

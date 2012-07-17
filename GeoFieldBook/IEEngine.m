@@ -312,7 +312,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         [formationFolders addObject:newFormationFolder];
         
         //Keep track of the sort number (formations will be sorted by the order they are in the csv file)
-        int sortNumber=0;
+        int sortNumber=1;
         
         //for each token(formation) in such an array of line record(formation folder)
         for(NSString *formation in  record) {

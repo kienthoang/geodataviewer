@@ -7,8 +7,6 @@
 //
 
 #import "PrototypeFormationTableViewController.h"
-#import "Formation.h"
-//#import "Image.h"
 
 @interface PrototypeFormationTableViewController ()
 
@@ -25,7 +23,7 @@
     //Set up the fetched results controller to fetch records
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
     request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.folder.folderName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationFolder.folderName" ascending:YES]];
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
@@ -122,14 +120,9 @@
     
     // Configure the cell...
     Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];  
-    
     cell.textLabel.text=formation.formationName;
-    //cell.name.text=[NSString stringWithFormat:@"%@", formation.name];
     
     return cell;
 }
-
-#pragma mark - Table View Delegate
-//
 
 @end

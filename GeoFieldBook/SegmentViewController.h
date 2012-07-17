@@ -17,7 +17,9 @@
 @property (nonatomic,strong) NSArray *viewControllers;
 @property (nonatomic,readonly) UIViewController *topViewController;
 
-typedef enum TransitionAnimationOption {TransitionAnimationPushLeft,TransitionAnimationPushRight,TransitionAnimationFlipLeft,TransitionAnimationFlipRight} TransionAnimationOption;
+typedef enum TransitionAnimationOption {TransitionAnimationPushLeft,TransitionAnimationPushRight,TransitionAnimationFlipLeft,TransitionAnimationFlipRight,TransitionAnimationFold,TransitionAnimationUnfold} TransionAnimationOption;
+
+@property (nonatomic) TransionAnimationOption animationOption;
 
 - (void)segmentController:(UISegmentedControl *)segmentController indexDidChangeTo:(int)newIndex;
 - (void)swapToViewControllerAtSegmentIndex:(int)segmentIndex;

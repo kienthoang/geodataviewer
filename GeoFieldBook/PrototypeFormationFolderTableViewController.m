@@ -32,7 +32,7 @@
 //Set up the FetchedResultsController to fetch folder entities from the database
 - (void)setupFetchedResultsController {
     //Setup its request
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
     
     //Create the fetchedResultsController
