@@ -120,7 +120,6 @@
     
     // Configure the cell...
     Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];  
-    
     cell.textLabel.text=formation.formationName;
     
     return cell;

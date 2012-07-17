@@ -44,8 +44,4 @@
     self.tableView.editing=YES;
 }
 
-#pragma mark - UITableViewControllerDelegate Protocol methods
-
-
-
 @end
