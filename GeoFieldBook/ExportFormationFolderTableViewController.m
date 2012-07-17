@@ -35,7 +35,7 @@
     return _selectedFormationsForFolders;
 }
 
-- (NSArray *)selectedRecords {
+- (NSArray *)selectedFormations {
     if (!_selectedFormations)
         _selectedFormations=[NSArray array];
     

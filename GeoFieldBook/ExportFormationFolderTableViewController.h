@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "PrototypeFolderTableViewController.h"
+#import "PrototypeFormationFolderTableViewController.h"
 #import "UIDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
-@interface ExportFormationFolderTableViewController : PrototypeFolderTableViewController <UIDoubleTableViewControllerChildren>
+@interface ExportFormationFolderTableViewController : PrototypeFormationFolderTableViewController <UIDoubleTableViewControllerChildren>
 
 @property (nonatomic,strong) NSArray *selectedFormations;
 

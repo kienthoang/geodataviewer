@@ -171,6 +171,8 @@
             else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Export Records"]) {
                 [self presentRecordExportPopover];
             }
+            
+            //If user clicked export formations
             else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Export Formations"]) {
                 [self presentFormationExportPopover];
             }
