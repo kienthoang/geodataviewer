@@ -456,4 +456,160 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     return values;
 }
+
+#pragma mark - Creation of CSV files
+
+-(void) createCSVFilesFromRecords:(NSArray *)records
+{
+    NSMutableSet *folders = [[NSMutableSet alloc] init];
+    //get the names of the folders from the array of records so you could create them
+    for(Record *record in records) {
+        [folders addObject:record.folder];
+    }
+        
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSArray *urlsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSString *documentsDirectory = [[urlsArray objectAtIndex:0] path];
+    
+    //create an dictionary of filehandlers. Key - folder name, Value - FileHandler for that folder
+    NSMutableDictionary *fileHandlers = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *mediaDirectories = [[NSMutableDictionary alloc] init];
+    
+    //for each project name, create a project folder in the documents directory with the same name. if the folder already exists, empty it. also create a media folder with the same name inside the directory
+    for(NSString *newFolder in [folders allObjects]) {
+        //first create the paths
+        NSString *dataDirectory = [documentsDirectory stringByAppendingFormat:@"/%@",newFolder];
+        NSString *mediaDirectory = [dataDirectory stringByAppendingString:@"/media"];
+        [mediaDirectories setObject:mediaDirectory forKey:newFolder]; 
+        NSString *dataFile = [dataDirectory stringByAppendingFormat:@"%@.csv", newFolder];
+        NSError *error;
+        //then create the directories...
+        //create the data directory if not there already
+        if (![[NSFileManager defaultManager] fileExistsAtPath:dataDirectory]){
+            [[NSFileManager defaultManager] createDirectoryAtPath:dataDirectory withIntermediateDirectories:NO attributes:nil error:&error]; 
+        }else {
+            //If the folder already, delete it and recreate it
+            [[NSFileManager defaultManager] removeItemAtPath:dataDirectory error:&error];
+            [[NSFileManager defaultManager] createDirectoryAtPath:dataDirectory withIntermediateDirectories:NO attributes:nil error:&error];             
+        }
+        //Create the media directory
+        [[NSFileManager defaultManager] createDirectoryAtPath:mediaDirectory withIntermediateDirectories:NO attributes:nil error:&error];
+        
+        //create the file if it does not exist
+        if(![[NSFileManager defaultManager] fileExistsAtPath:dataFile]){
+            NSLog(@"data file was not found, creating file");
+            [[NSFileManager defaultManager] createFileAtPath: dataFile contents:nil attributes:nil];
+        }
+        NSFileHandle *handler = [NSFileHandle fileHandleForWritingAtPath:dataFile];
+        [fileHandlers setObject:handler forKey:newFolder];
+        
+        //clear all contents of the file
+        [handler truncateFileAtOffset:0]; 
+        
+        //write the column headings to the csv
+        NSString *titles = [NSString stringWithFormat:@"Name, Type, Longitude, Latitude, Date,Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \r\n"];
+        [handler writeData:[titles dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    //now call the method that writes onto the array of records into their respective csv files
+    [self writeRecords:(NSArray *) records withFileHandlers:(NSMutableDictionary *) fileHandlers andSaveImagesInPath:(NSMutableDictionary *) mediaDirectories];
+}
+
+-(void) writeRecords:(NSArray *) records withFileHandlers:(NSMutableDictionary *) fileHandlers andSaveImagesInPath:(NSMutableDictionary *) mediaDirectories 
+{
+    NSFileHandle *fileHandler;
+    NSString *mediaDir;
+    NSString *recordData;
+    
+    for(Record *record in records) {
+        fileHandler = [fileHandlers objectForKey:record.folder];
+        mediaDir = [fileHandlers objectForKey:record.folder];
+        //now write the data contents...
+        NSString *name, *type, *longitude, *latitude, *date, *time, *strike, *dip, *dipDir, *observation, *formation, *lowerFormation, *upperFormation, *trend, *plunge, *imageFileName;
+        name=type=longitude=latitude=date=time=strike=dip=dipDir=observation=formation=lowerFormation=upperFormation=plunge=trend=imageFileName=@"";
+        NSString *imageFilePath;
+        //get all the common fields
+        name = record.name;
+        observation = record.fieldOservations;
+        longitude = record.longitude;
+        latitude = record.latitude;
+        dip = [NSString stringWithFormat:@"%i", record.dip];
+        dipDir = record.dipDirection;
+        strike = [NSString stringWithFormat:@"%i", record.strike];
+        
+        //get the date and time
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
+        [dateFormatter setDateFormat:@"MM/dd/yyyy"];        
+        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
+        [timeFormatter setDateFormat:@"HH:mm:ss"];
+        
+        date = [dateFormatter stringFromDate:record.date];
+        time = [timeFormatter stringFromDate:record.date];
+        
+        //now get the type, and type-specific fields        
+        if([record isKindOfClass:[Bedding class]]) {
+            type = @"Bedding";
+            formation = [[(Bedding *)record  formation] formationName];
+        }else if([record isKindOfClass:[Contact class]]) {
+            type = @"Contact";
+            lowerFormation = [[(Contact*)record lowerFormation] formationName];
+            upperFormation = [[(Contact*)record upperFormation] formationName];
+        }else if([record isKindOfClass:[JointSet class]]) {
+            type = @"Joint Set";
+            formation = [[(JointSet *)record formation] formationName];
+        }else if([record isKindOfClass:[Fault class]]) {
+            type = @"Fault";
+            formation = [[(Fault *)record formation] formationName];
+            plunge = [(Fault *)record plunge];
+            trend = [(Fault *)record trend];
+        }else if([record isKindOfClass:[Other class]]) {
+            type = @"Other";
+        }       
+        
+        //save the image file        
+        if(record.image) {
+            imageFileName = [NSString stringWithFormat:@"%@_%@.jpeg", record.folder, record.name];
+            imageFilePath = [NSString stringWithFormat:@"%@/%@",imageFileName];
+            if(![[NSFileManager defaultManager] fileExistsAtPath:imageFilePath]){
+                NSLog(@"image file does not exist, creating it");   
+                [[NSFileManager defaultManager] createFileAtPath: imageFilePath contents:nil attributes:nil];
+                
+                NSFileHandle *mediaFileHandler = [NSFileHandle fileHandleForWritingAtPath:imageFilePath];
+                NSData *image=UIImageJPEGRepresentation([[UIImage alloc] initWithData:record.image.imageData], 1.0);
+                [mediaFileHandler writeData:image];
+                [mediaFileHandler closeFile];
+            }
+        }
+        
+        //finally write the string tokens to the csv file
+        recordData = [NSString stringWithFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\r\n",
+                      name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
+        [fileHandler writeData:[recordData dataUsingEncoding:NSUTF8StringEncoding]];        
+    }
+    //close all the filehandlers
+    for(NSFileHandle *handler in [fileHandlers allValues]) {
+        [handler closeFile];
+    }
+}
+
+-(void) createCSVFilesFromFormations:(NSArray *)formations 
+{
+    NSMutableDictionary *folders = [[NSMutableDictionary alloc] init]; //a multiset type data structure. Key-foldername; Value-array of formations for that forlder
+    for(Formation *formation in formations) {
+        //if the folder name has already been encountered, add to it
+        if([[folders allKeys] containsObject:formation.formationFolder.folderName]) { 
+            NSMutableArray *formationArray = [folders objectForKey:formation.formationFolder.folderName];
+            [folders removeObjectForKey:formation.formationFolder.folderName];
+            [formationArray addObject:formation.formationName];
+            [folders setValue:formationArray forKey:formation.formationFolder.folderName];
+        }else {
+            //otherwise create a new array and add to the dictionary with the foldername as the key to that array
+            NSMutableArray *formationArray = [[NSMutableArray alloc] initWithObjects:formation.formationName, nil];
+            [folders setValue:formationArray forKey:formation.formationFolder.folderName];
+        }
+    }
+    
+    
+}
+//-(void)writeFormations:(NSDictionary *)formations
+
 @end
