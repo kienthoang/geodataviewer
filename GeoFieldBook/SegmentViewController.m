@@ -7,6 +7,7 @@
 //
 
 #import "SegmentViewController.h"
+#import "MPFoldTransition.h"
 
 @interface SegmentViewController()
 
@@ -19,6 +20,8 @@
 @synthesize contentView=_contentView;
 @synthesize viewControllers=_viewControllers;
 @synthesize currentViewController=_currentViewController;
+
+@synthesize animationOption=_animationOption;
 
 #pragma mark - Getters and Setters
 
@@ -40,37 +43,52 @@
     [self addChildViewController:viewController];
     [viewController willMoveToParentViewController:self];
     
-    UIViewAnimationOptions option=(animationOption!=TransitionAnimationPushLeft && animationOption!=TransitionAnimationPushRight) ? 1:0;
+    //Adjust the frame of the specified view controller's view
+    viewController.view.frame=self.contentView.bounds;
     
     if (self.currentViewController) {
-        if (option) 
-            option=animationOption==TransitionAnimationFlipLeft ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight;
-        else if (self.currentViewController) {
-            option=UIViewAnimationOptionCurveLinear;
-            CATransition *transition=[CATransition animation];
-            transition.type=kCATransitionPush;
-            transition.subtype=animationOption==TransitionAnimationPushLeft ? kCATransitionFromLeft : kCATransitionFromRight;
-            transition.startProgress=0.2;
-            [self.contentView.layer addAnimation:transition forKey:@"push-transition"];
-        }
-        
-        [self transitionFromViewController:self.currentViewController toViewController:viewController duration:0.5 options:option animations:^{
-            //Adjust the frame of the specified view controller's view
-            viewController.view.frame=self.contentView.bounds;
-            
-            //Remove the view of the current view controller from the view hierachy
-            [self.currentViewController.view removeFromSuperview];
-            
-            //Add the view of the new vc to the hierachy and set it as the current view controller
-            [self.contentView addSubview:viewController.view];
-            
-        } completion:^(BOOL completed){
-            if (completed) {
+        if (animationOption==TransitionAnimationFold || animationOption==TransitionAnimationUnfold) {
+            MPFoldStyle style=animationOption==TransitionAnimationFold ? MPFoldStyleHorizontal : MPFoldStyleUnfold;
+            [MPFoldTransition transitionFromViewController:self.currentViewController toViewController:viewController duration:0.4 style:style completion:^(BOOL finished){
+                //Remove the view of the current view controller from the view hierachy
+                [self.currentViewController.view removeFromSuperview];
+                
+                //Add the view of the new vc to the hierachy and set it as the current view controller
+                [self.contentView addSubview:viewController.view];
+                
                 //set the new view as the current view controller
                 [viewController didMoveToParentViewController:self];
                 self.currentViewController=viewController;
+            }];
+        }
+        else {
+            UIViewAnimationOptions option=(animationOption!=TransitionAnimationPushLeft && animationOption!=TransitionAnimationPushRight) ? 1:0;
+            if (option) 
+                option=animationOption==TransitionAnimationFlipLeft ? UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight;
+            else if (self.currentViewController) {
+                option=UIViewAnimationOptionCurveLinear;
+                CATransition *transition=[CATransition animation];
+                transition.type=kCATransitionPush;
+                transition.subtype=animationOption==TransitionAnimationPushLeft ? kCATransitionFromLeft : kCATransitionFromRight;
+                transition.startProgress=0.2;
+                [self.contentView.layer addAnimation:transition forKey:@"push-transition"];
             }
-        }];
+            
+            [self transitionFromViewController:self.currentViewController toViewController:viewController duration:0.5 options:option animations:^{                
+                //Remove the view of the current view controller from the view hierachy
+                [self.currentViewController.view removeFromSuperview];
+                
+            } completion:^(BOOL completed){
+                if (completed) {
+                    //Add the view of the new vc to the hierachy and set it as the current view controller
+                    [self.contentView addSubview:viewController.view];
+                    
+                    //set the new view as the current view controller
+                    [viewController didMoveToParentViewController:self];
+                    self.currentViewController=viewController;
+                }
+            }];
+        }
     } 
     else {
         //Some transition animation
@@ -101,8 +119,12 @@
     //Get the view controller at the new segment index
     UIViewController *viewController=[self.viewControllers objectAtIndex:segmentIndex];
     
-    //Show the view of the new view controller
-    TransionAnimationOption animationOption=segmentIndex ? TransitionAnimationPushRight : TransitionAnimationPushLeft;
+    //Show the view of the new view controller with custom animation option
+    TransionAnimationOption animationOption;
+    if (!self.animationOption)
+        animationOption=segmentIndex ? TransitionAnimationPushRight : TransitionAnimationPushLeft;
+    else
+        animationOption=self.animationOption;
     [self showViewController:viewController withTransitionAnimationOption:animationOption];
 }
 
