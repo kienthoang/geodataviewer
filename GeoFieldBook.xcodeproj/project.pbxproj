@@ -76,11 +76,6 @@
 		028894C815B4A83F0062E6DA /* MPFoldTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894B715B4A83F0062E6DA /* MPFoldTransition.m */; };
 		028894C915B4A83F0062E6DA /* MPTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894B915B4A83F0062E6DA /* MPTransition.m */; };
 		028894D115B4AEF90062E6DA /* MPAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894D015B4AEF80062E6DA /* MPAnimation.m */; };
-		028894DD15B4B2570062E6DA /* MNColorSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894D815B4B2570062E6DA /* MNColorSelectionViewController.m */; };
-		028894DE15B4B2570062E6DA /* MNColorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894DA15B4B2570062E6DA /* MNColorTableViewCell.m */; };
-		028894DF15B4B2570062E6DA /* MNColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894DC15B4B2570062E6DA /* MNColorView.m */; };
-		028894E515B4B4C20062E6DA /* MNTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894E415B4B4C20062E6DA /* MNTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		028894E915B4B4D20062E6DA /* MNMobileFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894E815B4B4D20062E6DA /* MNMobileFunctions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -309,17 +304,6 @@
 		028894BA15B4A83F0062E6DA /* MPTransitionEnumerations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPTransitionEnumerations.h; sourceTree = "<group>"; };
 		028894CF15B4AEF80062E6DA /* MPAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPAnimation.h; sourceTree = "<group>"; };
 		028894D015B4AEF80062E6DA /* MPAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPAnimation.m; sourceTree = "<group>"; };
-		028894D715B4B2570062E6DA /* MNColorSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNColorSelectionViewController.h; sourceTree = "<group>"; };
-		028894D815B4B2570062E6DA /* MNColorSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNColorSelectionViewController.m; sourceTree = "<group>"; };
-		028894D915B4B2570062E6DA /* MNColorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNColorTableViewCell.h; sourceTree = "<group>"; };
-		028894DA15B4B2570062E6DA /* MNColorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNColorTableViewCell.m; sourceTree = "<group>"; };
-		028894DB15B4B2570062E6DA /* MNColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNColorView.h; sourceTree = "<group>"; };
-		028894DC15B4B2570062E6DA /* MNColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNColorView.m; sourceTree = "<group>"; };
-		028894E315B4B4C20062E6DA /* MNTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNTableViewCell.h; sourceTree = "<group>"; };
-		028894E415B4B4C20062E6DA /* MNTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNTableViewCell.m; sourceTree = "<group>"; };
-		028894E615B4B4D20062E6DA /* MNGlobalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNGlobalHeader.h; sourceTree = "<group>"; };
-		028894E715B4B4D20062E6DA /* MNMobileFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMobileFunctions.h; sourceTree = "<group>"; };
-		028894E815B4B4D20062E6DA /* MNMobileFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMobileFunctions.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -704,7 +688,6 @@
 		027406B515AE6F3F00AD9EDC /* Formation Group */ = {
 			isa = PBXGroup;
 			children = (
-				028894D615B4B2490062E6DA /* Color Selector */,
 				023858651599233F00A0DB98 /* FormationFolderTableViewController.h */,
 				023858661599233F00A0DB98 /* FormationFolderTableViewController.m */,
 				0238586815994DF100A0DB98 /* FormationFolderViewController.h */,
@@ -787,24 +770,6 @@
 				028894BA15B4A83F0062E6DA /* MPTransitionEnumerations.h */,
 			);
 			path = MPFoldTransition;
-			sourceTree = "<group>";
-		};
-		028894D615B4B2490062E6DA /* Color Selector */ = {
-			isa = PBXGroup;
-			children = (
-				028894D715B4B2570062E6DA /* MNColorSelectionViewController.h */,
-				028894D815B4B2570062E6DA /* MNColorSelectionViewController.m */,
-				028894D915B4B2570062E6DA /* MNColorTableViewCell.h */,
-				028894DA15B4B2570062E6DA /* MNColorTableViewCell.m */,
-				028894DB15B4B2570062E6DA /* MNColorView.h */,
-				028894DC15B4B2570062E6DA /* MNColorView.m */,
-				028894E315B4B4C20062E6DA /* MNTableViewCell.h */,
-				028894E415B4B4C20062E6DA /* MNTableViewCell.m */,
-				028894E615B4B4D20062E6DA /* MNGlobalHeader.h */,
-				028894E715B4B4D20062E6DA /* MNMobileFunctions.h */,
-				028894E815B4B4D20062E6DA /* MNMobileFunctions.m */,
-			);
-			name = "Color Selector";
 			sourceTree = "<group>";
 		};
 		0294E086159361060025219F = {
@@ -1317,8 +1282,6 @@
 				028894C815B4A83F0062E6DA /* MPFoldTransition.m in Sources */,
 				028894C915B4A83F0062E6DA /* MPTransition.m in Sources */,
 				028894D115B4AEF90062E6DA /* MPAnimation.m in Sources */,
-				028894E515B4B4C20062E6DA /* MNTableViewCell.m in Sources */,
-				028894E915B4B4D20062E6DA /* MNMobileFunctions.m in Sources */,
 				212DD13615B46513000203AB /* ExportFormationFolderTableViewController.m in Sources */,
 				212DD13A15B46577000203AB /* ExportFormationTableViewController.m in Sources */,
 				212DD13D15B468DC000203AB /* PrototypeFormationFolderTableViewController.m in Sources */,
@@ -1345,9 +1308,6 @@
 				02F86EED15AF7021000A84D2 /* TransientOther.m in Sources */,
 				02F86EF115AFA9CF000A84D2 /* Record+DipDirectionValues.m in Sources */,
 				02F86EF515AFCDD8000A84D2 /* ValidationMessageBoard.m in Sources */,
-				028894DD15B4B2570062E6DA /* MNColorSelectionViewController.m in Sources */,
-				028894DE15B4B2570062E6DA /* MNColorTableViewCell.m in Sources */,
-				028894DF15B4B2570062E6DA /* MNColorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
