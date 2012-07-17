@@ -51,16 +51,20 @@
     _transientRecords=transientRecords;
         
     //Post a notification
-    if (!self.transientRecords.count)
+    if (!self.transientRecords.count) {
         [self postNotificationWithName:GeoNotificationConflictHandlerImportingDidEnd withUserInfo:[NSDictionary dictionary]];
+        NSLog(@"Done!");
+    }
 }
 
 - (void)setTransientFormations:(NSArray *)transientFormations {
     _transientFormations=transientFormations;
     
     //Post a notification
-    if (!self.transientFormations.count)
+    if (!self.transientFormations.count) {
         [self postNotificationWithName:GeoNotificationConflictHandlerImportingDidEnd withUserInfo:[NSDictionary dictionary]];
+        
+    }
 }
 
 #pragma mark - Process Transient Data
@@ -70,7 +74,7 @@
        withValidationMessageLog:(NSArray *)validationLog
 {
     //If the given array of transient records is not nil (i.e. no validation errors happened), process them
-    if (records) {
+    if (records.count) {
         //Iterate through the given folders and check if there is any folder name duplicate
         NSMutableArray *unprocessedFolders=[folders mutableCopy];
         NSMutableArray *processedFolders=[NSMutableArray array];

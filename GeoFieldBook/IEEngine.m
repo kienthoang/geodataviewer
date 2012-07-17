@@ -225,7 +225,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     for(NSArray *lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
         
         if(lineArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) { //not enough/more fields in the record
-            //NSLog(@"Corrupted record ignored: %@",lineArray);
+            [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
         }
         
         else {
@@ -278,7 +278,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //If there is any error message, pass nil to the handler as well as the error log
     if (self.validationMessageBoard.errorCount) {
         [self.handler processTransientRecords:nil 
-                                   andFolders:self.folders 
+                                   andFolders:nil
                      withValidationMessageLog:self.validationMessageBoard.allMessages];
         
         //Reset the validation message board
