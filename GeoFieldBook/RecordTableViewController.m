@@ -513,6 +513,22 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark - Table View Data Source
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell=[super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    //Select cell if its record is in the list of selected records
+    Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    if ([self.selectedRecords containsObject:record]) {
+        [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+    
+    return cell;
+}
+
 #pragma mark - Table View Delegate
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
