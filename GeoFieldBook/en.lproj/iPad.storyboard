@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Ipy-TH-jYd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Ipy-TH-jYd">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -200,7 +200,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="250" height="275"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7417" y="4983"/>
+            <point key="canvasLocation" x="-7369" y="5599"/>
         </scene>
         <!--Formation Folder Table View Controller - Formation Folders-->
         <scene sceneID="56r-Yf-LiQ">
@@ -1126,7 +1126,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-7409" y="6503"/>
+            <point key="canvasLocation" x="-7361" y="6575"/>
         </scene>
         <!--Strike Picker View Controller-->
         <scene sceneID="ovW-L9-di4">
@@ -1675,6 +1675,21 @@
             </objects>
             <point key="canvasLocation" x="-6199" y="-4162"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UnK-e0-DKH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T0f-MW-ea4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="Formation Export TVC" definesPresentationContext="YES" id="1k1-Ge-13a" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="m0x-5Y-m1e">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="N1Y-Pe-ENT" kind="relationship" relationship="rootViewController" id="ASx-3N-fxH"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-11237" y="3570"/>
+        </scene>
         <!--Initial Detail View Controller-->
         <scene sceneID="6R2-xh-iRe">
             <objects>
@@ -1705,7 +1720,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-9287" y="4271"/>
+            <point key="canvasLocation" x="-9495" y="4735"/>
         </scene>
         <!--Record Map View Controller-->
         <scene sceneID="FuB-nF-Ci1">
@@ -1746,7 +1761,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-9544" y="5247"/>
+            <point key="canvasLocation" x="-9392" y="5919"/>
         </scene>
         <!--Geo Field Book Controller-->
         <scene sceneID="Mo4-bZ-Lyn">
@@ -1814,10 +1829,96 @@
                         <segue destination="TMV-ag-Ybd" kind="custom" identifier="Import Record Popover" customClass="GeoFieldBookControllerSegue" id="VAd-Mc-Naw"/>
                         <segue destination="9ut-5g-xp2" kind="custom" identifier="Import Formation Popover" customClass="GeoFieldBookControllerSegue" id="Bu7-VF-gJl"/>
                         <segue destination="Kci-F7-0rk" kind="custom" identifier="Export Record Popover" customClass="GeoFieldBookControllerSegue" id="Wci-b1-la7"/>
+                        <segue destination="1k1-Ge-13a" kind="custom" identifier="Export Formations Popover" customClass="GeoFieldBookControllerSegue" id="neP-6c-y5n"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-12472" y="-1281"/>
+        </scene>
+        <!--Export Formation Folder Table View Controller-->
+        <scene sceneID="dFx-Es-6c9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Px7-Y9-hL4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="cZu-9R-oqH" customClass="ExportFormationFolderTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2mP-az-IUY">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" editingAccessoryType="detailDisclosureButton" textLabel="x9y-g4-JHA" detailTextLabel="EKt-D3-eB8" style="IBUITableViewCellStyleSubtitle" id="pnb-kb-j9x">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x9y-g4-JHA">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EKt-D3-eB8">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cZu-9R-oqH" id="oUK-Zz-YLF"/>
+                            <outlet property="delegate" destination="cZu-9R-oqH" id="Gkp-jv-gOq"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-8404" y="3258"/>
+        </scene>
+        <!--Export Formation Table View Controller-->
+        <scene sceneID="ulk-iP-JCo">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wAz-AY-zd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="2Bj-Pv-dtZ" customClass="ExportFormationTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zcJ-9F-VRZ">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="dA4-xg-Zeu" style="IBUITableViewCellStyleDefault" id="E8V-gu-FXK">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dA4-xg-Zeu">
+                                            <rect key="frame" x="10" y="0.0" width="1004" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2Bj-Pv-dtZ" id="MaL-OG-I3Z"/>
+                            <outlet property="delegate" destination="2Bj-Pv-dtZ" id="43p-EL-02S"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-8318" y="4274"/>
         </scene>
         <!--Data Map Segment View Controller-->
         <scene sceneID="zn7-To-boj">
@@ -1847,7 +1948,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-11289" y="4871"/>
+            <point key="canvasLocation" x="-11569" y="5711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xz9-7j-2ys">
@@ -2243,6 +2344,46 @@
             </objects>
             <point key="canvasLocation" x="-7947" y="-3139"/>
         </scene>
+        <!--Export Double Table View Controller-->
+        <scene sceneID="H2o-Yr-hpn">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J1h-aQ-jm5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="N1Y-Pe-ENT" customClass="ExportDoubleTableViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OyJ-W1-iYd">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="6J5-Qh-bo1">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="704"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="BJj-p4-MXj">
+                                <rect key="frame" x="373" y="0.0" width="651" height="704"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="1x8-Os-ZOr">
+                                <rect key="frame" x="373" y="0.0" width="1" height="704"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xfV-1J-fmm"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="800" height="500"/>
+                    <connections>
+                        <outlet property="detailTableView" destination="BJj-p4-MXj" id="Wih-Hg-Ld7"/>
+                        <outlet property="masterTableView" destination="6J5-Qh-bo1" id="hkL-sq-z76"/>
+                        <segue destination="2Bj-Pv-dtZ" kind="custom" identifier="detailTableViewController" customClass="DoubleTableViewControllerSegue" id="osF-gH-OC3"/>
+                        <segue destination="cZu-9R-oqH" kind="custom" identifier="masterTableViewController" customClass="DoubleTableViewControllerSegue" id="y0a-aW-w1i"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-9883" y="3565"/>
+        </scene>
     </scenes>
     <resources>
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
@@ -2303,6 +2444,12 @@
         <class className="ExportFolderTableViewController" superclassName="PrototypeFolderTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportFolderTableViewController.h"/>
         </class>
+        <class className="ExportFormationFolderTableViewController" superclassName="PrototypeFormationFolderTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportFormationFolderTableViewController.h"/>
+        </class>
+        <class className="ExportFormationTableViewController" superclassName="PrototypeFormationTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportFormationTableViewController.h"/>
+        </class>
         <class className="ExportRecordTableViewController" superclassName="PrototypeRecordTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportRecordTableViewController.h"/>
         </class>
@@ -2355,6 +2502,12 @@
                 <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FormationViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="GeoFieldBookController" superclassName="UIViewController">
@@ -2427,6 +2580,12 @@
         </class>
         <class className="PrototypeFolderTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeFolderTableViewController.h"/>
+        </class>
+        <class className="PrototypeFormationFolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeFormationFolderTableViewController.h"/>
+        </class>
+        <class className="PrototypeFormationTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeFormationTableViewController.h"/>
         </class>
         <class className="PrototypeRecordTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeRecordTableViewController.h"/>
