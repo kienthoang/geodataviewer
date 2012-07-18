@@ -868,6 +868,14 @@
     //Clear the color of the field observation text area
     self.fieldObservationTextArea.backgroundColor=[UIColor clearColor];
     
+    //Show all the textfields except for the name textfield
+    [self.textFields makeObjectsPerformSelector:@selector(setHidden:) withObject:nil];
+    
+    //Hide the strike, dip, and dip direction, field observation labels
+    NSSet *showedLabels=[NSSet setWithObjects:self.strikeLabel,self.dipLabel,self.dipDirectionLabel,self.formationLabel, nil];
+    for (UILabel *label in showedLabels)
+        label.hidden=NO;
+    
     //Hide the formation, trend, plunge. lower, upper formations textfields and will put them up again if the record type requires them (WHITELISTING)
     NSSet *hiddenFields=[NSSet setWithObjects:self.trendTextField,self.trendLabel,self.plungeLabel,self.plungeTextField,self.formationLabel,self.formationTextField,self.lowerFormationLabel,self.lowerFormationTextField,self.upperFormationLabel,self.upperFormationTextField, nil];
     [hiddenFields makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES]];
@@ -891,6 +899,7 @@
 
 - (void)formSetupForBeddingType {
     Bedding *bedding=(Bedding *)self.record;
+    NSLog(@"Bedding: %@",bedding);
     
     //Show the formation label and formation textfield set the textfield's value
     self.formationLabel.hidden=NO;
@@ -941,9 +950,9 @@
     self.recordNameTextField.hidden=NO;
     
     //Hide the strike, dip, and dip direction, field observation labels
-    NSSet *hiddenFields=[NSSet setWithObjects:self.strikeLabel,self.dipLabel,self.dipDirectionLabel,self.formationLabel, nil];
-    for (UITextField *textField in hiddenFields)
-        textField.hidden=YES;
+    NSSet *showedLabels=[NSSet setWithObjects:self.strikeLabel,self.dipLabel,self.dipDirectionLabel,self.formationLabel, nil];
+    for (UILabel *label in showedLabels)
+        label.hidden=YES;
 }
 
 @end

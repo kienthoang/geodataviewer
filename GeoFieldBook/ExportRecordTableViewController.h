@@ -10,8 +10,13 @@
 #import "UIDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
+#import "ExportRecordTableViewControllerDelegate.h"
+
 @interface ExportRecordTableViewController : PrototypeRecordTableViewController <UIDoubleTableViewControllerChildren>
 
 @property (nonatomic,strong) NSSet *selectedRecords;
+@property (nonatomic,weak) id <ExportRecordTableViewControllerDelegate> delegate;
+
+- (void)updateSelectedRecordsWith:(NSSet *)records;
 
 @end

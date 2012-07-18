@@ -20,7 +20,6 @@
 
 @synthesize doubleTableViewController=_doubleTableViewController;
 @synthesize selectedRecordsForFolders=_selectedRecordsForFolders;
-@synthesize selectedRecords=_selectedRecords;
 
 #pragma mark - Getters and Setters
 
@@ -36,10 +35,12 @@
 }
 
 - (NSArray *)selectedRecords {
-    if (!_selectedRecords)
-        _selectedRecords=[NSArray array];
+    //Return all the selected records
+    NSMutableArray *selectedRecords=[NSMutableArray array];
+    for (NSSet *records in self.selectedRecordsForFolders.allValues)
+        [selectedRecords addObjectsFromArray:records.allObjects];
     
-    return _selectedRecords;
+    return selectedRecords.copy;
 }
 
 #pragma mark - UITableViewDelegate Protocol methods
@@ -52,7 +53,7 @@
     self.exportRecordTableViewController.folder=folder;
     
     //Pass the selected records to the export record tvc
-    self.exportRecordTableViewController.selectedRecords=[self.selectedRecordsForFolders objectForKey:folder.folderName];    
+    [self.exportRecordTableViewController updateSelectedRecordsWith:[self.selectedRecordsForFolders objectForKey:folder.folderName]];    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -68,7 +69,7 @@
     //If the folder of the export record tvc is the same as the selected folder, update its selected records
     if (self.exportRecordTableViewController.folder==folder) {
         //Pass the selected records to the export record tvc
-        self.exportRecordTableViewController.selectedRecords=[self.selectedRecordsForFolders objectForKey:folder.folderName];
+        [self.exportRecordTableViewController updateSelectedRecordsWith:[self.selectedRecordsForFolders objectForKey:folder.folderName]];
     }
 }
 
@@ -85,7 +86,7 @@
     //If the folder of the export record tvc is the same as the selected folder, update its selected records
     if (self.exportRecordTableViewController.folder==folder) {
         //Pass the selected records to the export record tvc
-        self.exportRecordTableViewController.selectedRecords=[self.selectedRecordsForFolders objectForKey:folder.folderName];
+        [self.exportRecordTableViewController updateSelectedRecordsWith:[self.selectedRecordsForFolders objectForKey:folder.folderName]];
     }
 }
 
@@ -96,6 +97,15 @@
     
     //Put the table view into editing mode
     self.tableView.editing=YES;
+}
+
+#pragma mark - ExportRecordTVCDelegate protocol methods
+
+- (void)exportTVC:(ExportRecordTableViewController *)sender userDidSelectRecords:(NSSet *)records forFolder:(Folder *)folder {
+    //Save the selected records
+    NSMutableDictionary *selectedRecordsByFolder=self.selectedRecordsForFolders.mutableCopy;
+    [selectedRecordsByFolder setObject:records forKey:folder.folderName];
+    self.selectedRecordsForFolders=selectedRecordsByFolder;    
 }
 
 @end
