@@ -85,6 +85,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 
 - (TransientRecord *)recordForCSVLineTokenArray:(NSArray *)lineArray withFolderName:(NSString *)folderName {
     TransientRecord *record=nil;
+        
     //identify the record type and populate record specific fields
     if([[lineArray objectAtIndex:1] isEqualToString:@"Contact"]) {
         record =[[TransientContact alloc] init];
@@ -226,6 +227,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         
         if(lineArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) { //not enough/more fields in the record
             [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
+            NSLog(@"corrupted: %@",lineArray);
         }
         
         else {
@@ -233,7 +235,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             NSString *folderName=[[[path lastPathComponent] componentsSeparatedByString:@"."] objectAtIndex:0];
             TransientRecord *record=[self recordForCSVLineTokenArray:lineArray withFolderName:folderName];
             
-            //add the record to the arra of records
+            //add the record to the array of records
             [records addObject:record];
         }
     }
@@ -446,7 +448,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     for(int i = 0; i<[values count]; i++) {
         
         current = [values objectAtIndex:i];
-        if([[current componentsSeparatedByString:@","] count ] >1){ //if commas in the token data, , get rid of the enclosing quotes
+        if([current componentsSeparatedByString:@","].count >1 || [current componentsSeparatedByString:@"\n"].count >1){ //if commas in the token data, , get rid of the enclosing quotes
             NSRange range = NSMakeRange(1, [current length]-2);           
             current = [current substringWithRange:range];
         }
@@ -584,7 +586,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         }
         
         //finally write the string tokens to the csv file
-        recordData = [NSString stringWithFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\r\n",
+        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,\"%@\",%@,%@,%@,%@,%@,%@\r\n",
                       name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
         [fileHandler writeData:[recordData dataUsingEncoding:NSUTF8StringEncoding]];    
     }

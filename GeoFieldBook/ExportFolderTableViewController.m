@@ -40,7 +40,8 @@
     for (NSSet *records in self.selectedRecordsForFolders.allValues)
         [selectedRecords addObjectsFromArray:records.allObjects];
     
-    return selectedRecords.copy;
+    //Sort the selected records
+    return [selectedRecords sortedArrayUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],nil]];    
 }
 
 #pragma mark - UITableViewDelegate Protocol methods
