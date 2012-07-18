@@ -27,7 +27,6 @@
 @property (nonatomic, strong) NSMutableArray *formations;
 @property (nonatomic, strong) NSArray *folders;
 @property (nonatomic, strong) NSArray *formationFolders;
-@property (nonatomic, strong) NSArray *blah;
 
 @property (nonatomic, strong) ValidationMessageBoard *validationMessageBoard;
 
@@ -41,7 +40,6 @@
 @synthesize formations=_formations;
 @synthesize folders=_folders;
 @synthesize formationFolders=_formationFolders;
-@synthesize blah=_blah;
 
 @synthesize validationMessageBoard=_validationMessageBoard;
 
@@ -276,10 +274,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         [self.records addObjectsFromArray:records];
     }
     
-////    NSLog(@"calling");
-//    //call to se if the files are written again
-//    [self createCSVFilesFromRecords:self.records];
-    
+   
     //now call the handler and pass it the array of records created ... 
     //If there is any error message, pass nil to the handler as well as the error log
     if (self.validationMessageBoard.errorCount) {
@@ -485,10 +480,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //for each project name, create a project folder in the documents directory with the same name. if the folder already exists, empty it. also create a media folder with the same name inside the directory
     for(NSString *newFolder in [folders allObjects]) {
         //first create the paths
-        NSString *dataDirectory = [documentsDirectory stringByAppendingFormat:@"/blah%@",newFolder];
+        NSString *dataDirectory = [documentsDirectory stringByAppendingFormat:@"/%@",newFolder];
         NSString *mediaDirectory = [dataDirectory stringByAppendingString:@"/media"];
         [mediaDirectories setObject:mediaDirectory forKey:newFolder]; 
-        NSString *dataFile = [dataDirectory stringByAppendingFormat:@"/blah%@.csv", newFolder];
+        NSString *dataFile = [dataDirectory stringByAppendingFormat:@"/%@.csv", newFolder];
         NSError *error;
         //then create the directories...
         //create the data directory if not there already
@@ -503,10 +498,8 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         [[NSFileManager defaultManager] createDirectoryAtPath:mediaDirectory withIntermediateDirectories:NO attributes:nil error:&error];
         
         //create the file if it does not exist
-        if(![[NSFileManager defaultManager] fileExistsAtPath:dataFile]){
-            NSLog(@"data file was not found, creating file");
+        if(![[NSFileManager defaultManager] fileExistsAtPath:dataFile])
             [[NSFileManager defaultManager] createFileAtPath: dataFile contents:nil attributes:nil];
-        }
         NSFileHandle *handler = [NSFileHandle fileHandleForWritingAtPath:dataFile];
         [fileHandlers setObject:handler forKey:newFolder];
         
@@ -527,6 +520,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     NSFileHandle *fileHandler;
     NSString *mediaDir;
     NSString *recordData;
+    
+    //Get the file manager
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSString *documentDirPath=[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject path];
     
     for(Record *record in records) {
         fileHandler = [fileHandlers objectForKey:record.folder.folderName];
@@ -555,31 +552,29 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         type = [record.class description];
         //now get the type, and type-specific fields        
         if([record isKindOfClass:[Bedding class]]) {
-//            type = @"Bedding";
             formation = [[(Bedding *)record  formation] formationName];
         }else if([record isKindOfClass:[Contact class]]) {
-//            type = @"Contact";
             lowerFormation = [[(Contact*)record lowerFormation] formationName];
             upperFormation = [[(Contact*)record upperFormation] formationName];
         }else if([record isKindOfClass:[JointSet class]]) {
-//            type = @"Joint Set";
             formation = [[(JointSet *)record formation] formationName];
         }else if([record isKindOfClass:[Fault class]]) {
-//            type = @"Fault";
             formation = [[(Fault *)record formation] formationName];
             plunge = [(Fault *)record plunge];
             trend = [(Fault *)record trend];
         }else if([record isKindOfClass:[Other class]]) {
-//            type = @"Other";
+            //nothing to populate
         }       
         
         //save the image file        
         if(record.image) {
+            mediaDir=[documentDirPath stringByAppendingPathComponent:record.folder.folderName];
+            mediaDir=[mediaDir stringByAppendingPathComponent:@"media"];
+            
             imageFileName = [NSString stringWithFormat:@"%@_%@.jpeg", record.folder.folderName, record.name];
-            imageFilePath = [NSString stringWithFormat:@"%@/%@",imageFileName];
-            if(![[NSFileManager defaultManager] fileExistsAtPath:imageFilePath]){
-                NSLog(@"image file does not exist, creating it");   
-                [[NSFileManager defaultManager] createFileAtPath: imageFilePath contents:nil attributes:nil];
+            imageFilePath = [mediaDir stringByAppendingPathComponent:imageFileName];
+            if(![fileManager fileExistsAtPath:imageFilePath]){
+                [fileManager createFileAtPath:imageFilePath contents:nil attributes:nil];
                 
                 NSFileHandle *mediaFileHandler = [NSFileHandle fileHandleForWritingAtPath:imageFilePath];
                 NSData *image=UIImageJPEGRepresentation([[UIImage alloc] initWithData:record.image.imageData], 1.0);
@@ -592,7 +587,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         recordData = [NSString stringWithFormat:@"\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\"\r\n",
                       name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
         [fileHandler writeData:[recordData dataUsingEncoding:NSUTF8StringEncoding]];    
-        NSLog(@"%@",recordData);
     }
     //close all the filehandlers
     for(NSFileHandle *handler in [fileHandlers allValues]) {
