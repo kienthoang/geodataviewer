@@ -10,8 +10,10 @@
 #import "UIDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
-@interface ExportFolderTableViewController : PrototypeFolderTableViewController <UIDoubleTableViewControllerChildren>
+#import "ExportRecordTableViewControllerDelegate.h"
 
-@property (nonatomic,strong) NSArray *selectedRecords;
+@interface ExportFolderTableViewController : PrototypeFolderTableViewController <UIDoubleTableViewControllerChildren,ExportRecordTableViewControllerDelegate>
+
+@property (nonatomic,readonly) NSArray *selectedRecords;
 
 @end

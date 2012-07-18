@@ -163,6 +163,7 @@
 /* Begin PBXFileReference section */
 		0205C7AA159CD79900CA1223 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		0205C7AB159CD79900CA1223 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
+		0207374015B70B610068F7DB /* ExportRecordTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportRecordTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		020EBB5815941F7C00EECC08 /* FolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableViewController.h; sourceTree = "<group>"; };
 		020EBB5915941F7C00EECC08 /* FolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewController.m; sourceTree = "<group>"; };
 		020EBB7B15941FB400EECC08 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
@@ -901,6 +902,7 @@
 				026640D315AA0B2E00026D88 /* RecordTableViewControllerDelegate.h */,
 				026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */,
 				0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */,
+				0207374015B70B610068F7DB /* ExportRecordTableViewControllerDelegate.h */,
 				028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */,
 				028732F915B2805F0001BBC2 /* FolderSelectTableViewControllerDelegate.h */,
 				0288944415B382400062E6DA /* UIDoubleTableViewControllerChildren.h */,
