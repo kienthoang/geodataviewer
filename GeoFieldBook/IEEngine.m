@@ -591,6 +591,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     }
 }
 
+#pragma mark - Creation of CSV for formations
 -(void) createCSVFilesFromFormations:(NSArray *)formations 
 {
     NSMutableDictionary *folders = [[NSMutableDictionary alloc] init]; //a multiset type data structure. Key-foldername; Value-array of formations for that forlder
@@ -607,9 +608,41 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             [folders setValue:formationArray forKey:formation.formationFolder.folderName];
         }
     }
-    
-    
+    //now write the csv files with the contents of the dictionary
+    [self writeFormations:folders];    
 }
-//-(void)writeFormations:(NSDictionary *)formations
+
+-(void)writeFormations:(NSDictionary *)formations {
+    NSDate *current = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-DD-YYYY"];
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    [timeFormatter setDateFormat:@"HH:MM:SS"];
+
+    //create the file in the documents directory
+    NSString *formationFileName = [NSString stringWithFormat:@"Formation_%@_%@",[dateFormatter stringFromDate:current], [timeFormatter stringFromDate:current]];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSArray *urlsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSString *documentsDirectory = [[urlsArray objectAtIndex:0] path];
+    
+    NSString *destinationPath = [NSString stringWithFormat:@"%@/%@.formation.csv",documentsDirectory,formationFileName];
+    [[NSFileManager defaultManager] createFileAtPath:destinationPath contents:nil attributes:nil];
+    NSFileHandle *handler = [NSFileHandle fileHandleForWritingAtPath:destinationPath];
+    
+    //now write the records to the csv file
+    for(NSString *folderName in [formations allKeys]) {
+        NSString *record =@"";
+        [record stringByAppendingString:folderName];
+        
+        for(NSString *formation in [formations valueForKey:folderName]) {
+            [record stringByAppendingFormat:@"\",%@\""];
+        }
+        [record stringByAppendingString:@"\r\n"];
+        [handler writeData:[record dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [handler closeFile];
+
+}
 
 @end
