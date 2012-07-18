@@ -19,7 +19,6 @@
 @interface FormationFolderTableViewController() <FormationFolderViewControllerDelegate,UIActionSheetDelegate>
 
 @property (nonatomic,strong) NSArray *toBeDeletedFolders;
-@property (nonatomic,strong) UIManagedDocument *database;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
@@ -33,7 +32,7 @@
 
 @implementation FormationFolderTableViewController
 
-@synthesize database=_database;
+@synthesize selectedFolders=_selectedFolders;
 
 @synthesize addButton = _addButton;
 @synthesize deleteButton = _deleteButton;
@@ -45,13 +44,6 @@
 @synthesize toBeDeletedFolders=_toBeDeletedFolders;
 
 #pragma mark - Getters and Setters
-
-- (void)setDatabase:(UIManagedDocument *)database {
-    _database=database;
-        
-    //Setup the fectched results controller
-    [self setupFetchedResultsController];
-}
 
 - (NSArray *)toBeDeletedFolders {
     if (!_toBeDeletedFolders)
@@ -69,20 +61,6 @@
     
     //Disable the delete button if no record is selected
     self.deleteButton.enabled=numFolders>0;
-}
-
-#pragma mark - Controller State Initialization
-
-- (void)setupFetchedResultsController {
-    //Set up the request for fetched result controllers
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
-    
-    //Set up the fetched results controller
-    self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request 
-                                                                      managedObjectContext:self.database.managedObjectContext 
-                                                                        sectionNameKeyPath:nil 
-                                                                                 cacheName:nil];
 }
 
 #pragma mark - Prepare for segues
@@ -287,27 +265,6 @@
         //Dismiss the modal
         [self dismissModalViewControllerAnimated:YES];
     }
-}
-
-#pragma mark - TableViewControllerDataSource methods
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Formation Folder Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
-    // Configure the cell
-    Formation_Folder *formationFolder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
-    cell.textLabel.text=formationFolder.folderName;
-    NSString *formationCounter=[formationFolder.formations count]>1 ? @"Formations" : @"Formation";
-    cell.detailTextLabel.text=[NSString stringWithFormat:@"%d %@",[formationFolder.formations count],formationCounter];
-    
-    return cell;
 }
 
 #pragma mark - Table view delegate

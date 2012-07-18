@@ -32,7 +32,7 @@
 @implementation FormationTableViewController
 
 @synthesize formationFolder=_formationFolder;
-@synthesize database=_database;
+//@synthesize database=_database;
 
 @synthesize addButton = _addButton;
 @synthesize deleteButton = _deleteButton;
@@ -46,13 +46,6 @@
 @synthesize toBeDeletedFormations=_toBeDeletedFormations;
 
 #pragma mark - Getters and Setters
-
-- (void)setDatabase:(UIManagedDocument *)database {
-    _database=database;
-    
-    //Setup fetched results controller
-    [self setupFetchedResultsController];
-}
 
 - (void)setFormationFolder:(NSString *)formationFolder {
     _formationFolder=formationFolder;
@@ -287,7 +280,7 @@ didAskToModifyFormationWithName:(NSString *)originalName
 
 #pragma mark - TableViewControllerDataSource methods
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Formation Cell";
     
@@ -302,7 +295,7 @@ didAskToModifyFormationWithName:(NSString *)originalName
     cell.textLabel.text = formation.formationName;
     
     return cell;
-}
+}*/
 
 #pragma mark - Table view delegate
 

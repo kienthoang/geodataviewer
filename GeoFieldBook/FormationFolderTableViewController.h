@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "CoreDataTableViewController.h"
+#import "PrototypeFormationFolderTableViewController.h"
 
-@interface FormationFolderTableViewController : CoreDataTableViewController
+@interface FormationFolderTableViewController : PrototypeFormationFolderTableViewController
+
+@property (nonatomic,readonly) NSArray *selectedFolders;
 
 #define DEFAULT_BUTTON_SIZE 120
 

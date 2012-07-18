@@ -105,9 +105,11 @@
     }
     
     // Configure the cell
-    Formation_Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text=folder.folderName;
-    cell.detailTextLabel.text=[NSString stringWithFormat:@"%d Formations",folder.formations.count];
+    Formation_Folder *formationFolder=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
+    cell.textLabel.text=formationFolder.folderName;
+    NSString *formationCounter=[formationFolder.formations count]>1 ? @"Formations" : @"Formation";
+    cell.detailTextLabel.text=[NSString stringWithFormat:@"%d %@",[formationFolder.formations count],formationCounter];
     
     return cell;
 }

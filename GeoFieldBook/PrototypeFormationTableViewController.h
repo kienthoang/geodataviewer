@@ -14,6 +14,8 @@
 
 @interface PrototypeFormationTableViewController : CoreDataTableViewController
 
+- (void)setupFetchedResultsController;
+
 @property (nonatomic,strong) Formation_Folder *folder;
 @property (nonatomic,strong) UIManagedDocument *database;
 
