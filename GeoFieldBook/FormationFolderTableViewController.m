@@ -87,7 +87,7 @@
         //Set the folder name of the destination view controller
         UITableViewCell *cell=sender;
         Formation_Folder *folder=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-        [segue.destinationViewController setFormationFolder:folder.folderName];
+        [segue.destinationViewController setFormationFolder:folder];
         [segue.destinationViewController navigationItem].title=folder.folderName;
     }
 }

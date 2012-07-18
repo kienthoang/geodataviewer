@@ -11,8 +11,11 @@
 #import "UIDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
+#import "ExportFormationTableViewControllerDelegate.h"
+
 @interface ExportFormationTableViewController : PrototypeFormationTableViewController <UIDoubleTableViewControllerChildren>
 
 @property (nonatomic,strong) NSSet *selectedFormations;
+@property (nonatomic,weak) id <ExportFormationTableViewControllerDelegate> delegate;
 
 @end

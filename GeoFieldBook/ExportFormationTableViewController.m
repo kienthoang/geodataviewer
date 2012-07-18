@@ -14,6 +14,7 @@
 
 @implementation ExportFormationTableViewController
 
+@synthesize delegate=_delegate;
 @synthesize doubleTableViewController=_doubleTableViewController;
 @synthesize selectedFormations=_selectedFormations;
 

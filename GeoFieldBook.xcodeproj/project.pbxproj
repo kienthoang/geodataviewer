@@ -386,6 +386,7 @@
 		212DD13C15B468DC000203AB /* PrototypeFormationFolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeFormationFolderTableViewController.m; sourceTree = "<group>"; };
 		212DD13E15B46907000203AB /* PrototypeFormationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeFormationTableViewController.h; sourceTree = "<group>"; };
 		212DD13F15B46907000203AB /* PrototypeFormationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeFormationTableViewController.m; sourceTree = "<group>"; };
+		212DD18215B73531000203AB /* ExportFormationTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFormationTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		2132A5D5159CD26200009CB9 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		2132A5D6159CD26200009CB9 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		2132A5D8159CD62200009CB9 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image+Creation.h"; path = "Image/Image+Creation.h"; sourceTree = "<group>"; };
@@ -903,6 +904,7 @@
 				026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */,
 				0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */,
 				0207374015B70B610068F7DB /* ExportRecordTableViewControllerDelegate.h */,
+				212DD18215B73531000203AB /* ExportFormationTableViewControllerDelegate.h */,
 				028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */,
 				028732F915B2805F0001BBC2 /* FolderSelectTableViewControllerDelegate.h */,
 				0288944415B382400062E6DA /* UIDoubleTableViewControllerChildren.h */,
