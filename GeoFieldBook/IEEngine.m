@@ -225,9 +225,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //now create transient objects from the rest
     for(NSArray *lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
         
+        NSLog(@"Single line: %@",lineArray);
+        
         if(lineArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) { //not enough/more fields in the record
             [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
-            NSLog(@"corrupted: %@",lineArray);
         }
         
         else {
@@ -377,8 +378,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //fix the case where newline characters (record separators) appear in the data field themselves
     allLines = [self fixNewLineCharactersInData:allLines];
     
-    for(NSString *line in allLines) //skip the first line
-        [records addObject:[self parseLine:line]];
+    for(NSString *line in allLines) {
+        if (line.length)
+            [records addObject:[self parseLine:line]];
+    }
     
     return records;
     
@@ -544,12 +547,20 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         strike = [NSString stringWithFormat:@"%@", record.strike];
         
         //get the date and time
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init]; 
-        [dateFormatter setDateFormat:@"MM/dd/yyyy"];        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM/dd/yy"];        
         NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
         [timeFormatter setDateFormat:@"HH:mm:ss"];
         
         date = [dateFormatter stringFromDate:record.date];
+        NSMutableArray *dateComponents=[date componentsSeparatedByString:@"/"].mutableCopy;
+        NSString *day=[dateComponents objectAtIndex:1];
+        if ([day hasPrefix:@"0"]) {
+            day=[day substringFromIndex:1];
+            [dateComponents replaceObjectAtIndex:1 withObject:day];
+            date=[dateComponents componentsJoinedByString:@"/"];
+        }
+        
         time = [timeFormatter stringFromDate:record.date];
         type = [record.class description];
         //now get the type, and type-specific fields        
@@ -586,8 +597,12 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         }
         
         //finally write the string tokens to the csv file
-        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,\"%@\",%@,%@,%@,%@,%@,%@\r\n",
-                      name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
+        if ([observation componentsSeparatedByString:@","].count>1 || [observation componentsSeparatedByString:@"\n"].count>1)
+            recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,\"%@\",%@,%@,%@,%@,%@,%@\r\n",
+                          name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
+        else
+            recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\r\n",
+                          name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
         [fileHandler writeData:[recordData dataUsingEncoding:NSUTF8StringEncoding]];    
     }
     //close all the filehandlers
