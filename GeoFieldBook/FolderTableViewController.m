@@ -394,26 +394,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Folder Cell";
+    CustomFolderCell *cell=(CustomFolderCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    CustomFolderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[CustomFolderCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
-    // Configure the cell
+    //Select cell if its folder is in the list of selected folders
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.folder=folder;
-    cell.editingAccessoryType=UITableViewCellAccessoryDetailDisclosureButton;
-    CheckBox *checkbox=(CheckBox *)cell.checkBox;
-    checkbox.image=[self.recordFilter.selectedFolderNames containsObject:folder.folderName] ? checkbox.checked : checkbox.unchecked;
-    
-    //Set self to the delegate of the cell
-    cell.delegate=self;
-    
-    //Add gesture recognizer for long press
-    UILongPressGestureRecognizer *longPressRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnTableCell:)];
-    [cell addGestureRecognizer:longPressRecognizer];
+    if ([self.selectedFolders containsObject:folder]) {
+        [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
     
     //Show/Hide the checkboxes
     if (self.willFilterByFolder && !self.tableView.editing)

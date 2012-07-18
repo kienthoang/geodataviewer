@@ -11,6 +11,8 @@
 
 #import "GeoDatabaseManager.h"
 
+#import "CustomFolderCell.h"
+
 #import "Folder.h"
 
 @interface PrototypeFolderTableViewController : CoreDataTableViewController

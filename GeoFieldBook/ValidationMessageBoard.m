@@ -40,16 +40,20 @@
 
 - (void)addWarningWithMessage:(NSString *)message {
     //Add the error to the error list
-    NSMutableArray *warnings=[self.warnings mutableCopy];
-    [warnings addObject:message];
-    self.warnings=[warnings copy];
+    if (![self.warnings containsObject:message]) {
+        NSMutableArray *warnings=[self.warnings mutableCopy];
+        [warnings addObject:message];
+        self.warnings=[warnings copy];
+    }
 }
 
 - (void)addErrorWithMessage:(NSString *)message {
+    if (![self.errors containsObject:message]) {
     //Add the error to the error list
-    NSMutableArray *errors=[self.errors mutableCopy];
-    [errors addObject:message];
-    self.errors=[errors copy];
+        NSMutableArray *errors=[self.errors mutableCopy];
+        [errors addObject:message];
+        self.errors=[errors copy];
+    }
 }
 
 - (int)errorCount {

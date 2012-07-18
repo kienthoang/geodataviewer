@@ -99,15 +99,14 @@
 {
     static NSString *CellIdentifier = @"Folder Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomFolderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[CustomFolderCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text=folder.folderName;
-    cell.detailTextLabel.text=[NSString stringWithFormat:@"%d records",folder.records.count];
+    cell.folder=folder;
     
     return cell;
 }
