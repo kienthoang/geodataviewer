@@ -94,16 +94,6 @@
 
 #pragma mark - Alert Generators
 
-//Put up an alert about some database failure with specified message
-- (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Database Error" 
-                                                  message:message 
-                                                 delegate:nil 
-                                        cancelButtonTitle:@"Dismiss" 
-                                        otherButtonTitles: nil];
-    [alert show];
-}
-
 - (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
     UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation folder with the name '%@' already exists!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [duplicationAlert show];
@@ -307,21 +297,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //Load the database
-    UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
-    if (database.documentState==UIDocumentStateClosed) {
-        [database openWithCompletionHandler:^(BOOL successful){
-            if (successful)
-                self.database=database;
-            else {
-                //Handle errors
-            }
-        }];
-    } 
-    else if (database.documentState==UIDocumentStateNormal) 
-        self.database=database;
-    
+
     //Hide the delete button
     self.hiddenButton=self.deleteButton;
     NSMutableArray *toolbarItems=[self.toolbarItems mutableCopy];
@@ -353,9 +329,4 @@
     }
 }
 
-- (void)viewDidUnload {
-    [self setSelectAllButton:nil];
-    [self setSelectNone:nil];
-    [super viewDidUnload];
-}
 @end

@@ -51,7 +51,7 @@
     Formation_Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
     
     //Pass the folder to the export record tvc
-    self.exportFormationTableViewController.folder=folder;
+    self.exportFormationTableViewController.formationFolder=folder;
     
     //Pass the selected records to the export record tvc
     self.exportFormationTableViewController.selectedFormations=[self.selectedFormationsForFolders objectForKey:folder.folderName];
@@ -65,10 +65,10 @@
     self.selectedFormationsForFolders=selectedFormationsForFolders.copy;
     
     //Pass the folder to the export record tvc
-    self.exportFormationTableViewController.folder=folder;
+    self.exportFormationTableViewController.formationFolder=folder;
     
     //If the folder of the export record tvc is the same as the selected folder, update its selected records
-    if (self.exportFormationTableViewController.folder==folder) {
+    if (self.exportFormationTableViewController.formationFolder==folder) {
         //Pass the selected records to the export record tvc
         self.exportFormationTableViewController.selectedFormations=[self.selectedFormationsForFolders objectForKey:folder.folderName];
     }
@@ -82,10 +82,10 @@
     self.selectedFormationsForFolders=selectedFormationsForFolders.copy;
     
     //Pass the folder to the export record tvc
-    self.exportFormationTableViewController.folder=folder;
+    self.exportFormationTableViewController.formationFolder=folder;
     
     //If the folder of the export record tvc is the same as the selected folder, update its selected records
-    if (self.exportFormationTableViewController.folder==folder) {
+    if (self.exportFormationTableViewController.formationFolder==folder) {
         //Pass the selected records to the export record tvc
         self.exportFormationTableViewController.selectedFormations=[self.selectedFormationsForFolders objectForKey:folder.folderName];
     }

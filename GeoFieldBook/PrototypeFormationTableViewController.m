@@ -15,15 +15,15 @@
 @implementation PrototypeFormationTableViewController
 
 @synthesize database=_database;
-@synthesize folder=_folder;
+@synthesize formationFolder=_formationFolder;
 
 #pragma mark - Controller State Initialization
 
 - (void)setupFetchedResultsController {
     //Set up the fetched results controller to fetch records
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.folder.folderName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationFolder.folderName" ascending:YES]];
+    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.formationFolder.folderName];
+    request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"formationSortNumber" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"formationFolder.folderName" ascending:YES],nil];
     
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
@@ -51,18 +51,18 @@
         _database=database;
         
         //Set up fetchedResultsController
-        if (self.folder) {
+        if (self.formationFolder) {
             //Make sure the document is open and set up the fetched result controller
             [self normalizeDatabase]; 
         }
     }
 }
 
-- (void)setFolder:(Formation_Folder *)folder {
-    _folder=folder;
+- (void)setFormationFolder:(Formation_Folder *)formationFolder {
+    _formationFolder=formationFolder;
     
     //Set up fetchedResultsController
-    if (self.folder)
+    if (self.formationFolder)
         [self setupFetchedResultsController];
 }
 
@@ -94,11 +94,6 @@
             } 
         }];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
