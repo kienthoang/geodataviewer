@@ -7,7 +7,7 @@
 //
 
 #import "PrototypeFolderTableViewController.h"
-#import "UIDoubleTableViewController.h"
+#import "ExportDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
 #import "ExportRecordTableViewControllerDelegate.h"
@@ -15,5 +15,7 @@
 @interface ExportFolderTableViewController : PrototypeFolderTableViewController <UIDoubleTableViewControllerChildren,ExportRecordTableViewControllerDelegate>
 
 @property (nonatomic,readonly) NSArray *selectedRecords;
+
+@property (nonatomic,weak) id <ExportButtonOwner> exportButtonOwner;
 
 @end

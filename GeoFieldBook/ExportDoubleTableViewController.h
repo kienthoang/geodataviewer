@@ -8,6 +8,14 @@
 
 #import "UIDoubleTableViewController.h"
 
-@interface ExportDoubleTableViewController : UIDoubleTableViewController
+@protocol ExportButtonOwner
+
+- (void)needsUpdateExportButtonForNumberOfSelectedItems:(int)count;
+
+@end
+
+@interface ExportDoubleTableViewController : UIDoubleTableViewController <ExportButtonOwner>
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *exportButton;
 
 @end

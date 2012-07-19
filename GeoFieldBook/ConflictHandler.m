@@ -51,10 +51,8 @@
     _transientRecords=transientRecords;
         
     //Post a notification
-    if (!self.transientRecords.count) {
+    if (!self.transientRecords.count)
         [self postNotificationWithName:GeoNotificationConflictHandlerImportingDidEnd withUserInfo:[NSDictionary dictionary]];
-        NSLog(@"Done!");
-    }
 }
 
 - (void)setTransientFormations:(NSArray *)transientFormations {

@@ -7,11 +7,13 @@
 //
 
 #import "PrototypeFormationFolderTableViewController.h"
-#import "UIDoubleTableViewController.h"
+#import "ExportDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
 @interface ExportFormationFolderTableViewController : PrototypeFormationFolderTableViewController <UIDoubleTableViewControllerChildren>
 
 @property (nonatomic,strong) NSArray *selectedFormations;
+
+@property (nonatomic,weak) id <ExportButtonOwner> exportButtonOwner;
 
 @end

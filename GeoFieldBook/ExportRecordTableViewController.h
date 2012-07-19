@@ -7,7 +7,7 @@
 //
 
 #import "PrototypeRecordTableViewController.h"
-#import "UIDoubleTableViewController.h"
+#import "ExportDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
 #import "ExportRecordTableViewControllerDelegate.h"

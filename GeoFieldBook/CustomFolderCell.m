@@ -24,8 +24,8 @@
     
     //Setup the title and subtitle of the cell
     self.title.text=folder.folderName;
-    NSString *folderCounter=[folder.records count]>1 ? @"Records" : @"Record";
-    self.subtitle.text=[NSString stringWithFormat:@"%d %@",[folder.records count],folderCounter];
+    NSString *recordCounter=[folder.records count]>1 ? @"Records" : @"Record";
+    self.subtitle.text=[NSString stringWithFormat:@"%d %@",[folder.records count],recordCounter];
 }
 
 - (void)awakeFromNib {

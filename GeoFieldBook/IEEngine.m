@@ -20,6 +20,8 @@
 
 #import "ValidationMessageBoard.h"
 
+#import "IEEngineNotificationNames.h"
+
 @interface IEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
@@ -79,6 +81,11 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     if (!_records)
         _records=[NSMutableArray array];
     return _records;
+}
+
+- (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
 }
 
 #pragma mark - Reading of Record Files
@@ -224,9 +231,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     //now create transient objects from the rest
     for(NSArray *lineArray in lineRecordsInAFile) { //for each line in file, i.e. each single record
-        
-        NSLog(@"Single line: %@",lineArray);
-        
         if(lineArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) { //not enough/more fields in the record
             [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
         }
@@ -262,6 +266,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
  */
 -(void)createRecordsFromCSVFiles:(NSArray *)files
 {   
+    //Post a notification
+    [self postNotificationWithName:GeoNotificationIEEngineRecordImportingDidStart withUserInfo:[NSDictionary dictionary]];
+    
     //get paths to the selected files
     self.selectedFilePaths = [self getSelectedFilePaths:files];
     
@@ -336,6 +343,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 
 - (void)createFormationsFromCSVFiles:(NSArray *) files
 {
+    //Post a notification
+    [self postNotificationWithName:GeoNotificationIEEngineFormationImportingDidStart withUserInfo:[NSDictionary dictionary]];
+    
     //get the complete file paths for the selected files that exist
     self.selectedFilePaths=[self getSelectedFilePaths:files];
     
@@ -511,6 +521,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     //now call the method that writes onto the array of records into their respective csv files
     [self writeRecords:records withFileHandlers:fileHandlers.copy andSaveImagesInPath:mediaDirectories.copy];
+    
+    //Post a notification when done
+    [self postNotificationWithName:GeoNotificationIEEngineExportingDidEnd withUserInfo:[NSDictionary dictionary]];
 }
 
 - (void)writeRecord:(Record *)record withFileHandler:(NSFileHandle *)fileHandler mediaDirectoryPath:(NSString *)mediaDirPath {    

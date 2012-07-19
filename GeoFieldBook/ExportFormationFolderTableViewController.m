@@ -22,6 +22,8 @@
 @synthesize selectedFormationsForFolders=_selectedFormationsForFolders;
 @synthesize selectedFormations=_selectedFormations;
 
+@synthesize exportButtonOwner=_exportButtonOwner;
+
 #pragma mark - Getters and Setters
 
 - (ExportFormationTableViewController *)exportFormationTableViewController {

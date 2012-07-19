@@ -23,6 +23,7 @@
 @end
 
 @implementation ExportDoubleTableViewController
+@synthesize exportButton = _exportButton;
 
 @synthesize exportEngine=_exportEngine;
 
@@ -44,8 +45,9 @@
     //UITableViewController *exportTVC;
     
     if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
-        ExportFolderTableViewController *exportRecordTVC = (ExportFolderTableViewController *)self.masterTableViewController;
-        [(ExportRecordTableViewController *)self.detailTableViewController setDelegate:exportRecordTVC];
+        ExportFolderTableViewController *exportFolderTVC = (ExportFolderTableViewController *)self.masterTableViewController;
+        exportFolderTVC.exportButtonOwner=self;
+        [(ExportRecordTableViewController *)self.detailTableViewController setDelegate:exportFolderTVC];
     }
     else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
         ExportFormationFolderTableViewController *exportFormationsTVC = (ExportFormationFolderTableViewController *)self.masterTableViewController;
@@ -83,6 +85,18 @@
     
     //NSArray *exportedRecords=[(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
     [self.exportEngine createCSVFilesFromRecords:exportedItems];
+}
+
+- (void)viewDidUnload {
+    [self setExportButton:nil];
+    [super viewDidUnload];
+}
+
+#pragma mark - ExportButtonOwner Protocol methods
+
+- (void)needsUpdateExportButtonForNumberOfSelectedItems:(int)count {
+    NSString *exportButtonTitle=count ? [NSString stringWithFormat:@"Export (%d)",count] : @"Export";
+    self.exportButton.title=exportButtonTitle;
 }
 
 @end

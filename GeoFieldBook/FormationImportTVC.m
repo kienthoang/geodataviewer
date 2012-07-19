@@ -97,15 +97,9 @@
 - (void)importingWasCanceled:(NSNotification *)notification {
     //Put the import button back
     [self putImportButtonBack];
-    
-    //Notify delegate
-    [self.importDelegate importTableViewControllerDidCancelImporting:self];
 }
 
 - (void)importingDidEnd:(NSNotification *)notification {
-    //Notify delegate of the completion of the importing
-    [self.importDelegate importTableViewControllerDidEndImporting:self];
-    
     //Put the import button back again
     [self putImportButtonBack];
 }
@@ -183,8 +177,7 @@
 #pragma mark - Target Action Handlers
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
-    //Notify delegate of the start of the importing
-    [self.importDelegate importTableViewControllerDidStartImporting:self];
+    [super importPressed:sender];
     
     __weak FormationImportTVC *weakSelf=self;
     
