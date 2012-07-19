@@ -10,7 +10,9 @@
 #import "UIDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
-@interface ExportFormationFolderTableViewController : PrototypeFormationFolderTableViewController <UIDoubleTableViewControllerChildren>
+#import "ExportFormationTableViewControllerDelegate.h"
+
+@interface ExportFormationFolderTableViewController : PrototypeFormationFolderTableViewController <UIDoubleTableViewControllerChildren,ExportFormationTableViewControllerDelegate>
 
 @property (nonatomic,strong) NSArray *selectedFormations;
 

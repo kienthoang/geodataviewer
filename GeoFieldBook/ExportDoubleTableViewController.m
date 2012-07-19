@@ -40,9 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    //UITableViewController *exportTVC;
-    
     if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
         ExportFolderTableViewController *exportRecordTVC = (ExportFolderTableViewController *)self.masterTableViewController;
         [(ExportRecordTableViewController *)self.detailTableViewController setDelegate:exportRecordTVC];
@@ -51,13 +48,6 @@
         ExportFormationFolderTableViewController *exportFormationsTVC = (ExportFormationFolderTableViewController *)self.masterTableViewController;
         [(ExportFormationTableViewController *)self.detailTableViewController setDelegate:exportFormationsTVC];
     }
-    else {
-        //
-    }
-    
-    //Set the delegate of the export record tvc to be the export folder tvc
-    //ExportFolderTableViewController *exportFolderTVC=(ExportFolderTableViewController *)self.masterTableViewController;
-    //[(ExportRecordTableViewController *)self.detailTableViewController setDelegate:exportFolderTVC];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -77,11 +67,7 @@
     else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
         exportedItems = [(ExportFormationFolderTableViewController *)self.masterTableViewController selectedFormations];
     }
-    else {
-        //
-    }
     
-    //NSArray *exportedRecords=[(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
     [self.exportEngine createCSVFilesFromRecords:exportedItems];
 }
 
