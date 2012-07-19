@@ -370,47 +370,42 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     }
     
     //read the contents of the file
-    NSError *error;
-    NSString* content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+    NSString* content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
     
     //get all lines in the file
-    NSArray *allLines = [content componentsSeparatedByCharactersInSet: [NSCharacterSet newlineCharacterSet]];
+    NSArray *allLines = [content componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    
     //fix the case where newline characters (record separators) appear in the data field themselves
     allLines = [self fixNewLineCharactersInData:allLines];
     
+    //Skip blank line and parse the rest
     for(NSString *line in allLines) {
         if (line.length)
             [records addObject:[self parseLine:line]];
     }
     
     return records;
-    
 }
 
 -(NSArray *)getSelectedFilePaths:(NSArray *)fileNames;
 {   
     //Get the document directory path
-    NSMutableArray *paths = [[NSMutableArray alloc] init];
+    NSMutableArray *paths = [NSMutableArray array];
     NSFileManager *fileManager=[NSFileManager defaultManager];
     NSArray *pathsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSString *documentsDirectory = [[pathsArray objectAtIndex:0] path];
     
     //Get the csv file paths from the document directory
     for (NSString *file in fileNames)
-        [paths addObject:[documentsDirectory stringByAppendingFormat:@"/%@",file]];
+        [paths addObject:[documentsDirectory stringByAppendingPathComponent:file]];
     
     return paths;
 }
 
 - (NSArray *)parseLine:(NSString *) line
 {
-    //log to see if each individual line (record) is extracted properly
-    //NSLog(@"Individual record: %@", line);
-    
-    NSMutableArray *values = [[line componentsSeparatedByString:@","] mutableCopy];
-    
+    NSMutableArray *values = [line componentsSeparatedByString:@","].mutableCopy;
     values = [self separateRecordsOrFieldsByCountingQuotations:values byAppending:@","];
-    
     [self fixDoubleQuotationsWhileParsingLine:values];
     
     return values;
@@ -449,15 +444,13 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 -(NSMutableArray *) fixDoubleQuotationsWhileParsingLine:(NSMutableArray *) values {
     NSString *current;
     for(int i = 0; i<[values count]; i++) {
-        
         current = [values objectAtIndex:i];
         if([current componentsSeparatedByString:@","].count >1 || [current componentsSeparatedByString:@"\n"].count >1){ //if commas in the token data, , get rid of the enclosing quotes
             NSRange range = NSMakeRange(1, [current length]-2);           
             current = [current substringWithRange:range];
         }
         if([current length]>1) { //now replace all two double quote(s) with one.
-            [values replaceObjectAtIndex:i withObject:[current stringByReplacingOccurrencesOfString:@"\"\"" 
-                                                                                         withString:@"\""]]; 
+            [values replaceObjectAtIndex:i withObject:[current stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""]]; 
         }        
     }
     
@@ -470,41 +463,41 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 {
     NSMutableSet *folders = [[NSMutableSet alloc] init];
     //get the names of the folders from the array of records so you could create them
-    for(Record *record in records) {
+    for(Record *record in records)
         [folders addObject:record.folder.folderName];
-    }
         
     NSFileManager *fileManager=[NSFileManager defaultManager];
     NSArray *urlsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSString *documentsDirectory = [[urlsArray objectAtIndex:0] path];
+    NSString *documentsDirectory = [urlsArray.lastObject path];
     
     //create an dictionary of filehandlers. Key - folder name, Value - FileHandler for that folder
-    NSMutableDictionary *fileHandlers = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *mediaDirectories = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *fileHandlers = [NSMutableDictionary dictionary];
+    NSMutableDictionary *mediaDirectories = [NSMutableDictionary dictionary];
     
     //for each project name, create a project folder in the documents directory with the same name. if the folder already exists, empty it. also create a media folder with the same name inside the directory
-    for(NSString *newFolder in [folders allObjects]) {
+    for(NSString *newFolder in folders.allObjects) {
         //first create the paths
-        NSString *dataDirectory = [documentsDirectory stringByAppendingFormat:@"/%@",newFolder];
-        NSString *mediaDirectory = [dataDirectory stringByAppendingString:@"/media"];
+        NSString *dataDirectory = [documentsDirectory stringByAppendingPathComponent:newFolder];
+        NSString *mediaDirectory = [dataDirectory stringByAppendingPathComponent:@"media"];
         [mediaDirectories setObject:mediaDirectory forKey:newFolder]; 
-        NSString *dataFile = [dataDirectory stringByAppendingFormat:@"/%@.csv", newFolder];
-        NSError *error;
+        NSString *csvFileName=[NSString stringWithFormat:@"%@.csv",newFolder];
+        NSString *dataFile = [dataDirectory stringByAppendingPathComponent:csvFileName];
         //then create the directories...
         //create the data directory if not there already
-        if (![[NSFileManager defaultManager] fileExistsAtPath:dataDirectory]){
-            [[NSFileManager defaultManager] createDirectoryAtPath:dataDirectory withIntermediateDirectories:NO attributes:nil error:&error]; 
-        }else {
+        if (![fileManager fileExistsAtPath:dataDirectory])
+            [fileManager createDirectoryAtPath:dataDirectory withIntermediateDirectories:NO attributes:nil error:NULL]; 
+        else {
             //If the folder already, delete it and recreate it
-            [[NSFileManager defaultManager] removeItemAtPath:dataDirectory error:&error];
-            [[NSFileManager defaultManager] createDirectoryAtPath:dataDirectory withIntermediateDirectories:NO attributes:nil error:&error];             
+            [fileManager removeItemAtPath:dataDirectory error:NULL];
+            [fileManager createDirectoryAtPath:dataDirectory withIntermediateDirectories:NO attributes:nil error:NULL];             
         }
+        
         //Create the media directory
-        [[NSFileManager defaultManager] createDirectoryAtPath:mediaDirectory withIntermediateDirectories:NO attributes:nil error:&error];
+        [fileManager createDirectoryAtPath:mediaDirectory withIntermediateDirectories:NO attributes:nil error:NULL];
         
         //create the file if it does not exist
-        if(![[NSFileManager defaultManager] fileExistsAtPath:dataFile])
-            [[NSFileManager defaultManager] createFileAtPath: dataFile contents:nil attributes:nil];
+        if(![fileManager fileExistsAtPath:dataFile])
+            [fileManager createFileAtPath: dataFile contents:nil attributes:nil];
         NSFileHandle *handler = [NSFileHandle fileHandleForWritingAtPath:dataFile];
         [fileHandlers setObject:handler forKey:newFolder];
         
@@ -517,98 +510,90 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     }
     
     //now call the method that writes onto the array of records into their respective csv files
-    [self writeRecords:(NSArray *) records withFileHandlers:(NSMutableDictionary *) fileHandlers andSaveImagesInPath:(NSMutableDictionary *) mediaDirectories];
+    [self writeRecords:records withFileHandlers:fileHandlers.copy andSaveImagesInPath:mediaDirectories.copy];
 }
 
--(void) writeRecords:(NSArray *) records withFileHandlers:(NSMutableDictionary *) fileHandlers andSaveImagesInPath:(NSMutableDictionary *) mediaDirectories 
-{
-    NSFileHandle *fileHandler;
-    NSString *mediaDir;
-    NSString *recordData;
+- (void)writeRecord:(Record *)record withFileHandler:(NSFileHandle *)fileHandler mediaDirectoryPath:(NSString *)mediaDirPath {    
+    //get all the common fields
+    NSString *name = record.name;
+    NSString *observation = record.fieldOservations;
+    NSString *longitude = record.longitude;
+    NSString *latitude = record.latitude;
+    NSString *dip = [NSString stringWithFormat:@"%@", record.dip];
+    NSString *dipDir = record.dipDirection;
+    NSString *strike = [NSString stringWithFormat:@"%@", record.strike];
     
-    //Get the file manager
+    //get the date and time
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yy"];        
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
+    [timeFormatter setDateFormat:@"HH:mm:ss"];
+    
+    NSString *date = [dateFormatter stringFromDate:record.date];
+    NSString *time = [timeFormatter stringFromDate:record.date];
+    NSString *type = [record.class description];
+    
+    //now get the type, and type-specific fields   
+    NSString *formation=@"";
+    NSString *lowerFormation=@"";
+    NSString *upperFormation=@"";
+    NSString *plunge=@"";
+    NSString *trend=@"";
+    if([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[JointSet class]] || [record isKindOfClass:[Fault class]]) {
+        Formation *recordFormation=[(id)record formation];
+        formation = recordFormation ? recordFormation.formationName : @"";
+    } else if([record isKindOfClass:[Contact class]]) {
+        Formation *recordLowerFormation=[(Contact *)record lowerFormation];
+        Formation *recordUpperFormation=[(Contact *)record upperFormation];
+        lowerFormation = recordLowerFormation ? recordLowerFormation.formationName : @"";
+        upperFormation = recordUpperFormation ? recordUpperFormation.formationName : @"";
+    } else if([record isKindOfClass:[Fault class]]) {
+        plunge = [(Fault *)record plunge];
+        trend = [(Fault *)record trend];
+    } else if([record isKindOfClass:[Other class]]) {
+        //nothing to populate
+    }       
+    
+    //save the image file  
     NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSString *documentDirPath=[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject path];
-    
-    for(Record *record in records) {
-        fileHandler = [fileHandlers objectForKey:record.folder.folderName];
-        mediaDir = [fileHandlers objectForKey:record.folder.folderName];
-        //now write the data contents...
-        NSString *name, *type, *longitude, *latitude, *date, *time, *strike, *dip, *dipDir, *observation, *formation, *lowerFormation, *upperFormation, *trend, *plunge, *imageFileName;
-        name=type=longitude=latitude=date=time=strike=dip=dipDir=observation=formation=lowerFormation=upperFormation=plunge=trend=imageFileName=@"";
-        NSString *imageFilePath;
-        //get all the common fields
-        name = record.name;
-        observation = record.fieldOservations;
-        longitude = record.longitude;
-        latitude = record.latitude;
-        dip = [NSString stringWithFormat:@"%@", record.dip];
-        dipDir = record.dipDirection;
-        strike = [NSString stringWithFormat:@"%@", record.strike];
-        
-        //get the date and time
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM/dd/yy"];        
-        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
-        [timeFormatter setDateFormat:@"HH:mm:ss"];
-        
-        date = [dateFormatter stringFromDate:record.date];
-        NSMutableArray *dateComponents=[date componentsSeparatedByString:@"/"].mutableCopy;
-        NSString *day=[dateComponents objectAtIndex:1];
-        if ([day hasPrefix:@"0"]) {
-            day=[day substringFromIndex:1];
-            [dateComponents replaceObjectAtIndex:1 withObject:day];
-            date=[dateComponents componentsJoinedByString:@"/"];
-        }
-        
-        time = [timeFormatter stringFromDate:record.date];
-        type = [record.class description];
-        //now get the type, and type-specific fields        
-        if([record isKindOfClass:[Bedding class]]) {
-            formation = [[(Bedding *)record  formation] formationName];
-        }else if([record isKindOfClass:[Contact class]]) {
-            lowerFormation = [[(Contact*)record lowerFormation] formationName];
-            upperFormation = [[(Contact*)record upperFormation] formationName];
-        }else if([record isKindOfClass:[JointSet class]]) {
-            formation = [[(JointSet *)record formation] formationName];
-        }else if([record isKindOfClass:[Fault class]]) {
-            formation = [[(Fault *)record formation] formationName];
-            plunge = [(Fault *)record plunge];
-            trend = [(Fault *)record trend];
-        }else if([record isKindOfClass:[Other class]]) {
-            //nothing to populate
-        }       
-        
-        //save the image file        
-        if(record.image) {
-            mediaDir=[documentDirPath stringByAppendingPathComponent:record.folder.folderName];
-            mediaDir=[mediaDir stringByAppendingPathComponent:@"media"];
+    NSString *imageFileName=@"";
+    if(record.image) {                  
+       imageFileName = [NSString stringWithFormat:@"%@_%@.jpeg", record.folder.folderName, record.name];
+        NSString *imageFilePath = [mediaDirPath stringByAppendingPathComponent:imageFileName];
+        if(![fileManager fileExistsAtPath:imageFilePath]){
+            [fileManager createFileAtPath:imageFilePath contents:nil attributes:nil];
             
-            imageFileName = [NSString stringWithFormat:@"%@_%@.jpeg", record.folder.folderName, record.name];
-            imageFilePath = [mediaDir stringByAppendingPathComponent:imageFileName];
-            if(![fileManager fileExistsAtPath:imageFilePath]){
-                [fileManager createFileAtPath:imageFilePath contents:nil attributes:nil];
-                
-                NSFileHandle *mediaFileHandler = [NSFileHandle fileHandleForWritingAtPath:imageFilePath];
-                NSData *image=UIImageJPEGRepresentation([[UIImage alloc] initWithData:record.image.imageData], 1.0);
-                [mediaFileHandler writeData:image];
-                [mediaFileHandler closeFile];
-            }
+            NSFileHandle *mediaFileHandler = [NSFileHandle fileHandleForWritingAtPath:imageFilePath];
+            NSData *image=UIImageJPEGRepresentation([[UIImage alloc] initWithData:record.image.imageData], 1.0);
+            [mediaFileHandler writeData:image];
+            [mediaFileHandler closeFile];
         }
-        
-        //finally write the string tokens to the csv file
-        if ([observation componentsSeparatedByString:@","].count>1 || [observation componentsSeparatedByString:@"\n"].count>1)
-            recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,\"%@\",%@,%@,%@,%@,%@,%@\r\n",
-                          name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
-        else
-            recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\r\n",
-                          name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
-        [fileHandler writeData:[recordData dataUsingEncoding:NSUTF8StringEncoding]];    
     }
+                  
+    //finally write the string tokens to the csv file
+    NSString *recordData=@"";
+    if ([observation componentsSeparatedByString:@","].count>1 || [observation componentsSeparatedByString:@"\n"].count>1)
+        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,\"%@\",%@,%@,%@,%@,%@,%@\r\n",
+                      name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
+    else
+        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\r\n",
+                      name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
+    [fileHandler writeData:[recordData dataUsingEncoding:NSUTF8StringEncoding]];
+}
+
+- (void)writeRecords:(NSArray *)records withFileHandlers:(NSDictionary *)fileHandlers andSaveImagesInPath:(NSDictionary *) mediaDirectories 
+{        
+    //Get the data from each record
+    for(Record *record in records) {
+        //Write each record out
+        NSString *folderName=record.folder.folderName;
+        NSFileHandle *fileHandler=[fileHandlers objectForKey:folderName];
+        [self writeRecord:record withFileHandler:fileHandler mediaDirectoryPath:[mediaDirectories objectForKey:folderName]];
+    }
+    
     //close all the filehandlers
-    for(NSFileHandle *handler in [fileHandlers allValues]) {
+    for(NSFileHandle *handler in [fileHandlers allValues])
         [handler closeFile];
-    }
 }
 
 #pragma mark - Creation of CSV for formations
@@ -622,17 +607,19 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             [folders removeObjectForKey:formation.formationFolder.folderName];
             [formationArray addObject:formation.formationName];
             [folders setValue:formationArray forKey:formation.formationFolder.folderName];
-        }else {
+        } else {
             //otherwise create a new array and add to the dictionary with the foldername as the key to that array
             NSMutableArray *formationArray = [[NSMutableArray alloc] initWithObjects:formation.formationName, nil];
             [folders setValue:formationArray forKey:formation.formationFolder.folderName];
         }
     }
+    
     //now write the csv files with the contents of the dictionary
     [self writeFormations:folders];    
 }
 
 -(void)writeFormations:(NSDictionary *)formations {
+    //Format the date
     NSDate *current = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-DD-YYYY"];
