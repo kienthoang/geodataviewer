@@ -603,4 +603,40 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark - Change active records
+
+- (BOOL)hasNextRecord {
+    //If the currently chosen record is not the last record
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:self.chosenRecord];
+    return indexPath.row<self.fetchedResultsController.fetchedObjects.count-1;
+}
+
+- (BOOL)hasPrevRecord {
+    //If the currently chosen record is not the first record and there's more than 1 record
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:self.chosenRecord];
+    return indexPath.row>0 && self.fetchedResultsController.fetchedObjects.count>1;
+}
+
+- (void)forwardToNextRecord {
+    //Get the index path of the currenly chosen record
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:self.chosenRecord];
+    
+    //if there is a next record, choose the next record
+    if ([self hasNextRecord]) {
+        NSIndexPath *nextIndexPath=[NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
+        self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:nextIndexPath];
+    }
+} 
+
+- (void)backToPrevRecord {
+    //Get the index path of the currenly chosen record
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:self.chosenRecord];
+    
+    //If there is a prev record, choose the prev record
+    if ([self hasPrevRecord]) {
+        NSIndexPath *prevIndexPath=[NSIndexPath indexPathForRow:indexPath.row-1 inSection:indexPath.section];
+        self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:prevIndexPath];
+    }
+}
+
 @end

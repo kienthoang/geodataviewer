@@ -164,6 +164,7 @@
 		0205C7AA159CD79900CA1223 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		0205C7AB159CD79900CA1223 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
 		0207374015B70B610068F7DB /* ExportRecordTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportRecordTableViewControllerDelegate.h; sourceTree = "<group>"; };
+		0207375A15B79C900068F7DB /* IEEngineNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEEngineNotificationNames.h; sourceTree = "<group>"; };
 		020EBB5815941F7C00EECC08 /* FolderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableViewController.h; sourceTree = "<group>"; };
 		020EBB5915941F7C00EECC08 /* FolderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableViewController.m; sourceTree = "<group>"; };
 		020EBB7B15941FB400EECC08 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
@@ -674,6 +675,7 @@
 			children = (
 				0249E2ED15A9040800A7532E /* ModelGroupNotificationNames.h */,
 				02F86EF615AFE13B000A84D2 /* IEConflictHandlerNotificationNames.h */,
+				0207375A15B79C900068F7DB /* IEEngineNotificationNames.h */,
 			);
 			name = "NSNotification Registrations";
 			sourceTree = "<group>";

@@ -20,8 +20,6 @@
 
 @implementation ImportTableViewController
 
-@synthesize importDelegate=_importDelegate;
-
 @synthesize csvFileNames=_csvFileNames;
 @synthesize selectedCSVFiles=_selectedCSVFiles;
 
@@ -34,6 +32,11 @@
 @synthesize deleteButton=_deleteButton;
 @synthesize addButton=_addButton;
 @synthesize hiddenButton=_hiddenButton;
+
+- (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
+}
 
 #pragma mark - Getters and Setters
 
@@ -90,7 +93,6 @@
 }
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
-   
 }
 
 #pragma mark - View Controller Lifecycle

@@ -12,7 +12,9 @@
 #import "RecordTableViewController.h"
 #import "FolderTableViewController.h"
 #import "FormationFolderTableViewController.h"
+
 #import "ImportTableViewController.h"
+#import "RecordImportTVC.h"
 
 #import "DataMapSegmentViewController.h"
 #import "RecordViewController.h"
@@ -20,10 +22,9 @@
 #import "RecordViewControllerDelegate.h"
 #import "DataMapSegmentControllerDelegate.h"
 
-#import "ImportTableViewControllerDelegate.h"
-#import "RecordImportTVC.h"
-
 #import "ModelGroupNotificationNames.h"
+#import "IEEngineNotificationNames.h"
+#import "IEConflictHandlerNotificationNames.h"
 
 #import "Record+Modification.h"
 #import "Record+Validation.h"
@@ -31,7 +32,7 @@
 
 #import "GeoDatabaseManager.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate,ImportTableViewControllerDelegate>
+@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -111,7 +112,6 @@
     
     //Instantiate the record import popover
     UINavigationController *recordImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
-    [(ImportTableViewController *)recordImportTVC.topViewController setImportDelegate:self];
     self.importPopover=[[UIPopoverController alloc] initWithContentViewController:recordImportTVC];
     
     //Present it
@@ -124,7 +124,6 @@
     
     //Instantiate the record import popover
     UINavigationController *formationImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FORMATION_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
-    [(ImportTableViewController *)formationImportTVC.topViewController setImportDelegate:self];
     self.importPopover=[[UIPopoverController alloc] initWithContentViewController:formationImportTVC];
     
     //Present it
@@ -257,45 +256,6 @@
     }
 }
 
-#pragma mark - Model Group Notifcation Handlers
-
-- (void)modelGroupFolderDatabaseDidUpdate:(NSNotification *)notification {
-    //Update the map
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
-}
-
-- (void)modelGroupRecordDatabaseDidUpdate:(NSNotification *)notification {
-    //Update the map
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
-    
-    //Pop the detail record vc (if the chosen record got deleted)
-    RecordTableViewController *recordTVC=[self recordTableViewController];
-    if (!recordTVC.chosenRecord) {
-        [dataMapSegmentVC pushInitialViewController];
-        if (!dataMapSegmentVC.topViewController)
-            [self swapToSegmentIndex:0];
-    }
-}
-
-- (void)modelGroupDidCreateNewRecord:(NSNotification *)notification {
-    //If the data side of the data map segment controller is not a record view controller, push rvc
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
-        [dataMapSegmentVC pushRecordViewController];
-    
-    //Switch to the data side
-    if (![dataMapSegmentVC.topViewController isKindOfClass:[RecordViewController class]])
-        [self swapToSegmentIndex:0];
-    
-    //Put the record view controller in editing mode
-    [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
-    
-    //Dismiss the popover
-    [self.popoverViewController dismissPopoverAnimated:NO];
-}
-
 #pragma mark - Prepare for Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -336,6 +296,122 @@
 
 #pragma mark - KVO/NSNotification Managers
 
+- (void)modelGroupFolderDatabaseDidUpdate:(NSNotification *)notification {
+    //Update the map
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
+}
+
+- (void)modelGroupRecordDatabaseDidUpdate:(NSNotification *)notification {
+    //Update the map
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
+    
+    //Pop the detail record vc (if the chosen record got deleted)
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    if (!recordTVC.chosenRecord) {
+        [dataMapSegmentVC pushInitialViewController];
+        if (!dataMapSegmentVC.topViewController)
+            [self swapToSegmentIndex:0];
+    }
+}
+
+- (void)modelGroupDidCreateNewRecord:(NSNotification *)notification {
+    //If the data side of the data map segment controller is not a record view controller, push rvc
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
+        [dataMapSegmentVC pushRecordViewController];
+    
+    //Switch to the data side
+    if (![dataMapSegmentVC.topViewController isKindOfClass:[RecordViewController class]])
+        [self swapToSegmentIndex:0];
+    
+    //Dismiss the popover
+    [self.popoverViewController dismissPopoverAnimated:NO];
+    
+    //Put the record view controller in editing mode
+    [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
+}
+
+- (void)putImportExportButtonBack {
+    //Hide spinner and put up the import button
+    __weak GeoFieldBookController *weakSelf=self;
+    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Hide the spinner
+        [weakSelf.importExportSpinner stopAnimating];
+        int index=[toolbarItems indexOfObject:weakSelf.importExportSpinnerBarButtonItem];
+        [toolbarItems removeObject:weakSelf.importExportSpinnerBarButtonItem];
+        [toolbarItems insertObject:weakSelf.importExportButton atIndex:index];
+        weakSelf.toolbar.items=toolbarItems.copy;
+    });
+}
+
+- (void)importingDidStart:(NSNotification *)notification {
+    //Put up a spinner for the import button
+    __weak GeoFieldBookController *weakSelf=self;
+    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
+        [spinner startAnimating];
+        int index=[toolbarItems indexOfObject:weakSelf.importExportButton];
+        [toolbarItems removeObject:weakSelf.importExportButton];
+        [toolbarItems insertObject:spinnerBarButtonItem atIndex:index];
+        weakSelf.toolbar.items=toolbarItems.copy;
+        
+        weakSelf.importExportSpinner=spinner;
+        weakSelf.importExportSpinnerBarButtonItem=spinnerBarButtonItem; 
+    });
+}
+
+- (void)recordImportingDidStart:(NSNotification *)notification {
+    [self importingDidStart:notification];
+    UINavigationController *modelNav=(UINavigationController *)self.popoverViewController.contentViewController;
+    [modelNav popToRootViewControllerAnimated:NO];
+}
+
+- (void)formationImportingDidStart:(NSNotification *)notification {
+    [self importingDidStart:notification];
+}
+
+- (void)importingWasCanceled:(NSNotification *)notification {
+    //Put the import export button back
+    [self putImportExportButtonBack];
+}
+
+- (void)importingDidEnd:(NSNotification *)notification {
+    //Hide spinner and put up the import button
+    [self putImportExportButtonBack];
+    
+    //Show done alert in the main queue (UI stuff)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Put up an alert
+        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Finished Importing" message:nil delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [doneAlert show];
+        
+        //Tell the folder tvc to reload its data
+        FolderTableViewController *folderTVC=[self folderTableViewController];
+        [folderTVC reloadVisibleCells];
+    });
+}
+
+- (void)exportingDidEnd:(NSNotification *)notification {
+    //Put up alert in the main queue (UI stuff)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Exporting Finished" message:@"" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [doneAlert show];
+    });
+}
+
+- (void)handleValidationErrors:(NSNotification *)notification {
+    //Put up an alert in the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Put the import export button back again
+        [self putImportExportButtonBack];
+    });
+}
+
 - (void)registerForModelGroupNotifications {
     //Register to receive notifications from the model group
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
@@ -350,6 +426,31 @@
     [notificationCenter addObserver:self 
                            selector:@selector(modelGroupDidCreateNewRecord:) 
                                name:GeoNotificationModelGroupDidCreateNewRecord 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(importingDidEnd:) 
+                               name:GeoNotificationConflictHandlerImportingDidEnd 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(importingWasCanceled:) 
+                               name:GeoNotificationConflictHandlerImportingWasCanceled
+                             object:nil];
+    
+    [notificationCenter addObserver:self 
+                           selector:@selector(recordImportingDidStart:) 
+                               name:GeoNotificationIEEngineRecordImportingDidStart
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(formationImportingDidStart:) 
+                               name:GeoNotificationIEEngineFormationImportingDidStart
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(exportingDidEnd:) 
+                               name:GeoNotificationIEEngineExportingDidEnd
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(handleValidationErrors:) 
+                               name:GeoNotificationConflictHandlerValidationErrorsOccur 
                              object:nil];
 }
 
@@ -494,25 +595,33 @@
 
 #pragma mark - DataMapSegmentViewControllerDelegate protocol methods
 
+- (void)removeEditButton {
+    //Remove edit button
+    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
+    for (int index=0;index<[toolbarItems count];index++) {
+        UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
+        if ([barButtonItem.title isEqualToString:@"Edit"] || [barButtonItem.title isEqualToString:@"Done"])
+            [toolbarItems removeObject:barButtonItem];        
+    }
+    
+    //Set the tolbar
+    self.toolbar.items=[toolbarItems copy];
+}
+
 - (void)setupEditButtonForViewController:(UIViewController *)viewController {
     //If the swapped in view controller is the record view controller put up the edit button
     NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
     if ([viewController isKindOfClass:[RecordViewController class]]) {
         RecordViewController *recordDetail=(RecordViewController *)viewController;
-        [toolbarItems addObject:recordDetail.editButton];
+        if (![toolbarItems containsObject:recordDetail.editButton])
+            [toolbarItems addObject:recordDetail.editButton];
+        //Set the tolbar
+        self.toolbar.items=[toolbarItems copy];
     }
     
     //If the edit button is on the toolbar, take it off
-    else {
-        for (int index=0;index<[toolbarItems count];index++) {
-            UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
-            if ([barButtonItem.title isEqualToString:@"Edit"] || [barButtonItem.title isEqualToString:@"Done"])
-                [toolbarItems removeObject:barButtonItem];
-        }
-    }
-    
-    //Set the tolbar
-    self.toolbar.items=[toolbarItems copy];
+    else
+        [self removeEditButton];
 }
 
 - (void)setupTrackingButtonForViewController:(UIViewController *)viewController {
@@ -610,6 +719,52 @@
     }
 }
 
+- (void)replaceWithEditButtonOfRecordViewController:(RecordViewController *)recordVC {
+    //Remove the old edit button
+    [self removeEditButton];
+    
+    //Put up the new one
+    [self setupEditButtonForViewController:recordVC];
+}
+
+- (void)swipeWithTransitionAnimation:(TransionAnimationOption)animationOption forward:(BOOL)forward {
+    //Switch record
+    __weak GeoFieldBookController *weakSelf=self;
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC pushRecordViewControllerWithTransitionAnimation:animationOption setup:^(){
+        //Set the delegate of the new record vc
+        [dataMapSegmentVC setRecordViewControllerDelegate:weakSelf];
+        
+        //Move the next record
+        RecordTableViewController *recordTVC=[weakSelf recordTableViewController];
+        if (recordTVC) {
+            //If switching to the next record
+            if (forward)
+                [recordTVC forwardToNextRecord];
+            else
+                [recordTVC backToPrevRecord];
+        }
+    } completion:^{
+        //Replace the old edit button with the new one
+        RecordViewController *newRecordVC=(RecordViewController *)dataMapSegmentVC.topViewController;
+        [self replaceWithEditButtonOfRecordViewController:newRecordVC];
+    }];
+}
+
+- (void)userDidSwipeLeftInRecordViewController:(RecordViewController *)sender {
+    //Switch to the next record
+    RecordTableViewController *recordVC=[self recordTableViewController];
+    if (recordVC && [recordVC hasNextRecord])
+        [self swipeWithTransitionAnimation:TransitionAnimationPushRight forward:YES];
+}
+
+- (void)userDidSwipeRightInRecordViewController:(RecordViewController *)sender {
+    //Switch to the prev record
+    RecordTableViewController *recordVC=[self recordTableViewController];
+    if (recordVC && [recordVC hasPrevRecord])
+        [self swipeWithTransitionAnimation:TransitionAnimationPushLeft forward:NO];
+}
+
 #pragma mark - RecordMapViewControllerDelegate protocol methods
 
 - (NSArray *)recordsFromModelGroup {
@@ -689,66 +844,6 @@
     //Nillify the temporary record modified data
     self.modifiedRecord=nil;
     self.recordModifiedInfo=nil;
-}
-
-#pragma mark - ImportTableViewControllerDelegate protocol methods
-
-- (void)importTableViewControllerDidStartImporting:(ImportTableViewController *)sender {
-    //Put up a spinner for the import button
-    __weak GeoFieldBookController *weakSelf=self;
-    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
-        [spinner startAnimating];
-        int index=[toolbarItems indexOfObject:weakSelf.importExportButton];
-        [toolbarItems removeObject:weakSelf.importExportButton];
-        [toolbarItems insertObject:spinnerBarButtonItem atIndex:index];
-        weakSelf.toolbar.items=toolbarItems.copy;
-        
-        weakSelf.importExportSpinner=spinner;
-        weakSelf.importExportSpinnerBarButtonItem=spinnerBarButtonItem; 
-    });
-    
-    if ([sender isKindOfClass:[RecordImportTVC class]]) {
-        UINavigationController *modelNav=(UINavigationController *)self.popoverViewController.contentViewController;
-        [modelNav popToRootViewControllerAnimated:NO];
-    }
-}
-
-- (void)putImportExportButtonBack {
-    //Hide spinner and put up the import button
-    __weak GeoFieldBookController *weakSelf=self;
-    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //Hide the spinner
-        [weakSelf.importExportSpinner stopAnimating];
-        int index=[toolbarItems indexOfObject:weakSelf.importExportSpinnerBarButtonItem];
-        [toolbarItems removeObject:weakSelf.importExportSpinnerBarButtonItem];
-        [toolbarItems insertObject:weakSelf.importExportButton atIndex:index];
-        weakSelf.toolbar.items=toolbarItems.copy;
-    });
-}
-
-- (void)importTableViewControllerDidEndImporting:(ImportTableViewController *)sender {
-    //Hide spinner and put up the import button
-    [self putImportExportButtonBack];
-    
-    //Show done alert
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //Put up an alert
-        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Finished Importing" message:nil delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        [doneAlert show];
-        
-        //Tell the folder tvc to reload its data
-        FolderTableViewController *folderTVC=[self folderTableViewController];
-        [folderTVC reloadVisibleCells];
-    });
-}
-
-- (void)importTableViewControllerDidCancelImporting:(ImportTableViewController *)sender {
-    //Put the import export button back
-    [self putImportExportButtonBack];
 }
 
 @end

@@ -33,6 +33,10 @@
 #define TransientRecordMaximumDip 90
 #define TransientRecordMinimumStrike 0
 #define TransientRecordMaximumStrike 360
+#define TransientRecordMinimumLongitude -180
+#define TransientRecordMaximumLongitude 180
+#define TransientRecordMinimumLatitude -90
+#define TransientRecordMaximumLatitude 90
 
 #pragma mark - Setters with validations
 

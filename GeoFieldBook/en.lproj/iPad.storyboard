@@ -83,7 +83,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" rowHeight="62" id="ABX-2A-DqK" customClass="CustomFolderCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" editingAccessoryType="detailDisclosureButton" rowHeight="62" id="ABX-2A-DqK" customClass="CustomFolderCell">
                                 <rect key="frame" x="0.0" y="54" width="1024" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -213,7 +213,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" textLabel="aX7-rK-jy5" detailTextLabel="OPG-dX-d4C" style="IBUITableViewCellStyleSubtitle" id="g5m-A9-XLq">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Folder Cell" editingAccessoryType="detailDisclosureButton" textLabel="aX7-rK-jy5" detailTextLabel="OPG-dX-d4C" style="IBUITableViewCellStyleSubtitle" id="g5m-A9-XLq">
                                 <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2012,39 +2012,35 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="9gs-NN-udG">
-                                <rect key="frame" x="0.0" y="0.0" width="433" height="665"/>
+                                <rect key="frame" x="0.0" y="0.0" width="433" height="704"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="sTq-JU-6dH">
-                                <rect key="frame" x="432" y="0.0" width="592" height="665"/>
+                                <rect key="frame" x="432" y="0.0" width="592" height="704"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="K4Y-7w-5Xb">
-                                <rect key="frame" x="432" y="0.0" width="1" height="665"/>
+                                <rect key="frame" x="432" y="0.0" width="1" height="704"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5ov-18-qL8">
-                                <rect key="frame" x="0.0" y="665" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem title="Export" width="100" style="done" id="Hr8-9x-l18">
-                                        <connections>
-                                            <action selector="exportPressed:" destination="lZq-TB-prh" id="FH8-hV-mSC"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
-                    <navigationItem key="navigationItem" id="l7R-yp-NFb"/>
+                    <navigationItem key="navigationItem" id="l7R-yp-NFb">
+                        <barButtonItem key="rightBarButtonItem" title="Export" width="100" style="done" id="Hr8-9x-l18">
+                            <connections>
+                                <action selector="exportPressed:" destination="lZq-TB-prh" id="FH8-hV-mSC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="800" height="500"/>
                     <connections>
                         <outlet property="detailTableView" destination="sTq-JU-6dH" id="wYu-gR-AZu"/>
+                        <outlet property="exportButton" destination="Hr8-9x-l18" id="RW1-e0-3AQ"/>
                         <outlet property="masterTableView" destination="9gs-NN-udG" id="J8N-wT-NZG"/>
                         <segue destination="yaF-yJ-OdO" kind="custom" identifier="detailTableViewController" customClass="DoubleTableViewControllerSegue" id="EnD-tR-ZKY"/>
                         <segue destination="Oac-cG-hGt" kind="custom" identifier="masterTableViewController" customClass="DoubleTableViewControllerSegue" id="UdM-Tv-PXs"/>

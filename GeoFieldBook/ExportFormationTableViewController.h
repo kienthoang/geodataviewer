@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PrototypeFormationTableViewController.h"
-#import "UIDoubleTableViewController.h"
+#import "ExportDoubleTableViewController.h"
 #import "UIDoubleTableViewControllerChildren.h"
 
 #import "ExportFormationTableViewControllerDelegate.h"

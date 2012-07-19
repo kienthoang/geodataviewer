@@ -21,4 +21,9 @@
            whileModifyingRecord:(Record *)record 
                     withNewInfo:(NSDictionary *)newInfo;
 
+@optional
+
+- (void)userDidSwipeLeftInRecordViewController:(RecordViewController *)sender;
+- (void)userDidSwipeRightInRecordViewController:(RecordViewController *)sender;
+
 @end

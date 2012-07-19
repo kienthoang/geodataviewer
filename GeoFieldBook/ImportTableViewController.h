@@ -22,11 +22,13 @@
 @property (nonatomic,strong) IEEngine *engine;
 @property (nonatomic,strong) ConflictHandler *conflictHandler;
 
-@property (nonatomic,weak) id <ImportTableViewControllerDelegate> importDelegate;
-
 @property (nonatomic,weak) IBOutlet UIBarButtonItem *deleteButton;
 @property (nonatomic,weak) IBOutlet UIBarButtonItem *addButton;
 
 #define SECTION_FOOTER_HEIGHT 30
+
+- (IBAction)importPressed:(UIBarButtonItem *)sender;
+
+- (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo;
 
 @end

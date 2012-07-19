@@ -121,21 +121,14 @@
 - (void)importingWasCanceled:(NSNotification *)notification {
     //Put the import button back
     [self putImportButtonBack];
-    
-    //Notify delegate
-    [self.importDelegate importTableViewControllerDidCancelImporting:self];
 }
 
 - (void)importingDidEnd:(NSNotification *)notification {
-    //Notify delegate of the completion of the importing
-    [self.importDelegate importTableViewControllerDidEndImporting:self];
-    
     //Put the import button back again
     [self putImportButtonBack];
     
     //Notify the main controller that the folder database has changed
-    NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
-    [center postNotificationName:GeoNotificationModelGroupFolderDatabaseDidChange object:self];
+    [self postNotificationWithName:GeoNotificationModelGroupFolderDatabaseDidChange withUserInfo:[NSDictionary dictionary]];
 }
 
 - (void)handleFolderNameConflict:(NSNotification *)notification {
@@ -166,10 +159,10 @@
                                             cancelButtonTitle:@"Dismiss" 
                                             otherButtonTitles:nil];
         [alert show];
+        
+        //Put the import button back again
+        [self putImportButtonBack];
     });
-    
-    //Notify the delegate
-    [self importingWasCanceled:notification];
 }
 
 #pragma mark - UITableViewDataSource protocol methods
@@ -194,9 +187,8 @@
 #pragma mark - Target Action Handlers
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
-    //Notify delegate of the start of the importing
-    [self.importDelegate importTableViewControllerDidStartImporting:self];
-    
+    [super importPressed:sender];
+     
     __weak RecordImportTVC *weakSelf=self;
         
     //Start importing in another thread

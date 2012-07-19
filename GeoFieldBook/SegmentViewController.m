@@ -7,11 +7,8 @@
 //
 
 #import "SegmentViewController.h"
-#import "MPFoldTransition.h"
 
 @interface SegmentViewController()
-
-@property (nonatomic,strong) UIViewController *currentViewController;
 
 @end
 
@@ -74,7 +71,7 @@
                 [self.contentView.layer addAnimation:transition forKey:@"push-transition"];
             }
             
-            [self transitionFromViewController:self.currentViewController toViewController:viewController duration:0.5 options:option animations:^{                
+            [self transitionFromViewController:self.currentViewController toViewController:viewController duration:0.75 options:option animations:^{                
                 //Remove the view of the current view controller from the view hierachy
                 [self.currentViewController.view removeFromSuperview];
                 
@@ -125,6 +122,7 @@
         animationOption=segmentIndex ? TransitionAnimationPushRight : TransitionAnimationPushLeft;
     else
         animationOption=self.animationOption;
+    
     [self showViewController:viewController withTransitionAnimationOption:animationOption];
 }
 

@@ -197,7 +197,7 @@
     //Update the text fields and labels
     [self updateFormForRecord:self.record];
         
-    [self.view setNeedsDisplay];
+    [self.view setNeedsDisplay];    
 }
 
 - (NSArray *)textFields {
@@ -747,17 +747,41 @@
 
 #pragma mark - View lifecycle
 
+- (void)leftSwipe:(UISwipeGestureRecognizer *)swipeGesture {
+    //Notify the delegate only if self is not in editing mode
+    if (!self.editing && [self.delegate respondsToSelector:@selector(userDidSwipeLeftInRecordViewController:)])
+        [self.delegate userDidSwipeLeftInRecordViewController:self];
+}
+
+- (void)rightSwipe:(UISwipeGestureRecognizer *)swipeGesture {
+    //Notify the delegate only if not in editing mode
+    if (!self.editing && [self.delegate respondsToSelector:@selector(userDidSwipeRightInRecordViewController:)])
+        [self.delegate userDidSwipeRightInRecordViewController:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     //Update the form
-    [self updateFormForRecord:self.record];
+    if (self.record)
+        [self updateFormForRecord:self.record];
     
     //Set self up to receive notifications when the keyboard appears and disappears (to adjust the text fields and areas when keyboard shows up)
     [self registerForKeyboardNotifications];
     
     //initialize and set up location services
     [self setUpLocationManager];
+    
+    //Add swipe geestures
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipe:)];
+    leftSwipeGestureRecognizer.numberOfTouchesRequired=2;
+    leftSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
+    
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipe:)];
+    rightSwipeGestureRecognizer.numberOfTouchesRequired=2;
+    rightSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
     
     //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
@@ -899,7 +923,6 @@
 
 - (void)formSetupForBeddingType {
     Bedding *bedding=(Bedding *)self.record;
-    NSLog(@"Bedding: %@",bedding);
     
     //Show the formation label and formation textfield set the textfield's value
     self.formationLabel.hidden=NO;
