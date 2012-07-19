@@ -2321,7 +2321,11 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="xfV-1J-fmm">
-                        <barButtonItem key="rightBarButtonItem" title="Export" style="done" id="NlS-x9-YKu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Export" style="done" id="NlS-x9-YKu">
+                            <connections>
+                                <action selector="exportPressed:" destination="N1Y-Pe-ENT" id="JLe-5v-liS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="800" height="500"/>
                     <connections>
