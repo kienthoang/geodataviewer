@@ -18,4 +18,6 @@
 @property (nonatomic,strong) NSSet *selectedFormations;
 @property (nonatomic,weak) id <ExportFormationTableViewControllerDelegate> delegate;
 
+- (void)updateSelectedFormationsWith:(NSSet *)formations;
+
 @end

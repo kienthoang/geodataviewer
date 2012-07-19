@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Ipy-TH-jYd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Ipy-TH-jYd">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -1823,7 +1823,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="dA4-xg-Zeu" style="IBUITableViewCellStyleDefault" id="E8V-gu-FXK">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Formation Cell" textLabel="dA4-xg-Zeu" style="IBUITableViewCellStyleDefault" id="E8V-gu-FXK">
                                 <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2127,11 +2127,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" rowHeight="62" id="5Jl-s3-FDW" customClass="CustomFolderCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Folder Cell" editingAccessoryType="detailDisclosureButton" rowHeight="62" id="5Jl-s3-FDW" customClass="CustomFolderCell">
                                 <rect key="frame" x="0.0" y="22" width="1024" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="61"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="61"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="DAa-v6-wjz">
@@ -2321,12 +2321,16 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="xfV-1J-fmm">
-                        <barButtonItem key="rightBarButtonItem" title="Export" style="done" id="NlS-x9-YKu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Export" style="done" id="NlS-x9-YKu">
+                            <connections>
+                                <action selector="exportPressed:" destination="N1Y-Pe-ENT" id="gz9-lI-nTw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="800" height="500"/>
                     <connections>
                         <outlet property="detailTableView" destination="BJj-p4-MXj" id="Wih-Hg-Ld7"/>
-                        <outlet property="exportButton" destination="NlS-x9-YKu" id="WJ7-WT-WVd"/>
+                        <outlet property="exportButton" destination="NlS-x9-YKu" id="2G4-Wd-dSL"/>
                         <outlet property="masterTableView" destination="6J5-Qh-bo1" id="hkL-sq-z76"/>
                         <segue destination="2Bj-Pv-dtZ" kind="custom" identifier="detailTableViewController" customClass="DoubleTableViewControllerSegue" id="osF-gH-OC3"/>
                         <segue destination="cZu-9R-oqH" kind="custom" identifier="masterTableViewController" customClass="DoubleTableViewControllerSegue" id="y0a-aW-w1i"/>

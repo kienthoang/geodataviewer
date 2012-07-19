@@ -25,7 +25,23 @@
     }
     
     return filteredText;
-        
+}
+
++ (NSString *)csvCompliantStringFromString:(NSString *)text {
+    //Put quotation marks around if there is a comma or a new line character
+    if ([text componentsSeparatedByString:@","].count>1 || [text componentsSeparatedByString:@"\n"])
+        text=[NSString stringWithFormat:@"\"%@\"",text];
+    return text;
+}
+
++ (NSString *)stringFromCSVCompliantString:(NSString *)csvCompliantString {
+    //Strip a pair of quotation marks 
+    if([csvCompliantString componentsSeparatedByString:@","].count >1 || [csvCompliantString componentsSeparatedByString:@"\n"].count >1){ //if commas in the token data, , get rid of the enclosing quotes
+        NSRange range = NSMakeRange(1,csvCompliantString.length-2);           
+        csvCompliantString = [csvCompliantString substringWithRange:range];
+    }
+    
+    return csvCompliantString;
 }
 
 @end

@@ -48,8 +48,9 @@
         [(ExportRecordTableViewController *)self.detailTableViewController setDelegate:exportFolderTVC];
     }
     else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
-        ExportFormationFolderTableViewController *exportFormationsTVC = (ExportFormationFolderTableViewController *)self.masterTableViewController;
-        [(ExportFormationTableViewController *)self.detailTableViewController setDelegate:exportFormationsTVC];
+        ExportFormationFolderTableViewController *exportFormationFolderTVC = (ExportFormationFolderTableViewController *)self.masterTableViewController;
+        exportFormationFolderTVC.exportButtonOwner=self;
+        [(ExportFormationTableViewController *)self.detailTableViewController setDelegate:exportFormationFolderTVC];
     }
     
     //Register to hear notification
@@ -76,14 +77,6 @@
                            selector:@selector(exportingDidEnd:) 
                                name:GeoNotificationIEEngineExportingDidEnd 
                              object:nil];
-    /*if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
-        exportedItems = [(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
-    }
-    else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
-        exportedItems = [(ExportFormationFolderTableViewController *)self.masterTableViewController selectedFormations];
-    }
-    
-    [self.exportEngine createCSVFilesFromRecords:exportedItems];*/
 }
 
 - (void)exportingDidEnd:(NSNotification *)notification {

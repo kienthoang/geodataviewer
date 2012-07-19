@@ -22,6 +22,8 @@
 
 #import "IEEngineNotificationNames.h"
 
+#import "TextInputFilter.h"
+
 @interface IEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
@@ -391,7 +393,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //Skip blank line and parse the rest
     for(NSString *line in allLines) {
         if (line.length)
-            [records addObject:[self parseLine:line]];
+            [records addObject:[self tokenArrayForLine:line]];
     }
     
     return records;
@@ -412,13 +414,15 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     return paths;
 }
 
-- (NSArray *)parseLine:(NSString *) line
+- (NSArray *)tokenArrayForLine:(NSString *)line
 {
-    NSMutableArray *values = [line componentsSeparatedByString:@","].mutableCopy;
-    values = [self separateRecordsOrFieldsByCountingQuotations:values byAppending:@","];
-    [self fixDoubleQuotationsWhileParsingLine:values];
-    
-    return values;
+    //Get tokens from each line
+    NSMutableArray *tokenArray = [line componentsSeparatedByString:@","].mutableCopy;
+    tokenArray = [self separateRecordsOrFieldsByCountingQuotations:tokenArray byAppending:@","];
+        
+    //Filter each token (get rid of extra quotation marks or any auxiliary, csv-added symbols)
+    NSArray *filterTokenArray=[self filterTokenArray:tokenArray.copy];
+    return filterTokenArray;
 }
 -(NSMutableArray *) fixNewLineCharactersInData:(NSArray *)records {
     return [self separateRecordsOrFieldsByCountingQuotations:records byAppending:@"\n"];
@@ -427,11 +431,11 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 -(NSMutableArray *) separateRecordsOrFieldsByCountingQuotations:(NSArray *) array byAppending:(NSString *) separator {
     NSString *merged=@"";
     NSString *current=@"";
-    BOOL repeat;
+    BOOL repeat=NO;
     NSMutableArray *copy = [array mutableCopy];
     do {
         repeat = NO;
-        int length = [copy count];
+        int length = copy.count;
         for(int i = 0; i<length; i++) {
             current = [copy objectAtIndex:i];
             int quotes = [[current componentsSeparatedByString:@"\""] count]-1; //number of quotes
@@ -444,27 +448,19 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
                 break;
             }
         }
-        if(!repeat) 
-            break;
-    } while (YES);
+    } while (repeat);
         
     return copy;
 }
 
--(NSMutableArray *) fixDoubleQuotationsWhileParsingLine:(NSMutableArray *) values {
-    NSString *current;
-    for(int i = 0; i<[values count]; i++) {
-        current = [values objectAtIndex:i];
-        if([current componentsSeparatedByString:@","].count >1 || [current componentsSeparatedByString:@"\n"].count >1){ //if commas in the token data, , get rid of the enclosing quotes
-            NSRange range = NSMakeRange(1, [current length]-2);           
-            current = [current substringWithRange:range];
-        }
-        if([current length]>1) { //now replace all two double quote(s) with one.
-            [values replaceObjectAtIndex:i withObject:[current stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""]]; 
-        }        
-    }
+- (NSArray *)filterTokenArray:(NSArray *)tokenArray {
+    NSMutableArray *mutableTokenArray=tokenArray.mutableCopy;
+    for (int i=0;i<tokenArray.count;i++) {
+        NSString *token=[tokenArray objectAtIndex:i];
+        [mutableTokenArray replaceObjectAtIndex:i withObject:[TextInputFilter stringFromCSVCompliantString:token]];
+    }        
     
-    return values;
+    return mutableTokenArray.copy;
 }
 
 #pragma mark - Creation of CSV files
@@ -515,7 +511,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         [handler truncateFileAtOffset:0]; 
         
         //write the column headings to the csv
-        NSString *titles = [NSString stringWithFormat:@"Name, Type, Longitude, Latitude, Date,Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \r\n"];
+        NSString *titles = [NSString stringWithFormat:@"Name, Type, Longitude, Latitude, Date,Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \n"];
         [handler writeData:[titles dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
@@ -586,10 +582,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //finally write the string tokens to the csv file
     NSString *recordData=@"";
     if ([observation componentsSeparatedByString:@","].count>1 || [observation componentsSeparatedByString:@"\n"].count>1)
-        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,\"%@\",%@,%@,%@,%@,%@,%@\r\n",
+        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,\"%@\",%@,%@,%@,%@,%@,%@\n",
                       name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
     else
-        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\r\n",
+        recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
                       name,type,longitude,latitude,date,time,strike,dip,dipDir,observation,formation,lowerFormation,upperFormation,trend,plunge,imageFileName];
     [fileHandler writeData:[recordData dataUsingEncoding:NSUTF8StringEncoding]];
 }
@@ -628,16 +624,19 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     }
     
     //now write the csv files with the contents of the dictionary
-    [self writeFormations:folders];    
+    [self writeFormations:folders];  
+    
+    //Post a notification when done
+    [self postNotificationWithName:GeoNotificationIEEngineExportingDidEnd withUserInfo:[NSDictionary dictionary]];
 }
 
 -(void)writeFormations:(NSDictionary *)formations {
     //Format the date
     NSDate *current = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM-DD-YYYY"];
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-    [timeFormatter setDateFormat:@"HH:MM:SS"];
+    [dateFormatter setDateFormat:@"MM-dd-yy"];        
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init]; 
+    [timeFormatter setDateFormat:@"HH:mm:ss"];
 
     //create the file in the documents directory
     NSString *formationFileName = [NSString stringWithFormat:@"Formation_%@_%@",[dateFormatter stringFromDate:current], [timeFormatter stringFromDate:current]];
@@ -651,14 +650,14 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     //now write the records to the csv file
     for(NSString *folderName in [formations allKeys]) {
-        NSString *record =@"";
-        [record stringByAppendingString:folderName];
+        NSString *line =@"";
+        line=[line stringByAppendingString:folderName];
         
-        for(NSString *formation in [formations valueForKey:folderName]) {
-            [record stringByAppendingFormat:@"\",%@\""];
-        }
-        [record stringByAppendingString:@"\r\n"];
-        [handler writeData:[record dataUsingEncoding:NSUTF8StringEncoding]];
+        for(NSString *formation in [formations objectForKey:folderName])
+            line=[line stringByAppendingFormat:@",%@",formation];
+            
+        line=[line stringByAppendingString:@"\r\n"];
+        [handler writeData:[line dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
     [handler closeFile];

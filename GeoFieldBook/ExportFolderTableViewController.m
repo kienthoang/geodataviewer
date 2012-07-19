@@ -78,7 +78,7 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     //Get the folder corresponding to the given index path
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
+        
     //Update
     [self userDidChangeSelectedRecordsForFolder:folder];
 }
