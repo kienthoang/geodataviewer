@@ -171,24 +171,17 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     NSString *timeColumn = [[lineArray objectAtIndex:Time] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSArray *dateArray = [dateColumn componentsSeparatedByString:@"/"];
     NSArray *timeArray = [timeColumn componentsSeparatedByString:@":"];
- 
-    
-    NSArray *keys = [[NSArray alloc] initWithObjects:@"January",@"February", @"March", @"April", @"May", @"June", @"July", @"August", @"September", @"October", @"November", @"December", nil];
-    NSArray *values = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:2],[NSNumber numberWithInt:3],[NSNumber numberWithInt:4],[NSNumber numberWithInt:5],[NSNumber numberWithInt:6],[NSNumber numberWithInt:7],[NSNumber numberWithInt:8],[NSNumber numberWithInt:9],[NSNumber numberWithInt:10],[NSNumber numberWithInt:11],[NSNumber numberWithInt:12], nil];
-     
-    
-    NSDictionary *months = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
+
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    
-    [comps setYear:[[NSString stringWithFormat:@"20%@",[dateArray objectAtIndex:2]] intValue]];
-    [comps setMonth:(NSInteger)[months valueForKey:[dateArray objectAtIndex:0]]];
+    [comps setYear:[[NSString stringWithFormat:@"20%@",[dateArray objectAtIndex:2]] intValue]];;
+    [comps setMonth:[[dateArray objectAtIndex:0] intValue]];
     [comps setDay:[[dateArray objectAtIndex:1] intValue]];
     
     [comps setHour:[[timeArray objectAtIndex:0] intValue]];
     [comps setMinute:[[timeArray objectAtIndex:1] intValue]];
     [comps setSecond:[[timeArray objectAtIndex:2] intValue]];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDate *newDate = [gregorian dateFromComponents:comps]; 
+    NSDate *newDate = [gregorian dateFromComponents:comps];
     
     //finally populate the date field
     record.date = newDate;
@@ -445,7 +438,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
                 [copy replaceObjectAtIndex:i withObject:merged];
                 [copy removeObjectAtIndex:i+1];
                 repeat = YES;
-                length = [copy count];
+                length = copy.count;
                 break;
             }
         }
