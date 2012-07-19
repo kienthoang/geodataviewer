@@ -42,9 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    //UITableViewController *exportTVC;
-    
     if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
         ExportFolderTableViewController *exportFolderTVC = (ExportFolderTableViewController *)self.masterTableViewController;
         exportFolderTVC.exportButtonOwner=self;
@@ -54,12 +51,10 @@
         ExportFormationFolderTableViewController *exportFormationsTVC = (ExportFormationFolderTableViewController *)self.masterTableViewController;
         [(ExportFormationTableViewController *)self.detailTableViewController setDelegate:exportFormationsTVC];
     }
-    else {
-        //
-    }
     
     //Register to hear notification
     [self registerForIEEngineNotifications];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -81,7 +76,14 @@
                            selector:@selector(exportingDidEnd:) 
                                name:GeoNotificationIEEngineExportingDidEnd 
                              object:nil];
+    /*if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
+        exportedItems = [(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
+    }
+    else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
+        exportedItems = [(ExportFormationFolderTableViewController *)self.masterTableViewController selectedFormations];
+    }
     
+    [self.exportEngine createCSVFilesFromRecords:exportedItems];*/
 }
 
 - (void)exportingDidEnd:(NSNotification *)notification {
