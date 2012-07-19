@@ -41,6 +41,10 @@
         csvCompliantString = [csvCompliantString substringWithRange:range];
     }
     
+    //Replace double quotes = 1 quote (contiguous)
+    if(csvCompliantString.length>1) 
+        csvCompliantString=[csvCompliantString stringByReplacingOccurrencesOfString:@"\"\"" withString:@"\""]; 
+    
     return csvCompliantString;
 }
 

@@ -422,6 +422,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         
     //Filter each token (get rid of extra quotation marks or any auxiliary, csv-added symbols)
     NSArray *filterTokenArray=[self filterTokenArray:tokenArray.copy];
+    
     return filterTokenArray;
 }
 -(NSMutableArray *) fixNewLineCharactersInData:(NSArray *)records {
@@ -486,7 +487,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         NSString *dataDirectory = [documentsDirectory stringByAppendingPathComponent:newFolder];
         NSString *mediaDirectory = [dataDirectory stringByAppendingPathComponent:@"media"];
         [mediaDirectories setObject:mediaDirectory forKey:newFolder]; 
-        NSString *csvFileName=[NSString stringWithFormat:@"%@.csv",newFolder];
+        NSString *csvFileName=[NSString stringWithFormat:@"%@.record.csv",newFolder];
         NSString *dataFile = [dataDirectory stringByAppendingPathComponent:csvFileName];
         //then create the directories...
         //create the data directory if not there already
