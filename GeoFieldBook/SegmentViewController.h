@@ -11,11 +11,14 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "MPFoldTransition.h"
+
 @interface SegmentViewController : UIViewController
 
 @property (nonatomic,strong) IBOutlet UIView *contentView;
 @property (nonatomic,strong) NSArray *viewControllers;
 @property (nonatomic,readonly) UIViewController *topViewController;
+@property (nonatomic,strong) UIViewController *currentViewController;
 
 typedef enum TransitionAnimationOption {TransitionAnimationPushLeft,TransitionAnimationPushRight,TransitionAnimationFlipLeft,TransitionAnimationFlipRight,TransitionAnimationFold,TransitionAnimationUnfold} TransionAnimationOption;
 

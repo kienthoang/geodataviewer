@@ -31,12 +31,19 @@
 @synthesize formationButton = _formationButton;
 @synthesize settingButton = _settingButton;
 
+@synthesize animationOption=_animationOption;
+
 @synthesize delegate=_delegate;
 
 #pragma mark - Getters and Setters
 
 - (UIViewController *)detailSideViewController {
     return [self.viewControllers objectAtIndex:0];
+}
+
+//Determine the type of animation
+- (TransionAnimationOption)animationOption {
+    return self.currentViewController==self.viewControllers.lastObject ? TransitionAnimationFlipLeft : TransitionAnimationFlipRight;
 }
 
 #pragma mark - Data Forward Mechanisms
@@ -48,7 +55,7 @@
 
 - (void)setRecordViewControllerDelegate:(id <RecordViewControllerDelegate>)delegate {
     //Set the delegate of the record detail vc if it's in the view controller array
-    id recordDetail=[self.viewControllers objectAtIndex:0];
+    id recordDetail=self.detailSideViewController;
     if ([recordDetail isKindOfClass:[RecordViewController class]])
         [(RecordViewController *)recordDetail setDelegate:delegate];
 }
@@ -81,10 +88,6 @@
 }
 
 - (void)putRecordViewControllerIntoEditingMode {
-    //Swap to the record view controller if it's not the current view controller
-    if (self.topViewController!=[self.viewControllers objectAtIndex:0])
-        [self swapToViewControllerAtSegmentIndex:0];
-    
     //Put the record view controller into edit mode
     RecordViewController *recordDetail=(RecordViewController *)self.detailSideViewController;
     [recordDetail setEditing:YES animated:YES];
@@ -104,6 +107,54 @@
     [self performSegueWithIdentifier:@"Record View Controller" sender:nil];
     if (!self.topViewController)
         [self swapToViewControllerAtSegmentIndex:0];
+}
+
+- (void)pushRecordViewControllerWithTransitionAnimation:(TransionAnimationOption)animationOption 
+                                                  setup:(push_completion_handler_t)setupHandler 
+                                             completion:(push_completion_handler_t)completionHandler 
+{
+    //Only proceed if the current view controller is the reocrd view controller
+    if ([self.topViewController isKindOfClass:[RecordViewController class]]) {
+        //Setup the new record view controller
+        RecordViewController *newRecordViewController=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_DETAIL_VIEW_CONTROLLER_IDENTIFIER];
+        
+        //Replace the old record vc in the view controller array
+        NSMutableArray *viewControllers=self.viewControllers.mutableCopy;
+        [viewControllers replaceObjectAtIndex:0 withObject:newRecordViewController];
+        self.viewControllers=viewControllers.copy;
+        
+        //Prepare to put the new record vc's view on screen
+        [self addChildViewController:newRecordViewController];
+        [newRecordViewController willMoveToParentViewController:self];
+        
+        //Run the setup handler
+        setupHandler();
+        
+        //Animation
+        UIViewAnimationOptions option=UIViewAnimationOptionCurveLinear;
+        CATransition *transition=[CATransition animation];
+        transition.type=kCATransitionPush;
+        transition.subtype=animationOption==TransitionAnimationPushLeft ? kCATransitionFromLeft : kCATransitionFromRight;
+        [self.contentView.layer addAnimation:transition forKey:@"push-transition"];
+        
+        [self transitionFromViewController:self.currentViewController toViewController:newRecordViewController duration:0.4 options:option animations:^{                
+            //Remove the view of the current view controller from the view hierachy
+            [self.currentViewController.view removeFromSuperview];
+            
+        } completion:^(BOOL completed){
+            if (completed) {
+                //Add the view of the new vc to the hierachy and set it as the current view controller
+                [self.contentView addSubview:newRecordViewController.view];
+                
+                //set the new view as the current view controller
+                [newRecordViewController didMoveToParentViewController:self];
+                self.currentViewController=newRecordViewController;
+                
+                //Run the completion handler
+                completionHandler();
+            }
+        }];
+    }
 }
 
 - (void)pushInitialViewController {    

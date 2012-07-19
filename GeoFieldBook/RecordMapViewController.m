@@ -179,6 +179,15 @@
     self.records=[self.mapDelegate recordsForMapViewController:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //Reselect the selected record if its annotation view is not currently selected
+    MKGeoRecordAnnotation *annotation=self.mapView.selectedAnnotations.lastObject;
+    if (self.selectedRecord && self.selectedRecord!=annotation.record)
+        self.selectedRecord=self.selectedRecord;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;

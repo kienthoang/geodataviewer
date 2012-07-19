@@ -30,4 +30,11 @@
 
 @property (nonatomic,strong) NSArray *selectedRecordTypes;
 
+#pragma mark - Change active records
+
+- (BOOL)hasNextRecord;
+- (BOOL)hasPrevRecord;
+- (void)forwardToNextRecord;
+- (void)backToPrevRecord;
+
 @end

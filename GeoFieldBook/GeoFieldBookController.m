@@ -326,11 +326,11 @@
     if (![dataMapSegmentVC.topViewController isKindOfClass:[RecordViewController class]])
         [self swapToSegmentIndex:0];
     
-    //Put the record view controller in editing mode
-    [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
-    
     //Dismiss the popover
     [self.popoverViewController dismissPopoverAnimated:NO];
+    
+    //Put the record view controller in editing mode
+    [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
 }
 
 - (void)putImportExportButtonBack {
@@ -595,25 +595,33 @@
 
 #pragma mark - DataMapSegmentViewControllerDelegate protocol methods
 
+- (void)removeEditButton {
+    //Remove edit button
+    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
+    for (int index=0;index<[toolbarItems count];index++) {
+        UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
+        if ([barButtonItem.title isEqualToString:@"Edit"] || [barButtonItem.title isEqualToString:@"Done"])
+            [toolbarItems removeObject:barButtonItem];        
+    }
+    
+    //Set the tolbar
+    self.toolbar.items=[toolbarItems copy];
+}
+
 - (void)setupEditButtonForViewController:(UIViewController *)viewController {
     //If the swapped in view controller is the record view controller put up the edit button
     NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
     if ([viewController isKindOfClass:[RecordViewController class]]) {
         RecordViewController *recordDetail=(RecordViewController *)viewController;
-        [toolbarItems addObject:recordDetail.editButton];
+        if (![toolbarItems containsObject:recordDetail.editButton])
+            [toolbarItems addObject:recordDetail.editButton];
+        //Set the tolbar
+        self.toolbar.items=[toolbarItems copy];
     }
     
     //If the edit button is on the toolbar, take it off
-    else {
-        for (int index=0;index<[toolbarItems count];index++) {
-            UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
-            if ([barButtonItem.title isEqualToString:@"Edit"] || [barButtonItem.title isEqualToString:@"Done"])
-                [toolbarItems removeObject:barButtonItem];
-        }
-    }
-    
-    //Set the tolbar
-    self.toolbar.items=[toolbarItems copy];
+    else
+        [self removeEditButton];
 }
 
 - (void)setupTrackingButtonForViewController:(UIViewController *)viewController {
@@ -709,6 +717,52 @@
         //Put up the autosave alert
         [self autosaveRecord:record withNewRecordInfo:newInfo]; 
     }
+}
+
+- (void)replaceWithEditButtonOfRecordViewController:(RecordViewController *)recordVC {
+    //Remove the old edit button
+    [self removeEditButton];
+    
+    //Put up the new one
+    [self setupEditButtonForViewController:recordVC];
+}
+
+- (void)swipeWithTransitionAnimation:(TransionAnimationOption)animationOption forward:(BOOL)forward {
+    //Switch record
+    __weak GeoFieldBookController *weakSelf=self;
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC pushRecordViewControllerWithTransitionAnimation:animationOption setup:^(){
+        //Set the delegate of the new record vc
+        [dataMapSegmentVC setRecordViewControllerDelegate:weakSelf];
+        
+        //Move the next record
+        RecordTableViewController *recordTVC=[weakSelf recordTableViewController];
+        if (recordTVC) {
+            //If switching to the next record
+            if (forward)
+                [recordTVC forwardToNextRecord];
+            else
+                [recordTVC backToPrevRecord];
+        }
+    } completion:^{
+        //Replace the old edit button with the new one
+        RecordViewController *newRecordVC=(RecordViewController *)dataMapSegmentVC.topViewController;
+        [self replaceWithEditButtonOfRecordViewController:newRecordVC];
+    }];
+}
+
+- (void)userDidSwipeLeftInRecordViewController:(RecordViewController *)sender {
+    //Switch to the next record
+    RecordTableViewController *recordVC=[self recordTableViewController];
+    if (recordVC && [recordVC hasNextRecord])
+        [self swipeWithTransitionAnimation:TransitionAnimationPushRight forward:YES];
+}
+
+- (void)userDidSwipeRightInRecordViewController:(RecordViewController *)sender {
+    //Switch to the prev record
+    RecordTableViewController *recordVC=[self recordTableViewController];
+    if (recordVC && [recordVC hasPrevRecord])
+        [self swipeWithTransitionAnimation:TransitionAnimationPushLeft forward:NO];
 }
 
 #pragma mark - RecordMapViewControllerDelegate protocol methods

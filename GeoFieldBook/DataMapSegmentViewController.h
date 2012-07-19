@@ -23,6 +23,8 @@
 #define RECORD_DETAIL_VIEW_CONTROLLER_IDENTIFIER @"Record Detail View Controller"
 #define RECORD_MAP_VIEW_CONTROLLER_IDENTIFIER @"Record Map View Controller"
 
+typedef void (^push_completion_handler_t)(void);
+
 - (void)setMapViewDelegate:(id <RecordMapViewControllerDelegate>)mapDelegate;
 - (void)setRecordViewControllerDelegate:(id <RecordViewControllerDelegate>)delegate;
 - (void)updateMapWithRecords:(NSArray *)records;
@@ -34,6 +36,10 @@
 - (void)pushRecordViewController;
 
 - (void)dismissKeyboardInDataSideView;
+
+- (void)pushRecordViewControllerWithTransitionAnimation:(TransionAnimationOption)animationOption 
+                                                  setup:(push_completion_handler_t)setupHandler 
+                                             completion:(push_completion_handler_t)completionHandler;
 
 @property (nonatomic,readonly) UIViewController *detailSideViewController;
 
