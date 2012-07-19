@@ -384,7 +384,7 @@
     //Hide spinner and put up the import button
     [self putImportExportButtonBack];
     
-    //Show done alert
+    //Show done alert in the main queue (UI stuff)
     dispatch_async(dispatch_get_main_queue(), ^{
         //Put up an alert
         UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Finished Importing" message:nil delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
@@ -393,6 +393,22 @@
         //Tell the folder tvc to reload its data
         FolderTableViewController *folderTVC=[self folderTableViewController];
         [folderTVC reloadVisibleCells];
+    });
+}
+
+- (void)exportingDidEnd:(NSNotification *)notification {
+    //Put up alert in the main queue (UI stuff)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Exporting Finished" message:@"" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [doneAlert show];
+    });
+}
+
+- (void)handleValidationErrors:(NSNotification *)notification {
+    //Put up an alert in the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Put the import export button back again
+        [self putImportExportButtonBack];
     });
 }
 
@@ -427,6 +443,14 @@
     [notificationCenter addObserver:self 
                            selector:@selector(formationImportingDidStart:) 
                                name:GeoNotificationIEEngineFormationImportingDidStart
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(exportingDidEnd:) 
+                               name:GeoNotificationIEEngineExportingDidEnd
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(handleValidationErrors:) 
+                               name:GeoNotificationConflictHandlerValidationErrorsOccur 
                              object:nil];
 }
 

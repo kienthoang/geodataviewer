@@ -15,6 +15,7 @@
 #import "ExportFormationTableViewController.h"
 
 #import "IEEngine.h"
+#import "IEEngineNotificationNames.h"
 
 @interface ExportDoubleTableViewController()
 
@@ -57,9 +58,8 @@
         //
     }
     
-    //Set the delegate of the export record tvc to be the export folder tvc
-    //ExportFolderTableViewController *exportFolderTVC=(ExportFolderTableViewController *)self.masterTableViewController;
-    //[(ExportRecordTableViewController *)self.detailTableViewController setDelegate:exportFolderTVC];
+    //Register to hear notification
+    [self registerForIEEngineNotifications];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -67,29 +67,51 @@
 	return YES;
 }
 
-#pragma mark - Target-Action Handlers
-
-- (IBAction)exportPressed:(UIBarButtonItem *)sender {
-    //Export the records
-    NSArray *exportedItems;
-    
-    if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
-        exportedItems = [(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
-    }
-    else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
-        exportedItems = [(ExportFormationFolderTableViewController *)self.masterTableViewController selectedFormations];
-    }
-    else {
-        //
-    }
-    
-    //NSArray *exportedRecords=[(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
-    [self.exportEngine createCSVFilesFromRecords:exportedItems];
-}
-
 - (void)viewDidUnload {
     [self setExportButton:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - KVO Notification Managers
+
+- (void)registerForIEEngineNotifications {
+    //Register to receive notifications from the model group
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self 
+                           selector:@selector(exportingDidEnd:) 
+                               name:GeoNotificationIEEngineExportingDidEnd 
+                             object:nil];
+    
+}
+
+- (void)exportingDidEnd:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Put the export button back
+        self.navigationItem.rightBarButtonItem=self.exportButton;
+    });    
+}
+
+#pragma mark - Target-Action Handlers
+
+- (IBAction)exportPressed:(UIBarButtonItem *)sender {    
+    //Do the exporting in a different thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
+            //Export records
+            NSArray *exportedRecords=[(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
+            [self.exportEngine createCSVFilesFromRecords:exportedRecords];
+        }
+        else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
+            //Export Formations
+            NSArray *exportedFormations=[(ExportFormationFolderTableViewController *)self.masterTableViewController selectedFormations];
+            [self.exportEngine createCSVFilesFromFormations:exportedFormations];
+        }
+    });
+    
+    //Put the spinner in palce of the export button
+    UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
+    [spinner startAnimating];
 }
 
 #pragma mark - ExportButtonOwner Protocol methods

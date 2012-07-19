@@ -16,6 +16,6 @@
 
 @interface ExportDoubleTableViewController : UIDoubleTableViewController <ExportButtonOwner>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *exportButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *exportButton;
 
 @end

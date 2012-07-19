@@ -159,6 +159,9 @@
                                             cancelButtonTitle:@"Dismiss" 
                                             otherButtonTitles:nil];
         [alert show];
+        
+        //Put the import button back again
+        [self putImportButtonBack];
     });
 }
 

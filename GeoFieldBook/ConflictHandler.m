@@ -59,10 +59,8 @@
     _transientFormations=transientFormations;
     
     //Post a notification
-    if (!self.transientFormations.count) {
+    if (!self.transientFormations.count)
         [self postNotificationWithName:GeoNotificationConflictHandlerImportingDidEnd withUserInfo:[NSDictionary dictionary]];
-        
-    }
 }
 
 #pragma mark - Process Transient Data
