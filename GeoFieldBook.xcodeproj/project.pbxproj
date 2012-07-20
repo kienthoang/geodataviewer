@@ -62,6 +62,7 @@
 		02712A59159D013D00510188 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A58159D013D00510188 /* Other.m */; };
 		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
 		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
+		0277643915B91B6800C9DCEB /* ExportFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277643815B91B6800C9DCEB /* ExportFormatter.m */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
 		028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
@@ -274,6 +275,8 @@
 		027406BB15AE711200AD9EDC /* RecordImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTVC.m; sourceTree = "<group>"; };
 		027406BD15AE71FF00AD9EDC /* FormationImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationImportTVC.h; sourceTree = "<group>"; };
 		027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
+		0277643715B91B6800C9DCEB /* ExportFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFormatter.h; sourceTree = "<group>"; };
+		0277643815B91B6800C9DCEB /* ExportFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportFormatter.m; sourceTree = "<group>"; };
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -472,6 +475,8 @@
 				2128E74215A238F900B277F9 /* GeoFilter.m */,
 				02F86EF215AFCDD8000A84D2 /* ValidationMessageBoard.h */,
 				02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */,
+				0277643715B91B6800C9DCEB /* ExportFormatter.h */,
+				0277643815B91B6800C9DCEB /* ExportFormatter.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -1292,6 +1297,7 @@
 				212DD13D15B468DC000203AB /* PrototypeFormationFolderTableViewController.m in Sources */,
 				212DD14015B46907000203AB /* PrototypeFormationTableViewController.m in Sources */,
 				028E94BB15B89D1C006E8B3F /* Fault.m in Sources */,
+				0277643915B91B6800C9DCEB /* ExportFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
