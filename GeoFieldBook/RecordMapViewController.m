@@ -17,6 +17,9 @@
 #import "MKGeoRecordAnnotation.h"
 #import "MKCustomAnnotationView.h"
 
+#import "Bedding.h"
+#import "Contact.h"
+
 @interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate,FilterRecordsByType>
 
 @property (nonatomic,weak) UIPopoverController *filterPopover;
@@ -204,14 +207,26 @@
 
 #pragma mark - MKMapViewDelegate methods
 
+- (MKAnnotationView *)viewForAnnotation:(MKGeoRecordAnnotation *)annotation {
+    //Get the record of the annotation
+    Record *record=annotation.record;
+    
+    //If the record is of type bedding or contact return a MKCustomAnnotationView
+    if ([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[Contact class]]) {
+        return [[MKCustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    } 
+
+    return [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];;
+}
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
     //Get an annotation view
-    MKCustomAnnotationView *annotationView=(MKCustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    MKAnnotationView *annotationView=(MKCustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
     if (!annotationView) {
-        annotationView=[[MKCustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+        annotationView=[self viewForAnnotation:annotation];
         annotationView.canShowCallout=YES;
         
         //Set up the left view of the callout (where the image of the record is showed)

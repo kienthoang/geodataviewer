@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import "IEEngine.h"
 #import "ConflictHandler.h"
 
@@ -26,6 +28,7 @@
 @property (nonatomic,weak) IBOutlet UIBarButtonItem *addButton;
 
 #define SECTION_FOOTER_HEIGHT 30
+#define SizeInPopover CGRectMake(0,0,400,500).size
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender;
 

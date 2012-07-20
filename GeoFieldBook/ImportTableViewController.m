@@ -16,6 +16,16 @@
 @property (nonatomic,strong) UILabel *sectionFooter;
 @property (nonatomic,strong) UIBarButtonItem *hiddenButton;
 
+@property (nonatomic,strong) UIView * headerView;
+
+@property (nonatomic,strong) UIView * topView;
+@property (nonatomic,strong) UIView * bottomView;
+
+@property (nonatomic,strong) UILabel * topLabel;
+@property (nonatomic,strong) UILabel * bottomLabel;
+
+@property (nonatomic) BOOL refreshing;
+
 @end
 
 @implementation ImportTableViewController
@@ -32,6 +42,13 @@
 @synthesize deleteButton=_deleteButton;
 @synthesize addButton=_addButton;
 @synthesize hiddenButton=_hiddenButton;
+
+@synthesize headerView=_headerView;
+@synthesize topView=_topView;
+@synthesize bottomView=_bottomView;
+@synthesize topLabel=_topLabel;
+@synthesize bottomLabel=_bottomLabel;
+@synthesize refreshing=_refreshing;
 
 - (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
@@ -95,6 +112,110 @@
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
 }
 
+#pragma mark - Pull To Refresh
+
+CGFloat const kRefreshViewHeight = 65;
+
+- (void)setupPullToRefreshTopView {
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -kRefreshViewHeight, SizeInPopover.width, kRefreshViewHeight)];
+	[self.headerView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
+	[self.tableView addSubview:self.headerView];
+	
+	CATransform3D transform = CATransform3DIdentity;
+	transform.m34 = -1/500.0;
+	[self.headerView.layer setSublayerTransform:transform];
+	
+	self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, -kRefreshViewHeight / 4, self.headerView.bounds.size.width, kRefreshViewHeight / 2)];
+	[self.topView setBackgroundColor:[UIColor colorWithRed:0.886 green:0.906 blue:0.929 alpha:1]];
+	[self.topView.layer setAnchorPoint:CGPointMake(0.5, 0.0)];
+	[self.headerView addSubview:self.topView];
+	
+	self.topLabel = [[UILabel alloc] initWithFrame:self.topView.bounds];
+	[self.topLabel setBackgroundColor:[UIColor clearColor]];
+	[self.topLabel setTextAlignment:UITextAlignmentCenter];
+	[self.topLabel setText:@"Pull down to refresh"];
+	[self.topLabel setTextColor:[UIColor colorWithRed:0.395 green:0.427 blue:0.510 alpha:1]];
+	[self.topLabel setShadowColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7]];
+	[self.topLabel setShadowOffset:CGSizeMake(0, 1)];
+	[self.topView addSubview:self.topLabel];
+	
+	self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kRefreshViewHeight * 3 / 4, self.headerView.bounds.size.width, kRefreshViewHeight / 2)];
+	[self.bottomView setBackgroundColor:[UIColor colorWithRed:0.836 green:0.856 blue:0.879 alpha:1]];
+	[self.bottomView.layer setAnchorPoint:CGPointMake(0.5, 1.0)];
+	[self.headerView addSubview:self.bottomView];
+	
+	self.bottomLabel = [[UILabel alloc] initWithFrame:self.bottomView.bounds];
+	[self.bottomLabel setBackgroundColor:[UIColor clearColor]];
+	[self.bottomLabel setText:@"Last updated: 1/11/13 8:41 PM"];
+	[self.bottomLabel setTextAlignment:UITextAlignmentCenter];
+	[self.bottomLabel setTextColor:[UIColor colorWithRed:0.395 green:0.427 blue:0.510 alpha:1]];
+	[self.bottomLabel setShadowColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7]];
+	[self.bottomLabel setShadowOffset:CGSizeMake(0, 1)];
+	[self.bottomView addSubview:self.bottomLabel];
+	
+	// Just so it's not white above the refresh view.
+	UIView * aboveView = [[UIView alloc] initWithFrame:CGRectMake(0, -self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - kRefreshViewHeight)];
+	[aboveView setBackgroundColor:[UIColor colorWithRed:0.886 green:0.906 blue:0.929 alpha:1]];
+	[aboveView setTag:123];
+	[self.tableView addSubview:aboveView];
+	
+	self.refreshing = NO;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	
+	[UIView animateWithDuration:duration animations:^{
+		[self.headerView setFrame:CGRectMake(0, -kRefreshViewHeight, self.view.bounds.size.width, kRefreshViewHeight)];
+		[self.topView setFrame:CGRectMake(0, -kRefreshViewHeight / 4, self.headerView.bounds.size.width, kRefreshViewHeight / 2)];
+		[self.bottomView setFrame:CGRectMake(0, (kRefreshViewHeight / 2), self.headerView.bounds.size.width, kRefreshViewHeight / 2)];
+		[self.topLabel setFrame:self.topView.bounds];
+		[self.bottomLabel setFrame:self.bottomView.bounds];
+		[[self.view viewWithTag:123] setFrame:CGRectMake(0, -self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - kRefreshViewHeight)];
+	}];
+}
+
+- (void)refreshData {
+	
+	self.refreshing = YES;
+	
+	[self.topLabel setText:@"Refreshing..."];
+	[UIView animateWithDuration:0.2 animations:^{[self.tableView setContentInset:UIEdgeInsetsMake(kRefreshViewHeight, 0, 0, 0)];}];
+	
+	double delayInSeconds = 2.0;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+	dispatch_after(popTime, dispatch_get_main_queue(), ^{
+		self.refreshing = NO;
+		[UIView animateWithDuration:0.2 animations:^{[self.tableView setContentInset:UIEdgeInsetsZero];}];
+	});
+}
+
+- (void)unfoldHeaderToFraction:(CGFloat)fraction {
+	[self.bottomView.layer setTransform:CATransform3DMakeRotation((M_PI / 2) - asinf(fraction), 1, 0, 0)];
+	[self.topView.layer setTransform:CATransform3DMakeRotation(asinf(fraction) + (((M_PI) * 3) / 2) , 1, 0, 0)];
+	[self.topView setFrame:CGRectMake(0, kRefreshViewHeight * (1 - fraction), self.view.bounds.size.width, kRefreshViewHeight / 2)];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	
+	if (!self.refreshing){
+		
+		CGFloat fraction = scrollView.contentOffset.y / -kRefreshViewHeight;
+		if (fraction < 0) fraction = 0;
+		if (fraction > 1) fraction = 1;
+		
+		[self unfoldHeaderToFraction:fraction];
+		
+		if (fraction == 1)[self.topLabel setText:@"Release to refresh"];
+		else [self.topLabel setText:@"Pull down to refresh"];
+	}
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	if (scrollView.contentOffset.y < -kRefreshViewHeight) {
+        [self refreshData];
+    }
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad{
@@ -109,6 +230,9 @@
     //Initialize the conflict handler
     self.conflictHandler=[[ConflictHandler alloc] init];
     self.conflictHandler.database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+    
+    //Set up for pull-to-request feature
+    [self setupPullToRefreshTopView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

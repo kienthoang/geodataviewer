@@ -21,7 +21,11 @@
         
         //Add the strike symbol view
         symbol.backgroundColor=[UIColor clearColor];
-        [self addSubview:symbol];
+        UIGraphicsBeginImageContext(symbol.bounds.size);
+        [symbol.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();    
+        self.image=image;
     }
 }
 
