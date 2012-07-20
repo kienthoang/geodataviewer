@@ -550,7 +550,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     NSString *dip = [TextInputFilter csvCompliantStringFromString:[NSString stringWithFormat:@"%@", record.dip]];
     NSString *dipDir = [TextInputFilter csvCompliantStringFromString:record.dipDirection];
     NSString *strike = [TextInputFilter csvCompliantStringFromString:[NSString stringWithFormat:@"%@", record.strike]];
-    
+        
     //get the date and time
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yy"];        
@@ -605,7 +605,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             [mediaFileHandler closeFile];
         }
     }
-                  
+    
     //finally write the string tokens to the csv file
     NSString *recordData=@"";
     recordData = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@\n",
