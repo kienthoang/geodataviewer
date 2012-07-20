@@ -103,7 +103,7 @@
         }
     });
     
-    //Put the spinner in palce of the export button
+    //Put the spinner in place of the export button
     UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
     [spinner startAnimating];

@@ -141,6 +141,8 @@
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		218F8FD215B9AA220008710A /* MKCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */; };
+		218F8FD515B9AA490008710A /* DipStrikeSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD415B9AA490008710A /* DipStrikeSymbol.m */; };
 		21989D6415A4D20C001CF847 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21989D6215A4D20C001CF847 /* checked.png */; };
 		21989D6515A4D20C001CF847 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21989D6315A4D20C001CF847 /* unchecked.png */; };
 		21989D6915A4D27C001CF847 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 21989D6815A4D27C001CF847 /* CheckBox.m */; };
@@ -396,6 +398,10 @@
 		2132A5D8159CD62200009CB9 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image+Creation.h"; path = "Image/Image+Creation.h"; sourceTree = "<group>"; };
 		2132A5D9159CD62200009CB9 /* Image+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Image+Creation.m"; path = "Image/Image+Creation.m"; sourceTree = "<group>"; };
 		2141DC18159CA275002518F9 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
+		218F8FD015B9AA220008710A /* MKCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCustomAnnotationView.h; sourceTree = "<group>"; };
+		218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKCustomAnnotationView.m; sourceTree = "<group>"; };
+		218F8FD315B9AA490008710A /* DipStrikeSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipStrikeSymbol.h; sourceTree = "<group>"; };
+		218F8FD415B9AA490008710A /* DipStrikeSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipStrikeSymbol.m; sourceTree = "<group>"; };
 		21989D6215A4D20C001CF847 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		21989D6315A4D20C001CF847 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		21989D6715A4D27C001CF847 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
@@ -824,6 +830,7 @@
 				0249E2C015A6AD0300A7532E /* iPad.storyboard */,
 				0249E2E215A8EDF700A7532E /* GeoFieldBookController.h */,
 				0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */,
+				217C9F9C15B9A3A800C3AABC /* Dip Strike Symbol */,
 				020EBB9A15942C7900EECC08 /* Model MVC Group */,
 				020EBB9B15942C8F00EECC08 /* View MVC Group */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
@@ -1079,6 +1086,17 @@
 			name = Image;
 			sourceTree = "<group>";
 		};
+		217C9F9C15B9A3A800C3AABC /* Dip Strike Symbol */ = {
+			isa = PBXGroup;
+			children = (
+				218F8FD315B9AA490008710A /* DipStrikeSymbol.h */,
+				218F8FD415B9AA490008710A /* DipStrikeSymbol.m */,
+				218F8FD015B9AA220008710A /* MKCustomAnnotationView.h */,
+				218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */,
+			);
+			name = "Dip Strike Symbol";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1298,6 +1316,8 @@
 				212DD14015B46907000203AB /* PrototypeFormationTableViewController.m in Sources */,
 				028E94BB15B89D1C006E8B3F /* Fault.m in Sources */,
 				0277643915B91B6800C9DCEB /* ExportFormatter.m in Sources */,
+				218F8FD215B9AA220008710A /* MKCustomAnnotationView.m in Sources */,
+				218F8FD515B9AA490008710A /* DipStrikeSymbol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

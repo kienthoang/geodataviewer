@@ -27,6 +27,8 @@
     return filteredText;
 }
 
+
+//used while exporting
 + (NSString *)csvCompliantStringFromString:(NSString *)text {
     //Put quotation marks around if there is a comma or a new line character
     if ([text componentsSeparatedByString:@","].count>1 || [text componentsSeparatedByString:@"\n"].count>1)
@@ -37,8 +39,11 @@
         text = [@"" stringByAppendingFormat:@"\"%@\"",text];
     }
     return text;
+     
 }
 
+
+//used while importing
 + (NSString *)stringFromCSVCompliantString:(NSString *)csvCompliantString {
     //look for quotes and remove enclosing quotes
     NSRange range = NSMakeRange(1,csvCompliantString.length-2); 
