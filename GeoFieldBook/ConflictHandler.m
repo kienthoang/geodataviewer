@@ -328,9 +328,8 @@
                                                                 withTemplate:@"$1"];
         newTransientFolderName=[newTransientFolderName stringByAppendingFormat:@"(%d)",numberSuffix];
         
-    } else {
+    } else
         newTransientFolderName=[newTransientFolderName stringByAppendingString:@" (1)"];
-    }
     
     transientFolder.folderName=newTransientFolderName;
     return newTransientFolderName;

@@ -157,6 +157,17 @@
     
     //Update export button
     [self updateExportButton];
+    
+    //Select/Deselect Cell if appropriate
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:folder];
+    NSArray *selectedIndexPaths=self.tableView.indexPathsForSelectedRows;
+    if (formations.count) {
+        if (![selectedIndexPaths containsObject:indexPath]) 
+            [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    } else {
+        if ([selectedIndexPaths containsObject:indexPath])
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES]; 
+    }
 }
 
 @end

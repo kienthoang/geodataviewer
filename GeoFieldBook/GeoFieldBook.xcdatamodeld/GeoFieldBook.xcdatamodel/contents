@@ -59,8 +59,8 @@
     <elements>
         <element name="Bedding" positionX="171" positionY="597" width="128" height="60"/>
         <element name="Contact" positionX="250" positionY="438" width="128" height="75"/>
-        <element name="Fault" positionX="189" positionY="252" width="128" height="90"/>
-        <element name="Folder" positionX="79" positionY="108" width="128" height="105"/>
+        <element name="Fault" positionX="252" positionY="234" width="128" height="90"/>
+        <element name="Folder" positionX="79" positionY="108" width="128" height="120"/>
         <element name="Formation" positionX="-101" positionY="396" width="128" height="150"/>
         <element name="Formation_Folder" positionX="-92" positionY="234" width="128" height="90"/>
         <element name="Image" positionX="277" positionY="108" width="128" height="90"/>

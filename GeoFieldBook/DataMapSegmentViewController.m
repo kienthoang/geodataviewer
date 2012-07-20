@@ -131,13 +131,9 @@
         setupHandler();
         
         //Animation
-        UIViewAnimationOptions option=UIViewAnimationOptionCurveLinear;
-        CATransition *transition=[CATransition animation];
-        transition.type=kCATransitionPush;
-        transition.subtype=animationOption==TransitionAnimationPushLeft ? kCATransitionFromLeft : kCATransitionFromRight;
-        [self.contentView.layer addAnimation:transition forKey:@"push-transition"];
+        UIViewAnimationOptions option=animationOption==TransitionAnimationPushLeft ? UIViewAnimationOptionTransitionCurlDown : UIViewAnimationOptionTransitionCurlUp;
         
-        [self transitionFromViewController:self.currentViewController toViewController:newRecordViewController duration:0.4 options:option animations:^{                
+        [self transitionFromViewController:self.currentViewController toViewController:newRecordViewController duration:0.6 options:option animations:^{                
             //Remove the view of the current view controller from the view hierachy
             [self.currentViewController.view removeFromSuperview];
             

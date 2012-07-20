@@ -112,8 +112,12 @@
 #pragma mark - ExportButtonOwner Protocol methods
 
 - (void)needsUpdateExportButtonForNumberOfSelectedItems:(int)count {
+    //Update the title of the export button
     NSString *exportButtonTitle=count ? [NSString stringWithFormat:@"Export (%d)",count] : @"Export";
     self.exportButton.title=exportButtonTitle;
+    
+    //Disable the export button if there is no record to export
+    self.exportButton.enabled=count>0;
 }
 
 @end
