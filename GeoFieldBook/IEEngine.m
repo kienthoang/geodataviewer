@@ -324,15 +324,18 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //this is an array lines, which is an array of tokens
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
     
+    //Transpose the array of tokens (expecting the csv file to contains formation columns sorted by formation folders)
+    tokenArrays=[ExportFormatter transposeTwoDimensionalArray:tokenArrays.copy].mutableCopy;
+    
     //for each array of tokens 
     NSMutableArray *formationFolders=self.formationFolders.mutableCopy;
-    for(int index=0;index<tokenArrays.count;index++) {
+    for (int index=0;index<tokenArrays.count;index++) {
         //Create one formation for each line
-        NSMutableArray *record=[[tokenArrays objectAtIndex:index] mutableCopy];
-        NSString *folder = [record objectAtIndex:0];
-        [record removeObjectAtIndex:0];
+        NSMutableArray *tokenArray=[[tokenArrays objectAtIndex:index] mutableCopy];
+        NSString *folder = [tokenArray objectAtIndex:0];
+        [tokenArray removeObjectAtIndex:0];
         TransientFormation_Folder *newFormationFolder = [[TransientFormation_Folder alloc] init];
-        newFormationFolder.folderName = folder;
+        newFormationFolder.folderName = [TextInputFilter filterDatabaseInputText:folder];
         
         //Save the newly created transient formation folder
         [formationFolders addObject:newFormationFolder];
@@ -341,12 +344,13 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         int sortNumber=1;
         
         //for each token(formation) in such an array of line record(formation folder)
-        for(NSString *formation in  record) {
+        for (NSString *formation in tokenArray) {
             //if the formation name is not empty
-            if (formation.length) {
+            NSString *formationName=[TextInputFilter filterDatabaseInputText:formation];
+            if (formationName.length) {
                 TransientFormation *newFormation = [[TransientFormation alloc] init];
                 newFormation.formationFolder = newFormationFolder;
-                newFormation.formationName = formation;
+                newFormation.formationName = formationName;
                 newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
                 [self.formations addObject:newFormation];
             }
@@ -660,14 +664,13 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //Process the formation by folder dictionary into a two dimensional array; each of the element array contains
     //the formation folder name and all its formations' names
     NSMutableArray *twoDimensionalArray=[NSMutableArray array];
-    [formationsByFoldersDictionary enumerateKeysAndObjectsUsingBlock:^(id key,id value,BOOL *stop){
-        NSMutableArray *entry=[NSMutableArray arrayWithObject:key];
-        [entry addObjectsFromArray:(NSArray *)value];
-        if (![twoDimensionalArray containsObject:entry])
-            [twoDimensionalArray addObject:entry.copy];
-        else
-            *stop=YES;
-    }];
+    NSArray *allKeys=formationsByFoldersDictionary.allKeys;
+    allKeys=[allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    for (NSString *folderName in allKeys) {
+        NSMutableArray *entry=[NSMutableArray arrayWithObject:folderName];
+        [entry addObjectsFromArray:(NSArray *)[formationsByFoldersDictionary objectForKey:folderName]];
+        [twoDimensionalArray addObject:entry.copy];
+    }
     
     NSArray *transposedArray=[ExportFormatter transposeTwoDimensionalArray:twoDimensionalArray.copy];
     

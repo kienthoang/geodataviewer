@@ -33,7 +33,7 @@
 - (void)setupFetchedResultsController {
     //Setup its request
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     
     //Create the fetchedResultsController
     self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request 
