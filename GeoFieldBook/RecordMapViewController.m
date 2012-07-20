@@ -7,11 +7,15 @@
 //
 
 #import "RecordMapViewController.h"
+
 #import "FilterByRecordTypeController.h"
 #import "GeoFilter.h"
-#import "MKGeoRecordAnnotation.h"
+
 #import "MKMapRecordInfoViewController.h"
 #import "Image.h"
+
+#import "MKGeoRecordAnnotation.h"
+#import "MKCustomAnnotationView.h"
 
 @interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate,FilterRecordsByType>
 
@@ -205,9 +209,9 @@
         return nil;
     
     //Get an annotation view
-    MKPinAnnotationView *annotationView=(MKPinAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    MKCustomAnnotationView *annotationView=(MKCustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
     if (!annotationView) {
-        annotationView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+        annotationView=[[MKCustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
         annotationView.canShowCallout=YES;
         
         //Set up the left view of the callout (where the image of the record is showed)
