@@ -10,12 +10,16 @@
 #import "TransientImage.h"
 #import "Record+DipDirectionValues.h"
 
+#import "TransientBedding.h"
+#import "TransientContact.h"
+#import "TransientFault.h"
+#import "TransientJointSet.h"
+#import "TransientOther.h"
+
 @implementation TransientRecord
 
 @synthesize date=_date;
 @synthesize project=_project;
-@synthesize dateString= _dateString;
-@synthesize timeString=_timeString;
 @synthesize dip=_dip;
 @synthesize dipDirection=_dipDirection;
 @synthesize fieldOservations=_fieldOservations;
@@ -124,6 +128,23 @@
     
     //If the longitude value is not in the appropriate range, return an error message
     return (TransientRecordMinimumLongitude<=self.longitude.intValue && self.longitude.intValue<=TransientRecordMaximumLongitude) ? nil : [NSString stringWithFormat:@"Longitude value of record with name \"%@\" is invalid",self.name];
+}
+
+#pragma mark - Convenience methods
+
++ (TransientRecord *)recordWithType:(NSString *)recordType {    
+    if([recordType isEqualToString:@"Contact"])
+        return [[TransientContact alloc] init];
+    else if([recordType isEqualToString:@"Bedding"])
+        return [[TransientBedding alloc] init];
+    else if([recordType isEqualToString:@"Fault"])
+        return [[TransientFault alloc] init];
+    else if([recordType isEqualToString:@"Joint Set"])
+        return [[TransientContact alloc] init];
+    else if([recordType isEqualToString:@"Other"])
+        return [[TransientOther alloc] init];
+        
+    return nil;
 }
 
 @end

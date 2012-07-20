@@ -176,7 +176,7 @@
     [super viewWillAppear:animated];
     
     //Update the map view
-    self.records=[self.mapDelegate recordsForMapViewController:self];
+    //self.records=[self.mapDelegate recordsForMapViewController:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

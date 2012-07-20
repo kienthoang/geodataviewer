@@ -24,10 +24,41 @@
     [super saveToManagedObjectContext:context completion:completionHandler];
     
     //Populate formation
-    [(Fault *)self.nsManagedRecord setFormation:[self.formation saveFormationToManagedObjectContext:context]];
+    Fault *fault=(Fault *)self.nsManagedRecord;
+    [fault setFormation:[self.formation saveFormationToManagedObjectContext:context]];
+    
+    //Set plunge and trend
+    fault.trend=self.trend;
+    fault.plunge=self.plunge;
     
     //Call completion handler
     completionHandler(self.nsManagedRecord);
+}
+
+- (NSString *)setPlungeWithValidations:(NSString *)plungeString {
+    //Convert the plunge string into a number
+    if (plungeString.length) {
+        NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+        self.plunge=[numberFormatter numberFromString:plungeString];
+    } else if (plungeString) {
+        self.plunge=[NSNumber numberWithInt:0];
+    }
+    
+    //If that fails or the plunge value is not in the allowed range, return an error message
+    return (self.plunge &&  TransientRecordMinimumPlunge<=self.plunge.intValue && self.plunge.intValue<=TransientRecordMaximumPlunge) ? nil : [NSString stringWithFormat:@"Plunge value of record with name \"%@\" is invalid",self.name];
+}
+
+- (NSString *)setTrendWithValidations:(NSString *)trendString {
+    //Convert the given string into a number
+    if (trendString.length) {
+        NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+        self.trend=[numberFormatter numberFromString:trendString];
+    } else if (trendString) {
+        self.trend=[NSNumber numberWithInt:0];
+    }
+    
+    //If that fails or the trend value is not in the range, return an error message
+    return (self.trend &&  TransientRecordMinimumTrend<=self.trend.intValue && self.trend.intValue<=TransientRecordMaximumTrend) ? nil : [NSString stringWithFormat:@"Trend value of record with name \"%@\" is invalid",self.name];
 }
 
 @end

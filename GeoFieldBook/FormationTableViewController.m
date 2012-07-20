@@ -31,9 +31,6 @@
 
 @implementation FormationTableViewController
 
-@synthesize formationFolder=_formationFolder;
-//@synthesize database=_database;
-
 @synthesize addButton = _addButton;
 @synthesize deleteButton = _deleteButton;
 @synthesize editButton = _editButton;
@@ -46,13 +43,6 @@
 @synthesize toBeDeletedFormations=_toBeDeletedFormations;
 
 #pragma mark - Getters and Setters
-
-- (void)setFormationFolder:(NSString *)formationFolder {
-    _formationFolder=formationFolder;
-    
-    //Setup fetched results controller
-    [self setupFetchedResultsController];
-}
 
 - (NSArray *)toBeDeletedFormations {
     if (!_toBeDeletedFormations)
@@ -70,21 +60,6 @@
     
     //Enable the delete button
     self.deleteButton.enabled=numFormations>0;
-}
-
-#pragma mark - Controller State Initialization
-
-- (void)setupFetchedResultsController {
-    //Setup the request
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
-    request.predicate=[NSPredicate predicateWithFormat:@"formationFolder.folderName=%@",self.formationFolder];
-    request.sortDescriptors=[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"formationSortNumber" ascending:YES],[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES],nil];
-    
-    //Setup the feched results controller
-    self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    //Set the fetched results controller's delegate to self
-    self.fetchedResultsController.delegate=self;
 }
 
 #pragma mark - Prepare for segues
@@ -106,16 +81,6 @@
 
 #pragma mark - Alert Generators
 
-//Put up an alert about some database failure with specified message
-- (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message {
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Database Error" 
-                                                  message:message 
-                                                 delegate:nil 
-                                        cancelButtonTitle:@"Dismiss" 
-                                        otherButtonTitles: nil];
-    [alert show];
-}
-
 - (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
     UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation with the name '%@' already exists in this folder!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [duplicationAlert show];
@@ -135,7 +100,7 @@
 
 - (BOOL)createNewFormationWithName:(NSString *)formationName {
     //create a new formation, if that returns nil (name duplicate), put up an alert
-    if (![Formation formationForName:formationName inFormationFolderWithName:self.formationFolder inManagedObjectContext:self.database.managedObjectContext])
+    if (![Formation formationForName:formationName inFormationFolderWithName:self.formationFolder.folderName inManagedObjectContext:self.database.managedObjectContext])
     {
         [self putUpDuplicateNameAlertWithName:formationName];
         return NO;
@@ -278,25 +243,6 @@ didAskToModifyFormationWithName:(NSString *)originalName
     }
 }
 
-#pragma mark - TableViewControllerDataSource methods
-
-/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Formation Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType=UITableViewCellAccessoryDetailDisclosureButton;
-    }
-    
-    // Configure the cell
-    Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = formation.formationName;
-    
-    return cell;
-}*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
@@ -367,11 +313,6 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     
     //hide the select buttons
     [self toggleSelectButtons];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	return YES;
 }
 
 #pragma mark - UIActionSheetDelegate protocol methods

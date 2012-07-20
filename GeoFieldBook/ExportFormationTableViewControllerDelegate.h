@@ -12,6 +12,6 @@
 
 @protocol ExportFormationTableViewControllerDelegate <NSObject>
 
-- (void)exportTVC:(ExportFormationTableViewController *)sender userDidSelectFormations:(NSSet *)formations forFolder:(Folder *)folder;
+- (void)exportTVC:(ExportFormationTableViewController *)sender userDidSelectFormations:(NSSet *)formations forFolder:(Formation_Folder *)folder;
 
 @end

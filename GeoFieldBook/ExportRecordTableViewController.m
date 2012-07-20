@@ -20,6 +20,13 @@
 
 #pragma mark - Getters and Setters
 
+- (NSSet *)selectedRecords {
+    if (!_selectedRecords)
+        _selectedRecords=[NSSet set];
+    
+    return _selectedRecords;
+}
+
 - (void)updateSelectedRecordsWith:(NSSet *)records {
     self.selectedRecords=records;
     
@@ -75,6 +82,11 @@
     
     //Process
     [self userDidSelectRecords];
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
 }
 
 @end

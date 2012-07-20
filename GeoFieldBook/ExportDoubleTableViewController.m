@@ -48,8 +48,9 @@
         [(ExportRecordTableViewController *)self.detailTableViewController setDelegate:exportFolderTVC];
     }
     else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
-        ExportFormationFolderTableViewController *exportFormationsTVC = (ExportFormationFolderTableViewController *)self.masterTableViewController;
-        [(ExportFormationTableViewController *)self.detailTableViewController setDelegate:exportFormationsTVC];
+        ExportFormationFolderTableViewController *exportFormationFolderTVC = (ExportFormationFolderTableViewController *)self.masterTableViewController;
+        exportFormationFolderTVC.exportButtonOwner=self;
+        [(ExportFormationTableViewController *)self.detailTableViewController setDelegate:exportFormationFolderTVC];
     }
     
     //Register to hear notification
@@ -76,14 +77,6 @@
                            selector:@selector(exportingDidEnd:) 
                                name:GeoNotificationIEEngineExportingDidEnd 
                              object:nil];
-    /*if ([self.masterTableViewController isKindOfClass:[ExportFolderTableViewController class]]) {
-        exportedItems = [(ExportFolderTableViewController *)self.masterTableViewController selectedRecords];
-    }
-    else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
-        exportedItems = [(ExportFormationFolderTableViewController *)self.masterTableViewController selectedFormations];
-    }
-    
-    [self.exportEngine createCSVFilesFromRecords:exportedItems];*/
 }
 
 - (void)exportingDidEnd:(NSNotification *)notification {
@@ -110,7 +103,7 @@
         }
     });
     
-    //Put the spinner in palce of the export button
+    //Put the spinner in place of the export button
     UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
     [spinner startAnimating];
@@ -119,8 +112,12 @@
 #pragma mark - ExportButtonOwner Protocol methods
 
 - (void)needsUpdateExportButtonForNumberOfSelectedItems:(int)count {
+    //Update the title of the export button
     NSString *exportButtonTitle=count ? [NSString stringWithFormat:@"Export (%d)",count] : @"Export";
     self.exportButton.title=exportButtonTitle;
+    
+    //Disable the export button if there is no record to export
+    self.exportButton.enabled=count>0;
 }
 
 @end

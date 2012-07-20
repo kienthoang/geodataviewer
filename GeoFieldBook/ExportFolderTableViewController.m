@@ -78,7 +78,7 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     //Get the folder corresponding to the given index path
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
+        
     //Update
     [self userDidChangeSelectedRecordsForFolder:folder];
 }
@@ -98,7 +98,7 @@
     
     //Update corresponding cell
     [self updateCellCorrespondingToFolder:folder];
-    
+        
     //Update export button
     [self updateExportButton];
 }
@@ -147,6 +147,17 @@
     
     //Update export button
     [self updateExportButton];
+    
+    //Select/Deselect Cell if appropriate
+    NSIndexPath *indexPath=[self.fetchedResultsController indexPathForObject:folder];
+    NSArray *selectedIndexPaths=self.tableView.indexPathsForSelectedRows;
+    if (records.count) {
+        if (![selectedIndexPaths containsObject:indexPath]) 
+            [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    } else {
+        if ([selectedIndexPaths containsObject:indexPath])
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES]; 
+    }
 }
 
 @end

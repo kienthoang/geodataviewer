@@ -12,8 +12,12 @@
 #import "Fault.h"
 
 @interface TransientFault : TransientRecord
-@property (nonatomic, retain) NSString * plunge;
-@property (nonatomic, retain) NSString * trend;
+@property (nonatomic, retain) NSNumber * plunge;
+@property (nonatomic, retain) NSNumber * trend;
 @property (nonatomic, retain) TransientFormation *formation;
+
+- (NSString *)setPlungeWithValidations:(NSString *)plungeString;
+
+- (NSString *)setTrendWithValidations:(NSString *)trendString;
 
 @end

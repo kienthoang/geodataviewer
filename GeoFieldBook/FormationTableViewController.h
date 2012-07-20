@@ -10,7 +10,4 @@
 
 @interface FormationTableViewController : PrototypeFormationTableViewController
 
-@property (nonatomic,strong) NSString *formationFolder;  //The name of the folder the formations are in
-//@property (nonatomic,strong) UIManagedDocument *database;
-
 @end

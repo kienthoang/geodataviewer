@@ -10,7 +10,12 @@
 
 @interface TextInputFilter : NSObject
 
+//Database filter mechanisms
 + (BOOL)isSafeForDatabaseInputText:(NSString *)text;       //returns true if the text contains no unsafe parts
 + (NSString *)filterDatabaseInputText:(NSString *)text;    //returns nil if the text contains too many unsafe parts
+
+//CSV text filter mechanisms
++ (NSString *)csvCompliantStringFromString:(NSString *)text;
++ (NSString *)stringFromCSVCompliantString:(NSString *)csvCompliantString;
 
 @end

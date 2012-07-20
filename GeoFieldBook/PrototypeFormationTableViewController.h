@@ -16,7 +16,7 @@
 
 - (void)setupFetchedResultsController;
 
-@property (nonatomic,strong) Formation_Folder *folder;
+@property (nonatomic,strong) Formation_Folder *formationFolder;
 @property (nonatomic,strong) UIManagedDocument *database;
 
 - (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message;
