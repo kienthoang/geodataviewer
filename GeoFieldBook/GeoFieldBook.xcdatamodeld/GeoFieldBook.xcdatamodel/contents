@@ -8,8 +8,8 @@
         <relationship name="upperFormation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="upperContacts" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Fault" representedClassName="Fault" parentEntity="Record" syncable="YES">
-        <attribute name="plunge" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="trend" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plunge" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="trend" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="faults" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Folder" representedClassName="Folder" syncable="YES">

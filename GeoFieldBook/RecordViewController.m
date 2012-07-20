@@ -877,8 +877,8 @@
     self.acquiredDate=self.record.date;
     
     //Set the strike and dip
-    self.strikeTextField.text=[NSString stringWithFormat:@"%@",self.record.strike];
-    self.dipTextField.text=[NSString stringWithFormat:@"%@",self.record.dip];
+    self.strikeTextField.text=self.record.strike ? [NSString stringWithFormat:@"%@",self.record.strike] : @"";
+    self.dipTextField.text=self.record.dip ? [NSString stringWithFormat:@"%@",self.record.dip] : @"";
     
     //Set the dip direction and field observation
     self.dipDirectionTextField.text=self.record.dipDirection;
@@ -960,8 +960,8 @@
         textField.hidden=NO;
     
     //Set the trend and plunge text fields
-    self.plungeTextField.text=fault.plunge ? fault.plunge : @"";
-    self.trendTextField.text=fault.trend ? fault.trend : @"";
+    self.plungeTextField.text=fault.plunge ? [NSString stringWithFormat:@"%@",fault.plunge] : @"";
+    self.trendTextField.text=fault.trend ? [NSString stringWithFormat:@"%@",fault.trend] : @"";
     
     //Set the formation text field
     self.formationTextField.text=fault.formation ? fault.formation.formationName : @"";    

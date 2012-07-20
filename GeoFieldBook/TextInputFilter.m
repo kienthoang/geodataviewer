@@ -29,7 +29,7 @@
 
 + (NSString *)csvCompliantStringFromString:(NSString *)text {
     //Put quotation marks around if there is a comma or a new line character
-    if ([text componentsSeparatedByString:@","].count>1 || [text componentsSeparatedByString:@"\n"])
+    if ([text componentsSeparatedByString:@","].count>1 || [text componentsSeparatedByString:@"\n"].count>1)
         text=[NSString stringWithFormat:@"\"%@\"",text];
     return text;
 }

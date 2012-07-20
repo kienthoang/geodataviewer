@@ -2,7 +2,7 @@
 //  Fault.h
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 6/28/12.
+//  Created by Kien Hoang on 7/19/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 
 @interface Fault : Record
 
-@property (nonatomic, retain) NSString * plunge;
-@property (nonatomic, retain) NSString * trend;
+@property (nonatomic, retain) NSNumber * plunge;
+@property (nonatomic, retain) NSNumber * trend;
 @property (nonatomic, retain) Formation *formation;
 
 @end

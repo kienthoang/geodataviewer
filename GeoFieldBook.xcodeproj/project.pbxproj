@@ -58,7 +58,6 @@
 		0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0249E2EA15A9007B00A7532E /* DataMapSegmentControllerSegue.m */; };
 		02712A4C159D010500510188 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4B159D010500510188 /* Bedding.m */; };
 		02712A50159D011300510188 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A4F159D011300510188 /* Contact.m */; };
-		02712A53159D012100510188 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A52159D012100510188 /* Fault.m */; };
 		02712A56159D012F00510188 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A55159D012F00510188 /* JointSet.m */; };
 		02712A59159D013D00510188 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02712A58159D013D00510188 /* Other.m */; };
 		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
@@ -76,6 +75,7 @@
 		028894C815B4A83F0062E6DA /* MPFoldTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894B715B4A83F0062E6DA /* MPFoldTransition.m */; };
 		028894C915B4A83F0062E6DA /* MPTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894B915B4A83F0062E6DA /* MPTransition.m */; };
 		028894D115B4AEF90062E6DA /* MPAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894D015B4AEF80062E6DA /* MPAnimation.m */; };
+		028E94BB15B89D1C006E8B3F /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 028E94BA15B89D1C006E8B3F /* Fault.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -266,8 +266,6 @@
 		02712A4B159D010500510188 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		02712A4E159D011300510188 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		02712A4F159D011300510188 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		02712A51159D012100510188 /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
-		02712A52159D012100510188 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
 		02712A54159D012F00510188 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
 		02712A55159D012F00510188 /* JointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JointSet.m; sourceTree = "<group>"; };
 		02712A57159D013D00510188 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
@@ -306,6 +304,8 @@
 		028894BA15B4A83F0062E6DA /* MPTransitionEnumerations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPTransitionEnumerations.h; sourceTree = "<group>"; };
 		028894CF15B4AEF80062E6DA /* MPAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPAnimation.h; sourceTree = "<group>"; };
 		028894D015B4AEF80062E6DA /* MPAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPAnimation.m; sourceTree = "<group>"; };
+		028E94B915B89D1C006E8B3F /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
+		028E94BA15B89D1C006E8B3F /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1021,8 +1021,8 @@
 		0298C258159B43860038E89C /* Fault */ = {
 			isa = PBXGroup;
 			children = (
-				02712A51159D012100510188 /* Fault.h */,
-				02712A52159D012100510188 /* Fault.m */,
+				028E94B915B89D1C006E8B3F /* Fault.h */,
+				028E94BA15B89D1C006E8B3F /* Fault.m */,
 				0222DB081596204300699D62 /* Fault+Modification.h */,
 				0222DB091596204300699D62 /* Fault+Modification.m */,
 			);
@@ -1242,7 +1242,6 @@
 				0205C7AC159CD79900CA1223 /* Formation.m in Sources */,
 				02712A4C159D010500510188 /* Bedding.m in Sources */,
 				02712A50159D011300510188 /* Contact.m in Sources */,
-				02712A53159D012100510188 /* Fault.m in Sources */,
 				02712A56159D012F00510188 /* JointSet.m in Sources */,
 				02712A59159D013D00510188 /* Other.m in Sources */,
 				2128E74015A237AB00B277F9 /* MKGeoRecordAnnotation.m in Sources */,
@@ -1292,6 +1291,7 @@
 				212DD13A15B46577000203AB /* ExportFormationTableViewController.m in Sources */,
 				212DD13D15B468DC000203AB /* PrototypeFormationFolderTableViewController.m in Sources */,
 				212DD14015B46907000203AB /* PrototypeFormationTableViewController.m in Sources */,
+				028E94BB15B89D1C006E8B3F /* Fault.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
