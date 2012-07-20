@@ -36,7 +36,6 @@
         text = [text stringByReplacingOccurrencesOfString:@"\"" withString:@"\"\""];
         text = [@"" stringByAppendingFormat:@"\"%@\"",text];
     }
-    NSLog(@"quotes: %@",text);
     return text;
 }
 
