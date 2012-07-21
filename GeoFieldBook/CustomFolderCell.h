@@ -14,8 +14,8 @@
 
 @protocol CustomFolderCellDelegate
 
-- (void)folderCell:(CustomFolderCell *)sender userDidSelectDidCheckBoxForRecord:(Folder *)folder;
-- (void)folderCell:(CustomFolderCell *)sender userDidDeselectDidCheckBoxForRecord:(Folder *)folder;
+- (void)folderCell:(CustomFolderCell *)sender userDidSelectDidCheckBoxForFolder:(Folder *)folder;
+- (void)folderCell:(CustomFolderCell *)sender userDidDeselectDidCheckBoxForFolder:(Folder *)folder;
 
 @end
 

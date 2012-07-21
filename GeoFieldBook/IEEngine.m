@@ -171,14 +171,18 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     if ((errorMessage=[transientRecord setLongitudeWithValidations:[tokenArray objectAtIndex:Longitude]]))
         [self.validationMessageBoard addErrorWithMessage:errorMessage];
     
-    
     //Populate the date field
     NSString *dateToken = [[tokenArray objectAtIndex:Date] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *timeToken = [[tokenArray objectAtIndex:Time] stringByReplacingOccurrencesOfString:@" " withString:@""];
     transientRecord.date = [self dateFromDateToken:dateToken andTimeToken:timeToken];
     
     //Set the image of the record using the given image file name in the csv file
-    transientRecord.image.imageData=[self imageInDocumentDirectoryForName:[tokenArray objectAtIndex:imageName]];
+    NSData *imageData=[self imageInDocumentDirectoryForName:[tokenArray objectAtIndex:imageName]];
+    if (imageData) {
+        TransientImage *image=[[TransientImage alloc] init];
+        image.imageData=imageData;
+        transientRecord.image=image;
+    }
     
     //Set the folder
     transientRecord.folder=[self.foldersByFolderNames objectForKey:folderName];

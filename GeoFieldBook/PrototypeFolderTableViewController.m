@@ -100,9 +100,8 @@
     static NSString *CellIdentifier = @"Folder Cell";
     
     CustomFolderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
         cell = [[CustomFolderCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
     
     // Configure the cell
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];

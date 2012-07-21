@@ -396,6 +396,9 @@
 {
     CustomFolderCell *cell=(CustomFolderCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     
+    //Set the delegate of the cell to be notified when user toggles on/off checkboxes to include/exclude folders from being showed on the map
+    cell.delegate=self;
+    
     //Select cell if its folder is in the list of selected folders
     Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
     if ([self.selectedFolders containsObject:folder]) {
@@ -451,14 +454,14 @@
 
 #pragma mark - CustomFolderCellDelegate methods
 
-- (void)folderCell:(CustomFolderCell *)sender userDidSelectDidCheckBoxForRecord:(Folder *)folder {
+- (void)folderCell:(CustomFolderCell *)sender userDidSelectDidCheckBoxForFolder:(Folder *)folder {
     [self.recordFilter userDidSelectFolderWithName:folder.folderName];
-    
+        
     //Post a notification to indicate that the folder database has changed
     [self postNotificationWithName:GeoNotificationModelGroupFolderDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
 }
 
-- (void)folderCell:(CustomFolderCell *)sender userDidDeselectDidCheckBoxForRecord:(Folder *)folder {
+- (void)folderCell:(CustomFolderCell *)sender userDidDeselectDidCheckBoxForFolder:(Folder *)folder {
     [self.recordFilter userDidDeselectFolderWithName:folder.folderName];
     
     //Post a notification to indicate that the folder database has changed

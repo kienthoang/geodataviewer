@@ -18,6 +18,9 @@ typedef void (^completion_handler_t)(BOOL success);
 
 @property (nonatomic,strong) UIManagedDocument *geoFieldBookDatabase;      //Return the UIManagedDocument for the entire database, which will be shared throughout the app
 
+@property (nonatomic,readonly) NSURL *appSupportDirectoryURL;
+@property (nonatomic,readonly) NSURL *databaseURL;
+
 #define DATABASE_FILE_LOCALIZED_NAME @"GeoFieldBook_Database"
 
 @end

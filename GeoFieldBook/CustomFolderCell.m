@@ -42,12 +42,12 @@
     CheckBox *checkbox=(CheckBox *)self.checkBox;
     checkbox.isChecked=!checkbox.isChecked;
     checkbox.image = checkbox.isChecked ? checkbox.checked : checkbox.unchecked; 
-    
+        
     //Notify the delegate
     if (checkbox.isChecked)
-        [self.delegate folderCell:self userDidSelectDidCheckBoxForRecord:self.folder];
+        [self.delegate folderCell:self userDidSelectDidCheckBoxForFolder:self.folder];
     else
-        [self.delegate folderCell:self userDidDeselectDidCheckBoxForRecord:self.folder];
+        [self.delegate folderCell:self userDidDeselectDidCheckBoxForFolder:self.folder];
 }
 
 

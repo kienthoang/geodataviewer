@@ -46,6 +46,21 @@ static GeoDatabaseManager *standardDatabaseManager;
     return self;
 }
 
+- (NSURL *)appSupportDirectoryURL {
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSURL *appSupportDirURL=[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask].lastObject;
+    if (![fileManager fileExistsAtPath:appSupportDirURL.path])
+        [fileManager createDirectoryAtPath:appSupportDirURL.path withIntermediateDirectories:YES attributes:nil error:NULL];
+    
+    return appSupportDirURL;
+}
+
+- (NSURL *)databaseURL {
+    NSURL *appSupportDirURL=self.appSupportDirectoryURL;
+    NSURL *databaseURL=[appSupportDirURL URLByAppendingPathComponent:DATABASE_FILE_LOCALIZED_NAME];
+    return databaseURL;
+}
+
 - (void)createMainDatabaseWithURL:(NSURL *)databaseURL {
     //Create a UIManagedDocument with the database URL and save it first before keeping it as a property in case the user accesses the property in the middle of the saving process
     self.geoFieldBookDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
@@ -68,10 +83,7 @@ static GeoDatabaseManager *standardDatabaseManager;
 - (void)synchronizeWithMainDatabase {
     //If the main database doesn't exist on disk yet, create it
     NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSURL *appSupportDirURL=[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask].lastObject;
-    if (![fileManager fileExistsAtPath:appSupportDirURL.path])
-        [fileManager createDirectoryAtPath:appSupportDirURL.path withIntermediateDirectories:YES attributes:nil error:NULL];
-    NSURL *databaseURL=[appSupportDirURL URLByAppendingPathComponent:DATABASE_FILE_LOCALIZED_NAME];
+    NSURL *databaseURL=self.databaseURL;
     if (![fileManager fileExistsAtPath:databaseURL.path]) {
         //Create the main database
         [self createMainDatabaseWithURL:databaseURL];
