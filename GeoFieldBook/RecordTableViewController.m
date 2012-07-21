@@ -230,14 +230,14 @@
     //Update the record
     [record updateWithNewRecordInfo:recordInfo];
     
-    //Post a notification to indicate that the record database has changed
-    [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
-    
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
             //Highlight the modified record
             [self highlightRecord:record];
+            
+            //Post a notification to indicate that the record database has changed
+            [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
         }
     }];
 }

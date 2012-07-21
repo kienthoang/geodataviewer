@@ -13,5 +13,6 @@
 @property (nonatomic) float strike;
 @property (nonatomic) float dip;
 @property (nonatomic, strong) NSString *dipDirection;
+@property (nonatomic, strong) NSString *recordType;
 
 @end

@@ -557,7 +557,7 @@
         NSString *message=@"You navigated away. Do you want to save the record you were editing?";
         
         //Put up an alert to ask the user whether he/she wants to save
-        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave" 
+        autosaveAlert=[[UIAlertView alloc] initWithTitle:AUTOSAVE_ALERT_TITLE 
                                                  message:message 
                                                 delegate:self 
                                        cancelButtonTitle:@"Don't Save" 
@@ -592,36 +592,67 @@
     [autosaveAlert show];
 }
 
+#pragma mark - UI Management Methods
 
-#pragma mark - DataMapSegmentViewControllerDelegate protocol methods
-
-- (void)removeEditButton {
-    //Remove edit button
-    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
-    for (int index=0;index<[toolbarItems count];index++) {
+- (void)removeButtonWithTitle:(NSString *)title {
+    //Remove the button with the given title
+    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
+    for (int index=0;index<toolbarItems.count;index++) {
         UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
-        if ([barButtonItem.title isEqualToString:@"Edit"] || [barButtonItem.title isEqualToString:@"Done"])
-            [toolbarItems removeObject:barButtonItem];        
+        if (barButtonItem.title.length && [barButtonItem.title caseInsensitiveCompare:title]==NSOrderedSame)
+            [toolbarItems removeObject:barButtonItem];               
     }
     
     //Set the tolbar
     self.toolbar.items=[toolbarItems copy];
 }
 
-- (void)setupEditButtonForViewController:(UIViewController *)viewController {
-    //If the swapped in view controller is the record view controller put up the edit button
+- (void)removeButtonsWithTitles:(NSArray *)titles {
+    //Remove all buttons that hastitle in the given array
+    for (NSString *title in titles)
+        [self removeButtonWithTitle:title];
+}
+
+- (void)putUpButton:(UIBarButtonItem *)button atIndex:(int)index {
+    //Put the given button up if its not already in the toolbar
     NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
+    if (![toolbarItems containsObject:button])
+        [toolbarItems insertObject:button atIndex:index];
+    
+    //Set the tolbar
+    self.toolbar.items=[toolbarItems copy];
+}
+
+- (void)setupCancelButtonForViewController:(UIViewController *)viewController {
+    //If the swapped in view controller is the record view controller put up the cancel button
     if ([viewController isKindOfClass:[RecordViewController class]]) {
         RecordViewController *recordDetail=(RecordViewController *)viewController;
-        if (![toolbarItems containsObject:recordDetail.editButton])
-            [toolbarItems addObject:recordDetail.editButton];
-        //Set the tolbar
-        self.toolbar.items=[toolbarItems copy];
+        [self putUpButton:recordDetail.cancelButton atIndex:self.toolbar.items.count-1];
     }
     
     //If the edit button is on the toolbar, take it off
     else
-        [self removeEditButton];
+        [self removeButtonWithTitle:@"Cancel"];
+}
+
+- (void)setupEditButtonForViewController:(UIViewController *)viewController {
+    //If the swapped in view controller is the record view controller put up the edit button
+    if ([viewController isKindOfClass:[RecordViewController class]]) {
+        RecordViewController *recordDetail=(RecordViewController *)viewController;
+        [self putUpButton:recordDetail.editButton atIndex:self.toolbar.items.count];
+    }
+    
+    //If the edit button is on the toolbar, take it off (its title should either be "Done" or "Edit")
+    else
+        [self removeButtonsWithTitles:[NSArray arrayWithObjects:@"Edit",@"Done", nil]];
+}
+
+- (void)setupButtonsForViewSideController:(UIViewController *)viewController {
+    //Setup the tracking button
+    [self setupTrackingButtonForViewController:viewController];
+    
+    //Setup the buttons for the record view controller (if the given view controller is one)
+    [self setupEditButtonForViewController:viewController];
 }
 
 - (void)setupTrackingButtonForViewController:(UIViewController *)viewController {
@@ -646,18 +677,19 @@
     self.toolbar.items=[toolbarItems copy];
 }
 
+#pragma mark - DataMapSegmentViewControllerDelegate protocol methods
+
 - (void)dataMapSegmentController:(DataMapSegmentViewController *)sender 
      isSwitchingToViewController:(UIViewController *)viewController
 {
     //Setup the buttons
-    [self setupEditButtonForViewController:viewController];
-    [self setupTrackingButtonForViewController:viewController];
+    [self setupButtonsForViewSideController:viewController];
     
     //Setup delegate for the record view controller
     if ([viewController isKindOfClass:[RecordViewController class]])
         [sender setRecordViewControllerDelegate:self];
     
-    //If switching to the map, show the checkboxes (allow filter by folder) in the folder tvc
+    //If switching to the map, show the checkboxes (allow filter by folder) in the folder ;
     FolderTableViewController *folderTVC=[[(UINavigationController *)self.popoverViewController.contentViewController viewControllers] objectAtIndex:0];
     if (folderTVC) {
         if ([viewController isKindOfClass:[RecordMapViewController class]])
@@ -720,8 +752,8 @@
 }
 
 - (void)replaceWithEditButtonOfRecordViewController:(RecordViewController *)recordVC {
-    //Remove the old edit button
-    [self removeEditButton];
+    //Remove the old edit button (its title should either be "Edit" or "Done")
+    [self removeButtonsWithTitles:[NSArray arrayWithObjects:@"Edit",@"Done", nil]];
     
     //Put up the new one
     [self setupEditButtonForViewController:recordVC];
@@ -763,6 +795,26 @@
     RecordTableViewController *recordVC=[self recordTableViewController];
     if (recordVC && [recordVC hasPrevRecord])
         [self swipeWithTransitionAnimation:TransitionAnimationPushLeft forward:NO];
+}
+
+- (void)userDidCancelEditingMode:(RecordViewController *)sender {
+    //Remove the cancel button
+    [self removeButtonWithTitle:@"Cancel"];    
+}
+
+- (void)userWantsToCancelEditingMode:(RecordViewController *)sender {
+    //Put up an alert
+    UIAlertView *cancelAlert=[[UIAlertView alloc] initWithTitle:CANCEL_ALERT_TITLE 
+                                                        message:@"Are you sure you want to cancel? All the changes you made will be lost." 
+                                                       delegate:self 
+                                              cancelButtonTitle:@"Go Back" 
+                                              otherButtonTitles:@"Confirm", nil];
+    [cancelAlert show];
+}
+
+- (void)userDidStartEditingMode:(RecordViewController *)sender {
+    //Put up the cancel button
+    [self setupCancelButtonForViewController:sender];   
 }
 
 #pragma mark - RecordMapViewControllerDelegate protocol methods
@@ -830,13 +882,27 @@
 #pragma mark - UIAlertViewDelegate methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Save"]) {
-        //Save the record info
-        [self.modifiedRecord updateWithNewRecordInfo:self.recordModifiedInfo]; 
+    NSString *buttonTitle=[alertView buttonTitleAtIndex:buttonIndex];
+    
+    //If the alert is the autosave alert
+    if ([alertView.title isEqualToString:AUTOSAVE_ALERT_TITLE]) {
+        if ([buttonTitle isEqualToString:@"Save"]) {
+            //Save the record info
+            [self.modifiedRecord updateWithNewRecordInfo:self.recordModifiedInfo]; 
             
-        //Nillify the temporary record modified data
-        self.modifiedRecord=nil;
-        self.recordModifiedInfo=nil;
+            //Nillify the temporary record modified data
+            self.modifiedRecord=nil;
+            self.recordModifiedInfo=nil;
+        }
+    }
+    
+    //If the alert is the cancel alert (from RecordViewController)
+    else if ([alertView.title isEqualToString:CANCEL_ALERT_TITLE]) {
+        //If user click "Continue", cancel the editing mode of the record view controller
+        if ([buttonTitle isEqualToString:@"Confirm"]) {
+            DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+            [dataMapSegmentVC cancelRecordViewControllerEditingMode];
+        }
     }
 }
 

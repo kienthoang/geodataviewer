@@ -944,12 +944,19 @@
                                 <action selector="editPressed:" destination="LFc-wQ-Gyp" id="AYe-Th-2Ue"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Cancel" id="Omq-Y9-Wts">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelPressed:" destination="LFc-wQ-Gyp" id="wId-6J-suN"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="acquireButton" destination="Dxm-3N-8JA" id="KaY-6e-gG9"/>
                         <outlet property="browseButton" destination="CT2-6D-cfZ" id="Jhy-w1-Yj4"/>
+                        <outlet property="cancelButton" destination="Omq-Y9-Wts" id="IOO-Wy-w34"/>
                         <outlet property="dateTextField" destination="V3o-8P-hdU" id="mCP-gO-dTs"/>
                         <outlet property="dipDirectionLabel" destination="YSI-LC-man" id="jXa-64-uj5"/>
                         <outlet property="dipDirectionTextField" destination="Vnu-9G-ONQ" id="yFD-Gd-UoE"/>
@@ -1716,7 +1723,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <barButtonItem title="Model" style="plain" id="oka-MW-QWP"/>
+                                    <barButtonItem title="Model MVC Group" style="plain" id="oka-MW-QWP"/>
                                     <barButtonItem width="17" style="plain" systemItem="fixedSpace" id="dsO-3J-lud"/>
                                     <barButtonItem style="plain" systemItem="compose" id="CcB-as-dij">
                                         <connections>
@@ -2633,6 +2640,7 @@
             <relationships>
                 <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="browseButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="dateTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>

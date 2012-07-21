@@ -22,4 +22,7 @@
 @property (nonatomic,weak) UIActivityIndicatorView *importExportSpinner;
 @property (nonatomic,weak) UIBarButtonItem *importExportSpinnerBarButtonItem;
 
+#define AUTOSAVE_ALERT_TITLE @"Autosave"
+#define CANCEL_ALERT_TITLE @"Stop Editing"
+
 @end

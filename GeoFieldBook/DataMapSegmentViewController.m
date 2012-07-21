@@ -94,6 +94,12 @@
     [recordDetail showKeyboard];
 }
 
+- (void)cancelRecordViewControllerEditingMode {
+    //Cancel the record view controller's edit mode
+    RecordViewController *recordDetail=(RecordViewController *)self.detailSideViewController;
+    [recordDetail cancelEditingMode];
+}
+
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)
 
 - (void)swapToViewControllerAtSegmentIndex:(int)segmentIndex {

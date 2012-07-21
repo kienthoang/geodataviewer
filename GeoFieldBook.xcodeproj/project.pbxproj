@@ -63,6 +63,7 @@
 		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
 		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
 		0277643915B91B6800C9DCEB /* ExportFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277643815B91B6800C9DCEB /* ExportFormatter.m */; };
+		0277645815B9DC3700C9DCEB /* Record+Deletion.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277645715B9DC3600C9DCEB /* Record+Deletion.m */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
 		028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
@@ -279,6 +280,8 @@
 		027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
 		0277643715B91B6800C9DCEB /* ExportFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFormatter.h; sourceTree = "<group>"; };
 		0277643815B91B6800C9DCEB /* ExportFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportFormatter.m; sourceTree = "<group>"; };
+		0277645615B9DC3600C9DCEB /* Record+Deletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Deletion.h"; sourceTree = "<group>"; };
+		0277645715B9DC3600C9DCEB /* Record+Deletion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Deletion.m"; sourceTree = "<group>"; };
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -658,12 +661,8 @@
 		024097A2159D373F00855D33 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				21FC474C15A3789E00F245FF /* CustomFolderCell.h */,
-				21FC474D15A3789E00F245FF /* CustomFolderCell.m */,
-				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
-				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
-				21989D6715A4D27C001CF847 /* CheckBox.h */,
-				21989D6815A4D27C001CF847 /* CheckBox.m */,
+				0277645A15BA06C200C9DCEB /* Table Cells */,
+				217C9F9C15B9A3A800C3AABC /* Dip Strike Symbol */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -730,6 +729,13 @@
 				020EBBC0159467F100EECC08 /* ModalRecordTypeSelector.m */,
 			);
 			name = "Folder-Record Group";
+			sourceTree = "<group>";
+		};
+		0277645A15BA06C200C9DCEB /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Table Cells";
 			sourceTree = "<group>";
 		};
 		028732FA15B28F630001BBC2 /* Import */ = {
@@ -830,7 +836,6 @@
 				0249E2C015A6AD0300A7532E /* iPad.storyboard */,
 				0249E2E215A8EDF700A7532E /* GeoFieldBookController.h */,
 				0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */,
-				217C9F9C15B9A3A800C3AABC /* Dip Strike Symbol */,
 				020EBB9A15942C7900EECC08 /* Model MVC Group */,
 				020EBB9B15942C8F00EECC08 /* View MVC Group */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
@@ -1003,6 +1008,8 @@
 				0222DAFF15961D0D00699D62 /* Record+DictionaryKeys.m */,
 				029877F6159566E0000D71E7 /* Record+Creation.h */,
 				029877F7159566E0000D71E7 /* Record+Creation.m */,
+				0277645615B9DC3600C9DCEB /* Record+Deletion.h */,
+				0277645715B9DC3600C9DCEB /* Record+Deletion.m */,
 				020EBBC215946B3D00EECC08 /* Record+Types.h */,
 				020EBBC315946B3D00EECC08 /* Record+Types.m */,
 				0298C25A159B43F30038E89C /* Record+Validation.h */,
@@ -1090,6 +1097,12 @@
 			isa = PBXGroup;
 			children = (
 				218F8FD315B9AA490008710A /* DipStrikeSymbol.h */,
+				21FC474C15A3789E00F245FF /* CustomFolderCell.h */,
+				21FC474D15A3789E00F245FF /* CustomFolderCell.m */,
+				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
+				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
+				21989D6715A4D27C001CF847 /* CheckBox.h */,
+				21989D6815A4D27C001CF847 /* CheckBox.m */,
 				218F8FD415B9AA490008710A /* DipStrikeSymbol.m */,
 				218F8FD015B9AA220008710A /* MKCustomAnnotationView.h */,
 				218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */,
@@ -1318,6 +1331,7 @@
 				0277643915B91B6800C9DCEB /* ExportFormatter.m in Sources */,
 				218F8FD215B9AA220008710A /* MKCustomAnnotationView.m in Sources */,
 				218F8FD515B9AA490008710A /* DipStrikeSymbol.m in Sources */,
+				0277645815B9DC3700C9DCEB /* Record+Deletion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

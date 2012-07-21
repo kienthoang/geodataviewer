@@ -18,6 +18,7 @@
         symbol.strike=record.strike.floatValue;
         symbol.dip=record.dip.floatValue;
         symbol.dipDirection=record.dipDirection;
+        symbol.recordType = NSStringFromClass([record class]);;
         
         //Add the strike symbol view
         symbol.backgroundColor=[UIColor clearColor];

@@ -30,6 +30,7 @@ typedef void (^push_completion_handler_t)(void);
 - (void)updateMapWithRecords:(NSArray *)records;
 - (void)updateRecordDetailViewWithRecord:(Record *)record;
 - (void)putRecordViewControllerIntoEditingMode;
+- (void)cancelRecordViewControllerEditingMode;
 - (void)setMapSelectedRecord:(Record *)selectedRecord;
 
 - (void)pushInitialViewController;

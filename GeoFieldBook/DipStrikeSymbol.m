@@ -14,6 +14,7 @@
 @synthesize strike=_strike;
 @synthesize dip=_dip;
 @synthesize dipDirection=_dipDirection;
+@synthesize recordType=_recordType;
 
 #pragma mark - Setters
 
@@ -54,19 +55,19 @@
     return degrees * PI / 180;
 }
 
-- (void) drawStrikeWithContext:(CGContextRef) context point:(CGPoint) point1 andPoint:(CGPoint) point2
+- (void) drawStrikeWithContext:(CGContextRef) context point:(CGPoint) point1 andPoint:(CGPoint) point2 withColor:(UIColor *) color
 {
     CGContextMoveToPoint(context, point1.x, point1.y);
     CGContextAddLineToPoint(context, point2.x, point2.y);
-    [[UIColor blueColor] setStroke];
+    [color setStroke];
     CGContextStrokePath(context);
 }
 
-- (void) drawDipWithContext:(CGContextRef) context from:(CGPoint) center to:(CGPoint) point
+- (void) drawDipWithContext:(CGContextRef) context from:(CGPoint) center to:(CGPoint) point withColor:(UIColor *) color
 {
     CGContextMoveToPoint(context, center.x, center.y);
     CGContextAddLineToPoint(context, point.x, point.y);
-    [[UIColor redColor] setStroke];
+    [color setStroke];
     CGContextStrokePath(context);
 }
 
@@ -93,15 +94,58 @@
         center.x=self.bounds.origin.x+width/2;
         center.y=self.bounds.origin.y+height/2;
         float radius = sqrtf(width*width+height*height)/2;
-        float strike=self.strike;
+        
+        float strike=[self toRadians:self.strike];
         CGPoint point1 = CGPointMake(radius * sin(strike) + center.x, -radius * cos(strike) + center.y);
         CGPoint point2 = CGPointMake(-radius * sin(strike) + center.x, radius * cos(strike) + center.y);
         
+        //determine color of strike and dip lines
+        //switch requires int test and constant cases
+        UIColor *strikeColor;//=[UIColor blueColor];
+        UIColor *dipColor;//=[UIColor redColor];
+        if ([self.recordType isEqualToString:@"Bedding"]) {
+            strikeColor = [UIColor blueColor];
+            dipColor = [UIColor redColor];
+        }
+        else if ([self.recordType isEqualToString:@"Contact"]) {
+            strikeColor = [UIColor orangeColor];
+            dipColor = [UIColor greenColor];
+        }
+        else {
+            //do any other record types use the dip strike symbol?
+            //strikeColor = [UIColor magentaColor];
+            //dipColor = [UIColor cyanColor];
+        }
+        
+        /*if (0 <= strike && strike < PI/2) {
+            strikeColor = [UIColor blueColor];
+            dipColor = [UIColor redColor];
+        }
+        else if (strike < PI) {
+            strikeColor = [UIColor greenColor];
+            dipColor = [UIColor orangeColor];
+        }
+        else if (strike < 3*PI/2) {
+            strikeColor = [UIColor redColor];
+            dipColor = [UIColor blueColor];
+        }
+        else {
+            strikeColor = [UIColor orangeColor];
+            dipColor = [UIColor greenColor];
+        }*/
+        
         //Draw the strike
         CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetLineWidth(context, 3.0);
         CGContextBeginPath(context);
         
-        [self drawStrikeWithContext:context point:point1 andPoint:point2];
+        //draw surrounding circle or ellipse
+        //CGContextAddArc(context, center.x, center.y, radius, 0.0, 2*PI, 0);
+        //CGContextAddEllipseInRect(context, CGRectMake(self.bounds.origin.x, self.bounds.origin.y, width, height));
+        //[[UIColor whiteColor] setFill];
+        //CGContextFillPath(context);
+
+        [self drawStrikeWithContext:context point:point1 andPoint:point2 withColor:strikeColor];
         
         //DIP
         //the dip line is always perpendicular to the strike line
@@ -109,11 +153,11 @@
         //whichever side is closer to this direction is the side on which the dip line is drawn
         //if the dip direction corresponds exactly with the strike line (which it should not, this is likely an error in measurement I think), the dip line is drawn towards dipPoint1 (see below) (90 degrees clockwise from the strike angle given by the user)
         
+        //if the dip direction is used to determine the direction of the dip these two arrays are required
         NSArray *dipDirectionConversions = [NSArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:45], [NSNumber numberWithInt:90], [NSNumber numberWithInt:135], [NSNumber numberWithInt:180], [NSNumber numberWithInt:225], [NSNumber numberWithInt:270], [NSNumber numberWithInt:315], nil];
         NSArray *possibleDips = [Record allDipDirectionValues];
         
-        //float dip = 135 * PI / 180;//do we need this?
-        //input from user
+        //input from the user
         NSString *dipdirection = self.dipDirection;
         
         float dipAngle = [[dipDirectionConversions objectAtIndex:[possibleDips indexOfObject:dipdirection]] floatValue];
@@ -123,14 +167,21 @@
         if (strikePlus90 > 2*PI)
             strikePlus90 -= 2*PI;
         
-        CGPoint dipPoint1 = CGPointMake((.25) * radius * sin(strikePlus90) + center.x, -(.25) * radius * cos(strikePlus90) + center.y);
-        CGPoint dipPoint2 = CGPointMake(-(.25) * radius * sin(strikePlus90) + center.x, (.25) * radius * cos(strikePlus90) + center.y);
+        CGPoint dipPoint1 = CGPointMake((.33) * radius * sin(strikePlus90) + center.x, -(.33) * radius * cos(strikePlus90) + center.y);
+        CGPoint dipPoint2 = CGPointMake(-(.33) * radius * sin(strikePlus90) + center.x, (.33) * radius * cos(strikePlus90) + center.y);
         CGPoint givenDipPoint = CGPointMake(radius * sin(dipAngle) + center.x, -radius * cos(dipAngle) + center.y);
         
         CGPoint dipEndPoint = [self closestPointTo:givenDipPoint among:dipPoint1 or:dipPoint2];
         
         //Draw the dip
-        [self drawDipWithContext:context from:center to:dipEndPoint];
+        [self drawDipWithContext:context from:center to:dipEndPoint withColor:dipColor];
+        
+        //to use the given dip angle (not necessarily perpendicular to the strike) use this
+        /*float dipAngle = [self toRadians:self.dip];
+        
+        CGPoint dipPoint = CGPointMake((.33) * radius * sin(dipAngle) + center.x, -(.33) * radius * cos(dipAngle) + center.y);
+        
+        [self drawDipWithContext:context from:center to:dipPoint withColor:dipColor];*/
     }
 }
 

@@ -101,7 +101,7 @@
 
 - (void)setRecords:(NSArray *)records {
     //If the records actually changed
-    if (![_records isEqualToArray:records]) {
+    if (_records!=records) {
         _records=records;
         
         [self updateMapView];
@@ -212,11 +212,17 @@
     Record *record=annotation.record;
     
     //If the record is of type bedding or contact return a MKCustomAnnotationView
-    if ([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[Contact class]]) {
+    if ([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[Contact class]])
         return [[MKCustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
-    } 
 
     return [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];;
+}
+
+- (BOOL)annotationView:(MKAnnotationView *)annotationView isCorrectKindOfAnnotationViewFor:(Record *)record {
+    if ([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[Contact class]])
+        return [annotationView isKindOfClass:[MKCustomAnnotationView class]];
+    else
+        return [annotationView isKindOfClass:[MKPinAnnotationView class]];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -224,8 +230,9 @@
         return nil;
     
     //Get an annotation view
-    MKAnnotationView *annotationView=(MKCustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
-    if (!annotationView) {
+    Record *record=[(MKGeoRecordAnnotation *)annotation record];
+    MKAnnotationView *annotationView=[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    if (!annotationView || ![self annotationView:annotationView isCorrectKindOfAnnotationViewFor:record]) {
         annotationView=[self viewForAnnotation:annotation];
         annotationView.canShowCallout=YES;
         

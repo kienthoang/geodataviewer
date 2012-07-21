@@ -17,8 +17,9 @@
     [super updateWithNewRecordInfo:recordInfo];
 
     //Update trend and plunge
-    self.trend=[recordInfo objectForKey:RECORD_TREND];
-    self.plunge=[recordInfo objectForKey:RECORD_PLUNGE];
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    self.trend=[numberFormatter numberFromString:[recordInfo objectForKey:RECORD_TREND]];
+    self.plunge=[numberFormatter numberFromString:[recordInfo objectForKey:RECORD_PLUNGE]];
     
     //If the formation name is nil, nilly this record's formation
     NSString *formationName=[recordInfo objectForKey:RECORD_FORMATION];

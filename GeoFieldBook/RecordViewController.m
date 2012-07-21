@@ -132,6 +132,7 @@
 @synthesize gpsTimer = _gpsTimer;
 @synthesize gatheringGPS = _gatheringGPS;
 @synthesize editButton = _editButton;
+@synthesize cancelButton = _cancelButton;
 @synthesize acquiredImage=_acquiredImage;
 @synthesize hasTakenImage=_hasTakenImage;
 
@@ -429,8 +430,16 @@
     //Toggle the editting mode
     if (self.editing)
         [self endEditingModeAndSaveWithValidationsEnabled:YES];
-    else 
+    else  {
+        //Start editing mode
         [self setEditing:YES animated:YES];
+    }
+}
+
+- (IBAction)cancelPressed:(UIBarButtonItem *)sender {
+    //Notify the delegate
+    if ([self.delegate respondsToSelector:@selector(userWantsToCancelEditingMode:)])
+        [self.delegate userWantsToCancelEditingMode:self];
 }
 
 #pragma mark - Form Validations
@@ -521,6 +530,12 @@
     //Style input fields accordingly to editing
     [self styleFormInputFields];
     
+    //Notify the delegate
+    if (editing && [self.delegate respondsToSelector:@selector(userDidCancelEditingMode:)])
+        [self.delegate userDidStartEditingMode:self];
+    if (!editing && [self.delegate respondsToSelector:@selector(userDidCancelEditingMode:)])
+        [self.delegate userDidCancelEditingMode:self];
+    
     //Stop updating location if still updating and self goes out of editing mode
     if (!self.editing && [self.gatheringGPS isAnimating])
         [self timerFired];
@@ -537,6 +552,14 @@
     else
         //Process without validations
         [self userDoneEditingRecord];
+}
+
+- (void)cancelEditingMode {
+    //Turn the editing mode off
+    [self setEditing:NO animated:YES];
+    
+    //Reload the view
+    [self updateFormForRecord:self.record];
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -851,6 +874,7 @@
     [self setLongitudeTextField:nil];
     [self setDateTextField:nil];
     [self setTimeTextField:nil];
+    [self setCancelButton:nil];
     [super viewDidUnload];
 }
 

@@ -23,9 +23,11 @@
 @property (nonatomic,weak) id <RecordViewControllerDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 - (NSDictionary *)dictionaryFromForm;
 - (BOOL) isInEdittingMode;
+- (void)cancelEditingMode;
 
 - (void)showKeyboard;
 - (void)resignAllTextFieldsAndAreas;
