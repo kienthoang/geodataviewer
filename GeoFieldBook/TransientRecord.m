@@ -64,12 +64,12 @@
     if (dipString.length) {
         NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
         self.dip=[numberFormatter numberFromString:dipString];
-    } else if (dipString) {
-        self.dip=[NSNumber numberWithInt:0];
-    }
+        
+        //If that fails or the dip value is not in the allowed range, return an error message
+        return (self.dip &&  TransientRecordMinimumDip<=self.dip.intValue && self.dip.intValue<=TransientRecordMaximumDip) ? nil : [NSString stringWithFormat:@"Dip value of record with name \"%@\" is invalid",self.name];
+    } 
     
-    //If that fails or the dip value is not in the allowed range, return an error message
-    return (self.dip &&  TransientRecordMinimumDip<=self.dip.intValue && self.dip.intValue<=TransientRecordMaximumDip) ? nil : [NSString stringWithFormat:@"Dip value of record with name \"%@\" is invalid",self.name];
+    return nil;
 }
 
 - (NSString *)setStrikeWithValidations:(NSString *)strikeString {
@@ -77,12 +77,12 @@
     if (strikeString.length) {
         NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
         self.strike=[numberFormatter numberFromString:strikeString];
-    } else if (strikeString) {
-        self.strike=[NSNumber numberWithInt:0];
+        
+        //If that fails or the strike value is not in the range 0-360, return an error message
+        return (self.strike &&  TransientRecordMinimumStrike<=self.strike.intValue && self.strike.intValue<=TransientRecordMaximumStrike) ? nil : [NSString stringWithFormat:@"Strike value of record with name \"%@\" is invalid",self.name];
     }
     
-    //If that fails or the strike value is not in the range 0-360, return an error message
-    return (self.strike &&  TransientRecordMinimumStrike<=self.strike.intValue && self.strike.intValue<=TransientRecordMaximumStrike) ? nil : [NSString stringWithFormat:@"Strike value of record with name \"%@\" is invalid",self.name];
+    return nil;
 }
 
 - (NSString *)setFieldObservationWithValidations:(NSString *)fieldObservation {

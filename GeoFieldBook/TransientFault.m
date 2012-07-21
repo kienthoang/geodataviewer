@@ -40,12 +40,12 @@
     if (plungeString.length) {
         NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
         self.plunge=[numberFormatter numberFromString:plungeString];
-    } else if (plungeString) {
-        self.plunge=[NSNumber numberWithInt:0];
-    }
+        
+        //If that fails or the plunge value is not in the allowed range, return an error message
+        return (self.plunge &&  TransientRecordMinimumPlunge<=self.plunge.intValue && self.plunge.intValue<=TransientRecordMaximumPlunge) ? nil : [NSString stringWithFormat:@"Plunge value of record with name \"%@\" is invalid",self.name];
+    } 
     
-    //If that fails or the plunge value is not in the allowed range, return an error message
-    return (self.plunge &&  TransientRecordMinimumPlunge<=self.plunge.intValue && self.plunge.intValue<=TransientRecordMaximumPlunge) ? nil : [NSString stringWithFormat:@"Plunge value of record with name \"%@\" is invalid",self.name];
+    return nil;
 }
 
 - (NSString *)setTrendWithValidations:(NSString *)trendString {
@@ -53,12 +53,12 @@
     if (trendString.length) {
         NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
         self.trend=[numberFormatter numberFromString:trendString];
-    } else if (trendString) {
-        self.trend=[NSNumber numberWithInt:0];
-    }
+        
+        //If that fails or the trend value is not in the range, return an error message
+        return (self.trend &&  TransientRecordMinimumTrend<=self.trend.intValue && self.trend.intValue<=TransientRecordMaximumTrend) ? nil : [NSString stringWithFormat:@"Trend value of record with name \"%@\" is invalid",self.name];
+    } 
     
-    //If that fails or the trend value is not in the range, return an error message
-    return (self.trend &&  TransientRecordMinimumTrend<=self.trend.intValue && self.trend.intValue<=TransientRecordMaximumTrend) ? nil : [NSString stringWithFormat:@"Trend value of record with name \"%@\" is invalid",self.name];
+    return nil;
 }
 
 @end
