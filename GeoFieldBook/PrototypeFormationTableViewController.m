@@ -8,6 +8,8 @@
 
 #import "PrototypeFormationTableViewController.h"
 
+#import "CustomFormationCell.h"
+
 @interface PrototypeFormationTableViewController ()
 
 @end
@@ -108,14 +110,13 @@
 {
     static NSString *CellIdentifier = @"Formation Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    CustomFormationCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+        cell = [[CustomFormationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     // Configure the cell...
     Formation *formation=[self.fetchedResultsController objectAtIndexPath:indexPath];  
-    cell.textLabel.text=formation.formationName;
+    cell.formation=formation;
     
     return cell;
 }

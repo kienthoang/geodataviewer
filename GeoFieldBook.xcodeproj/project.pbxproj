@@ -71,6 +71,7 @@
 		027764BB15BA4ADE00C9DCEB /* ColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027764BA15BA4ADE00C9DCEB /* ColorPickerViewController.m */; };
 		02806EE615BA6B94003D09A7 /* Formation+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EE515BA6B94003D09A7 /* Formation+DictionaryKeys.m */; };
 		02806EE915BA6E78003D09A7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EE815BA6E78003D09A7 /* Formation.m */; };
+		02806EEC15BA7E97003D09A7 /* CustomFormationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
 		028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
@@ -304,6 +305,8 @@
 		02806EE515BA6B94003D09A7 /* Formation+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+DictionaryKeys.m"; sourceTree = "<group>"; };
 		02806EE715BA6E78003D09A7 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		02806EE815BA6E78003D09A7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
+		02806EEA15BA7E97003D09A7 /* CustomFormationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFormationCell.h; sourceTree = "<group>"; };
+		02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFormationCell.m; sourceTree = "<group>"; };
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -744,12 +747,14 @@
 		0277645A15BA06C200C9DCEB /* Table Cells */ = {
 			isa = PBXGroup;
 			children = (
+				21989D6715A4D27C001CF847 /* CheckBox.h */,
+				21989D6815A4D27C001CF847 /* CheckBox.m */,
 				21FC474C15A3789E00F245FF /* CustomFolderCell.h */,
 				21FC474D15A3789E00F245FF /* CustomFolderCell.m */,
 				21B1FEEE159B58C200868F62 /* CustomRecordCell.h */,
 				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
-				21989D6715A4D27C001CF847 /* CheckBox.h */,
-				21989D6815A4D27C001CF847 /* CheckBox.m */,
+				02806EEA15BA7E97003D09A7 /* CustomFormationCell.h */,
+				02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */,
 			);
 			name = "Table Cells";
 			sourceTree = "<group>";
@@ -1400,6 +1405,7 @@
 				027764BB15BA4ADE00C9DCEB /* ColorPickerViewController.m in Sources */,
 				02806EE615BA6B94003D09A7 /* Formation+DictionaryKeys.m in Sources */,
 				02806EE915BA6E78003D09A7 /* Formation.m in Sources */,
+				02806EEC15BA7E97003D09A7 /* CustomFormationCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
