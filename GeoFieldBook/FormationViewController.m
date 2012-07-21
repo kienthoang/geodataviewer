@@ -89,6 +89,10 @@
     
     //Else pass the new formation info dictionary back to the delegate
     else {
+        //Save the formation name
+        self.formationName=self.nameTextField.text;
+        
+        //Process new info
         NSDictionary *formationInfo=[self formationInfoFromForm];
         //If the formation has not been set before, send the delegate the new info
         if (!self.formation)
@@ -108,10 +112,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     //If the text field is the name text field
     if (textField==self.nameTextField) {
-        //If the text field's text is not empty, click done for the user and return YES
+        //Click "Done" for user
         [self donePressed:nil];
-        
-        return NO;
     }
     
     return YES;
