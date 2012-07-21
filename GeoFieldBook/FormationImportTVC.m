@@ -18,24 +18,16 @@
 
 @synthesize spinner=_spinner;
 
+#pragma mark - Getters and Setters
+
+- (NSString *)csvFileExtension {
+    return @".formation.csv";
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //Get the list of csv files from the document directories
-    NSMutableArray *csvFileNames=[NSMutableArray array];
-    NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSURL *documentDirURL=[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSArray *urls=[fileManager contentsOfDirectoryAtPath:[documentDirURL path] error:NULL];
-    for (NSURL *url in urls) {
-        //If the file name has extension .formation.csv, add it to the array of csv files
-        NSString *fileName=[url lastPathComponent];
-        if ([fileName hasSuffix:@".formation.csv"]) {
-            [csvFileNames addObject:fileName];
-        }
-    }
-    self.csvFileNames=csvFileNames;
     
     //Register to hear notifications from the conflict handler
     [self registerForNotificationsForConflictHandler];

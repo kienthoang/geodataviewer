@@ -50,9 +50,29 @@
 @synthesize bottomLabel=_bottomLabel;
 @synthesize refreshing=_refreshing;
 
+@synthesize csvFileExtension=_csvFileExtension;
+
 - (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
+}
+
+#pragma mark - Initial Setups
+
+- (void)synchronizeWithFileSystem {
+    //Get the list of csv files from the document directories
+    NSMutableArray *csvFileNames=[NSMutableArray array];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSURL *documentDirURL=[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSArray *urls=[fileManager contentsOfDirectoryAtPath:[documentDirURL path] error:NULL];
+    for (NSURL *url in urls) {
+        //If the file name has the required extension, add it to the array of csv files
+        NSString *fileName=[url lastPathComponent];
+        if ([fileName hasSuffix:self.csvFileExtension])
+            [csvFileNames addObject:fileName];
+    }
+    
+    self.csvFileNames=csvFileNames;
 }
 
 #pragma mark - Getters and Setters
@@ -73,18 +93,6 @@
     return _selectedCSVFiles;
 }
 
-- (void)updateButtons {
-    int numFiles=self.selectedCSVFiles.count;
-    
-    //Update the import button
-    self.importButton.title=numFiles ? [NSString stringWithFormat:@"Import (%d)",numFiles] : @"Import";
-    self.importButton.enabled=numFiles>0;
-    
-    //Update the delete button
-    self.deleteButton.title=numFiles ? [NSString stringWithFormat:@"Delete (%d)",numFiles] : @"Delete";
-    self.deleteButton.enabled=numFiles>0;
-}
-
 - (void)setSelectedCSVFiles:(NSArray *)selectedCSVFiles {
     _selectedCSVFiles=selectedCSVFiles;
     
@@ -95,6 +103,27 @@
     
     //Update the buttons accordingly
     [self updateButtons];
+}
+
+- (NSString *)csvFileExtension {
+    if (!_csvFileExtension)
+        self.csvFileExtension=@".csv";
+    
+    return _csvFileExtension;
+}
+
+#pragma mark - UI Updaters
+
+- (void)updateButtons {
+    int numFiles=self.selectedCSVFiles.count;
+    
+    //Update the import button
+    self.importButton.title=numFiles ? [NSString stringWithFormat:@"Import (%d)",numFiles] : @"Import";
+    self.importButton.enabled=numFiles>0;
+    
+    //Update the delete button
+    self.deleteButton.title=numFiles ? [NSString stringWithFormat:@"Delete (%d)",numFiles] : @"Delete";
+    self.deleteButton.enabled=numFiles>0;
 }
 
 #pragma mark - Target-Action Handlers
@@ -115,6 +144,16 @@
 #pragma mark - Pull To Refresh
 
 CGFloat const kRefreshViewHeight = 65;
+
+- (NSString *)currentTimeStamp {
+    NSString *timeStamp=@"Last updated: ";
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    NSDate *currentDate=[NSDate new];
+    dateFormatter.dateFormat=@"MM/dd/yy HH:mm";
+    timeStamp=[timeStamp stringByAppendingFormat:@" %@",[dateFormatter stringFromDate:currentDate]];
+    
+    return timeStamp;
+}
 
 - (void)setupPullToRefreshTopView {
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, -kRefreshViewHeight, SizeInPopover.width, kRefreshViewHeight)];
@@ -146,7 +185,7 @@ CGFloat const kRefreshViewHeight = 65;
 	
 	self.bottomLabel = [[UILabel alloc] initWithFrame:self.bottomView.bounds];
 	[self.bottomLabel setBackgroundColor:[UIColor clearColor]];
-	[self.bottomLabel setText:@"Last updated: 1/11/13 8:41 PM"];
+	[self.bottomLabel setText:[self currentTimeStamp]];
 	[self.bottomLabel setTextAlignment:UITextAlignmentCenter];
 	[self.bottomLabel setTextColor:[UIColor colorWithRed:0.395 green:0.427 blue:0.510 alpha:1]];
 	[self.bottomLabel setShadowColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7]];
@@ -186,6 +225,9 @@ CGFloat const kRefreshViewHeight = 65;
 	dispatch_after(popTime, dispatch_get_main_queue(), ^{
 		self.refreshing = NO;
 		[UIView animateWithDuration:0.2 animations:^{[self.tableView setContentInset:UIEdgeInsetsZero];}];
+        
+        //Reload the csv files
+        [self synchronizeWithFileSystem];
 	});
 }
 
@@ -220,6 +262,9 @@ CGFloat const kRefreshViewHeight = 65;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    //get the csv files
+    [self synchronizeWithFileSystem];
     
     //Put self into editing mode
     self.tableView.editing=YES;

@@ -22,23 +22,18 @@
 
 @synthesize spinner=_spinner;
 
+@synthesize csvFileExtension=_csvFileExtension;
+
+#pragma mark - Getters and Setters
+
+- (NSString *)csvFileExtension {
+    return @".record.csv";
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //Get the list of csv files from the document directories
-    NSMutableArray *csvFileNames=[NSMutableArray array];
-    NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSURL *documentDirURL=[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSArray *urls=[fileManager contentsOfDirectoryAtPath:[documentDirURL path] error:NULL];
-    for (NSURL *url in urls) {
-        //If the file name has extension .record.csv, add it to the array of csv files
-        NSString *fileName=[url lastPathComponent];
-        if ([fileName hasSuffix:@".record.csv"])
-            [csvFileNames addObject:fileName];
-    }
-    self.csvFileNames=csvFileNames;
     
     //Register for notifications from conflict handler
     [self registerForNotificationsForConflictHandler];

@@ -27,11 +27,15 @@
 @property (nonatomic,weak) IBOutlet UIBarButtonItem *deleteButton;
 @property (nonatomic,weak) IBOutlet UIBarButtonItem *addButton;
 
+@property (nonatomic,strong) NSString *csvFileExtension;
+
 #define SECTION_FOOTER_HEIGHT 30
 #define SizeInPopover CGRectMake(0,0,400,500).size
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender;
 
 - (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo;
+
+- (void)synchronizeWithFileSystem;
 
 @end
