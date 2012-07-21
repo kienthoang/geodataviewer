@@ -7,27 +7,32 @@
 //
 
 #import "Formation+Creation.h"
+
+#import "Formation+DictionaryKeys.h"
+
 #import "TextInputFilter.h"
 
 @implementation Formation (Creation)
 
-+ (Formation *)formationForName:(NSString *)formationName 
++ (Formation *)formationForInfo:(NSDictionary *)formationInfo 
       inFormationFolderWithName:(NSString *)folderName 
          inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    //Filter formation and folder names
+    //Get the formation name and color from the info dictionary
+    NSString *formationName=[formationInfo objectForKey:GeoFormationName];
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
-    folderName=[TextInputFilter filterDatabaseInputText:folderName];
-    
+    UIColor *formationColor=[formationInfo objectForKey:GeoFormationColor];
+
     //Query for the folder with the specified name, if it does not exist return nil
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
     request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",folderName];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     NSArray *results=[context executeFetchRequest:request error:NULL];
-    if (![results count])
+    if (!results.count)
         return nil;
     
-    Formation_Folder *formationFolder=[results lastObject];
+    //Else get the formation folder
+    Formation_Folder *formationFolder=results.lastObject;
     
     //Query for a formation with the specified name, if it exists, return nil
     request=[[NSFetchRequest alloc] initWithEntityName:@"Formation"];
@@ -41,6 +46,16 @@
     Formation *formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
     formation.formationName=formationName;
     formation.formationFolder=formationFolder;
+    
+    //Update the formation color
+    CGFloat red;
+    CGFloat blue;
+    CGFloat green;
+    CGFloat alpha;
+    [formationColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    formation.redColorComponent=[NSNumber numberWithFloat:red];
+    formation.blueColorComponent=[NSNumber numberWithFloat:blue];
+    formation.greenColorComponent=[NSNumber numberWithFloat:green];
     
     return formation;
 }

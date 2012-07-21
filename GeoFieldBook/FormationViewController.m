@@ -8,21 +8,71 @@
 
 #import "FormationViewController.h"
 
-@interface FormationViewController() <UITextFieldDelegate>
+#import "ColorPickerViewController.h"
+#import "ColorPickerViewControllerDelegate.h"
+#import "NPColorPickerView.h"
+
+@interface FormationViewController() <UITextFieldDelegate,ColorPickerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UIButton *colorPatch;
 
 @end
 
 @implementation FormationViewController
+
 @synthesize nameTextField = _nameTextField;
+@synthesize colorPatch = _colorPatch;
 
 @synthesize delegate=_delegate;
+
+@synthesize formation=_formation;
 @synthesize formationName=_formationName;
+@synthesize formationColor=_formationColor;
 
 - (void)dismissKeyboard:(UITapGestureRecognizer *)tapGesture {
     //dismiss the keyboard
     [self.nameTextField resignFirstResponder];
+}
+
+#pragma mark - Getters and Setters
+
+- (UIColor *)formationColor {
+    if (!_formationColor)
+        self.formationColor=[UIColor blackColor];
+    
+    return _formationColor;
+}
+
+- (void)setFormationColor:(UIColor *)formationColor {
+    if (![_formationColor isEqual:formationColor]) {
+        _formationColor=formationColor;
+        
+        //Update the color patch
+        self.colorPatch.backgroundColor=formationColor;
+    }
+}
+
+- (void)setFormation:(Formation *)formation {
+    _formation=formation;
+    
+    //Update the name
+    self.formationName=self.formation.formationName;
+    
+    //Update the color
+    UIColor *formationColor=[UIColor colorWithRed:formation.redColorComponent.floatValue 
+                                            green:self.formation.greenColorComponent.floatValue 
+                                             blue:self.formation.blueColorComponent.floatValue 
+                                            alpha:1.0];
+    self.formationColor=formationColor;
+}
+
+#pragma mark -Data Collectors
+
+- (NSDictionary *)formationInfoFromForm {
+    //Create a dictionary with all the information user provided
+    NSDictionary *formationInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.formationName,GeoFormationName,self.formationColor,GeoFormationColor, nil];
+    return formationInfo;
 }
 
 #pragma mark - Target-Action Handlers
@@ -37,18 +87,19 @@
     if (![self.nameTextField.text length])
         [self.nameTextField becomeFirstResponder];
     
-    //Else pass the name back to the delegate
+    //Else pass the new formation info dictionary back to the delegate
     else {
-        //If the folder name has not been set before, send the delegate the new name
-        if (!self.formationName)
+        NSDictionary *formationInfo=[self formationInfoFromForm];
+        //If the formation has not been set before, send the delegate the new info
+        if (!self.formation)
             [self.delegate formationViewController:self 
-                         didObtainNewFormationName:self.nameTextField.text];
+                         didObtainNewFormationInfo:formationInfo];
         
-        //Else send both the origin name and the new name
+        //Else send both the formation and the info
         else 
             [self.delegate formationViewController:self 
-                   didAskToModifyFormationWithName:self.formationName 
-                                andObtainedNewName:self.nameTextField.text];
+                           didAskToModifyFormation:self.formation 
+                                andObtainedNewInfo:formationInfo];
     }
 }
 
@@ -64,6 +115,21 @@
     }
     
     return YES;
+}
+
+#pragma mark - Prepare for Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //Color picker
+    if ([segue.identifier isEqualToString:@"Color Picker"]) {
+        //Dismiss the keyboard
+        [self dismissKeyboard:nil];
+        
+        //Set the color picker vc's delegate to self
+        ColorPickerViewController *colorPickerVC=(ColorPickerViewController *)segue.destinationViewController;
+        colorPickerVC.delegate=self;
+        colorPickerVC.selectedColor=[UIColor redColor];
+    }
 }
 
 #pragma mark - View Controller Lifecycles
@@ -87,6 +153,14 @@
     //If the formation name is not nil, set the text of the name text field
     if (self.formationName)
         self.nameTextField.text=self.formationName;
+    
+    //Setup the color patch button
+    self.colorPatch.layer.borderColor=[UIColor blackColor].CGColor;
+    self.colorPatch.layer.cornerRadius=8.0f;
+    self.colorPatch.layer.borderWidth=1.0f;
+    
+    //Give the color patch the formation color
+    self.colorPatch.backgroundColor=self.formationColor;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -96,6 +170,15 @@
 
 - (void)viewDidUnload {
     [self setNameTextField:nil];
+    [self setColorPatch:nil];
     [super viewDidUnload];
 }
+
+#pragma mark - ColorPickerViewControllerDelegate Protocol methods
+
+- (void)colorPicker:(ColorPickerViewController *)colorPicker userDidSelectColor:(UIColor *)color {
+    //Save the selected color
+    self.formationColor=color;
+}
+
 @end

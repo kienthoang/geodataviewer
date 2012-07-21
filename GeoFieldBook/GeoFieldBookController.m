@@ -657,7 +657,7 @@
 
 - (void)setupTrackingButtonForViewController:(UIViewController *)viewController {
     //If switched to the map, put up the tracking button
-    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
+    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
     if ([viewController isKindOfClass:[RecordMapViewController class]]) {
         RecordMapViewController *mapDetail=(RecordMapViewController *)viewController;
         UIBarButtonItem *trackingButton=[[MKUserTrackingBarButtonItem alloc] initWithMapView:mapDetail.mapView];
@@ -674,7 +674,7 @@
     }
     
     //Set the tolbar
-    self.toolbar.items=[toolbarItems copy];
+    self.toolbar.items=toolbarItems.copy;
 }
 
 #pragma mark - DataMapSegmentViewControllerDelegate protocol methods
@@ -840,7 +840,7 @@
             [records addObjectsFromArray:results];
         }
                 
-        return [records copy];
+        return records.copy;
     }
     
     return nil;

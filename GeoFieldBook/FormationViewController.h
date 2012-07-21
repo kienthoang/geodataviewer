@@ -7,23 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
+#import "Formation+DictionaryKeys.h"
 
 @class FormationViewController;
 
 @protocol FormationViewControllerDelegate <NSObject>
 
 - (void)formationViewController:(FormationViewController *)sender 
-      didObtainNewFormationName:(NSString *)formationName;
+      didObtainNewFormationInfo:(NSDictionary *)formationInfo;
 
 - (void)formationViewController:(FormationViewController *)sender 
-didAskToModifyFormationWithName:(NSString *)originalName 
-             andObtainedNewName:(NSString *)folderName;
+        didAskToModifyFormation:(Formation *)formation 
+             andObtainedNewInfo:(NSDictionary *)formationInfo;
 
 @end
 
 @interface FormationViewController : UIViewController
 
 @property (nonatomic,weak) id <FormationViewControllerDelegate> delegate;
+@property (nonatomic,strong) Formation *formation;
 @property (nonatomic,strong) NSString *formationName;
+@property (nonatomic,strong) UIColor *formationColor;
 
 @end

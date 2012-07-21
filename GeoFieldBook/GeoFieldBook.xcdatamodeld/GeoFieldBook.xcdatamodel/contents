@@ -20,8 +20,11 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Record" inverseName="folder" inverseEntity="Record" syncable="YES"/>
     </entity>
     <entity name="Formation" representedClassName="Formation" syncable="YES">
+        <attribute name="blueColorComponent" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="formationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="formationSortNumber" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="greenColorComponent" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="redColorComponent" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="beddings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bedding" inverseName="formation" inverseEntity="Bedding" syncable="YES"/>
         <relationship name="faults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fault" inverseName="formation" inverseEntity="Fault" syncable="YES"/>
         <relationship name="formationFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Formation_Folder" inverseName="formations" inverseEntity="Formation_Folder" syncable="YES"/>
@@ -61,7 +64,7 @@
         <element name="Contact" positionX="250" positionY="438" width="128" height="75"/>
         <element name="Fault" positionX="252" positionY="234" width="128" height="90"/>
         <element name="Folder" positionX="79" positionY="108" width="128" height="120"/>
-        <element name="Formation" positionX="-101" positionY="396" width="128" height="150"/>
+        <element name="Formation" positionX="-101" positionY="396" width="128" height="210"/>
         <element name="Formation_Folder" positionX="-92" positionY="234" width="128" height="90"/>
         <element name="Image" positionX="277" positionY="108" width="128" height="90"/>
         <element name="JointSet" positionX="198" positionY="720" width="128" height="60"/>

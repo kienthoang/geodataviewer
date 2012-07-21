@@ -7,12 +7,28 @@
 //
 
 #import "Formation+Modification.h"
+
 #import "Formation_Folder.h"
+#import "Formation+DictionaryKeys.h"
+
 #import "TextInputFilter.h"
 
 @implementation Formation (Modification)
 
-- (BOOL)changeFormationNameTo:(NSString *)formationName {
+- (BOOL)updateFormationWithFormationInfo:(NSDictionary *)formationInfo {
+    //Get the formation name and color from the info dictionary
+    NSString *formationName=[formationInfo objectForKey:GeoFormationName];
+    formationName=[TextInputFilter filterDatabaseInputText:formationName];
+    UIColor *formationColor=[formationInfo objectForKey:GeoFormationColor];
+    
+    //if the name is nil, return NO
+    if (!formationName)
+        return NO;
+    
+    //If the color is nil, set it to black (default color)
+    if (!formationColor)
+        formationColor=[UIColor blackColor];
+    
     //Filter formation name
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
     
@@ -29,8 +45,18 @@
             return NO;
     }
     
-    //Update the formation
+    //Update the formation name
     self.formationName=formationName;
+    
+    //Update the formation color
+    CGFloat red;
+    CGFloat blue;
+    CGFloat green;
+    CGFloat alpha;
+    [formationColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    self.redColorComponent=[NSNumber numberWithFloat:red];
+    self.blueColorComponent=[NSNumber numberWithFloat:blue];
+    self.greenColorComponent=[NSNumber numberWithFloat:green];
     
     return YES;
 }

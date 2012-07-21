@@ -10,6 +10,6 @@
 
 @interface Formation (Modification)
 
-- (BOOL)changeFormationNameTo:(NSString *)formationName;
+- (BOOL)updateFormationWithFormationInfo:(NSDictionary *)formationInfo;
 
 @end

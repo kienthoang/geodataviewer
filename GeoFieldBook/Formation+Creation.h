@@ -10,7 +10,7 @@
 
 @interface Formation (Creation)
 
-+ (Formation *)formationForName:(NSString *)formationName 
++ (Formation *)formationForInfo:(NSDictionary *)formationInfo 
       inFormationFolderWithName:(NSString *)folderName 
          inManagedObjectContext:(NSManagedObjectContext *)context;
 

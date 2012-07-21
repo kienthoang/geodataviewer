@@ -7,10 +7,14 @@
 //
 
 #import "FormationTableViewController.h"
+
 #import "FormationViewController.h"
+
 #import "Formation.h"
 #import "Formation+Creation.h"
 #import "Formation+Modification.h"
+#import "Formation+DictionaryKeys.h"
+
 #import "TextInputFilter.h"
 
 @interface FormationTableViewController() <FormationViewControllerDelegate,NSFetchedResultsControllerDelegate,UIActionSheetDelegate>
@@ -70,20 +74,25 @@
         //Set the delegate of the destination controller as self
         [segue.destinationViewController setDelegate:self];
         
-        //If the sender is a UITableViewCell, set the folder name of the destination controller as well
+        //If the sender is a UITableViewCell, set the formation of the destination controller as well
         if ([sender isKindOfClass:[UITableViewCell class]]) {
             UITableViewCell *cell=sender;
             Formation *selectedFormation=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-            [segue.destinationViewController setFormationName:selectedFormation.formationName];
+            [segue.destinationViewController setFormation:selectedFormation];
         }
     }
 }
 
 #pragma mark - Alert Generators
 
+- (void)putUpAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [alert show];
+}
+
 - (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
-    UIAlertView *duplicationAlert=[[UIAlertView alloc] initWithTitle:@"Name Duplicate" message:[NSString stringWithFormat:@"A formation with the name '%@' already exists in this folder!",duplicateName] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [duplicationAlert show];
+    NSString *message=[NSString stringWithFormat:@"A formation with the name '%@' already exists in this folder!",duplicateName];
+    [self putUpAlertWithTitle:@"Name Duplicate" andMessage:message];
 }
 
 #pragma mark - Formation Manipulation
@@ -98,10 +107,13 @@
     }];
 }
 
-- (BOOL)createNewFormationWithName:(NSString *)formationName {
-    //create a new formation, if that returns nil (name duplicate), put up an alert
-    if (![Formation formationForName:formationName inFormationFolderWithName:self.formationFolder.folderName inManagedObjectContext:self.database.managedObjectContext])
-    {
+- (BOOL)createNewFormationWithInfo:(NSDictionary *)formationInfo {
+    //Get the formation name
+    NSString *formationName=[formationInfo objectForKey:GeoFormationName];
+    formationName=[TextInputFilter filterDatabaseInputText:formationName];
+    
+    //create a new formation, if that returns nil (folder not found), put up an alert
+    if (![Formation formationForInfo:formationInfo inFormationFolderWithName:self.formationFolder.folderName inManagedObjectContext:self.database.managedObjectContext]) {
         [self putUpDuplicateNameAlertWithName:formationName];
         return NO;
     }
@@ -110,20 +122,14 @@
     return YES;
 }
 
-- (BOOL)modifyFormationWithName:(NSString *)originalName toName:(NSString *)newName {
-    //Filter new name
-    newName=[TextInputFilter filterDatabaseInputText:newName];
+- (BOOL)modifyFormation:(Formation *)formation withNewInfo:(NSDictionary *)formationInfo {
+    //Filter formation name
+    NSString *formationName=[formationInfo objectForKey:GeoFormationName];
+    formationName=[TextInputFilter filterDatabaseInputText:formationName];
     
-    //Get the formation with the specified original name
-    Formation *selectedFormation=nil;
-    for (Formation *formation in [self.fetchedResultsController fetchedObjects]) {
-        if ([formation.formationName isEqualToString:originalName])
-            selectedFormation=formation;
-    }
-    
-    //Update its name, if that returns NO (i.e. the update failed because of name duplication), put up an alert
-    if (![selectedFormation changeFormationNameTo:newName]) {
-        [self putUpDuplicateNameAlertWithName:newName];
+    //Update the formation, if that returns NO (i.e. the update failed because of name duplication), put up an alert
+    if (![formation updateFormationWithFormationInfo:formationInfo]) {
+        [self putUpDuplicateNameAlertWithName:formationName];
         return NO;
     }
     
@@ -223,21 +229,21 @@
 #pragma mark - Formation View Controller Delegate methods
 
 - (void)formationViewController:(FormationViewController *)sender 
-      didObtainNewFormationName:(NSString *)formationName
+      didObtainNewFormationInfo:(NSDictionary *)formationInfo
 {
     //Create a new formation with the specified name and if that returns YES (success), dismiss the modal
-    if ([self createNewFormationWithName:formationName]) {
+    if ([self createNewFormationWithInfo:formationInfo]) {
         //Dismiss the modal
         [self dismissModalViewControllerAnimated:YES];
     }
 }
 
 - (void)formationViewController:(FormationViewController *)sender 
-didAskToModifyFormationWithName:(NSString *)originalName 
-             andObtainedNewName:(NSString *)formationName
+        didAskToModifyFormation:(Formation *)formation 
+             andObtainedNewInfo:(NSDictionary *)formationInfo
 {
     //Modify the formation with the specified original name and if that returns YES (success), dismiss the modal
-    if ([self modifyFormationWithName:originalName toName:formationName]) {
+    if ([self modifyFormation:formation withNewInfo:formationInfo]) {
         //Dismiss the modal
         [self dismissModalViewControllerAnimated:YES];
     }
