@@ -30,6 +30,10 @@
 
 //used while exporting
 + (NSString *)csvCompliantStringFromString:(NSString *)text {
+    //If the text is null or @"(null)" make it empty string
+    if (!text || [text isEqualToString:@"(null)"])
+        text=@"";
+    
     //Put quotation marks around if there is a comma or a new line character
     if ([text componentsSeparatedByString:@","].count>1 || [text componentsSeparatedByString:@"\n"].count>1)
         text=[NSString stringWithFormat:@"\"%@\"",text];
@@ -38,6 +42,7 @@
         text = [text stringByReplacingOccurrencesOfString:@"\"" withString:@"\"\""];
         text = [@"" stringByAppendingFormat:@"\"%@\"",text];
     }
+    
     return text;
      
 }

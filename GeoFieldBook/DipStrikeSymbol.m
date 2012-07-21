@@ -14,7 +14,7 @@
 @synthesize strike=_strike;
 @synthesize dip=_dip;
 @synthesize dipDirection=_dipDirection;
-@synthesize recordType=_recordType;
+@synthesize color=_color;
 
 #pragma mark - Setters
 
@@ -37,6 +37,13 @@
     
     //Redraw
     [self setNeedsDisplay];
+}
+
+- (UIColor *)color {
+    if (!_color)
+        self.color=[UIColor blackColor];
+    
+    return _color;
 }
 
 #pragma mark - Getters
@@ -99,41 +106,6 @@
         CGPoint point1 = CGPointMake(radius * sin(strike) + center.x, -radius * cos(strike) + center.y);
         CGPoint point2 = CGPointMake(-radius * sin(strike) + center.x, radius * cos(strike) + center.y);
         
-        //determine color of strike and dip lines
-        //switch requires int test and constant cases
-        UIColor *strikeColor;//=[UIColor blueColor];
-        UIColor *dipColor;//=[UIColor redColor];
-        if ([self.recordType isEqualToString:@"Bedding"]) {
-            strikeColor = [UIColor blueColor];
-            dipColor = [UIColor redColor];
-        }
-        else if ([self.recordType isEqualToString:@"Contact"]) {
-            strikeColor = [UIColor orangeColor];
-            dipColor = [UIColor greenColor];
-        }
-        else {
-            //do any other record types use the dip strike symbol?
-            //strikeColor = [UIColor magentaColor];
-            //dipColor = [UIColor cyanColor];
-        }
-        
-        /*if (0 <= strike && strike < PI/2) {
-            strikeColor = [UIColor blueColor];
-            dipColor = [UIColor redColor];
-        }
-        else if (strike < PI) {
-            strikeColor = [UIColor greenColor];
-            dipColor = [UIColor orangeColor];
-        }
-        else if (strike < 3*PI/2) {
-            strikeColor = [UIColor redColor];
-            dipColor = [UIColor blueColor];
-        }
-        else {
-            strikeColor = [UIColor orangeColor];
-            dipColor = [UIColor greenColor];
-        }*/
-        
         //Draw the strike
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(context, 3.0);
@@ -145,7 +117,7 @@
         //[[UIColor whiteColor] setFill];
         //CGContextFillPath(context);
 
-        [self drawStrikeWithContext:context point:point1 andPoint:point2 withColor:strikeColor];
+        [self drawStrikeWithContext:context point:point1 andPoint:point2 withColor:self.color];
         
         //DIP
         //the dip line is always perpendicular to the strike line
@@ -174,7 +146,7 @@
         CGPoint dipEndPoint = [self closestPointTo:givenDipPoint among:dipPoint1 or:dipPoint2];
         
         //Draw the dip
-        [self drawDipWithContext:context from:center to:dipEndPoint withColor:dipColor];
+        [self drawDipWithContext:context from:center to:dipEndPoint withColor:self.color];
         
         //to use the given dip angle (not necessarily perpendicular to the strike) use this
         /*float dipAngle = [self toRadians:self.dip];

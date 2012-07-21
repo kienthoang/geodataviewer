@@ -12,6 +12,12 @@
 #import "MKGeoRecordAnnotation.h"
 #import "DipStrikeSymbol.h"
 
+#import "Formation.h"
+#import "Bedding.h"
+#import "Contact.h"
+
 @interface MKCustomAnnotationView : MKAnnotationView
+
+- (void)reloadAnnotationView;
 
 @end

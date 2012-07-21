@@ -20,4 +20,9 @@
 
 @property (weak,nonatomic) id <RecordMapViewControllerDelegate> mapDelegate;
 
+#define kDEFAULTCLUSTERSIZE 0.2
+
+- (void)updateRecords:(NSArray *)records forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
+- (void)reloadAnnotationViewColor;
+
 @end

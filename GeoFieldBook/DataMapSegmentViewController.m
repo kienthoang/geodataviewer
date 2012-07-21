@@ -46,7 +46,7 @@
     return self.currentViewController==self.viewControllers.lastObject ? TransitionAnimationFlipLeft : TransitionAnimationFlipRight;
 }
 
-#pragma mark - Data Forward Mechanisms
+#pragma mark - Record View Controller Data Forward Mechanisms
 
 - (void)dismissKeyboardInDataSideView {
     if ([self.detailSideViewController isKindOfClass:[RecordViewController class]])
@@ -58,26 +58,6 @@
     id recordDetail=self.detailSideViewController;
     if ([recordDetail isKindOfClass:[RecordViewController class]])
         [(RecordViewController *)recordDetail setDelegate:delegate];
-}
-
-- (void)setMapViewDelegate:(id<RecordMapViewControllerDelegate>)mapDelegate {
-    //Set the map delegate of the map vc
-    id mapDetail=[self.viewControllers lastObject];
-    if ([mapDetail isKindOfClass:[RecordMapViewController class]])
-        [(RecordMapViewController *)mapDetail setMapDelegate:mapDelegate];
-}
-
-- (void)updateMapWithRecords:(NSArray *)records {
-    //Set the records of the record map view controller if it's in the view controller array
-    RecordMapViewController *recordMap=[self.viewControllers lastObject];
-    recordMap.records=records;    
-}
-
-- (void)setMapSelectedRecord:(Record *)selectedRecord {
-    if ([self.viewControllers.lastObject isKindOfClass:[RecordMapViewController class]]) {
-        RecordMapViewController *mapDetail=(RecordMapViewController *)self.viewControllers.lastObject;
-        mapDetail.selectedRecord=selectedRecord;
-    }
 }
 
 - (void)updateRecordDetailViewWithRecord:(Record *)record {
@@ -98,6 +78,36 @@
     //Cancel the record view controller's edit mode
     RecordViewController *recordDetail=(RecordViewController *)self.detailSideViewController;
     [recordDetail cancelEditingMode];
+}
+
+#pragma mark - Record Map View Controller Data Forward Mechanisms
+
+
+- (void)setMapViewDelegate:(id<RecordMapViewControllerDelegate>)mapDelegate {
+    //Set the map delegate of the map vc
+    id mapDetail=[self.viewControllers lastObject];
+    if ([mapDetail isKindOfClass:[RecordMapViewController class]])
+        [(RecordMapViewController *)mapDetail setMapDelegate:mapDelegate];
+}
+
+- (void)updateMapWithRecords:(NSArray *)records forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion {
+    //Set the records of the record map view controller if it's in the view controller array
+    RecordMapViewController *recordMap=[self.viewControllers lastObject];
+    [recordMap updateRecords:records forceUpdate:willForceUpdate updateRegion:willUpdateRegion];
+}
+
+- (void)setMapSelectedRecord:(Record *)selectedRecord {
+    if ([self.viewControllers.lastObject isKindOfClass:[RecordMapViewController class]]) {
+        RecordMapViewController *mapDetail=(RecordMapViewController *)self.viewControllers.lastObject;
+        mapDetail.selectedRecord=selectedRecord;
+    }
+}
+
+- (void)reloadMapAnnotationViewColor {
+    if ([self.viewControllers.lastObject isKindOfClass:[RecordMapViewController class]]) {
+        RecordMapViewController *mapDetail=(RecordMapViewController *)self.viewControllers.lastObject;
+        [mapDetail reloadAnnotationViewColor];
+    }
 }
 
 #pragma mark - View Controller Manipulation (Pushing, Poping, Swapping)

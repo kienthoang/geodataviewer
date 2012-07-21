@@ -241,7 +241,7 @@
         }
         
         //Update the map view
-        [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
+        [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:NO updateRegion:YES];
         [dataMapSegmentVC setMapSelectedRecord:nil];  
         
         //If switching to the record tvc and the map is on screen, show the checkboxes in the record tvc
@@ -299,13 +299,27 @@
 - (void)modelGroupFolderDatabaseDidUpdate:(NSNotification *)notification {
     //Update the map
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
+    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:YES];
+}
+
+- (void)modelGroupRecordDatabaseDidChange:(NSNotification *)notification {
+    //Update the map
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:YES];
+    
+    //Pop the detail record vc (if the chosen record got deleted)
+    RecordTableViewController *recordTVC=[self recordTableViewController];
+    if (!recordTVC.chosenRecord) {
+        [dataMapSegmentVC pushInitialViewController];
+        if (!dataMapSegmentVC.topViewController)
+            [self swapToSegmentIndex:0];
+    }
 }
 
 - (void)modelGroupRecordDatabaseDidUpdate:(NSNotification *)notification {
     //Update the map
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup]];
+    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:NO];
     
     //Pop the detail record vc (if the chosen record got deleted)
     RecordTableViewController *recordTVC=[self recordTableViewController];
@@ -331,6 +345,12 @@
     
     //Put the record view controller in editing mode
     [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
+}
+
+- (void)modelGroupFormationDatabaseDidChange:(NSNotification *)notification {
+    //Force update the map
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC reloadMapAnnotationViewColor];
 }
 
 - (void)putImportExportButtonBack {
@@ -420,8 +440,16 @@
                                name:GeoNotificationModelGroupFolderDatabaseDidChange 
                              object:nil];
     [notificationCenter addObserver:self 
-                           selector:@selector(modelGroupRecordDatabaseDidUpdate:) 
+                           selector:@selector(modelGroupRecordDatabaseDidChange:) 
                                name:GeoNotificationModelGroupRecordDatabaseDidChange 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(modelGroupRecordDatabaseDidUpdate:) 
+                               name:GeoNotificationModelGroupRecordDatabaseDidUpdate 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(modelGroupFormationDatabaseDidChange:) 
+                               name:GeoNotificationModelGroupFormationDatabaseDidChange 
                              object:nil];
     [notificationCenter addObserver:self 
                            selector:@selector(modelGroupDidCreateNewRecord:) 
@@ -736,8 +764,8 @@
     [[self recordTableViewController] modifyRecord:record withNewInfo:recordInfo];
     
     //Call the popover if it's not visible
-    if (!self.popoverViewController.isPopoverVisible)
-        [self.popoverViewController presentPopoverFromBarButtonItem:self.popoverVCButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+//    if (!self.popoverViewController.isPopoverVisible)
+//        [self.popoverViewController presentPopoverFromBarButtonItem:self.popoverVCButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)userDidNavigateAwayFrom:(RecordViewController *)sender 

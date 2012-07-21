@@ -72,6 +72,8 @@
 		02806EE615BA6B94003D09A7 /* Formation+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EE515BA6B94003D09A7 /* Formation+DictionaryKeys.m */; };
 		02806EE915BA6E78003D09A7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EE815BA6E78003D09A7 /* Formation.m */; };
 		02806EEC15BA7E97003D09A7 /* CustomFormationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */; };
+		02806F0515BB00E5003D09A7 /* regular_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 02806F0315BB00E5003D09A7 /* regular_pin.png */; };
+		02806F0615BB00E5003D09A7 /* regular_pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02806F0415BB00E5003D09A7 /* regular_pin@2x.png */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
 		028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
@@ -307,6 +309,8 @@
 		02806EE815BA6E78003D09A7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
 		02806EEA15BA7E97003D09A7 /* CustomFormationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFormationCell.h; sourceTree = "<group>"; };
 		02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFormationCell.m; sourceTree = "<group>"; };
+		02806F0315BB00E5003D09A7 /* regular_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regular_pin.png; sourceTree = "<group>"; };
+		02806F0415BB00E5003D09A7 /* regular_pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "regular_pin@2x.png"; sourceTree = "<group>"; };
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -1013,6 +1017,8 @@
 				0249E2AC15A6A16100A7532E /* import_export.png */,
 				0249E2B015A6A32300A7532E /* gear.png */,
 				0249E2AE15A6A2D100A7532E /* gear2.png */,
+				02806F0315BB00E5003D09A7 /* regular_pin.png */,
+				02806F0415BB00E5003D09A7 /* regular_pin@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1258,6 +1264,8 @@
 				0249E2AF15A6A2D100A7532E /* gear2.png in Resources */,
 				0249E2B115A6A32300A7532E /* gear.png in Resources */,
 				0249E2C215A6AD0300A7532E /* iPad.storyboard in Resources */,
+				02806F0515BB00E5003D09A7 /* regular_pin.png in Resources */,
+				02806F0615BB00E5003D09A7 /* regular_pin@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

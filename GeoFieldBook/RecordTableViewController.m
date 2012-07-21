@@ -227,6 +227,10 @@
 - (void)modifyRecord:(Record *)record 
          withNewInfo:(NSDictionary *)recordInfo
 {
+    //Save the current longitude and latitude of the record for reference
+    CLLocationDegrees latitude=record.latitude.doubleValue;
+    CLLocationDegrees longitude=record.longitude.doubleValue;
+    
     //Update the record
     [record updateWithNewRecordInfo:recordInfo];
     
@@ -236,8 +240,17 @@
             //Highlight the modified record
             [self highlightRecord:record];
             
-            //Post a notification to indicate that the record database has changed
-            [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
+            //If the record's latitude and longitude weren't updated, post a notification to indicate that the database has updated
+            if (latitude==record.latitude.doubleValue && longitude==record.longitude.doubleValue) {
+                //Post a notification to indicate that the record database has changed
+                [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidUpdate andUserInfo:[NSDictionary dictionary]];
+            }
+            
+            //Else post a notification to indicate that the database has changed (to update location)
+            else {
+                //Post a notification to indicate that the record database has changed
+                [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
+            }
         }
     }];
 }

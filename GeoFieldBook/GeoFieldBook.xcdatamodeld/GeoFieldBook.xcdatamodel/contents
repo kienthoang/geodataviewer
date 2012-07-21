@@ -8,8 +8,8 @@
         <relationship name="upperFormation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="upperContacts" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Fault" representedClassName="Fault" parentEntity="Record" syncable="YES">
-        <attribute name="plunge" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="trend" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="plunge" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="trend" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="faults" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Folder" representedClassName="Folder" syncable="YES">
@@ -48,14 +48,14 @@
     <entity name="Other" representedClassName="Other" parentEntity="Record" syncable="YES"/>
     <entity name="Record" representedClassName="Record" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="dip" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dip" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="dipDirection" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fieldOservations" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="idOnServer" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="strike" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="strike" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
         <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="whoUses" inverseEntity="Image" syncable="YES"/>
     </entity>
@@ -64,7 +64,7 @@
         <element name="Contact" positionX="250" positionY="438" width="128" height="75"/>
         <element name="Fault" positionX="252" positionY="234" width="128" height="90"/>
         <element name="Folder" positionX="79" positionY="108" width="128" height="120"/>
-        <element name="Formation" positionX="-101" positionY="396" width="128" height="210"/>
+        <element name="Formation" positionX="-101" positionY="396" width="128" height="150"/>
         <element name="Formation_Folder" positionX="-92" positionY="234" width="128" height="90"/>
         <element name="Image" positionX="277" positionY="108" width="128" height="90"/>
         <element name="JointSet" positionX="198" positionY="720" width="128" height="60"/>

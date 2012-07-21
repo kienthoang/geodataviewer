@@ -15,6 +15,8 @@
 #import "Formation+Modification.h"
 #import "Formation+DictionaryKeys.h"
 
+#import "ModelGroupNotificationNames.h"
+
 #import "TextInputFilter.h"
 
 @interface FormationTableViewController() <FormationViewControllerDelegate,NSFetchedResultsControllerDelegate,UIActionSheetDelegate>
@@ -95,12 +97,25 @@
     [self putUpAlertWithTitle:@"Name Duplicate" andMessage:message];
 }
 
+#pragma mark - Notification Manipulators
+
+- (void)postNotificationWithName:(NSString *)name andUserInfo:(NSDictionary *)userInfo {
+    //Post the notification
+    NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
+    [center postNotificationName:name object:self userInfo:userInfo];    
+}
+
 #pragma mark - Formation Manipulation
 
-- (void)saveChangesToDatabase {
+typedef void (^database_save_t)(void);
+
+- (void)saveChangesToDatabaseWithCompletionHandler:(database_save_t)completionHandler {
     //Save changes to database
     [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-        if (!success) {
+        if (success) {
+            //Call completion handler
+            completionHandler();
+        } else {
             //handle errors
             [self putUpDatabaseErrorAlertWithMessage:@"Failed to save changes to database. Please try to submit them again."];
         }
@@ -118,7 +133,12 @@
         return NO;
     }
     
-    [self saveChangesToDatabase];
+    //Save changes to database
+    [self saveChangesToDatabaseWithCompletionHandler:^(void){
+        //Broadcast changes
+        [self postNotificationWithName:GeoNotificationModelGroupFormationDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
+    }];
+    
     return YES;
 }
 
@@ -133,8 +153,12 @@
         return NO;
     }
     
-    //Else, save
-    [self saveChangesToDatabase];
+    //Save changes to database
+    [self saveChangesToDatabaseWithCompletionHandler:^(void){
+        //Broadcast changes
+        [self postNotificationWithName:GeoNotificationModelGroupFormationDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
+    }];
+    
     return YES;
 }
 
@@ -143,8 +167,11 @@
     for (Formation *formation in formations)
         [self.database.managedObjectContext deleteObject:formation];
     
-    //Save
-    [self saveChangesToDatabase];
+    //Save changes to database
+    [self saveChangesToDatabaseWithCompletionHandler:^(void){
+        //Broadcast changes
+        [self postNotificationWithName:GeoNotificationModelGroupFormationDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
+    }];
 }
 
 #pragma mark - Target-Action Handlers
