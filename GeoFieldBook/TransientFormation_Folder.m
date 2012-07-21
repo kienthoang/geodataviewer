@@ -28,7 +28,7 @@
     NSArray *results=[context executeFetchRequest:request error:NULL];
     
     if (results.count)
-        return [results lastObject];
+        return results.lastObject;
     
     //Save folder
     TransientFormation_Folder *folder=[[TransientFormation_Folder alloc] init];
@@ -46,7 +46,7 @@
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
     NSArray *results=[context executeFetchRequest:request error:NULL];
     if (results.count)
-        return [results lastObject];
+        return results.lastObject;
     
     //Save to database otherwise
     [self saveToManagedObjectContext:context completion:completionHandler];

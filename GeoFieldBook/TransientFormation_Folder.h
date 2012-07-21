@@ -23,6 +23,6 @@
 
 @property (nonatomic,strong) Formation_Folder *managedFormationFolder;
 
-#define DEFAULT_FORMATION_FOLDER_NAME @"Imported Formations"
+#define DEFAULT_FORMATION_FOLDER_NAME @"__Imported Formations"
 
 @end

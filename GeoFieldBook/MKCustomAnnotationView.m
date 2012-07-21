@@ -11,7 +11,7 @@
 @implementation MKCustomAnnotationView
 
 - (void)reloadAnnotationView {
-    [self drawDipStrikeSymbolWithAnnotation:self.annotation];
+    [self drawAnnotationViewForAnnotation:self.annotation];
 }
 
 - (void)drawDipStrikeSymbolWithAnnotation:(MKGeoRecordAnnotation *)annotation {
@@ -52,10 +52,21 @@
     }
 }
 
+- (void)drawAnnotationViewForAnnotation:(MKGeoRecordAnnotation *)annotation {
+    //If the annotation's record does not have a strike and dip value or its strike and dip value are 0, set the image only
+    Record *record=annotation.record;
+    if (!record.strike || !record.dip || !record.strike.intValue || !record.dip.intValue)
+        self.image=[UIImage imageNamed:@"green_pin.png"];
+    
+    //Else draw the dip strike symbol
+    else
+        [self drawDipStrikeSymbolWithAnnotation:annotation];
+}
+
 - (id) initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self=[super initWithAnnotation:self.annotation reuseIdentifier:reuseIdentifier])
-        [self drawDipStrikeSymbolWithAnnotation:annotation];
+        [self drawAnnotationViewForAnnotation:annotation];
     
     return self;
 }
@@ -63,7 +74,7 @@
 - (void)setAnnotation:(id<MKAnnotation>)annotation {
     [super setAnnotation:annotation];
     
-    [self drawDipStrikeSymbolWithAnnotation:annotation];
+    [self drawAnnotationViewForAnnotation:annotation];
 }
 
 @end
