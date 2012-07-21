@@ -768,19 +768,21 @@
     }
 }
 
-#pragma mark - View lifecycle
+#pragma mark - Gesture Handlers
 
-- (void)leftSwipe:(UISwipeGestureRecognizer *)swipeGesture {
+- (void)downSwipe:(UISwipeGestureRecognizer *)swipeGesture {
     //Notify the delegate only if self is not in editing mode
-    if (!self.editing && [self.delegate respondsToSelector:@selector(userDidSwipeLeftInRecordViewController:)])
-        [self.delegate userDidSwipeLeftInRecordViewController:self];
+    if (!self.editing && [self.delegate respondsToSelector:@selector(userDidSwipeDownInRecordViewController:)])
+        [self.delegate userDidSwipeDownInRecordViewController:self];
 }
 
-- (void)rightSwipe:(UISwipeGestureRecognizer *)swipeGesture {
+- (void)upSwipe:(UISwipeGestureRecognizer *)swipeGesture {
     //Notify the delegate only if not in editing mode
-    if (!self.editing && [self.delegate respondsToSelector:@selector(userDidSwipeRightInRecordViewController:)])
-        [self.delegate userDidSwipeRightInRecordViewController:self];
+    if (!self.editing && [self.delegate respondsToSelector:@selector(userDidSwipeUpInRecordViewController:)])
+        [self.delegate userDidSwipeUpInRecordViewController:self];
 }
+
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -796,15 +798,15 @@
     [self setUpLocationManager];
     
     //Add swipe geestures
-    UISwipeGestureRecognizer *leftSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipe:)];
-    leftSwipeGestureRecognizer.numberOfTouchesRequired=2;
-    leftSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:leftSwipeGestureRecognizer];
+    UISwipeGestureRecognizer *downSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(downSwipe:)];
+    downSwipeGestureRecognizer.numberOfTouchesRequired=2;
+    downSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:downSwipeGestureRecognizer];
     
-    UISwipeGestureRecognizer *rightSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipe:)];
-    rightSwipeGestureRecognizer.numberOfTouchesRequired=2;
-    rightSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:rightSwipeGestureRecognizer];
+    UISwipeGestureRecognizer *upSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(upSwipe:)];
+    upSwipeGestureRecognizer.numberOfTouchesRequired=2;
+    upSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:upSwipeGestureRecognizer];
     
     //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];

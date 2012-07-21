@@ -147,7 +147,7 @@
         setupHandler();
         
         //Animation
-        UIViewAnimationOptions option=animationOption==TransitionAnimationPushLeft ? UIViewAnimationOptionTransitionCurlDown : UIViewAnimationOptionTransitionCurlUp;
+        UIViewAnimationOptions option=animationOption==TransitionAnimationCurlDown ? UIViewAnimationOptionTransitionCurlDown : UIViewAnimationOptionTransitionCurlUp;
         
         [self transitionFromViewController:self.currentViewController toViewController:newRecordViewController duration:0.6 options:option animations:^{                
             //Remove the view of the current view controller from the view hierachy

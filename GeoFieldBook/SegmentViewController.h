@@ -20,7 +20,7 @@
 @property (nonatomic,readonly) UIViewController *topViewController;
 @property (nonatomic,strong) UIViewController *currentViewController;
 
-typedef enum TransitionAnimationOption {TransitionAnimationPushLeft,TransitionAnimationPushRight,TransitionAnimationFlipLeft,TransitionAnimationFlipRight,TransitionAnimationFold,TransitionAnimationUnfold} TransionAnimationOption;
+typedef enum TransitionAnimationOption {TransitionAnimationPushLeft,TransitionAnimationPushRight,TransitionAnimationFlipLeft,TransitionAnimationFlipRight,TransitionAnimationFold,TransitionAnimationUnfold,TransitionAnimationCurlUp,TransitionAnimationCurlDown} TransionAnimationOption;
 
 @property (nonatomic) TransionAnimationOption animationOption;
 

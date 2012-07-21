@@ -811,18 +811,18 @@
     }];
 }
 
-- (void)userDidSwipeLeftInRecordViewController:(RecordViewController *)sender {
+- (void)userDidSwipeUpInRecordViewController:(RecordViewController *)sender {
     //Switch to the next record
     RecordTableViewController *recordVC=[self recordTableViewController];
     if (recordVC && [recordVC hasNextRecord])
-        [self swipeWithTransitionAnimation:TransitionAnimationPushRight forward:YES];
+        [self swipeWithTransitionAnimation:TransitionAnimationCurlUp forward:YES];
 }
 
-- (void)userDidSwipeRightInRecordViewController:(RecordViewController *)sender {
+- (void)userDidSwipeDownInRecordViewController:(RecordViewController *)sender {
     //Switch to the prev record
     RecordTableViewController *recordVC=[self recordTableViewController];
     if (recordVC && [recordVC hasPrevRecord])
-        [self swipeWithTransitionAnimation:TransitionAnimationPushLeft forward:NO];
+        [self swipeWithTransitionAnimation:TransitionAnimationCurlDown forward:NO];
 }
 
 - (void)userDidCancelEditingMode:(RecordViewController *)sender {

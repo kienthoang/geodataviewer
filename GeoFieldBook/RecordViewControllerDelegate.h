@@ -23,8 +23,9 @@
 
 @optional
 
-- (void)userDidSwipeLeftInRecordViewController:(RecordViewController *)sender;
-- (void)userDidSwipeRightInRecordViewController:(RecordViewController *)sender;
+- (void)userDidSwipeDownInRecordViewController:(RecordViewController *)sender;
+- (void)userDidSwipeUpInRecordViewController:(RecordViewController *)sender;
+
 - (void)userDidCancelEditingMode:(RecordViewController *)sender;
 - (void)userDidStartEditingMode:(RecordViewController *)sender;
 - (void)userWantsToCancelEditingMode:(RecordViewController *)sender;
