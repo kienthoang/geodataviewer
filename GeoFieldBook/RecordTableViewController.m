@@ -529,7 +529,7 @@
 #pragma mark - Table View Data Source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell=[super tableView:tableView cellForRowAtIndexPath:indexPath];
+    CustomRecordCell *cell=(CustomRecordCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     
     //Select cell if its record is in the list of selected records
     Record *record=[self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -537,6 +537,14 @@
         [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+    
+    //Load the checkbox if table view is not in editing mode and willShowCheckBoxes is YES (the map is visible)
+    if (tableView.editing || !self.willShowCheckboxes)
+        [cell hideCheckBoxAnimated:YES];
+    else {
+        //Show the checkboxes
+        [cell showCheckBoxAnimated:YES];
     }
     
     return cell;
@@ -561,14 +569,15 @@
     if (self.tableView.editing) {
         //Add the selected record to the delete list
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSMutableArray *selectedRecords=[self.selectedRecords mutableCopy];
+        NSMutableArray *selectedRecords=self.selectedRecords.mutableCopy;
         [selectedRecords addObject:folder];
-        self.selectedRecords=[selectedRecords copy];
+        self.selectedRecords=selectedRecords.copy;
     }
     
     //Else, save the chosen record
-    else if (self.chosenRecord!=[self.fetchedResultsController objectAtIndexPath:indexPath])
+    else {
         self.chosenRecord=[self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -576,9 +585,9 @@
     if (self.tableView.editing) {
         //Remove the selected folder from the delete list
         Folder *folder=[self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSMutableArray *selectedRecords=[self.selectedRecords mutableCopy];
+        NSMutableArray *selectedRecords=self.selectedRecords.mutableCopy;
         [selectedRecords removeObject:folder];
-        self.selectedRecords=[selectedRecords copy];
+        self.selectedRecords=selectedRecords.copy;
     }
 }
 

@@ -39,7 +39,7 @@
 
 - (UIColor *)formationColor {
     if (!_formationColor)
-        self.formationColor=[UIColor blackColor];
+        self.formationColor=[UIColor redColor];
     
     return _formationColor;
 }
