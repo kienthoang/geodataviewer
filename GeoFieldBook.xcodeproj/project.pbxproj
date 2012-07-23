@@ -134,6 +134,8 @@
 		02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */; };
 		02AC0F9515A5408300FBA9D3 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9415A5408300FBA9D3 /* folder.png */; };
 		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
+		02AE26EF15BDF8AC00FE59C7 /* StudentFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AE26EE15BDF8AC00FE59C7 /* StudentFeedbackViewController.m */; };
+		02AE26F215BE192500FE59C7 /* CustomQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AE26F115BE192500FE59C7 /* CustomQuestionCell.m */; };
 		02F86EB415AF6E5B000A84D2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F86EB315AF6E5B000A84D2 /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		02F86EB815AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
 		02F86EB915AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
@@ -444,6 +446,10 @@
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		02AC0F9815A5483700FBA9D3 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
+		02AE26ED15BDF8AC00FE59C7 /* StudentFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentFeedbackViewController.h; sourceTree = "<group>"; };
+		02AE26EE15BDF8AC00FE59C7 /* StudentFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentFeedbackViewController.m; sourceTree = "<group>"; };
+		02AE26F015BE192500FE59C7 /* CustomQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomQuestionCell.h; sourceTree = "<group>"; };
+		02AE26F115BE192500FE59C7 /* CustomQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomQuestionCell.m; sourceTree = "<group>"; };
 		02F86EB315AF6E5B000A84D2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		02F86EB615AF6F09000A84D2 /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEngine.h; path = GeoFieldBook/IEEngine.h; sourceTree = "<group>"; };
 		02F86EB715AF6F09000A84D2 /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEEngine.m; path = GeoFieldBook/IEEngine.m; sourceTree = "<group>"; };
@@ -782,6 +788,7 @@
 			children = (
 				028732FB15B28F720001BBC2 /* Export */,
 				028732FA15B28F630001BBC2 /* Import */,
+				02AE26EC15BDF1AE00FE59C7 /* Feedback Group */,
 			);
 			name = "I/E Group";
 			sourceTree = "<group>";
@@ -829,6 +836,8 @@
 				21B1FEEF159B58C200868F62 /* CustomRecordCell.m */,
 				02806EEA15BA7E97003D09A7 /* CustomFormationCell.h */,
 				02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */,
+				02AE26F015BE192500FE59C7 /* CustomQuestionCell.h */,
+				02AE26F115BE192500FE59C7 /* CustomQuestionCell.m */,
 			);
 			name = "Table Cells";
 			sourceTree = "<group>";
@@ -939,7 +948,6 @@
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
-				02A7765715BCA6E4008A22C2 /* MessageUI.framework */,
 				0294E09B159361060025219F /* GeoFieldBook */,
 				0294E0B9159361060025219F /* GeoFieldBookTests */,
 				0294E094159361060025219F /* Frameworks */,
@@ -959,6 +967,7 @@
 		0294E094159361060025219F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02A7765715BCA6E4008A22C2 /* MessageUI.framework */,
 				0287330715B369790001BBC2 /* QuartzCore.framework */,
 				02F86EB315AF6E5B000A84D2 /* iAd.framework */,
 				2141DC18159CA275002518F9 /* libcommonCrypto.dylib */,
@@ -1284,6 +1293,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		02AE26EC15BDF1AE00FE59C7 /* Feedback Group */ = {
+			isa = PBXGroup;
+			children = (
+				02AE26ED15BDF8AC00FE59C7 /* StudentFeedbackViewController.h */,
+				02AE26EE15BDF8AC00FE59C7 /* StudentFeedbackViewController.m */,
+			);
+			name = "Feedback Group";
+			sourceTree = "<group>";
+		};
 		211B728D15AB522D00EC4C60 /* Import/Export */ = {
 			isa = PBXGroup;
 			children = (
@@ -1578,6 +1596,8 @@
 				02A7766415BCC26F008A22C2 /* SettingsSplitViewController.m in Sources */,
 				02A7766715BCC37D008A22C2 /* CustomSplitViewControllerSegue.m in Sources */,
 				02A7767115BCE39A008A22C2 /* SettingManager.m in Sources */,
+				02AE26EF15BDF8AC00FE59C7 /* StudentFeedbackViewController.m in Sources */,
+				02AE26F215BE192500FE59C7 /* CustomQuestionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

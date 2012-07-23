@@ -247,8 +247,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     for(NSArray *tokenArray in tokenArrays) {
         
         //If the current token array does not have enough tokens, add an error message to the message board
-        if(tokenArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE)
+        if(tokenArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) {
             [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
+            NSLog(@"Corrupted: %@",tokenArray);
+        }
         
         //Else, process the token array and contruct a corresponding transient record
         else {
