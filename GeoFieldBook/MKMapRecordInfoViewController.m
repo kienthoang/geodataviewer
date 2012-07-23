@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *recordDate;
 @property (weak, nonatomic) IBOutlet UILabel *recordTime;
 @property (weak, nonatomic) IBOutlet UILabel *formation;
+@property (weak, nonatomic) IBOutlet UILabel *upperFormation;
+@property (weak, nonatomic) IBOutlet UILabel *lowerFormation;
 @property (weak, nonatomic) IBOutlet UILabel *dipDirection;
 @property (weak, nonatomic) IBOutlet UILabel *dip;
 @property (weak, nonatomic) IBOutlet UILabel *strike;
@@ -34,6 +36,8 @@
 @synthesize recordDate=_recordDate;
 @synthesize recordTime=_recordTime;
 @synthesize formation = _formation;
+@synthesize upperFormation = _upperFormation;
+@synthesize lowerFormation = _lowerFormation;
 @synthesize dipDirection = _dipDirection;
 @synthesize dip = _dip;
 @synthesize strike = _strike;
@@ -56,16 +60,25 @@
     [super viewDidLoad];
     
     //Setup the info
+    Record *record=self.record;
     self.imageView.image=[UIImage imageWithData:self.record.image.imageData];
-    self.recordName.text=self.record.name;
-    self.recordType.text=[self.record.class description];
-    self.recordDate.text=[Record dateFromNSDate:self.record.date];
-    self.recordTime.text=[Record timeFromNSDate:self.record.date];
-    id record=self.record;
-    self.formation.text=([record isKindOfClass:[Contact class]] || [record isKindOfClass:[Other class]]) ? @"N/A" : [(Formation *)[record formation] formationName];
-    self.dip.text=self.record.dip ? [NSString stringWithFormat:@"%@",self.record.dip] : @"N/A";
-    self.strike.text=self.record.strike ? [NSString stringWithFormat:@"%@",self.record.strike] : @"N/A";
-    self.dipDirection.text=self.record.dipDirection ? self.record.dipDirection : @"N/A";
+    self.recordName.text=record.name;
+    self.recordType.text=[record.class description];
+    self.recordDate.text=[Record dateFromNSDate:record.date];
+    self.recordTime.text=[Record timeFromNSDate:record.date];
+    self.dip.text=record.dip ? [NSString stringWithFormat:@"%@",record.dip] : @"N/A";
+    self.strike.text=record.strike ? [NSString stringWithFormat:@"%@",record.strike] : @"N/A";
+    self.dipDirection.text=record.dipDirection ? record.dipDirection : @"N/A";
+    
+    if ([record isKindOfClass:[Contact class]]) {
+        Contact *contact=(Contact *)record;
+        self.upperFormation.text=contact.upperFormation.formationName;
+        self.lowerFormation.text=contact.lowerFormation.formationName;
+    } else if ([record isKindOfClass:[Other class]]) {
+        self.formation.text=@"N/A";
+    } else {
+        self.formation.text=[(Formation *)[(id)record formation] formationName];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -83,6 +96,8 @@
     [self setDipDirection:nil];
     [self setDip:nil];
     [self setStrike:nil];
+    [self setUpperFormation:nil];
+    [self setLowerFormation:nil];
     [super viewDidUnload];
 }
 @end

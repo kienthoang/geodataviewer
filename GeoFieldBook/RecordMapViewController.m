@@ -303,9 +303,11 @@
     }
 
     //show the popover
-    MKMapRecordInfoViewController *recordInfo=[self.storyboard instantiateViewControllerWithIdentifier:@"Record Info Popover"];
     MKGeoRecordAnnotation *annotation=view.annotation;
-    recordInfo.record=annotation.record;
+    Record *record=annotation.record;
+    MKMapRecordInfoViewController *recordInfo=[record isKindOfClass:[Contact class]] ? [self.storyboard instantiateViewControllerWithIdentifier:@"Contact Info Popover"] :
+                                                                                    [self.storyboard instantiateViewControllerWithIdentifier:@"Non-Contact Info Popover"];
+    recordInfo.record=record;
     recordInfo.delegate=self;
     UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
     [annotationCalloutPopover presentPopoverFromRect:view.bounds 
