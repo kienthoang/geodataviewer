@@ -223,6 +223,11 @@
     [dataMapSegmentVC segmentController:sender indexDidChangeTo:segmentIndex];
 }
 
+- (IBAction)settingButtonPressed:(UIButton *)sender {
+    //Segue to the settings view controller
+    [self performSegueWithIdentifier:@"Settings" sender:nil];
+}
+
 #pragma mark - UINavigationViewControllerDelegate methods
 
 - (void)navigationController:(UINavigationController *)navigationController 
@@ -496,7 +501,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     //Register to receive notifications from the model group
     [self registerForModelGroupNotifications];
 
@@ -528,7 +533,7 @@
     UIButton *settingButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
     [settingButtonCustomView setImage:[UIImage imageNamed:@"gear2.png"] forState:UIControlStateNormal];
     settingButtonCustomView.frame=CGRectMake(0, 0, 30, 30);
-    //[settingButtonCustomView addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [settingButtonCustomView addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     settingButtonCustomView.showsTouchWhenHighlighted=YES;
     self.settingButton.customView=settingButtonCustomView;
     
@@ -831,13 +836,22 @@
 }
 
 - (void)userWantsToCancelEditingMode:(RecordViewController *)sender {
-    //Put up an alert
-    UIAlertView *cancelAlert=[[UIAlertView alloc] initWithTitle:CANCEL_ALERT_TITLE 
-                                                        message:@"Are you sure you want to cancel? All the changes you made will be lost." 
-                                                       delegate:self 
-                                              cancelButtonTitle:@"Go Back" 
-                                              otherButtonTitles:@"Confirm", nil];
-    [cancelAlert show];
+    //Cancel immediately if the record info has not changed
+    Record *record=sender.record;
+    if (NO) {
+        
+    } 
+    
+    //else put up an alert to make sure user wants to cancel
+    else {
+        //Put up an alert
+        UIAlertView *cancelAlert=[[UIAlertView alloc] initWithTitle:CANCEL_ALERT_TITLE 
+                                                            message:@"Are you sure you want to cancel? All the changes you made will be lost." 
+                                                           delegate:self 
+                                                  cancelButtonTitle:@"Go Back" 
+                                                  otherButtonTitles:@"Confirm", nil];
+        [cancelAlert show];
+    }
 }
 
 - (void)userDidStartEditingMode:(RecordViewController *)sender {

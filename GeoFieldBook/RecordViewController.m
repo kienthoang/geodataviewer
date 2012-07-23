@@ -42,6 +42,8 @@
 #import "MKGeoRecordAnnotation.h"
 #import "FilterByRecordTypeController.h"
 
+#import "SettingManager.h"
+
 @interface RecordViewController() <UINavigationControllerDelegate,CLLocationManagerDelegate, StrikePickerDelegate,DipPickerDelegate,DipDirectionPickerDelegate,PlungePickerDelegate,TrendPickerDelegate,FormationPickerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate>
 
 //The names of the pickers
@@ -782,6 +784,54 @@
         [self.delegate userDidSwipeUpInRecordViewController:self];
 }
 
+- (void)removeGestureRecognizersInView:(UIView *)view {
+    for (UIGestureRecognizer *gestureRecognizer in view.gestureRecognizers) {
+        if ([gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]])
+            [view removeGestureRecognizer:gestureRecognizer];
+    }
+}
+
+- (void)addSwipeGestureRecognizersForView:(UIView *)view {
+    //Remove all swipe gesture recognizers
+    [self removeGestureRecognizersInView:self.view];
+    
+    //Get the required number of fingers
+    int numOfRequiredFingers=[[SettingManager standardSettingManager] recordSwipeGestureNumberOfFingersRequired].intValue;
+        
+    //Add swipe geestures
+    UISwipeGestureRecognizer *downSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(downSwipe:)];
+    downSwipeGestureRecognizer.numberOfTouchesRequired=numOfRequiredFingers;
+    downSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:downSwipeGestureRecognizer];
+    
+    UISwipeGestureRecognizer *upSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(upSwipe:)];
+    upSwipeGestureRecognizer.numberOfTouchesRequired=numOfRequiredFingers;
+    upSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:upSwipeGestureRecognizer];
+}
+
+- (void)addGestureRecognizersForView:(UIView *)view {
+    //Add swipe gesture recognizers
+    [self addSwipeGestureRecognizersForView:view ];
+    
+    //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
+    UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    tapGestureRecognizer.numberOfTapsRequired=2;
+    [view addGestureRecognizer:tapGestureRecognizer];  
+}
+
+#pragma mark - Notification Center
+
+- (void)swipeRecordGestureSettingDidChange:(NSNotification *)notification {
+    //Reset swipe record gesture
+    [self addSwipeGestureRecognizersForView:self.view];
+}
+
+- (void)registerForNotifications {
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(swipeRecordGestureSettingDidChange:) name:SettingManagerSwipeRecordDidChange object:nil];
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -797,21 +847,11 @@
     //initialize and set up location services
     [self setUpLocationManager];
     
-    //Add swipe geestures
-    UISwipeGestureRecognizer *downSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(downSwipe:)];
-    downSwipeGestureRecognizer.numberOfTouchesRequired=2;
-    downSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionDown;
-    [self.view addGestureRecognizer:downSwipeGestureRecognizer];
+    //Add gesture recognizers
+    [self addGestureRecognizersForView:self.view];
     
-    UISwipeGestureRecognizer *upSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(upSwipe:)];
-    upSwipeGestureRecognizer.numberOfTouchesRequired=2;
-    upSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionUp;
-    [self.view addGestureRecognizer:upSwipeGestureRecognizer];
-    
-    //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
-    UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
-    tapGestureRecognizer.numberOfTapsRequired=2;
-    [self.view addGestureRecognizer:tapGestureRecognizer];    
+    //Register for notifications
+    [self registerForNotifications];
 } 
 
 - (void)viewWillLayoutSubviews {

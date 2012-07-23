@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Gestures</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Long Press</string>
+			<key>Key</key>
+			<string>gestures_long_press_enabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Swipe to turn record</string>
+			<key>Key</key>
+			<string>gestures_swipe_record_enabled</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Record Swipe Gesture</string>
+			<key>Key</key>
+			<string>gestures_swipe_record</string>
+			<key>DefaultValue</key>
+			<integer>2</integer>
+			<key>Titles</key>
+			<array>
+				<string>1 finger</string>
+				<string>2 fingers</string>
+				<string>3 fingers</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<integer>1</integer>
+				<string>2</string>
+				<string>3</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
