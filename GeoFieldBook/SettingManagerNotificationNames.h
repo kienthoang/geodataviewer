@@ -18,6 +18,6 @@
 #define SettingManagerLongPressEnabledDidChange @"GeoFieldBook.SettingManager.LongPressEnabledDidChange"
 #define SettingManagerSwipeRecordEnabledDidChange @"GeoFieldBook.SettingManager.SwipeRecordEnabledDidChange"
 #define SettingManagerSwipeRecordDidChange @"GeoFieldBook.SettingManager.SwipeRecordDidChange"
-
+#define SettingManagerFeedbackTimeout @"GeoFieldBook.SettingManager.FeedbackTimeout"
 
 @end

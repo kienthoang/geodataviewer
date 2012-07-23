@@ -443,6 +443,11 @@
     [self setupLongPressGestureRecognizer];
 }
 
+#warning Feedback not implemented yet
+- (void)feedbackTimeout:(NSNotification *)notification {
+    //Put up the question feedback modal
+}
+
 - (void)registerForModelGroupNotifications {
     //Register to receive notifications from the model group
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
@@ -494,6 +499,10 @@
     [notificationCenter addObserver:self 
                            selector:@selector(longPressGestureSettingDidChange:) 
                                name:SettingManagerLongPressEnabledDidChange 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(feedbackTimeout:) 
+                               name:SettingManagerFeedbackTimeout 
                              object:nil];
 }
 

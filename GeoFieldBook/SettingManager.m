@@ -47,6 +47,16 @@ static SettingManager *settingManager;
     return [NSUserDefaults standardUserDefaults];
 }
 
+- (void)userDefaultsSetObject:(id)object forKey:(NSString *)key {
+    [self.userDefaults setObject:object forKey:key];
+    [self.userDefaults synchronize];
+}
+
+- (void)userDefaultsSetBool:(BOOL)flag forKey:(NSString *)key {
+    [self.userDefaults setBool:flag forKey:key];
+    [self.userDefaults synchronize];
+}
+
 #pragma mark - Notification Center
 
 - (void)postNotificationWithName:(NSString *)name andUserInfo:(NSDictionary *)userInfo {
@@ -55,8 +65,11 @@ static SettingManager *settingManager;
     [center postNotificationName:name object:self userInfo:userInfo];    
 }
 
-- (void)userPreferencesDidChange:(NSNotification *)notification {
-    //Post notifications
+- (void)postNotifications {
+    //Feedback notification
+    [self postFeedbackNotification];
+    
+    //Other notifications
     NSDictionary *userInfo=[NSDictionary dictionary];
     [self postNotificationWithName:SettingManagerFormationColorEnabledDidChange andUserInfo:userInfo];
     [self postNotificationWithName:SettingManagerDefaultFormationColorDidChange andUserInfo:userInfo];
@@ -66,6 +79,25 @@ static SettingManager *settingManager;
     [self postNotificationWithName:SettingManagerSwipeRecordDidChange andUserInfo:userInfo];
 }
 
+- (void)postFeedbackNotification {
+    //If the feedback system is enabled, proceed
+    if (self.feedbackEnabled) {
+        //Get the interval and counter
+        int feedbackInterval=self.feedbackInterval.intValue;
+        int feedbackCounter=self.feedbackCounter.intValue;
+        
+        if (feedbackCounter>=feedbackInterval) {
+            //Post a notification
+            [self postNotificationWithName:SettingManagerFeedbackTimeout andUserInfo:[NSDictionary dictionary]];
+        }
+    }
+}
+
+- (void)userPreferencesDidChange:(NSNotification *)notification {
+    //Post notifications
+    [self postNotifications];
+}
+
 #pragma mark - Color Group
 
 - (BOOL)formationColorEnabled {
@@ -73,8 +105,7 @@ static SettingManager *settingManager;
 }
 
 - (void)setFormationColorEnabled:(BOOL)formationColorEnabled {
-    [self.userDefaults setBool:formationColorEnabled forKey:NSUserDefaultsFormationColorEnabled];
-    [self.userDefaults synchronize];
+    [self userDefaultsSetBool:formationColorEnabled forKey:NSUserDefaultsFormationColorEnabled];
 }
 
 - (UIColor *)defaultFormationColor {
@@ -91,8 +122,8 @@ static SettingManager *settingManager;
 }
 
 - (void)setDefaultFormationColor:(NSString *)defaultFormationColor {
-    [self.userDefaults setObject:defaultFormationColor forKey:NSUserDefaultsDefaultFormationColor];
-    [self.userDefaults synchronize];
+    [self userDefaultsSetObject:defaultFormationColor forKey:NSUserDefaultsDefaultFormationColor];
+
 }
 
 
@@ -110,8 +141,7 @@ static SettingManager *settingManager;
 }
 
 - (void)setDefaultSymbolColor:(NSString *)defaultSymbolColor {
-    [self.userDefaults setObject:defaultSymbolColor forKey:NSUserDefaultsDefaultSymbolColor];
-    [self.userDefaults synchronize];
+    [self userDefaultsSetObject:defaultSymbolColor forKey:NSUserDefaultsDefaultSymbolColor];
 }
 
 #pragma mark - Gestures Group
@@ -121,8 +151,7 @@ static SettingManager *settingManager;
 }
 
 - (void)setLongGestureEnabled:(BOOL)longGestureEnabled {
-    [self.userDefaults setBool:longGestureEnabled forKey:NSUserDefaultsLongPressEnabled];
-    [self.userDefaults synchronize];
+    [self userDefaultsSetBool:longGestureEnabled forKey:NSUserDefaultsLongPressEnabled];
 }
 
 - (BOOL)swipeToTurnRecordEnabled {
@@ -130,8 +159,7 @@ static SettingManager *settingManager;
 }
 
 - (void)setSwipeToTurnRecordEnabled:(BOOL)swipeToTurnRecordEnabled {
-    return [self.userDefaults setBool:swipeToTurnRecordEnabled forKey:NSUserDefaultsSwipeRecordEnabled];
-    [self.userDefaults synchronize];
+    return [self userDefaultsSetBool:swipeToTurnRecordEnabled forKey:NSUserDefaultsSwipeRecordEnabled];
 }
 
 -(NSNumber *)recordSwipeGestureNumberOfFingersRequired {
@@ -139,8 +167,33 @@ static SettingManager *settingManager;
 }
 
 - (void)setRecordSwipeGestureNumberOfFingersRequired:(NSNumber *)recordSwipeGestureNumberOfFingersRequired {
-    [self.userDefaults setObject:recordSwipeGestureNumberOfFingersRequired forKey:NSUserDefaultsSwipeRecord];
-    [self.userDefaults synchronize];
+    [self userDefaultsSetObject:recordSwipeGestureNumberOfFingersRequired forKey:NSUserDefaultsSwipeRecord];
+}
+
+#pragma mark - Feedback Group
+
+- (BOOL)feedbackEnabled {
+    return [self.userDefaults boolForKey:NSUserDefaultsFeedbackEnabled];
+}
+
+- (void)setFeedbackEnabled:(BOOL)feedbackEnabled {
+    [self userDefaultsSetBool:feedbackEnabled forKey:NSUserDefaultsFeedbackEnabled];
+}
+
+- (NSNumber *)feedbackInterval {
+    return [self.userDefaults objectForKey:NSUserDefaultsFeedbackInterval];
+}
+
+- (void)setFeedbackInterval:(NSNumber *)feedbackInterval {
+    [self userDefaultsSetObject:feedbackInterval forKey:NSUserDefaultsFeedbackInterval];
+}
+
+- (NSNumber *)feedbackCounter {
+    return [self.userDefaults objectForKey:NSUserDefaultsFeedbackCounter];
+}
+
+- (void)setFeedbackCounter:(NSNumber *)feedbackCounter {
+    [self userDefaultsSetObject:feedbackCounter forKey:NSUserDefaultsFeedbackCounter];
 }
 
 @end
