@@ -5,38 +5,10 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>Title</key>
+			<string>Group</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Sounds</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<true/>
-			<key>Key</key>
-			<string>play_sounds_preference</string>
-			<key>Title</key>
-			<string>Play Sounds</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<true/>
-			<key>Key</key>
-			<string>3D_sounds_preference</string>
-			<key>Title</key>
-			<string>3D Sounds</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string></string>
-			<key>Key</key>
-			<string></string>
 		</dict>
 		<dict>
 			<key>AutocapitalizationType</key>
@@ -48,7 +20,7 @@
 			<key>IsSecure</key>
 			<false/>
 			<key>Key</key>
-			<string>user_name</string>
+			<string>name_preference</string>
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>Title</key>
@@ -57,54 +29,30 @@
 			<string>PSTextFieldSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSMultiValueSpecifier</string>
-			<key>Title</key>
-			<string>Experience Level</string>
-			<key>Key</key>
-			<string>experience_preference</string>
 			<key>DefaultValue</key>
-			<string>0</string>
-			<key>Titles</key>
-			<array>
-				<string>Beginner</string>
-				<string>Expert</string>
-				<string>Master</string>
-			</array>
-			<key>Values</key>
-			<array>
-				<string>0</string>
-				<string>1</string>
-				<string>2</string>
-			</array>
+			<true/>
+			<key>Key</key>
+			<string>enabled_preference</string>
+			<key>Title</key>
+			<string>Enabled</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Gravity</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSSliderSpecifier</string>
-			<key>Key</key>
-			<string>gravity_preference</string>
 			<key>DefaultValue</key>
+			<real>0.5</real>
+			<key>Key</key>
+			<string>slider_preference</string>
+			<key>MaximumValue</key>
 			<integer>1</integer>
+			<key>MaximumValueImage</key>
+			<string></string>
 			<key>MinimumValue</key>
 			<integer>0</integer>
-			<key>MaximumValue</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-			<key>Title</key>
-			<string>More Options</string>
-			<key>Key</key>
+			<key>MinimumValueImage</key>
 			<string></string>
-			<key>File</key>
-			<string>MoreOptions</string>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

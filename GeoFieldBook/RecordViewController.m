@@ -784,52 +784,58 @@
         [self.delegate userDidSwipeUpInRecordViewController:self];
 }
 
-- (void)removeGestureRecognizersInView:(UIView *)view {
+- (void)removeSwipeGestureRecognizersInView:(UIView *)view {
     for (UIGestureRecognizer *gestureRecognizer in view.gestureRecognizers) {
         if ([gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]])
             [view removeGestureRecognizer:gestureRecognizer];
     }
 }
 
-- (void)addSwipeGestureRecognizersForView:(UIView *)view {
+- (void)setupSwipeGestureRecognizersForView:(UIView *)view {
     //Remove all swipe gesture recognizers
-    [self removeGestureRecognizersInView:self.view];
+    [self removeSwipeGestureRecognizersInView:self.view];
     
-    //Get the required number of fingers
-    int numOfRequiredFingers=[[SettingManager standardSettingManager] recordSwipeGestureNumberOfFingersRequired].intValue;
+    //Add swipe gesture recognizers only if specified in settings
+    BOOL swipeRecordGestureEnabled=[SettingManager standardSettingManager].swipeToTurnRecordEnabled;
+    if (swipeRecordGestureEnabled) {
+        //Get the required number of fingers
+        int numOfRequiredFingers=[[SettingManager standardSettingManager] recordSwipeGestureNumberOfFingersRequired].intValue;
         
-    //Add swipe geestures
-    UISwipeGestureRecognizer *downSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(downSwipe:)];
-    downSwipeGestureRecognizer.numberOfTouchesRequired=numOfRequiredFingers;
-    downSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionDown;
-    [self.view addGestureRecognizer:downSwipeGestureRecognizer];
-    
-    UISwipeGestureRecognizer *upSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(upSwipe:)];
-    upSwipeGestureRecognizer.numberOfTouchesRequired=numOfRequiredFingers;
-    upSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionUp;
-    [self.view addGestureRecognizer:upSwipeGestureRecognizer];
+        //Add swipe geestures
+        UISwipeGestureRecognizer *downSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(downSwipe:)];
+        downSwipeGestureRecognizer.numberOfTouchesRequired=numOfRequiredFingers;
+        downSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionDown;
+        [self.view addGestureRecognizer:downSwipeGestureRecognizer];
+        
+        UISwipeGestureRecognizer *upSwipeGestureRecognizer=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(upSwipe:)];
+        upSwipeGestureRecognizer.numberOfTouchesRequired=numOfRequiredFingers;
+        upSwipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionUp;
+        [self.view addGestureRecognizer:upSwipeGestureRecognizer];
+    }
 }
 
-- (void)addGestureRecognizersForView:(UIView *)view {
+- (void)setupGestureRecognizersForView:(UIView *)view {
     //Add swipe gesture recognizers
-    [self addSwipeGestureRecognizersForView:view ];
+    [self setupSwipeGestureRecognizersForView:view];
+    
     
     //Add double tap recognizer (a double tap outside the text fields or text areas will dismiss the keyboard)
     UITapGestureRecognizer *tapGestureRecognizer=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     tapGestureRecognizer.numberOfTapsRequired=2;
-    [view addGestureRecognizer:tapGestureRecognizer];  
+    [view addGestureRecognizer:tapGestureRecognizer];
 }
 
 #pragma mark - Notification Center
 
 - (void)swipeRecordGestureSettingDidChange:(NSNotification *)notification {
     //Reset swipe record gesture
-    [self addSwipeGestureRecognizersForView:self.view];
+    [self setupSwipeGestureRecognizersForView:self.view];
 }
 
 - (void)registerForNotifications {
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(swipeRecordGestureSettingDidChange:) name:SettingManagerSwipeRecordDidChange object:nil];
+    [notificationCenter addObserver:self selector:@selector(swipeRecordGestureSettingDidChange:) name:SettingManagerSwipeRecordEnabledDidChange object:nil];
 }
 
 #pragma mark - View lifecycle
@@ -847,8 +853,8 @@
     //initialize and set up location services
     [self setUpLocationManager];
     
-    //Add gesture recognizers
-    [self addGestureRecognizersForView:self.view];
+    //Add gesture recognizers if record swipe gesture is enabled in settings
+    [self setupGestureRecognizersForView:self.view];
     
     //Register for notifications
     [self registerForNotifications];

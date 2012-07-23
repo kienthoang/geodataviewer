@@ -20,6 +20,8 @@
 #import "Bedding.h"
 #import "Contact.h"
 
+#import "SettingManager.h"
+
 @interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate,FilterRecordsByType>
 
 @property (nonatomic,weak) UIPopoverController *filterPopover;
@@ -176,6 +178,19 @@
     }
 }
 
+#pragma mark - Notification Center
+
+- (void)formationColorSettingDidChange:(NSNotification *)notification {
+    //Reload the annotation views' colors
+    [self reloadAnnotationViewColor];
+}
+
+- (void)registerForNotifications {
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerFormationColorEnabledDidChange object:nil];
+    [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerDefaultFormationColorDidChange object:nil];
+}
+
 #pragma mark - View Controller Lifecycles
 
 - (void)viewDidLoad {
@@ -192,6 +207,9 @@
     
     //Update records
     [self updateRecords:[self.mapDelegate recordsForMapViewController:self] forceUpdate:NO updateRegion:YES];    
+    
+    //Register for notifications
+    [self registerForNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

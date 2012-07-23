@@ -12,6 +12,8 @@
 #import "ColorPickerViewControllerDelegate.h"
 #import "NPColorPickerView.h"
 
+#import "SettingManager.h"
+
 @interface FormationViewController() <UITextFieldDelegate,ColorPickerViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
@@ -39,7 +41,7 @@
 
 - (UIColor *)formationColor {
     if (!_formationColor)
-        self.formationColor=[UIColor redColor];
+        self.formationColor=[SettingManager standardSettingManager].defaultFormationColor;
     
     return _formationColor;
 }

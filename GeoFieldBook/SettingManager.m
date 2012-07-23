@@ -57,7 +57,6 @@ static SettingManager *settingManager;
 
 - (void)userPreferencesDidChange:(NSNotification *)notification {
     //Post notifications
-    NSLog(@"Got notifications");
     NSDictionary *userInfo=[NSDictionary dictionary];
     [self postNotificationWithName:SettingManagerFormationColorEnabledDidChange andUserInfo:userInfo];
     [self postNotificationWithName:SettingManagerDefaultFormationColorDidChange andUserInfo:userInfo];
@@ -78,8 +77,17 @@ static SettingManager *settingManager;
     [self.userDefaults synchronize];
 }
 
-- (NSString *)defaultFormationColor {
-    return [self.userDefaults objectForKey:NSUserDefaultsDefaultFormationColor];
+- (UIColor *)defaultFormationColor {
+    UIColor *defaultFormationColor=nil;
+    NSString *defaultFormationColorPreference=[self.userDefaults objectForKey:NSUserDefaultsDefaultFormationColor];
+    if ([defaultFormationColorPreference isEqualToString:@"Red"])
+        defaultFormationColor=[UIColor redColor];
+    else if ([defaultFormationColorPreference isEqualToString:@"Blue"])
+        defaultFormationColor=[UIColor blueColor];
+    else if ([defaultFormationColorPreference isEqualToString:@"Green"])
+        defaultFormationColor=[UIColor greenColor];
+    
+    return defaultFormationColor;
 }
 
 - (void)setDefaultFormationColor:(NSString *)defaultFormationColor {
@@ -88,8 +96,17 @@ static SettingManager *settingManager;
 }
 
 
-- (NSString *)defaultSymbolColor {
-    return [self.userDefaults objectForKey:NSUserDefaultsDefaultSymbolColor];
+- (UIColor *)defaultSymbolColor {
+    UIColor *defaultSymbolColor=nil;
+    NSString *defaultSymbolColorPreference=[self.userDefaults objectForKey:NSUserDefaultsDefaultSymbolColor];
+    if ([defaultSymbolColorPreference isEqualToString:@"Red"])
+        defaultSymbolColor=[UIColor redColor];
+    else if ([defaultSymbolColorPreference isEqualToString:@"Blue"])
+        defaultSymbolColor=[UIColor blueColor];
+    else if ([defaultSymbolColorPreference isEqualToString:@"Black"])
+        defaultSymbolColor=[UIColor blackColor];
+    
+    return defaultSymbolColor;
 }
 
 - (void)setDefaultSymbolColor:(NSString *)defaultSymbolColor {

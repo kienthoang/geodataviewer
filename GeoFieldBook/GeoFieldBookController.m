@@ -31,6 +31,7 @@
 #import "Record+NameEncoding.h"
 
 #import "GeoDatabaseManager.h"
+#import "SettingManager.h"
 
 @interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate>
 
@@ -437,6 +438,11 @@
     });
 }
 
+- (void)longPressGestureSettingDidChange:(NSNotification *)notification {
+    //Reset 
+    [self setupLongPressGestureRecognizer];
+}
+
 - (void)registerForModelGroupNotifications {
     //Register to receive notifications from the model group
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
@@ -485,6 +491,36 @@
                            selector:@selector(handleValidationErrors:) 
                                name:GeoNotificationConflictHandlerValidationErrorsOccur 
                              object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(longPressGestureSettingDidChange:) 
+                               name:SettingManagerLongPressEnabledDidChange 
+                             object:nil];
+}
+
+#pragma mark - Gesture Setups
+
+- (void)removeLongPressGestureRecogizer {
+    for (UIGestureRecognizer *gestureRecognizer in self.contentView.gestureRecognizers) {
+        if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]])
+            [self.contentView removeGestureRecognizer:gestureRecognizer];
+    }
+}
+
+- (void)setupLongPressGestureRecognizer {
+    //Remove long press gestures
+    [self removeLongPressGestureRecogizer];
+    
+    //Add long press if specified by settings
+    BOOL longPressEnabled=[SettingManager standardSettingManager].longGestureEnabled;
+    if (longPressEnabled) {
+        UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(presentPopoverViewController:)];
+        [self.contentView addGestureRecognizer:longPressGestureRecognizer];
+    }
+}
+
+- (void)setupGestureRecognizers {
+    //Setup the long press gesture recognizer
+    [self setupLongPressGestureRecognizer];
 }
 
 #pragma mark - View Controller Lifecycle
@@ -539,9 +575,9 @@
     
     //[self.toolbar setBackgroundImage:[UIImage imageNamed:@"stone-textures.jpeg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
     
-    //Add gesture to call the master
-    UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(presentPopoverViewController:)];
-    [self.contentView addGestureRecognizer:longPressGestureRecognizer];
+    //Setup gesture recognizers
+    [self setupGestureRecognizers];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -837,7 +873,7 @@
 
 - (void)userWantsToCancelEditingMode:(RecordViewController *)sender {
     //Cancel immediately if the record info has not changed
-    Record *record=sender.record;
+    //Record *record=sender.record;
     if (NO) {
         
     } 

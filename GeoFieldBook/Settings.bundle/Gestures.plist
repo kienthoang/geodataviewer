@@ -38,7 +38,7 @@
 			<key>Key</key>
 			<string>gestures_swipe_record</string>
 			<key>DefaultValue</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>Titles</key>
 			<array>
 				<string>1 finger</string>
@@ -48,8 +48,8 @@
 			<key>Values</key>
 			<array>
 				<integer>1</integer>
-				<string>2</string>
-				<string>3</string>
+				<integer>2</integer>
+				<integer>3</integer>
 			</array>
 		</dict>
 	</array>

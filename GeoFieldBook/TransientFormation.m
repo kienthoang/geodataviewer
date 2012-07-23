@@ -8,6 +8,8 @@
 
 #import "TransientFormation.h"
 
+#import "SettingManager.h"
+
 @interface TransientFormation()
 
 @property (nonatomic,strong) Formation *managedFormation;
@@ -53,6 +55,18 @@
     formation.formationName=self.formationName;
     formation.formationSortNumber=self.formationSortNumber;
     formation.formationFolder=[self.formationFolder saveFormationFolderToManagedObjectContext:context completion:completionHandler];
+    
+    //Set the color of the formation to the default formation color in settings
+    SettingManager *settingManager=[SettingManager standardSettingManager];
+    UIColor *defaultFormationColor=settingManager.defaultFormationColor;
+    CGFloat red;
+    CGFloat blue;
+    CGFloat green;
+    CGFloat alpha;
+    [defaultFormationColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    formation.redColorComponent=[NSNumber numberWithFloat:red];
+    formation.blueColorComponent=[NSNumber numberWithFloat:blue];
+    formation.greenColorComponent=[NSNumber numberWithFloat:green];
     
     self.managedFormation=formation;
 }

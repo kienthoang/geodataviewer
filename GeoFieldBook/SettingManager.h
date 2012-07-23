@@ -17,8 +17,8 @@
 #pragma mark - Color Group
 
 @property (nonatomic) BOOL formationColorEnabled;
-@property (nonatomic,strong) NSString *defaultFormationColor;
-@property (nonatomic,strong) NSString *defaultSymbolColor;
+@property (nonatomic,strong) UIColor *defaultFormationColor;
+@property (nonatomic,strong) UIColor *defaultSymbolColor;
 
 #pragma mark - Gestures Group
 

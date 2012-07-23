@@ -8,6 +8,8 @@
 
 #import "MKCustomAnnotationView.h"
 
+#import "SettingManager.h"
+
 @implementation MKCustomAnnotationView
 
 - (void)reloadAnnotationView {
@@ -24,21 +26,29 @@
         symbol.dipDirection=record.dipDirection;
         symbol.backgroundColor=[UIColor clearColor];
         
-        //Set the color of the dip strike symbol
+        //Setup the color of the dip strike symbol if specified by user preference
         UIColor *color=nil;
-        if ([record isKindOfClass:[Bedding class]]) {
-            Formation *formation=[(Bedding *)record formation];
-            color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
-                                  green:formation.greenColorComponent.floatValue 
-                                   blue:formation.blueColorComponent.floatValue 
-                                  alpha:1.0];
+        SettingManager *settingManager=[SettingManager standardSettingManager];
+        if (settingManager.formationColorEnabled) {
+            if ([record isKindOfClass:[Bedding class]]) {
+                Formation *formation=[(Bedding *)record formation];
+                color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
+                                      green:formation.greenColorComponent.floatValue 
+                                       blue:formation.blueColorComponent.floatValue 
+                                      alpha:1.0];
+            }
+            else if ([record isKindOfClass:[Contact class]]) {
+                Formation *upperFormation=[(Contact *)record upperFormation];
+                color=[UIColor colorWithRed:upperFormation.redColorComponent.floatValue 
+                                      green:upperFormation.greenColorComponent.floatValue 
+                                       blue:upperFormation.blueColorComponent.floatValue 
+                                      alpha:1.0];
+            }
         }
-        else if ([record isKindOfClass:[Contact class]]) {
-            Formation *upperFormation=[(Contact *)record upperFormation];
-            color=[UIColor colorWithRed:upperFormation.redColorComponent.floatValue 
-                                  green:upperFormation.greenColorComponent.floatValue 
-                                   blue:upperFormation.blueColorComponent.floatValue 
-                                  alpha:1.0];
+        
+        //Else just set the color to the default symbol color
+        else {
+            color=settingManager.defaultSymbolColor;
         }
         
         symbol.color=color;

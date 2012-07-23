@@ -110,7 +110,6 @@
 		0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969315A408B100E51C27 /* DataMapSegmentViewController.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
-		02A7761E15BC96DC008A22C2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A7761D15BC96DC008A22C2 /* Settings.bundle */; };
 		02A7764515BCA3BE008A22C2 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A7762715BCA3BE008A22C2 /* IASKAppSettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		02A7764615BCA3BE008A22C2 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A7762915BCA3BE008A22C2 /* IASKAppSettingsWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		02A7764715BCA3BE008A22C2 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A7762B15BCA3BE008A22C2 /* IASKSpecifierValuesViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -131,6 +130,7 @@
 		02A7766415BCC26F008A22C2 /* SettingsSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A7766315BCC26F008A22C2 /* SettingsSplitViewController.m */; };
 		02A7766715BCC37D008A22C2 /* CustomSplitViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A7766615BCC37D008A22C2 /* CustomSplitViewControllerSegue.m */; };
 		02A7767115BCE39A008A22C2 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A7767015BCE39A008A22C2 /* SettingManager.m */; };
+		02A7767415BD28BB008A22C2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A7767315BD28BA008A22C2 /* Settings.bundle */; };
 		02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */; };
 		02AC0F9515A5408300FBA9D3 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9415A5408300FBA9D3 /* folder.png */; };
 		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
@@ -397,7 +397,6 @@
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
 		0298C25E159B45650038E89C /* Record+NameEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+NameEncoding.m"; sourceTree = "<group>"; };
-		02A7761D15BC96DC008A22C2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		02A7762615BCA3BE008A22C2 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		02A7762715BCA3BE008A22C2 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
 		02A7762815BCA3BE008A22C2 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
@@ -440,6 +439,7 @@
 		02A7766F15BCE39A008A22C2 /* SettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManager.h; sourceTree = "<group>"; };
 		02A7767015BCE39A008A22C2 /* SettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingManager.m; sourceTree = "<group>"; };
 		02A7767215BD0F24008A22C2 /* SettingManagerNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManagerNotificationNames.h; sourceTree = "<group>"; };
+		02A7767315BD28BA008A22C2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		02AC0F8815A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapRecordInfoViewController.h; sourceTree = "<group>"; };
 		02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
 		02AC0F9415A5408300FBA9D3 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
@@ -1214,8 +1214,8 @@
 		02A7761F15BC9A5C008A22C2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				02A7767315BD28BA008A22C2 /* Settings.bundle */,
 				02A7762415BCA3BE008A22C2 /* InAppSettingsKit */,
-				02A7761D15BC96DC008A22C2 /* Settings.bundle */,
 				02A7766215BCC26F008A22C2 /* SettingsSplitViewController.h */,
 				02A7766315BCC26F008A22C2 /* SettingsSplitViewController.m */,
 				02A7765C15BCAE2C008A22C2 /* MainSettingsTableViewController.h */,
@@ -1410,7 +1410,7 @@
 				0249E2B115A6A32300A7532E /* gear.png in Resources */,
 				0249E2C215A6AD0300A7532E /* iPad.storyboard in Resources */,
 				02806F0515BB00E5003D09A7 /* green_pin.png in Resources */,
-				02A7761E15BC96DC008A22C2 /* Settings.bundle in Resources */,
+				02A7767415BD28BB008A22C2 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

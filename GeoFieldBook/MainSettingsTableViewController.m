@@ -40,12 +40,6 @@
     [self.delegate userDidPressCancel:self];
 }
 
-#pragma mark - Table View Data Source
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return section ? @"Education" : @"App Interaction";
-}
-
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
