@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "NPColorPickerView.h"
 #import "ColorPickerViewControllerDelegate.h"
 
 @interface ColorPickerViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet NPColorPickerView *colorPickerView;
 @property (weak, nonatomic) id <ColorPickerViewControllerDelegate> delegate;
 
 @property (nonatomic,strong) UIColor *selectedColor;
+
+@property (nonatomic,strong) NSString *colorName;
 
 @end

@@ -8,16 +8,24 @@
 
 #import "ColorPickerViewController.h"
 
-@interface ColorPickerViewController() <NPColorPickerViewDelegate>
+@interface ColorPickerViewController() 
 
-@property (weak, nonatomic) IBOutlet UIButton *redPatch;
-@property (weak, nonatomic) IBOutlet UIButton *yellowPatch;
-@property (weak, nonatomic) IBOutlet UIButton *greenPatch;
-@property (weak, nonatomic) IBOutlet UIButton *cyanPatch;
-@property (weak, nonatomic) IBOutlet UIButton *plumPatch;
-@property (weak, nonatomic) IBOutlet UIButton *mochaPatch;
-@property (weak, nonatomic) IBOutlet UIButton *cloverPatch;
+@property (weak, nonatomic) IBOutlet UIButton *purplePatch;
+@property (weak, nonatomic) IBOutlet UIButton *fuchsiaPatch;
+@property (weak, nonatomic) IBOutlet UIButton *navyPatch;
 @property (weak, nonatomic) IBOutlet UIButton *bluePatch;
+@property (weak, nonatomic) IBOutlet UIButton *tealPatch;
+@property (weak, nonatomic) IBOutlet UIButton *mochaPatch;
+@property (weak, nonatomic) IBOutlet UIButton *aquaPatch;
+@property (weak, nonatomic) IBOutlet UIButton *greenPatch;
+@property (weak, nonatomic) IBOutlet UIButton *limePatch;
+@property (weak, nonatomic) IBOutlet UIButton *olivePatch;
+@property (weak, nonatomic) IBOutlet UIButton *yellowPatch;
+@property (weak, nonatomic) IBOutlet UIButton *maroonPatch;
+@property (weak, nonatomic) IBOutlet UIButton *redPatch;
+@property (weak, nonatomic) IBOutlet UIButton *silverPatch;
+@property (weak, nonatomic) IBOutlet UIButton *blackPatch;
+@property (weak, nonatomic) IBOutlet UIButton *whitePatch;
 
 @property (nonatomic,readonly) NSArray *colorPatches;
 
@@ -26,18 +34,26 @@
 @implementation ColorPickerViewController 
 
 #pragma mark - View Controller Lifecycle
-@synthesize redPatch = _redPatch;
-@synthesize yellowPatch = _yellowPatch;
-@synthesize greenPatch = _greenPatch;
-@synthesize cyanPatch = _cyanPatch;
-@synthesize plumPatch = _plumPatch;
-@synthesize mochaPatch = _mochaPatch;
-@synthesize cloverPatch = _cloverPatch;
+@synthesize purplePatch = _purplePatch;
+@synthesize fuchsiaPatch = _fuchsiaPatch;
+@synthesize navyPatch = _navyPatch;
 @synthesize bluePatch = _bluePatch;
+@synthesize tealPatch = _tealPatch;
+@synthesize mochaPatch = _mochaPatch;
+@synthesize aquaPatch = _aquaPatch;
+@synthesize greenPatch = _greenPatch;
+@synthesize limePatch = _limePatch;
+@synthesize olivePatch = _olivePatch;
+@synthesize yellowPatch = _yellowPatch;
+@synthesize maroonPatch = _maroonPatch;
+@synthesize redPatch = _redPatch;
+@synthesize silverPatch = _silverPatch;
+@synthesize blackPatch = _blackPatch;
+@synthesize whitePatch = _whitePatch;
 
 @synthesize selectedColor=_selectedColor;
+@synthesize colorName=_colorName;
 
-@synthesize colorPickerView=_colorPickerView;
 
 @synthesize delegate=_delegate;
 
@@ -45,31 +61,36 @@
 
 - (NSArray *)colorPatches {
     return [NSArray arrayWithObjects:
-            self.redPatch,
-            self.yellowPatch,
-            self.greenPatch,
-            self.cyanPatch,
-            self.plumPatch,
+            self.purplePatch,
+            self.fuchsiaPatch,
+            self.navyPatch,
+            self.bluePatch,
+            self.tealPatch,
             self.mochaPatch,
-            self.cloverPatch,
-            self.bluePatch, nil];
+            self.aquaPatch,
+            self.greenPatch,
+            self.limePatch,
+            self.olivePatch,
+            self.yellowPatch,
+            self.maroonPatch,
+            self.redPatch,
+            self.silverPatch,
+            self.blackPatch,
+            self.whitePatch,nil];
 }
 
 - (void)setSelectedColor:(UIColor *)selectedColor {
     if (![_selectedColor isEqual:selectedColor]) {
         _selectedColor=selectedColor;
-        
-        //Update the color picker view
-        self.colorPickerView.color=self.selectedColor;
     }
 }
 
-- (void)setColorPickerView:(NPColorPickerView *)colorPickerView {
-    _colorPickerView=colorPickerView;
-    
-    //Set self as the delegate of the color picker view
-    self.colorPickerView.delegate=self;
+-(void)setColorName:(NSString *)colorName {
+    if(![_colorName isEqualToString:colorName])
+       _colorName = colorName;
 }
+
+
 
 #pragma mark - View Controller Lifecycle
 
@@ -96,9 +117,9 @@
 
 #pragma mark - Color Patches
 
-- (void)updateSelectedColor:(UIColor *)color {
+- (void)updateSelectedColor:(UIColor *)color andName:(NSString *) colorName{
     //Notify the delegate
-    [self.delegate colorPicker:self userDidSelectColor:color];
+    [self.delegate colorPicker:self userDidSelectColor:color withName:(NSString *)colorName];
     
     //Save the selected color
     self.selectedColor=color;
@@ -107,27 +128,33 @@
 - (IBAction)colorPatchPressed:(UIButton *)colorPatch {
     //Get the color represented by the color patch
     UIColor *selectedColor=colorPatch.backgroundColor;
-    
+    self.colorName = colorPatch.titleLabel.text;
     //Update
-    [self updateSelectedColor:selectedColor];
+    NSLog(@"Color Name: %@", self.colorName);
+    [self updateSelectedColor:selectedColor andName:self.colorName];
+    
 }
 
 - (void)viewDidUnload {
-    [self setRedPatch:nil];
-    [self setYellowPatch:nil];
-    [self setGreenPatch:nil];
-    [self setCyanPatch:nil];
-    [self setPlumPatch:nil];
-    [self setMochaPatch:nil];
-    [self setCloverPatch:nil];
+    [self setPurplePatch:nil];
+    [self setFuchsiaPatch:nil];
+    [self setNavyPatch:nil];
     [self setBluePatch:nil];
+    [self setTealPatch:nil];
+    [self setMochaPatch:nil];
+    [self setAquaPatch:nil];
+    [self setGreenPatch:nil];
+    [self setLimePatch:nil];
+    [self setOlivePatch:nil];
+    [self setYellowPatch:nil];
+    [self setMaroonPatch:nil];
+    [self setRedPatch:nil];
+    [self setSilverPatch:nil];
+    [self setBluePatch:nil];
+    [self setWhitePatch:nil];
     [super viewDidUnload];
 }
 
-#pragma mark - NPColorPickerView Delegate methods
 
-- (void)NPColorPickerView:(NPColorPickerView *)view didSelectColor:(UIColor *)color {
-    [self updateSelectedColor:color];
-}
 
 @end
