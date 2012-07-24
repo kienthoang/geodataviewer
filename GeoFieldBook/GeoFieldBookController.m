@@ -816,10 +816,6 @@
 {
     //Call the record table view controller to update the given record with the given record info
     [[self recordTableViewController] modifyRecord:record withNewInfo:recordInfo];
-    
-    //Call the popover if it's not visible
-//    if (!self.popoverViewController.isPopoverVisible)
-//        [self.popoverViewController presentPopoverFromBarButtonItem:self.popoverVCButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
@@ -991,8 +987,13 @@
     else if ([alertView.title isEqualToString:CANCEL_ALERT_TITLE]) {
         //If user click "Continue", cancel the editing mode of the record view controller
         if ([buttonTitle isEqualToString:@"Confirm"]) {
+            //Cancel editing mode
             DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
             [dataMapSegmentVC cancelRecordViewControllerEditingMode];
+            
+            //Delete the record if it's "fresh" (newly created and has not been modified)
+            RecordTableViewController *recordTVC=[self recordTableViewController];
+            [recordTVC deleteRecordIfFresh:recordTVC.chosenRecord];
         }
     }
 }

@@ -12,6 +12,6 @@
 
 typedef enum RecordState {RecordStateNew,RecordStateUpdated} RecordState;
 
-@property (nonatomic,getter = isNewlyCreated) RecordState state;
+@property (nonatomic) int recordState;
 
 @end

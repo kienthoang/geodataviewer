@@ -8,22 +8,16 @@
 
 #import "Record+State.h"
 
-#import <objc/runtime.h>
-
 @implementation Record (State)
 
-@dynamic state;
+@dynamic recordState;
 
-static char const * const StateTagkey="State";
-
-- (void)setState:(RecordState)state {
-    NSNumber *stateObj=[NSNumber numberWithInt:state];
-    objc_setAssociatedObject(self, StateTagkey, stateObj, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (int)recordState {
+    return self.state.intValue;
 }
 
-- (RecordState)isNewlyCreated {
-    NSNumber *state=objc_getAssociatedObject(self, StateTagkey);
-    return state.intValue;
+- (void)setRecordState:(int)recordState {
+    self.state=[NSNumber numberWithInt:recordState];
 }
 
 @end

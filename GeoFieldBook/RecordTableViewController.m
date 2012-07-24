@@ -214,9 +214,6 @@
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
-            //mark the record as newly created
-            record.state=RecordStateNew;
-            
             //Choose the newly created record
             self.chosenRecord=record;
             
@@ -259,14 +256,14 @@
             }
             
             //If the record state is new, increment the feedback counter
-            if (record.state==RecordStateNew) {
+            if (record.recordState==RecordStateNew) {
                 SettingManager *settingManager=[SettingManager standardSettingManager];
                 int feedbackCounter=settingManager.feedbackCounter.intValue;
                 settingManager.feedbackCounter=[NSNumber numberWithInt:feedbackCounter+1];
             }
             
             //mark record as updated
-            record.state=RecordStateUpdated;
+            record.recordState=RecordStateUpdated;
         }
     }];
 }
@@ -287,6 +284,12 @@
         //Post a notification to indicate that the record database has changed
         [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
     }];
+}
+
+- (void)deleteRecordIfFresh:(Record *)record {
+    //If the record's state is new, delete it
+    if (record.recordState==RecordStateNew)
+        [self deleteRecords:[NSArray arrayWithObject:record]];
 }
 
 #pragma mark - FormationFolderPickerDelegate methods

@@ -8,6 +8,10 @@
 
 #import "GeoFieldBookAppDelegate.h"
 
+#import "GeoDatabaseManager.h"
+
+#import "Question+Types.h"
+
 @implementation GeoFieldBookAppDelegate
 
 @synthesize window = _window;

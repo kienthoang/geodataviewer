@@ -10,6 +10,7 @@
 
 #import "CustomQuestionCell.h"
 #import "Question+Types.h"
+#import "Question+Seed.h"
 
 #import "GeoDatabaseManager.h"
 
@@ -29,6 +30,17 @@
     }
 }
 
+- (void)createSeedQuestionsInManagedObjectContext:(NSManagedObjectContext *)context {
+    //If there is no question in the core data database, initialize seed questions 
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Question"];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]];
+    NSArray *results=[context executeFetchRequest:request error:NULL];
+    if (!results.count) {
+        //Seed data
+        [Question seedDataInContext:context];
+    }
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad {
@@ -37,6 +49,9 @@
     //Set up the database
     if (!self.database)
         self.database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+    
+    //Create seed questions if there's none
+    [self createSeedQuestionsInManagedObjectContext:self.database.managedObjectContext];
     
     //Setup fetched results controller to get questions
     [self setupFetchedResultsController];
@@ -79,27 +94,6 @@
 #pragma mark - Target-Action Handlers
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
-//    Question *question1=[NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:self.database.managedObjectContext];
-//    question1.prompt=@"Does what I have collected make sense?";
-//    question1.type=[Question nameForQuestionType:BooleanQuestionType];
-//    question1.title=@"Question 1";
-//    
-//    Question *question2=[NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:self.database.managedObjectContext];
-//    question2.prompt=@"How might I modify my working hypothesis?";
-//    question2.type=[Question nameForQuestionType:TextQuestionType];
-//    question2.title=@"Question 2";
-//    
-//    Question *question3=[NSEntityDescription insertNewObjectForEntityForName:@"Question" inManagedObjectContext:self.database.managedObjectContext];
-//    question3.prompt=@"How might I change my field program to maximize the field data to test my hypothesis?";
-//    question3.type=[Question nameForQuestionType:TextQuestionType];
-//    question3.title=@"Question 3";
-//    
-//    NSLog(@"Database: %@",self.database);
-//    
-//    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
-//        NSLog(@"Success");
-//    }];
-//    
     //Dismiss self
     [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
