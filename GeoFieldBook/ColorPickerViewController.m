@@ -132,6 +132,8 @@
     //Update
     [self updateSelectedColor:selectedColor andName:self.colorName];
     
+    //NSLog(@"Color Description: %@ Name: %@ ", [selectedColor description], self.colorName);
+    
 }
 
 - (void)viewDidUnload {

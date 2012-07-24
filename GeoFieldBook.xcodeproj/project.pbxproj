@@ -187,6 +187,7 @@
 		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		2147B15E15BEF6BF001600F0 /* ColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2147B15D15BEF6BF001600F0 /* ColorManager.m */; };
 		218F8FD215B9AA220008710A /* MKCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */; };
 		218F8FD515B9AA490008710A /* DipStrikeSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD415B9AA490008710A /* DipStrikeSymbol.m */; };
 		21989D6415A4D20C001CF847 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21989D6215A4D20C001CF847 /* checked.png */; };
@@ -566,6 +567,8 @@
 		2132A5D8159CD62200009CB9 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image+Creation.h"; path = "Image/Image+Creation.h"; sourceTree = "<group>"; };
 		2132A5D9159CD62200009CB9 /* Image+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Image+Creation.m"; path = "Image/Image+Creation.m"; sourceTree = "<group>"; };
 		2141DC18159CA275002518F9 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
+		2147B15C15BEF6BF001600F0 /* ColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorManager.h; sourceTree = "<group>"; };
+		2147B15D15BEF6BF001600F0 /* ColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorManager.m; sourceTree = "<group>"; };
 		218F8FD015B9AA220008710A /* MKCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCustomAnnotationView.h; sourceTree = "<group>"; };
 		218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKCustomAnnotationView.m; sourceTree = "<group>"; };
 		218F8FD315B9AA490008710A /* DipStrikeSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipStrikeSymbol.h; sourceTree = "<group>"; };
@@ -657,6 +660,8 @@
 				02F86EF315AFCDD8000A84D2 /* ValidationMessageBoard.m */,
 				0277643715B91B6800C9DCEB /* ExportFormatter.h */,
 				0277643815B91B6800C9DCEB /* ExportFormatter.m */,
+				2147B15C15BEF6BF001600F0 /* ColorManager.h */,
+				2147B15D15BEF6BF001600F0 /* ColorManager.m */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -1821,6 +1826,7 @@
 				026915A415BE83220076E34E /* Question+Seed.m in Sources */,
 				026915A715BE86900076E34E /* Record.m in Sources */,
 				026915AA15BE86A80076E34E /* Record+State.m in Sources */,
+				2147B15E15BEF6BF001600F0 /* ColorManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

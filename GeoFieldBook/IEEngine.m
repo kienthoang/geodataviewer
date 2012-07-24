@@ -27,6 +27,8 @@
 
 #import "ExportFormatter.h"
 
+#import "ColorManager.h"
+
 @interface IEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
@@ -393,6 +395,8 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             newFormation.formationFolder = newTransientFormationFolder;
             newFormation.formationName = formationName;
             newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
+            newFormation.formationColor = [ColorManager colorWithName:[TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:1]]];
+            newFormation.colorName = [tokenArray objectAtIndex:1];
             [self.formations addObject:newFormation];
         }       
     }
