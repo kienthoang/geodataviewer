@@ -31,6 +31,7 @@
 @synthesize formation=_formation;
 @synthesize formationName=_formationName;
 @synthesize formationColor=_formationColor;
+@synthesize formationColorName=_formationColorName;
 
 - (void)dismissKeyboard:(UITapGestureRecognizer *)tapGesture {
     //dismiss the keyboard
@@ -126,6 +127,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //Color picker
     if ([segue.identifier isEqualToString:@"Color Picker"]) {
+        
         //Dismiss the keyboard
         [self dismissKeyboard:nil];
         
@@ -133,6 +135,7 @@
         ColorPickerViewController *colorPickerVC=(ColorPickerViewController *)segue.destinationViewController;
         colorPickerVC.delegate=self;
         colorPickerVC.selectedColor=self.formationColor;
+        
     }
 }
 
@@ -180,9 +183,10 @@
 
 #pragma mark - ColorPickerViewControllerDelegate Protocol methods
 
-- (void)colorPicker:(ColorPickerViewController *)colorPicker userDidSelectColor:(UIColor *)color {
+- (void)colorPicker:(ColorPickerViewController *)colorPicker userDidSelectColor:(UIColor *)color withName:(NSString *)colorName {
     //Save the selected color
     self.formationColor=color;
+    self.formationColorName=colorName;
 }
 
 @end

@@ -30,5 +30,6 @@
 @property (nonatomic,strong) Formation *formation;
 @property (nonatomic,strong) NSString *formationName;
 @property (nonatomic,strong) UIColor *formationColor;
+@property (nonatomic,strong) NSString *formationColorName;
 
 @end
