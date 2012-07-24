@@ -74,6 +74,7 @@ static SettingManager *settingManager;
     [self postNotificationWithName:SettingManagerLongPressEnabledDidChange andUserInfo:userInfo];
     [self postNotificationWithName:SettingManagerSwipeRecordEnabledDidChange andUserInfo:userInfo];
     [self postNotificationWithName:SettingManagerSwipeRecordDidChange andUserInfo:userInfo];
+    [self postNotificationWithName:SettingManagerDipNumberEnabledDidChange andUserInfo:userInfo];
 }
 
 - (void)postFeedbackNotification {
@@ -194,6 +195,16 @@ static SettingManager *settingManager;
     
     //Feedback notification
     [self postFeedbackNotification];
+}
+
+#pragma mark - Dip Number group
+
+- (BOOL)dipNumberEnabled {
+    return [self.userDefaults boolForKey:NSUserDefaultsDipNumberEnabled];
+}
+
+- (void)setDipNumberEnabled:(BOOL)dipNumberEnabled {
+    [self userDefaultsSetBool:dipNumberEnabled forKey:NSUserDefaultsDipNumberEnabled];
 }
 
 @end

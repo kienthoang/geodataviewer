@@ -86,74 +86,113 @@
     return givenDipToDipPoint1 > givenDipToDipPoint2 ? dipPoint2 : dipPoint1;
 }
 
+- (void) drawDipStrikeSymbolWithCenter:(CGPoint) center andRadius:(float) radius
+{
+    //STRIKE
+    //information about the view being drawn in   
+    /*CGPoint center;
+    CGFloat width=self.bounds.size.width;
+    CGFloat height=self.bounds.size.height;
+    center.x=self.bounds.origin.x+width/2;
+    center.y=self.bounds.origin.y+height/2;
+    float radius = sqrtf(width*width+height*height)/2;*/
+    
+    float strike=[self toRadians:self.strike];
+    CGPoint point1 = CGPointMake(radius * sin(strike) + center.x, -radius * cos(strike) + center.y);
+    CGPoint point2 = CGPointMake(-radius * sin(strike) + center.x, radius * cos(strike) + center.y);
+    
+    //Draw the strike line
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 3.0);
+    CGContextBeginPath(context);
+    
+    [self drawStrikeWithContext:context point:point1 andPoint:point2 withColor:self.color];
+    
+    //DIP
+    //the dip line is always perpendicular to the strike line
+    //we determine which side of the strike line the dip line will appear based on the dip direction...
+    //whichever side is closer to this direction is the side on which the dip line is drawn
+    //if the dip direction corresponds exactly with the strike line (which it should not, this is likely an error in measurement), the dip line is drawn towards dipPoint1 (see below) (90 degrees clockwise from the strike angle given by the user)
+    
+    //arrays used to convert between direction and angle
+    NSArray *dipDirectionConversions = [NSArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:45], [NSNumber numberWithInt:90], [NSNumber numberWithInt:135], [NSNumber numberWithInt:180], [NSNumber numberWithInt:225], [NSNumber numberWithInt:270], [NSNumber numberWithInt:315], nil];
+    NSArray *possibleDips = [Record allDipDirectionValues];
+    
+    //the dip direction of the record being drawn
+    NSString *dipdirection = self.dipDirection;
+    
+    float dipAngle = [[dipDirectionConversions objectAtIndex:[possibleDips indexOfObject:dipdirection]] floatValue];
+    dipAngle = [self toRadians:dipAngle];
+    
+    float strikePlus90 = strike + (PI / 2);
+    if (strikePlus90 > 2*PI)
+        strikePlus90 -= 2*PI;
+    
+    CGPoint dipPoint1 = CGPointMake((.33) * radius * sin(strikePlus90) + center.x, -(.33) * radius * cos(strikePlus90) + center.y);
+    CGPoint dipPoint2 = CGPointMake(-(.33) * radius * sin(strikePlus90) + center.x, (.33) * radius * cos(strikePlus90) + center.y);
+    CGPoint givenDipPoint = CGPointMake(radius * sin(dipAngle) + center.x, -radius * cos(dipAngle) + center.y);
+    
+    CGPoint dipEndPoint = [self closestPointTo:givenDipPoint among:dipPoint1 or:dipPoint2];
+    
+    //Draw the dip line
+    [self drawDipWithContext:context from:center to:dipEndPoint withColor:self.color];
+    
+    //Write the numerical representation of the dip
+    //only if the switch is on in settings and there is a dip
+    if (self.dip >= 0) {
+        CGFloat height = self.bounds.size.height;
+        NSString *dipString = [NSString stringWithFormat:@"%d", (int)self.dip];
+        CGPoint dipLocation;
+        if ((self.strike >= 90 && self.strike <= 180) || (self.strike >= 270 && self.strike <= 360)) {
+            dipLocation = CGPointMake(0.0, center.y+height/6);
+        }
+        else if ((self.strike > 0 && self.strike < 90) || (self.strike > 180 && self.strike < 270)) {
+            dipLocation = CGPointMake(center.x, center.y+height/6);
+        }
+        //set the text color to be the same as the symbol
+        [self.color set];
+        [dipString drawAtPoint:dipLocation withFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
+    }
+
+}
+
+- (void) drawDotWithCenter:(CGPoint) center andRect:(CGRect) rect
+{
+    CGFloat width=self.bounds.size.width;
+    CGFloat height=self.bounds.size.height;
+    CGFloat sideLength = width < height ? width : height;
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextClearRect(context, rect);
+    CGContextSetLineWidth(context, 3.0);
+    CGContextBeginPath(context);
+    
+    CGContextAddArc(context, center.x, center.y, sideLength/6, 2*PI, 0, 1);
+    CGContextClosePath(context);
+    //CGContextSetStrokeColorWithColor(context, self.color.CGColor);
+    //CGContextStrokePath(context);
+    CGContextSetFillColorWithColor(context, self.color.CGColor);
+    CGContextFillPath(context);
+}
+
 - (void)drawRect:(CGRect)rect 
 {
     //CONVERT TO RADIANS
     [super drawRect:rect];
     
-    if (self.dipDirection) {
-        //STRIKE
-        
-        //input from user    
-        CGPoint center;
-        CGFloat width=self.bounds.size.width;
-        CGFloat height=self.bounds.size.height;
-        center.x=self.bounds.origin.x+width/2;
-        center.y=self.bounds.origin.y+height/2;
-        float radius = sqrtf(width*width+height*height)/2;
-        
-        float strike=[self toRadians:self.strike];
-        CGPoint point1 = CGPointMake(radius * sin(strike) + center.x, -radius * cos(strike) + center.y);
-        CGPoint point2 = CGPointMake(-radius * sin(strike) + center.x, radius * cos(strike) + center.y);
-        
-        //Draw the strike
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetLineWidth(context, 3.0);
-        CGContextBeginPath(context);
-        
-        //draw surrounding circle or ellipse
-        //CGContextAddArc(context, center.x, center.y, radius, 0.0, 2*PI, 0);
-        //CGContextAddEllipseInRect(context, CGRectMake(self.bounds.origin.x, self.bounds.origin.y, width, height));
-        //[[UIColor whiteColor] setFill];
-        //CGContextFillPath(context);
-
-        [self drawStrikeWithContext:context point:point1 andPoint:point2 withColor:self.color];
-        
-        //DIP
-        //the dip line is always perpendicular to the strike line
-        //we determine which side of the strike line the dip line will appear based on the dip direction given by the user...
-        //whichever side is closer to this direction is the side on which the dip line is drawn
-        //if the dip direction corresponds exactly with the strike line (which it should not, this is likely an error in measurement I think), the dip line is drawn towards dipPoint1 (see below) (90 degrees clockwise from the strike angle given by the user)
-        
-        //if the dip direction is used to determine the direction of the dip these two arrays are required
-        NSArray *dipDirectionConversions = [NSArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:45], [NSNumber numberWithInt:90], [NSNumber numberWithInt:135], [NSNumber numberWithInt:180], [NSNumber numberWithInt:225], [NSNumber numberWithInt:270], [NSNumber numberWithInt:315], nil];
-        NSArray *possibleDips = [Record allDipDirectionValues];
-        
-        //input from the user
-        NSString *dipdirection = self.dipDirection;
-        
-        float dipAngle = [[dipDirectionConversions objectAtIndex:[possibleDips indexOfObject:dipdirection]] floatValue];
-        dipAngle = [self toRadians:dipAngle];
-        
-        float strikePlus90 = strike + (PI / 2);
-        if (strikePlus90 > 2*PI)
-            strikePlus90 -= 2*PI;
-        
-        CGPoint dipPoint1 = CGPointMake((.33) * radius * sin(strikePlus90) + center.x, -(.33) * radius * cos(strikePlus90) + center.y);
-        CGPoint dipPoint2 = CGPointMake(-(.33) * radius * sin(strikePlus90) + center.x, (.33) * radius * cos(strikePlus90) + center.y);
-        CGPoint givenDipPoint = CGPointMake(radius * sin(dipAngle) + center.x, -radius * cos(dipAngle) + center.y);
-        
-        CGPoint dipEndPoint = [self closestPointTo:givenDipPoint among:dipPoint1 or:dipPoint2];
-        
-        //Draw the dip
-        [self drawDipWithContext:context from:center to:dipEndPoint withColor:self.color];
-        
-        //to use the given dip angle (not necessarily perpendicular to the strike) use this
-        /*float dipAngle = [self toRadians:self.dip];
-        
-        CGPoint dipPoint = CGPointMake((.33) * radius * sin(dipAngle) + center.x, -(.33) * radius * cos(dipAngle) + center.y);
-        
-        [self drawDipWithContext:context from:center to:dipPoint withColor:dipColor];*/
+    //information about the view being drawn in   
+    CGPoint center;
+    CGFloat width=self.bounds.size.width;
+    CGFloat height=self.bounds.size.height;
+    center.x=self.bounds.origin.x+width/2;
+    center.y=self.bounds.origin.y+height/2;
+    float radius = sqrtf(width*width+height*height)/2;
+    
+    if (self.strike && self.dipDirection && self.dip) {
+        [self drawDipStrikeSymbolWithCenter:center andRadius:radius];
+    }
+    else {
+        [self drawDotWithCenter:center andRect:rect];
     }
 }
 

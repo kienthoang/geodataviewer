@@ -45,4 +45,10 @@
 @property (nonatomic,strong) NSNumber *feedbackInterval;
 @property (nonatomic,strong) NSNumber *feedbackCounter;
 
+#pragma mark - Dip Number Group
+
+#define NSUserDefaultsDipNumberEnabled @"dip_number_enabled"
+
+@property (nonatomic) BOOL dipNumberEnabled;
+
 @end
