@@ -7,6 +7,7 @@
 //
 
 #import "Answer.h"
+#import "Question.h"
 
 
 @implementation Answer
@@ -16,5 +17,6 @@
 @dynamic latitude;
 @dynamic longitude;
 @dynamic numberOfRecords;
+@dynamic question;
 
 @end

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "CoreDataTableViewController.h"
 
 @interface StudentFeedbackViewController : CoreDataTableViewController
 
 @property (nonatomic,strong) UIManagedDocument *database;
+@property (nonatomic,strong) NSArray *answers;
 
 @end

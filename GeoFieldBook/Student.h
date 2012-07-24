@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Group;
 
 @interface Student : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) Group *group;
 
 @end
