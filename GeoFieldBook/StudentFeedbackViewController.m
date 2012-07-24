@@ -26,8 +26,6 @@
         NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Question"];
         request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
         self.fetchedResultsController=[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.database.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        
-        NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
     }
 }
 

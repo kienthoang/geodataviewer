@@ -446,6 +446,10 @@
 - (void)feedbackTimeout:(NSNotification *)notification {
     //Put up the question feedback modal
     [self performSegueWithIdentifier:@"Questions" sender:nil];
+    
+    //Reset the feedback counter
+    SettingManager *settingManager=[SettingManager standardSettingManager];
+    settingManager.feedbackCounter=[NSNumber numberWithInt:0];
 }
 
 - (void)registerForModelGroupNotifications {
