@@ -989,7 +989,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-8522" y="6475"/>
+            <point key="canvasLocation" x="-7292" y="6475"/>
         </scene>
         <!--Map Record Info View Controller-->
         <scene sceneID="neR-GK-FNx">
@@ -1167,7 +1167,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-5409" y="6987"/>
+            <point key="canvasLocation" x="-4179" y="6987"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="neq-Dd-nPE">
@@ -1217,7 +1217,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3838" y="7459"/>
+            <point key="canvasLocation" x="-2608" y="7459"/>
         </scene>
         <!--Dip Direction Picker View Controller-->
         <scene sceneID="gzM-LZ-3Za">
@@ -1242,7 +1242,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-2344" y="6351"/>
+            <point key="canvasLocation" x="-1114" y="6351"/>
         </scene>
         <!--Trend Picker View Controller-->
         <scene sceneID="Tjg-pS-3cq">
@@ -1267,7 +1267,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-2274" y="7031"/>
+            <point key="canvasLocation" x="-1044" y="7031"/>
         </scene>
         <!--Plunge Picker View Controller-->
         <scene sceneID="Yff-Cv-Agq">
@@ -1292,7 +1292,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3207" y="7643"/>
+            <point key="canvasLocation" x="-1977" y="7643"/>
         </scene>
         <!--Formation Folder View Controller-->
         <scene sceneID="vmK-no-er4">
@@ -1627,7 +1627,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3102" y="7902"/>
+            <point key="canvasLocation" x="-1872" y="7902"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="qVl-Lc-KVd">
@@ -1652,7 +1652,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3926" y="7310"/>
+            <point key="canvasLocation" x="-2696" y="7310"/>
         </scene>
         <!--Formation Folder Picker View Controller-->
         <scene sceneID="Dph-6C-M7x">
@@ -1684,38 +1684,86 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6U-uN-FtR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="YjY-xn-bU3" customClass="StudentFeedbackViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ZSS-Nj-Vel">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="372" sectionHeaderHeight="10" sectionFooterHeight="10" id="ZSS-Nj-Vel">
+                        <rect key="frame" x="0.0" y="44" width="768" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="e5X-0q-NGJ">
-                                <rect key="frame" x="0.0" y="54" width="1024" height="45"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GeoFieldBook.Feedback.Question.BooleanType" rowHeight="371" id="e5X-0q-NGJ" customClass="CustomQuestionCell">
+                                <rect key="frame" x="0.0" y="54" width="768" height="372"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <rect key="frame" x="45" y="1" width="678" height="370"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Question Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0dX-K3-gQR">
+                                            <rect key="frame" x="20" y="5" width="618" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.01085100634" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="M5g-l6-CEh">
+                                            <rect key="frame" x="20" y="45" width="618" height="1"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="u3A-mv-ILu">
+                                            <rect key="frame" x="36" y="106" width="611" height="212"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="OeP-Ek-xR6" customClass="UICustomSwitch">
+                                            <rect key="frame" x="279" y="76" width="118" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        </slider>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <outlet property="answerSwitch" destination="OeP-Ek-xR6" id="3ej-br-V4t"/>
+                                    <outlet property="answerTextView" destination="u3A-mv-ILu" id="4Bf-MU-xX9"/>
+                                    <outlet property="questionPrompt" destination="0dX-K3-gQR" id="veN-7D-4ly"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qun-Sm-alu">
-                                <rect key="frame" x="0.0" y="99" width="1024" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GeoFieldBook.Feedback.Question.TextType" rowHeight="372" id="qun-Sm-alu" customClass="CustomQuestionCell">
+                                <rect key="frame" x="0.0" y="426" width="768" height="373"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="45" y="0.0" width="934" height="43"/>
+                                    <rect key="frame" x="45" y="0.0" width="678" height="371"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Question Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Jvg-ko-ekt">
+                                            <rect key="frame" x="30" y="11" width="618" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.01085100634" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="Ek1-6N-MTd">
+                                            <rect key="frame" x="30" y="59" width="618" height="1"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="dI7-Hy-V0Q">
+                                            <rect key="frame" x="30" y="85" width="618" height="266"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hWe-NH-IYZ">
-                                <rect key="frame" x="0.0" y="143" width="1024" height="45"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="45" y="0.0" width="934" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
+                                <connections>
+                                    <outlet property="answerTextView" destination="dI7-Hy-V0Q" id="l18-n1-oAQ"/>
+                                    <outlet property="questionPrompt" destination="Jvg-ko-ekt" id="P4w-14-NpC"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1723,9 +1771,16 @@
                             <outlet property="delegate" destination="YjY-xn-bU3" id="T5M-EX-DDt"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="0az-bk-uUb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="hc3-Lk-DpZ">
+                            <connections>
+                                <action selector="donePressed:" destination="YjY-xn-bU3" id="d5r-wp-hOk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-11908" y="7114"/>
+            <point key="canvasLocation" x="-10678" y="7114"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UnK-e0-DKH">
@@ -1886,7 +1941,7 @@
                         <segue destination="9ut-5g-xp2" kind="custom" identifier="Import Formation Popover" customClass="GeoFieldBookControllerSegue" id="Bu7-VF-gJl"/>
                         <segue destination="Kci-F7-0rk" kind="custom" identifier="Export Record Popover" customClass="GeoFieldBookControllerSegue" id="Wci-b1-la7"/>
                         <segue destination="1k1-Ge-13a" kind="custom" identifier="Export Formations Popover" customClass="GeoFieldBookControllerSegue" id="neP-6c-y5n"/>
-                        <segue destination="YjY-xn-bU3" kind="modal" identifier="Questions" id="ejX-DG-i6x"/>
+                        <segue destination="87g-uI-Glf" kind="modal" identifier="Questions" modalPresentationStyle="pageSheet" modalTransitionStyle="coverVertical" id="ejX-DG-i6x"/>
                     </connections>
                 </viewController>
             </objects>
@@ -3095,17 +3150,119 @@
             </objects>
             <point key="canvasLocation" x="-6935" y="5458"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="95l-CF-kv3">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IEr-3D-25i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="87g-uI-Glf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="kXz-2U-3ey">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YjY-xn-bU3" kind="relationship" relationship="rootViewController" id="ZRg-hA-cL1"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-11908" y="7114"/>
+        </scene>
     </scenes>
     <resources>
         <image name="GeoFieldBookFrontPage.png" width="1275" height="1650"/>
         <image name="RecordVCBackground.jpg" width="536" height="688"/>
     </resources>
     <classes>
+        <class className="CSVTableViewController" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CSVTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
         <class className="CheckBox" superclassName="UIImageView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CheckBox.h"/>
         </class>
+        <class className="ColorPickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ColorPickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bluePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="cloverPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="colorPickerView" candidateClass="NPColorPickerView"/>
+                <relationship kind="outlet" name="cyanPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="greenPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mochaPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="plumPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="redPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="yellowPatch" candidateClass="UIButton"/>
+            </relationships>
+        </class>
         <class className="CoreDataTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="CustomFolderCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFolderCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomFormationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFormationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomQuestionCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomQuestionCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="answerSwitch" candidateClass="UICustomSwitch"/>
+                <relationship kind="outlet" name="answerTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="questionPrompt" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomRecordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="CheckBox"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="type" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomSplitViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomSplitViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="masterView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="DataMapSegmentViewController" superclassName="SegmentViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DataMapSegmentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataMapSwitch" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="formationButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="settingButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="DipDirectionPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipDirectionPickerViewController.h"/>
+        </class>
+        <class className="DipPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DipPickerViewController.h"/>
+        </class>
+        <class className="ExportDoubleTableViewController" superclassName="UIDoubleTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportDoubleTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="exportButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="ExportFolderTableViewController" superclassName="PrototypeFolderTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportFolderTableViewController.h"/>
@@ -3116,13 +3273,68 @@
         <class className="ExportFormationTableViewController" superclassName="PrototypeFormationTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportFormationTableViewController.h"/>
         </class>
+        <class className="ExportRecordTableViewController" superclassName="PrototypeRecordTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExportRecordTableViewController.h"/>
+        </class>
         <class className="FilterByRecordTypeController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterByRecordTypeController.h"/>
         </class>
+        <class className="FolderSelectTableViewController" superclassName="PrototypeFolderTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderSelectTableViewController.h"/>
+        </class>
         <class className="FolderTableViewController" superclassName="PrototypeFolderTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FolderTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
-        <class className="GeoFieldBookController">
+        <class className="FormationFolderPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderPickerViewController.h"/>
+        </class>
+        <class className="FormationFolderTableViewController" superclassName="PrototypeFormationFolderTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FormationFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FormationImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationImportTVC.h"/>
+        </class>
+        <class className="FormationPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationPickerViewController.h"/>
+        </class>
+        <class className="FormationTableViewController" superclassName="PrototypeFormationTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FormationViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="GeoFieldBookController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoFieldBookController.h"/>
             <relationships>
                 <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
@@ -3134,14 +3346,168 @@
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
+        <class className="IASKAppSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IASKAppSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+        <class className="ImportTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="importPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="InitialDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="geofieldbookLogo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MKMapRecordInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MKMapRecordInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dip" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipDirection" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="formation" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lowerFormation" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordType" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strike" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upperFormation" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MainSettingsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainSettingsTableViewController.h"/>
+        </class>
+        <class className="ModalFolderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalFolderViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="folderDescriptionTextArea" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="folderNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ModalRecordTypeSelector" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ModalRecordTypeSelector.h"/>
+            <relationships>
+                <relationship kind="outlet" name="recordTypePicker" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+        <class className="NPColorPickerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorPickerView.h"/>
+        </class>
+        <class className="PickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="pickerView" candidateClass="UIPickerView"/>
+            </relationships>
+        </class>
+        <class className="PlungePickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlungePickerViewController.h"/>
+        </class>
         <class className="PrototypeFolderTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeFolderTableViewController.h"/>
+        </class>
+        <class className="PrototypeFormationFolderTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeFormationFolderTableViewController.h"/>
         </class>
         <class className="PrototypeFormationTableViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeFormationTableViewController.h"/>
         </class>
-        <class className="StudentFeedbackViewController" superclassName="UITableViewController">
+        <class className="PrototypeRecordTableViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeRecordTableViewController.h"/>
+        </class>
+        <class className="RecordImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordImportTVC.h"/>
+        </class>
+        <class className="RecordMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="RecordTableViewController" superclassName="PrototypeRecordTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="moveButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNone" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="setLocationButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="RecordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="acquireButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="browseButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="dateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dipDirectionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipDirectionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="dipLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="fieldObservationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fieldObservationTextArea" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="formationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="formationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="gatheringGPS" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="latitudeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="longitudeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="lowerFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lowerFormationTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="plungeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="plungeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="recordTypeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="strikeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strikeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="takePhotoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="trendLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="trendTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="upperFormationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upperFormationTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="SegmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SegmentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="SettingsSplitViewController" superclassName="CustomSplitViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsSplitViewController.h"/>
+        </class>
+        <class className="StrikePickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StrikePickerViewController.h"/>
+        </class>
+        <class className="StudentFeedbackViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StudentFeedbackViewController.h"/>
+        </class>
+        <class className="TrendPickerViewController" superclassName="PickerViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrendPickerViewController.h"/>
+        </class>
+        <class className="UICustomSwitch" superclassName="UISlider">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICustomSwitch.h"/>
+        </class>
+        <class className="UIDoubleTableViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIDoubleTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailTableView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="masterTableView" candidateClass="UIView"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -443,9 +443,9 @@
     [self setupLongPressGestureRecognizer];
 }
 
-#warning Feedback not implemented yet
 - (void)feedbackTimeout:(NSNotification *)notification {
     //Put up the question feedback modal
+    [self performSegueWithIdentifier:@"Questions" sender:nil];
 }
 
 - (void)registerForModelGroupNotifications {

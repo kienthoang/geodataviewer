@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StudentFeedbackViewController : UITableViewController
+#import "CoreDataTableViewController.h"
 
-@property (nonatomic,strong) NSArray *questions;
+@interface StudentFeedbackViewController : CoreDataTableViewController
+
+@property (nonatomic,strong) UIManagedDocument *database;
 
 @end

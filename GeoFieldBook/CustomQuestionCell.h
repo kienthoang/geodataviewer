@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Question.h"
+
 @interface CustomQuestionCell : UITableViewCell
+
+#define FeedbackQuestionBooleanType @"GeoFieldBook.Feedback.Question.BooleanType"
+#define FeedbackQuestionTextType @"GeoFieldBook.Feedback.Question.TextType"
+
+@property (nonatomic,strong) Question *question;
 
 @end

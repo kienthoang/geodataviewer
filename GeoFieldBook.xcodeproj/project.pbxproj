@@ -20,6 +20,9 @@
 		020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBC315946B3D00EECC08 /* Record+Types.m */; };
 		020F06FC15982E570006B53B /* TrendPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FB15982E570006B53B /* TrendPickerViewController.m */; };
 		020F06FF15982ED20006B53B /* PlungePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020F06FE15982ED10006B53B /* PlungePickerViewController.m */; };
+		0218AA8115BE70E000D60258 /* switchBlueBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0218AA7E15BE70E000D60258 /* switchBlueBg.png */; };
+		0218AA8215BE70E000D60258 /* switchOffPlain.png in Resources */ = {isa = PBXBuildFile; fileRef = 0218AA7F15BE70E000D60258 /* switchOffPlain.png */; };
+		0218AA8315BE70E000D60258 /* switchThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 0218AA8015BE70E000D60258 /* switchThumb.png */; };
 		02191EC615AC850600A5EB2B /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 02191EC515AC850600A5EB2B /* Record.m */; };
 		02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02191EC915ACA8DD00A5EB2B /* ImportTableViewController.m */; };
 		0221BDE1159A58EA0058C792 /* FormationFolderPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0221BDE0159A58EA0058C792 /* FormationFolderPickerViewController.m */; };
@@ -87,6 +90,13 @@
 		028894C915B4A83F0062E6DA /* MPTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894B915B4A83F0062E6DA /* MPTransition.m */; };
 		028894D115B4AEF90062E6DA /* MPAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894D015B4AEF80062E6DA /* MPAnimation.m */; };
 		028E94BB15B89D1C006E8B3F /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 028E94BA15B89D1C006E8B3F /* Fault.m */; };
+		0294C0B215BE56A200E0E2D0 /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0B115BE56A200E0E2D0 /* UICustomSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0294C0B515BE5CAE00E0E2D0 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0B415BE5CAE00E0E2D0 /* Answer.m */; };
+		0294C0B815BE5CAE00E0E2D0 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0B715BE5CAE00E0E2D0 /* Group.m */; };
+		0294C0BB15BE5CAE00E0E2D0 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0BA15BE5CAE00E0E2D0 /* Question.m */; };
+		0294C0BE15BE5CAE00E0E2D0 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0BD15BE5CAE00E0E2D0 /* Student.m */; };
+		0294C0C815BE5ECA00E0E2D0 /* Question+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0C715BE5ECA00E0E2D0 /* Question+Types.m */; };
+		0294C0CB15BE679A00E0E2D0 /* Record+State.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0CA15BE679A00E0E2D0 /* Record+State.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
@@ -136,6 +146,8 @@
 		02AC0F9915A5483700FBA9D3 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02AC0F9815A5483700FBA9D3 /* formation.png */; };
 		02AE26EF15BDF8AC00FE59C7 /* StudentFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AE26EE15BDF8AC00FE59C7 /* StudentFeedbackViewController.m */; };
 		02AE26F215BE192500FE59C7 /* CustomQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AE26F115BE192500FE59C7 /* CustomQuestionCell.m */; };
+		02AE271815BE512800FE59C7 /* libSSToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AE270F15BE50E100FE59C7 /* libSSToolkit.a */; };
+		02AE271915BE515E00FE59C7 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02AE271315BE50E100FE59C7 /* SSToolkitResources.bundle */; };
 		02F86EB415AF6E5B000A84D2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F86EB315AF6E5B000A84D2 /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		02F86EB815AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
 		02F86EB915AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
@@ -194,6 +206,41 @@
 			remoteGlobalIDString = 0294E090159361060025219F;
 			remoteInfo = GeoFieldBook;
 		};
+		02AE270E15BE50E100FE59C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		02AE271015BE50E100FE59C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B239101D1357DC3E00ADE21B;
+			remoteInfo = SSToolkitTests;
+		};
+		02AE271215BE50E100FE59C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2C507EA151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
+		02AE271415BE510500FE59C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		02AE271615BE510C00FE59C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C507E9151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +272,9 @@
 		020F06FB15982E570006B53B /* TrendPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendPickerViewController.m; sourceTree = "<group>"; };
 		020F06FD15982ED10006B53B /* PlungePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlungePickerViewController.h; sourceTree = "<group>"; };
 		020F06FE15982ED10006B53B /* PlungePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlungePickerViewController.m; sourceTree = "<group>"; };
+		0218AA7E15BE70E000D60258 /* switchBlueBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchBlueBg.png; sourceTree = "<group>"; };
+		0218AA7F15BE70E000D60258 /* switchOffPlain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOffPlain.png; sourceTree = "<group>"; };
+		0218AA8015BE70E000D60258 /* switchThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchThumb.png; sourceTree = "<group>"; };
 		02191EC415AC850600A5EB2B /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		02191EC515AC850600A5EB2B /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		02191EC815ACA8DD00A5EB2B /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -364,6 +414,20 @@
 		028894D015B4AEF80062E6DA /* MPAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPAnimation.m; sourceTree = "<group>"; };
 		028E94B915B89D1C006E8B3F /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
 		028E94BA15B89D1C006E8B3F /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
+		0294C0B015BE56A200E0E2D0 /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomSwitch.h; sourceTree = "<group>"; };
+		0294C0B115BE56A200E0E2D0 /* UICustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomSwitch.m; sourceTree = "<group>"; };
+		0294C0B315BE5CAE00E0E2D0 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		0294C0B415BE5CAE00E0E2D0 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		0294C0B615BE5CAE00E0E2D0 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		0294C0B715BE5CAE00E0E2D0 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		0294C0B915BE5CAE00E0E2D0 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		0294C0BA15BE5CAE00E0E2D0 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		0294C0BC15BE5CAE00E0E2D0 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		0294C0BD15BE5CAE00E0E2D0 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		0294C0C615BE5ECA00E0E2D0 /* Question+Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Question+Types.h"; sourceTree = "<group>"; };
+		0294C0C715BE5ECA00E0E2D0 /* Question+Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Question+Types.m"; sourceTree = "<group>"; };
+		0294C0C915BE679A00E0E2D0 /* Record+State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+State.h"; sourceTree = "<group>"; };
+		0294C0CA15BE679A00E0E2D0 /* Record+State.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+State.m"; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -450,6 +514,7 @@
 		02AE26EE15BDF8AC00FE59C7 /* StudentFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentFeedbackViewController.m; sourceTree = "<group>"; };
 		02AE26F015BE192500FE59C7 /* CustomQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomQuestionCell.h; sourceTree = "<group>"; };
 		02AE26F115BE192500FE59C7 /* CustomQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomQuestionCell.m; sourceTree = "<group>"; };
+		02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SSToolkit.xcodeproj; path = Vendor/SSToolkit/SSToolkit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		02F86EB315AF6E5B000A84D2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		02F86EB615AF6F09000A84D2 /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEngine.h; path = GeoFieldBook/IEEngine.h; sourceTree = "<group>"; };
 		02F86EB715AF6F09000A84D2 /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEEngine.m; path = GeoFieldBook/IEEngine.m; sourceTree = "<group>"; };
@@ -522,6 +587,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02AE271815BE512800FE59C7 /* libSSToolkit.a in Frameworks */,
 				02A7765815BCA6E4008A22C2 /* MessageUI.framework in Frameworks */,
 				0287330815B369790001BBC2 /* QuartzCore.framework in Frameworks */,
 				02F86EB415AF6E5B000A84D2 /* iAd.framework in Frameworks */,
@@ -605,16 +671,9 @@
 		020EBB9B15942C8F00EECC08 /* View MVC Group */ = {
 			isa = PBXGroup;
 			children = (
-				029877F91595740C000D71E7 /* InitialDetailViewController.h */,
-				029877FA1595740C000D71E7 /* InitialDetailViewController.m */,
-				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
-				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
-				0298968F15A38F4C00E51C27 /* RecordMapViewController.h */,
-				0298969015A38F4C00E51C27 /* RecordMapViewController.m */,
-				02AC0F8815A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.h */,
-				02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */,
-				21FC475315A4244000F245FF /* FilterByRecordTypeController.h */,
-				21FC475415A4244000F245FF /* FilterByRecordTypeController.m */,
+				0294C0C515BE5DEE00E0E2D0 /* Initial View */,
+				0294C0C315BE5DD300E0E2D0 /* Record View */,
+				0294C0C415BE5DDE00E0E2D0 /* Map View */,
 				0298969215A408B100E51C27 /* DataMapSegmentViewController.h */,
 				0298969315A408B100E51C27 /* DataMapSegmentViewController.m */,
 			);
@@ -753,6 +812,7 @@
 			children = (
 				0277645A15BA06C200C9DCEB /* Table Cells */,
 				217C9F9C15B9A3A800C3AABC /* Dip Strike Symbol */,
+				0294C0AD15BE560D00E0E2D0 /* Misc */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -788,7 +848,6 @@
 			children = (
 				028732FB15B28F720001BBC2 /* Export */,
 				028732FA15B28F630001BBC2 /* Import */,
-				02AE26EC15BDF1AE00FE59C7 /* Feedback Group */,
 			);
 			name = "I/E Group";
 			sourceTree = "<group>";
@@ -945,6 +1004,92 @@
 			path = MPFoldTransition;
 			sourceTree = "<group>";
 		};
+		0294C09E15BE539300E0E2D0 /* SSToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */,
+			);
+			name = SSToolkit;
+			sourceTree = "<group>";
+		};
+		0294C0AD15BE560D00E0E2D0 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				0294C0B015BE56A200E0E2D0 /* UICustomSwitch.h */,
+				0294C0B115BE56A200E0E2D0 /* UICustomSwitch.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		0294C0BF15BE5CB500E0E2D0 /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				0294C0BC15BE5CAE00E0E2D0 /* Student.h */,
+				0294C0BD15BE5CAE00E0E2D0 /* Student.m */,
+			);
+			name = Student;
+			sourceTree = "<group>";
+		};
+		0294C0C015BE5CC700E0E2D0 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				0294C0B915BE5CAE00E0E2D0 /* Question.h */,
+				0294C0BA15BE5CAE00E0E2D0 /* Question.m */,
+				0294C0C615BE5ECA00E0E2D0 /* Question+Types.h */,
+				0294C0C715BE5ECA00E0E2D0 /* Question+Types.m */,
+			);
+			name = Question;
+			sourceTree = "<group>";
+		};
+		0294C0C115BE5CD900E0E2D0 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				0294C0B615BE5CAE00E0E2D0 /* Group.h */,
+				0294C0B715BE5CAE00E0E2D0 /* Group.m */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		0294C0C215BE5CE200E0E2D0 /* Answer */ = {
+			isa = PBXGroup;
+			children = (
+				0294C0B315BE5CAE00E0E2D0 /* Answer.h */,
+				0294C0B415BE5CAE00E0E2D0 /* Answer.m */,
+			);
+			name = Answer;
+			sourceTree = "<group>";
+		};
+		0294C0C315BE5DD300E0E2D0 /* Record View */ = {
+			isa = PBXGroup;
+			children = (
+				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
+				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
+			);
+			name = "Record View";
+			sourceTree = "<group>";
+		};
+		0294C0C415BE5DDE00E0E2D0 /* Map View */ = {
+			isa = PBXGroup;
+			children = (
+				0298968F15A38F4C00E51C27 /* RecordMapViewController.h */,
+				0298969015A38F4C00E51C27 /* RecordMapViewController.m */,
+				02AC0F8815A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.h */,
+				02AC0F8915A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m */,
+				21FC475315A4244000F245FF /* FilterByRecordTypeController.h */,
+				21FC475415A4244000F245FF /* FilterByRecordTypeController.m */,
+			);
+			name = "Map View";
+			sourceTree = "<group>";
+		};
+		0294C0C515BE5DEE00E0E2D0 /* Initial View */ = {
+			isa = PBXGroup;
+			children = (
+				029877F91595740C000D71E7 /* InitialDetailViewController.h */,
+				029877FA1595740C000D71E7 /* InitialDetailViewController.m */,
+			);
+			name = "Initial View";
+			sourceTree = "<group>";
+		};
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
@@ -991,6 +1136,7 @@
 				0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */,
 				020EBB9A15942C7900EECC08 /* Model MVC Group */,
 				020EBB9B15942C8F00EECC08 /* View MVC Group */,
+				02AE26EC15BDF1AE00FE59C7 /* Feedback Group */,
 				02A7761F15BC9A5C008A22C2 /* Settings */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
 				0249E2E515A8EECB00A7532E /* Custom Segues */,
@@ -1004,6 +1150,7 @@
 				029877F015955CB2000D71E7 /* Protocols */,
 				020EBB961594255700EECC08 /* Library */,
 				0294E0D1159362D20025219F /* Database */,
+				02AE26F315BE508700FE59C7 /* Vendor */,
 				0294E09C159361060025219F /* Supporting Files */,
 			);
 			path = GeoFieldBook;
@@ -1054,6 +1201,8 @@
 		0294E0D5159363050025219F /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				0294C0C215BE5CE200E0E2D0 /* Answer */,
+				0294C0C115BE5CD900E0E2D0 /* Group */,
 				2132A5DB159CD63500009CB9 /* Image */,
 				0298C253159B432A0038E89C /* Bedding */,
 				0298C254159B433A0038E89C /* Contact */,
@@ -1063,6 +1212,8 @@
 				0298C259159B43910038E89C /* Formation Folder */,
 				0298C257159B43790038E89C /* JointSet */,
 				0298C256159B435B0038E89C /* Record */,
+				0294C0BF15BE5CB500E0E2D0 /* Student */,
+				0294C0C015BE5CC700E0E2D0 /* Question */,
 				022C3E4B15AE79D6004F0EDD /* Other */,
 			);
 			name = NSManagedObject;
@@ -1100,6 +1251,9 @@
 				0249E2B015A6A32300A7532E /* gear.png */,
 				0249E2AE15A6A2D100A7532E /* gear2.png */,
 				02806F0315BB00E5003D09A7 /* green_pin.png */,
+				0218AA7E15BE70E000D60258 /* switchBlueBg.png */,
+				0218AA7F15BE70E000D60258 /* switchOffPlain.png */,
+				0218AA8015BE70E000D60258 /* switchThumb.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1179,6 +1333,8 @@
 				21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */,
 				02F86EEE15AFA9CE000A84D2 /* Record+DipDirectionValues.h */,
 				02F86EEF15AFA9CF000A84D2 /* Record+DipDirectionValues.m */,
+				0294C0C915BE679A00E0E2D0 /* Record+State.h */,
+				0294C0CA15BE679A00E0E2D0 /* Record+State.m */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -1302,6 +1458,24 @@
 			name = "Feedback Group";
 			sourceTree = "<group>";
 		};
+		02AE26F315BE508700FE59C7 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0294C09E15BE539300E0E2D0 /* SSToolkit */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		02AE270515BE50E100FE59C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02AE270F15BE50E100FE59C7 /* libSSToolkit.a */,
+				02AE271115BE50E100FE59C7 /* SSToolkitTests.app */,
+				02AE271315BE50E100FE59C7 /* SSToolkitResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		211B728D15AB522D00EC4C60 /* Import/Export */ = {
 			isa = PBXGroup;
 			children = (
@@ -1359,6 +1533,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				02AE271715BE510C00FE59C7 /* PBXTargetDependency */,
+				02AE271515BE510500FE59C7 /* PBXTargetDependency */,
 			);
 			name = GeoFieldBook;
 			productName = GeoFieldBook;
@@ -1403,6 +1579,12 @@
 			mainGroup = 0294E086159361060025219F;
 			productRefGroup = 0294E092159361060025219F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 02AE270515BE50E100FE59C7 /* Products */;
+					ProjectRef = 02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0294E090159361060025219F /* GeoFieldBook */,
@@ -1411,12 +1593,37 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		02AE270F15BE50E100FE59C7 /* libSSToolkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSSToolkit.a;
+			remoteRef = 02AE270E15BE50E100FE59C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02AE271115BE50E100FE59C7 /* SSToolkitTests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SSToolkitTests.app;
+			remoteRef = 02AE271015BE50E100FE59C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		02AE271315BE50E100FE59C7 /* SSToolkitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SSToolkitResources.bundle;
+			remoteRef = 02AE271215BE50E100FE59C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		0294E08F159361060025219F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0294E0A0159361060025219F /* InfoPlist.strings in Resources */,
+				02AE271915BE515E00FE59C7 /* SSToolkitResources.bundle in Resources */,
 				029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */,
 				0222DB1C1596487800699D62 /* GeoFieldBookFrontPage.png in Resources */,
 				21989D6415A4D20C001CF847 /* checked.png in Resources */,
@@ -1429,6 +1636,9 @@
 				0249E2C215A6AD0300A7532E /* iPad.storyboard in Resources */,
 				02806F0515BB00E5003D09A7 /* green_pin.png in Resources */,
 				02A7767415BD28BB008A22C2 /* Settings.bundle in Resources */,
+				0218AA8115BE70E000D60258 /* switchBlueBg.png in Resources */,
+				0218AA8215BE70E000D60258 /* switchOffPlain.png in Resources */,
+				0218AA8315BE70E000D60258 /* switchThumb.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1598,6 +1808,13 @@
 				02A7767115BCE39A008A22C2 /* SettingManager.m in Sources */,
 				02AE26EF15BDF8AC00FE59C7 /* StudentFeedbackViewController.m in Sources */,
 				02AE26F215BE192500FE59C7 /* CustomQuestionCell.m in Sources */,
+				0294C0B215BE56A200E0E2D0 /* UICustomSwitch.m in Sources */,
+				0294C0B515BE5CAE00E0E2D0 /* Answer.m in Sources */,
+				0294C0B815BE5CAE00E0E2D0 /* Group.m in Sources */,
+				0294C0BB15BE5CAE00E0E2D0 /* Question.m in Sources */,
+				0294C0BE15BE5CAE00E0E2D0 /* Student.m in Sources */,
+				0294C0C815BE5ECA00E0E2D0 /* Question+Types.m in Sources */,
+				0294C0CB15BE679A00E0E2D0 /* Record+State.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1630,6 +1847,16 @@
 			isa = PBXTargetDependency;
 			target = 0294E090159361060025219F /* GeoFieldBook */;
 			targetProxy = 0294E0B7159361060025219F /* PBXContainerItemProxy */;
+		};
+		02AE271515BE510500FE59C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkit;
+			targetProxy = 02AE271415BE510500FE59C7 /* PBXContainerItemProxy */;
+		};
+		02AE271715BE510C00FE59C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkitResources;
+			targetProxy = 02AE271615BE510C00FE59C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1715,11 +1942,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
+				"HEADER_SEARCH_PATHS[sdk=*]" = Vendor/SSToolkit;
 				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "65168178-1D9E-4F5C-A45A-54D48C7A44EE";
@@ -1734,11 +1966,16 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = Vendor/SSToolkit;
 				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-all_load",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "70C9F55C-B768-45BC-9609-4FEAEE1B4C41";

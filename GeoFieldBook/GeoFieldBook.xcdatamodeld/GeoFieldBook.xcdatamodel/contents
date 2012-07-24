@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Answer" syncable="YES">
+    <entity name="Answer" representedClassName="Answer" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -44,7 +44,7 @@
         <relationship name="folders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Folder" inverseName="formationFolder" inverseEntity="Folder" syncable="YES"/>
         <relationship name="formations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Formation" inverseName="formationFolder" inverseEntity="Formation" syncable="YES"/>
     </entity>
-    <entity name="Group" syncable="YES">
+    <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numberOfMembers" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -57,7 +57,7 @@
         <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="joinSets" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Other" representedClassName="Other" parentEntity="Record" syncable="YES"/>
-    <entity name="Question" syncable="YES">
+    <entity name="Question" representedClassName="Question" syncable="YES">
         <attribute name="prompt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
@@ -75,23 +75,23 @@
         <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
         <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="whoUses" inverseEntity="Image" syncable="YES"/>
     </entity>
-    <entity name="Student" syncable="YES">
+    <entity name="Student" representedClassName="Student" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Answer" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Bedding" positionX="171" positionY="597" width="128" height="60"/>
         <element name="Contact" positionX="250" positionY="438" width="128" height="75"/>
         <element name="Fault" positionX="252" positionY="234" width="128" height="90"/>
         <element name="Folder" positionX="79" positionY="108" width="128" height="120"/>
         <element name="Formation" positionX="-101" positionY="396" width="128" height="210"/>
         <element name="Formation_Folder" positionX="-92" positionY="234" width="128" height="90"/>
+        <element name="Group" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Image" positionX="277" positionY="108" width="128" height="90"/>
         <element name="JointSet" positionX="198" positionY="720" width="128" height="60"/>
         <element name="Other" positionX="333" positionY="594" width="128" height="45"/>
-        <element name="Record" positionX="466" positionY="162" width="128" height="210"/>
         <element name="Question" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Answer" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="Group" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Record" positionX="466" positionY="162" width="128" height="210"/>
         <element name="Student" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>

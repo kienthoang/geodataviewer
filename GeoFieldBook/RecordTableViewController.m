@@ -13,6 +13,7 @@
 #import "Folder.h"
 
 #import "Record.h"
+#import "Record+State.h"
 #import "Record+Types.h"
 #import "Record+Creation.h"
 #import "Record+Validation.h"
@@ -26,6 +27,8 @@
 
 #import "FolderSelectTableViewController.h"
 #import "FolderSelectTableViewControllerDelegate.h"
+
+#import "SettingManager.h"
 
 @interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UIAlertViewDelegate,FolderSelectTableViewControllerDelegate>
 
@@ -211,6 +214,9 @@
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
+            //mark the record as newly created
+            record.state=RecordStateNew;
+            
             //Choose the newly created record
             self.chosenRecord=record;
             
@@ -251,6 +257,16 @@
                 //Post a notification to indicate that the record database has changed
                 [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
             }
+            
+            //If the record state is new, increment the feedback counter
+            if (record.state==RecordStateNew) {
+                SettingManager *settingManager=[SettingManager standardSettingManager];
+                int feedbackCounter=settingManager.feedbackCounter.intValue;
+                settingManager.feedbackCounter=[NSNumber numberWithInt:feedbackCounter+1];
+            }
+            
+            //mark record as updated
+            record.state=RecordStateUpdated;
         }
     }];
 }
