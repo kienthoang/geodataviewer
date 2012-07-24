@@ -18,6 +18,7 @@
 -(void) createFormationsFromCSVFiles:(NSArray *)files; //passes the array of formations to the ConflictHandler
 -(void) createCSVFilesFromRecords:(NSArray *)records;
 -(void) createCSVFilesFromFormations:(NSArray *)formations;
+-(void) createFormationsWithColorFromCSVFiles:(NSArray *) files; //this reads the new version of formation files with colors.
 
 #define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16
 #define IMPORT_MATRIX_FOLDER_NAME @"ExportMatrix.FolderName"
