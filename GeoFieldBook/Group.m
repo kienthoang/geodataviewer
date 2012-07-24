@@ -7,11 +7,13 @@
 //
 
 #import "Group.h"
+#import "Student.h"
 
 
 @implementation Group
 
 @dynamic name;
 @dynamic numberOfMembers;
+@dynamic students;
 
 @end

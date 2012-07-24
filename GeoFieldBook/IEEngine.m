@@ -27,6 +27,8 @@
 
 #import "ExportFormatter.h"
 
+#import "ColorManager.h"
+
 @interface IEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
@@ -361,9 +363,44 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
                 [self.formations addObject:newFormation];
             }
         }
+    }    
+    self.formationFolders=formationFolders.copy;
+}
+
+-(void) constructFormationsWithColorsfromCSVFilePath:(NSString *) path
+{
+    
+    NSMutableArray *tokenArrays = [self tokenArrayForLine:path].mutableCopy; // A 2D array with rows as each line, and tokens en each line as the columns in each row
+    TransientFormation_Folder *newTransientFormationFolder;
+    NSMutableArray *formationFolders = self.formationFolders.mutableCopy;
+    if([tokenArrays count]) {
+        NSString *newFormationFolderName = [[tokenArrays objectAtIndex:0] objectAtIndex:0];//get the object as the first row and column.
+        newFormationFolderName = [TextInputFilter filterDatabaseInputText:newFormationFolderName];
+        newTransientFormationFolder = [[TransientFormation_Folder alloc] init];
+        newTransientFormationFolder.folderName = [TextInputFilter filterDatabaseInputText:newFormationFolderName];
+        //save the object in the array of folders to be added to the database
+        [formationFolders addObject:newTransientFormationFolder];
     }
     
-    self.formationFolders=formationFolders.copy;
+    [tokenArrays removeObjectAtIndex:0];//get rid of the column headings
+    if(![tokenArrays count]) return; //if no data, return
+    
+    int sortNumber = 1;
+    for (int line = 0; line<tokenArrays.count; line++) {
+        NSMutableArray *tokenArray = [tokenArrays objectAtIndex:line];
+        NSString *formationName = [TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:0]];
+        //if formation name is not empty, then create the transient object
+        if (formationName.length) {
+            TransientFormation *newFormation = [[TransientFormation alloc] init];
+            newFormation.formationFolder = newTransientFormationFolder;
+            newFormation.formationName = formationName;
+            newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
+            newFormation.formationColor = [ColorManager colorWithName:[TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:1]]];
+            newFormation.colorName = [tokenArray objectAtIndex:1];
+            [self.formations addObject:newFormation];
+        }       
+    }
+    self.formationFolders = formationFolders.copy;
 }
 
 - (void)createFormationsFromCSVFiles:(NSArray *) files
@@ -391,6 +428,28 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
                              andFormationFolders:self.formationFolders 
                         withValidationMessageLog:self.validationMessageBoard.warningMessages];
 }
+
+/* The format of this file would be two columns of data in a file for each formation folder. The first column is the formation type and the second would be the color associated with that formation type. If the color column is empty, the color would be default when the annotations are drawn.
+ For example:
+ 
+ Formations  Color  -> Column headings
+ Formation1  Red
+ Formation2  Blue
+ ...         ...
+ */
+-(void) createFormationsWithColorFromCSVFiles:(NSArray *) files 
+{
+    self.selectedFilePaths = [self getSelectedFilePaths:files];    
+    
+    //read each of those files line by line and create the formation objects and add it to self.formations array.
+    for(NSString *path in self.selectedFilePaths) {
+        //Construct formations from the file path
+        [self constructFormationsWithColorsfromCSVFilePath:path];
+    }
+
+}
+
+
 
 #pragma mark - CSV File Parsing
 
@@ -489,6 +548,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     return mutableTokenArray.copy;
 }
+
 
 #pragma mark - Creation of CSV files
 
@@ -641,6 +701,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 }
 
 #pragma mark - Creation of CSV for formations
+
 -(void) createCSVFilesFromFormations:(NSArray *)formations 
 {
     //a multiset type data structure. Key-foldername; Value-array of formations for that folder

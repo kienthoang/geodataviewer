@@ -9,11 +9,17 @@
 #import "CustomQuestionCell.h"
 #import "UICustomSwitch.h"
 
-@interface CustomQuestionCell()
+#import "Answer+Creation.h"
+#import "Answer+Modification.h"
+#import "SettingManager.h"
+
+@interface CustomQuestionCell() <UITextViewDelegate>
 
 @property (nonatomic,weak) IBOutlet UICustomSwitch *answerSwitch;
 @property (nonatomic,weak) IBOutlet UITextView *answerTextView;
 @property (nonatomic,weak) IBOutlet UILabel *questionPrompt;
+
+@property (nonatomic,readonly) NSDictionary *answerInfo;
 
 @end
 
@@ -23,17 +29,62 @@
 @synthesize answerTextView=_answerTextView;
 @synthesize questionPrompt=_questionPrompt;
 
+@synthesize database=_database;
 @synthesize question=_question;
+@synthesize answer=_answer;
+
+@synthesize delegate=_delegate;
+
+@synthesize indexPath=_indexPath;
 
 #pragma mark - Getters and Setters
 
+- (NSDictionary *)answerInfo {
+    SettingManager *settingManager=[SettingManager standardSettingManager];
+    NSMutableDictionary *answerInfo=[NSMutableDictionary dictionary];
+    [answerInfo setObject:self.answerTextView.text forKey:ANSWER_CONTENT];
+    [answerInfo setObject:[NSDate date] forKey:ANSWER_DATE];
+    [answerInfo setObject:self.question forKey:ANSWER_QUESTION];
+    [answerInfo setObject:settingManager.feedbackCounter forKey:ANSWER_NUM_RECORDS];
+    CLLocation *currentLocation=[self.delegate locationForCell:self];
+    [answerInfo setObject:currentLocation forKey:ANSWER_LOCATION];
+    
+    return answerInfo.copy;
+}
+
+- (Answer *)answer {
+    if (!_answer && self.database.documentState==UIDocumentStateNormal) {
+        //Create a new answer
+            _answer=[NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:self.database.managedObjectContext];
+        
+        //Notify delegate
+        [self.delegate customQuestionCell:self 
+                       didCreateNewAnswer:self.answer 
+                              atIndexPath:self.indexPath];
+    }
+    
+    return _answer;
+}
+
+- (void)setAnswer:(Answer *)answer {
+    _answer=answer;
+    if (answer.content) {
+        //Update the text view
+        self.answerTextView.text=answer.content;
+    }
+}
+
 - (void)updateSubviews {
     if (self.question) {
+        //Update the text
         self.questionPrompt.text=self.question.prompt;
         self.answerSwitch.leftLabel.text=@"Yes";
         self.answerSwitch.rightLabel.text=@"No";
         self.answerSwitch.on=YES;
         [self.answerSwitch scaleSwitch:CGSizeMake(0.9, 1)];
+        
+        //Update delegate
+        self.answerTextView.delegate=self;
     }
 }
 
@@ -44,6 +95,16 @@
         //Update subviews
         [self updateSubviews];
     }
+}
+
+#pragma mark - UITextViewDelegate Protocol Methods
+
+- (void)textViewDidChange:(UITextView *)textView {
+    //Update the answer
+    [self.answer updateWithInfo:self.answerInfo];
+    
+    //Save changes to database
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL completed){}];
 }
 
 @end

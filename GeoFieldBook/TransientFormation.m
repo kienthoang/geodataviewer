@@ -21,6 +21,8 @@
 @synthesize formationName=_formationName;
 @synthesize formationSortNumber=_formationSortNumber;
 @synthesize formationFolder=_formationFolder;
+@synthesize formationColor = _formationColor;
+@synthesize colorName = _colorName;
 
 @synthesize managedFormation=_managedFormation;
 

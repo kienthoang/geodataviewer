@@ -7,6 +7,7 @@
 //
 
 #import "Question.h"
+#import "Answer.h"
 
 
 @implementation Question
@@ -14,5 +15,6 @@
 @dynamic prompt;
 @dynamic title;
 @dynamic type;
+@dynamic answers;
 
 @end

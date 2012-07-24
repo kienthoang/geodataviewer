@@ -130,8 +130,9 @@
     UIColor *selectedColor=colorPatch.backgroundColor;
     self.colorName = colorPatch.titleLabel.text;
     //Update
-    NSLog(@"Color Name: %@", self.colorName);
     [self updateSelectedColor:selectedColor andName:self.colorName];
+    
+    //NSLog(@"Color Description: %@ Name: %@ ", [selectedColor description], self.colorName);
     
 }
 

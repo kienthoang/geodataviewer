@@ -7,8 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "Question.h"
+
+@class CustomQuestionCell;
+
+@protocol CustomQuestionCellDelegate
+
+- (CLLocation *)locationForCell:(CustomQuestionCell *)cell;
+- (void)customQuestionCell:(CustomQuestionCell *)cell 
+        didCreateNewAnswer:(Answer *)answer 
+               atIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 @interface CustomQuestionCell : UITableViewCell
 
@@ -16,5 +28,11 @@
 #define FeedbackQuestionTextType @"GeoFieldBook.Feedback.Question.TextType"
 
 @property (nonatomic,strong) Question *question;
+@property (nonatomic,strong) UIManagedDocument *database;
+
+@property (nonatomic,strong) Answer *answer;
+@property (nonatomic,strong) NSIndexPath *indexPath;
+
+@property (nonatomic,weak) id <CustomQuestionCellDelegate> delegate;
 
 @end
