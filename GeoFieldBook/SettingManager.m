@@ -66,9 +66,6 @@ static SettingManager *settingManager;
 }
 
 - (void)postNotifications {
-    //Feedback notification
-    [self postFeedbackNotification];
-    
     //Other notifications
     NSDictionary *userInfo=[NSDictionary dictionary];
     [self postNotificationWithName:SettingManagerFormationColorEnabledDidChange andUserInfo:userInfo];
@@ -123,7 +120,6 @@ static SettingManager *settingManager;
 
 - (void)setDefaultFormationColor:(NSString *)defaultFormationColor {
     [self userDefaultsSetObject:defaultFormationColor forKey:NSUserDefaultsDefaultFormationColor];
-
 }
 
 
@@ -193,7 +189,11 @@ static SettingManager *settingManager;
 }
 
 - (void)setFeedbackCounter:(NSNumber *)feedbackCounter {
+    //Set the feedback counter
     [self userDefaultsSetObject:feedbackCounter forKey:NSUserDefaultsFeedbackCounter];
+    
+    //Feedback notification
+    [self postFeedbackNotification];
 }
 
 @end

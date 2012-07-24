@@ -13,6 +13,7 @@
 #import "Folder.h"
 
 #import "Record.h"
+#import "Record+State.h"
 #import "Record+Types.h"
 #import "Record+Creation.h"
 #import "Record+Validation.h"
@@ -26,6 +27,8 @@
 
 #import "FolderSelectTableViewController.h"
 #import "FolderSelectTableViewControllerDelegate.h"
+
+#import "SettingManager.h"
 
 @interface RecordTableViewController() <ModalRecordTypeSelectorDelegate,UIAlertViewDelegate,FormationFolderPickerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UIAlertViewDelegate,FolderSelectTableViewControllerDelegate>
 
@@ -251,6 +254,16 @@
                 //Post a notification to indicate that the record database has changed
                 [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
             }
+            
+            //If the record state is new, increment the feedback counter
+            if (record.recordState==RecordStateNew) {
+                SettingManager *settingManager=[SettingManager standardSettingManager];
+                int feedbackCounter=settingManager.feedbackCounter.intValue;
+                settingManager.feedbackCounter=[NSNumber numberWithInt:feedbackCounter+1];
+            }
+            
+            //mark record as updated
+            record.recordState=RecordStateUpdated;
         }
     }];
 }
@@ -271,6 +284,12 @@
         //Post a notification to indicate that the record database has changed
         [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
     }];
+}
+
+- (void)deleteRecordIfFresh:(Record *)record {
+    //If the record's state is new, delete it
+    if (record.recordState==RecordStateNew)
+        [self deleteRecords:[NSArray arrayWithObject:record]];
 }
 
 #pragma mark - FormationFolderPickerDelegate methods
