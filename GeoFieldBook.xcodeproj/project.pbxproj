@@ -78,6 +78,14 @@
 		02806EE915BA6E78003D09A7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EE815BA6E78003D09A7 /* Formation.m */; };
 		02806EEC15BA7E97003D09A7 /* CustomFormationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */; };
 		02806F0515BB00E5003D09A7 /* green_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 02806F0315BB00E5003D09A7 /* green_pin.png */; };
+		0280FCA715BEEACC009ED484 /* Answer+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCA615BEEACC009ED484 /* Answer+Creation.m */; };
+		0280FCAA15BEEAE4009ED484 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCA915BEEAE4009ED484 /* Answer.m */; };
+		0280FCAD15BEEAF5009ED484 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCAC15BEEAF5009ED484 /* Question.m */; };
+		0280FCB015BEEB06009ED484 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCAF15BEEB06009ED484 /* Group.m */; };
+		0280FCB315BEEB18009ED484 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCB215BEEB18009ED484 /* Student.m */; };
+		0280FCB615BEEB36009ED484 /* Answer+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCB515BEEB36009ED484 /* Answer+DictionaryKeys.m */; };
+		0280FCBC15BEF2E8009ED484 /* Answer+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCBB15BEF2E8009ED484 /* Answer+Modification.m */; };
+		0280FCBF15BEF484009ED484 /* AnswerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCBE15BEF484009ED484 /* AnswerTableViewController.m */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
 		028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
@@ -93,10 +101,6 @@
 		028894D115B4AEF90062E6DA /* MPAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 028894D015B4AEF80062E6DA /* MPAnimation.m */; };
 		028E94BB15B89D1C006E8B3F /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 028E94BA15B89D1C006E8B3F /* Fault.m */; };
 		0294C0B215BE56A200E0E2D0 /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0B115BE56A200E0E2D0 /* UICustomSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0294C0B515BE5CAE00E0E2D0 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0B415BE5CAE00E0E2D0 /* Answer.m */; };
-		0294C0B815BE5CAE00E0E2D0 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0B715BE5CAE00E0E2D0 /* Group.m */; };
-		0294C0BB15BE5CAE00E0E2D0 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0BA15BE5CAE00E0E2D0 /* Question.m */; };
-		0294C0BE15BE5CAE00E0E2D0 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0BD15BE5CAE00E0E2D0 /* Student.m */; };
 		0294C0C815BE5ECA00E0E2D0 /* Question+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294C0C715BE5ECA00E0E2D0 /* Question+Types.m */; };
 		0294E096159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E098159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
@@ -388,6 +392,22 @@
 		02806EEA15BA7E97003D09A7 /* CustomFormationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFormationCell.h; sourceTree = "<group>"; };
 		02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFormationCell.m; sourceTree = "<group>"; };
 		02806F0315BB00E5003D09A7 /* green_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_pin.png; sourceTree = "<group>"; };
+		0280FCA515BEEACC009ED484 /* Answer+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer+Creation.h"; sourceTree = "<group>"; };
+		0280FCA615BEEACC009ED484 /* Answer+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answer+Creation.m"; sourceTree = "<group>"; };
+		0280FCA815BEEAE4009ED484 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		0280FCA915BEEAE4009ED484 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		0280FCAB15BEEAF5009ED484 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		0280FCAC15BEEAF5009ED484 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		0280FCAE15BEEB06009ED484 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		0280FCAF15BEEB06009ED484 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		0280FCB115BEEB18009ED484 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		0280FCB215BEEB18009ED484 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		0280FCB415BEEB36009ED484 /* Answer+DictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer+DictionaryKeys.h"; sourceTree = "<group>"; };
+		0280FCB515BEEB36009ED484 /* Answer+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answer+DictionaryKeys.m"; sourceTree = "<group>"; };
+		0280FCBA15BEF2E8009ED484 /* Answer+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer+Modification.h"; sourceTree = "<group>"; };
+		0280FCBB15BEF2E8009ED484 /* Answer+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answer+Modification.m"; sourceTree = "<group>"; };
+		0280FCBD15BEF484009ED484 /* AnswerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerTableViewController.h; sourceTree = "<group>"; };
+		0280FCBE15BEF484009ED484 /* AnswerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTableViewController.m; sourceTree = "<group>"; };
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -422,14 +442,6 @@
 		028E94BA15B89D1C006E8B3F /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
 		0294C0B015BE56A200E0E2D0 /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomSwitch.h; sourceTree = "<group>"; };
 		0294C0B115BE56A200E0E2D0 /* UICustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomSwitch.m; sourceTree = "<group>"; };
-		0294C0B315BE5CAE00E0E2D0 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
-		0294C0B415BE5CAE00E0E2D0 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
-		0294C0B615BE5CAE00E0E2D0 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		0294C0B715BE5CAE00E0E2D0 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
-		0294C0B915BE5CAE00E0E2D0 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
-		0294C0BA15BE5CAE00E0E2D0 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
-		0294C0BC15BE5CAE00E0E2D0 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
-		0294C0BD15BE5CAE00E0E2D0 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		0294C0C615BE5ECA00E0E2D0 /* Question+Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Question+Types.h"; sourceTree = "<group>"; };
 		0294C0C715BE5ECA00E0E2D0 /* Question+Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Question+Types.m"; sourceTree = "<group>"; };
 		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -672,6 +684,7 @@
 				027406B615AE6F5300AD9EDC /* Folder-Record Group */,
 				027406B515AE6F3F00AD9EDC /* Formation Group */,
 				027406B315AE6F2C00AD9EDC /* I/E Group */,
+				02AE26EC15BDF1AE00FE59C7 /* Feedback Group */,
 			);
 			name = "Model MVC Group";
 			sourceTree = "<group>";
@@ -1032,8 +1045,8 @@
 		0294C0BF15BE5CB500E0E2D0 /* Student */ = {
 			isa = PBXGroup;
 			children = (
-				0294C0BC15BE5CAE00E0E2D0 /* Student.h */,
-				0294C0BD15BE5CAE00E0E2D0 /* Student.m */,
+				0280FCB115BEEB18009ED484 /* Student.h */,
+				0280FCB215BEEB18009ED484 /* Student.m */,
 			);
 			name = Student;
 			sourceTree = "<group>";
@@ -1041,8 +1054,8 @@
 		0294C0C015BE5CC700E0E2D0 /* Question */ = {
 			isa = PBXGroup;
 			children = (
-				0294C0B915BE5CAE00E0E2D0 /* Question.h */,
-				0294C0BA15BE5CAE00E0E2D0 /* Question.m */,
+				0280FCAB15BEEAF5009ED484 /* Question.h */,
+				0280FCAC15BEEAF5009ED484 /* Question.m */,
 				0294C0C615BE5ECA00E0E2D0 /* Question+Types.h */,
 				0294C0C715BE5ECA00E0E2D0 /* Question+Types.m */,
 				026915A215BE83220076E34E /* Question+Seed.h */,
@@ -1054,8 +1067,8 @@
 		0294C0C115BE5CD900E0E2D0 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				0294C0B615BE5CAE00E0E2D0 /* Group.h */,
-				0294C0B715BE5CAE00E0E2D0 /* Group.m */,
+				0280FCAE15BEEB06009ED484 /* Group.h */,
+				0280FCAF15BEEB06009ED484 /* Group.m */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -1063,8 +1076,14 @@
 		0294C0C215BE5CE200E0E2D0 /* Answer */ = {
 			isa = PBXGroup;
 			children = (
-				0294C0B315BE5CAE00E0E2D0 /* Answer.h */,
-				0294C0B415BE5CAE00E0E2D0 /* Answer.m */,
+				0280FCA815BEEAE4009ED484 /* Answer.h */,
+				0280FCA915BEEAE4009ED484 /* Answer.m */,
+				0280FCA515BEEACC009ED484 /* Answer+Creation.h */,
+				0280FCA615BEEACC009ED484 /* Answer+Creation.m */,
+				0280FCB415BEEB36009ED484 /* Answer+DictionaryKeys.h */,
+				0280FCB515BEEB36009ED484 /* Answer+DictionaryKeys.m */,
+				0280FCBA15BEF2E8009ED484 /* Answer+Modification.h */,
+				0280FCBB15BEF2E8009ED484 /* Answer+Modification.m */,
 			);
 			name = Answer;
 			sourceTree = "<group>";
@@ -1146,7 +1165,6 @@
 				0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */,
 				020EBB9A15942C7900EECC08 /* Model MVC Group */,
 				020EBB9B15942C8F00EECC08 /* View MVC Group */,
-				02AE26EC15BDF1AE00FE59C7 /* Feedback Group */,
 				02A7761F15BC9A5C008A22C2 /* Settings */,
 				0222DB251596B9B200699D62 /* Picker View Controllers */,
 				0249E2E515A8EECB00A7532E /* Custom Segues */,
@@ -1464,6 +1482,8 @@
 			children = (
 				02AE26ED15BDF8AC00FE59C7 /* StudentFeedbackViewController.h */,
 				02AE26EE15BDF8AC00FE59C7 /* StudentFeedbackViewController.m */,
+				0280FCBD15BEF484009ED484 /* AnswerTableViewController.h */,
+				0280FCBE15BEF484009ED484 /* AnswerTableViewController.m */,
 			);
 			name = "Feedback Group";
 			sourceTree = "<group>";
@@ -1818,15 +1838,19 @@
 				02AE26EF15BDF8AC00FE59C7 /* StudentFeedbackViewController.m in Sources */,
 				02AE26F215BE192500FE59C7 /* CustomQuestionCell.m in Sources */,
 				0294C0B215BE56A200E0E2D0 /* UICustomSwitch.m in Sources */,
-				0294C0B515BE5CAE00E0E2D0 /* Answer.m in Sources */,
-				0294C0B815BE5CAE00E0E2D0 /* Group.m in Sources */,
-				0294C0BB15BE5CAE00E0E2D0 /* Question.m in Sources */,
-				0294C0BE15BE5CAE00E0E2D0 /* Student.m in Sources */,
 				0294C0C815BE5ECA00E0E2D0 /* Question+Types.m in Sources */,
 				026915A415BE83220076E34E /* Question+Seed.m in Sources */,
 				026915A715BE86900076E34E /* Record.m in Sources */,
 				026915AA15BE86A80076E34E /* Record+State.m in Sources */,
 				2147B15E15BEF6BF001600F0 /* ColorManager.m in Sources */,
+				0280FCA715BEEACC009ED484 /* Answer+Creation.m in Sources */,
+				0280FCAA15BEEAE4009ED484 /* Answer.m in Sources */,
+				0280FCAD15BEEAF5009ED484 /* Question.m in Sources */,
+				0280FCB015BEEB06009ED484 /* Group.m in Sources */,
+				0280FCB315BEEB18009ED484 /* Student.m in Sources */,
+				0280FCB615BEEB36009ED484 /* Answer+DictionaryKeys.m in Sources */,
+				0280FCBC15BEF2E8009ED484 /* Answer+Modification.m in Sources */,
+				0280FCBF15BEF484009ED484 /* AnswerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,15 +12,53 @@
 #import "Question+Types.h"
 #import "Question+Seed.h"
 
+#import "Answer.h"
+
 #import "GeoDatabaseManager.h"
 
-@interface StudentFeedbackViewController ()
+@interface StudentFeedbackViewController() <CustomQuestionCellDelegate>
+
+@property (nonatomic,strong) CLLocationManager *locationManager;
 
 @end
 
 @implementation StudentFeedbackViewController
 
 @synthesize database=_database;
+@synthesize answers=_answers;
+
+@synthesize locationManager=_locationManager;
+
+#pragma mark - Getters and Setters
+
+- (NSArray *)answers {
+    if (!_answers) {
+        NSMutableArray *mutableAnswers=[NSMutableArray array];
+        for (Question *question in self.fetchedResultsController.fetchedObjects) {
+            Answer *answer=[NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:self.database.managedObjectContext];
+            answer.question=question;
+            [mutableAnswers addObject:answer];
+        }
+        
+        _answers=mutableAnswers.copy;
+    }
+    
+    return _answers;
+}
+
+#pragma mark - State Initialization Methods
+
+-(void) setupLocationManager {
+    self.locationManager = [[CLLocationManager alloc] init];
+    CLLocationManager *locationManager=self.locationManager;
+    locationManager.distanceFilter = kCLDistanceFilterNone; 
+    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; //accuracy in 100 meters 
+    
+    //stop the location manager
+    [locationManager stopUpdatingHeading];
+    if ([CLLocationManager locationServicesEnabled])
+        [locationManager startUpdatingLocation];
+}
 
 - (void)setupFetchedResultsController {
     if (self.database.documentState==UIDocumentStateNormal) {
@@ -55,6 +93,9 @@
     
     //Setup fetched results controller to get questions
     [self setupFetchedResultsController];
+    
+    //Setup the location manager
+    [self setupLocationManager];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -85,8 +126,15 @@
     if (!cell)
         cell=[[CustomQuestionCell alloc] init];
     
+    //Give the answer corresponding to the current question to the cell
+    if (indexPath.row<self.answers.count)
+        cell.answer=[self.answers objectAtIndex:indexPath.row];
+    
     //Configure the cell
+    cell.indexPath=indexPath;
     cell.question=question;
+    cell.delegate=self;
+    cell.database=self.database;
     
     return cell;
 }
@@ -96,6 +144,22 @@
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
     //Dismiss self
     [self.presentingViewController dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - CustomQuestionDelegate Protocol Methods
+
+- (CLLocation *)locationForCell:(CustomQuestionCell *)cell {
+    return self.locationManager.location;
+}
+
+- (void)customQuestionCell:(CustomQuestionCell *)cell 
+        didCreateNewAnswer:(Answer *)answer 
+               atIndexPath:(NSIndexPath *)indexPath
+{
+    //Add the new answer to the array of answers
+    NSMutableArray *answers=self.answers.mutableCopy;
+    [answers replaceObjectAtIndex:indexPath.row withObject:answer];
+    self.answers=answers.copy;
 }
 
 @end

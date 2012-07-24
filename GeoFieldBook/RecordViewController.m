@@ -276,7 +276,6 @@
 -(void) setUpLocationManager {
     [self.gatheringGPS setHidesWhenStopped:YES];
     self.locationManager = [[CLLocationManager alloc] init];
-    if(!self.locationManager) NSLog(@"initialized here");
     self.locationManager.delegate = self;
     self.locationManager.distanceFilter = kCLDistanceFilterNone; 
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation; //accuracy in 100 meters 
@@ -289,7 +288,7 @@
     //Only acquire data when self is in editing mode
     if (self.editing) {
         //Save the acquired date
-        self.acquiredDate=[[NSDate alloc] init];
+        self.acquiredDate=[NSDate date];
         
         //reset the txtfields appropriately.
         self.dateTextField.text = [Record dateFromNSDate:self.acquiredDate];
