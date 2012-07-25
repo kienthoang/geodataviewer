@@ -10,6 +10,7 @@
 
 @interface ColorManager : NSObject
 
+
 + (ColorManager *)standardColorManager;
 
 - (UIColor *)colorWithName:(NSString *)colorName;

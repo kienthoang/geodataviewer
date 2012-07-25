@@ -27,5 +27,6 @@
 @dynamic joinSets;
 @dynamic lowerContacts;
 @dynamic upperContacts;
+@dynamic colorName;
 
 @end

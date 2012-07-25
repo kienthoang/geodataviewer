@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Answer" representedClassName="Answer" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" defaultValueString=" " syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -28,7 +28,8 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Record" inverseName="folder" inverseEntity="Record" syncable="YES"/>
     </entity>
     <entity name="Formation" representedClassName="Formation" syncable="YES">
-        <attribute name="blueColorComponent" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="blueColorComponent" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="colorName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="formationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="formationSortNumber" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
         <attribute name="greenColorComponent" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
@@ -88,7 +89,7 @@
         <element name="Contact" positionX="250" positionY="438" width="128" height="75"/>
         <element name="Fault" positionX="252" positionY="234" width="128" height="90"/>
         <element name="Folder" positionX="79" positionY="108" width="128" height="120"/>
-        <element name="Formation" positionX="-101" positionY="396" width="128" height="210"/>
+        <element name="Formation" positionX="-101" positionY="396" width="128" height="225"/>
         <element name="Formation_Folder" positionX="-92" positionY="234" width="128" height="90"/>
         <element name="Group" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Image" positionX="277" positionY="108" width="128" height="90"/>

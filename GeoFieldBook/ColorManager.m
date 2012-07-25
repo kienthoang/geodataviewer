@@ -78,8 +78,9 @@ static ColorManager *standardColorManager;
     UIColor *color = nil;
     if([self.colorNames containsObject:colorName])
         color = [self.colorDictionary objectForKey:colorName];
-    
+  
     return color;
+    
 }
 
 - (NSString *)nameForColor:(UIColor *)color { 
@@ -89,5 +90,6 @@ static ColorManager *standardColorManager;
         colorName=[self.colorNameDictionary objectForKey:color];
     return colorName;
 }
+
 
 @end

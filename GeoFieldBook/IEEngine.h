@@ -21,9 +21,10 @@
 -(void) createFormationsWithColorFromCSVFiles:(NSArray *) files; //this reads the new version of formation files with colors.
 
 #pragma mark - Export
-
 -(void) createCSVFilesFromRecords:(NSArray *)records;
 -(void) createCSVFilesFromFormations:(NSArray *)formations;
+-(void) createCSVFilesFromFormationsWithColors:(NSArray *) formations; //format for version 2
+
 
 #define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16
 #define IMPORT_MATRIX_FOLDER_NAME @"ExportMatrix.FolderName"

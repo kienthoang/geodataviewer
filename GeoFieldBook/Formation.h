@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSSet *joinSets;
 @property (nonatomic, retain) NSSet *lowerContacts;
 @property (nonatomic, retain) NSSet *upperContacts;
+@property (nonatomic, retain) NSString *colorName;
 @end
 
 @interface Formation (CoreDataGeneratedAccessors)
