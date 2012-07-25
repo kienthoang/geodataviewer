@@ -19,5 +19,6 @@
 #define SettingManagerSwipeRecordEnabledDidChange @"GeoFieldBook.SettingManager.SwipeRecordEnabledDidChange"
 #define SettingManagerSwipeRecordDidChange @"GeoFieldBook.SettingManager.SwipeRecordDidChange"
 #define SettingManagerFeedbackTimeout @"GeoFieldBook.SettingManager.FeedbackTimeout"
+#define SettingManagerDipNumberEnabledDidChange @"GeoFieldBook.SettingManager.DipNumberEnabledDidChange"
 
 @end

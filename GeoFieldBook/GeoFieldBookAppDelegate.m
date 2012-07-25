@@ -43,6 +43,7 @@
     [self registerDefaultsForPListFile:@"Color.plist"];
     [self registerDefaultsForPListFile:@"Gestures.plist"];
     [self registerDefaultsForPListFile:@"Feedback.plist"];
+    [self registerDefaultsForPListFile:@"Dip Number.plist"];
     
     // Override point for customization after application launch.
     return YES;

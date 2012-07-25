@@ -67,7 +67,6 @@
 		027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BB15AE711200AD9EDC /* RecordImportTVC.m */; };
 		027406BF15AE71FF00AD9EDC /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */; };
 		0277643915B91B6800C9DCEB /* ExportFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277643815B91B6800C9DCEB /* ExportFormatter.m */; };
-		0277645815B9DC3700C9DCEB /* Record+Deletion.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277645715B9DC3600C9DCEB /* Record+Deletion.m */; };
 		0277649F15BA47BF00C9DCEB /* NPColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277649815BA47BF00C9DCEB /* NPColorPickerView.m */; };
 		027764A115BA47BF00C9DCEB /* NPPickerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277649C15BA47BF00C9DCEB /* NPPickerIndicator.m */; };
 		027764A215BA47BF00C9DCEB /* NPColorQuadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0277649E15BA47BF00C9DCEB /* NPColorQuadView.m */; };
@@ -153,6 +152,7 @@
 		02AE26F215BE192500FE59C7 /* CustomQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02AE26F115BE192500FE59C7 /* CustomQuestionCell.m */; };
 		02AE271815BE512800FE59C7 /* libSSToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AE270F15BE50E100FE59C7 /* libSSToolkit.a */; };
 		02AE271915BE515E00FE59C7 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02AE271315BE50E100FE59C7 /* SSToolkitResources.bundle */; };
+		02BBB43515C04DF2008F7D68 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BBB43415C04DF1008F7D68 /* Image.m */; };
 		02F86EB415AF6E5B000A84D2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F86EB315AF6E5B000A84D2 /* iAd.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		02F86EB815AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
 		02F86EB915AF6F09000A84D2 /* IEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F86EB715AF6F09000A84D2 /* IEEngine.m */; };
@@ -188,7 +188,6 @@
 		212DD13A15B46577000203AB /* ExportFormationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD13915B46576000203AB /* ExportFormationTableViewController.m */; };
 		212DD13D15B468DC000203AB /* PrototypeFormationFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD13C15B468DC000203AB /* PrototypeFormationFolderTableViewController.m */; };
 		212DD14015B46907000203AB /* PrototypeFormationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212DD13F15B46907000203AB /* PrototypeFormationTableViewController.m */; };
-		2132A5D7159CD26200009CB9 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D6159CD26200009CB9 /* Image.m */; };
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2147B15E15BEF6BF001600F0 /* ColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2147B15D15BEF6BF001600F0 /* ColorManager.m */; };
@@ -370,8 +369,6 @@
 		027406BE15AE71FF00AD9EDC /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
 		0277643715B91B6800C9DCEB /* ExportFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFormatter.h; sourceTree = "<group>"; };
 		0277643815B91B6800C9DCEB /* ExportFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportFormatter.m; sourceTree = "<group>"; };
-		0277645615B9DC3600C9DCEB /* Record+Deletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Deletion.h"; sourceTree = "<group>"; };
-		0277645715B9DC3600C9DCEB /* Record+Deletion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Deletion.m"; sourceTree = "<group>"; };
 		0277649715BA47BF00C9DCEB /* NPColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPColorPickerView.h; sourceTree = "<group>"; };
 		0277649815BA47BF00C9DCEB /* NPColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPColorPickerView.m; sourceTree = "<group>"; };
 		0277649B15BA47BF00C9DCEB /* NPPickerIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPPickerIndicator.h; sourceTree = "<group>"; };
@@ -531,6 +528,8 @@
 		02AE26F015BE192500FE59C7 /* CustomQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomQuestionCell.h; sourceTree = "<group>"; };
 		02AE26F115BE192500FE59C7 /* CustomQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomQuestionCell.m; sourceTree = "<group>"; };
 		02AE270415BE50E100FE59C7 /* SSToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SSToolkit.xcodeproj; path = Vendor/SSToolkit/SSToolkit.xcodeproj; sourceTree = SOURCE_ROOT; };
+		02BBB43315C04DF1008F7D68 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		02BBB43415C04DF1008F7D68 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		02F86EB315AF6E5B000A84D2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		02F86EB615AF6F09000A84D2 /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEngine.h; path = GeoFieldBook/IEEngine.h; sourceTree = "<group>"; };
 		02F86EB715AF6F09000A84D2 /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEEngine.m; path = GeoFieldBook/IEEngine.m; sourceTree = "<group>"; };
@@ -574,8 +573,6 @@
 		212DD13E15B46907000203AB /* PrototypeFormationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeFormationTableViewController.h; sourceTree = "<group>"; };
 		212DD13F15B46907000203AB /* PrototypeFormationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeFormationTableViewController.m; sourceTree = "<group>"; };
 		212DD18215B73531000203AB /* ExportFormationTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportFormationTableViewControllerDelegate.h; sourceTree = "<group>"; };
-		2132A5D5159CD26200009CB9 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		2132A5D6159CD26200009CB9 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		2132A5D8159CD62200009CB9 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Image+Creation.h"; path = "Image/Image+Creation.h"; sourceTree = "<group>"; };
 		2132A5D9159CD62200009CB9 /* Image+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Image+Creation.m"; path = "Image/Image+Creation.m"; sourceTree = "<group>"; };
 		2141DC18159CA275002518F9 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
@@ -1170,9 +1167,9 @@
 				0249E2E515A8EECB00A7532E /* Custom Segues */,
 				0249E2EC15A903BE00A7532E /* NSNotification Registrations */,
 				211B728D15AB522D00EC4C60 /* Import/Export */,
-				2128E73D15A2378000B277F9 /* MKAnnotation */,
 				024097A2159D373F00855D33 /* Custom Views */,
 				029877FC1595954D000D71E7 /* Images */,
+				2128E73D15A2378000B277F9 /* MKAnnotation */,
 				020EBB5C15941F8300EECC08 /* View Controller Prototypes */,
 				0288944E15B49E6A0062E6DA /* Custom Animations */,
 				029877F015955CB2000D71E7 /* Protocols */,
@@ -1349,8 +1346,6 @@
 				0222DAFF15961D0D00699D62 /* Record+DictionaryKeys.m */,
 				029877F6159566E0000D71E7 /* Record+Creation.h */,
 				029877F7159566E0000D71E7 /* Record+Creation.m */,
-				0277645615B9DC3600C9DCEB /* Record+Deletion.h */,
-				0277645715B9DC3600C9DCEB /* Record+Deletion.m */,
 				020EBBC215946B3D00EECC08 /* Record+Types.h */,
 				020EBBC315946B3D00EECC08 /* Record+Types.m */,
 				0298C25A159B43F30038E89C /* Record+Validation.h */,
@@ -1530,8 +1525,8 @@
 		2132A5DB159CD63500009CB9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				2132A5D5159CD26200009CB9 /* Image.h */,
-				2132A5D6159CD26200009CB9 /* Image.m */,
+				02BBB43315C04DF1008F7D68 /* Image.h */,
+				02BBB43415C04DF1008F7D68 /* Image.m */,
 				2132A5D8159CD62200009CB9 /* Image+Creation.h */,
 				2132A5D9159CD62200009CB9 /* Image+Creation.m */,
 			);
@@ -1748,7 +1743,6 @@
 				0298C25C159B43F30038E89C /* Record+Validation.m in Sources */,
 				0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */,
 				21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */,
-				2132A5D7159CD26200009CB9 /* Image.m in Sources */,
 				2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */,
 				2141DC17159C9AE1002518F9 /* (null) in Sources */,
 				21A87A13159CAAFE001A220E /* Record+DateAndTimeFormatter.m in Sources */,
@@ -1806,7 +1800,6 @@
 				0277643915B91B6800C9DCEB /* ExportFormatter.m in Sources */,
 				218F8FD215B9AA220008710A /* MKCustomAnnotationView.m in Sources */,
 				218F8FD515B9AA490008710A /* DipStrikeSymbol.m in Sources */,
-				0277645815B9DC3700C9DCEB /* Record+Deletion.m in Sources */,
 				0277649F15BA47BF00C9DCEB /* NPColorPickerView.m in Sources */,
 				027764A115BA47BF00C9DCEB /* NPPickerIndicator.m in Sources */,
 				027764A215BA47BF00C9DCEB /* NPColorQuadView.m in Sources */,
@@ -1851,6 +1844,7 @@
 				0280FCB615BEEB36009ED484 /* Answer+DictionaryKeys.m in Sources */,
 				0280FCBC15BEF2E8009ED484 /* Answer+Modification.m in Sources */,
 				0280FCBF15BEF484009ED484 /* AnswerTableViewController.m in Sources */,
+				02BBB43515C04DF2008F7D68 /* Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

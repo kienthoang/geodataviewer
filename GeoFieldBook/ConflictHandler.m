@@ -401,7 +401,7 @@
     //Save database
     [self saveDatabase:self.database];
     
-    return [unsavedRecords copy];
+    return unsavedRecords.copy;
 }
 
 - (void)saveTransientFolders:(NSArray *)folders;
@@ -440,7 +440,7 @@
     //Save database
     [self saveDatabase:self.database];
     
-    return [unsavedFormations copy];
+    return unsavedFormations.copy;
 }
 
 - (void)saveTransientFormationFolders:(NSArray *)folders;

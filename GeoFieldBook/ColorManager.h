@@ -10,8 +10,10 @@
 
 @interface ColorManager : NSObject
 
--(UIColor *) colorWithName:(NSString *) colorName;
 
-@property (nonatomic, strong) NSDictionary *colorDictionary;
++ (ColorManager *)standardColorManager;
+
+- (UIColor *)colorWithName:(NSString *)colorName;
+- (NSString *)nameForColor:(UIColor *)color;
 
 @end

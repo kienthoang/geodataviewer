@@ -24,4 +24,6 @@
 - (void)putUpDatabaseErrorAlertWithMessage:(NSString *)message;
 - (void)loadImagesForCells:(NSArray *)cells;
 
+#define ImageCacheCapacity 50
+
 @end
