@@ -727,11 +727,14 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             [formationArray addObject:newFormation];
             [formationsByFolders setObject:formationArray forKey:formation.formationFolder.folderName];
         } else {
-//            NSArray *newFormation = [NSArray array
+            NSArray *newFormation = [NSArray arrayWithObjects:formation.formationName, formation.colorName, nil];
             NSMutableArray *formationArray = [NSMutableArray arrayWithObject:formation.formationName];
-            
+            [formationArray addObject:newFormation];
+            [formationsByFolders setObject:formationArray forKey:formation.formationFolder.folderName];
         }
     }
+    
+    [self writeFormationFiles:formationsByFolders];
 }
 
 -(void) createCSVFilesFromFormations:(NSArray *)formations 
@@ -774,6 +777,33 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     NSArray *transposedArray=[ExportFormatter transposeTwoDimensionalArray:twoDimensionalArray.copy];
     
     return transposedArray;
+}
+
+-(void)writeFormationFiles:(NSDictionary *)formationsSeparatedByFolders {
+    //get the path to documents directory
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSArray *urlsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSString *documentsDirectory = [[urlsArray objectAtIndex:0] path];
+    
+    for(NSString *folder in formationsSeparatedByFolders.allKeys ) {
+        //first create the file, if a file by that name already exists, overwrite.
+        NSString *destinationPath = [NSString stringWithFormat:@"%@/%@.formation.c.csv", documentsDirectory, folder];
+        [[NSFileManager defaultManager] createFileAtPath:destinationPath contents:nil attributes:nil];
+        NSFileHandle *handler = [NSFileHandle fileHandleForWritingAtPath:destinationPath];
+        
+        //now write the contents - first write the column headings, then the contents
+        NSString *header = [NSString stringWithFormat:@"Formation,Color\r\n"];
+        [handler writeData:[header dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSArray *formationsArray = [formationsSeparatedByFolders objectForKey:folder];
+        NSString *line;
+        for(NSArray *formations in formationsArray) 
+        {
+            line = [NSString stringWithFormat:@"%@,%@\r\n", [formations objectAtIndex:0], [formations objectAtIndex:1]];
+            [handler writeData:[line dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        [handler closeFile];
+    }
 }
 
 -(void)writeFormations:(NSArray *)twoDimensionalFormationArray {
