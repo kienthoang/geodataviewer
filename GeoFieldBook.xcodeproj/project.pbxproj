@@ -191,6 +191,7 @@
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2147B15E15BEF6BF001600F0 /* ColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2147B15D15BEF6BF001600F0 /* ColorManager.m */; };
+		218BF61C15C078FA00963CB6 /* Contact+Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218BF61B15C078FA00963CB6 /* Contact+Formation.m */; };
 		218F8FD215B9AA220008710A /* MKCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */; };
 		218F8FD515B9AA490008710A /* DipStrikeSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD415B9AA490008710A /* DipStrikeSymbol.m */; };
 		21989D6415A4D20C001CF847 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 21989D6215A4D20C001CF847 /* checked.png */; };
@@ -578,6 +579,8 @@
 		2141DC18159CA275002518F9 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		2147B15C15BEF6BF001600F0 /* ColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorManager.h; sourceTree = "<group>"; };
 		2147B15D15BEF6BF001600F0 /* ColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorManager.m; sourceTree = "<group>"; };
+		218BF61A15C078FA00963CB6 /* Contact+Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contact+Formation.h"; path = "../Contact+Formation.h"; sourceTree = "<group>"; };
+		218BF61B15C078FA00963CB6 /* Contact+Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contact+Formation.m"; path = "../Contact+Formation.m"; sourceTree = "<group>"; };
 		218F8FD015B9AA220008710A /* MKCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCustomAnnotationView.h; sourceTree = "<group>"; };
 		218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKCustomAnnotationView.m; sourceTree = "<group>"; };
 		218F8FD315B9AA490008710A /* DipStrikeSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipStrikeSymbol.h; sourceTree = "<group>"; };
@@ -1316,6 +1319,8 @@
 				02712A4F159D011300510188 /* Contact.m */,
 				0222DB0E159622DC00699D62 /* Contact+Modification.h */,
 				0222DB0F159622DC00699D62 /* Contact+Modification.m */,
+				218BF61A15C078FA00963CB6 /* Contact+Formation.h */,
+				218BF61B15C078FA00963CB6 /* Contact+Formation.m */,
 			);
 			name = Contact;
 			sourceTree = "<group>";
@@ -1845,6 +1850,7 @@
 				0280FCBC15BEF2E8009ED484 /* Answer+Modification.m in Sources */,
 				0280FCBF15BEF484009ED484 /* AnswerTableViewController.m in Sources */,
 				02BBB43515C04DF2008F7D68 /* Image.m in Sources */,
+				218BF61C15C078FA00963CB6 /* Contact+Formation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

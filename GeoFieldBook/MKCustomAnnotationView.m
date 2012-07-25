@@ -21,14 +21,14 @@
         //Setup the dip strike symbol
         DipStrikeSymbol *symbol=[[DipStrikeSymbol alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         Record *record=annotation.record;
-        symbol.strike=record.strike.floatValue;
-        symbol.dipDirection=record.dipDirection;
+        symbol.strike=record.strike ? record.strike.floatValue : 0.0;
+        symbol.dipDirection=record.dipDirection ? record.dipDirection : nil;
         symbol.backgroundColor=[UIColor clearColor];
         
         //Setup the color of the dip strike symbol if specified by user preference
-        UIColor *color=nil;
         SettingManager *settingManager=[SettingManager standardSettingManager];
-        if (settingManager.formationColorEnabled) {
+        UIColor *color=settingManager.defaultSymbolColor;
+        if (settingManager.formationColorEnabled && ) {
             if ([record isKindOfClass:[Bedding class]]) {
                 Formation *formation=[(Bedding *)record formation];
                 color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
@@ -37,17 +37,21 @@
                                       alpha:1.0];
             }
             else if ([record isKindOfClass:[Contact class]]) {
-                Formation *upperFormation=[(Contact *)record upperFormation];
-                color=[UIColor colorWithRed:upperFormation.redColorComponent.floatValue 
-                                      green:upperFormation.greenColorComponent.floatValue 
-                                       blue:upperFormation.blueColorComponent.floatValue 
-                                      alpha:1.0];
+                Formation *formation=[(Contact *)record upperFormation];
+                if (formation) {
+                    color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
+                                          green:formation.greenColorComponent.floatValue 
+                                           blue:formation.blueColorComponent.floatValue 
+                                          alpha:1.0];
+                }
+                else {
+                    formation=[(Contact *)record lowerFormation];
+                    color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
+                                          green:formation.greenColorComponent.floatValue 
+                                           blue:formation.blueColorComponent.floatValue 
+                                          alpha:1.0];
+                }
             }
-        }
-        
-        //Else just set the color to the default symbol color
-        else {
-            color=settingManager.defaultSymbolColor;
         }
         
         symbol.color=color;
@@ -78,17 +82,10 @@
         Record *record=annotation.record;
         
         //Setup the color of the dot if specified by user preference
-        UIColor *color=nil;
         SettingManager *settingManager=[SettingManager standardSettingManager];
+        UIColor *color=settingManager.defaultSymbolColor;
         if (settingManager.formationColorEnabled) {
-            if ([record isKindOfClass:[Bedding class]]) {
-                Formation *formation=[(Bedding *)record formation];
-                color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
-                                      green:formation.greenColorComponent.floatValue 
-                                       blue:formation.blueColorComponent.floatValue 
-                                      alpha:1.0];
-            }
-            else if ([record isKindOfClass:[Contact class]]) {
+            if ([record isKindOfClass:[Contact class]]) {
                 Formation *formation=[(Contact *)record upperFormation];
                 if (formation) {
                 color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
@@ -103,12 +100,17 @@
                                            blue:formation.blueColorComponent.floatValue 
                                           alpha:1.0];
                 }
+            } else if ([record isKindOfClass:[Other class]]) {
+                
+            } else if ([(id)record formation]) {
+                if ([record isKindOfClass:[Bedding class]]) {
+                    Formation *formation=[(Bedding *)record formation];
+                    color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
+                                          green:formation.greenColorComponent.floatValue 
+                                           blue:formation.blueColorComponent.floatValue 
+                                          alpha:1.0];
+                }
             }
-        }
-        
-        //Else just set the color to the default symbol color
-        else {
-            color=settingManager.defaultSymbolColor;
         }
         
         symbol.color=color;
