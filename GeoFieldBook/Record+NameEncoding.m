@@ -18,7 +18,8 @@
         nameEncodings=[NSDictionary dictionaryWithObjectsAndKeys:
                        @"Latitude",RECORD_LATITUDE,
                        @"Longitude",RECORD_LONGITUDE,
-                       @"Date",RECORD_DATE, nil];
+                       @"Date",RECORD_DATE,
+                       @"Dip Direction",RECORD_DIP_DIRECTION, nil];
     }
     
     return [nameEncodings objectForKey:dictionaryKey];

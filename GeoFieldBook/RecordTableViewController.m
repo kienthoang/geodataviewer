@@ -237,6 +237,13 @@
     //Update the record
     [record updateWithNewRecordInfo:recordInfo];
     
+    //If the record state is new, increment the feedback counter
+    if (record.recordState==RecordStateNew) {
+        SettingManager *settingManager=[SettingManager standardSettingManager];
+        int feedbackCounter=settingManager.feedbackCounter.intValue;
+        settingManager.feedbackCounter=[NSNumber numberWithInt:feedbackCounter+1];
+    }
+    
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){
         if (success) {
@@ -254,16 +261,6 @@
                 //Post a notification to indicate that the record database has changed
                 [self postNotificationWithName:GeoNotificationModelGroupRecordDatabaseDidChange andUserInfo:[NSDictionary dictionary]];
             }
-            
-            //If the record state is new, increment the feedback counter
-            if (record.recordState==RecordStateNew) {
-                SettingManager *settingManager=[SettingManager standardSettingManager];
-                int feedbackCounter=settingManager.feedbackCounter.intValue;
-                settingManager.feedbackCounter=[NSNumber numberWithInt:feedbackCounter+1];
-            }
-            
-            //mark record as updated
-            record.recordState=RecordStateUpdated;
         }
     }];
 }

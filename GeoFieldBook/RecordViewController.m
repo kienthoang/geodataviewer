@@ -451,7 +451,7 @@
 {
     //Put up alerts if validations fail
     NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
-    if ([validationKeys count] && alertsEnabled) {
+    if (validationKeys.count && alertsEnabled) {
         //Get the name of the fields that do not pass validations
         NSMutableArray *failedFieldNames=[NSMutableArray array];
         for (NSString *failedKey in validationKeys)

@@ -7,6 +7,7 @@
 //
 
 #import "Record+Modification.h"
+#import "Record+State.h"
 #import "Image+Creation.h"
 
 @implementation Record (Modification)
@@ -33,6 +34,9 @@
         //Set the new image
         self.image = [Image imageWithBinaryData:imageData inManagedObjectContext:self.managedObjectContext];    
     }
+    
+    //mark record as updated
+    self.recordState=RecordStateUpdated;
 }
 
 @end

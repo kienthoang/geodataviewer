@@ -19,6 +19,7 @@
 @interface StudentFeedbackViewController() <CustomQuestionCellDelegate>
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
+@property (nonatomic,strong) CLLocation *answerLocation;
 
 @end
 
@@ -28,8 +29,16 @@
 @synthesize answers=_answers;
 
 @synthesize locationManager=_locationManager;
+@synthesize answerLocation=_answerLocation;
 
 #pragma mark - Getters and Setters
+
+- (CLLocation *)answerLocation {
+    if (!_answerLocation)
+        _answerLocation=self.locationManager.location;
+    
+    return _answerLocation;
+}
 
 - (NSArray *)answers {
     if (!_answers) {
@@ -37,6 +46,9 @@
         for (Question *question in self.fetchedResultsController.fetchedObjects) {
             Answer *answer=[NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:self.database.managedObjectContext];
             answer.question=question;
+            CLLocationCoordinate2D coordinate=self.answerLocation.coordinate;
+            answer.longitude=[NSNumber numberWithFloat:coordinate.longitude];
+            answer.latitude=[NSNumber numberWithFloat:coordinate.latitude];
             [mutableAnswers addObject:answer];
         }
         
@@ -149,7 +161,7 @@
 #pragma mark - CustomQuestionDelegate Protocol Methods
 
 - (CLLocation *)locationForCell:(CustomQuestionCell *)cell {
-    return self.locationManager.location;
+    return self.answerLocation;
 }
 
 - (void)customQuestionCell:(CustomQuestionCell *)cell 
