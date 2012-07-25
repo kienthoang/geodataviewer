@@ -169,8 +169,6 @@
     
     CGContextAddArc(context, center.x, center.y, sideLength/6, 2*PI, 0, 1);
     CGContextClosePath(context);
-    //CGContextSetStrokeColorWithColor(context, self.color.CGColor);
-    //CGContextStrokePath(context);
     CGContextSetFillColorWithColor(context, self.color.CGColor);
     CGContextFillPath(context);
 }

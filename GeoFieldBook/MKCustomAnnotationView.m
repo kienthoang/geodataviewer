@@ -89,11 +89,20 @@
                                       alpha:1.0];
             }
             else if ([record isKindOfClass:[Contact class]]) {
-                Formation *upperFormation=[(Contact *)record upperFormation];
-                color=[UIColor colorWithRed:upperFormation.redColorComponent.floatValue 
-                                      green:upperFormation.greenColorComponent.floatValue 
-                                       blue:upperFormation.blueColorComponent.floatValue 
+                Formation *formation=[(Contact *)record upperFormation];
+                if (formation) {
+                color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
+                                      green:formation.greenColorComponent.floatValue 
+                                       blue:formation.blueColorComponent.floatValue 
                                       alpha:1.0];
+                }
+                else {
+                    formation=[(Contact *)record lowerFormation];
+                    color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
+                                          green:formation.greenColorComponent.floatValue 
+                                           blue:formation.blueColorComponent.floatValue 
+                                          alpha:1.0];
+                }
             }
         }
         
@@ -105,6 +114,7 @@
         symbol.color=color;
         
         //Add the strike symbol view
+        symbol.backgroundColor=[UIColor clearColor];
         UIGraphicsBeginImageContext(symbol.bounds.size);
         [symbol.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
