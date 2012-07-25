@@ -40,6 +40,7 @@
     //Configure cell
     Answer *answer=[self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text=answer.content;
+    cell.detailTextLabel.text=[NSString stringWithFormat:@"Latitude: %@. Longitude: %@",answer.latitude,answer.longitude];
     
     return cell;
 }

@@ -15,14 +15,14 @@
     //Create an array to hold the keys that correspond to missing or invalid mandatory information
     NSMutableArray *invalidInformationKeys=[NSMutableArray array];
     
-    //Validates the presence of latitude, longitude, and date information
-    NSArray *mandatoryFields=[NSArray arrayWithObjects:RECORD_LATITUDE,RECORD_LONGITUDE,RECORD_DATE, nil];
+    //Validates the presence of location, date, and dip direction information
+    NSArray *mandatoryFields=[NSArray arrayWithObjects:RECORD_LATITUDE,RECORD_LONGITUDE,RECORD_DATE,RECORD_DIP_DIRECTION, nil];
     for (NSString *field in mandatoryFields) {
         if (![recordInfo objectForKey:field])
             [invalidInformationKeys addObject:field];
     }
         
-    return [invalidInformationKeys copy];
+    return invalidInformationKeys.copy;
 }
 
 @end
