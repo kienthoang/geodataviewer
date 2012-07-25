@@ -15,6 +15,7 @@
 #import "Formation.h"
 #import "Bedding.h"
 #import "Contact.h"
+#import "Other.h"
 
 @interface MKCustomAnnotationView : MKAnnotationView
 

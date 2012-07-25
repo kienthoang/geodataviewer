@@ -10,6 +10,6 @@
 
 @interface Contact (Formation)
 
-- (Formation *)formationColor;
+- (Formation *)formation;
 
 @end

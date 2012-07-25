@@ -10,7 +10,7 @@
 
 @implementation Contact (Formation)
 
-- (Formation *) formationColor
+- (Formation *)formation
 {
     return self.upperFormation ? self.upperFormation : self.lowerFormation;
 }
