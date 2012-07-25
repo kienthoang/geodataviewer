@@ -2,7 +2,7 @@
 //  Image.m
 //  GeoFieldBook
 //
-//  Created by excel2011 on 6/28/12.
+//  Created by Kien Hoang on 7/25/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -13,7 +13,6 @@
 @implementation Image
 
 @dynamic imageData;
-@dynamic imageHash;
 @dynamic whoUses;
 
 @end

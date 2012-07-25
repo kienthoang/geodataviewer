@@ -389,13 +389,15 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     for (int line = 0; line<tokenArrays.count; line++) {
         NSMutableArray *tokenArray = [tokenArrays objectAtIndex:line];
         NSString *formationName = [TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:0]];
+        ColorManager *colorManager=[ColorManager standardColorManager];
+        
         //if formation name is not empty, then create the transient object
         if (formationName.length) {
             TransientFormation *newFormation = [[TransientFormation alloc] init];
             newFormation.formationFolder = newTransientFormationFolder;
             newFormation.formationName = formationName;
             newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
-            newFormation.formationColor = [ColorManager colorWithName:[TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:1]]];
+            newFormation.formationColor = [colorManager colorWithName:[TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:1]]];
             newFormation.colorName = [tokenArray objectAtIndex:1];
             [self.formations addObject:newFormation];
         }       
@@ -437,7 +439,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
  Formation2  Blue
  ...         ...
  */
--(void) createFormationsWithColorFromCSVFiles:(NSArray *) files 
+- (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
 {
     self.selectedFilePaths = [self getSelectedFilePaths:files];    
     

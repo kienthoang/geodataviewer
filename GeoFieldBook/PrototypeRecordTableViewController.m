@@ -163,16 +163,16 @@
 
 #pragma mark - Table View Delegate
 
-- (void)cacheImage:(UIImage *)image forHashValue:(NSString *)hashValue {
+- (void)cacheImage:(UIImage *)image forHashValue:(id)hashValue {
     //If the cache has more than 30 images, flush it
-    if ([self.imageCache count]>30)
+    if (self.imageCache.count>ImageCacheCapacity)
         [self flushImageCache];
     
     //Cache the given image
-    [self.imageCache setValue:image forKey:hashValue];
+    [self.imageCache setObject:image forKey:hashValue];
 }
 
-- (UIImage *)imageInCacheWithHashValue:(NSString *)hashValue {
+- (UIImage *)imageInCacheWithHashValue:(id)hashValue {
     return [self.imageCache objectForKey:hashValue];
 }
 
@@ -181,35 +181,38 @@
 }
 
 - (void)loadImageForCell:(CustomRecordCell *)cell withRecord:(Record *)record {
-    UIImage *image=[self imageInCacheWithHashValue:[NSString stringWithFormat:@"%@",record.image.imageHash]];
-    if (image)
-        cell.recordImageView.image=image;
-    
-    //Load and cache the image if it's not there
-    else {
-        //Show the spinner
-        cell.spinner.hidden=NO;
-        [cell.spinner startAnimating];
+    if (record.image) {
+        NSNumber *hashValue=[NSNumber numberWithInt:[self.fetchedResultsController indexPathForObject:record].row];
+        UIImage *image=[self imageInCacheWithHashValue:hashValue];
+        if (image)
+            cell.recordImageView.image=image;
         
-        //Load the image from database asynchronously
-        dispatch_queue_t image_loader=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(image_loader, ^{
-            UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
-            [self cacheImage:image forHashValue:[NSString stringWithFormat:@"%@",record.image.imageHash]];
+        //Load and cache the image if it's not there
+        else {
+            //Show the spinner
+            cell.spinner.hidden=NO;
+            [cell.spinner startAnimating];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //Load the image
-                if (!cell.recordImageView.image) {
-                    cell.recordImageView.image=image;
-                    
-                    //Stop the spinner
-                    [cell.spinner stopAnimating];
-                    cell.spinner.hidden=YES;
-                }
+            //Load the image from database asynchronously
+            dispatch_queue_t image_loader=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(image_loader, ^{
+                UIImage *image = [[UIImage alloc] initWithData:record.image.imageData];
+                [self cacheImage:image forHashValue:hashValue];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //Load the image
+                    if (!cell.recordImageView.image) {
+                        cell.recordImageView.image=image;
+                        
+                        //Stop the spinner
+                        [cell.spinner stopAnimating];
+                        cell.spinner.hidden=YES;
+                    }
+                });
             });
-        });
-        
-        dispatch_release(image_loader);
+            
+            dispatch_release(image_loader);
+        }
     }
 }
 

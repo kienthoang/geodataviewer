@@ -2,7 +2,7 @@
 //  Image.h
 //  GeoFieldBook
 //
-//  Created by excel2011 on 6/28/12.
+//  Created by Kien Hoang on 7/25/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -14,7 +14,6 @@
 @interface Image : NSManagedObject
 
 @property (nonatomic, retain) NSData * imageData;
-@property (nonatomic, retain) NSData * imageHash;
 @property (nonatomic, retain) NSSet *whoUses;
 @end
 

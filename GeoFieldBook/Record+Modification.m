@@ -26,8 +26,13 @@
     
     //Update the image if it's not NSNULL
     id imageData = [recordInfo objectForKey:RECORD_IMAGE_DATA];
-    if ([imageData isKindOfClass:[NSData class]])
+    if ([imageData isKindOfClass:[NSData class]]) {
+        //Delete the old image
+        [self.managedObjectContext deleteObject:self.image];
+        
+        //Set the new image
         self.image = [Image imageWithBinaryData:imageData inManagedObjectContext:self.managedObjectContext];    
+    }
 }
 
 @end

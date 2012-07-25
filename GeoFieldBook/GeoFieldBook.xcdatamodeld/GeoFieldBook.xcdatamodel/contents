@@ -52,7 +52,6 @@
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="imageHash" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="whoUses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="image" inverseEntity="Record" syncable="YES"/>
     </entity>
     <entity name="JointSet" representedClassName="JointSet" parentEntity="Record" syncable="YES">
@@ -77,7 +76,7 @@
         <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="strike" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
-        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="whoUses" inverseEntity="Image" syncable="YES"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Image" inverseName="whoUses" inverseEntity="Image" syncable="YES"/>
     </entity>
     <entity name="Student" representedClassName="Student" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -96,7 +95,7 @@
         <element name="JointSet" positionX="198" positionY="720" width="128" height="60"/>
         <element name="Other" positionX="333" positionY="594" width="128" height="45"/>
         <element name="Question" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Record" positionX="466" positionY="162" width="128" height="210"/>
+        <element name="Record" positionX="466" positionY="162" width="128" height="225"/>
         <element name="Student" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>

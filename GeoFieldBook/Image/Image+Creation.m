@@ -13,23 +13,9 @@
 
 + (Image *)imageWithBinaryData:(NSData *)imageData inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSMutableData *imageHashKey=[NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-    CC_SHA256(imageData.bytes,imageData.length,imageHashKey.mutableBytes);
-    
-    //Query the database for any existing image with the same hash key
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Image"];
-    request.predicate=[NSPredicate predicateWithFormat:@"imageHash=%@",imageHashKey];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"imageHash" ascending:YES]];
-    NSArray *images=[context executeFetchRequest:request error:NULL];
-    
-    Image *image=nil;
-    if ([images count]) 
-        image=[images lastObject];
-    else {
-        image=[NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:context];
-        image.imageData=imageData;
-        image.imageHash=imageHashKey;
-    }
+    //Create a new image
+    Image *image=[NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:context];
+    image.imageData=imageData;
     
     return image;
 }
