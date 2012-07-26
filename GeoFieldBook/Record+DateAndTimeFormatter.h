@@ -10,6 +10,7 @@
 
 @interface Record (DateAndTimeFormatter)
 
-+(NSString *) dateFromNSDate: (NSDate *) date;
-+(NSString *) timeFromNSDate: (NSDate *) time;
++ (NSString *)dateFromNSDate:(NSDate *)date;
++ (NSString *)timeFromNSDate:(NSDate *)time;
+
 @end

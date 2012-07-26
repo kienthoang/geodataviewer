@@ -45,7 +45,7 @@
     [answerInfo setObject:self.answerTextView.text forKey:ANSWER_CONTENT];
     [answerInfo setObject:[NSDate date] forKey:ANSWER_DATE];
     [answerInfo setObject:self.question forKey:ANSWER_QUESTION];
-    [answerInfo setObject:settingManager.feedbackCounter forKey:ANSWER_NUM_RECORDS];
+    [answerInfo setObject:settingManager.feedbackInterval forKey:ANSWER_NUM_RECORDS];
     CLLocation *currentLocation=[self.delegate locationForCell:self];
     [answerInfo setObject:currentLocation forKey:ANSWER_LOCATION];
     
@@ -100,11 +100,8 @@
 #pragma mark - UITextViewDelegate Protocol Methods
 
 - (void)textViewDidChange:(UITextView *)textView {
-    //Update the answer
-    [self.answer updateWithInfo:self.answerInfo];
-    
-    //Save changes to database
-    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL completed){}];
+    //Notify the delegate
+    [self.delegate customQuestionCell:self didUpdateAnswer:self.answer withNewInfo:self.answerInfo];
 }
 
 @end

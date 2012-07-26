@@ -20,14 +20,15 @@
 #import "TransientProject.h"
 
 #import "ValidationMessageBoard.h"
-
 #import "IEEngineNotificationNames.h"
 
 #import "TextInputFilter.h"
-
 #import "ExportFormatter.h"
-
 #import "ColorManager.h"
+
+#import "Question.h"
+#import "Answer.h"
+#import "Answer+DateFormatter.h"
 
 @interface IEEngine()
 
@@ -737,7 +738,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     [self writeFormationFiles:formationsByFolders];
 }
 
--(void) createCSVFilesFromFormations:(NSArray *)formations 
+- (void)createCSVFilesFromFormations:(NSArray *)formations 
 {
     //a multiset type data structure. Key-foldername; Value-array of formations for that folder
     NSMutableDictionary *formationsByFolders = [NSMutableDictionary dictionary]; 
@@ -832,6 +833,66 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     }
     
     [handler closeFile];
+}
+
+#pragma mark - Student Response Exporting
+
+- (void)createCSVFilesFromStudentResponses:(NSArray *)responses {
+    //Create token matrix from responses
+    NSMutableArray *tokenMatrix=[NSMutableArray array];
+    for (Answer *response in responses)
+        [tokenMatrix addObject:[self tokenArrayFromResponse:response]];
+    
+    //Write the token matrix to file
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSURL *documentDirURL=[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject;
+    NSString *responseFilePath=[documentDirURL.path stringByAppendingPathComponent:@"student_responses.response.csv"];
+    
+    //Create the file and add the eader token array to the matrix if the file doesn't exist yet
+    BOOL fileNewlyCreated=NO;
+    if (![fileManager fileExistsAtPath:responseFilePath]) {
+        fileNewlyCreated=YES;
+        
+        //Create the file
+        [fileManager createFileAtPath:responseFilePath contents:nil attributes:nil];
+        
+        NSLog(@"Creating the file!");
+        
+        //Add the header token array
+        NSArray *headerTokenArray=[NSArray arrayWithObjects:@"Question",@"Response",@"Date",@"Time",@"Latitude",@"Longitude",@"Number of Records", nil];
+        [tokenMatrix insertObject:headerTokenArray atIndex:0];
+    }
+    
+    NSFileHandle *handler = [NSFileHandle fileHandleForWritingAtPath:responseFilePath];
+    
+    //Append the response data to the file (without overwriting it)
+    [handler seekToEndOfFile];
+    
+    //Write a blank line if the file is not newly created
+    if (!fileNewlyCreated)
+        [handler writeData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    for (NSArray *tokenArray in tokenMatrix) {
+        NSString *line=[tokenArray componentsJoinedByString:@", "];
+        line=[line stringByAppendingString:@"\r\n"];
+        [handler writeData:[line dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [handler closeFile];
+}
+
+- (NSArray *)tokenArrayFromResponse:(Answer *)response {
+    //Create a token array from the given response
+    NSMutableArray *tokenArray=[NSMutableArray array];
+    [tokenArray addObject:response.question.prompt];
+    [tokenArray addObject:response.content];
+    [tokenArray addObject:response.day];
+    [tokenArray addObject:response.time];
+    [tokenArray addObject:[NSString stringWithFormat:@"%@",response.latitude]];
+    [tokenArray addObject:[NSString stringWithFormat:@"%@",response.longitude]];
+    [tokenArray addObject:[NSString stringWithFormat:@"%@ Records",response.numberOfRecords]];
+    
+    return tokenArray.copy;
 }
 
 @end

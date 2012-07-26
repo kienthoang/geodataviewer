@@ -234,15 +234,15 @@
     CLLocationDegrees latitude=record.latitude.doubleValue;
     CLLocationDegrees longitude=record.longitude.doubleValue;
     
-    //Update the record
-    [record updateWithNewRecordInfo:recordInfo];
-    
     //If the record state is new, increment the feedback counter
     if (record.recordState==RecordStateNew) {
         SettingManager *settingManager=[SettingManager standardSettingManager];
         int feedbackCounter=settingManager.feedbackCounter.intValue;
         settingManager.feedbackCounter=[NSNumber numberWithInt:feedbackCounter+1];
     }
+    
+    //Update the record
+    [record updateWithNewRecordInfo:recordInfo];
     
     //Save changes to database
     [self saveChangesToDatabase:self.database completion:^(BOOL success){

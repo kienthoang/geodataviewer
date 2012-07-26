@@ -19,6 +19,9 @@
 - (void)customQuestionCell:(CustomQuestionCell *)cell 
         didCreateNewAnswer:(Answer *)answer 
                atIndexPath:(NSIndexPath *)indexPath;
+- (void)customQuestionCell:(CustomQuestionCell *)cell 
+           didUpdateAnswer:(Answer *)answer 
+               withNewInfo:(NSDictionary *)answerInfo;
 
 @end
 

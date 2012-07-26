@@ -50,6 +50,7 @@
 		0238587915996F4A00A0DB98 /* FormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587815996F4900A0DB98 /* FormationViewController.m */; };
 		0238587C1599732000A0DB98 /* Formation+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587B1599731F00A0DB98 /* Formation+Creation.m */; };
 		0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587E1599747300A0DB98 /* Formation+Modification.m */; };
+		023DEFFC15C1C1EB00591572 /* Answer+DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 023DEFFB15C1C1EB00591572 /* Answer+DateFormatter.m */; };
 		0249E2AD15A6A16100A7532E /* import_export.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AC15A6A16100A7532E /* import_export.png */; };
 		0249E2AF15A6A2D100A7532E /* gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AE15A6A2D100A7532E /* gear2.png */; };
 		0249E2B115A6A32300A7532E /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2B015A6A32300A7532E /* gear.png */; };
@@ -84,7 +85,6 @@
 		0280FCB315BEEB18009ED484 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCB215BEEB18009ED484 /* Student.m */; };
 		0280FCB615BEEB36009ED484 /* Answer+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCB515BEEB36009ED484 /* Answer+DictionaryKeys.m */; };
 		0280FCBC15BEF2E8009ED484 /* Answer+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCBB15BEF2E8009ED484 /* Answer+Modification.m */; };
-		0280FCBF15BEF484009ED484 /* AnswerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCBE15BEF484009ED484 /* AnswerTableViewController.m */; };
 		028732F015B25B6B0001BBC2 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */; };
 		028732F515B272D80001BBC2 /* PrototypeFolderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F415B272D80001BBC2 /* PrototypeFolderTableViewController.m */; };
 		028732F815B27E570001BBC2 /* FolderSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028732F715B27E570001BBC2 /* FolderSelectTableViewController.m */; };
@@ -335,6 +335,8 @@
 		0238587D1599747200A0DB98 /* Formation+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation+Modification.h"; sourceTree = "<group>"; };
 		0238587E1599747300A0DB98 /* Formation+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+Modification.m"; sourceTree = "<group>"; };
 		0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewControllerDelegate.h; sourceTree = "<group>"; };
+		023DEFFA15C1C1EB00591572 /* Answer+DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer+DateFormatter.h"; sourceTree = "<group>"; };
+		023DEFFB15C1C1EB00591572 /* Answer+DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answer+DateFormatter.m"; sourceTree = "<group>"; };
 		0249E2AC15A6A16100A7532E /* import_export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_export.png; sourceTree = "<group>"; };
 		0249E2AE15A6A2D100A7532E /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
 		0249E2B015A6A32300A7532E /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
@@ -404,8 +406,6 @@
 		0280FCB515BEEB36009ED484 /* Answer+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answer+DictionaryKeys.m"; sourceTree = "<group>"; };
 		0280FCBA15BEF2E8009ED484 /* Answer+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer+Modification.h"; sourceTree = "<group>"; };
 		0280FCBB15BEF2E8009ED484 /* Answer+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answer+Modification.m"; sourceTree = "<group>"; };
-		0280FCBD15BEF484009ED484 /* AnswerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerTableViewController.h; sourceTree = "<group>"; };
-		0280FCBE15BEF484009ED484 /* AnswerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTableViewController.m; sourceTree = "<group>"; };
 		028732EE15B25B6B0001BBC2 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		028732EF15B25B6B0001BBC2 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		028732F215B25D6A0001BBC2 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -1084,6 +1084,8 @@
 				0280FCB515BEEB36009ED484 /* Answer+DictionaryKeys.m */,
 				0280FCBA15BEF2E8009ED484 /* Answer+Modification.h */,
 				0280FCBB15BEF2E8009ED484 /* Answer+Modification.m */,
+				023DEFFA15C1C1EB00591572 /* Answer+DateFormatter.h */,
+				023DEFFB15C1C1EB00591572 /* Answer+DateFormatter.m */,
 			);
 			name = Answer;
 			sourceTree = "<group>";
@@ -1482,8 +1484,6 @@
 			children = (
 				02AE26ED15BDF8AC00FE59C7 /* StudentFeedbackViewController.h */,
 				02AE26EE15BDF8AC00FE59C7 /* StudentFeedbackViewController.m */,
-				0280FCBD15BEF484009ED484 /* AnswerTableViewController.h */,
-				0280FCBE15BEF484009ED484 /* AnswerTableViewController.m */,
 			);
 			name = "Feedback Group";
 			sourceTree = "<group>";
@@ -1848,9 +1848,9 @@
 				0280FCB315BEEB18009ED484 /* Student.m in Sources */,
 				0280FCB615BEEB36009ED484 /* Answer+DictionaryKeys.m in Sources */,
 				0280FCBC15BEF2E8009ED484 /* Answer+Modification.m in Sources */,
-				0280FCBF15BEF484009ED484 /* AnswerTableViewController.m in Sources */,
 				02BBB43515C04DF2008F7D68 /* Image.m in Sources */,
 				218BF61C15C078FA00963CB6 /* Contact+Formation.m in Sources */,
+				023DEFFC15C1C1EB00591572 /* Answer+DateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
