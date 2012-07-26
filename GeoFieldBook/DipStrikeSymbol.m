@@ -139,20 +139,6 @@
     
     //Write the numerical representation of the dip
     //only if the switch is on in settings and there is a dip
-    /*if (self.dip >= 0) {
-        CGFloat height = self.bounds.size.height;
-        NSString *dipString = [NSString stringWithFormat:@"%d", (int)self.dip];
-        CGPoint dipLocation;
-        if ((self.strike >= 90 && self.strike <= 180) || (self.strike >= 270 && self.strike <= 360)) {
-            dipLocation = CGPointMake(0.0, center.y+height/6);
-        }
-        else if ((self.strike > 0 && self.strike < 90) || (self.strike > 180 && self.strike < 270)) {
-            dipLocation = CGPointMake(center.x, center.y+height/6);
-        }
-        //set the text color to be the same as the symbol
-        [self.color set];
-        [dipString drawAtPoint:dipLocation withFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
-    }*/
     if (self.dip >=0) {
         CGFloat height = self.bounds.size.height;
         CGFloat width = self.bounds.size.width;
