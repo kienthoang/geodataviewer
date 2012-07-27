@@ -13,8 +13,11 @@
 #import "Question+Seed.h"
 
 #import "Answer.h"
+#import "Answer+Modification.h"
 
 #import "GeoDatabaseManager.h"
+#import "SettingManager.h"
+#import "IEEngine.h"
 
 @interface StudentFeedbackViewController() <CustomQuestionCellDelegate>
 
@@ -46,6 +49,7 @@
         for (Question *question in self.fetchedResultsController.fetchedObjects) {
             Answer *answer=[NSEntityDescription insertNewObjectForEntityForName:@"Answer" inManagedObjectContext:self.database.managedObjectContext];
             answer.question=question;
+            answer.numberOfRecords=[SettingManager standardSettingManager].feedbackInterval;
             CLLocationCoordinate2D coordinate=self.answerLocation.coordinate;
             answer.longitude=[NSNumber numberWithFloat:coordinate.longitude];
             answer.latitude=[NSNumber numberWithFloat:coordinate.latitude];
@@ -154,6 +158,10 @@
 #pragma mark - Target-Action Handlers
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
+    //Write the responses to csv file
+    IEEngine *exportEngine=[[IEEngine alloc] init];
+    [exportEngine createCSVFilesFromStudentResponses:self.answers];
+    
     //Dismiss self
     [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
@@ -172,6 +180,17 @@
     NSMutableArray *answers=self.answers.mutableCopy;
     [answers replaceObjectAtIndex:indexPath.row withObject:answer];
     self.answers=answers.copy;
+}
+
+- (void)customQuestionCell:(CustomQuestionCell *)cell 
+           didUpdateAnswer:(Answer *)answer 
+               withNewInfo:(NSDictionary *)answerInfo
+{
+    //Update the answer
+    [answer updateWithInfo:answerInfo];
+    
+    //Save changes to database
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL completed){}];
 }
 
 @end
