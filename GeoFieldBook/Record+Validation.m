@@ -11,12 +11,12 @@
 
 @implementation Record (Validation)
 
-+ (NSArray *)validatesMandatoryPresenceOfRecordInfo:(NSDictionary *)recordInfo {
+- (NSArray *)validatesMandatoryPresenceOfRecordInfo:(NSDictionary *)recordInfo {
     //Create an array to hold the keys that correspond to missing or invalid mandatory information
     NSMutableArray *invalidInformationKeys=[NSMutableArray array];
     
     //Validates the presence of location, date, and dip direction information
-    NSArray *mandatoryFields=[NSArray arrayWithObjects:RECORD_LATITUDE,RECORD_LONGITUDE,RECORD_DATE,RECORD_DIP_DIRECTION, nil];
+    NSMutableArray *mandatoryFields=[NSMutableArray arrayWithObjects:RECORD_LATITUDE,RECORD_LONGITUDE,RECORD_DATE, nil];
     for (NSString *field in mandatoryFields) {
         if (![recordInfo objectForKey:field])
             [invalidInformationKeys addObject:field];

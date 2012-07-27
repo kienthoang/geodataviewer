@@ -621,7 +621,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-7599" y="-2929"/>
+            <point key="canvasLocation" x="-7455" y="-3433"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="hMg-tH-KZj">
@@ -1602,7 +1602,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-8974" y="-2942"/>
+            <point key="canvasLocation" x="-8830" y="-3446"/>
         </scene>
         <!--Formation Picker View Controller-->
         <scene sceneID="dbq-aM-UYl">
@@ -2101,7 +2101,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-10236" y="-2942"/>
+            <point key="canvasLocation" x="-10092" y="-3446"/>
         </scene>
         <!--Formation ImportTVC-->
         <scene sceneID="nBD-Xt-9wU">

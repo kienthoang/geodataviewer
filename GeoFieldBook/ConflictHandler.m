@@ -448,9 +448,7 @@
     for (TransientFormation_Folder *transientFolder in folders) {
         //Save the folder (in the approrpiate thread since UIManagedDocument is not thread-safe)
         [self.database.managedObjectContext performBlock:^{
-            [transientFolder saveToManagedObjectContext:self.database.managedObjectContext completion:^(NSManagedObject *savedManagedObject){
-                
-            }];
+            [transientFolder saveToManagedObjectContext:self.database.managedObjectContext completion:^(NSManagedObject *savedManagedObject){}];
         }];
     }    
     

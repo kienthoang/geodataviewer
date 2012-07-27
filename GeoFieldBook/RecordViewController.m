@@ -51,24 +51,6 @@
 #define LOWER_FORMATION_PICKER_NAME @"RecordViewController.Lower_Formation_Picker"
 #define UPPER_FORMATION_PICKER_NAME @"RecordViewController.Upper_Formation_Picker"
 
-- (void)userDoneEditingRecord;         //handles when user finishes editing the record's info
-- (void)resignAllTextFieldsAndAreas;
-
-#pragma mark - Validation Mechanism Declarations
-
-- (BOOL)validateMandatoryFieldsOfInfo:(NSDictionary *)recordInfo 
-                        alertsEnabled:(BOOL)alertsEnabled;
-
-#pragma mark - Form Setup Controller Method Declarations
-
-- (void)formSetupForBeddingType;
-- (void)formSetupForContactType;
-- (void)formSetupForJointSetType;
-- (void)formSetupForFaultType;
-- (void)formSetupForOtherType;
-
-- (void)updateFormForRecord:(Record *)record;
-
 #pragma mark - Private Properties
 
 @property (nonatomic) BOOL editing;
@@ -450,7 +432,7 @@
                         alertsEnabled:(BOOL)alertsEnabled 
 {
     //Put up alerts if validations fail
-    NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
+    NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo forRecord:self.record];
     if (validationKeys.count && alertsEnabled) {
         //Get the name of the fields that do not pass validations
         NSMutableArray *failedFieldNames=[NSMutableArray array];
