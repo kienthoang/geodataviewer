@@ -405,7 +405,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             [self.formations addObject:newFormation];
         }       
     }
-    NSLog(@"Formation Folders: %@", [[formationFolders objectAtIndex:0] folderName]);
     self.formationFolders = formationFolders.copy;
 }
 
@@ -454,7 +453,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     for(NSString *path in self.selectedFilePaths) {
         //Construct formations from the file path
         NSString *folderName = [[[[path componentsSeparatedByString:@"/"] lastObject] componentsSeparatedByString:@"."] objectAtIndex:0];
-        NSLog(@"folderName %@", folderName);
         [self constructFormationsWithColorsfromCSVFilePath:path withFolderName:folderName];
     }
 
