@@ -23,6 +23,6 @@
 #define kDEFAULTCLUSTERSIZE 0.2
 
 - (void)updateRecords:(NSArray *)records forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
-- (void)reloadAnnotationViewColor;
+- (void)reloadAnnotationViews;
 
 @end

@@ -356,7 +356,7 @@
 - (void)modelGroupFormationDatabaseDidChange:(NSNotification *)notification {
     //Force update the map
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC reloadMapAnnotationViewColor];
+    [dataMapSegmentVC reloadMapAnnotationViews];
 }
 
 - (void)putImportExportButtonBack {
@@ -502,7 +502,7 @@
                              object:nil];
     [notificationCenter addObserver:self 
                            selector:@selector(longPressGestureSettingDidChange:) 
-                               name:SettingManagerLongPressEnabledDidChange 
+                               name:SettingManagerUserPreferencesDidChange 
                              object:nil];
     [notificationCenter addObserver:self 
                            selector:@selector(feedbackTimeout:) 
