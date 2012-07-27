@@ -180,8 +180,8 @@
         
         //Save the unprocessed transient folders and records
            
-        if([unprocessedFormations count]) self.transientFormations=unprocessedFormations;
-        if([unprocessedFolders count]) self.transientFormationFolders=[unprocessedFolders copy];
+        self.transientFormations=unprocessedFormations;
+        self.transientFormationFolders=[unprocessedFolders copy];
         
         //If the duplicate folder name is not nil, save the unprocessed transient formations and folders and notify the program
         if (self.duplicateFormationFolderName) {
