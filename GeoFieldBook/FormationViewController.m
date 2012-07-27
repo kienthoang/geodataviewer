@@ -74,7 +74,10 @@
 
 - (NSDictionary *)formationInfoFromForm {
     //Create a dictionary with all the information user provided
-    NSDictionary *formationInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.formationName,GeoFormationName,self.formationColor,GeoFormationColor, nil];
+    SettingManager *settings = [SettingManager standardSettingManager];
+    
+    if(!self.formationColorName) self.formationColorName = settings.defaultFormationColorName; 
+    NSDictionary *formationInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.formationName,GeoFormationName,self.formationColor,GeoFormationColor, self.formationColorName, GeoFormationColorName, nil];
     return formationInfo;
 }
 

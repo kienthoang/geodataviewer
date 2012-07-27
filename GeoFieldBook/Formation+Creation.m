@@ -22,6 +22,7 @@
     NSString *formationName=[formationInfo objectForKey:GeoFormationName];
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
     UIColor *formationColor=[formationInfo objectForKey:GeoFormationColor];
+    NSString *colorName=[formationInfo objectForKey:GeoFormationColorName];
 
     //Query for the folder with the specified name, if it does not exist return nil
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
@@ -46,6 +47,7 @@
     Formation *formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
     formation.formationName=formationName;
     formation.formationFolder=formationFolder;
+    formation.colorName=colorName;
     
     //Update the formation color
     CGFloat red;

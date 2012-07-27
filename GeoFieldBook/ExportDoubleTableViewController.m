@@ -99,7 +99,7 @@
         else if ([self.masterTableViewController isKindOfClass:[ExportFormationFolderTableViewController class]]) {
             //Export Formations
             NSArray *exportedFormations=[(ExportFormationFolderTableViewController *)self.masterTableViewController selectedFormations];
-            [self.exportEngine createCSVFilesFromFormations:exportedFormations];
+            [self.exportEngine createCSVFilesFromFormationsWithColors:exportedFormations];
         }
     });
     

@@ -43,7 +43,7 @@ static ColorManager *standardColorManager;
         //Initialize the properties
         [self initializeColorNameAndColors];
         self.colorDictionary=[NSDictionary dictionaryWithObjects:self.colors forKeys:self.colorNames];
-        self.colorNameDictionary=[NSDictionary dictionaryWithObjects:self.colorNames forKeys:self.colors];
+//        self.colorNameDictionary=[NSDictionary dictionaryWithObjects:self.colorNames forKeys:self.colors];
     }
     
     return self;

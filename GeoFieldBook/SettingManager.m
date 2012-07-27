@@ -16,6 +16,8 @@
 
 @implementation SettingManager
 
+@synthesize defaultFormationColorName=_defaultFormationColorName;
+
 static SettingManager *settingManager;
 
 + (void)initialize {
@@ -97,6 +99,10 @@ static SettingManager *settingManager;
 }
 
 #pragma mark - Color Group
+
+-(NSString *) defaultFormationColorName {
+    return [self.userDefaults objectForKey:NSUserDefaultsDefaultFormationColor];
+}
 
 - (BOOL)formationColorEnabled {
     return [self.userDefaults boolForKey:NSUserDefaultsFormationColorEnabled];

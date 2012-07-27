@@ -205,7 +205,7 @@
         
         //Pass the selected csv files to the engine
         weakSelf.engine.handler=weakSelf.conflictHandler;
-        [weakSelf.engine createFormationsFromCSVFiles:selectedCSVFiles];
+        [weakSelf.engine createFormationsWithColorFromCSVFiles:selectedCSVFiles];
     });
     dispatch_release(import_queue_t);
 }
