@@ -23,7 +23,7 @@
 @property (nonatomic) BOOL formationColorEnabled;
 @property (nonatomic,strong) UIColor *defaultFormationColor;
 @property (nonatomic,strong) UIColor *defaultSymbolColor;
-
+@property (nonatomic, strong) NSString *defaultFormationColorName;
 #pragma mark - Gestures Group
 
 

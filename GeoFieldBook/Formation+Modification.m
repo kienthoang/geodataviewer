@@ -20,7 +20,8 @@
     NSString *formationName=[formationInfo objectForKey:GeoFormationName];
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
     UIColor *formationColor=[formationInfo objectForKey:GeoFormationColor];
-    
+    NSString *colorName=[formationInfo objectForKey:GeoFormationColorName];
+
     //if the name is nil, return NO
     if (!formationName)
         return NO;
@@ -47,6 +48,7 @@
     
     //Update the formation name
     self.formationName=formationName;
+    self.colorName=colorName;
     
     //Update the formation color
     CGFloat red;

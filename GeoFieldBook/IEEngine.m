@@ -331,7 +331,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 - (void)constructFormationsFromCSVFilePath:(NSString *)path {
     //this is an array lines, which is an array of tokens
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
-    
+        
     //Transpose the array of tokens (expecting the csv file to contains formation columns sorted by formation folders)
     tokenArrays=[ExportFormatter transposeTwoDimensionalArray:tokenArrays.copy].mutableCopy;
     
@@ -367,14 +367,16 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     self.formationFolders=formationFolders.copy;
 }
 
--(void) constructFormationsWithColorsfromCSVFilePath:(NSString *) path
+-(void) constructFormationsWithColorsfromCSVFilePath:(NSString *) path withFolderName:(NSString *) fileName;
 {
     
-    NSMutableArray *tokenArrays = [self tokenArrayForLine:path].mutableCopy; // A 2D array with rows as each line, and tokens en each line as the columns in each row
+    NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy; // A 2D array with rows as each line, and tokens en each line as the columns in each row    
+    
     TransientFormation_Folder *newTransientFormationFolder;
     NSMutableArray *formationFolders = self.formationFolders.mutableCopy;
+    
     if([tokenArrays count]) {
-        NSString *newFormationFolderName = [[tokenArrays objectAtIndex:0] objectAtIndex:0];//get the object as the first row and column.
+        NSString *newFormationFolderName = fileName;//get the object as the first row and column.
         newFormationFolderName = [TextInputFilter filterDatabaseInputText:newFormationFolderName];
         newTransientFormationFolder = [[TransientFormation_Folder alloc] init];
         newTransientFormationFolder.folderName = [TextInputFilter filterDatabaseInputText:newFormationFolderName];
@@ -402,6 +404,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             [self.formations addObject:newFormation];
         }       
     }
+    NSLog(@"Formation Folders: %@", [[formationFolders objectAtIndex:0] folderName]);
     self.formationFolders = formationFolders.copy;
 }
 
@@ -421,14 +424,17 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
        
     //If there is any error message, pass nil to the handler as well as the error log
-    if (self.validationMessageBoard.errorCount)
+       
+    if (self.validationMessageBoard.errorCount){        
         [self.handler processTransientFormations:nil 
                              andFormationFolders:nil
                         withValidationMessageLog:self.validationMessageBoard.allMessages];
-    else
+    
+    } else {
         [self.handler processTransientFormations:self.formations.copy 
                              andFormationFolders:self.formationFolders 
                         withValidationMessageLog:self.validationMessageBoard.warningMessages];
+    }
 }
 
 /* The format of this file would be two columns of data in a file for each formation folder. The first column is the formation type and the second would be the color associated with that formation type. If the color column is empty, the color would be default when the annotations are drawn.
@@ -446,19 +452,24 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //read each of those files line by line and create the formation objects and add it to self.formations array.
     for(NSString *path in self.selectedFilePaths) {
         //Construct formations from the file path
-        [self constructFormationsWithColorsfromCSVFilePath:path];
+        NSString *folderName = [[[[path componentsSeparatedByString:@"/"] lastObject] componentsSeparatedByString:@"."] objectAtIndex:0];
+        NSLog(@"folderName %@", folderName);
+        [self constructFormationsWithColorsfromCSVFilePath:path withFolderName:folderName];
     }
 
+   
     //call the handler
     //If there is any error message, pass nil to the handler as well as the error log
-    if (self.validationMessageBoard.errorCount)
+    if (self.validationMessageBoard.errorCount) {
         [self.handler processTransientFormations:nil 
                              andFormationFolders:nil
                         withValidationMessageLog:self.validationMessageBoard.allMessages];
-    else
+    } else {
+//        NSLog(@"Formation folder: %@", self.formationFolders);
         [self.handler processTransientFormations:self.formations.copy 
                              andFormationFolders:self.formationFolders 
-                        withValidationMessageLog:self.validationMessageBoard.warningMessages];
+                        withValidationMessageLog:self.validationMessageBoard.warningMessages];  
+    }
 }
 
 
@@ -722,14 +733,16 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         if([formationsByFolders.allKeys containsObject:formation.formationFolder.folderName]) {
             //new formation to add
             NSArray *newFormation = [NSArray arrayWithObjects:formation.formationName, formation.colorName, nil];
+//            NSLog(@"NewFormation: %@", newFormation);
             //get the existing value
             NSMutableArray *formationArray = [formationsByFolders objectForKey:formation.formationFolder.folderName];
+            [formationsByFolders removeObjectForKey:formation.formationFolder.folderName];
             [formationArray addObject:newFormation];
             [formationsByFolders setObject:formationArray forKey:formation.formationFolder.folderName];
         } else {
             NSArray *newFormation = [NSArray arrayWithObjects:formation.formationName, formation.colorName, nil];
-            NSMutableArray *formationArray = [NSMutableArray arrayWithObject:formation.formationName];
-            [formationArray addObject:newFormation];
+//            NSLog(@"NewFormationNEW: %@", newFormation);
+            NSMutableArray *formationArray = [NSMutableArray arrayWithObject:newFormation];
             [formationsByFolders setObject:formationArray forKey:formation.formationFolder.folderName];
         }
     }
@@ -799,8 +812,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         NSString *line;
         for(NSArray *formations in formationsArray) 
         {
-            line = [NSString stringWithFormat:@"%@,%@\r\n", [formations objectAtIndex:0], [formations objectAtIndex:1]];
-            [handler writeData:[line dataUsingEncoding:NSUTF8StringEncoding]];
+            if([formations count]==2) {
+                line = [NSString stringWithFormat:@"%@,%@\r\n", [formations objectAtIndex:0], [formations objectAtIndex:1]];
+                [handler writeData:[line dataUsingEncoding:NSUTF8StringEncoding]];
+            }
         }
         [handler closeFile];
     }

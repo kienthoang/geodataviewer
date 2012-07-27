@@ -47,6 +47,16 @@
 
 #pragma mark - Getters and Setters
 
+-(NSArray *)transientFormationFolders {
+    if(!_transientFormationFolders) _transientFormationFolders = [[NSArray alloc] init];
+    return _transientFormationFolders;
+}
+
+-(NSArray *)transientFormations {
+    if(!_transientFormations) _transientFormations = [[NSArray alloc] init];
+    return _transientFormations;
+}
+
 - (void)setTransientRecords:(NSArray *)transientRecords {
     _transientRecords=transientRecords;
         
@@ -138,6 +148,7 @@
             //Save the folder name if there is a duplicate
             TransientFormation_Folder *transientFolder=[folders objectAtIndex:index];
             [unprocessedFolders removeObject:transientFolder];
+            NSLog(@"TransientFormationFolderName: %@", transientFolder.folderName);
             Formation_Folder *duplicateFormationFolder=[self queryDatabaseForFormationFolderWithName:transientFolder.folderName];
             if (duplicateFormationFolder) {
                 //Save the duplicate folder name
@@ -168,8 +179,9 @@
         }
         
         //Save the unprocessed transient folders and records
-        self.transientFormations=unprocessedFormations;
-        self.transientFormationFolders=[unprocessedFolders copy];
+           
+        if([unprocessedFormations count]) self.transientFormations=unprocessedFormations;
+        if([unprocessedFolders count]) self.transientFormationFolders=[unprocessedFolders copy];
         
         //If the duplicate folder name is not nil, save the unprocessed transient formations and folders and notify the program
         if (self.duplicateFormationFolderName) {
