@@ -283,12 +283,6 @@
     }];
 }
 
-- (void)deleteRecordIfFresh:(Record *)record {
-    //If the record's state is new, delete it
-    if (record.recordState==RecordStateNew)
-        [self deleteRecords:[NSArray arrayWithObject:record]];
-}
-
 #pragma mark - FormationFolderPickerDelegate methods
 
 - (void)formationFolderPickerViewController:(FormationFolderPickerViewController *)sender 

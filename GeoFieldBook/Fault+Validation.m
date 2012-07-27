@@ -17,7 +17,7 @@
     //Validates the presence of location, date, and dip direction information
     NSMutableArray *mandatoryFields=[NSMutableArray arrayWithObjects:RECORD_DIP_DIRECTION, nil];
     for (NSString *field in mandatoryFields) {
-        if (![recordInfo objectForKey:field])
+        if (![[recordInfo objectForKey:field] length])
             [invalidInformationKeys addObject:field];
     }
     
