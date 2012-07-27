@@ -7,12 +7,14 @@
 //
 
 #import "Contact+Formation.h"
+#import "SettingManager.h"
 
 @implementation Contact (Formation)
 
 - (Formation *)formation
 {
-    return self.upperFormation ? self.upperFormation : self.lowerFormation;
+    NSString *defaultContactFormation=[SettingManager standardSettingManager].defaultContactFormation;
+    return [defaultContactFormation isEqualToString:@"Upper Formation"] ? self.upperFormation : self.lowerFormation;
 }
 
 @end

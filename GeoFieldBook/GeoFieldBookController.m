@@ -633,7 +633,7 @@
     UIAlertView *autosaveAlert=nil;
     
     //If the record info passes the validations, show the alert; otherwise, show an alert with no confirm button
-    NSArray *failedKeyNames=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo];
+    NSArray *failedKeyNames=[self.modifiedRecord validatesMandatoryPresenceOfRecordInfo:recordInfo];
     if (![failedKeyNames count]) {
         //If the name of the record is not nil
         NSString *message=@"You navigated away. Do you want to save the record you were editing?";

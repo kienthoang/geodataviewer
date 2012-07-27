@@ -24,8 +24,8 @@
 @property (nonatomic,strong) UIColor *defaultFormationColor;
 @property (nonatomic,strong) UIColor *defaultSymbolColor;
 @property (nonatomic, strong) NSString *defaultFormationColorName;
-#pragma mark - Gestures Group
 
+#pragma mark - Gestures Group
 
 #define NSUserDefaultsLongPressEnabled @"gestures_long_press_enabled"
 #define NSUserDefaultsSwipeRecordEnabled @"gestures_swipe_record_enabled"
@@ -45,10 +45,12 @@
 @property (nonatomic,strong) NSNumber *feedbackInterval;
 @property (nonatomic,strong) NSNumber *feedbackCounter;
 
-#pragma mark - Dip Number Group
+#pragma mark - Dip Strike Symbol Group
 
 #define NSUserDefaultsDipNumberEnabled @"dip_number_enabled"
+#define NSUserDefaultsContactDefaultFormation @"contact_default_formation"
 
 @property (nonatomic) BOOL dipNumberEnabled;
+@property (nonatomic,strong) NSString *defaultContactFormation;
 
 @end

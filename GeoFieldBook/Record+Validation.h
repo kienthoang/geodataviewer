@@ -7,6 +7,7 @@
 //
 
 #import "Record.h"
+#import "Record+DictionaryKeys.h"
 
 @interface Record (Validation)
 

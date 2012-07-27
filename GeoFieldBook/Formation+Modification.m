@@ -50,16 +50,6 @@
     self.formationName=formationName;
     self.colorName=colorName;
     
-    //Update the formation color
-    CGFloat red;
-    CGFloat blue;
-    CGFloat green;
-    CGFloat alpha;
-    [formationColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    self.redColorComponent=[NSNumber numberWithFloat:red];
-    self.blueColorComponent=[NSNumber numberWithFloat:blue];
-    self.greenColorComponent=[NSNumber numberWithFloat:green];
-    
     return YES;
 }
 

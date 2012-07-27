@@ -8,6 +8,8 @@
 
 #import "CustomFormationCell.h"
 
+#import "ColorManager.h"
+
 @implementation CustomFormationCell
 
 @synthesize formation=_formation;
@@ -15,10 +17,7 @@
 @synthesize name=_name;
 
 - (UIColor *)colorForFormation:(Formation *)formation {
-    UIColor *formationColor=[[UIColor alloc] initWithRed:formation.redColorComponent.floatValue 
-                                                   green:formation.greenColorComponent.floatValue 
-                                                    blue:formation.blueColorComponent.floatValue 
-                                                   alpha:1.0];
+    UIColor *formationColor=[[ColorManager standardColorManager] colorWithName:formation.colorName];
     
     return formationColor;
 }

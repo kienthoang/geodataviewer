@@ -2,7 +2,7 @@
 //  Formation.h
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 7/21/12.
+//  Created by Kien Hoang on 7/27/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -13,18 +13,15 @@
 
 @interface Formation : NSManagedObject
 
+@property (nonatomic, retain) NSString * colorName;
 @property (nonatomic, retain) NSString * formationName;
 @property (nonatomic, retain) NSNumber * formationSortNumber;
-@property (nonatomic, retain) NSNumber * redColorComponent;
-@property (nonatomic, retain) NSNumber * greenColorComponent;
-@property (nonatomic, retain) NSNumber * blueColorComponent;
 @property (nonatomic, retain) NSSet *beddings;
 @property (nonatomic, retain) NSSet *faults;
 @property (nonatomic, retain) Formation_Folder *formationFolder;
 @property (nonatomic, retain) NSSet *joinSets;
 @property (nonatomic, retain) NSSet *lowerContacts;
 @property (nonatomic, retain) NSSet *upperContacts;
-@property (nonatomic, retain) NSString *colorName;
 @end
 
 @interface Formation (CoreDataGeneratedAccessors)

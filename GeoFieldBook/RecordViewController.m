@@ -432,7 +432,7 @@
                         alertsEnabled:(BOOL)alertsEnabled 
 {
     //Put up alerts if validations fail
-    NSArray *validationKeys=[Record validatesMandatoryPresenceOfRecordInfo:recordInfo forRecord:self.record];
+    NSArray *validationKeys=[self.record validatesMandatoryPresenceOfRecordInfo:recordInfo];
     if (validationKeys.count && alertsEnabled) {
         //Get the name of the fields that do not pass validations
         NSMutableArray *failedFieldNames=[NSMutableArray array];

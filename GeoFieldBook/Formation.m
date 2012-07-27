@@ -2,7 +2,7 @@
 //  Formation.m
 //  GeoFieldBook
 //
-//  Created by Kien Hoang on 7/21/12.
+//  Created by Kien Hoang on 7/27/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -16,17 +16,14 @@
 
 @implementation Formation
 
+@dynamic colorName;
 @dynamic formationName;
 @dynamic formationSortNumber;
-@dynamic redColorComponent;
-@dynamic greenColorComponent;
-@dynamic blueColorComponent;
 @dynamic beddings;
 @dynamic faults;
 @dynamic formationFolder;
 @dynamic joinSets;
 @dynamic lowerContacts;
 @dynamic upperContacts;
-@dynamic colorName;
 
 @end

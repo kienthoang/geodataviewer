@@ -9,6 +9,7 @@
 #import "MKCustomAnnotationView.h"
 
 #import "SettingManager.h"
+#import "ColorManager.h"
 
 #import "Contact+Formation.h"
 
@@ -43,10 +44,7 @@
         if (settingManager.formationColorEnabled && [(id)record formation]) {
             if (![record isKindOfClass:[Other class]]) {
                 Formation *formation=[(id)record formation];
-                color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
-                                      green:formation.greenColorComponent.floatValue 
-                                       blue:formation.blueColorComponent.floatValue 
-                                      alpha:1.0];
+                color=[[ColorManager standardColorManager] colorWithName:formation.colorName];
             }
         }
         

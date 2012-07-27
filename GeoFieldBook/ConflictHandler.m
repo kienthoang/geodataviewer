@@ -48,12 +48,12 @@
 #pragma mark - Getters and Setters
 
 -(NSArray *)transientFormationFolders {
-    if(!_transientFormationFolders) _transientFormationFolders = [[NSArray alloc] init];
+    if(!_transientFormationFolders) _transientFormationFolders = [NSArray array];
     return _transientFormationFolders;
 }
 
 -(NSArray *)transientFormations {
-    if(!_transientFormations) _transientFormations = [[NSArray alloc] init];
+    if(!_transientFormations) _transientFormations = [NSArray array];
     return _transientFormations;
 }
 

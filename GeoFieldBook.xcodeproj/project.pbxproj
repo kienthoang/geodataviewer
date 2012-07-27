@@ -51,6 +51,11 @@
 		0238587C1599732000A0DB98 /* Formation+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587B1599731F00A0DB98 /* Formation+Creation.m */; };
 		0238587F1599747400A0DB98 /* Formation+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238587E1599747300A0DB98 /* Formation+Modification.m */; };
 		023DEFFC15C1C1EB00591572 /* Answer+DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 023DEFFB15C1C1EB00591572 /* Answer+DateFormatter.m */; };
+		023DEFFF15C2FE8800591572 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 023DEFFE15C2FE8800591572 /* Formation.m */; };
+		023DF00215C309AD00591572 /* Bedding+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 023DF00115C309AD00591572 /* Bedding+Validation.m */; };
+		023DF00515C30A2C00591572 /* Contact+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 023DF00415C30A2C00591572 /* Contact+Validation.m */; };
+		023DF00815C30A8700591572 /* Fault+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 023DF00715C30A8700591572 /* Fault+Validation.m */; };
+		023DF00B15C30AA500591572 /* JointSet+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 023DF00A15C30AA500591572 /* JointSet+Validation.m */; };
 		0249E2AD15A6A16100A7532E /* import_export.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AC15A6A16100A7532E /* import_export.png */; };
 		0249E2AF15A6A2D100A7532E /* gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AE15A6A2D100A7532E /* gear2.png */; };
 		0249E2B115A6A32300A7532E /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2B015A6A32300A7532E /* gear.png */; };
@@ -75,7 +80,6 @@
 		027764B815BA49DC00C9DCEB /* RGB-HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 027764B715BA49DB00C9DCEB /* RGB-HSL.m */; };
 		027764BB15BA4ADE00C9DCEB /* ColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027764BA15BA4ADE00C9DCEB /* ColorPickerViewController.m */; };
 		02806EE615BA6B94003D09A7 /* Formation+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EE515BA6B94003D09A7 /* Formation+DictionaryKeys.m */; };
-		02806EE915BA6E78003D09A7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EE815BA6E78003D09A7 /* Formation.m */; };
 		02806EEC15BA7E97003D09A7 /* CustomFormationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */; };
 		02806F0515BB00E5003D09A7 /* green_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 02806F0315BB00E5003D09A7 /* green_pin.png */; };
 		0280FCA715BEEACC009ED484 /* Answer+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0280FCA615BEEACC009ED484 /* Answer+Creation.m */; };
@@ -337,6 +341,16 @@
 		0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		023DEFFA15C1C1EB00591572 /* Answer+DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer+DateFormatter.h"; sourceTree = "<group>"; };
 		023DEFFB15C1C1EB00591572 /* Answer+DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answer+DateFormatter.m"; sourceTree = "<group>"; };
+		023DEFFD15C2FE8800591572 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
+		023DEFFE15C2FE8800591572 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
+		023DF00015C309AD00591572 /* Bedding+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bedding+Validation.h"; sourceTree = "<group>"; };
+		023DF00115C309AD00591572 /* Bedding+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bedding+Validation.m"; sourceTree = "<group>"; };
+		023DF00315C30A2C00591572 /* Contact+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Contact+Validation.h"; sourceTree = "<group>"; };
+		023DF00415C30A2C00591572 /* Contact+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+Validation.m"; sourceTree = "<group>"; };
+		023DF00615C30A8700591572 /* Fault+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fault+Validation.h"; sourceTree = "<group>"; };
+		023DF00715C30A8700591572 /* Fault+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Fault+Validation.m"; sourceTree = "<group>"; };
+		023DF00915C30AA500591572 /* JointSet+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JointSet+Validation.h"; sourceTree = "<group>"; };
+		023DF00A15C30AA500591572 /* JointSet+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JointSet+Validation.m"; sourceTree = "<group>"; };
 		0249E2AC15A6A16100A7532E /* import_export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_export.png; sourceTree = "<group>"; };
 		0249E2AE15A6A2D100A7532E /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
 		0249E2B015A6A32300A7532E /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
@@ -387,8 +401,6 @@
 		02806EE215BA66D5003D09A7 /* ColorPickerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerViewControllerDelegate.h; sourceTree = "<group>"; };
 		02806EE415BA6B94003D09A7 /* Formation+DictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation+DictionaryKeys.h"; sourceTree = "<group>"; };
 		02806EE515BA6B94003D09A7 /* Formation+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation+DictionaryKeys.m"; sourceTree = "<group>"; };
-		02806EE715BA6E78003D09A7 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
-		02806EE815BA6E78003D09A7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
 		02806EEA15BA7E97003D09A7 /* CustomFormationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFormationCell.h; sourceTree = "<group>"; };
 		02806EEB15BA7E97003D09A7 /* CustomFormationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFormationCell.m; sourceTree = "<group>"; };
 		02806F0315BB00E5003D09A7 /* green_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_pin.png; sourceTree = "<group>"; };
@@ -1291,8 +1303,8 @@
 		0298C251159B43170038E89C /* Formation */ = {
 			isa = PBXGroup;
 			children = (
-				02806EE715BA6E78003D09A7 /* Formation.h */,
-				02806EE815BA6E78003D09A7 /* Formation.m */,
+				023DEFFD15C2FE8800591572 /* Formation.h */,
+				023DEFFE15C2FE8800591572 /* Formation.m */,
 				0238587A1599731F00A0DB98 /* Formation+Creation.h */,
 				0238587B1599731F00A0DB98 /* Formation+Creation.m */,
 				0238587D1599747200A0DB98 /* Formation+Modification.h */,
@@ -1310,6 +1322,8 @@
 				02712A4B159D010500510188 /* Bedding.m */,
 				0222DB0515961ED900699D62 /* Bedding+Modification.h */,
 				0222DB0615961ED900699D62 /* Bedding+Modification.m */,
+				023DF00015C309AD00591572 /* Bedding+Validation.h */,
+				023DF00115C309AD00591572 /* Bedding+Validation.m */,
 			);
 			name = Bedding;
 			sourceTree = "<group>";
@@ -1323,6 +1337,8 @@
 				0222DB0F159622DC00699D62 /* Contact+Modification.m */,
 				218BF61A15C078FA00963CB6 /* Contact+Formation.h */,
 				218BF61B15C078FA00963CB6 /* Contact+Formation.m */,
+				023DF00315C30A2C00591572 /* Contact+Validation.h */,
+				023DF00415C30A2C00591572 /* Contact+Validation.m */,
 			);
 			name = Contact;
 			sourceTree = "<group>";
@@ -1378,6 +1394,8 @@
 				0222DB151596305400699D62 /* JointSet+Description.m */,
 				0222DB0B1596229E00699D62 /* JointSet+Modification.h */,
 				0222DB0C1596229F00699D62 /* JointSet+Modification.m */,
+				023DF00915C30AA500591572 /* JointSet+Validation.h */,
+				023DF00A15C30AA500591572 /* JointSet+Validation.m */,
 			);
 			name = JointSet;
 			sourceTree = "<group>";
@@ -1389,6 +1407,8 @@
 				028E94BA15B89D1C006E8B3F /* Fault.m */,
 				0222DB081596204300699D62 /* Fault+Modification.h */,
 				0222DB091596204300699D62 /* Fault+Modification.m */,
+				023DF00615C30A8700591572 /* Fault+Validation.h */,
+				023DF00715C30A8700591572 /* Fault+Validation.m */,
 			);
 			name = Fault;
 			sourceTree = "<group>";
@@ -1812,7 +1832,6 @@
 				027764B815BA49DC00C9DCEB /* RGB-HSL.m in Sources */,
 				027764BB15BA4ADE00C9DCEB /* ColorPickerViewController.m in Sources */,
 				02806EE615BA6B94003D09A7 /* Formation+DictionaryKeys.m in Sources */,
-				02806EE915BA6E78003D09A7 /* Formation.m in Sources */,
 				02806EEC15BA7E97003D09A7 /* CustomFormationCell.m in Sources */,
 				02A7764515BCA3BE008A22C2 /* IASKAppSettingsViewController.m in Sources */,
 				02A7764615BCA3BE008A22C2 /* IASKAppSettingsWebViewController.m in Sources */,
@@ -1851,6 +1870,11 @@
 				02BBB43515C04DF2008F7D68 /* Image.m in Sources */,
 				218BF61C15C078FA00963CB6 /* Contact+Formation.m in Sources */,
 				023DEFFC15C1C1EB00591572 /* Answer+DateFormatter.m in Sources */,
+				023DEFFF15C2FE8800591572 /* Formation.m in Sources */,
+				023DF00215C309AD00591572 /* Bedding+Validation.m in Sources */,
+				023DF00515C30A2C00591572 /* Contact+Validation.m in Sources */,
+				023DF00815C30A8700591572 /* Fault+Validation.m in Sources */,
+				023DF00B15C30AA500591572 /* JointSet+Validation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

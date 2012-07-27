@@ -13,6 +13,7 @@
 #import "NPColorPickerView.h"
 
 #import "SettingManager.h"
+#import "ColorManager.h"
 
 @interface FormationViewController() <UITextFieldDelegate,ColorPickerViewControllerDelegate>
 
@@ -63,14 +64,11 @@
     self.formationName=self.formation.formationName;
     
     //Update the color
-    UIColor *formationColor=[UIColor colorWithRed:formation.redColorComponent.floatValue 
-                                            green:self.formation.greenColorComponent.floatValue 
-                                             blue:self.formation.blueColorComponent.floatValue 
-                                            alpha:1.0];
+    UIColor *formationColor=[[ColorManager standardColorManager] colorWithName:formation.colorName];
     self.formationColor=formationColor;
 }
 
-#pragma mark -Data Collectors
+#pragma mark - Data Collectors
 
 - (NSDictionary *)formationInfoFromForm {
     //Create a dictionary with all the information user provided

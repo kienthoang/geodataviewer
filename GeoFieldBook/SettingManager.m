@@ -77,6 +77,7 @@ static SettingManager *settingManager;
     [self postNotificationWithName:SettingManagerSwipeRecordEnabledDidChange andUserInfo:userInfo];
     [self postNotificationWithName:SettingManagerSwipeRecordDidChange andUserInfo:userInfo];
     [self postNotificationWithName:SettingManagerDipNumberEnabledDidChange andUserInfo:userInfo];
+    [self postNotificationWithName:SettingManagerContactDefaultFormationDidChange andUserInfo:userInfo];
 }
 
 - (void)postFeedbackNotification {
@@ -203,7 +204,7 @@ static SettingManager *settingManager;
     [self postFeedbackNotification];
 }
 
-#pragma mark - Dip Number group
+#pragma mark - Dip Strike Symbol Group
 
 - (BOOL)dipNumberEnabled {
     return [self.userDefaults boolForKey:NSUserDefaultsDipNumberEnabled];
@@ -211,6 +212,14 @@ static SettingManager *settingManager;
 
 - (void)setDipNumberEnabled:(BOOL)dipNumberEnabled {
     [self userDefaultsSetBool:dipNumberEnabled forKey:NSUserDefaultsDipNumberEnabled];
+}
+
+- (NSString *)defaultContactFormation {
+    return [self.userDefaults objectForKey:NSUserDefaultsContactDefaultFormation];
+}
+
+- (void)setDefaultContactFormation:(NSString *)defaultContactFormation {
+    [self userDefaultsSetObject:defaultContactFormation forKey:NSUserDefaultsContactDefaultFormation];
 }
 
 @end

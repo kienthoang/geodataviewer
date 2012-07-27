@@ -189,6 +189,7 @@
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerFormationColorEnabledDidChange object:nil];
     [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerDefaultFormationColorDidChange object:nil];
+    [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerContactDefaultFormationDidChange object:nil];
 }
 
 #pragma mark - View Controller Lifecycles

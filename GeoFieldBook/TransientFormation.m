@@ -35,17 +35,17 @@
         NSArray *results=[context executeFetchRequest:request error:NULL];
         
         if (results.count)
-            return [results lastObject];
+            return results.lastObject;
         
         //Save formation
         Formation *formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
         formation.formationName=self.formationName;
         formation.formationSortNumber=self.formationSortNumber;
         formation.formationFolder=[TransientFormation_Folder defaultFolderManagedObjectContext:context];
+        formation.colorName=self.colorName;
         
         return formation;
     }
-    
     
     return nil;
 }
@@ -58,17 +58,8 @@
     formation.formationSortNumber=self.formationSortNumber;
     formation.formationFolder=[self.formationFolder saveFormationFolderToManagedObjectContext:context completion:completionHandler];
     
-    //Set the color of the formation to the default formation color in settings
-    SettingManager *settingManager=[SettingManager standardSettingManager];
-    UIColor *defaultFormationColor=settingManager.defaultFormationColor;
-    CGFloat red;
-    CGFloat blue;
-    CGFloat green;
-    CGFloat alpha;
-    [defaultFormationColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    formation.redColorComponent=[NSNumber numberWithFloat:red];
-    formation.blueColorComponent=[NSNumber numberWithFloat:blue];
-    formation.greenColorComponent=[NSNumber numberWithFloat:green];
+    //Set the color name
+    formation.colorName=self.colorName;
     
     self.managedFormation=formation;
 }

@@ -21,7 +21,6 @@
     //Get the formation name and color from the info dictionary
     NSString *formationName=[formationInfo objectForKey:GeoFormationName];
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
-    UIColor *formationColor=[formationInfo objectForKey:GeoFormationColor];
     NSString *colorName=[formationInfo objectForKey:GeoFormationColorName];
 
     //Query for the folder with the specified name, if it does not exist return nil
@@ -48,16 +47,6 @@
     formation.formationName=formationName;
     formation.formationFolder=formationFolder;
     formation.colorName=colorName;
-    
-    //Update the formation color
-    CGFloat red;
-    CGFloat blue;
-    CGFloat green;
-    CGFloat alpha;
-    [formationColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    formation.redColorComponent=[NSNumber numberWithFloat:red];
-    formation.blueColorComponent=[NSNumber numberWithFloat:blue];
-    formation.greenColorComponent=[NSNumber numberWithFloat:green];
     
     return formation;
 }

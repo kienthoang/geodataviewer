@@ -7,6 +7,7 @@
 //
 
 #import "ColorManager.h"
+#import "SettingManager.h"
 
 @interface ColorManager()
 
@@ -74,8 +75,9 @@ static ColorManager *standardColorManager;
 
 - (UIColor *)colorWithName:(NSString *)colorName
 {
-    //Return the color 
-    UIColor *color = nil;
+    //Return the color
+    SettingManager *settingManager=[SettingManager standardSettingManager];
+    UIColor *color = settingManager.defaultFormationColor;
     if([self.colorNames containsObject:colorName])
         color = [self.colorDictionary objectForKey:colorName];
   

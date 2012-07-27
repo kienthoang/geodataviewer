@@ -447,6 +447,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
  */
 - (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
 {
+    //Post a notification
+    [self postNotificationWithName:GeoNotificationIEEngineFormationImportingDidStart withUserInfo:[NSDictionary dictionary]];
+    
     self.selectedFilePaths = [self getSelectedFilePaths:files];    
     
     //read each of those files line by line and create the formation objects and add it to self.formations array.
