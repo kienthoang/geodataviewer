@@ -734,22 +734,20 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         //check if the foldername key is already present, if so add the new formation to the value for the key (array of formations), otherwise create a new array and add it to the dictionary.
         if([formationsByFolders.allKeys containsObject:formation.formationFolder.folderName]) {
             //new formation to add
-            NSArray *newFormation = [NSArray arrayWithObjects:formation.formationName, formation.colorName, nil];
-//            NSLog(@"NewFormation: %@", newFormation);
+            NSArray *newFormation = [NSArray arrayWithObjects:[ TextInputFilter csvCompliantStringFromString:formation.formationName], [TextInputFilter csvCompliantStringFromString:formation.colorName], nil];
             //get the existing value
-            NSMutableArray *formationArray = [formationsByFolders objectForKey:formation.formationFolder.folderName];
+            NSMutableArray *formationArray =[formationsByFolders objectForKey:formation.formationFolder.folderName];
             [formationsByFolders removeObjectForKey:formation.formationFolder.folderName];
             [formationArray addObject:newFormation];
             [formationsByFolders setObject:formationArray forKey:formation.formationFolder.folderName];
         } else {
-            NSArray *newFormation = [NSArray arrayWithObjects:formation.formationName, formation.colorName, nil];
-//            NSLog(@"NewFormationNEW: %@", newFormation);
+            NSArray *newFormation = [NSArray arrayWithObjects: [TextInputFilter csvCompliantStringFromString:formation.formationName], [TextInputFilter csvCompliantStringFromString:formation.colorName], nil];
             NSMutableArray *formationArray = [NSMutableArray arrayWithObject:newFormation];
             [formationsByFolders setObject:formationArray forKey:formation.formationFolder.folderName];
         }
     }
     
-    [self writeFormationFiles:formationsByFolders];
+    [self writeFormationFilesWithColor:formationsByFolders];
 }
 
 - (void)createCSVFilesFromFormations:(NSArray *)formations 
@@ -794,7 +792,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     return transposedArray;
 }
 
--(void)writeFormationFiles:(NSDictionary *)formationsSeparatedByFolders {
+-(void)writeFormationFilesWithColor:(NSDictionary *)formationsSeparatedByFolders {
     //get the path to documents directory
     NSFileManager *fileManager=[NSFileManager defaultManager];
     NSArray *urlsArray = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
