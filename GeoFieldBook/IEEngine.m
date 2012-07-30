@@ -748,6 +748,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     }
     
     [self writeFormationFilesWithColor:formationsByFolders];
+    
+    //Post a notification when done
+    [self postNotificationWithName:GeoNotificationIEEngineExportingDidEnd withUserInfo:[NSDictionary dictionary]];
 }
 
 - (void)createCSVFilesFromFormations:(NSArray *)formations 
