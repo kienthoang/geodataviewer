@@ -40,7 +40,6 @@
     //Now put extra quotation marks around if there is a comma, new line character or any quotation
     if ([text componentsSeparatedByString:@","].count>1 || [text componentsSeparatedByString:@"\n"].count>1 || [text componentsSeparatedByString:@"\""].count>1)
         text=[NSString stringWithFormat:@"\"%@\"",text];   
-    NSLog(@"Text: %@", text);
 
     return text;     
 }
