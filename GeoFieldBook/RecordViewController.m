@@ -815,8 +815,7 @@
 
 - (void)registerForNotifications {
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(swipeRecordGestureSettingDidChange:) name:SettingManagerSwipeRecordDidChange object:nil];
-    [notificationCenter addObserver:self selector:@selector(swipeRecordGestureSettingDidChange:) name:SettingManagerSwipeRecordEnabledDidChange object:nil];
+    [notificationCenter addObserver:self selector:@selector(swipeRecordGestureSettingDidChange:) name:SettingManagerUserPreferencesDidChange object:nil];
 }
 
 #pragma mark - View lifecycle

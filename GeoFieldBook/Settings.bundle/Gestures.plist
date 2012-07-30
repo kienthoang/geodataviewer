@@ -14,7 +14,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Long Press</string>
+			<string>Long Press for Record List</string>
 			<key>Key</key>
 			<string>gestures_long_press_enabled</string>
 			<key>DefaultValue</key>

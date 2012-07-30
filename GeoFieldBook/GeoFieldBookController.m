@@ -29,6 +29,7 @@
 #import "Record+Modification.h"
 #import "Record+Validation.h"
 #import "Record+NameEncoding.h"
+#import "Record+State.h"
 
 #import "GeoDatabaseManager.h"
 #import "SettingManager.h"
@@ -88,12 +89,15 @@
 }
 
 - (void)swapToSegmentIndex:(int)segmentIndex {
-    //Swap to show the view controller at the given segment index
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC swapToViewControllerAtSegmentIndex:segmentIndex];
-    
-    //Make sure the data map switch stays consistent with the view controller showed in the view MVC group
-    [self.dataMapSwitch setSelectedSegmentIndex:segmentIndex];
+    //if the segment index is not the given index, swap
+    if (self.dataMapSwitch.selectedSegmentIndex!=segmentIndex) {
+        //Swap to show the view controller at the given segment index
+        DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+        [dataMapSegmentVC swapToViewControllerAtSegmentIndex:segmentIndex];
+        
+        //Make sure the data map switch stays consistent with the view controller showed in the view MVC group
+        [self.dataMapSwitch setSelectedSegmentIndex:segmentIndex];
+    }
 }
 
 - (void)dismissAllVisiblePopoversAnimated:(BOOL)animated {
@@ -103,6 +107,24 @@
     self.importPopover=nil;
     [self.exportPopover dismissPopoverAnimated:NO];
     self.exportPopover=nil;
+}
+
+#pragma mark - Model MVC Group Manipulators
+
+#pragma mark - View MVC Group Manipulators
+
+- (void)pushInitialViewControllerOnScreen {
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC pushInitialViewController];
+    if (!dataMapSegmentVC.topViewController)
+        [self swapToSegmentIndex:0];
+}
+
+- (void)pushRecordViewControllerOnScreen {
+    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    [dataMapSegmentVC pushRecordViewController];
+    if (!dataMapSegmentVC.topViewController)
+        [self swapToSegmentIndex:0];
 }
 
 #pragma mark - UIActionSheetDelegate Protocol methods
@@ -240,11 +262,8 @@
         DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
         
         //If the recently pushed view controller is a folder tvc, swap the view MVC group to show the initial view
-        if ([viewController isKindOfClass:[FolderTableViewController class]]) {
-            [dataMapSegmentVC pushInitialViewController];
-            if (!dataMapSegmentVC.topViewController)
-                [self swapToSegmentIndex:0];
-        }
+        if ([viewController isKindOfClass:[FolderTableViewController class]])
+            [self pushInitialViewControllerOnScreen];
         
         //Update the map view
         [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:NO updateRegion:YES];
@@ -340,11 +359,10 @@
     //If the data side of the data map segment controller is not a record view controller, push rvc
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
     if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
-        [dataMapSegmentVC pushRecordViewController];
+        [self pushRecordViewControllerOnScreen];
     
     //Switch to the data side
-    if (![dataMapSegmentVC.topViewController isKindOfClass:[RecordViewController class]])
-        [self swapToSegmentIndex:0];
+    [self swapToSegmentIndex:0];
     
     //Dismiss the popover
     [self.popoverViewController dismissPopoverAnimated:NO];
@@ -356,7 +374,7 @@
 - (void)modelGroupFormationDatabaseDidChange:(NSNotification *)notification {
     //Force update the map
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC reloadMapAnnotationViewColor];
+    [dataMapSegmentVC reloadMapAnnotationViews];
 }
 
 - (void)putImportExportButtonBack {
@@ -502,7 +520,7 @@
                              object:nil];
     [notificationCenter addObserver:self 
                            selector:@selector(longPressGestureSettingDidChange:) 
-                               name:SettingManagerLongPressEnabledDidChange 
+                               name:SettingManagerUserPreferencesDidChange 
                              object:nil];
     [notificationCenter addObserver:self 
                            selector:@selector(feedbackTimeout:) 
@@ -634,7 +652,7 @@
     
     //If the record info passes the validations, show the alert; otherwise, show an alert with no confirm button
     NSArray *failedKeyNames=[self.modifiedRecord validatesMandatoryPresenceOfRecordInfo:recordInfo];
-    if (![failedKeyNames count]) {
+    if (!failedKeyNames.count) {
         //If the name of the record is not nil
         NSString *message=@"You navigated away. Do you want to save the record you were editing?";
         
@@ -650,11 +668,16 @@
         for (NSString *failedKey in failedKeyNames)
             [failedNames addObject:[Record nameForDictionaryKey:failedKey]];
         NSString *message=[NSString stringWithFormat:@"Record could not be saved because the following information was missing: %@",[failedNames componentsJoinedByString:@", "]];
-        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Autosave Failed!" 
+        autosaveAlert=[[UIAlertView alloc] initWithTitle:@"Saving Failed!" 
                                                  message:message 
                                                 delegate:nil 
                                        cancelButtonTitle:@"Dismiss" 
                                        otherButtonTitles:nil];
+        
+        //Delete the record if it's "fresh" (newly created and has not been modified)
+        Record *record=self.modifiedRecord;
+        if (record.recordState==RecordStateNew)
+            [record.managedObjectContext deleteObject:record];
     }
     
     return autosaveAlert;
@@ -942,7 +965,7 @@
     //Update the data side (push if it's not on screen somewhere)
     DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
     if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
-        [dataMapSegmentVC pushRecordViewController];
+        [self pushRecordViewControllerOnScreen];
     [dataMapSegmentVC updateRecordDetailViewWithRecord:record];
     
     //Update the model group to reflect the changes
@@ -993,7 +1016,12 @@
             
             //Delete the record if it's "fresh" (newly created and has not been modified)
             RecordTableViewController *recordTVC=[self recordTableViewController];
-            [recordTVC deleteRecordIfFresh:recordTVC.chosenRecord];
+            Record *record=recordTVC.chosenRecord;
+            if (record.recordState==RecordStateNew)
+                [record.managedObjectContext deleteObject:record];
+            
+            //Push the initial view on screen
+            [self pushInitialViewControllerOnScreen];
         }
     }
 }

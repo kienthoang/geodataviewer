@@ -59,57 +59,6 @@
         self.image=image;
     }
 }
-//
-//- (void) drawDotWithAnnotation:(MKGeoRecordAnnotation *)annotation
-//{
-//    if (annotation.record) {
-//        //Setup the dip strike symbol
-//        DipStrikeSymbol *symbol=[[DipStrikeSymbol alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-//        Record *record=annotation.record;
-//        
-//        //Setup the color of the dot if specified by user preference
-//        SettingManager *settingManager=[SettingManager standardSettingManager];
-//        UIColor *color=settingManager.defaultSymbolColor;
-//        if (settingManager.formationColorEnabled) {
-//            if ([record isKindOfClass:[Contact class]]) {
-//                Formation *formation=[(Contact *)record upperFormation];
-//                if (formation) {
-//                color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
-//                                      green:formation.greenColorComponent.floatValue 
-//                                       blue:formation.blueColorComponent.floatValue 
-//                                      alpha:1.0];
-//                }
-//                else {
-//                    formation=[(Contact *)record lowerFormation];
-//                    color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
-//                                          green:formation.greenColorComponent.floatValue 
-//                                           blue:formation.blueColorComponent.floatValue 
-//                                          alpha:1.0];
-//                }
-//            } else if ([record isKindOfClass:[Other class]]) {
-//                
-//            } else if ([(id)record formation]) {
-//                if ([record isKindOfClass:[Bedding class]]) {
-//                    Formation *formation=[(Bedding *)record formation];
-//                    color=[UIColor colorWithRed:formation.redColorComponent.floatValue 
-//                                          green:formation.greenColorComponent.floatValue 
-//                                           blue:formation.blueColorComponent.floatValue 
-//                                          alpha:1.0];
-//                }
-//            }
-//        }
-//        
-//        symbol.color=color;
-//        
-//        //Add the strike symbol view
-//        symbol.backgroundColor=[UIColor clearColor];
-//        UIGraphicsBeginImageContext(symbol.bounds.size);
-//        [symbol.layer renderInContext:UIGraphicsGetCurrentContext()];
-//        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();    
-//        self.image=image;
-//    }
-//}
 
 - (id) initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {

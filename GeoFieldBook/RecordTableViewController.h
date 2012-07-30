@@ -29,7 +29,6 @@
 #pragma mark - Record Manipulators
 
 - (void)modifyRecord:(Record *)record withNewInfo:(NSDictionary *)recordInfo;
-- (void)deleteRecordIfFresh:(Record *)record; //Delete the given record if its state is new
 
 #pragma mark - Filter related properties
 

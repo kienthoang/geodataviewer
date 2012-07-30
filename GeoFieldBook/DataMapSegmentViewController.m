@@ -103,10 +103,10 @@
     }
 }
 
-- (void)reloadMapAnnotationViewColor {
+- (void)reloadMapAnnotationViews {
     if ([self.viewControllers.lastObject isKindOfClass:[RecordMapViewController class]]) {
         RecordMapViewController *mapDetail=(RecordMapViewController *)self.viewControllers.lastObject;
-        [mapDetail reloadAnnotationViewColor];
+        [mapDetail reloadAnnotationViews];
     }
 }
 

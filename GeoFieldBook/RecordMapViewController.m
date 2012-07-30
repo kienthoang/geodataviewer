@@ -114,7 +114,8 @@
     }
 }
 
-- (void)reloadAnnotationViewColor {
+- (void)reloadAnnotationViews {
+    //Redraw all annotation views
     for (MKGeoRecordAnnotation *annotation in self.mapView.annotations) {
         MKAnnotationView *annotationView=[self.mapView viewForAnnotation:annotation];
         if ([annotationView isKindOfClass:[MKCustomAnnotationView class]]) {
@@ -182,14 +183,12 @@
 
 - (void)formationColorSettingDidChange:(NSNotification *)notification {
     //Reload the annotation views' colors
-    [self reloadAnnotationViewColor];
+    [self reloadAnnotationViews];
 }
 
 - (void)registerForNotifications {
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerFormationColorEnabledDidChange object:nil];
-    [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerDefaultFormationColorDidChange object:nil];
-    [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerContactDefaultFormationDidChange object:nil];
+    [notificationCenter addObserver:self selector:@selector(formationColorSettingDidChange:) name:SettingManagerUserPreferencesDidChange object:nil];
 }
 
 #pragma mark - View Controller Lifecycles

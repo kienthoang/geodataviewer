@@ -67,19 +67,6 @@ static SettingManager *settingManager;
     [center postNotificationName:name object:self userInfo:userInfo];    
 }
 
-- (void)postNotifications {
-    //Other notifications
-    NSDictionary *userInfo=[NSDictionary dictionary];
-    [self postNotificationWithName:SettingManagerFormationColorEnabledDidChange andUserInfo:userInfo];
-    [self postNotificationWithName:SettingManagerDefaultFormationColorDidChange andUserInfo:userInfo];
-    [self postNotificationWithName:SettingManagerDefaultSymbolColorDidChange andUserInfo:userInfo];
-    [self postNotificationWithName:SettingManagerLongPressEnabledDidChange andUserInfo:userInfo];
-    [self postNotificationWithName:SettingManagerSwipeRecordEnabledDidChange andUserInfo:userInfo];
-    [self postNotificationWithName:SettingManagerSwipeRecordDidChange andUserInfo:userInfo];
-    [self postNotificationWithName:SettingManagerDipNumberEnabledDidChange andUserInfo:userInfo];
-    [self postNotificationWithName:SettingManagerContactDefaultFormationDidChange andUserInfo:userInfo];
-}
-
 - (void)postFeedbackNotification {
     //If the feedback system is enabled, proceed
     if (self.feedbackEnabled) {
@@ -96,7 +83,8 @@ static SettingManager *settingManager;
 
 - (void)userPreferencesDidChange:(NSNotification *)notification {
     //Post notifications
-    [self postNotifications];
+    NSDictionary *userInfo=[NSDictionary dictionary];
+    [self postNotificationWithName:SettingManagerUserPreferencesDidChange andUserInfo:userInfo];
 }
 
 #pragma mark - Color Group

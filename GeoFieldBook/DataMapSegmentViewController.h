@@ -34,7 +34,7 @@ typedef void (^push_completion_handler_t)(void);
 - (void)setMapViewDelegate:(id <RecordMapViewControllerDelegate>)mapDelegate;
 - (void)updateMapWithRecords:(NSArray *)records forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
 - (void)setMapSelectedRecord:(Record *)selectedRecord;
-- (void)reloadMapAnnotationViewColor;
+- (void)reloadMapAnnotationViews;
 
 - (void)pushInitialViewController;
 - (void)pushRecordViewController;
