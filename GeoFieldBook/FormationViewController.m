@@ -74,7 +74,8 @@
     //Create a dictionary with all the information user provided
     SettingManager *settings = [SettingManager standardSettingManager];
     
-    if(!self.formationColorName) self.formationColorName = settings.defaultFormationColorName; 
+    if(!self.formationColorName) self.formationColorName = settings.defaultFormationColorName; //the previously saved color name is gone when the view is pushed from the navigateion stack
+    
     NSDictionary *formationInfo=[NSDictionary dictionaryWithObjectsAndKeys:self.formationName,GeoFormationName,self.formationColor,GeoFormationColor, self.formationColorName, GeoFormationColorName, nil];
     return formationInfo;
 }

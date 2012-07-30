@@ -81,6 +81,7 @@
             UITableViewCell *cell=sender;
             Formation *selectedFormation=[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             [segue.destinationViewController setFormation:selectedFormation];
+            [segue.destinationViewController setFormationColorName: selectedFormation.colorName];
         }
     }
 }
