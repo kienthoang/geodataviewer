@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "GeoFieldBookAppDelegate.h"
+#import "GeoDataViewerAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([GeoFieldBookAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([GeoDataViewerAppDelegate class]));
     }
 }

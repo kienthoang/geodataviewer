@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "GeoFieldBookControllerSegue.h"
+#import "GeoDataViewerControllerSegue.h"
 
-@implementation GeoFieldBookControllerSegue
+@implementation GeoDataViewerControllerSegue
 
 - (void)perform {
     //Do nothing

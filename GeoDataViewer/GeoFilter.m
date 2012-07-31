@@ -42,7 +42,7 @@
         //Get all the folders' names
         NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
         request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
-        UIManagedDocument *sharedDatabase=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+        UIManagedDocument *sharedDatabase=[GeoDatabaseManager standardDatabaseManager].geoDataViewerDatabase;
         NSArray *results=[sharedDatabase.managedObjectContext executeFetchRequest:request error:NULL];
         NSMutableArray *selectedFolderNames=[NSMutableArray arrayWithCapacity:[results count]];
         for (Folder *folder in results)

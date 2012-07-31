@@ -1,18 +1,18 @@
 //
-//  GeoFieldBookAppDelegate.m
-//  GeoFieldBook
+//  GeoDataViewerAppDelegate.m
+//  GeoDataViewer
 //
 //  Created by Kien Hoang on 6/21/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "GeoFieldBookAppDelegate.h"
+#import "GeoDataViewerAppDelegate.h"
 
 #import "GeoDatabaseManager.h"
 
 #import "Question+Types.h"
 
-@implementation GeoFieldBookAppDelegate
+@implementation GeoDataViewerAppDelegate
 
 @synthesize window = _window;
 

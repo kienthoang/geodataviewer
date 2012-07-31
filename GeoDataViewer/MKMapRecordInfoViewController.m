@@ -42,17 +42,7 @@
 @synthesize dip = _dip;
 @synthesize strike = _strike;
 
-@synthesize delegate=_delegate;
-
 @synthesize record=_record;
-
-#pragma mark - Target-Action Handlers
-
-- (IBAction)accessoryTapped:(UIButton *)sender {
-    //Notify the delegate
-    [self.delegate mapRecordInfoViewController:self 
-            userDidTapOnAccessoryViewForRecord:self.record];
-}
 
 #pragma mark - View Controller Lifecycle
 

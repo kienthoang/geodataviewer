@@ -102,7 +102,7 @@
     
     //Set up the database
     if (!self.database)
-        self.database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+        self.database=[GeoDatabaseManager standardDatabaseManager].geoDataViewerDatabase;
     
     //Create seed questions if there's none
     [self createSeedQuestionsInManagedObjectContext:self.database.managedObjectContext];

@@ -1,17 +1,19 @@
 //
-//  GeoFieldBookController.h
-//  GeoFieldBook
+//  GeoDataViewerController.h
+//  GeoDataViewer
 //
 //  Created by Kien Hoang on 7/7/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "RecordMapViewController.h"
+#import "RecordMapViewControllerDelegate.h"
 
-@interface GeoFieldBookController : UIViewController
+@interface GeoDataViewerController : UIViewController
 
 @property (nonatomic,strong) UIPopoverController *popoverViewController;
-@property (nonatomic,strong) UIViewController *viewGroupController;
+@property (nonatomic,strong) RecordMapViewController *mapViewController;
 
 #define IMPORT_EXPORT_ACTION_SHEET_TITLE @"Import/Export"
 #define RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Record Import TVC"

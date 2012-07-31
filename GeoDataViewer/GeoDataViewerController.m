@@ -1,13 +1,13 @@
 //
-//  GeoFieldBookController.m
-//  GeoFieldBook
+//  GeoDataViewerController.m
+//  GeoDataViewer
 //
 //  Created by Kien Hoang on 7/7/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "GeoFieldBookController.h"
-#import "GeoFieldBookControllerSegue.h"
+#import "GeoDataViewerController.h"
+#import "GeoDataViewerControllerSegue.h"
 
 #import "RecordTableViewController.h"
 #import "FolderTableViewController.h"
@@ -15,12 +15,6 @@
 
 #import "ImportTableViewController.h"
 #import "RecordImportTVC.h"
-
-#import "DataMapSegmentViewController.h"
-#import "RecordViewController.h"
-
-#import "RecordViewControllerDelegate.h"
-#import "DataMapSegmentControllerDelegate.h"
 
 #import "ModelGroupNotificationNames.h"
 #import "IEEngineNotificationNames.h"
@@ -34,7 +28,7 @@
 #import "GeoDatabaseManager.h"
 #import "SettingManager.h"
 
-@interface GeoFieldBookController() <UINavigationControllerDelegate,DataMapSegmentControllerDelegate,RecordViewControllerDelegate,UIAlertViewDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate>
+@interface GeoDataViewerController() <UINavigationControllerDelegate,RecordMapViewControllerDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *formationButton;
@@ -55,7 +49,7 @@
 
 @end
 
-@implementation GeoFieldBookController
+@implementation GeoDataViewerController
 
 @synthesize contentView = _contentView;
 @synthesize formationButton = _formationButton;
@@ -69,7 +63,7 @@
 @synthesize importExportSpinnerBarButtonItem=_importExportSpinnerBarButtonItem;
 
 @synthesize popoverViewController=_popoverViewController;
-@synthesize viewGroupController=_viewGroupController;
+@synthesize mapViewController=_viewGroupController;
 
 @synthesize formationFolderPopoverController=_formationFolderPopoverController;
 
@@ -79,27 +73,6 @@
 @synthesize importPopover=_importPopover;
 @synthesize exportPopover=_exportPopover;
 
-- (DataMapSegmentViewController *)dataMapSegmentViewController {
-    id dataMapSegmentViewController=self.viewGroupController;
-    
-    if (![dataMapSegmentViewController isKindOfClass:[DataMapSegmentViewController class]])
-        dataMapSegmentViewController=nil;
-    
-    return dataMapSegmentViewController;
-}
-
-- (void)swapToSegmentIndex:(int)segmentIndex {
-    //if the segment index is not the given index, swap
-    if (self.dataMapSwitch.selectedSegmentIndex!=segmentIndex) {
-        //Swap to show the view controller at the given segment index
-        DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-        [dataMapSegmentVC swapToViewControllerAtSegmentIndex:segmentIndex];
-        
-        //Make sure the data map switch stays consistent with the view controller showed in the view MVC group
-        [self.dataMapSwitch setSelectedSegmentIndex:segmentIndex];
-    }
-}
-
 - (void)dismissAllVisiblePopoversAnimated:(BOOL)animated {
     [self.formationFolderPopoverController dismissPopoverAnimated:NO];
     [self.popoverViewController dismissPopoverAnimated:NO];
@@ -107,24 +80,6 @@
     self.importPopover=nil;
     [self.exportPopover dismissPopoverAnimated:NO];
     self.exportPopover=nil;
-}
-
-#pragma mark - Model MVC Group Manipulators
-
-#pragma mark - View MVC Group Manipulators
-
-- (void)pushInitialViewControllerOnScreen {
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC pushInitialViewController];
-    if (!dataMapSegmentVC.topViewController)
-        [self swapToSegmentIndex:0];
-}
-
-- (void)pushRecordViewControllerOnScreen {
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC pushRecordViewController];
-    if (!dataMapSegmentVC.topViewController)
-        [self swapToSegmentIndex:0];
 }
 
 #pragma mark - UIActionSheetDelegate Protocol methods
@@ -205,10 +160,7 @@
 #pragma mark - Target-Action Handlers
 
 - (IBAction)presentPopoverViewController:(UIButton *)popoverVCButtonCustomView 
-{
-    //Dismiss the keyboard in the view side
-    [[self dataMapSegmentViewController] dismissKeyboardInDataSideView];
-    
+{    
     //Dismiss all visible popovers
     [self dismissAllVisiblePopoversAnimated:NO];
     
@@ -239,13 +191,6 @@
     [importExportActionSheet showInView:self.contentView];
 }
 
-- (IBAction)dataMapSwitchValueChanged:(UISegmentedControl *)sender {
-    //Notify the data map segment controller of the change
-    int segmentIndex=sender.selectedSegmentIndex;
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC segmentController:sender indexDidChangeTo:segmentIndex];
-}
-
 - (IBAction)settingButtonPressed:(UIButton *)sender {
     //Segue to the settings view controller
     [self performSegueWithIdentifier:@"Settings" sender:nil];
@@ -258,33 +203,16 @@
                     animated:(BOOL)animated
 {
     //If the calling navigation controller controls the model MVC group and the new view controller is being pushed onto the navigation stack
-    if (navigationController==self.popoverViewController.contentViewController) {
-        DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-        
-        //If the recently pushed view controller is a folder tvc, swap the view MVC group to show the initial view
-        if ([viewController isKindOfClass:[FolderTableViewController class]])
-            [self pushInitialViewControllerOnScreen];
-        
+    if (navigationController==self.popoverViewController.contentViewController) {                
         //Update the map view
-        [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:NO updateRegion:YES];
-        [dataMapSegmentVC setMapSelectedRecord:nil];  
         
-        //If switching to the record tvc and the map is on screen, show the checkboxes in the record tvc
-        RecordTableViewController *recordTVC=[self recordTableViewController];
-        if (recordTVC) {
-            DataMapSegmentViewController *dataMapSegmentVC=(DataMapSegmentViewController *)self.viewGroupController;
-            if ([dataMapSegmentVC.topViewController isKindOfClass:[RecordMapViewController class]])
-                recordTVC.willShowCheckboxes=YES;
-            else
-                recordTVC.willShowCheckboxes=NO;
-        }
     }
 }
 
 #pragma mark - Prepare for Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue isKindOfClass:[GeoFieldBookControllerSegue class]]) {
+    if ([segue isKindOfClass:[GeoDataViewerControllerSegue class]]) {
         //popover view controller setup
         if ([segue.identifier isEqualToString:@"popoverViewController"]) {
             UIViewController *popoverContent=[self.storyboard instantiateViewControllerWithIdentifier:@"folderRecordModelGroup"];
@@ -293,14 +221,9 @@
         }
         
         //view group controller setup
-        else if ([segue.identifier isEqualToString:@"viewGroupController"]) {
-            self.viewGroupController=[self.storyboard instantiateViewControllerWithIdentifier:@"viewGroupController"];
-            DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-            [dataMapSegmentVC setDelegate:self];
-            
-            //Setup for the map view controller
-            if ([[dataMapSegmentVC.viewControllers lastObject] isKindOfClass:[RecordMapViewController class]])
-                [dataMapSegmentVC setMapViewDelegate:self];
+        else if ([segue.identifier isEqualToString:@"mapViewController"]) {
+            self.mapViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
+            self.mapViewController.mapDelegate=self;
         }
     }
         
@@ -319,67 +242,51 @@
     }
 }
 
+#pragma mark - Model MVC Group Manipulators
+
+- (FolderTableViewController *)folderTableViewController {
+    UINavigationController *modelMVCNav=(UINavigationController *)self.popoverViewController.contentViewController;
+    FolderTableViewController *folderTVC=nil;
+    if ([modelMVCNav.topViewController isKindOfClass:[FolderTableViewController class]])
+        folderTVC=(FolderTableViewController *)modelMVCNav.topViewController;
+    
+    return folderTVC;
+}
+
+- (RecordTableViewController *)recordTableViewController {
+    UINavigationController *modelMVCNav=(UINavigationController *)self.popoverViewController.contentViewController;
+    RecordTableViewController *recordTVC=nil;
+    if ([modelMVCNav.topViewController isKindOfClass:[RecordTableViewController class]])
+        recordTVC=(RecordTableViewController *)modelMVCNav.topViewController;
+    
+    return recordTVC;
+}
+
 #pragma mark - KVO/NSNotification Managers
 
 - (void)modelGroupFolderDatabaseDidUpdate:(NSNotification *)notification {
     //Update the map
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:YES];
+    [self.mapViewController updateRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:YES];
 }
 
 - (void)modelGroupRecordDatabaseDidChange:(NSNotification *)notification {
     //Update the map
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:YES];
-    
-    //Pop the detail record vc (if the chosen record got deleted)
-    RecordTableViewController *recordTVC=[self recordTableViewController];
-    if (!recordTVC.chosenRecord) {
-        [dataMapSegmentVC pushInitialViewController];
-        if (!dataMapSegmentVC.topViewController)
-            [self swapToSegmentIndex:0];
-    }
+    [self.mapViewController updateRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:YES];
 }
 
 - (void)modelGroupRecordDatabaseDidUpdate:(NSNotification *)notification {
     //Update the map
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC updateMapWithRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:NO];
-    
-    //Pop the detail record vc (if the chosen record got deleted)
-    RecordTableViewController *recordTVC=[self recordTableViewController];
-    if (!recordTVC.chosenRecord) {
-        [dataMapSegmentVC pushInitialViewController];
-        if (!dataMapSegmentVC.topViewController)
-            [self swapToSegmentIndex:0];
-    }
-}
-
-- (void)modelGroupDidCreateNewRecord:(NSNotification *)notification {
-    //If the data side of the data map segment controller is not a record view controller, push rvc
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
-        [self pushRecordViewControllerOnScreen];
-    
-    //Switch to the data side
-    [self swapToSegmentIndex:0];
-    
-    //Dismiss the popover
-    [self.popoverViewController dismissPopoverAnimated:NO];
-    
-    //Put the record view controller in editing mode
-    [dataMapSegmentVC putRecordViewControllerIntoEditingMode];
+    [self.mapViewController updateRecords:[self recordsFromModelGroup] forceUpdate:YES updateRegion:NO];
 }
 
 - (void)modelGroupFormationDatabaseDidChange:(NSNotification *)notification {
     //Force update the map
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC reloadMapAnnotationViews];
+    [self.mapViewController reloadAnnotationViews];
 }
 
 - (void)putImportExportButtonBack {
     //Hide spinner and put up the import button
-    __weak GeoFieldBookController *weakSelf=self;
+    __weak GeoDataViewerController *weakSelf=self;
     NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         //Hide the spinner
@@ -393,7 +300,7 @@
 
 - (void)importingDidStart:(NSNotification *)notification {
     //Put up a spinner for the import button
-    __weak GeoFieldBookController *weakSelf=self;
+    __weak GeoDataViewerController *weakSelf=self;
     NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -490,10 +397,6 @@
                                name:GeoNotificationModelGroupFormationDatabaseDidChange 
                              object:nil];
     [notificationCenter addObserver:self 
-                           selector:@selector(modelGroupDidCreateNewRecord:) 
-                               name:GeoNotificationModelGroupDidCreateNewRecord 
-                             object:nil];
-    [notificationCenter addObserver:self 
                            selector:@selector(importingDidEnd:) 
                                name:GeoNotificationConflictHandlerImportingDidEnd 
                              object:nil];
@@ -563,7 +466,7 @@
     [self performSegueWithIdentifier:@"popoverViewController" sender:nil];
     
     //Instantiate the view group view controlelr
-    [self performSegueWithIdentifier:@"viewGroupController" sender:nil];
+    [self performSegueWithIdentifier:@"mapViewController" sender:nil];
 }
 
 - (void)viewDidLoad {
@@ -614,19 +517,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Get the data map segment controller
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
+    //Get the map vc
+    RecordMapViewController *mapVC=self.mapViewController;
     
     //Adjust the frame of the specified view controller's view
-    dataMapSegmentVC.view.frame=self.contentView.bounds;
+    mapVC.view.frame=self.contentView.bounds;
     
     //Setup the view controller hierachy
-    [self addChildViewController:dataMapSegmentVC];
-    [self.viewGroupController willMoveToParentViewController:self];
+    [self addChildViewController:mapVC];
+    [self.mapViewController willMoveToParentViewController:self];
     
     //Add the view of the data map segment
-    [self.contentView addSubview:dataMapSegmentVC.view];
-    [dataMapSegmentVC didMoveToParentViewController:self];    
+    [self.contentView addSubview:mapVC.view];
+    [mapVC didMoveToParentViewController:self];    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -697,236 +600,6 @@
     [autosaveAlert show];
 }
 
-#pragma mark - UI Management Methods
-
-- (void)removeButtonWithTitle:(NSString *)title {
-    //Remove the button with the given title
-    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
-    for (int index=0;index<toolbarItems.count;index++) {
-        UIBarButtonItem *barButtonItem=[toolbarItems objectAtIndex:index];
-        if (barButtonItem.title.length && [barButtonItem.title caseInsensitiveCompare:title]==NSOrderedSame)
-            [toolbarItems removeObject:barButtonItem];               
-    }
-    
-    //Set the tolbar
-    self.toolbar.items=[toolbarItems copy];
-}
-
-- (void)removeButtonsWithTitles:(NSArray *)titles {
-    //Remove all buttons that hastitle in the given array
-    for (NSString *title in titles)
-        [self removeButtonWithTitle:title];
-}
-
-- (void)putUpButton:(UIBarButtonItem *)button atIndex:(int)index {
-    //Put the given button up if its not already in the toolbar
-    NSMutableArray *toolbarItems=[self.toolbar.items mutableCopy];
-    if (![toolbarItems containsObject:button])
-        [toolbarItems insertObject:button atIndex:index];
-    
-    //Set the tolbar
-    self.toolbar.items=[toolbarItems copy];
-}
-
-- (void)setupCancelButtonForViewController:(UIViewController *)viewController {
-    //If the swapped in view controller is the record view controller put up the cancel button
-    if ([viewController isKindOfClass:[RecordViewController class]]) {
-        RecordViewController *recordDetail=(RecordViewController *)viewController;
-        [self putUpButton:recordDetail.cancelButton atIndex:self.toolbar.items.count-1];
-    }
-    
-    //If the edit button is on the toolbar, take it off
-    else
-        [self removeButtonWithTitle:@"Cancel"];
-}
-
-- (void)setupEditButtonForViewController:(UIViewController *)viewController {
-    //If the swapped in view controller is the record view controller put up the edit button
-    if ([viewController isKindOfClass:[RecordViewController class]]) {
-        RecordViewController *recordDetail=(RecordViewController *)viewController;
-        [self putUpButton:recordDetail.editButton atIndex:self.toolbar.items.count];
-    }
-    
-    //If the edit button is on the toolbar, take it off (its title should either be "Done" or "Edit")
-    else
-        [self removeButtonsWithTitles:[NSArray arrayWithObjects:@"Edit",@"Done", nil]];
-}
-
-- (void)setupButtonsForViewSideController:(UIViewController *)viewController {
-    //Setup the tracking button
-    [self setupTrackingButtonForViewController:viewController];
-    
-    //Setup the buttons for the record view controller (if the given view controller is one)
-    [self setupEditButtonForViewController:viewController];
-}
-
-- (void)setupTrackingButtonForViewController:(UIViewController *)viewController {
-    //If switched to the map, put up the tracking button
-    NSMutableArray *toolbarItems=self.toolbar.items.mutableCopy;
-    if ([viewController isKindOfClass:[RecordMapViewController class]]) {
-        RecordMapViewController *mapDetail=(RecordMapViewController *)viewController;
-        UIBarButtonItem *trackingButton=[[MKUserTrackingBarButtonItem alloc] initWithMapView:mapDetail.mapView];
-        [toolbarItems insertObject:trackingButton atIndex:[toolbarItems count]-1];
-    }
-    
-    //Else get rid of that button
-    else {
-        for (int index=0;index<[toolbarItems count];index++) {
-            UIBarButtonItem *item=[toolbarItems objectAtIndex:index];
-            if ([item isKindOfClass:[MKUserTrackingBarButtonItem class]])
-                [toolbarItems removeObject:item];
-        }
-    }
-    
-    //Set the tolbar
-    self.toolbar.items=toolbarItems.copy;
-}
-
-#pragma mark - DataMapSegmentViewControllerDelegate protocol methods
-
-- (void)dataMapSegmentController:(DataMapSegmentViewController *)sender 
-     isSwitchingToViewController:(UIViewController *)viewController
-{
-    //Setup the buttons
-    [self setupButtonsForViewSideController:viewController];
-    
-    //Setup delegate for the record view controller
-    if ([viewController isKindOfClass:[RecordViewController class]])
-        [sender setRecordViewControllerDelegate:self];
-    
-    //If switching to the map, show the checkboxes (allow filter by folder) in the folder ;
-    FolderTableViewController *folderTVC=[[(UINavigationController *)self.popoverViewController.contentViewController viewControllers] objectAtIndex:0];
-    if (folderTVC) {
-        if ([viewController isKindOfClass:[RecordMapViewController class]])
-            folderTVC.willFilterByFolder=YES;
-        else
-            folderTVC.willFilterByFolder=NO;
-    }
-    
-    //If switching to the map, show the checkboxes in the record tvc
-    RecordTableViewController *recordTVC=[self recordTableViewController];
-    if (recordTVC) {
-        if ([viewController isKindOfClass:[RecordMapViewController class]])
-            recordTVC.willShowCheckboxes=YES;
-        else
-            recordTVC.willShowCheckboxes=NO;
-    }
-}
-
-#pragma mark - RecordViewControllerDelegate protocol methods
-
-- (RecordTableViewController *)recordTableViewController {
-    UINavigationController *navController=(UINavigationController *)self.popoverViewController.contentViewController;
-    id topViewController=navController.topViewController;
-    if (![topViewController isKindOfClass:[RecordTableViewController class]])
-        topViewController=nil;
-    
-    return topViewController;
-}
-
-- (FolderTableViewController *)folderTableViewController {
-    UINavigationController *navController=(UINavigationController *)self.popoverViewController.contentViewController;
-    id topViewController=navController.topViewController;
-    if (![topViewController isKindOfClass:[FolderTableViewController class]])
-        topViewController=nil;
-    
-    return topViewController;
-}
-
-- (void)recordViewController:(RecordViewController *)sender 
-         userDidModifyRecord:(Record *)record 
-           withNewRecordInfo:(NSDictionary *)recordInfo 
-{
-    //Call the record table view controller to update the given record with the given record info
-    [[self recordTableViewController] modifyRecord:record withNewInfo:recordInfo];
-}
-
-- (void)userDidNavigateAwayFrom:(RecordViewController *)sender 
-           whileModifyingRecord:(Record *)record
-                    withNewInfo:(NSDictionary *)newInfo
-{
-    //If the given record has not been deleted yet, show the autosave alert
-    if (!record.isDeleted) {
-        //Put up the autosave alert
-        [self autosaveRecord:record withNewRecordInfo:newInfo]; 
-    }
-}
-
-- (void)replaceWithEditButtonOfRecordViewController:(RecordViewController *)recordVC {
-    //Remove the old edit button (its title should either be "Edit" or "Done")
-    [self removeButtonsWithTitles:[NSArray arrayWithObjects:@"Edit",@"Done", nil]];
-    
-    //Put up the new one
-    [self setupEditButtonForViewController:recordVC];
-}
-
-- (void)swipeWithTransitionAnimation:(TransionAnimationOption)animationOption forward:(BOOL)forward {
-    //Switch record
-    __weak GeoFieldBookController *weakSelf=self;
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    [dataMapSegmentVC pushRecordViewControllerWithTransitionAnimation:animationOption setup:^(){
-        //Set the delegate of the new record vc
-        [dataMapSegmentVC setRecordViewControllerDelegate:weakSelf];
-        
-        //Move the next record
-        RecordTableViewController *recordTVC=[weakSelf recordTableViewController];
-        if (recordTVC) {
-            //If switching to the next record
-            if (forward)
-                [recordTVC forwardToNextRecord];
-            else
-                [recordTVC backToPrevRecord];
-        }
-    } completion:^{
-        //Replace the old edit button with the new one
-        RecordViewController *newRecordVC=(RecordViewController *)dataMapSegmentVC.topViewController;
-        [self replaceWithEditButtonOfRecordViewController:newRecordVC];
-    }];
-}
-
-- (void)userDidSwipeUpInRecordViewController:(RecordViewController *)sender {
-    //Switch to the next record
-    RecordTableViewController *recordVC=[self recordTableViewController];
-    if (recordVC && [recordVC hasNextRecord])
-        [self swipeWithTransitionAnimation:TransitionAnimationCurlUp forward:YES];
-}
-
-- (void)userDidSwipeDownInRecordViewController:(RecordViewController *)sender {
-    //Switch to the prev record
-    RecordTableViewController *recordVC=[self recordTableViewController];
-    if (recordVC && [recordVC hasPrevRecord])
-        [self swipeWithTransitionAnimation:TransitionAnimationCurlDown forward:NO];
-}
-
-- (void)userDidCancelEditingMode:(RecordViewController *)sender {
-    //Remove the cancel button
-    [self removeButtonWithTitle:@"Cancel"];    
-}
-
-- (void)userWantsToCancelEditingMode:(RecordViewController *)sender {
-    //Cancel immediately if the record info has not changed
-    //Record *record=sender.record;
-    if (NO) {
-        
-    } 
-    
-    //else put up an alert to make sure user wants to cancel
-    else {
-        //Put up an alert
-        UIAlertView *cancelAlert=[[UIAlertView alloc] initWithTitle:CANCEL_ALERT_TITLE 
-                                                            message:@"Are you sure you want to cancel? All the changes you made will be lost." 
-                                                           delegate:self 
-                                                  cancelButtonTitle:@"Go Back" 
-                                                  otherButtonTitles:@"Confirm", nil];
-        [cancelAlert show];
-    }
-}
-
-- (void)userDidStartEditingMode:(RecordViewController *)sender {
-    //Put up the cancel button
-    [self setupCancelButtonForViewController:sender];   
-}
-
 #pragma mark - RecordMapViewControllerDelegate protocol methods
 
 - (NSArray *)recordsFromModelGroup {
@@ -941,7 +614,7 @@
     if (modelGroupTopVC) {
         NSMutableArray *records=[NSMutableArray array];
         NSArray *selectedFolders=[(FolderTableViewController *)modelGroupTopVC selectedFolders];
-        UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+        UIManagedDocument *database=[GeoDatabaseManager standardDatabaseManager].geoDataViewerDatabase;
         for (NSString *folder in selectedFolders) {
             NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
             request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",folder];
@@ -960,76 +633,11 @@
     return [self recordsFromModelGroup];
 }
 
-- (void)mapViewController:(RecordMapViewController *)mapVC userDidSelectAnnotationForRecord:(Record *)record switchToDataView:(BOOL)willSwitchToDataView 
-{
-    //Update the data side (push if it's not on screen somewhere)
-    DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-    if (![dataMapSegmentVC.detailSideViewController isKindOfClass:[RecordViewController class]])
-        [self pushRecordViewControllerOnScreen];
-    [dataMapSegmentVC updateRecordDetailViewWithRecord:record];
-    
-    //Update the model group to reflect the changes
-    RecordTableViewController *recordTVC=[self recordTableViewController];
-    if (recordTVC)
-        [(RecordTableViewController *)recordTVC setChosenRecord:record];
-    else if ([self folderTableViewController]) {
-        FolderTableViewController *folderTVC=[self folderTableViewController];
-        [folderTVC performSegueWithIdentifier:@"Show Records" sender:record];
-    }
-    
-    //Switch to data view if desired
-    if (willSwitchToDataView)
-        [self swapToSegmentIndex:0];
-}
-
 - (void)userDidChooseToDisplayRecordTypes:(NSArray *)selectedRecordTypes {
     //Update the record tvc
     RecordTableViewController *recordTVC=[self recordTableViewController];
     if (recordTVC)
         recordTVC.selectedRecordTypes=selectedRecordTypes;
-}
-
-#pragma mark - UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *buttonTitle=[alertView buttonTitleAtIndex:buttonIndex];
-    
-    //If the alert is the autosave alert
-    if ([alertView.title isEqualToString:AUTOSAVE_ALERT_TITLE]) {
-        if ([buttonTitle isEqualToString:@"Save"]) {
-            //Save the record info
-            [self.modifiedRecord updateWithNewRecordInfo:self.recordModifiedInfo]; 
-            
-            //Nillify the temporary record modified data
-            self.modifiedRecord=nil;
-            self.recordModifiedInfo=nil;
-        }
-    }
-    
-    //If the alert is the cancel alert (from RecordViewController)
-    else if ([alertView.title isEqualToString:CANCEL_ALERT_TITLE]) {
-        //If user click "Continue", cancel the editing mode of the record view controller
-        if ([buttonTitle isEqualToString:@"Confirm"]) {
-            //Cancel editing mode
-            DataMapSegmentViewController *dataMapSegmentVC=[self dataMapSegmentViewController];
-            [dataMapSegmentVC cancelRecordViewControllerEditingMode];
-            
-            //Delete the record if it's "fresh" (newly created and has not been modified)
-            RecordTableViewController *recordTVC=[self recordTableViewController];
-            Record *record=recordTVC.chosenRecord;
-            if (record.recordState==RecordStateNew)
-                [record.managedObjectContext deleteObject:record];
-            
-            //Push the initial view on screen
-            [self pushInitialViewControllerOnScreen];
-        }
-    }
-}
-
-- (void)alertViewCancel:(UIAlertView *)alertView {
-    //Nillify the temporary record modified data
-    self.modifiedRecord=nil;
-    self.recordModifiedInfo=nil;
 }
 
 @end

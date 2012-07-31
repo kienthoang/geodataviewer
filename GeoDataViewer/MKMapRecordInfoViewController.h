@@ -12,17 +12,8 @@
 
 @class MKMapRecordInfoViewController;
 
-@protocol MKMapRecordInfoDelegate <NSObject>
-
-- (void)mapRecordInfoViewController:(MKMapRecordInfoViewController *)sender 
- userDidTapOnAccessoryViewForRecord:(Record *)record;
-
-@end
-
 @interface MKMapRecordInfoViewController : UIViewController
 
 @property (nonatomic,strong) Record *record;
-
-@property (nonatomic,weak) id <MKMapRecordInfoDelegate> delegate;
 
 @end

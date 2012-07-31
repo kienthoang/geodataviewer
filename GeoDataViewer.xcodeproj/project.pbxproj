@@ -11,7 +11,6 @@
 		020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB7C15941FB400EECC08 /* Formation_Folder.m */; };
 		020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB941594217A00EECC08 /* CoreDataTableViewController.m */; };
 		020EBB991594259900EECC08 /* GeoDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB981594259900EECC08 /* GeoDatabaseManager.m */; };
-		020EBB9E15942CBB00EECC08 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBB9D15942CBB00EECC08 /* RecordViewController.m */; };
 		020EBBA115942E8800EECC08 /* ModalFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBA015942E8800EECC08 /* ModalFolderViewController.m */; };
 		020EBBA41594355800EECC08 /* Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBA31594355800EECC08 /* Folder+Creation.m */; };
 		020EBBAF15944F4500EECC08 /* TextInputFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 020EBBAE15944F4500EECC08 /* TextInputFilter.m */; };
@@ -34,7 +33,6 @@
 		0222DB0D1596229F00699D62 /* JointSet+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB0C1596229F00699D62 /* JointSet+Modification.m */; };
 		0222DB10159622DD00699D62 /* Contact+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB0F159622DC00699D62 /* Contact+Modification.m */; };
 		0222DB161596305500699D62 /* JointSet+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB151596305400699D62 /* JointSet+Description.m */; };
-		0222DB1C1596487800699D62 /* GeoFieldBookFrontPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */; };
 		0222DB241596B40C00699D62 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB231596B40C00699D62 /* PickerViewController.m */; };
 		0222DB281596B9ED00699D62 /* FormationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB271596B9ED00699D62 /* FormationPickerViewController.m */; };
 		0222DB2B1596BF2800699D62 /* StrikePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0222DB2A1596BF2800699D62 /* StrikePickerViewController.m */; };
@@ -60,8 +58,6 @@
 		0249E2AF15A6A2D100A7532E /* gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2AE15A6A2D100A7532E /* gear2.png */; };
 		0249E2B115A6A32300A7532E /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2B015A6A32300A7532E /* gear.png */; };
 		0249E2C215A6AD0300A7532E /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0249E2C015A6AD0300A7532E /* iPad.storyboard */; };
-		0249E2E415A8EDF700A7532E /* GeoFieldBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */; };
-		0249E2E815A8EEF500A7532E /* GeoFieldBookControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0249E2E715A8EEF500A7532E /* GeoFieldBookControllerSegue.m */; };
 		0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0249E2EA15A9007B00A7532E /* DataMapSegmentControllerSegue.m */; };
 		026915A415BE83220076E34E /* Question+Seed.m in Sources */ = {isa = PBXBuildFile; fileRef = 026915A315BE83220076E34E /* Question+Seed.m */; };
 		026915A715BE86900076E34E /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 026915A615BE86900076E34E /* Record.m */; };
@@ -110,22 +106,18 @@
 		0294E09A159361060025219F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E099159361060025219F /* CoreGraphics.framework */; };
 		0294E0A0159361060025219F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0294E09E159361060025219F /* InfoPlist.strings */; };
 		0294E0A2159361060025219F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0A1159361060025219F /* main.m */; };
-		0294E0A6159361060025219F /* GeoFieldBookAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */; };
 		0294E0B4159361060025219F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0B3159361060025219F /* SenTestingKit.framework */; };
 		0294E0B5159361060025219F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E095159361060025219F /* UIKit.framework */; };
 		0294E0B6159361060025219F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E097159361060025219F /* Foundation.framework */; };
 		0294E0BE159361060025219F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0294E0BC159361060025219F /* InfoPlist.strings */; };
-		0294E0C1159361060025219F /* GeoFieldBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0C0159361060025219F /* GeoFieldBookTests.m */; };
+		0294E0C1159361060025219F /* GeoDataViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0C0159361060025219F /* GeoDataViewerTests.m */; };
 		0294E0CB159361F50025219F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CA159361F50025219F /* CoreData.framework */; };
 		0294E0CD159362040025219F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CC159362040025219F /* MapKit.framework */; };
 		0294E0CF1593620B0025219F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0294E0CE1593620B0025219F /* CoreLocation.framework */; };
-		0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */; };
 		029877F8159566E0000D71E7 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877F7159566E0000D71E7 /* Record+Creation.m */; };
-		029877FB1595740C000D71E7 /* InitialDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029877FA1595740C000D71E7 /* InitialDetailViewController.m */; };
 		029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 029877FD1595955E000D71E7 /* RecordVCBackground.jpg */; };
 		0298968B15A375B500E51C27 /* SegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298968A15A375B500E51C27 /* SegmentViewController.m */; };
 		0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969015A38F4C00E51C27 /* RecordMapViewController.m */; };
-		0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298969315A408B100E51C27 /* DataMapSegmentViewController.m */; };
 		0298C25C159B43F30038E89C /* Record+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25B159B43F30038E89C /* Record+Validation.m */; };
 		0298C25F159B45650038E89C /* Record+NameEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298C25E159B45650038E89C /* Record+NameEncoding.m */; };
 		02A7764515BCA3BE008A22C2 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A7762715BCA3BE008A22C2 /* IASKAppSettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -195,6 +187,7 @@
 		2132A5DA159CD62200009CB9 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2132A5D9159CD62200009CB9 /* Image+Creation.m */; };
 		2141DC17159C9AE1002518F9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2147B15E15BEF6BF001600F0 /* ColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2147B15D15BEF6BF001600F0 /* ColorManager.m */; };
+		2163722215C835D200FA4CAA /* GeoDataViewer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2163722015C835D200FA4CAA /* GeoDataViewer.xcdatamodeld */; };
 		218BF61C15C078FA00963CB6 /* Contact+Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 218BF61B15C078FA00963CB6 /* Contact+Formation.m */; };
 		218F8FD215B9AA220008710A /* MKCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD115B9AA220008710A /* MKCustomAnnotationView.m */; };
 		218F8FD515B9AA490008710A /* DipStrikeSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 218F8FD415B9AA490008710A /* DipStrikeSymbol.m */; };
@@ -204,6 +197,10 @@
 		21A87A13159CAAFE001A220E /* Record+DateAndTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A87A12159CAAFE001A220E /* Record+DateAndTimeFormatter.m */; };
 		21B1FEF0159B58C200868F62 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B1FEEF159B58C200868F62 /* CustomRecordCell.m */; };
 		21C309E1159B6C800066FC9B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C309E0159B6C800066FC9B /* MobileCoreServices.framework */; };
+		21E81E5315C82E7600A118A5 /* GeoDataViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E81E5215C82E7600A118A5 /* GeoDataViewerController.m */; };
+		21E81E5615C82EEF00A118A5 /* GeoDataViewerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E81E5515C82EEF00A118A5 /* GeoDataViewerAppDelegate.m */; };
+		21E81E5915C82F3B00A118A5 /* GeoDataViewerControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E81E5815C82F3B00A118A5 /* GeoDataViewerControllerSegue.m */; };
+		21E81E5B15C82F7C00A118A5 /* GeoDataViewerFrontPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E81E5A15C82F7C00A118A5 /* GeoDataViewerFrontPage.png */; };
 		21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC474D15A3789E00F245FF /* CustomFolderCell.m */; };
 		21FC475515A4244000F245FF /* FilterByRecordTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FC475415A4244000F245FF /* FilterByRecordTypeController.m */; };
 /* End PBXBuildFile section */
@@ -214,7 +211,7 @@
 			containerPortal = 0294E088159361060025219F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0294E090159361060025219F;
-			remoteInfo = GeoFieldBook;
+			remoteInfo = GeoDataViewer;
 		};
 		02AE270E15BE50E100FE59C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -264,8 +261,6 @@
 		020EBB941594217A00EECC08 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		020EBB971594259900EECC08 /* GeoDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDatabaseManager.h; sourceTree = "<group>"; };
 		020EBB981594259900EECC08 /* GeoDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoDatabaseManager.m; sourceTree = "<group>"; };
-		020EBB9C15942CBB00EECC08 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
-		020EBB9D15942CBB00EECC08 /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
 		020EBB9F15942E8800EECC08 /* ModalFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalFolderViewController.h; sourceTree = "<group>"; };
 		020EBBA015942E8800EECC08 /* ModalFolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalFolderViewController.m; sourceTree = "<group>"; };
 		020EBBA21594355800EECC08 /* Folder+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+Creation.h"; sourceTree = "<group>"; };
@@ -307,7 +302,6 @@
 		0222DB0F159622DC00699D62 /* Contact+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+Modification.m"; sourceTree = "<group>"; };
 		0222DB141596305400699D62 /* JointSet+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JointSet+Description.h"; sourceTree = "<group>"; };
 		0222DB151596305400699D62 /* JointSet+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JointSet+Description.m"; sourceTree = "<group>"; };
-		0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeoFieldBookFrontPage.png; sourceTree = "<group>"; };
 		0222DB221596B40C00699D62 /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
 		0222DB231596B40C00699D62 /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
 		0222DB261596B9ED00699D62 /* FormationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationPickerViewController.h; sourceTree = "<group>"; };
@@ -355,17 +349,11 @@
 		0249E2AE15A6A2D100A7532E /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
 		0249E2B015A6A32300A7532E /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		0249E2C115A6AD0300A7532E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
-		0249E2E215A8EDF700A7532E /* GeoFieldBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookController.h; sourceTree = "<group>"; };
-		0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookController.m; sourceTree = "<group>"; };
-		0249E2E615A8EEF500A7532E /* GeoFieldBookControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookControllerSegue.h; sourceTree = "<group>"; };
-		0249E2E715A8EEF500A7532E /* GeoFieldBookControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookControllerSegue.m; sourceTree = "<group>"; };
 		0249E2E915A9007B00A7532E /* DataMapSegmentControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentControllerSegue.h; sourceTree = "<group>"; };
 		0249E2EA15A9007B00A7532E /* DataMapSegmentControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMapSegmentControllerSegue.m; sourceTree = "<group>"; };
 		0249E2ED15A9040800A7532E /* ModelGroupNotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelGroupNotificationNames.h; sourceTree = "<group>"; };
 		0249E2F815A944D300A7532E /* RecordMapViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordMapViewControllerDelegate.h; sourceTree = "<group>"; };
-		0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordViewControllerDelegate.h; sourceTree = "<group>"; };
 		026640D315AA0B2E00026D88 /* RecordTableViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordTableViewControllerDelegate.h; sourceTree = "<group>"; };
-		026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentControllerDelegate.h; sourceTree = "<group>"; };
 		026915A215BE83220076E34E /* Question+Seed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Question+Seed.h"; sourceTree = "<group>"; };
 		026915A315BE83220076E34E /* Question+Seed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Question+Seed.m"; sourceTree = "<group>"; };
 		026915A515BE86900076E34E /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
@@ -462,29 +450,22 @@
 		0294E09F159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0294E0A1159361060025219F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0294E0A3159361060025219F /* GeoDataViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoDataViewer-Prefix.pch"; sourceTree = "<group>"; };
-		0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookAppDelegate.h; sourceTree = "<group>"; };
-		0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookAppDelegate.m; sourceTree = "<group>"; };
 		0294E0B2159361060025219F /* GeoDataViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoDataViewerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E0B3159361060025219F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0294E0BB159361060025219F /* GeoDataViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoDataViewerTests-Info.plist"; sourceTree = "<group>"; };
 		0294E0BD159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0294E0BF159361060025219F /* GeoFieldBookTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookTests.h; sourceTree = "<group>"; };
-		0294E0C0159361060025219F /* GeoFieldBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookTests.m; sourceTree = "<group>"; };
+		0294E0BF159361060025219F /* GeoDataViewerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoDataViewerTests.h; sourceTree = "<group>"; };
+		0294E0C0159361060025219F /* GeoDataViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoDataViewerTests.m; sourceTree = "<group>"; };
 		0294E0CA159361F50025219F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0294E0CC159362040025219F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0294E0CE1593620B0025219F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoFieldBook.xcdatamodel; sourceTree = "<group>"; };
 		029877F6159566E0000D71E7 /* Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Creation.h"; sourceTree = "<group>"; };
 		029877F7159566E0000D71E7 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
-		029877F91595740C000D71E7 /* InitialDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialDetailViewController.h; sourceTree = "<group>"; };
-		029877FA1595740C000D71E7 /* InitialDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialDetailViewController.m; sourceTree = "<group>"; };
 		029877FD1595955E000D71E7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
 		0298968915A375B500E51C27 /* SegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentViewController.h; sourceTree = "<group>"; };
 		0298968A15A375B500E51C27 /* SegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentViewController.m; sourceTree = "<group>"; };
 		0298968F15A38F4C00E51C27 /* RecordMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewController.h; sourceTree = "<group>"; };
 		0298969015A38F4C00E51C27 /* RecordMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordMapViewController.m; sourceTree = "<group>"; };
-		0298969215A408B100E51C27 /* DataMapSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMapSegmentViewController.h; sourceTree = "<group>"; };
-		0298969315A408B100E51C27 /* DataMapSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataMapSegmentViewController.m; sourceTree = "<group>"; };
 		0298C25A159B43F30038E89C /* Record+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Validation.h"; sourceTree = "<group>"; };
 		0298C25B159B43F30038E89C /* Record+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Validation.m"; sourceTree = "<group>"; };
 		0298C25D159B45650038E89C /* Record+NameEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+NameEncoding.h"; sourceTree = "<group>"; };
@@ -544,10 +525,10 @@
 		02BBB43315C04DF1008F7D68 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		02BBB43415C04DF1008F7D68 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		02F86EB315AF6E5B000A84D2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		02F86EB615AF6F09000A84D2 /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEngine.h; path = GeoFieldBook/IEEngine.h; sourceTree = "<group>"; };
-		02F86EB715AF6F09000A84D2 /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEEngine.m; path = GeoFieldBook/IEEngine.m; sourceTree = "<group>"; };
-		02F86EBA15AF6F37000A84D2 /* ConflictHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConflictHandler.h; path = GeoFieldBook/ConflictHandler.h; sourceTree = "<group>"; };
-		02F86EBB15AF6F37000A84D2 /* ConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConflictHandler.m; path = GeoFieldBook/ConflictHandler.m; sourceTree = "<group>"; };
+		02F86EB615AF6F09000A84D2 /* IEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEngine.h; path = GeoDataViewer/IEEngine.h; sourceTree = "<group>"; };
+		02F86EB715AF6F09000A84D2 /* IEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IEEngine.m; path = GeoDataViewer/IEEngine.m; sourceTree = "<group>"; };
+		02F86EBA15AF6F37000A84D2 /* ConflictHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConflictHandler.h; path = GeoDataViewer/ConflictHandler.h; sourceTree = "<group>"; };
+		02F86EBB15AF6F37000A84D2 /* ConflictHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConflictHandler.m; path = GeoDataViewer/ConflictHandler.m; sourceTree = "<group>"; };
 		02F86EBE15AF6F6F000A84D2 /* TransientImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientImage.h; sourceTree = "<group>"; };
 		02F86EBF15AF6F6F000A84D2 /* TransientImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientImage.m; sourceTree = "<group>"; };
 		02F86ECA15AF6FA0000A84D2 /* TransientBedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientBedding.h; sourceTree = "<group>"; };
@@ -591,6 +572,7 @@
 		2141DC18159CA275002518F9 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		2147B15C15BEF6BF001600F0 /* ColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorManager.h; sourceTree = "<group>"; };
 		2147B15D15BEF6BF001600F0 /* ColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorManager.m; sourceTree = "<group>"; };
+		2163722115C835D200FA4CAA /* GeoFieldBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GeoFieldBook.xcdatamodel; sourceTree = "<group>"; };
 		218BF61A15C078FA00963CB6 /* Contact+Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Contact+Formation.h"; path = "../Contact+Formation.h"; sourceTree = "<group>"; };
 		218BF61B15C078FA00963CB6 /* Contact+Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Contact+Formation.m"; path = "../Contact+Formation.m"; sourceTree = "<group>"; };
 		218F8FD015B9AA220008710A /* MKCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCustomAnnotationView.h; sourceTree = "<group>"; };
@@ -606,6 +588,13 @@
 		21B1FEEE159B58C200868F62 /* CustomRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecordCell.h; sourceTree = "<group>"; };
 		21B1FEEF159B58C200868F62 /* CustomRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecordCell.m; sourceTree = "<group>"; };
 		21C309E0159B6C800066FC9B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		21E81E5115C82E7600A118A5 /* GeoDataViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDataViewerController.h; sourceTree = "<group>"; };
+		21E81E5215C82E7600A118A5 /* GeoDataViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoDataViewerController.m; sourceTree = "<group>"; };
+		21E81E5415C82EEF00A118A5 /* GeoDataViewerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDataViewerAppDelegate.h; sourceTree = "<group>"; };
+		21E81E5515C82EEF00A118A5 /* GeoDataViewerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoDataViewerAppDelegate.m; sourceTree = "<group>"; };
+		21E81E5715C82F3B00A118A5 /* GeoDataViewerControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDataViewerControllerSegue.h; sourceTree = "<group>"; };
+		21E81E5815C82F3B00A118A5 /* GeoDataViewerControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoDataViewerControllerSegue.m; sourceTree = "<group>"; };
+		21E81E5A15C82F7C00A118A5 /* GeoDataViewerFrontPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeoDataViewerFrontPage.png; sourceTree = "<group>"; };
 		21FC474C15A3789E00F245FF /* CustomFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFolderCell.h; sourceTree = "<group>"; };
 		21FC474D15A3789E00F245FF /* CustomFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFolderCell.m; sourceTree = "<group>"; };
 		21FC475315A4244000F245FF /* FilterByRecordTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterByRecordTypeController.h; sourceTree = "<group>"; };
@@ -704,11 +693,7 @@
 		020EBB9B15942C8F00EECC08 /* View MVC Group */ = {
 			isa = PBXGroup;
 			children = (
-				0294C0C515BE5DEE00E0E2D0 /* Initial View */,
-				0294C0C315BE5DD300E0E2D0 /* Record View */,
 				0294C0C415BE5DDE00E0E2D0 /* Map View */,
-				0298969215A408B100E51C27 /* DataMapSegmentViewController.h */,
-				0298969315A408B100E51C27 /* DataMapSegmentViewController.m */,
 			);
 			name = "View MVC Group";
 			sourceTree = "<group>";
@@ -853,8 +838,8 @@
 		0249E2E515A8EECB00A7532E /* Custom Segues */ = {
 			isa = PBXGroup;
 			children = (
-				0249E2E615A8EEF500A7532E /* GeoFieldBookControllerSegue.h */,
-				0249E2E715A8EEF500A7532E /* GeoFieldBookControllerSegue.m */,
+				21E81E5715C82F3B00A118A5 /* GeoDataViewerControllerSegue.h */,
+				21E81E5815C82F3B00A118A5 /* GeoDataViewerControllerSegue.m */,
 				0249E2E915A9007B00A7532E /* DataMapSegmentControllerSegue.h */,
 				0249E2EA15A9007B00A7532E /* DataMapSegmentControllerSegue.m */,
 				0287330315B35EC30001BBC2 /* DoubleTableViewControllerSegue.h */,
@@ -1102,15 +1087,6 @@
 			name = Answer;
 			sourceTree = "<group>";
 		};
-		0294C0C315BE5DD300E0E2D0 /* Record View */ = {
-			isa = PBXGroup;
-			children = (
-				020EBB9C15942CBB00EECC08 /* RecordViewController.h */,
-				020EBB9D15942CBB00EECC08 /* RecordViewController.m */,
-			);
-			name = "Record View";
-			sourceTree = "<group>";
-		};
 		0294C0C415BE5DDE00E0E2D0 /* Map View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,20 +1100,11 @@
 			name = "Map View";
 			sourceTree = "<group>";
 		};
-		0294C0C515BE5DEE00E0E2D0 /* Initial View */ = {
-			isa = PBXGroup;
-			children = (
-				029877F91595740C000D71E7 /* InitialDetailViewController.h */,
-				029877FA1595740C000D71E7 /* InitialDetailViewController.m */,
-			);
-			name = "Initial View";
-			sourceTree = "<group>";
-		};
 		0294E086159361060025219F = {
 			isa = PBXGroup;
 			children = (
-				0294E09B159361060025219F /* GeoFieldBook */,
-				0294E0B9159361060025219F /* GeoFieldBookTests */,
+				0294E09B159361060025219F /* GeoDataViewer */,
+				0294E0B9159361060025219F /* GeoDataViewerTests */,
 				0294E094159361060025219F /* Frameworks */,
 				0294E092159361060025219F /* Products */,
 			);
@@ -1171,12 +1138,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0294E09B159361060025219F /* GeoFieldBook */ = {
+		0294E09B159361060025219F /* GeoDataViewer */ = {
 			isa = PBXGroup;
 			children = (
 				0249E2C015A6AD0300A7532E /* iPad.storyboard */,
-				0249E2E215A8EDF700A7532E /* GeoFieldBookController.h */,
-				0249E2E315A8EDF700A7532E /* GeoFieldBookController.m */,
+				21E81E5115C82E7600A118A5 /* GeoDataViewerController.h */,
+				21E81E5215C82E7600A118A5 /* GeoDataViewerController.m */,
 				020EBB9A15942C7900EECC08 /* Model MVC Group */,
 				020EBB9B15942C8F00EECC08 /* View MVC Group */,
 				02A7761F15BC9A5C008A22C2 /* Settings */,
@@ -1195,14 +1162,14 @@
 				02AE26F315BE508700FE59C7 /* Vendor */,
 				0294E09C159361060025219F /* Supporting Files */,
 			);
-			path = GeoFieldBook;
+			path = GeoDataViewer;
 			sourceTree = "<group>";
 		};
 		0294E09C159361060025219F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */,
-				0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */,
+				21E81E5415C82EEF00A118A5 /* GeoDataViewerAppDelegate.h */,
+				21E81E5515C82EEF00A118A5 /* GeoDataViewerAppDelegate.m */,
 				0294E09D159361060025219F /* GeoDataViewer-Info.plist */,
 				0294E09E159361060025219F /* InfoPlist.strings */,
 				0294E0A1159361060025219F /* main.m */,
@@ -1211,14 +1178,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0294E0B9159361060025219F /* GeoFieldBookTests */ = {
+		0294E0B9159361060025219F /* GeoDataViewerTests */ = {
 			isa = PBXGroup;
 			children = (
-				0294E0BF159361060025219F /* GeoFieldBookTests.h */,
-				0294E0C0159361060025219F /* GeoFieldBookTests.m */,
+				0294E0BF159361060025219F /* GeoDataViewerTests.h */,
+				0294E0C0159361060025219F /* GeoDataViewerTests.m */,
 				0294E0BA159361060025219F /* Supporting Files */,
 			);
-			path = GeoFieldBookTests;
+			path = GeoDataViewerTests;
 			sourceTree = "<group>";
 		};
 		0294E0BA159361060025219F /* Supporting Files */ = {
@@ -1233,7 +1200,6 @@
 		0294E0D1159362D20025219F /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */,
 				0294E0D5159363050025219F /* NSManagedObject */,
 				022C3DF815AE74FD004F0EDD /* TransientManagedObjects */,
 			);
@@ -1243,6 +1209,7 @@
 		0294E0D5159363050025219F /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				2163722015C835D200FA4CAA /* GeoDataViewer.xcdatamodeld */,
 				0294C0C215BE5CE200E0E2D0 /* Answer */,
 				0294C0C115BE5CD900E0E2D0 /* Group */,
 				2132A5DB159CD63500009CB9 /* Image */,
@@ -1265,9 +1232,7 @@
 			isa = PBXGroup;
 			children = (
 				0249E2F815A944D300A7532E /* RecordMapViewControllerDelegate.h */,
-				0249E2FA15A9456700A7532E /* RecordViewControllerDelegate.h */,
 				026640D315AA0B2E00026D88 /* RecordTableViewControllerDelegate.h */,
-				026640D415AA3B2800026D88 /* DataMapSegmentControllerDelegate.h */,
 				0238E56615B06F9500A2CA6C /* ImportTableViewControllerDelegate.h */,
 				0207374015B70B610068F7DB /* ExportRecordTableViewControllerDelegate.h */,
 				212DD18215B73531000203AB /* ExportFormationTableViewControllerDelegate.h */,
@@ -1283,10 +1248,10 @@
 		029877FC1595954D000D71E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				21E81E5A15C82F7C00A118A5 /* GeoDataViewerFrontPage.png */,
 				21989D6215A4D20C001CF847 /* checked.png */,
 				21989D6315A4D20C001CF847 /* unchecked.png */,
 				029877FD1595955E000D71E7 /* RecordVCBackground.jpg */,
-				0222DB1B1596487800699D62 /* GeoFieldBookFrontPage.png */,
 				02AC0F9415A5408300FBA9D3 /* folder.png */,
 				02AC0F9815A5483700FBA9D3 /* formation.png */,
 				0249E2AC15A6A16100A7532E /* import_export.png */,
@@ -1587,7 +1552,7 @@
 				02AE271515BE510500FE59C7 /* PBXTargetDependency */,
 			);
 			name = GeoDataViewer;
-			productName = GeoFieldBook;
+			productName = GeoDataViewer;
 			productReference = 0294E091159361060025219F /* GeoDataViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1606,7 +1571,7 @@
 				0294E0B8159361060025219F /* PBXTargetDependency */,
 			);
 			name = GeoDataViewerTests;
-			productName = GeoFieldBookTests;
+			productName = GeoDataViewerTests;
 			productReference = 0294E0B2159361060025219F /* GeoDataViewerTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -1675,7 +1640,6 @@
 				0294E0A0159361060025219F /* InfoPlist.strings in Resources */,
 				02AE271915BE515E00FE59C7 /* SSToolkitResources.bundle in Resources */,
 				029877FE1595955E000D71E7 /* RecordVCBackground.jpg in Resources */,
-				0222DB1C1596487800699D62 /* GeoFieldBookFrontPage.png in Resources */,
 				21989D6415A4D20C001CF847 /* checked.png in Resources */,
 				21989D6515A4D20C001CF847 /* unchecked.png in Resources */,
 				02AC0F9515A5408300FBA9D3 /* folder.png in Resources */,
@@ -1689,6 +1653,7 @@
 				0218AA8115BE70E000D60258 /* switchBlueBg.png in Resources */,
 				0218AA8215BE70E000D60258 /* switchOffPlain.png in Resources */,
 				0218AA8315BE70E000D60258 /* switchThumb.png in Resources */,
+				21E81E5B15C82F7C00A118A5 /* GeoDataViewerFrontPage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1724,13 +1689,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0294E0A2159361060025219F /* main.m in Sources */,
-				0294E0A6159361060025219F /* GeoFieldBookAppDelegate.m in Sources */,
-				0294E0D4159362FC0025219F /* GeoFieldBook.xcdatamodeld in Sources */,
 				020EBB5A15941F7C00EECC08 /* FolderTableViewController.m in Sources */,
 				020EBB7D15941FB400EECC08 /* Formation_Folder.m in Sources */,
 				020EBB951594217A00EECC08 /* CoreDataTableViewController.m in Sources */,
 				020EBB991594259900EECC08 /* GeoDatabaseManager.m in Sources */,
-				020EBB9E15942CBB00EECC08 /* RecordViewController.m in Sources */,
 				020EBBA115942E8800EECC08 /* ModalFolderViewController.m in Sources */,
 				020EBBA41594355800EECC08 /* Folder+Creation.m in Sources */,
 				020EBBAF15944F4500EECC08 /* TextInputFilter.m in Sources */,
@@ -1738,7 +1700,6 @@
 				020EBBC1159467F200EECC08 /* ModalRecordTypeSelector.m in Sources */,
 				020EBBC415946B3D00EECC08 /* Record+Types.m in Sources */,
 				029877F8159566E0000D71E7 /* Record+Creation.m in Sources */,
-				029877FB1595740C000D71E7 /* InitialDetailViewController.m in Sources */,
 				0222DB0015961D0D00699D62 /* Record+DictionaryKeys.m in Sources */,
 				0222DB0415961D5D00699D62 /* Record+Modification.m in Sources */,
 				0222DB0715961ED900699D62 /* Bedding+Modification.m in Sources */,
@@ -1779,13 +1740,10 @@
 				2128E74315A238F900B277F9 /* GeoFilter.m in Sources */,
 				0298968B15A375B500E51C27 /* SegmentViewController.m in Sources */,
 				0298969115A38F4C00E51C27 /* RecordMapViewController.m in Sources */,
-				0298969415A408B200E51C27 /* DataMapSegmentViewController.m in Sources */,
 				21FC474E15A3789E00F245FF /* CustomFolderCell.m in Sources */,
 				21FC475515A4244000F245FF /* FilterByRecordTypeController.m in Sources */,
 				21989D6915A4D27C001CF847 /* CheckBox.m in Sources */,
 				02AC0F8A15A4DE8A00FBA9D3 /* MKMapRecordInfoViewController.m in Sources */,
-				0249E2E415A8EDF700A7532E /* GeoFieldBookController.m in Sources */,
-				0249E2E815A8EEF500A7532E /* GeoFieldBookControllerSegue.m in Sources */,
 				0249E2EB15A9007B00A7532E /* DataMapSegmentControllerSegue.m in Sources */,
 				02191ECA15ACA8DD00A5EB2B /* ImportTableViewController.m in Sources */,
 				027406BC15AE711200AD9EDC /* RecordImportTVC.m in Sources */,
@@ -1875,6 +1833,10 @@
 				023DF00515C30A2C00591572 /* Contact+Validation.m in Sources */,
 				023DF00815C30A8700591572 /* Fault+Validation.m in Sources */,
 				023DF00B15C30AA500591572 /* JointSet+Validation.m in Sources */,
+				21E81E5315C82E7600A118A5 /* GeoDataViewerController.m in Sources */,
+				21E81E5615C82EEF00A118A5 /* GeoDataViewerAppDelegate.m in Sources */,
+				21E81E5915C82F3B00A118A5 /* GeoDataViewerControllerSegue.m in Sources */,
+				2163722215C835D200FA4CAA /* GeoDataViewer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1882,7 +1844,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0294E0C1159361060025219F /* GeoFieldBookTests.m in Sources */,
+				0294E0C1159361060025219F /* GeoDataViewerTests.m in Sources */,
 				02F86EB915AF6F09000A84D2 /* IEEngine.m in Sources */,
 				02F86EBD15AF6F37000A84D2 /* ConflictHandler.m in Sources */,
 				02F86EC115AF6F6F000A84D2 /* TransientImage.m in Sources */,
@@ -2001,9 +1963,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeoFieldBook/GeoDataViewer-Prefix.pch";
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
 				"HEADER_SEARCH_PATHS[sdk=*]" = Vendor/SSToolkit;
-				INFOPLIST_FILE = "GeoFieldBook/GeoDataViewer-Info.plist";
+				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2025,9 +1987,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeoFieldBook/GeoDataViewer-Prefix.pch";
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = Vendor/SSToolkit;
-				INFOPLIST_FILE = "GeoFieldBook/GeoDataViewer-Info.plist";
+				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2046,14 +2008,14 @@
 		0294E0C8159361060025219F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GeoFieldBook.app/GeoFieldBook";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GeoDataViewer.app/GeoDataViewer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
-				INFOPLIST_FILE = "GeoFieldBookTests/GeoDataViewerTests-Info.plist";
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				INFOPLIST_FILE = "GeoDataViewerTests/GeoDataViewerTests-Info.plist";
 				PRODUCT_NAME = GeoDataViewerTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -2063,14 +2025,14 @@
 		0294E0C9159361060025219F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GeoFieldBook.app/GeoFieldBook";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GeoDataViewer.app/GeoDataViewer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
-				INFOPLIST_FILE = "GeoFieldBookTests/GeoDataViewerTests-Info.plist";
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				INFOPLIST_FILE = "GeoDataViewerTests/GeoDataViewerTests-Info.plist";
 				PRODUCT_NAME = GeoDataViewerTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -2110,13 +2072,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0294E0D2159362FC0025219F /* GeoFieldBook.xcdatamodeld */ = {
+		2163722015C835D200FA4CAA /* GeoDataViewer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */,
+				2163722115C835D200FA4CAA /* GeoFieldBook.xcdatamodel */,
 			);
-			currentVersion = 0294E0D3159362FC0025219F /* GeoFieldBook.xcdatamodel */;
-			path = GeoFieldBook.xcdatamodeld;
+			currentVersion = 2163722115C835D200FA4CAA /* GeoFieldBook.xcdatamodel */;
+			path = GeoDataViewer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

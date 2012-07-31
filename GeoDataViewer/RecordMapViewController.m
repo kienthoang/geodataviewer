@@ -22,7 +22,7 @@
 
 #import "SettingManager.h"
 
-@interface RecordMapViewController() <MKMapViewDelegate,MKMapRecordInfoDelegate,FilterRecordsByType>
+@interface RecordMapViewController() <MKMapViewDelegate,FilterRecordsByType>
 
 @property (nonatomic,weak) UIPopoverController *filterPopover;
 @property (nonatomic,strong) UIPopoverController *annotationCalloutPopover;
@@ -308,7 +308,6 @@
     MKMapRecordInfoViewController *recordInfo=[record isKindOfClass:[Contact class]] ? [self.storyboard instantiateViewControllerWithIdentifier:@"Contact Info Popover"] :
                                                                                     [self.storyboard instantiateViewControllerWithIdentifier:@"Non-Contact Info Popover"];
     recordInfo.record=record;
-    recordInfo.delegate=self;
     UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
     [annotationCalloutPopover presentPopoverFromRect:view.bounds 
                                               inView:view 
@@ -390,18 +389,6 @@
     //Notify the delegate of the selected record types
     if ([self.mapDelegate respondsToSelector:@selector(userDidChooseToDisplayRecordTypes:)])
         [self.mapDelegate userDidChooseToDisplayRecordTypes:self.recordFilter.selectedRecordTypes];
-}
-
-#pragma mark - MKMapRecordInfoViewControllerDelegate methods
-
-- (void)mapRecordInfoViewController:(MKMapRecordInfoViewController *)sender 
- userDidTapOnAccessoryViewForRecord:(Record *)record 
-{
-    //Notify the delegate
-    [self.mapDelegate mapViewController:self userDidSelectAnnotationForRecord:record switchToDataView:YES];
-    
-    //Dismiss the callout popover
-    [self.annotationCalloutPopover dismissPopoverAnimated:NO];
 }
 
 @end

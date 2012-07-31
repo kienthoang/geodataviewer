@@ -19,7 +19,7 @@
 
 @implementation GeoDatabaseManager
 
-@synthesize geoFieldBookDatabase=_geoFieldBookDatabase;
+@synthesize geoDataViewerDatabase=_geoDataViewerDatabase;
 @synthesize completionBlockForFetchingDatabase=_completionBlockForFetchingDatabase;
 
 static GeoDatabaseManager *standardDatabaseManager;
@@ -63,8 +63,8 @@ static GeoDatabaseManager *standardDatabaseManager;
 
 - (void)createMainDatabaseWithURL:(NSURL *)databaseURL {
     //Create a UIManagedDocument with the database URL and save it first before keeping it as a property in case the user accesses the property in the middle of the saving process
-    self.geoFieldBookDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
-    [self.geoFieldBookDatabase saveToURL:databaseURL
+    self.geoDataViewerDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
+    [self.geoDataViewerDatabase saveToURL:databaseURL
                    forSaveOperation:UIDocumentSaveForCreating 
                   completionHandler:^(BOOL success){
                       if (success) {
@@ -72,7 +72,7 @@ static GeoDatabaseManager *standardDatabaseManager;
                               self.completionBlockForFetchingDatabase(YES);
                       } else {
                           //handle errors
-                          NSLog(@"Failed: %@",self.geoFieldBookDatabase);
+                          NSLog(@"Failed: %@",self.geoDataViewerDatabase);
                           if (self.completionBlockForFetchingDatabase)
                               self.completionBlockForFetchingDatabase(NO);
                       }
@@ -91,7 +91,7 @@ static GeoDatabaseManager *standardDatabaseManager;
     
     //Else if it already exists, assign it to the property geoFieldBookDatabase
     else {
-        self.geoFieldBookDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
+        self.geoDataViewerDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
     }
 }
 
@@ -100,7 +100,7 @@ static GeoDatabaseManager *standardDatabaseManager;
     //Save the completion block
     self.completionBlockForFetchingDatabase=completionBlock;
     
-    return self.geoFieldBookDatabase;
+    return self.geoDataViewerDatabase;
 }
 
 @end

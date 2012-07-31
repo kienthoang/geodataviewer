@@ -274,7 +274,7 @@ CGFloat const kRefreshViewHeight = 65;
     
     //Initialize the conflict handler
     self.conflictHandler=[[ConflictHandler alloc] init];
-    self.conflictHandler.database=[GeoDatabaseManager standardDatabaseManager].geoFieldBookDatabase;
+    self.conflictHandler.database=[GeoDatabaseManager standardDatabaseManager].geoDataViewerDatabase;
     
     //Set up for pull-to-request feature
     [self setupPullToRefreshTopView];
