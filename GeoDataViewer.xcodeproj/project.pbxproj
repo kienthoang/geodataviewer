@@ -454,19 +454,19 @@
 		0294C0B115BE56A200E0E2D0 /* UICustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomSwitch.m; sourceTree = "<group>"; };
 		0294C0C615BE5ECA00E0E2D0 /* Question+Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Question+Types.h"; sourceTree = "<group>"; };
 		0294C0C715BE5ECA00E0E2D0 /* Question+Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Question+Types.m"; sourceTree = "<group>"; };
-		0294E091159361060025219F /* GeoFieldBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFieldBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0294E091159361060025219F /* GeoDataViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoDataViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E095159361060025219F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0294E097159361060025219F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0294E099159361060025219F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0294E09D159361060025219F /* GeoFieldBook-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoFieldBook-Info.plist"; sourceTree = "<group>"; };
+		0294E09D159361060025219F /* GeoDataViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoDataViewer-Info.plist"; sourceTree = "<group>"; };
 		0294E09F159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0294E0A1159361060025219F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0294E0A3159361060025219F /* GeoFieldBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoFieldBook-Prefix.pch"; sourceTree = "<group>"; };
+		0294E0A3159361060025219F /* GeoDataViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoDataViewer-Prefix.pch"; sourceTree = "<group>"; };
 		0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookAppDelegate.h; sourceTree = "<group>"; };
 		0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookAppDelegate.m; sourceTree = "<group>"; };
-		0294E0B2159361060025219F /* GeoFieldBookTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoFieldBookTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0294E0B2159361060025219F /* GeoDataViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoDataViewerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294E0B3159361060025219F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		0294E0BB159361060025219F /* GeoFieldBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoFieldBookTests-Info.plist"; sourceTree = "<group>"; };
+		0294E0BB159361060025219F /* GeoDataViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoDataViewerTests-Info.plist"; sourceTree = "<group>"; };
 		0294E0BD159361060025219F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0294E0BF159361060025219F /* GeoFieldBookTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoFieldBookTests.h; sourceTree = "<group>"; };
 		0294E0C0159361060025219F /* GeoFieldBookTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFieldBookTests.m; sourceTree = "<group>"; };
@@ -1146,8 +1146,8 @@
 		0294E092159361060025219F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0294E091159361060025219F /* GeoFieldBook.app */,
-				0294E0B2159361060025219F /* GeoFieldBookTests.octest */,
+				0294E091159361060025219F /* GeoDataViewer.app */,
+				0294E0B2159361060025219F /* GeoDataViewerTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1203,10 +1203,10 @@
 			children = (
 				0294E0A4159361060025219F /* GeoFieldBookAppDelegate.h */,
 				0294E0A5159361060025219F /* GeoFieldBookAppDelegate.m */,
-				0294E09D159361060025219F /* GeoFieldBook-Info.plist */,
+				0294E09D159361060025219F /* GeoDataViewer-Info.plist */,
 				0294E09E159361060025219F /* InfoPlist.strings */,
 				0294E0A1159361060025219F /* main.m */,
-				0294E0A3159361060025219F /* GeoFieldBook-Prefix.pch */,
+				0294E0A3159361060025219F /* GeoDataViewer-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1224,7 +1224,7 @@
 		0294E0BA159361060025219F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0294E0BB159361060025219F /* GeoFieldBookTests-Info.plist */,
+				0294E0BB159361060025219F /* GeoDataViewerTests-Info.plist */,
 				0294E0BC159361060025219F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1572,9 +1572,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0294E090159361060025219F /* GeoFieldBook */ = {
+		0294E090159361060025219F /* GeoDataViewer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0294E0C4159361060025219F /* Build configuration list for PBXNativeTarget "GeoFieldBook" */;
+			buildConfigurationList = 0294E0C4159361060025219F /* Build configuration list for PBXNativeTarget "GeoDataViewer" */;
 			buildPhases = (
 				0294E08D159361060025219F /* Sources */,
 				0294E08E159361060025219F /* Frameworks */,
@@ -1586,14 +1586,14 @@
 				02AE271715BE510C00FE59C7 /* PBXTargetDependency */,
 				02AE271515BE510500FE59C7 /* PBXTargetDependency */,
 			);
-			name = GeoFieldBook;
+			name = GeoDataViewer;
 			productName = GeoFieldBook;
-			productReference = 0294E091159361060025219F /* GeoFieldBook.app */;
+			productReference = 0294E091159361060025219F /* GeoDataViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0294E0B1159361060025219F /* GeoFieldBookTests */ = {
+		0294E0B1159361060025219F /* GeoDataViewerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0294E0C7159361060025219F /* Build configuration list for PBXNativeTarget "GeoFieldBookTests" */;
+			buildConfigurationList = 0294E0C7159361060025219F /* Build configuration list for PBXNativeTarget "GeoDataViewerTests" */;
 			buildPhases = (
 				0294E0AD159361060025219F /* Sources */,
 				0294E0AE159361060025219F /* Frameworks */,
@@ -1605,9 +1605,9 @@
 			dependencies = (
 				0294E0B8159361060025219F /* PBXTargetDependency */,
 			);
-			name = GeoFieldBookTests;
+			name = GeoDataViewerTests;
 			productName = GeoFieldBookTests;
-			productReference = 0294E0B2159361060025219F /* GeoFieldBookTests.octest */;
+			productReference = 0294E0B2159361060025219F /* GeoDataViewerTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -1619,7 +1619,7 @@
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Lafayette College";
 			};
-			buildConfigurationList = 0294E08B159361060025219F /* Build configuration list for PBXProject "GeoFieldBook" */;
+			buildConfigurationList = 0294E08B159361060025219F /* Build configuration list for PBXProject "GeoDataViewer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1637,8 +1637,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				0294E090159361060025219F /* GeoFieldBook */,
-				0294E0B1159361060025219F /* GeoFieldBookTests */,
+				0294E090159361060025219F /* GeoDataViewer */,
+				0294E0B1159361060025219F /* GeoDataViewerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1905,7 +1905,7 @@
 /* Begin PBXTargetDependency section */
 		0294E0B8159361060025219F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0294E090159361060025219F /* GeoFieldBook */;
+			target = 0294E090159361060025219F /* GeoDataViewer */;
 			targetProxy = 0294E0B7159361060025219F /* PBXContainerItemProxy */;
 		};
 		02AE271515BE510500FE59C7 /* PBXTargetDependency */ = {
@@ -2001,9 +2001,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
+				GCC_PREFIX_HEADER = "GeoFieldBook/GeoDataViewer-Prefix.pch";
 				"HEADER_SEARCH_PATHS[sdk=*]" = Vendor/SSToolkit;
-				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
+				INFOPLIST_FILE = "GeoFieldBook/GeoDataViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2013,7 +2013,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GeoDataViewer;
 				PROVISIONING_PROFILE = "65168178-1D9E-4F5C-A45A-54D48C7A44EE";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65168178-1D9E-4F5C-A45A-54D48C7A44EE";
 				WRAPPER_EXTENSION = app;
@@ -2025,9 +2025,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
+				GCC_PREFIX_HEADER = "GeoFieldBook/GeoDataViewer-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = Vendor/SSToolkit;
-				INFOPLIST_FILE = "GeoFieldBook/GeoFieldBook-Info.plist";
+				INFOPLIST_FILE = "GeoFieldBook/GeoDataViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2037,7 +2037,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GeoDataViewer;
 				PROVISIONING_PROFILE = "70C9F55C-B768-45BC-9609-4FEAEE1B4C41";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2053,8 +2053,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
-				INFOPLIST_FILE = "GeoFieldBookTests/GeoFieldBookTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "GeoFieldBookTests/GeoDataViewerTests-Info.plist";
+				PRODUCT_NAME = GeoDataViewerTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -2070,8 +2070,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoFieldBook/GeoFieldBook-Prefix.pch";
-				INFOPLIST_FILE = "GeoFieldBookTests/GeoFieldBookTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "GeoFieldBookTests/GeoDataViewerTests-Info.plist";
+				PRODUCT_NAME = GeoDataViewerTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -2080,7 +2080,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0294E08B159361060025219F /* Build configuration list for PBXProject "GeoFieldBook" */ = {
+		0294E08B159361060025219F /* Build configuration list for PBXProject "GeoDataViewer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0294E0C2159361060025219F /* Debug */,
@@ -2089,7 +2089,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0294E0C4159361060025219F /* Build configuration list for PBXNativeTarget "GeoFieldBook" */ = {
+		0294E0C4159361060025219F /* Build configuration list for PBXNativeTarget "GeoDataViewer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0294E0C5159361060025219F /* Debug */,
@@ -2098,7 +2098,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0294E0C7159361060025219F /* Build configuration list for PBXNativeTarget "GeoFieldBookTests" */ = {
+		0294E0C7159361060025219F /* Build configuration list for PBXNativeTarget "GeoDataViewerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0294E0C8159361060025219F /* Debug */,

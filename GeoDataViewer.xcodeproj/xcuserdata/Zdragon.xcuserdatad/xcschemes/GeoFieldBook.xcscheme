@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0294E090159361060025219F"
-               BuildableName = "GeoFieldBook.app"
-               BlueprintName = "GeoFieldBook"
-               ReferencedContainer = "container:GeoFieldBook.xcodeproj">
+               BuildableName = "GeoDataViewer.app"
+               BlueprintName = "GeoDataViewer"
+               ReferencedContainer = "container:GeoDataViewer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0294E0B1159361060025219F"
-               BuildableName = "GeoFieldBookTests.octest"
-               BlueprintName = "GeoFieldBookTests"
-               ReferencedContainer = "container:GeoFieldBook.xcodeproj">
+               BuildableName = "GeoDataViewerTests.octest"
+               BlueprintName = "GeoDataViewerTests"
+               ReferencedContainer = "container:GeoDataViewer.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0294E090159361060025219F"
-            BuildableName = "GeoFieldBook.app"
-            BlueprintName = "GeoFieldBook"
-            ReferencedContainer = "container:GeoFieldBook.xcodeproj">
+            BuildableName = "GeoDataViewer.app"
+            BlueprintName = "GeoDataViewer"
+            ReferencedContainer = "container:GeoDataViewer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0294E090159361060025219F"
-            BuildableName = "GeoFieldBook.app"
-            BlueprintName = "GeoFieldBook"
-            ReferencedContainer = "container:GeoFieldBook.xcodeproj">
+            BuildableName = "GeoDataViewer.app"
+            BlueprintName = "GeoDataViewer"
+            ReferencedContainer = "container:GeoDataViewer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0294E090159361060025219F"
-            BuildableName = "GeoFieldBook.app"
-            BlueprintName = "GeoFieldBook"
-            ReferencedContainer = "container:GeoFieldBook.xcodeproj">
+            BuildableName = "GeoDataViewer.app"
+            BlueprintName = "GeoDataViewer"
+            ReferencedContainer = "container:GeoDataViewer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
