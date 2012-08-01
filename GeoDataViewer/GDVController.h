@@ -19,8 +19,7 @@
 #import "GDVFormationFolderTVC.h"
 #import "GDVFormationTableViewController.h"
 
-//#import "RecordImportTVC.h"
-//#import "FormationImportTVC.h"
+#import "ImportTableViewController.h"
 
 #import "RecordMapViewController.h"
 

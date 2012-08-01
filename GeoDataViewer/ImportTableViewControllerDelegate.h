@@ -10,10 +10,12 @@
 
 @class ImportTableViewController;
 
-@protocol ImportTableViewControllerDelegate
+@protocol ImportTableViewControllerDelegate <NSObject>
 
-- (void)importTableViewControllerDidStartImporting:(ImportTableViewController *)sender;
-- (void)importTableViewControllerDidEndImporting:(ImportTableViewController *)sender;
-- (void)importTableViewControllerDidCancelImporting:(ImportTableViewController *)sender;
+@optional
+
+- (void)userDidSelectRecordCSVFiles:(NSArray *)records forImportingInImportTVC:(ImportTableViewController *)sender;
+- (void)userDidSelectFormationCSVFiles:(NSArray *)formations forImportingInImportTVC:(ImportTableViewController *)sender;
+- (void)userDidSelectFeedbackCSVFiles:(NSArray *)feedbacks forImportingInImportTVC:(ImportTableViewController *)sender;
 
 @end

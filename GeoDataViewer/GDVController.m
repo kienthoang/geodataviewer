@@ -8,7 +8,7 @@
 
 #import "GDVController.h"
 
-@interface GDVController()
+@interface GDVController() <ImportTableViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
@@ -77,4 +77,22 @@
     [self setContentView:nil];
     [super viewDidUnload];
 }
+
+#pragma mark - ImportTableViewControllerDelegate Protocol Methods
+
+- (void)userDidSelectRecordCSVFiles:(NSArray *)records forImportingInImportTVC:(ImportTableViewController *)sender
+{
+    
+}
+
+- (void)userDidSelectFormationCSVFiles:(NSArray *)formations forImportingInImportTVC:(ImportTableViewController *)sender
+{
+    
+}
+
+- (void)userDidSelectFeedbackCSVFiles:(NSArray *)feedbacks forImportingInImportTVC:(ImportTableViewController *)sender
+{
+    
+}
+
 @end

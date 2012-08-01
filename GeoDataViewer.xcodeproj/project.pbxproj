@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
+		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
+		02782FCB15C9ECA900A0A062 /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC615C9ECA900A0A062 /* FormationImportTVC.m */; };
+		02782FCC15C9ECA900A0A062 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC815C9ECA900A0A062 /* CSVTableViewController.m */; };
 		02F3198E15C9BCB70070EDC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198D15C9BCB70070EDC7 /* UIKit.framework */; };
 		02F3199015C9BCB70070EDC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198F15C9BCB70070EDC7 /* Foundation.framework */; };
 		02F3199215C9BCB70070EDC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3199115C9BCB70070EDC7 /* CoreGraphics.framework */; };
@@ -106,6 +110,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
+		02782FC215C9ECA900A0A062 /* ImportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportTableViewController.m; sourceTree = "<group>"; };
+		02782FC315C9ECA900A0A062 /* RecordImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordImportTVC.h; sourceTree = "<group>"; };
+		02782FC415C9ECA900A0A062 /* RecordImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordImportTVC.m; sourceTree = "<group>"; };
+		02782FC515C9ECA900A0A062 /* FormationImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormationImportTVC.h; sourceTree = "<group>"; };
+		02782FC615C9ECA900A0A062 /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
+		02782FC715C9ECA900A0A062 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
+		02782FC815C9ECA900A0A062 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		02F3198915C9BCB70070EDC7 /* GeoDataViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoDataViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3198D15C9BCB70070EDC7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		02F3198F15C9BCB70070EDC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -402,6 +414,14 @@
 		02F319DF15C9BE800070EDC7 /* Import */ = {
 			isa = PBXGroup;
 			children = (
+				02782FC115C9ECA900A0A062 /* ImportTableViewController.h */,
+				02782FC215C9ECA900A0A062 /* ImportTableViewController.m */,
+				02782FC315C9ECA900A0A062 /* RecordImportTVC.h */,
+				02782FC415C9ECA900A0A062 /* RecordImportTVC.m */,
+				02782FC515C9ECA900A0A062 /* FormationImportTVC.h */,
+				02782FC615C9ECA900A0A062 /* FormationImportTVC.m */,
+				02782FC715C9ECA900A0A062 /* CSVTableViewController.h */,
+				02782FC815C9ECA900A0A062 /* CSVTableViewController.m */,
 			);
 			name = Import;
 			sourceTree = "<group>";
@@ -1016,6 +1036,10 @@
 				02F31B3D15C9D67E0070EDC7 /* Record+DipDirectionValues.m in Sources */,
 				02F31B4015C9D6CC0070EDC7 /* Contact+Formation.m in Sources */,
 				02F31B5115C9D7790070EDC7 /* TransientBedding.m in Sources */,
+				02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */,
+				02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */,
+				02782FCB15C9ECA900A0A062 /* FormationImportTVC.m in Sources */,
+				02782FCC15C9ECA900A0A062 /* CSVTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,6 +1211,7 @@
 				02F319BE15C9BCB70070EDC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		02F319BF15C9BCB70070EDC7 /* Build configuration list for PBXNativeTarget "GeoDataViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -1195,6 +1220,7 @@
 				02F319C115C9BCB70070EDC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
