@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Answer" representedClassName="Answer" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="numberOfRecords" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="question" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Question" inverseName="questions" inverseEntity="Question" syncable="YES"/>
+    </entity>
+    <entity name="Bedding" representedClassName="Bedding" parentEntity="Record" syncable="YES">
+        <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="beddings" inverseEntity="Formation" syncable="YES"/>
+    </entity>
+    <entity name="Contact" representedClassName="Contact" parentEntity="Record" syncable="YES">
+        <relationship name="lowerFormation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="lowerContacts" inverseEntity="Formation" syncable="YES"/>
+        <relationship name="upperFormation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="upperContacts" inverseEntity="Formation" syncable="YES"/>
+    </entity>
+    <entity name="Fault" representedClassName="Fault" parentEntity="Record" syncable="YES">
+        <attribute name="plunge" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="trend" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="faults" inverseEntity="Formation" syncable="YES"/>
+    </entity>
+    <entity name="Folder" representedClassName="Folder" syncable="YES">
+        <attribute name="folderDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="folderName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="formationFolder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation_Folder" inverseName="folders" inverseEntity="Formation_Folder" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Record" inverseName="folder" inverseEntity="Record" syncable="YES"/>
+    </entity>
+    <entity name="Formation" representedClassName="Formation" syncable="YES">
+        <attribute name="colorName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="formationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="formationSortNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="beddings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bedding" inverseName="formation" inverseEntity="Bedding" syncable="YES"/>
+        <relationship name="faults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fault" inverseName="formation" inverseEntity="Fault" syncable="YES"/>
+        <relationship name="formationFolder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation_Folder" inverseName="formations" inverseEntity="Formation_Folder" syncable="YES"/>
+        <relationship name="jointSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JointSet" inverseName="formation" inverseEntity="JointSet" syncable="YES"/>
+        <relationship name="lowerContacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="lowerFormation" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="upperContacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="upperFormation" inverseEntity="Contact" syncable="YES"/>
+    </entity>
+    <entity name="Formation_Folder" representedClassName="Formation_Folder" syncable="YES">
+        <attribute name="folderName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="folders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Folder" inverseName="formationFolder" inverseEntity="Folder" syncable="YES"/>
+        <relationship name="formations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Formation" inverseName="formationFolder" inverseEntity="Formation" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberOfMembers" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Image" representedClassName="Image" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="record" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="image" inverseEntity="Record" syncable="YES"/>
+    </entity>
+    <entity name="JointSet" representedClassName="JointSet" parentEntity="Record" syncable="YES">
+        <relationship name="formation" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="jointSets" inverseEntity="Formation" syncable="YES"/>
+    </entity>
+    <entity name="Other" representedClassName="Other" parentEntity="Record" syncable="YES"/>
+    <entity name="Question" representedClassName="Question" syncable="YES">
+        <attribute name="prompt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Answer" inverseName="question" inverseEntity="Answer" syncable="YES"/>
+    </entity>
+    <entity name="Record" representedClassName="Record" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dip" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dipDirection" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fieldObservations" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="strike" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="folder" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
+        <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Image" inverseName="record" inverseEntity="Image" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Answer" positionX="450" positionY="117" width="128" height="135"/>
+        <element name="Record" positionX="-65" positionY="243" width="128" height="195"/>
+        <element name="Question" positionX="475" positionY="351" width="128" height="105"/>
+        <element name="Image" positionX="-45" positionY="9" width="128" height="75"/>
+        <element name="Group" positionX="288" positionY="663" width="128" height="75"/>
+        <element name="Formation_Folder" positionX="-297" positionY="261" width="128" height="90"/>
+        <element name="Formation" positionX="-108" positionY="687" width="128" height="180"/>
+        <element name="Folder" positionX="-200" positionY="63" width="128" height="105"/>
+        <element name="Fault" positionX="-90" positionY="465" width="128" height="90"/>
+        <element name="Contact" positionX="72" positionY="495" width="128" height="75"/>
+        <element name="Bedding" positionX="178" positionY="396" width="128" height="60"/>
+        <element name="JointSet" positionX="216" positionY="297" width="128" height="60"/>
+        <element name="Other" positionX="180" positionY="108" width="128" height="45"/>
+    </elements>
+</model>

@@ -1,0 +1,1215 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02F3198E15C9BCB70070EDC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198D15C9BCB70070EDC7 /* UIKit.framework */; };
+		02F3199015C9BCB70070EDC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198F15C9BCB70070EDC7 /* Foundation.framework */; };
+		02F3199215C9BCB70070EDC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3199115C9BCB70070EDC7 /* CoreGraphics.framework */; };
+		02F3199815C9BCB70070EDC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02F3199615C9BCB70070EDC7 /* InfoPlist.strings */; };
+		02F3199A15C9BCB70070EDC7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F3199915C9BCB70070EDC7 /* main.m */; };
+		02F3199E15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */; };
+		02F319A115C9BCB70070EDC7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02F3199F15C9BCB70070EDC7 /* MainStoryboard.storyboard */; };
+		02F319AC15C9BCB70070EDC7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F319AB15C9BCB70070EDC7 /* SenTestingKit.framework */; };
+		02F319AD15C9BCB70070EDC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198D15C9BCB70070EDC7 /* UIKit.framework */; };
+		02F319AE15C9BCB70070EDC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198F15C9BCB70070EDC7 /* Foundation.framework */; };
+		02F319B615C9BCB70070EDC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02F319B415C9BCB70070EDC7 /* InfoPlist.strings */; };
+		02F319B915C9BCB70070EDC7 /* GeoDataViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319B815C9BCB70070EDC7 /* GeoDataViewerTests.m */; };
+		02F319C715C9BD480070EDC7 /* GDVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319C615C9BD480070EDC7 /* GDVController.m */; };
+		02F319CB15C9BD900070EDC7 /* GDVResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319CA15C9BD900070EDC7 /* GDVResourceManager.m */; };
+		02F319CE15C9BDB40070EDC7 /* GDVIEEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319CD15C9BDB40070EDC7 /* GDVIEEngine.m */; };
+		02F319D115C9BDF80070EDC7 /* GDVServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319D015C9BDF80070EDC7 /* GDVServerCommunicator.m */; };
+		02F319F415C9BF2D0070EDC7 /* RecordMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319EF15C9BF2D0070EDC7 /* RecordMapViewController.m */; };
+		02F319F515C9BF2D0070EDC7 /* MKMapRecordInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319F115C9BF2D0070EDC7 /* MKMapRecordInfoViewController.m */; };
+		02F319F615C9BF2D0070EDC7 /* FilterByRecordTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319F315C9BF2D0070EDC7 /* FilterByRecordTypeController.m */; };
+		02F319FA15C9BF760070EDC7 /* MKGeoRecordAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319F915C9BF760070EDC7 /* MKGeoRecordAnnotation.m */; };
+		02F319FE15C9BF9B0070EDC7 /* GeoDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F319FD15C9BF9B0070EDC7 /* GeoDatabaseManager.m */; };
+		02F31A0115C9BFA50070EDC7 /* TextInputFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A0015C9BFA50070EDC7 /* TextInputFilter.m */; };
+		02F31A0415C9BFAE0070EDC7 /* ValidationMessageBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A0315C9BFAE0070EDC7 /* ValidationMessageBoard.m */; };
+		02F31A0715C9BFB90070EDC7 /* ColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A0615C9BFB90070EDC7 /* ColorManager.m */; };
+		02F31A0C15C9BFF50070EDC7 /* TransientManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A0B15C9BFF50070EDC7 /* TransientManagedObject.m */; };
+		02F31A1115C9C0090070EDC7 /* TransientImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A1015C9C0090070EDC7 /* TransientImage.m */; };
+		02F31A1915C9C03A0070EDC7 /* TransientContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A1815C9C03A0070EDC7 /* TransientContact.m */; };
+		02F31A1D15C9C05B0070EDC7 /* TransientFault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A1C15C9C05B0070EDC7 /* TransientFault.m */; };
+		02F31A2115C9C0830070EDC7 /* TransientProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A2015C9C0830070EDC7 /* TransientProject.m */; };
+		02F31A2515C9C0A00070EDC7 /* TransientFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A2415C9C0A00070EDC7 /* TransientFormation.m */; };
+		02F31A2915C9C0B90070EDC7 /* TransientFormation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A2815C9C0B90070EDC7 /* TransientFormation_Folder.m */; };
+		02F31A2D15C9C0CC0070EDC7 /* TransientJointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A2C15C9C0CC0070EDC7 /* TransientJointSet.m */; };
+		02F31A3115C9C0E60070EDC7 /* TransientRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A3015C9C0E60070EDC7 /* TransientRecord.m */; };
+		02F31A3515C9C0FA0070EDC7 /* TransientOther.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A3415C9C0FA0070EDC7 /* TransientOther.m */; };
+		02F31A3815C9C1150070EDC7 /* GDVDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A3615C9C1150070EDC7 /* GDVDatabase.xcdatamodeld */; };
+		02F31A7015C9C3D90070EDC7 /* Record+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A6F15C9C3D90070EDC7 /* Record+Types.m */; };
+		02F31A8815C9C4C70070EDC7 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7B15C9C4C70070EDC7 /* checked.png */; };
+		02F31A8915C9C4C70070EDC7 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7C15C9C4C70070EDC7 /* unchecked.png */; };
+		02F31A8A15C9C4C70070EDC7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7D15C9C4C70070EDC7 /* RecordVCBackground.jpg */; };
+		02F31A8B15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7E15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png */; };
+		02F31A8C15C9C4C70070EDC7 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7F15C9C4C70070EDC7 /* folder.png */; };
+		02F31A8D15C9C4C70070EDC7 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8015C9C4C70070EDC7 /* formation.png */; };
+		02F31A8E15C9C4C70070EDC7 /* import_export.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8115C9C4C70070EDC7 /* import_export.png */; };
+		02F31A8F15C9C4C70070EDC7 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8215C9C4C70070EDC7 /* gear.png */; };
+		02F31A9015C9C4C70070EDC7 /* gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8315C9C4C70070EDC7 /* gear2.png */; };
+		02F31A9115C9C4C70070EDC7 /* green_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8415C9C4C70070EDC7 /* green_pin.png */; };
+		02F31A9F15C9C50F0070EDC7 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9815C9C50F0070EDC7 /* CheckBox.m */; };
+		02F31AA015C9C50F0070EDC7 /* CustomFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9A15C9C50F0070EDC7 /* CustomFolderCell.m */; };
+		02F31AA115C9C50F0070EDC7 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9C15C9C50F0070EDC7 /* CustomRecordCell.m */; };
+		02F31AA215C9C50F0070EDC7 /* CustomFormationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9E15C9C50F0070EDC7 /* CustomFormationCell.m */; };
+		02F31AA815C9C52F0070EDC7 /* DipStrikeSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AA515C9C52F0070EDC7 /* DipStrikeSymbol.m */; };
+		02F31AA915C9C52F0070EDC7 /* MKCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AA715C9C52F0070EDC7 /* MKCustomAnnotationView.m */; };
+		02F31AAC15C9C59C0070EDC7 /* GDVFormationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AAB15C9C59C0070EDC7 /* GDVFormationTableViewController.m */; };
+		02F31AAF15C9C5B10070EDC7 /* GDVFormationFolderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AAE15C9C5B10070EDC7 /* GDVFormationFolderTVC.m */; };
+		02F31ABE15C9C6CA0070EDC7 /* GDVControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ABD15C9C6CA0070EDC7 /* GDVControllerSegue.m */; };
+		02F31AC115C9C78D0070EDC7 /* GDVStudentGroupTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC015C9C78D0070EDC7 /* GDVStudentGroupTVC.m */; };
+		02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC315C9C7B70070EDC7 /* GDVFolderTVC.m */; };
+		02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */; };
+		02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */; };
+		02F31ACD15C9C8D20070EDC7 /* GDVFeedbackTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */; };
+		02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ADA15C9D0160070EDC7 /* GeoFilter.m */; };
+		02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AE815C9D0490070EDC7 /* SettingManager.m */; };
+		02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0415C9D4AF0070EDC7 /* Answer.m */; };
+		02F31B0815C9D4BE0070EDC7 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0715C9D4BE0070EDC7 /* Bedding.m */; };
+		02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0A15C9D4CD0070EDC7 /* Contact.m */; };
+		02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0D15C9D4DD0070EDC7 /* Fault.m */; };
+		02F31B1115C9D4ED0070EDC7 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1015C9D4ED0070EDC7 /* Folder.m */; };
+		02F31B1415C9D5030070EDC7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1315C9D5030070EDC7 /* Formation.m */; };
+		02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */; };
+		02F31B1A15C9D51C0070EDC7 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1915C9D51C0070EDC7 /* Group.m */; };
+		02F31B1D15C9D5280070EDC7 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1C15C9D5280070EDC7 /* Image.m */; };
+		02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1F15C9D5340070EDC7 /* JointSet.m */; };
+		02F31B2315C9D5440070EDC7 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B2215C9D5440070EDC7 /* Other.m */; };
+		02F31B2615C9D5520070EDC7 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B2515C9D5520070EDC7 /* Question.m */; };
+		02F31B2915C9D5620070EDC7 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B2815C9D5620070EDC7 /* Record.m */; };
+		02F31B3A15C9D6620070EDC7 /* Record+DateAndTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B3915C9D6620070EDC7 /* Record+DateAndTimeFormatter.m */; };
+		02F31B3D15C9D67E0070EDC7 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B3C15C9D67E0070EDC7 /* Record+DipDirectionValues.m */; };
+		02F31B4015C9D6CC0070EDC7 /* Contact+Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B3F15C9D6CC0070EDC7 /* Contact+Formation.m */; };
+		02F31B4215C9D6F10070EDC7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4115C9D6F00070EDC7 /* MapKit.framework */; };
+		02F31B4415C9D6F90070EDC7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4315C9D6F80070EDC7 /* CoreLocation.framework */; };
+		02F31B4615C9D7010070EDC7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4515C9D7000070EDC7 /* QuartzCore.framework */; };
+		02F31B4815C9D71E0070EDC7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4715C9D71D0070EDC7 /* CoreData.framework */; };
+		02F31B4A15C9D72B0070EDC7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4915C9D72B0070EDC7 /* MessageUI.framework */; };
+		02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4B15C9D7310070EDC7 /* iAd.framework */; };
+		02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */; };
+		02F31B5115C9D7790070EDC7 /* TransientBedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B5015C9D7790070EDC7 /* TransientBedding.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		02F319AF15C9BCB70070EDC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02F3198015C9BCB70070EDC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02F3198815C9BCB70070EDC7;
+			remoteInfo = GeoDataViewer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02F3198915C9BCB70070EDC7 /* GeoDataViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoDataViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02F3198D15C9BCB70070EDC7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		02F3198F15C9BCB70070EDC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		02F3199115C9BCB70070EDC7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		02F3199515C9BCB70070EDC7 /* GeoDataViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoDataViewer-Info.plist"; sourceTree = "<group>"; };
+		02F3199715C9BCB70070EDC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		02F3199915C9BCB70070EDC7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		02F3199B15C9BCB70070EDC7 /* GeoDataViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoDataViewer-Prefix.pch"; sourceTree = "<group>"; };
+		02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeoDataViewerAppDelegate.h; path = ../GeoDataViewer/GeoDataViewerAppDelegate.h; sourceTree = "<group>"; };
+		02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GeoDataViewerAppDelegate.m; path = ../GeoDataViewer/GeoDataViewerAppDelegate.m; sourceTree = "<group>"; };
+		02F319A015C9BCB70070EDC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		02F319AA15C9BCB70070EDC7 /* GeoDataViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoDataViewerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02F319AB15C9BCB70070EDC7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		02F319B315C9BCB70070EDC7 /* GeoDataViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeoDataViewerTests-Info.plist"; sourceTree = "<group>"; };
+		02F319B515C9BCB70070EDC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		02F319B715C9BCB70070EDC7 /* GeoDataViewerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoDataViewerTests.h; sourceTree = "<group>"; };
+		02F319B815C9BCB70070EDC7 /* GeoDataViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoDataViewerTests.m; sourceTree = "<group>"; };
+		02F319C515C9BD480070EDC7 /* GDVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVController.h; sourceTree = "<group>"; };
+		02F319C615C9BD480070EDC7 /* GDVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVController.m; sourceTree = "<group>"; };
+		02F319C915C9BD900070EDC7 /* GDVResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVResourceManager.h; sourceTree = "<group>"; };
+		02F319CA15C9BD900070EDC7 /* GDVResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVResourceManager.m; sourceTree = "<group>"; };
+		02F319CC15C9BDB40070EDC7 /* GDVIEEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVIEEngine.h; sourceTree = "<group>"; };
+		02F319CD15C9BDB40070EDC7 /* GDVIEEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVIEEngine.m; sourceTree = "<group>"; };
+		02F319CF15C9BDF80070EDC7 /* GDVServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVServerCommunicator.h; sourceTree = "<group>"; };
+		02F319D015C9BDF80070EDC7 /* GDVServerCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVServerCommunicator.m; sourceTree = "<group>"; };
+		02F319EE15C9BF2D0070EDC7 /* RecordMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewController.h; sourceTree = "<group>"; };
+		02F319EF15C9BF2D0070EDC7 /* RecordMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordMapViewController.m; sourceTree = "<group>"; };
+		02F319F015C9BF2D0070EDC7 /* MKMapRecordInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapRecordInfoViewController.h; sourceTree = "<group>"; };
+		02F319F115C9BF2D0070EDC7 /* MKMapRecordInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapRecordInfoViewController.m; sourceTree = "<group>"; };
+		02F319F215C9BF2D0070EDC7 /* FilterByRecordTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterByRecordTypeController.h; sourceTree = "<group>"; };
+		02F319F315C9BF2D0070EDC7 /* FilterByRecordTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterByRecordTypeController.m; sourceTree = "<group>"; };
+		02F319F815C9BF760070EDC7 /* MKGeoRecordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKGeoRecordAnnotation.h; sourceTree = "<group>"; };
+		02F319F915C9BF760070EDC7 /* MKGeoRecordAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKGeoRecordAnnotation.m; sourceTree = "<group>"; };
+		02F319FC15C9BF9B0070EDC7 /* GeoDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDatabaseManager.h; sourceTree = "<group>"; };
+		02F319FD15C9BF9B0070EDC7 /* GeoDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoDatabaseManager.m; sourceTree = "<group>"; };
+		02F319FF15C9BFA50070EDC7 /* TextInputFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextInputFilter.h; sourceTree = "<group>"; };
+		02F31A0015C9BFA50070EDC7 /* TextInputFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextInputFilter.m; sourceTree = "<group>"; };
+		02F31A0215C9BFAE0070EDC7 /* ValidationMessageBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationMessageBoard.h; sourceTree = "<group>"; };
+		02F31A0315C9BFAE0070EDC7 /* ValidationMessageBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationMessageBoard.m; sourceTree = "<group>"; };
+		02F31A0515C9BFB90070EDC7 /* ColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorManager.h; sourceTree = "<group>"; };
+		02F31A0615C9BFB90070EDC7 /* ColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorManager.m; sourceTree = "<group>"; };
+		02F31A0A15C9BFF50070EDC7 /* TransientManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientManagedObject.h; sourceTree = "<group>"; };
+		02F31A0B15C9BFF50070EDC7 /* TransientManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientManagedObject.m; sourceTree = "<group>"; };
+		02F31A0F15C9C0090070EDC7 /* TransientImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientImage.h; sourceTree = "<group>"; };
+		02F31A1015C9C0090070EDC7 /* TransientImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientImage.m; sourceTree = "<group>"; };
+		02F31A1715C9C03A0070EDC7 /* TransientContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientContact.h; sourceTree = "<group>"; };
+		02F31A1815C9C03A0070EDC7 /* TransientContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientContact.m; sourceTree = "<group>"; };
+		02F31A1B15C9C05B0070EDC7 /* TransientFault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFault.h; sourceTree = "<group>"; };
+		02F31A1C15C9C05B0070EDC7 /* TransientFault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFault.m; sourceTree = "<group>"; };
+		02F31A1F15C9C0830070EDC7 /* TransientProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientProject.h; sourceTree = "<group>"; };
+		02F31A2015C9C0830070EDC7 /* TransientProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientProject.m; sourceTree = "<group>"; };
+		02F31A2315C9C0A00070EDC7 /* TransientFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation.h; sourceTree = "<group>"; };
+		02F31A2415C9C0A00070EDC7 /* TransientFormation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation.m; sourceTree = "<group>"; };
+		02F31A2715C9C0B90070EDC7 /* TransientFormation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientFormation_Folder.h; sourceTree = "<group>"; };
+		02F31A2815C9C0B90070EDC7 /* TransientFormation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientFormation_Folder.m; sourceTree = "<group>"; };
+		02F31A2B15C9C0CC0070EDC7 /* TransientJointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientJointSet.h; sourceTree = "<group>"; };
+		02F31A2C15C9C0CC0070EDC7 /* TransientJointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientJointSet.m; sourceTree = "<group>"; };
+		02F31A2F15C9C0E60070EDC7 /* TransientRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientRecord.h; sourceTree = "<group>"; };
+		02F31A3015C9C0E60070EDC7 /* TransientRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientRecord.m; sourceTree = "<group>"; };
+		02F31A3315C9C0FA0070EDC7 /* TransientOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientOther.h; sourceTree = "<group>"; };
+		02F31A3415C9C0FA0070EDC7 /* TransientOther.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientOther.m; sourceTree = "<group>"; };
+		02F31A3715C9C1150070EDC7 /* GDVDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GDVDatabase.xcdatamodel; sourceTree = "<group>"; };
+		02F31A6E15C9C3D90070EDC7 /* Record+Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Types.h"; sourceTree = "<group>"; };
+		02F31A6F15C9C3D90070EDC7 /* Record+Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Types.m"; sourceTree = "<group>"; };
+		02F31A7B15C9C4C70070EDC7 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
+		02F31A7C15C9C4C70070EDC7 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
+		02F31A7D15C9C4C70070EDC7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
+		02F31A7E15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeoFieldBookFrontPage.png; sourceTree = "<group>"; };
+		02F31A7F15C9C4C70070EDC7 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		02F31A8015C9C4C70070EDC7 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
+		02F31A8115C9C4C70070EDC7 /* import_export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_export.png; sourceTree = "<group>"; };
+		02F31A8215C9C4C70070EDC7 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		02F31A8315C9C4C70070EDC7 /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
+		02F31A8415C9C4C70070EDC7 /* green_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_pin.png; sourceTree = "<group>"; };
+		02F31A9715C9C50F0070EDC7 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
+		02F31A9815C9C50F0070EDC7 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
+		02F31A9915C9C50F0070EDC7 /* CustomFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFolderCell.h; sourceTree = "<group>"; };
+		02F31A9A15C9C50F0070EDC7 /* CustomFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFolderCell.m; sourceTree = "<group>"; };
+		02F31A9B15C9C50F0070EDC7 /* CustomRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecordCell.h; sourceTree = "<group>"; };
+		02F31A9C15C9C50F0070EDC7 /* CustomRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecordCell.m; sourceTree = "<group>"; };
+		02F31A9D15C9C50F0070EDC7 /* CustomFormationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFormationCell.h; sourceTree = "<group>"; };
+		02F31A9E15C9C50F0070EDC7 /* CustomFormationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFormationCell.m; sourceTree = "<group>"; };
+		02F31AA415C9C52F0070EDC7 /* DipStrikeSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipStrikeSymbol.h; sourceTree = "<group>"; };
+		02F31AA515C9C52F0070EDC7 /* DipStrikeSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipStrikeSymbol.m; sourceTree = "<group>"; };
+		02F31AA615C9C52F0070EDC7 /* MKCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCustomAnnotationView.h; sourceTree = "<group>"; };
+		02F31AA715C9C52F0070EDC7 /* MKCustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKCustomAnnotationView.m; sourceTree = "<group>"; };
+		02F31AAA15C9C59C0070EDC7 /* GDVFormationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationTableViewController.h; sourceTree = "<group>"; };
+		02F31AAB15C9C59C0070EDC7 /* GDVFormationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFormationTableViewController.m; sourceTree = "<group>"; };
+		02F31AAD15C9C5B10070EDC7 /* GDVFormationFolderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationFolderTVC.h; sourceTree = "<group>"; };
+		02F31AAE15C9C5B10070EDC7 /* GDVFormationFolderTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFormationFolderTVC.m; sourceTree = "<group>"; };
+		02F31ABC15C9C6CA0070EDC7 /* GDVControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVControllerSegue.h; sourceTree = "<group>"; };
+		02F31ABD15C9C6CA0070EDC7 /* GDVControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVControllerSegue.m; sourceTree = "<group>"; };
+		02F31ABF15C9C78D0070EDC7 /* GDVStudentGroupTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentGroupTVC.h; sourceTree = "<group>"; };
+		02F31AC015C9C78D0070EDC7 /* GDVStudentGroupTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVStudentGroupTVC.m; sourceTree = "<group>"; };
+		02F31AC215C9C7B70070EDC7 /* GDVFolderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFolderTVC.h; sourceTree = "<group>"; };
+		02F31AC315C9C7B70070EDC7 /* GDVFolderTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFolderTVC.m; sourceTree = "<group>"; };
+		02F31AC515C9C7C70070EDC7 /* GDVRecordTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVRecordTVC.h; sourceTree = "<group>"; };
+		02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVRecordTVC.m; sourceTree = "<group>"; };
+		02F31AC815C9C8A30070EDC7 /* CustomStudentGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomStudentGroupCell.h; sourceTree = "<group>"; };
+		02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomStudentGroupCell.m; sourceTree = "<group>"; };
+		02F31ACB15C9C8D20070EDC7 /* GDVFeedbackTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFeedbackTVC.h; sourceTree = "<group>"; };
+		02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFeedbackTVC.m; sourceTree = "<group>"; };
+		02F31AD915C9D0150070EDC7 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
+		02F31ADA15C9D0160070EDC7 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
+		02F31AE715C9D0490070EDC7 /* SettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManager.h; sourceTree = "<group>"; };
+		02F31AE815C9D0490070EDC7 /* SettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingManager.m; sourceTree = "<group>"; };
+		02F31AF615C9D0BA0070EDC7 /* RecordMapViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewControllerDelegate.h; sourceTree = "<group>"; };
+		02F31AF715C9D0BA0070EDC7 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
+		02F31B0315C9D4AF0070EDC7 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		02F31B0415C9D4AF0070EDC7 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		02F31B0615C9D4BE0070EDC7 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
+		02F31B0715C9D4BE0070EDC7 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
+		02F31B0915C9D4CD0070EDC7 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		02F31B0A15C9D4CD0070EDC7 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		02F31B0C15C9D4DD0070EDC7 /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
+		02F31B0D15C9D4DD0070EDC7 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
+		02F31B0F15C9D4ED0070EDC7 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		02F31B1015C9D4ED0070EDC7 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
+		02F31B1215C9D5030070EDC7 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
+		02F31B1315C9D5030070EDC7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
+		02F31B1515C9D50D0070EDC7 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
+		02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
+		02F31B1815C9D51C0070EDC7 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		02F31B1915C9D51C0070EDC7 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		02F31B1B15C9D5280070EDC7 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		02F31B1C15C9D5280070EDC7 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		02F31B1E15C9D5340070EDC7 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
+		02F31B1F15C9D5340070EDC7 /* JointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JointSet.m; sourceTree = "<group>"; };
+		02F31B2115C9D5440070EDC7 /* Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other.h; sourceTree = "<group>"; };
+		02F31B2215C9D5440070EDC7 /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
+		02F31B2415C9D5520070EDC7 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		02F31B2515C9D5520070EDC7 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		02F31B2715C9D5620070EDC7 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
+		02F31B2815C9D5620070EDC7 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		02F31B3515C9D5AC0070EDC7 /* ImportTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewControllerDelegate.h; sourceTree = "<group>"; };
+		02F31B3715C9D6010070EDC7 /* SettingManagerNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManagerNotificationNames.h; sourceTree = "<group>"; };
+		02F31B3815C9D6620070EDC7 /* Record+DateAndTimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DateAndTimeFormatter.h"; sourceTree = "<group>"; };
+		02F31B3915C9D6620070EDC7 /* Record+DateAndTimeFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DateAndTimeFormatter.m"; sourceTree = "<group>"; };
+		02F31B3B15C9D67E0070EDC7 /* Record+DipDirectionValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DipDirectionValues.h"; sourceTree = "<group>"; };
+		02F31B3C15C9D67E0070EDC7 /* Record+DipDirectionValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DipDirectionValues.m"; sourceTree = "<group>"; };
+		02F31B3E15C9D6CC0070EDC7 /* Contact+Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Contact+Formation.h"; sourceTree = "<group>"; };
+		02F31B3F15C9D6CC0070EDC7 /* Contact+Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+Formation.m"; sourceTree = "<group>"; };
+		02F31B4115C9D6F00070EDC7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		02F31B4315C9D6F80070EDC7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		02F31B4515C9D7000070EDC7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		02F31B4715C9D71D0070EDC7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		02F31B4915C9D72B0070EDC7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		02F31B4B15C9D7310070EDC7 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		02F31B4F15C9D7790070EDC7 /* TransientBedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientBedding.h; sourceTree = "<group>"; };
+		02F31B5015C9D7790070EDC7 /* TransientBedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientBedding.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		02F3198615C9BCB70070EDC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */,
+				02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */,
+				02F31B4A15C9D72B0070EDC7 /* MessageUI.framework in Frameworks */,
+				02F31B4815C9D71E0070EDC7 /* CoreData.framework in Frameworks */,
+				02F31B4615C9D7010070EDC7 /* QuartzCore.framework in Frameworks */,
+				02F31B4415C9D6F90070EDC7 /* CoreLocation.framework in Frameworks */,
+				02F31B4215C9D6F10070EDC7 /* MapKit.framework in Frameworks */,
+				02F3198E15C9BCB70070EDC7 /* UIKit.framework in Frameworks */,
+				02F3199015C9BCB70070EDC7 /* Foundation.framework in Frameworks */,
+				02F3199215C9BCB70070EDC7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02F319A615C9BCB70070EDC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02F319AC15C9BCB70070EDC7 /* SenTestingKit.framework in Frameworks */,
+				02F319AD15C9BCB70070EDC7 /* UIKit.framework in Frameworks */,
+				02F319AE15C9BCB70070EDC7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02F3197E15C9BCB70070EDC7 = {
+			isa = PBXGroup;
+			children = (
+				02F3199315C9BCB70070EDC7 /* GeoDataViewer */,
+				02F319B115C9BCB70070EDC7 /* GeoDataViewerTests */,
+				02F3198C15C9BCB70070EDC7 /* Frameworks */,
+				02F3198A15C9BCB70070EDC7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		02F3198A15C9BCB70070EDC7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				02F3198915C9BCB70070EDC7 /* GeoDataViewer.app */,
+				02F319AA15C9BCB70070EDC7 /* GeoDataViewerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		02F3198C15C9BCB70070EDC7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */,
+				02F31B4B15C9D7310070EDC7 /* iAd.framework */,
+				02F31B4915C9D72B0070EDC7 /* MessageUI.framework */,
+				02F31B4715C9D71D0070EDC7 /* CoreData.framework */,
+				02F31B4515C9D7000070EDC7 /* QuartzCore.framework */,
+				02F31B4315C9D6F80070EDC7 /* CoreLocation.framework */,
+				02F31B4115C9D6F00070EDC7 /* MapKit.framework */,
+				02F3198D15C9BCB70070EDC7 /* UIKit.framework */,
+				02F3198F15C9BCB70070EDC7 /* Foundation.framework */,
+				02F3199115C9BCB70070EDC7 /* CoreGraphics.framework */,
+				02F319AB15C9BCB70070EDC7 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02F3199315C9BCB70070EDC7 /* GeoDataViewer */ = {
+			isa = PBXGroup;
+			children = (
+				02F3199F15C9BCB70070EDC7 /* MainStoryboard.storyboard */,
+				02F319C515C9BD480070EDC7 /* GDVController.h */,
+				02F319C615C9BD480070EDC7 /* GDVController.m */,
+				02F319C815C9BD730070EDC7 /* Resource Manager Group */,
+				02F31A7115C9C3ED0070EDC7 /* Views */,
+				02F31ABB15C9C6AC0070EDC7 /* Custom Segues */,
+				02F31AF515C9D0930070EDC7 /* Protocols */,
+				02F31A7A15C9C4A50070EDC7 /* Images */,
+				02F319FB15C9BF8F0070EDC7 /* Library */,
+				02F31B3615C9D5F10070EDC7 /* Notification Registrations */,
+				02F31A0815C9BFC80070EDC7 /* Database */,
+				02F3199415C9BCB70070EDC7 /* Supporting Files */,
+			);
+			path = GeoDataViewer;
+			sourceTree = "<group>";
+		};
+		02F3199415C9BCB70070EDC7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02F3199515C9BCB70070EDC7 /* GeoDataViewer-Info.plist */,
+				02F3199615C9BCB70070EDC7 /* InfoPlist.strings */,
+				02F3199915C9BCB70070EDC7 /* main.m */,
+				02F3199B15C9BCB70070EDC7 /* GeoDataViewer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02F319B115C9BCB70070EDC7 /* GeoDataViewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */,
+				02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */,
+				02F319B715C9BCB70070EDC7 /* GeoDataViewerTests.h */,
+				02F319B815C9BCB70070EDC7 /* GeoDataViewerTests.m */,
+				02F319B215C9BCB70070EDC7 /* Supporting Files */,
+			);
+			path = GeoDataViewerTests;
+			sourceTree = "<group>";
+		};
+		02F319B215C9BCB70070EDC7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				02F319B315C9BCB70070EDC7 /* GeoDataViewerTests-Info.plist */,
+				02F319B415C9BCB70070EDC7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02F319C815C9BD730070EDC7 /* Resource Manager Group */ = {
+			isa = PBXGroup;
+			children = (
+				02F319C915C9BD900070EDC7 /* GDVResourceManager.h */,
+				02F319CA15C9BD900070EDC7 /* GDVResourceManager.m */,
+				02F319CC15C9BDB40070EDC7 /* GDVIEEngine.h */,
+				02F319CD15C9BDB40070EDC7 /* GDVIEEngine.m */,
+				02F319CF15C9BDF80070EDC7 /* GDVServerCommunicator.h */,
+				02F319D015C9BDF80070EDC7 /* GDVServerCommunicator.m */,
+			);
+			name = "Resource Manager Group";
+			sourceTree = "<group>";
+		};
+		02F319D315C9BE3A0070EDC7 /* Import/Export Group */ = {
+			isa = PBXGroup;
+			children = (
+				02F319DF15C9BE800070EDC7 /* Import */,
+			);
+			name = "Import/Export Group";
+			sourceTree = "<group>";
+		};
+		02F319DF15C9BE800070EDC7 /* Import */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Import;
+			sourceTree = "<group>";
+		};
+		02F319EC15C9BEA10070EDC7 /* Record List Group */ = {
+			isa = PBXGroup;
+			children = (
+				02F31ABF15C9C78D0070EDC7 /* GDVStudentGroupTVC.h */,
+				02F31AC015C9C78D0070EDC7 /* GDVStudentGroupTVC.m */,
+				02F31AC215C9C7B70070EDC7 /* GDVFolderTVC.h */,
+				02F31AC315C9C7B70070EDC7 /* GDVFolderTVC.m */,
+				02F31AC515C9C7C70070EDC7 /* GDVRecordTVC.h */,
+				02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */,
+			);
+			name = "Record List Group";
+			sourceTree = "<group>";
+		};
+		02F319ED15C9BF100070EDC7 /* Map View Group */ = {
+			isa = PBXGroup;
+			children = (
+				02F319F715C9BF5E0070EDC7 /* MKAnnotation */,
+				02F319EE15C9BF2D0070EDC7 /* RecordMapViewController.h */,
+				02F319EF15C9BF2D0070EDC7 /* RecordMapViewController.m */,
+				02F319F015C9BF2D0070EDC7 /* MKMapRecordInfoViewController.h */,
+				02F319F115C9BF2D0070EDC7 /* MKMapRecordInfoViewController.m */,
+				02F319F215C9BF2D0070EDC7 /* FilterByRecordTypeController.h */,
+				02F319F315C9BF2D0070EDC7 /* FilterByRecordTypeController.m */,
+			);
+			name = "Map View Group";
+			sourceTree = "<group>";
+		};
+		02F319F715C9BF5E0070EDC7 /* MKAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				02F319F815C9BF760070EDC7 /* MKGeoRecordAnnotation.h */,
+				02F319F915C9BF760070EDC7 /* MKGeoRecordAnnotation.m */,
+			);
+			name = MKAnnotation;
+			sourceTree = "<group>";
+		};
+		02F319FB15C9BF8F0070EDC7 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				02F319FC15C9BF9B0070EDC7 /* GeoDatabaseManager.h */,
+				02F319FD15C9BF9B0070EDC7 /* GeoDatabaseManager.m */,
+				02F31AE715C9D0490070EDC7 /* SettingManager.h */,
+				02F31AE815C9D0490070EDC7 /* SettingManager.m */,
+				02F319FF15C9BFA50070EDC7 /* TextInputFilter.h */,
+				02F31A0015C9BFA50070EDC7 /* TextInputFilter.m */,
+				02F31AD915C9D0150070EDC7 /* GeoFilter.h */,
+				02F31ADA15C9D0160070EDC7 /* GeoFilter.m */,
+				02F31A0215C9BFAE0070EDC7 /* ValidationMessageBoard.h */,
+				02F31A0315C9BFAE0070EDC7 /* ValidationMessageBoard.m */,
+				02F31A0515C9BFB90070EDC7 /* ColorManager.h */,
+				02F31A0615C9BFB90070EDC7 /* ColorManager.m */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		02F31A0815C9BFC80070EDC7 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A3615C9C1150070EDC7 /* GDVDatabase.xcdatamodeld */,
+				02F31A3915C9C11C0070EDC7 /* NSManagedObject */,
+				02F31A0915C9BFD90070EDC7 /* TransientManagedObjects */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		02F31A0915C9BFD90070EDC7 /* TransientManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A0A15C9BFF50070EDC7 /* TransientManagedObject.h */,
+				02F31A0B15C9BFF50070EDC7 /* TransientManagedObject.m */,
+				02F31A0E15C9C0000070EDC7 /* Image */,
+				02F31A1215C9C0150070EDC7 /* Bedding */,
+				02F31A1615C9C02F0070EDC7 /* Contact */,
+				02F31A1A15C9C04C0070EDC7 /* Fault */,
+				02F31A1E15C9C06F0070EDC7 /* Folder */,
+				02F31A2215C9C0950070EDC7 /* Formation */,
+				02F31A2615C9C0AD0070EDC7 /* Formation Folder */,
+				02F31A2A15C9C0C30070EDC7 /* JointSet */,
+				02F31A2E15C9C0D70070EDC7 /* Record */,
+				02F31A3215C9C0F00070EDC7 /* Other */,
+			);
+			name = TransientManagedObjects;
+			sourceTree = "<group>";
+		};
+		02F31A0E15C9C0000070EDC7 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A0F15C9C0090070EDC7 /* TransientImage.h */,
+				02F31A1015C9C0090070EDC7 /* TransientImage.m */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		02F31A1215C9C0150070EDC7 /* Bedding */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B4F15C9D7790070EDC7 /* TransientBedding.h */,
+				02F31B5015C9D7790070EDC7 /* TransientBedding.m */,
+			);
+			name = Bedding;
+			sourceTree = "<group>";
+		};
+		02F31A1615C9C02F0070EDC7 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A1715C9C03A0070EDC7 /* TransientContact.h */,
+				02F31A1815C9C03A0070EDC7 /* TransientContact.m */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
+		02F31A1A15C9C04C0070EDC7 /* Fault */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A1B15C9C05B0070EDC7 /* TransientFault.h */,
+				02F31A1C15C9C05B0070EDC7 /* TransientFault.m */,
+			);
+			name = Fault;
+			sourceTree = "<group>";
+		};
+		02F31A1E15C9C06F0070EDC7 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A1F15C9C0830070EDC7 /* TransientProject.h */,
+				02F31A2015C9C0830070EDC7 /* TransientProject.m */,
+			);
+			name = Folder;
+			sourceTree = "<group>";
+		};
+		02F31A2215C9C0950070EDC7 /* Formation */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A2315C9C0A00070EDC7 /* TransientFormation.h */,
+				02F31A2415C9C0A00070EDC7 /* TransientFormation.m */,
+			);
+			name = Formation;
+			sourceTree = "<group>";
+		};
+		02F31A2615C9C0AD0070EDC7 /* Formation Folder */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A2715C9C0B90070EDC7 /* TransientFormation_Folder.h */,
+				02F31A2815C9C0B90070EDC7 /* TransientFormation_Folder.m */,
+			);
+			name = "Formation Folder";
+			sourceTree = "<group>";
+		};
+		02F31A2A15C9C0C30070EDC7 /* JointSet */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A2B15C9C0CC0070EDC7 /* TransientJointSet.h */,
+				02F31A2C15C9C0CC0070EDC7 /* TransientJointSet.m */,
+			);
+			name = JointSet;
+			sourceTree = "<group>";
+		};
+		02F31A2E15C9C0D70070EDC7 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A2F15C9C0E60070EDC7 /* TransientRecord.h */,
+				02F31A3015C9C0E60070EDC7 /* TransientRecord.m */,
+			);
+			name = Record;
+			sourceTree = "<group>";
+		};
+		02F31A3215C9C0F00070EDC7 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A3315C9C0FA0070EDC7 /* TransientOther.h */,
+				02F31A3415C9C0FA0070EDC7 /* TransientOther.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		02F31A3915C9C11C0070EDC7 /* NSManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A6D15C9C3B00070EDC7 /* Record */,
+				02F31A6C15C9C3A80070EDC7 /* Formation */,
+				02F31A6B15C9C3A10070EDC7 /* Question */,
+				02F31A6A15C9C3980070EDC7 /* Joint Set */,
+				02F31A6915C9C3920070EDC7 /* Other */,
+				02F31A6815C9C3840070EDC7 /* Formation Folder */,
+				02F31A6715C9C3760070EDC7 /* Folder */,
+				02F31A6615C9C3680070EDC7 /* Fault */,
+				02F31A6515C9C3590070EDC7 /* Contact */,
+				02F31A6415C9C3420070EDC7 /* Bedding */,
+				02F31A6315C9C3320070EDC7 /* Image */,
+				02F31A6115C9C2F30070EDC7 /* Answer */,
+				02F31A6215C9C3260070EDC7 /* Group */,
+			);
+			name = NSManagedObject;
+			sourceTree = "<group>";
+		};
+		02F31A6115C9C2F30070EDC7 /* Answer */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B0315C9D4AF0070EDC7 /* Answer.h */,
+				02F31B0415C9D4AF0070EDC7 /* Answer.m */,
+			);
+			name = Answer;
+			sourceTree = "<group>";
+		};
+		02F31A6215C9C3260070EDC7 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B1815C9D51C0070EDC7 /* Group.h */,
+				02F31B1915C9D51C0070EDC7 /* Group.m */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		02F31A6315C9C3320070EDC7 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B1B15C9D5280070EDC7 /* Image.h */,
+				02F31B1C15C9D5280070EDC7 /* Image.m */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		02F31A6415C9C3420070EDC7 /* Bedding */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B0615C9D4BE0070EDC7 /* Bedding.h */,
+				02F31B0715C9D4BE0070EDC7 /* Bedding.m */,
+			);
+			name = Bedding;
+			sourceTree = "<group>";
+		};
+		02F31A6515C9C3590070EDC7 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B0915C9D4CD0070EDC7 /* Contact.h */,
+				02F31B0A15C9D4CD0070EDC7 /* Contact.m */,
+				02F31B3E15C9D6CC0070EDC7 /* Contact+Formation.h */,
+				02F31B3F15C9D6CC0070EDC7 /* Contact+Formation.m */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
+		02F31A6615C9C3680070EDC7 /* Fault */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B0C15C9D4DD0070EDC7 /* Fault.h */,
+				02F31B0D15C9D4DD0070EDC7 /* Fault.m */,
+			);
+			name = Fault;
+			sourceTree = "<group>";
+		};
+		02F31A6715C9C3760070EDC7 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B0F15C9D4ED0070EDC7 /* Folder.h */,
+				02F31B1015C9D4ED0070EDC7 /* Folder.m */,
+			);
+			name = Folder;
+			sourceTree = "<group>";
+		};
+		02F31A6815C9C3840070EDC7 /* Formation Folder */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B1515C9D50D0070EDC7 /* Formation_Folder.h */,
+				02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */,
+			);
+			name = "Formation Folder";
+			sourceTree = "<group>";
+		};
+		02F31A6915C9C3920070EDC7 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B2115C9D5440070EDC7 /* Other.h */,
+				02F31B2215C9D5440070EDC7 /* Other.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		02F31A6A15C9C3980070EDC7 /* Joint Set */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B1E15C9D5340070EDC7 /* JointSet.h */,
+				02F31B1F15C9D5340070EDC7 /* JointSet.m */,
+			);
+			name = "Joint Set";
+			sourceTree = "<group>";
+		};
+		02F31A6B15C9C3A10070EDC7 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B2415C9D5520070EDC7 /* Question.h */,
+				02F31B2515C9D5520070EDC7 /* Question.m */,
+			);
+			name = Question;
+			sourceTree = "<group>";
+		};
+		02F31A6C15C9C3A80070EDC7 /* Formation */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B1215C9D5030070EDC7 /* Formation.h */,
+				02F31B1315C9D5030070EDC7 /* Formation.m */,
+			);
+			name = Formation;
+			sourceTree = "<group>";
+		};
+		02F31A6D15C9C3B00070EDC7 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B2715C9D5620070EDC7 /* Record.h */,
+				02F31B2815C9D5620070EDC7 /* Record.m */,
+				02F31A6E15C9C3D90070EDC7 /* Record+Types.h */,
+				02F31A6F15C9C3D90070EDC7 /* Record+Types.m */,
+				02F31B3815C9D6620070EDC7 /* Record+DateAndTimeFormatter.h */,
+				02F31B3915C9D6620070EDC7 /* Record+DateAndTimeFormatter.m */,
+				02F31B3B15C9D67E0070EDC7 /* Record+DipDirectionValues.h */,
+				02F31B3C15C9D67E0070EDC7 /* Record+DipDirectionValues.m */,
+			);
+			name = Record;
+			sourceTree = "<group>";
+		};
+		02F31A7115C9C3ED0070EDC7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A9515C9C4EA0070EDC7 /* Custom Views */,
+				02F31A7315C9C4140070EDC7 /* Feedback Group */,
+				02F31A7215C9C40D0070EDC7 /* Formation Group */,
+				02F319D315C9BE3A0070EDC7 /* Import/Export Group */,
+				02F319EC15C9BEA10070EDC7 /* Record List Group */,
+				02F319ED15C9BF100070EDC7 /* Map View Group */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		02F31A7215C9C40D0070EDC7 /* Formation Group */ = {
+			isa = PBXGroup;
+			children = (
+				02F31AAA15C9C59C0070EDC7 /* GDVFormationTableViewController.h */,
+				02F31AAB15C9C59C0070EDC7 /* GDVFormationTableViewController.m */,
+				02F31AAD15C9C5B10070EDC7 /* GDVFormationFolderTVC.h */,
+				02F31AAE15C9C5B10070EDC7 /* GDVFormationFolderTVC.m */,
+			);
+			name = "Formation Group";
+			sourceTree = "<group>";
+		};
+		02F31A7315C9C4140070EDC7 /* Feedback Group */ = {
+			isa = PBXGroup;
+			children = (
+				02F31ACB15C9C8D20070EDC7 /* GDVFeedbackTVC.h */,
+				02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */,
+			);
+			name = "Feedback Group";
+			sourceTree = "<group>";
+		};
+		02F31A7A15C9C4A50070EDC7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A7B15C9C4C70070EDC7 /* checked.png */,
+				02F31A7C15C9C4C70070EDC7 /* unchecked.png */,
+				02F31A7D15C9C4C70070EDC7 /* RecordVCBackground.jpg */,
+				02F31A7E15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png */,
+				02F31A7F15C9C4C70070EDC7 /* folder.png */,
+				02F31A8015C9C4C70070EDC7 /* formation.png */,
+				02F31A8115C9C4C70070EDC7 /* import_export.png */,
+				02F31A8215C9C4C70070EDC7 /* gear.png */,
+				02F31A8315C9C4C70070EDC7 /* gear2.png */,
+				02F31A8415C9C4C70070EDC7 /* green_pin.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		02F31A9515C9C4EA0070EDC7 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				02F31AA315C9C5170070EDC7 /* Dip Strike Symbol */,
+				02F31A9615C9C4F40070EDC7 /* Table Cells */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		02F31A9615C9C4F40070EDC7 /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+				02F31A9715C9C50F0070EDC7 /* CheckBox.h */,
+				02F31A9815C9C50F0070EDC7 /* CheckBox.m */,
+				02F31A9915C9C50F0070EDC7 /* CustomFolderCell.h */,
+				02F31A9A15C9C50F0070EDC7 /* CustomFolderCell.m */,
+				02F31A9B15C9C50F0070EDC7 /* CustomRecordCell.h */,
+				02F31A9C15C9C50F0070EDC7 /* CustomRecordCell.m */,
+				02F31A9D15C9C50F0070EDC7 /* CustomFormationCell.h */,
+				02F31A9E15C9C50F0070EDC7 /* CustomFormationCell.m */,
+				02F31AC815C9C8A30070EDC7 /* CustomStudentGroupCell.h */,
+				02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */,
+			);
+			name = "Table Cells";
+			sourceTree = "<group>";
+		};
+		02F31AA315C9C5170070EDC7 /* Dip Strike Symbol */ = {
+			isa = PBXGroup;
+			children = (
+				02F31AA415C9C52F0070EDC7 /* DipStrikeSymbol.h */,
+				02F31AA515C9C52F0070EDC7 /* DipStrikeSymbol.m */,
+				02F31AA615C9C52F0070EDC7 /* MKCustomAnnotationView.h */,
+				02F31AA715C9C52F0070EDC7 /* MKCustomAnnotationView.m */,
+			);
+			name = "Dip Strike Symbol";
+			sourceTree = "<group>";
+		};
+		02F31ABB15C9C6AC0070EDC7 /* Custom Segues */ = {
+			isa = PBXGroup;
+			children = (
+				02F31ABC15C9C6CA0070EDC7 /* GDVControllerSegue.h */,
+				02F31ABD15C9C6CA0070EDC7 /* GDVControllerSegue.m */,
+			);
+			name = "Custom Segues";
+			sourceTree = "<group>";
+		};
+		02F31AF515C9D0930070EDC7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				02F31AF615C9D0BA0070EDC7 /* RecordMapViewControllerDelegate.h */,
+				02F31B3515C9D5AC0070EDC7 /* ImportTableViewControllerDelegate.h */,
+				02F31AF715C9D0BA0070EDC7 /* CSVTableViewControllerDelegate.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		02F31B3615C9D5F10070EDC7 /* Notification Registrations */ = {
+			isa = PBXGroup;
+			children = (
+				02F31B3715C9D6010070EDC7 /* SettingManagerNotificationNames.h */,
+			);
+			name = "Notification Registrations";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		02F3198815C9BCB70070EDC7 /* GeoDataViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02F319BC15C9BCB70070EDC7 /* Build configuration list for PBXNativeTarget "GeoDataViewer" */;
+			buildPhases = (
+				02F3198515C9BCB70070EDC7 /* Sources */,
+				02F3198615C9BCB70070EDC7 /* Frameworks */,
+				02F3198715C9BCB70070EDC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeoDataViewer;
+			productName = GeoDataViewer;
+			productReference = 02F3198915C9BCB70070EDC7 /* GeoDataViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		02F319A915C9BCB70070EDC7 /* GeoDataViewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02F319BF15C9BCB70070EDC7 /* Build configuration list for PBXNativeTarget "GeoDataViewerTests" */;
+			buildPhases = (
+				02F319A515C9BCB70070EDC7 /* Sources */,
+				02F319A615C9BCB70070EDC7 /* Frameworks */,
+				02F319A715C9BCB70070EDC7 /* Resources */,
+				02F319A815C9BCB70070EDC7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				02F319B015C9BCB70070EDC7 /* PBXTargetDependency */,
+			);
+			name = GeoDataViewerTests;
+			productName = GeoDataViewerTests;
+			productReference = 02F319AA15C9BCB70070EDC7 /* GeoDataViewerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		02F3198015C9BCB70070EDC7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GeoDataViewer;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Lafayette College";
+			};
+			buildConfigurationList = 02F3198315C9BCB70070EDC7 /* Build configuration list for PBXProject "GeoDataViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 02F3197E15C9BCB70070EDC7;
+			productRefGroup = 02F3198A15C9BCB70070EDC7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				02F3198815C9BCB70070EDC7 /* GeoDataViewer */,
+				02F319A915C9BCB70070EDC7 /* GeoDataViewerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02F3198715C9BCB70070EDC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02F3199815C9BCB70070EDC7 /* InfoPlist.strings in Resources */,
+				02F319A115C9BCB70070EDC7 /* MainStoryboard.storyboard in Resources */,
+				02F31A8815C9C4C70070EDC7 /* checked.png in Resources */,
+				02F31A8915C9C4C70070EDC7 /* unchecked.png in Resources */,
+				02F31A8A15C9C4C70070EDC7 /* RecordVCBackground.jpg in Resources */,
+				02F31A8B15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png in Resources */,
+				02F31A8C15C9C4C70070EDC7 /* folder.png in Resources */,
+				02F31A8D15C9C4C70070EDC7 /* formation.png in Resources */,
+				02F31A8E15C9C4C70070EDC7 /* import_export.png in Resources */,
+				02F31A8F15C9C4C70070EDC7 /* gear.png in Resources */,
+				02F31A9015C9C4C70070EDC7 /* gear2.png in Resources */,
+				02F31A9115C9C4C70070EDC7 /* green_pin.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02F319A715C9BCB70070EDC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02F319B615C9BCB70070EDC7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02F319A815C9BCB70070EDC7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		02F3198515C9BCB70070EDC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02F3199A15C9BCB70070EDC7 /* main.m in Sources */,
+				02F3199E15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m in Sources */,
+				02F319C715C9BD480070EDC7 /* GDVController.m in Sources */,
+				02F319CB15C9BD900070EDC7 /* GDVResourceManager.m in Sources */,
+				02F319CE15C9BDB40070EDC7 /* GDVIEEngine.m in Sources */,
+				02F319D115C9BDF80070EDC7 /* GDVServerCommunicator.m in Sources */,
+				02F319F415C9BF2D0070EDC7 /* RecordMapViewController.m in Sources */,
+				02F319F515C9BF2D0070EDC7 /* MKMapRecordInfoViewController.m in Sources */,
+				02F319F615C9BF2D0070EDC7 /* FilterByRecordTypeController.m in Sources */,
+				02F319FA15C9BF760070EDC7 /* MKGeoRecordAnnotation.m in Sources */,
+				02F319FE15C9BF9B0070EDC7 /* GeoDatabaseManager.m in Sources */,
+				02F31A0115C9BFA50070EDC7 /* TextInputFilter.m in Sources */,
+				02F31A0415C9BFAE0070EDC7 /* ValidationMessageBoard.m in Sources */,
+				02F31A0715C9BFB90070EDC7 /* ColorManager.m in Sources */,
+				02F31A0C15C9BFF50070EDC7 /* TransientManagedObject.m in Sources */,
+				02F31A1115C9C0090070EDC7 /* TransientImage.m in Sources */,
+				02F31A1915C9C03A0070EDC7 /* TransientContact.m in Sources */,
+				02F31A1D15C9C05B0070EDC7 /* TransientFault.m in Sources */,
+				02F31A2115C9C0830070EDC7 /* TransientProject.m in Sources */,
+				02F31A2515C9C0A00070EDC7 /* TransientFormation.m in Sources */,
+				02F31A2915C9C0B90070EDC7 /* TransientFormation_Folder.m in Sources */,
+				02F31A2D15C9C0CC0070EDC7 /* TransientJointSet.m in Sources */,
+				02F31A3115C9C0E60070EDC7 /* TransientRecord.m in Sources */,
+				02F31A3515C9C0FA0070EDC7 /* TransientOther.m in Sources */,
+				02F31A3815C9C1150070EDC7 /* GDVDatabase.xcdatamodeld in Sources */,
+				02F31A7015C9C3D90070EDC7 /* Record+Types.m in Sources */,
+				02F31A9F15C9C50F0070EDC7 /* CheckBox.m in Sources */,
+				02F31AA015C9C50F0070EDC7 /* CustomFolderCell.m in Sources */,
+				02F31AA115C9C50F0070EDC7 /* CustomRecordCell.m in Sources */,
+				02F31AA215C9C50F0070EDC7 /* CustomFormationCell.m in Sources */,
+				02F31AA815C9C52F0070EDC7 /* DipStrikeSymbol.m in Sources */,
+				02F31AA915C9C52F0070EDC7 /* MKCustomAnnotationView.m in Sources */,
+				02F31AAC15C9C59C0070EDC7 /* GDVFormationTableViewController.m in Sources */,
+				02F31AAF15C9C5B10070EDC7 /* GDVFormationFolderTVC.m in Sources */,
+				02F31ABE15C9C6CA0070EDC7 /* GDVControllerSegue.m in Sources */,
+				02F31AC115C9C78D0070EDC7 /* GDVStudentGroupTVC.m in Sources */,
+				02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */,
+				02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */,
+				02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */,
+				02F31ACD15C9C8D20070EDC7 /* GDVFeedbackTVC.m in Sources */,
+				02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */,
+				02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */,
+				02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */,
+				02F31B0815C9D4BE0070EDC7 /* Bedding.m in Sources */,
+				02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */,
+				02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */,
+				02F31B1115C9D4ED0070EDC7 /* Folder.m in Sources */,
+				02F31B1415C9D5030070EDC7 /* Formation.m in Sources */,
+				02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */,
+				02F31B1A15C9D51C0070EDC7 /* Group.m in Sources */,
+				02F31B1D15C9D5280070EDC7 /* Image.m in Sources */,
+				02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */,
+				02F31B2315C9D5440070EDC7 /* Other.m in Sources */,
+				02F31B2615C9D5520070EDC7 /* Question.m in Sources */,
+				02F31B2915C9D5620070EDC7 /* Record.m in Sources */,
+				02F31B3A15C9D6620070EDC7 /* Record+DateAndTimeFormatter.m in Sources */,
+				02F31B3D15C9D67E0070EDC7 /* Record+DipDirectionValues.m in Sources */,
+				02F31B4015C9D6CC0070EDC7 /* Contact+Formation.m in Sources */,
+				02F31B5115C9D7790070EDC7 /* TransientBedding.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02F319A515C9BCB70070EDC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02F319B915C9BCB70070EDC7 /* GeoDataViewerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		02F319B015C9BCB70070EDC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02F3198815C9BCB70070EDC7 /* GeoDataViewer */;
+			targetProxy = 02F319AF15C9BCB70070EDC7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		02F3199615C9BCB70070EDC7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02F3199715C9BCB70070EDC7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		02F3199F15C9BCB70070EDC7 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02F319A015C9BCB70070EDC7 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		02F319B415C9BCB70070EDC7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				02F319B515C9BCB70070EDC7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		02F319BA15C9BCB70070EDC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		02F319BB15C9BCB70070EDC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		02F319BD15C9BCB70070EDC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		02F319BE15C9BCB70070EDC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		02F319C015C9BCB70070EDC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GeoDataViewer.app/GeoDataViewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				INFOPLIST_FILE = "GeoDataViewerTests/GeoDataViewerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		02F319C115C9BCB70070EDC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GeoDataViewer.app/GeoDataViewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				INFOPLIST_FILE = "GeoDataViewerTests/GeoDataViewerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02F3198315C9BCB70070EDC7 /* Build configuration list for PBXProject "GeoDataViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02F319BA15C9BCB70070EDC7 /* Debug */,
+				02F319BB15C9BCB70070EDC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		02F319BC15C9BCB70070EDC7 /* Build configuration list for PBXNativeTarget "GeoDataViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02F319BD15C9BCB70070EDC7 /* Debug */,
+				02F319BE15C9BCB70070EDC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		02F319BF15C9BCB70070EDC7 /* Build configuration list for PBXNativeTarget "GeoDataViewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02F319C015C9BCB70070EDC7 /* Debug */,
+				02F319C115C9BCB70070EDC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		02F31A3615C9C1150070EDC7 /* GDVDatabase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				02F31A3715C9C1150070EDC7 /* GDVDatabase.xcdatamodel */,
+			);
+			currentVersion = 02F31A3715C9C1150070EDC7 /* GDVDatabase.xcdatamodel */;
+			path = GDVDatabase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 02F3198015C9BCB70070EDC7 /* Project object */;
+}
