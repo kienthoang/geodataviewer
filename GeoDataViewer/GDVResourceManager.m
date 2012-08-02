@@ -61,15 +61,17 @@ static GDVResourceManager *defaultResourceManager;
 
 - (void)importRecordCSVFiles:(NSArray *)csvFiles {
     //Import the record csv files
-    
+    [self.engine createRecordsFromCSVFiles:csvFiles];
 }
 
 - (void)importFormationCSVFiles:(NSArray *)csvFiles {
-    
+    //Import the formation csv files
+    [self.engine createFormationsFromCSVFiles:csvFiles];
 }
 
 - (void)importFeedbackCSVFiles:(NSArray *)csvFiles {
-    
+    //Import the record csv files
+    [self.engine createFeedbacksFromCSVFiles:csvFiles];
 }
 
 @end

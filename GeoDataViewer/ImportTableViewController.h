@@ -16,11 +16,6 @@
 @property (nonatomic,strong) NSArray *csvFileNames;
 @property (nonatomic,strong) NSArray *selectedCSVFiles;
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *importButton;
-
-@property (nonatomic,weak) IBOutlet UIBarButtonItem *deleteButton;
-@property (nonatomic,weak) IBOutlet UIBarButtonItem *addButton;
-
 @property (nonatomic,strong) NSString *csvFileExtension;
 
 #define SECTION_FOOTER_HEIGHT 30

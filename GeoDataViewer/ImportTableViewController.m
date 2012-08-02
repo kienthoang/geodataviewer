@@ -12,7 +12,11 @@
 @interface ImportTableViewController() <UIActionSheetDelegate>
 
 @property (nonatomic,strong) UILabel *sectionFooter;
+
 @property (nonatomic,strong) UIBarButtonItem *hiddenButton;
+@property (nonatomic,weak) IBOutlet UIBarButtonItem *deleteButton;
+@property (nonatomic,weak) IBOutlet UIBarButtonItem *addButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *importButton;
 
 @property (nonatomic,strong) UIView * headerView;
 @property (nonatomic,strong) UIView * topView;

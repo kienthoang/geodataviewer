@@ -14,8 +14,8 @@
 
 @optional
 
-- (void)userDidSelectRecordCSVFiles:(NSArray *)records forImportingInImportTVC:(ImportTableViewController *)sender;
-- (void)userDidSelectFormationCSVFiles:(NSArray *)formations forImportingInImportTVC:(ImportTableViewController *)sender;
-- (void)userDidSelectFeedbackCSVFiles:(NSArray *)feedbacks forImportingInImportTVC:(ImportTableViewController *)sender;
+- (void)userDidSelectRecordCSVFiles:(NSArray *)files forImportingInImportTVC:(ImportTableViewController *)sender;
+- (void)userDidSelectFormationCSVFiles:(NSArray *)files forImportingInImportTVC:(ImportTableViewController *)sender;
+- (void)userDidSelectFeedbackCSVFiles:(NSArray *)files forImportingInImportTVC:(ImportTableViewController *)sender;
 
 @end

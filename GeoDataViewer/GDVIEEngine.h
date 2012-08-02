@@ -12,9 +12,10 @@
 
 #pragma mark - Import
 
-- (void)createRecordsFromCSVFiles:(NSArray *)files; //passes the array of records to the ConflictaHandler
+- (void)createRecordsFromCSVFiles:(NSArray *)files; //passes the array of records
 - (void)createFormationsWithColorFromCSVFiles:(NSArray *)files; //this reads the new version of formation files with colors.
-- (void)createFormationsFromCSVFiles:(NSArray *)files; //passes the array of formations to the ConflictHandler
+- (void)createFormationsFromCSVFiles:(NSArray *)files; //passes the array of formations
+- (void)createFeedbacksFromCSVFiles:(NSArray *)files; //passes the array of feedbacks
 
 #define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16
 

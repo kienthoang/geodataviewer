@@ -25,14 +25,19 @@
 
 @interface GDVController : UIViewController
 
+#define IMPORT_EXPORT_ACTION_SHEET_TITLE @"Import/Export"
+#define RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Import Records"
+#define FORMATION_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Import Formations"
+#define FEEDBACK_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER @"Import Feedbacks"
+
 #pragma mark - Model
 
 @property (nonatomic,readonly) GDVResourceManager *resourceManager;
 
 #pragma mark - Views
 
-@property (nonatomic,strong) UINavigationController *recordList;
-@property (nonatomic,strong) UINavigationController *feedbackList;
+@property (nonatomic,strong) UIPopoverController *recordList;
+@property (nonatomic,strong) UIPopoverController *feedbackList;
 @property (nonatomic,weak) UIPopoverController *formationListPopover;
 
 @property (nonatomic,strong) RecordMapViewController *mapViewController;
