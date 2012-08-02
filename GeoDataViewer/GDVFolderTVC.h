@@ -7,17 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SSToolkit/SSLoadingView.h>
+
+#import "PrototypeLoadingTableViewController.h"
 
 #import "Group.h"
 #import "Folder.h"
 
-@interface GDVFolderTVC : UITableViewController
+@interface GDVFolderTVC : PrototypeLoadingTableViewController
 
 @property (nonatomic,strong) Group *studentGroup;
 @property (nonatomic,strong) NSArray *folders;
-
-- (void)showLoadingScreen;
-- (void)stopLoadingScreen;
 
 @end

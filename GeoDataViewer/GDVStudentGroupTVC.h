@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SSToolkit/SSLoadingView.h>
+
+#import "PrototypeLoadingTableViewController.h"
 
 #import "Group.h"
 
-@interface GDVStudentGroupTVC : UITableViewController
-
-- (void)showLoadingScreen;
-- (void)stopLoadingScreen;
+@interface GDVStudentGroupTVC : PrototypeLoadingTableViewController
 
 @property (nonatomic,strong) NSArray *studentGroups;
 

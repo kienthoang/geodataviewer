@@ -14,31 +14,32 @@
 
 @implementation GDVRecordTVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+@synthesize folder=_folder;
+@synthesize records=_records;
+
+#pragma mark - Getters and Setters
+
+- (void)setRecords:(NSArray *)records {
+    if (records) {
+        _records=records;
+        
+        //Stop the loading screen
+        [self stopLoadingScreen];
+        
+        //Relaod table view
+        [self.tableView reloadData];
     }
-    return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+#pragma mark - View Controller Lifecycle
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    [super viewDidAppear:animated];
+    
+    //Show loading screen while asking for data
+    if (!self.records)
+        [self showLoadingScreen];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -47,13 +48,6 @@
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

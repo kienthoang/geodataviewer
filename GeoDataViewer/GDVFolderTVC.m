@@ -10,38 +10,36 @@
 
 @interface GDVFolderTVC ()
 
-@property (nonatomic,weak) SSLoadingView *loadingView;
-
 @end
 
 @implementation GDVFolderTVC
 
-@synthesize loadingView=_loadingView;
-
 @synthesize studentGroup=_studentGroup;
 @synthesize folders=_folders;
 
-- (void)showLoadingScreen {
-    if (!self.loadingView) {
-        CGSize size = self.view.frame.size;
-        
-        SSLoadingView *loadingView = [[SSLoadingView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
-        [self.view addSubview:loadingView];
-        self.loadingView=loadingView;
-    }
-}
+#pragma mark - Getters and Setters
 
-- (void)stopLoadingScreen {
-    if (self.loadingView)
-        [self.loadingView removeFromSuperview];
+- (void)setFolders:(NSArray *)folders {
+    if (folders) {
+        _folders=folders;
+        
+        //Stop the loading screen
+        [self stopLoadingScreen];
+        
+        //Relaod table view
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - View Controller Lifecycle
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-
+    [super viewDidAppear:animated];
+    
+    //Show loading screen while asking for data
+    if (!self.folders)
+        [self showLoadingScreen];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

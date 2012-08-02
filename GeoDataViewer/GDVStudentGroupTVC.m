@@ -10,30 +10,11 @@
 
 @interface GDVStudentGroupTVC ()
 
-@property (nonatomic,weak) SSLoadingView *loadingView;
-
 @end
 
 @implementation GDVStudentGroupTVC
 
-@synthesize loadingView=_loadingView;
-
 @synthesize studentGroups=_studentGroups;
-
-- (void)showLoadingScreen {
-    if (!self.loadingView) {
-        CGSize size = self.view.frame.size;
-        
-        SSLoadingView *loadingView = [[SSLoadingView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
-        [self.view addSubview:loadingView];
-        self.loadingView=loadingView;
-    }
-}
-
-- (void)stopLoadingScreen {
-    if (self.loadingView)
-        [self.loadingView removeFromSuperview];
-}
 
 #pragma mark - Getters and Setters
 
@@ -58,11 +39,6 @@
     //Show loading screen while asking for data
     if (!self.studentGroups)
         [self showLoadingScreen];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

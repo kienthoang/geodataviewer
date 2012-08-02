@@ -14,6 +14,7 @@
 		0206DE9115CB2F3400B76398 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9015CB2F3400B76398 /* Group.m */; };
 		0206DE9415CB2F4700B76398 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9315CB2F4700B76398 /* Answer.m */; };
 		0206DE9715CB2F5700B76398 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9615CB2F5700B76398 /* Folder.m */; };
+		0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */; };
 		0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251901A15C9FA4E009B8BDA /* IEFormatter.m */; };
 		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
 		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
@@ -164,6 +165,8 @@
 		0206DE9315CB2F4700B76398 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		0206DE9515CB2F5700B76398 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
 		0206DE9615CB2F5700B76398 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
+		0206DE9915CB320900B76398 /* PrototypeLoadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeLoadingTableViewController.h; sourceTree = "<group>"; };
+		0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeLoadingTableViewController.m; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 		0206DE9815CB319E00B76398 /* View Controller Prototype */ = {
 			isa = PBXGroup;
 			children = (
+				0206DE9915CB320900B76398 /* PrototypeLoadingTableViewController.h */,
+				0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */,
 			);
 			name = "View Controller Prototype";
 			sourceTree = "<group>";
@@ -1188,6 +1193,7 @@
 				0206DE9115CB2F3400B76398 /* Group.m in Sources */,
 				0206DE9415CB2F4700B76398 /* Answer.m in Sources */,
 				0206DE9715CB2F5700B76398 /* Folder.m in Sources */,
+				0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
