@@ -20,4 +20,10 @@
 
 + (GDVResourceManager *)defaultResourceManager;
 
+#pragma mark - Import Mechanisms
+
+- (void)importRecordCSVFiles:(NSArray *)csvFiles;
+- (void)importFormationCSVFiles:(NSArray *)csvFiles;
+- (void)importFeedbackCSVFiles:(NSArray *)csvFiles;
+
 @end

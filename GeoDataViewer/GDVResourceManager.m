@@ -57,4 +57,19 @@ static GDVResourceManager *defaultResourceManager;
     return _server;
 }
 
+#pragma mark - Import Mechanisms
+
+- (void)importRecordCSVFiles:(NSArray *)csvFiles {
+    //Import the record csv files
+    
+}
+
+- (void)importFormationCSVFiles:(NSArray *)csvFiles {
+    
+}
+
+- (void)importFeedbackCSVFiles:(NSArray *)csvFiles {
+    
+}
+
 @end

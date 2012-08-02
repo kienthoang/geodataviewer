@@ -185,7 +185,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="OeV-6w-hSg"/>
                                     <barButtonItem title="Records" id="wbA-KT-NWR">
                                         <connections>
                                             <segue destination="rDG-bq-TWN" kind="custom" identifier="Record List" customClass="GDVControllerSegue" id="ZBk-NZ-unh"/>
