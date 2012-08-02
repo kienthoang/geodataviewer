@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <SSToolkit/SSLoadingView.h>
 
+#import "Group.h"
+
 @interface GDVStudentGroupTVC : UITableViewController
 
 - (void)showLoadingScreen;
+- (void)stopLoadingScreen;
 
 @property (nonatomic,strong) NSArray *studentGroups;
 

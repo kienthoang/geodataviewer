@@ -45,6 +45,44 @@
     return [GDVResourceManager defaultResourceManager];
 }
 
+#pragma mark - View Manipulators
+
+- (UINavigationController *)recordListNav {
+    return (UINavigationController *)self.recordList.contentViewController;
+}
+
+- (GDVStudentGroupTVC *)recordListStudentGroupTVC {
+    UIViewController *studentGroupTVC=self.recordListNav.topViewController;
+    if ([studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
+        studentGroupTVC=nil;
+    
+    return (GDVStudentGroupTVC *)studentGroupTVC;
+}
+
+- (UINavigationController *)formationListNav {
+    return self.formationListPopover.isPopoverVisible ? (UINavigationController *)self.formationListPopover.contentViewController : nil;
+}
+
+- (GDVFormationFolderTVC *)formationFolderTVC {
+    UIViewController *formationFolderTVC=self.formationListNav.topViewController;
+    if ([formationFolderTVC isKindOfClass:[GDVFormationFolderTVC class]]) 
+        formationFolderTVC=nil;
+    
+    return (GDVFormationFolderTVC *)formationFolderTVC;
+}
+
+- (UINavigationController *)studentResponseListNav {
+    return (UINavigationController *)self.studentResponseList.contentViewController;
+}
+
+- (GDVStudentGroupTVC *)studentResponseListStudentGroupTVC {
+    UIViewController *studentGroupTVC=self.studentResponseListNav.topViewController;
+    if ([studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
+        studentGroupTVC=nil;
+    
+    return (GDVStudentGroupTVC *)studentGroupTVC;
+}
+
 #pragma mark - Prepare for Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -143,15 +181,48 @@
 #pragma mark - KVO/NSNotification Managers
 
 - (void)recordDatabaseDidChange:(NSNotification *)notification {
+    //Pop record list's nav to root vc
+    [self.recordListNav popToRootViewControllerAnimated:YES];
     
+    //Show loading screen in the student group vc in record list
+    GDVStudentGroupTVC *studentGroupTVC=self.recordListStudentGroupTVC;
+    [studentGroupTVC showLoadingScreen];
+    
+    //Update student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        if (studentGroups)
+            studentGroupTVC.studentGroups=studentGroups;
+    }];
 }
 
 - (void)formationDatabaseDidChange:(NSNotification *)notification {
+    //Pop formation list's nav to root vc if the formation list popover is visible (if not, the formationListNav will be nil, and popToRootVCAnimated will have no effect
+    [self.formationListNav popToRootViewControllerAnimated:YES];
     
+    //Show loading screen in the formation folder vc in formation list
+    GDVFormationFolderTVC *formationFolderTVC=self.formationFolderTVC;
+    [formationFolderTVC showLoadingScreen];
+    
+    //Update formation folders
+    [self.resourceManager fetchFormationFoldersWithCompletionHandler:^(NSArray *formationFolders){
+        if (formationFolderTVC)
+            formationFolderTVC.formationFolders=formationFolders;
+    }];
 }
 
 - (void)studentResponseDatabaseDidChange:(NSNotification *)notification {
+    //Pop student response list's nav to root vc
+    [self.studentResponseListNav popToRootViewControllerAnimated:YES];
     
+    //Show loading screen in the student group vc in student response list
+    GDVStudentGroupTVC *studentGroupTVC=self.studentResponseListStudentGroupTVC;
+    [studentGroupTVC showLoadingScreen];
+    
+    //Update student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        if (studentGroups)
+            studentGroupTVC.studentGroups=studentGroups;
+    }];
 }
 
 - (void)registerNotifications {

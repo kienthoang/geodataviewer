@@ -124,4 +124,30 @@ static GDVResourceManager *defaultResourceManager;
     [self postNotificationWithName:GDVResourceManagerStudentResponseDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
 }
 
+#pragma mark - Data
+
+- (void)fetchStudentGroupsWithCompletionHandler:(data_completion_handler_t)completionHandler {
+    
+}
+
+- (void)fetchFoldersForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
+    
+}
+
+- (void)fetchRecordsForFolder:(Folder *)folder completion:(data_completion_handler_t)completionHandler {
+    
+}
+
+- (void)fetchFormationFoldersWithCompletionHandler:(data_completion_handler_t)completionHandler {
+    
+}
+
+- (void)fetchFormationsForFormationFolder:(Formation_Folder *)formationFolder completion:(data_completion_handler_t)completionHandler {
+    
+}
+
+- (void)fetchStudentResponsesForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
+    
+}
+
 @end

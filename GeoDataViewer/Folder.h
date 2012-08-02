@@ -2,14 +2,14 @@
 //  Folder.h
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 8/2/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Formation_Folder, Record;
+@class Formation_Folder, Group, Record;
 
 @interface Folder : NSManagedObject
 
@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * folderName;
 @property (nonatomic, retain) Formation_Folder *formationFolder;
 @property (nonatomic, retain) NSSet *records;
+@property (nonatomic, retain) Group *group;
 @end
 
 @interface Folder (CoreDataGeneratedAccessors)

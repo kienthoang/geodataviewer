@@ -11,6 +11,9 @@
 		0206DD3715CB14EE00B76398 /* GDVTransientDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */; };
 		0206DE7115CB1D3100B76398 /* libSSToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0206DE6815CB1CC600B76398 /* libSSToolkit.a */; };
 		0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */; };
+		0206DE9115CB2F3400B76398 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9015CB2F3400B76398 /* Group.m */; };
+		0206DE9415CB2F4700B76398 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9315CB2F4700B76398 /* Answer.m */; };
+		0206DE9715CB2F5700B76398 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9615CB2F5700B76398 /* Folder.m */; };
 		0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251901A15C9FA4E009B8BDA /* IEFormatter.m */; };
 		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
 		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
@@ -79,14 +82,11 @@
 		02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */; };
 		02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ADA15C9D0160070EDC7 /* GeoFilter.m */; };
 		02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AE815C9D0490070EDC7 /* SettingManager.m */; };
-		02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0415C9D4AF0070EDC7 /* Answer.m */; };
 		02F31B0815C9D4BE0070EDC7 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0715C9D4BE0070EDC7 /* Bedding.m */; };
 		02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0A15C9D4CD0070EDC7 /* Contact.m */; };
 		02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0D15C9D4DD0070EDC7 /* Fault.m */; };
-		02F31B1115C9D4ED0070EDC7 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1015C9D4ED0070EDC7 /* Folder.m */; };
 		02F31B1415C9D5030070EDC7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1315C9D5030070EDC7 /* Formation.m */; };
 		02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */; };
-		02F31B1A15C9D51C0070EDC7 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1915C9D51C0070EDC7 /* Group.m */; };
 		02F31B1D15C9D5280070EDC7 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1C15C9D5280070EDC7 /* Image.m */; };
 		02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1F15C9D5340070EDC7 /* JointSet.m */; };
 		02F31B2315C9D5440070EDC7 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B2215C9D5440070EDC7 /* Other.m */; };
@@ -158,6 +158,12 @@
 		0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVTransientDataProcessor.m; sourceTree = "<group>"; };
 		0206DD3815CB180A00B76398 /* GDVResourceManagerNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVResourceManagerNotificationNames.h; sourceTree = "<group>"; };
 		0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SSToolkit.xcodeproj; sourceTree = "<group>"; };
+		0206DE8F15CB2F3400B76398 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		0206DE9015CB2F3400B76398 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		0206DE9215CB2F4700B76398 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		0206DE9315CB2F4700B76398 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		0206DE9515CB2F5700B76398 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		0206DE9615CB2F5700B76398 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -269,7 +275,7 @@
 		02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVRecordTVC.m; sourceTree = "<group>"; };
 		02F31AC815C9C8A30070EDC7 /* CustomStudentGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomStudentGroupCell.h; sourceTree = "<group>"; };
 		02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomStudentGroupCell.m; sourceTree = "<group>"; };
-		02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GDVStudentResponseTVC.h; sourceTree = "<group>"; };
+		02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentResponseTVC.h; sourceTree = "<group>"; };
 		02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVStudentResponseTVC.m; sourceTree = "<group>"; };
 		02F31AD915C9D0150070EDC7 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
 		02F31ADA15C9D0160070EDC7 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
@@ -277,22 +283,16 @@
 		02F31AE815C9D0490070EDC7 /* SettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingManager.m; sourceTree = "<group>"; };
 		02F31AF615C9D0BA0070EDC7 /* RecordMapViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewControllerDelegate.h; sourceTree = "<group>"; };
 		02F31AF715C9D0BA0070EDC7 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
-		02F31B0315C9D4AF0070EDC7 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
-		02F31B0415C9D4AF0070EDC7 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		02F31B0615C9D4BE0070EDC7 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
 		02F31B0715C9D4BE0070EDC7 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		02F31B0915C9D4CD0070EDC7 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		02F31B0A15C9D4CD0070EDC7 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		02F31B0C15C9D4DD0070EDC7 /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
 		02F31B0D15C9D4DD0070EDC7 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
-		02F31B0F15C9D4ED0070EDC7 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
-		02F31B1015C9D4ED0070EDC7 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		02F31B1215C9D5030070EDC7 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		02F31B1315C9D5030070EDC7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
 		02F31B1515C9D50D0070EDC7 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
 		02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
-		02F31B1815C9D51C0070EDC7 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		02F31B1915C9D51C0070EDC7 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		02F31B1B15C9D5280070EDC7 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		02F31B1C15C9D5280070EDC7 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		02F31B1E15C9D5340070EDC7 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
@@ -380,6 +380,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0206DE9815CB319E00B76398 /* View Controller Prototype */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "View Controller Prototype";
+			sourceTree = "<group>";
+		};
 		02F3197E15C9BCB70070EDC7 = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +438,7 @@
 				02F319FB15C9BF8F0070EDC7 /* Library */,
 				02F31B3615C9D5F10070EDC7 /* Notification Registrations */,
 				02F31A0815C9BFC80070EDC7 /* Database */,
+				0206DE9815CB319E00B76398 /* View Controller Prototype */,
 				0206DD5115CB1CC600B76398 /* Vendor */,
 				02F3199415C9BCB70070EDC7 /* Supporting Files */,
 			);
@@ -708,8 +716,8 @@
 		02F31A6115C9C2F30070EDC7 /* Answer */ = {
 			isa = PBXGroup;
 			children = (
-				02F31B0315C9D4AF0070EDC7 /* Answer.h */,
-				02F31B0415C9D4AF0070EDC7 /* Answer.m */,
+				0206DE9215CB2F4700B76398 /* Answer.h */,
+				0206DE9315CB2F4700B76398 /* Answer.m */,
 			);
 			name = Answer;
 			sourceTree = "<group>";
@@ -717,8 +725,8 @@
 		02F31A6215C9C3260070EDC7 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				02F31B1815C9D51C0070EDC7 /* Group.h */,
-				02F31B1915C9D51C0070EDC7 /* Group.m */,
+				0206DE8F15CB2F3400B76398 /* Group.h */,
+				0206DE9015CB2F3400B76398 /* Group.m */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -764,8 +772,8 @@
 		02F31A6715C9C3760070EDC7 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
-				02F31B0F15C9D4ED0070EDC7 /* Folder.h */,
-				02F31B1015C9D4ED0070EDC7 /* Folder.m */,
+				0206DE9515CB2F5700B76398 /* Folder.h */,
+				0206DE9615CB2F5700B76398 /* Folder.m */,
 			);
 			name = Folder;
 			sourceTree = "<group>";
@@ -1156,14 +1164,11 @@
 				02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */,
 				02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */,
 				02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */,
-				02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */,
 				02F31B0815C9D4BE0070EDC7 /* Bedding.m in Sources */,
 				02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */,
 				02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */,
-				02F31B1115C9D4ED0070EDC7 /* Folder.m in Sources */,
 				02F31B1415C9D5030070EDC7 /* Formation.m in Sources */,
 				02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */,
-				02F31B1A15C9D51C0070EDC7 /* Group.m in Sources */,
 				02F31B1D15C9D5280070EDC7 /* Image.m in Sources */,
 				02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */,
 				02F31B2315C9D5440070EDC7 /* Other.m in Sources */,
@@ -1180,6 +1185,9 @@
 				0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */,
 				0206DD3215CB0DED00B76398 /* StudentReponseImportTVC.m in Sources */,
 				0206DD3715CB14EE00B76398 /* GDVTransientDataProcessor.m in Sources */,
+				0206DE9115CB2F3400B76398 /* Group.m in Sources */,
+				0206DE9415CB2F4700B76398 /* Answer.m in Sources */,
+				0206DE9715CB2F5700B76398 /* Folder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SSToolkit/SSLoadingView.h>
+
+#import "Group.h"
+#import "Folder.h"
 
 @interface GDVFolderTVC : UITableViewController
+
+@property (nonatomic,strong) Group *studentGroup;
+@property (nonatomic,strong) NSArray *folders;
+
+- (void)showLoadingScreen;
+- (void)stopLoadingScreen;
 
 @end

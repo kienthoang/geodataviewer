@@ -2,12 +2,13 @@
 //  Folder.m
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 8/2/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import "Folder.h"
 #import "Formation_Folder.h"
+#import "Group.h"
 #import "Record.h"
 
 
@@ -17,5 +18,6 @@
 @dynamic folderName;
 @dynamic formationFolder;
 @dynamic records;
+@dynamic group;
 
 @end
