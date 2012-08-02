@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0206DD3215CB0DED00B76398 /* StudentReponseImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */; };
+		0206DD3715CB14EE00B76398 /* GDVTransientDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */; };
+		0206DE7115CB1D3100B76398 /* libSSToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0206DE6815CB1CC600B76398 /* libSSToolkit.a */; };
+		0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */; };
 		0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251901A15C9FA4E009B8BDA /* IEFormatter.m */; };
 		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
 		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
@@ -73,7 +76,7 @@
 		02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC315C9C7B70070EDC7 /* GDVFolderTVC.m */; };
 		02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */; };
 		02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */; };
-		02F31ACD15C9C8D20070EDC7 /* GDVFeedbackTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */; };
+		02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */; };
 		02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ADA15C9D0160070EDC7 /* GeoFilter.m */; };
 		02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AE815C9D0490070EDC7 /* SettingManager.m */; };
 		02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0415C9D4AF0070EDC7 /* Answer.m */; };
@@ -103,6 +106,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0206DE6715CB1CC600B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		0206DE6915CB1CC600B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B239101D1357DC3E00ADE21B;
+			remoteInfo = SSToolkitTests;
+		};
+		0206DE6B15CB1CC600B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2C507EA151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
+		0206DE6D15CB1D2100B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		0206DE6F15CB1D2100B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C507E9151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
 		02F319AF15C9BCB70070EDC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02F3198015C9BCB70070EDC7 /* Project object */;
@@ -113,8 +151,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0206DD3015CB0DED00B76398 /* StudentReponseImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = StudentReponseImportTVC.h; sourceTree = "<group>"; };
+		0206DD3015CB0DED00B76398 /* StudentReponseImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentReponseImportTVC.h; sourceTree = "<group>"; };
 		0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentReponseImportTVC.m; sourceTree = "<group>"; };
+		0206DD3415CB147900B76398 /* GDVTransientDataProcessorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVTransientDataProcessorDelegate.h; sourceTree = "<group>"; };
+		0206DD3515CB14EE00B76398 /* GDVTransientDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVTransientDataProcessor.h; sourceTree = "<group>"; };
+		0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVTransientDataProcessor.m; sourceTree = "<group>"; };
+		0206DD3815CB180A00B76398 /* GDVResourceManagerNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVResourceManagerNotificationNames.h; sourceTree = "<group>"; };
+		0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SSToolkit.xcodeproj; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -125,7 +168,6 @@
 		02782FC615C9ECA900A0A062 /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
 		02782FC715C9ECA900A0A062 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		02782FC815C9ECA900A0A062 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
-		02782FE015C9F97400A0A062 /* GDVIEEngineNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVIEEngineNotificationNames.h; sourceTree = "<group>"; };
 		0281DBF415CAD44F00D1D8B1 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group.png; sourceTree = "<group>"; };
 		02F3198915C9BCB70070EDC7 /* GeoDataViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoDataViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3198D15C9BCB70070EDC7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -135,8 +177,8 @@
 		02F3199715C9BCB70070EDC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		02F3199915C9BCB70070EDC7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		02F3199B15C9BCB70070EDC7 /* GeoDataViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoDataViewer-Prefix.pch"; sourceTree = "<group>"; };
-		02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeoDataViewerAppDelegate.h; path = ../GeoDataViewer/GeoDataViewerAppDelegate.h; sourceTree = "<group>"; };
-		02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GeoDataViewerAppDelegate.m; path = ../GeoDataViewer/GeoDataViewerAppDelegate.m; sourceTree = "<group>"; };
+		02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoDataViewerAppDelegate.h; sourceTree = "<group>"; };
+		02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoDataViewerAppDelegate.m; sourceTree = "<group>"; };
 		02F319A015C9BCB70070EDC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		02F319AA15C9BCB70070EDC7 /* GeoDataViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoDataViewerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F319AB15C9BCB70070EDC7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -227,8 +269,8 @@
 		02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVRecordTVC.m; sourceTree = "<group>"; };
 		02F31AC815C9C8A30070EDC7 /* CustomStudentGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomStudentGroupCell.h; sourceTree = "<group>"; };
 		02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomStudentGroupCell.m; sourceTree = "<group>"; };
-		02F31ACB15C9C8D20070EDC7 /* GDVFeedbackTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFeedbackTVC.h; sourceTree = "<group>"; };
-		02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFeedbackTVC.m; sourceTree = "<group>"; };
+		02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GDVStudentResponseTVC.h; sourceTree = "<group>"; };
+		02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVStudentResponseTVC.m; sourceTree = "<group>"; };
 		02F31AD915C9D0150070EDC7 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
 		02F31ADA15C9D0160070EDC7 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
 		02F31AE715C9D0490070EDC7 /* SettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManager.h; sourceTree = "<group>"; };
@@ -285,6 +327,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0206DE7115CB1D3100B76398 /* libSSToolkit.a in Frameworks */,
 				02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */,
 				02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */,
 				02F31B4A15C9D72B0070EDC7 /* MessageUI.framework in Frameworks */,
@@ -311,6 +354,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0206DD5115CB1CC600B76398 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0206DD5215CB1CC600B76398 /* SSToolkit */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		0206DD5215CB1CC600B76398 /* SSToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */,
+			);
+			path = SSToolkit;
+			sourceTree = "<group>";
+		};
+		0206DDF015CB1CC600B76398 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0206DE6815CB1CC600B76398 /* libSSToolkit.a */,
+				0206DE6A15CB1CC600B76398 /* SSToolkitTests.app */,
+				0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		02F3197E15C9BCB70070EDC7 = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +431,7 @@
 				02F319FB15C9BF8F0070EDC7 /* Library */,
 				02F31B3615C9D5F10070EDC7 /* Notification Registrations */,
 				02F31A0815C9BFC80070EDC7 /* Database */,
+				0206DD5115CB1CC600B76398 /* Vendor */,
 				02F3199415C9BCB70070EDC7 /* Supporting Files */,
 			);
 			path = GeoDataViewer;
@@ -370,6 +440,8 @@
 		02F3199415C9BCB70070EDC7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */,
+				02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */,
 				02F3199515C9BCB70070EDC7 /* GeoDataViewer-Info.plist */,
 				02F3199615C9BCB70070EDC7 /* InfoPlist.strings */,
 				02F3199915C9BCB70070EDC7 /* main.m */,
@@ -381,8 +453,6 @@
 		02F319B115C9BCB70070EDC7 /* GeoDataViewerTests */ = {
 			isa = PBXGroup;
 			children = (
-				02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */,
-				02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */,
 				02F319B715C9BCB70070EDC7 /* GeoDataViewerTests.h */,
 				02F319B815C9BCB70070EDC7 /* GeoDataViewerTests.m */,
 				02F319B215C9BCB70070EDC7 /* Supporting Files */,
@@ -408,6 +478,8 @@
 				02F319CD15C9BDB40070EDC7 /* GDVIEEngine.m */,
 				02F319CF15C9BDF80070EDC7 /* GDVServerCommunicator.h */,
 				02F319D015C9BDF80070EDC7 /* GDVServerCommunicator.m */,
+				0206DD3515CB14EE00B76398 /* GDVTransientDataProcessor.h */,
+				0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */,
 			);
 			name = "Resource Manager Group";
 			sourceTree = "<group>";
@@ -762,7 +834,7 @@
 			isa = PBXGroup;
 			children = (
 				02F31A9515C9C4EA0070EDC7 /* Custom Views */,
-				02F31A7315C9C4140070EDC7 /* Feedback Group */,
+				02F31A7315C9C4140070EDC7 /* Student Response Group */,
 				02F31A7215C9C40D0070EDC7 /* Formation Group */,
 				02F319D315C9BE3A0070EDC7 /* Import/Export Group */,
 				02F319EC15C9BEA10070EDC7 /* Record List Group */,
@@ -782,13 +854,13 @@
 			name = "Formation Group";
 			sourceTree = "<group>";
 		};
-		02F31A7315C9C4140070EDC7 /* Feedback Group */ = {
+		02F31A7315C9C4140070EDC7 /* Student Response Group */ = {
 			isa = PBXGroup;
 			children = (
-				02F31ACB15C9C8D20070EDC7 /* GDVFeedbackTVC.h */,
-				02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */,
+				02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */,
+				02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */,
 			);
-			name = "Feedback Group";
+			name = "Student Response Group";
 			sourceTree = "<group>";
 		};
 		02F31A7A15C9C4A50070EDC7 /* Images */ = {
@@ -861,6 +933,7 @@
 				02F31AF615C9D0BA0070EDC7 /* RecordMapViewControllerDelegate.h */,
 				02F31B3515C9D5AC0070EDC7 /* ImportTableViewControllerDelegate.h */,
 				02F31AF715C9D0BA0070EDC7 /* CSVTableViewControllerDelegate.h */,
+				0206DD3415CB147900B76398 /* GDVTransientDataProcessorDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -868,8 +941,8 @@
 		02F31B3615C9D5F10070EDC7 /* Notification Registrations */ = {
 			isa = PBXGroup;
 			children = (
-				02782FE015C9F97400A0A062 /* GDVIEEngineNotificationNames.h */,
 				02F31B3715C9D6010070EDC7 /* SettingManagerNotificationNames.h */,
+				0206DD3815CB180A00B76398 /* GDVResourceManagerNotificationNames.h */,
 			);
 			name = "Notification Registrations";
 			sourceTree = "<group>";
@@ -888,6 +961,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				0206DE6E15CB1D2100B76398 /* PBXTargetDependency */,
+				0206DE7015CB1D2100B76398 /* PBXTargetDependency */,
 			);
 			name = GeoDataViewer;
 			productName = GeoDataViewer;
@@ -929,10 +1004,31 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
+				es,
+				fr,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nl,
+				pt,
+				pt_PT,
+				ru,
+				sv,
+				zh_Hans,
+				zh_Hant,
 			);
 			mainGroup = 02F3197E15C9BCB70070EDC7;
 			productRefGroup = 02F3198A15C9BCB70070EDC7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0206DDF015CB1CC600B76398 /* Products */;
+					ProjectRef = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				02F3198815C9BCB70070EDC7 /* GeoDataViewer */,
@@ -940,6 +1036,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0206DE6815CB1CC600B76398 /* libSSToolkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSSToolkit.a;
+			remoteRef = 0206DE6715CB1CC600B76398 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0206DE6A15CB1CC600B76398 /* SSToolkitTests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SSToolkitTests.app;
+			remoteRef = 0206DE6915CB1CC600B76398 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SSToolkitResources.bundle;
+			remoteRef = 0206DE6B15CB1CC600B76398 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		02F3198715C9BCB70070EDC7 /* Resources */ = {
@@ -959,6 +1079,7 @@
 				02F31A9015C9C4C70070EDC7 /* gear2.png in Resources */,
 				02F31A9115C9C4C70070EDC7 /* green_pin.png in Resources */,
 				0281DBF515CAD44F00D1D8B1 /* group.png in Resources */,
+				0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,7 +1153,7 @@
 				02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */,
 				02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */,
 				02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */,
-				02F31ACD15C9C8D20070EDC7 /* GDVFeedbackTVC.m in Sources */,
+				02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */,
 				02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */,
 				02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */,
 				02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */,
@@ -1058,6 +1179,7 @@
 				02782FCC15C9ECA900A0A062 /* CSVTableViewController.m in Sources */,
 				0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */,
 				0206DD3215CB0DED00B76398 /* StudentReponseImportTVC.m in Sources */,
+				0206DD3715CB14EE00B76398 /* GDVTransientDataProcessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,6 +1194,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0206DE6E15CB1D2100B76398 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkit;
+			targetProxy = 0206DE6D15CB1D2100B76398 /* PBXContainerItemProxy */;
+		};
+		0206DE7015CB1D2100B76398 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkitResources;
+			targetProxy = 0206DE6F15CB1D2100B76398 /* PBXContainerItemProxy */;
+		};
 		02F319B015C9BCB70070EDC7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 02F3198815C9BCB70070EDC7 /* GeoDataViewer */;
@@ -1159,9 +1291,18 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = Vendor/SSToolkit;
 				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";
@@ -1174,9 +1315,18 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = Vendor/SSToolkit;
 				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";

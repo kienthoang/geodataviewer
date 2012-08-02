@@ -10,35 +10,59 @@
 
 @interface GDVStudentGroupTVC ()
 
+@property (nonatomic,weak) SSLoadingView *loadingView;
+
 @end
 
 @implementation GDVStudentGroupTVC
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+@synthesize loadingView=_loadingView;
+
+@synthesize studentGroups=_studentGroups;
+
+- (void)showLoadingScreen {
+    if (!self.loadingView) {
+        CGSize size = self.view.frame.size;
+        
+        SSLoadingView *loadingView = [[SSLoadingView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+        [self.view addSubview:loadingView];
+        self.loadingView=loadingView;
     }
-    return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void)stopLoadingScreen {
+    if (self.loadingView)
+        [self.loadingView removeFromSuperview];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+#pragma mark - Getters and Setters
+
+- (void)setStudentGroups:(NSArray *)studentGroups {
+    if (studentGroups) {
+        _studentGroups=studentGroups;
+        
+        //Stop the loading screen
+        [self stopLoadingScreen];
+        
+        //Relaod table view
+        [self.tableView reloadData];
+    }
+}
+
+#pragma mark - View Controller Lifecycle
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    //Show loading screen while asking for data
+    if (!self.studentGroups)
+        [self showLoadingScreen];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

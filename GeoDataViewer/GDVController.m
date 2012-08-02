@@ -140,6 +140,36 @@
     }
 }
 
+#pragma mark - KVO/NSNotification Managers
+
+- (void)recordDatabaseDidChange:(NSNotification *)notification {
+    
+}
+
+- (void)formationDatabaseDidChange:(NSNotification *)notification {
+    
+}
+
+- (void)studentResponseDatabaseDidChange:(NSNotification *)notification {
+    
+}
+
+- (void)registerNotifications {
+    //Register to receive notifications from the model group
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self 
+                           selector:@selector(recordDatabaseDidChange:) 
+                               name:GDVResourceManagerRecordDatabaseDidUpdate 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(formationDatabaseDidChange:) 
+                               name:GDVResourceManagerFormationDatabaseDidUpdate 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(studentResponseDatabaseDidChange:) 
+                               name:GDVResourceManagerStudentResponseDatabaseDidUpdate 
+                             object:nil];
+}
 
 #pragma mark - Target-Action Handlers
 
@@ -211,6 +241,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Register to receive notifications
+    [self registerNotifications];
     
     //Change the look of the master presenter
     UIButton *recordListButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];

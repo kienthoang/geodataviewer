@@ -310,11 +310,11 @@
             </objects>
             <point key="canvasLocation" x="357" y="893"/>
         </scene>
-        <!--FeedbackTVC-->
+        <!--Student ResponseTVC-->
         <scene sceneID="dUY-7O-LbA">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvL-Oj-73U" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="1vD-k9-Po8" customClass="GDVFeedbackTVC" sceneMemberID="viewController">
+                <tableViewController id="1vD-k9-Po8" customClass="GDVStudentResponseTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOG-WK-UFL">
                         <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -866,9 +866,6 @@
                 <relationship kind="outlet" name="settingsButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
-        <class className="GDVFeedbackTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFeedbackTVC.h"/>
-        </class>
         <class className="GDVFolderTVC" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFolderTVC.h"/>
         </class>
@@ -880,6 +877,9 @@
         </class>
         <class className="GDVStudentGroupTVC" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentGroupTVC.h"/>
+        </class>
+        <class className="GDVStudentResponseTVC" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentResponseTVC.h"/>
         </class>
         <class className="ImportTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportTableViewController.h"/>

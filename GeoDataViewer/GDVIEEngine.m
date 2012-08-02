@@ -20,7 +20,6 @@
 #import "TransientProject.h"
 
 #import "ValidationMessageBoard.h"
-#import "GDVIEEngineNotificationNames.h"
 
 #import "TextInputFilter.h"
 #import "IEFormatter.h"
@@ -47,6 +46,15 @@
 @synthesize formationFolders=_formationFolders;
 
 @synthesize validationMessageBoard=_validationMessageBoard;
+
+@synthesize processor=_processor;
+
++ (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor {
+    GDVIEEngine *engine=[[GDVIEEngine alloc] init];
+    engine.processor=processor;
+    
+    return engine;
+}
 
 //enum for columnHeadings
 typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
@@ -85,13 +93,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     if (!_records)
         _records=[NSMutableArray array];
     return _records;
-}
-
-#pragma mark - Notification Management Mechanisms
-
-- (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
-    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
 }
 
 #pragma mark - Data Managers
@@ -284,10 +285,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
  "Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, Dip Direction, Observations, Formation, Lower Formation, Upper Formation, Trend, Plunge, Image file name \r\n"
  */
 -(void)createRecordsFromCSVFiles:(NSArray *)files
-{   
-    //Post a notification
-    [self postNotificationWithName:GeoNotificationIEEngineRecordImportingDidStart withUserInfo:[NSDictionary dictionary]];
-    
+{       
     //get paths to the selected files
     self.selectedFilePaths = [self getSelectedFilePaths:files];
     
@@ -386,10 +384,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 }
 
 - (void)createFormationsFromCSVFiles:(NSArray *) files
-{
-    //Post a notification
-    [self postNotificationWithName:GeoNotificationIEEngineFormationImportingDidStart withUserInfo:[NSDictionary dictionary]];
-    
+{    
     //get the complete file paths for the selected files that exist
     self.selectedFilePaths=[self getSelectedFilePaths:files];
     
@@ -409,10 +404,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
  ...         ...
  */
 - (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
-{
-    //Post a notification
-    [self postNotificationWithName:GeoNotificationIEEngineFormationImportingDidStart withUserInfo:[NSDictionary dictionary]];
-    
+{    
     self.selectedFilePaths = [self getSelectedFilePaths:files];    
     
     //read each of those files line by line and create the formation objects and add it to self.formations array.
