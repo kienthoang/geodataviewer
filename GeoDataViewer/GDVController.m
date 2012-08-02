@@ -33,7 +33,7 @@
 @synthesize settingsButton = _settingsButton;
 
 @synthesize recordList=_recordList;
-@synthesize feedbackList=_feedbackList;
+@synthesize studentResponseList=_studentResponseList;
 @synthesize formationListPopover=_formationListPopover;
 @synthesize importPopover=_importPopover;
 
@@ -55,10 +55,10 @@
         self.recordList=[[UIPopoverController alloc] initWithContentViewController:recordList];
     }
     
-    //Segue to feedback list
-    else if ([segueIdentifier isEqualToString:@"Feedback List"]) {
-        UIViewController *feedbackList=[self.storyboard instantiateViewControllerWithIdentifier:@"Feedback List"];
-        self.feedbackList=[[UIPopoverController alloc] initWithContentViewController:feedbackList];
+    //Segue to Student Response List
+    else if ([segueIdentifier isEqualToString:@"Student Response List"]) {
+        UIViewController *feedbackList=[self.storyboard instantiateViewControllerWithIdentifier:@"Student Response List"];
+        self.studentResponseList=[[UIPopoverController alloc] initWithContentViewController:feedbackList];
     }
     
     //Segue to map view
@@ -108,13 +108,13 @@
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-- (void)presentFeedbackImportPopover {
+- (void)presentStudentResponseImportPopover {
     //Dismiss all visible popovers
     [self dismissAllVisiblePopoversAnimated:NO];
     
-    //Instantiate the record import popover
-    UINavigationController *feedbackImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FEEDBACK_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
-    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:feedbackImportTVC];
+    //Instantiate the student response import popover
+    UINavigationController *studentResponseImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:STUDENT_RESPONSE_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:studentResponseImportTVC];
     
     //Present it
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -132,9 +132,9 @@
             else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Formations"])
                 [self presentFormationImportPopover];
             
-            //If user clicked import feedbacks
-            else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Feedbacks"]) {
-                [self presentFeedbackImportPopover];
+            //If user clicked import student responses
+            else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Student Responses"]) {
+                [self presentStudentResponseImportPopover];
             }
         }
     }
@@ -146,7 +146,7 @@
 - (void)dismissAllVisiblePopoversAnimated:(BOOL)animated {
     [self.formationListPopover dismissPopoverAnimated:NO];
     [self.recordList dismissPopoverAnimated:NO];
-    [self.feedbackList dismissPopoverAnimated:NO];
+    [self.studentResponseList dismissPopoverAnimated:NO];
     [self.importPopover dismissPopoverAnimated:NO];
     self.importPopover=nil;
 }
@@ -175,7 +175,7 @@
     [self dismissAllVisiblePopoversAnimated:NO];
     
     //Present
-    [self.feedbackList presentPopoverFromBarButtonItem:self.feedbackListButton 
+    [self.studentResponseList presentPopoverFromBarButtonItem:self.feedbackListButton 
                               permittedArrowDirections:UIPopoverArrowDirectionAny 
                                               animated:YES];
 }
@@ -189,7 +189,7 @@
                                                                        delegate:self 
                                                               cancelButtonTitle:@"Cancel" 
                                                          destructiveButtonTitle:nil 
-                                                              otherButtonTitles:@"Import Records",@"Import Formations", @"Import Feedbacks",nil];
+                                                              otherButtonTitles:@"Import Records",@"Import Formations", @"Import Student Responses",nil];
     [importExportActionSheet showInView:self.contentView];
 }
 
@@ -205,7 +205,7 @@
     
     //Perform custom segues
     [self performSegueWithIdentifier:@"Record List" sender:nil];
-    [self performSegueWithIdentifier:@"Feedback List" sender:nil];
+    [self performSegueWithIdentifier:@"Student Response List" sender:nil];
     [self performSegueWithIdentifier:@"Map View" sender:nil];
 }
 
@@ -262,7 +262,6 @@
     [self setContentView:nil];
     [self setRecordListButton:nil];
     [self setFormationListButton:nil];
-    [self setFeedbackListButton:nil];
     [self setImportExportButton:nil];
     [self setSettingsButton:nil];
     [super viewDidUnload];

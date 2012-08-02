@@ -17,8 +17,7 @@
 @implementation CSVTableViewController
 @synthesize addButton = _addButton;
 
-@synthesize blacklistedExtensions=_blacklistedExtensions;
-@synthesize delegate=_delegate;
+@synthesize addDelegate=_addDelegate;
 
 - (void)updateButtons {
     int numFiles=self.selectedCSVFiles.count;
@@ -29,31 +28,8 @@
     self.addButton.enabled=numFiles>0;
 }
 
-#pragma mark - View Controller Lifecycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    //Get the list of csv files from the document directories
-    NSMutableArray *csvFileNames=[NSMutableArray array];
-    NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSURL *documentDirURL=[[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSArray *urls=[fileManager contentsOfDirectoryAtPath:[documentDirURL path] error:NULL];
-    for (NSURL *url in urls) {
-        //If the file name has extension .csv and not one of the blacklisted extensions, add it to the array of csv files
-        NSString *fileName=[url lastPathComponent];
-        if ([fileName hasSuffix:@".csv"]) {
-            BOOL blacklisted=NO;
-            for (NSString *suffix in self.blacklistedExtensions) {
-                if ([fileName hasSuffix:suffix])
-                    blacklisted=YES;
-            }
-            
-            if (!blacklisted)
-                [csvFileNames addObject:fileName];
-        }
-    }
-    self.csvFileNames=csvFileNames;
+- (NSString *)csvFileExtension {
+    return @".csv";
 }
 
 #pragma mark - UITableViewDataSource protocol methods
@@ -115,7 +91,7 @@
     NSString *clickedButtonTitle=[actionSheet buttonTitleAtIndex:buttonIndex];
     if (self.tableView.editing && [deleteButtonTitles containsObject:clickedButtonTitle]) {
         //Notify the delegate
-        [self.delegate csvTableViewController:self userDidChooseFilesWithNames:self.selectedCSVFiles];
+        [self.addDelegate csvTableViewController:self userDidChooseFilesWithNames:self.selectedCSVFiles];
     }
 }
 

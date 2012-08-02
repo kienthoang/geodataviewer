@@ -227,11 +227,11 @@
                         <outlet property="importExportButton" destination="lIQ-Tn-bpF" id="eVI-65-4QW"/>
                         <outlet property="recordListButton" destination="wbA-KT-NWR" id="oxa-Yj-WB3"/>
                         <outlet property="settingsButton" destination="ZcH-zx-mb6" id="jsu-DE-MB8"/>
-                        <segue destination="09O-RO-VwQ" kind="custom" identifier="Feedback List" customClass="GDVControllerSegue" id="qPr-ik-Ref"/>
+                        <segue destination="09O-RO-VwQ" kind="custom" identifier="Student Response List" customClass="GDVControllerSegue" id="qPr-ik-Ref"/>
                         <segue destination="5el-RI-vdz" kind="custom" identifier="Map View" customClass="GDVControllerSegue" id="ha5-xy-2BM"/>
-                        <segue destination="Rzz-JP-mcB" kind="custom" identifier="Import Feedbacks" customClass="GDVControllerSegue" id="Je9-uY-gUc"/>
                         <segue destination="JfV-Zl-9OU" kind="custom" identifier="Import Formations" customClass="GDVControllerSegue" id="nDM-nM-DLj"/>
                         <segue destination="6yl-3Z-hBH" kind="custom" identifier="Import Records" customClass="GDVControllerSegue" id="QWI-w1-YEg"/>
+                        <segue destination="v15-0E-3NA" kind="custom" identifier="Import Student Responses" customClass="GDVControllerSegue" id="Zqc-eg-7dN"/>
                     </connections>
                 </viewController>
             </objects>
@@ -346,7 +346,7 @@
         <scene sceneID="ODd-Jm-1XJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCP-1y-xgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Feedback List" id="09O-RO-VwQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Student Response List" id="09O-RO-VwQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0nR-O5-xkh">
@@ -384,92 +384,6 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-1114" y="6649"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="gYU-NT-P1J">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d46-0A-KYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="Eb9-nM-t53" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XT9-HT-pva">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cQw-ib-hXh">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <connections>
-                                    <segue destination="85A-G0-7Jt" kind="push" id="oc2-G7-sw9"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Eb9-nM-t53" id="Vfu-ji-8Vh"/>
-                            <outlet property="delegate" destination="Eb9-nM-t53" id="nKz-li-gye"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="Pil-lq-hgK"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="910" y="5025"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="bos-hQ-0ic">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TO7-DV-uWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="85A-G0-7Jt" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mPs-EP-R61">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eEd-uw-W7x">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="85A-G0-7Jt" id="CZb-n0-4Zc"/>
-                            <outlet property="delegate" destination="85A-G0-7Jt" id="hF7-f8-6vg"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="Gg5-ts-bUW"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="2288" y="4993"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mQA-Sc-dwl">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GMC-gu-XgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Import Feedbacks" id="Rzz-JP-mcB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Oub-jC-XHB">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Eb9-nM-t53" kind="relationship" relationship="rootViewController" id="on2-py-xhX"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="-320" y="5025"/>
         </scene>
         <!--Formation ImportTVC-->
         <scene sceneID="C46-Vg-IxO">
@@ -518,6 +432,9 @@
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="0FS-w2-pDW"/>
                         <barButtonItem title="Add File" width="100" id="UM3-lP-oLj">
                             <color key="tintColor" red="1" green="0.49574802159999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="a3a-j7-905" kind="push" identifier="Add File" id="3ZY-Fa-BsW"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="YYY-hu-rLk"/>
                     </toolbarItems>
@@ -569,7 +486,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbg-fH-YLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="a3a-j7-905" customClass="CSVTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hcD-I4-5LK">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -754,6 +671,146 @@
             </objects>
             <point key="canvasLocation" x="-460" y="2154"/>
         </scene>
+        <!--Student Reponse ImportTVC-->
+        <scene sceneID="Gne-D6-EL3">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wzE-yy-Zq7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="" id="CYl-uD-YDe" customClass="StudentReponseImportTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fww-Wv-dXO">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Student Response Import Cell" textLabel="uaf-uj-dW6" style="IBUITableViewCellStyleDefault" id="oqA-xQ-X9F">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uaf-uj-dW6">
+                                            <rect key="frame" x="10" y="0.0" width="914" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CYl-uD-YDe" id="WFN-xB-hHN"/>
+                            <outlet property="delegate" destination="CYl-uD-YDe" id="zsS-ID-7I1"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jw0-yj-QBi"/>
+                        <barButtonItem enabled="NO" title="Delete" width="100" id="nXs-LE-FwS">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="GOB-wd-0W2"/>
+                        <barButtonItem enabled="NO" title="Import" width="100" style="done" id="sNB-Ev-qPa">
+                            <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="Gia-uB-d3L"/>
+                        <barButtonItem title="Add File" width="100" id="Hfn-44-4RH">
+                            <color key="tintColor" red="1" green="0.49574802159999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="9Z6-Wo-Kex" kind="push" identifier="Add File" id="7s7-ko-Qe2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="GBF-kF-H2C"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="3JX-5K-tbx">
+                        <barButtonItem key="leftBarButtonItem" title="Select All" width="100" id="PhW-rI-3st"/>
+                        <barButtonItem key="rightBarButtonItem" title="Select None" width="100" id="0d4-dg-1If">
+                            <connections>
+                                <action selector="selectNone:" destination="CYl-uD-YDe" id="1v5-45-ycl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="Hfn-44-4RH" id="eOg-fr-yxF"/>
+                        <outlet property="deleteButton" destination="nXs-LE-FwS" id="c57-I4-alK"/>
+                        <outlet property="importButton" destination="sNB-Ev-qPa" id="V3x-TT-7Ae"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1086" y="4954"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aQM-07-pAE">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hi2-pG-roj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="Import Student Responses" toolbarHidden="NO" id="v15-0E-3NA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Cun-um-zvu">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nln-WE-6O2">
+                        <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="CYl-uD-YDe" kind="relationship" relationship="rootViewController" id="gxU-55-TGP"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-176" y="4970"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="2Zy-O4-XSA">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZY-tF-vgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="9Z6-Wo-Kex" customClass="CSVTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zGT-X5-dHj">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CSV File Cell" id="AWZ-ji-nF8">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9Z6-Wo-Kex" id="vc3-ED-fnI"/>
+                            <outlet property="delegate" destination="9Z6-Wo-Kex" id="otd-H8-fM4"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="FoF-Q2-AYC"/>
+                        <barButtonItem enabled="NO" title="Add File" width="120" style="done" id="71X-LY-z5V">
+                            <connections>
+                                <action selector="addPressed:" destination="9Z6-Wo-Kex" id="Van-Ek-DvV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Al8-Gr-iYd"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="dqO-72-6Hz"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="71X-LY-z5V" id="dDa-Wu-AhI"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="2261" y="4930"/>
+        </scene>
     </scenes>
     <classes>
         <class className="CSVTableViewController" superclassName="ImportTableViewController">
@@ -841,6 +898,9 @@
             <relationships>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
             </relationships>
+        </class>
+        <class className="StudentReponseImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StudentReponseImportTVC.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

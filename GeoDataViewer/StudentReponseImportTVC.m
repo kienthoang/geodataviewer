@@ -1,39 +1,35 @@
 //
-//  RecordImportTVC.m
-//  GeoFieldBook
+//  StudentReponseImportTVC.m
+//  GeoDataViewer
 //
-//  Created by Kien Hoang on 7/11/12.
+//  Created by Kien Hoang on 8/2/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "RecordImportTVC.h"
+#import "StudentReponseImportTVC.h"
 #import "CSVTableViewController.h"
 
-#import "TransientProject.h"
-
-@interface RecordImportTVC() <CSVTableViewControllerDelegate>
+@interface StudentReponseImportTVC() <CSVTableViewControllerDelegate>
 
 @end
 
-@implementation RecordImportTVC
-
-@synthesize csvFileExtension=_csvFileExtension;
+@implementation StudentReponseImportTVC
 
 #pragma mark - Getters and Setters
 
 - (NSString *)csvFileExtension {
-    return @".record.csv";
+    return @".response.csv";
 }
 
 #pragma mark - UITableViewDataSource protocol methods
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"Record CSV Files";
+    return @"Student Response CSV Files";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Record Import Cell";
+    static NSString *CellIdentifier = @"Student Response Import Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
@@ -48,13 +44,13 @@
 
 - (IBAction)importPressed:(UIBarButtonItem *)sender {
     [super importPressed:sender];
-     
-    __weak RecordImportTVC *weakSelf=self;
+    
+    __weak StudentReponseImportTVC *weakSelf=self;
     
     //Start importing
     [self startImportingWithHandler:^(NSArray *selectedCSVFiles){
-        if ([weakSelf.delegate respondsToSelector:@selector(userDidSelectRecordCSVFiles:forImportingInImportTVC:)])
-            [weakSelf.delegate userDidSelectRecordCSVFiles:selectedCSVFiles forImportingInImportTVC:weakSelf];
+        if ([weakSelf.delegate respondsToSelector:@selector(userDidSelectFormationCSVFiles:forImportingInImportTVC:)])
+            [weakSelf.delegate userDidSelectFeedbackCSVFiles:selectedCSVFiles forImportingInImportTVC:weakSelf];
     }];
 }
 
@@ -70,7 +66,7 @@
 #pragma mark - CSVTableViewControllerDelegate protocol methods
 
 - (void)csvTableViewController:(CSVTableViewController *)sender userDidChooseFilesWithNames:(NSArray *)fileNames {
-    //Rename the files to have .record.csv extension
+    //Rename the files to have .response.csv extension
     NSFileManager *fileManager=[NSFileManager defaultManager];
     NSURL *documentDirURL=[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject;
     NSMutableArray *csvFileNames=self.csvFileNames.mutableCopy;
@@ -78,7 +74,7 @@
         NSMutableArray *nameComponents=[fileName componentsSeparatedByString:@"."].mutableCopy;
         [nameComponents removeLastObject];
         NSString *localizedName=[nameComponents componentsJoinedByString:@"."];
-        NSString *newName=[localizedName stringByAppendingString:@".record.csv"];
+        NSString *newName=[localizedName stringByAppendingString:@".response.csv"];
         
         [fileManager moveItemAtURL:[documentDirURL URLByAppendingPathComponent:fileName] toURL:[documentDirURL URLByAppendingPathComponent:newName] error:NULL];
         [csvFileNames addObject:newName];

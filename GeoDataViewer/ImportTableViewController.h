@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSArray *selectedCSVFiles;
 
 @property (nonatomic,strong) NSString *csvFileExtension;
+@property (nonatomic,strong) NSArray *blacklistedExtensions;
 
 #define SECTION_FOOTER_HEIGHT 30
 #define SizeInPopover CGRectMake(0,0,400,500).size

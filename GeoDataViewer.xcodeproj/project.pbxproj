@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0206DD3215CB0DED00B76398 /* StudentReponseImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */; };
 		0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251901A15C9FA4E009B8BDA /* IEFormatter.m */; };
 		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
 		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
@@ -112,6 +113,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0206DD3015CB0DED00B76398 /* StudentReponseImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = StudentReponseImportTVC.h; sourceTree = "<group>"; };
+		0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentReponseImportTVC.m; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -426,6 +429,8 @@
 				02782FC415C9ECA900A0A062 /* RecordImportTVC.m */,
 				02782FC515C9ECA900A0A062 /* FormationImportTVC.h */,
 				02782FC615C9ECA900A0A062 /* FormationImportTVC.m */,
+				0206DD3015CB0DED00B76398 /* StudentReponseImportTVC.h */,
+				0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */,
 				02782FC715C9ECA900A0A062 /* CSVTableViewController.h */,
 				02782FC815C9ECA900A0A062 /* CSVTableViewController.m */,
 			);
@@ -1052,6 +1057,7 @@
 				02782FCB15C9ECA900A0A062 /* FormationImportTVC.m in Sources */,
 				02782FCC15C9ECA900A0A062 /* CSVTableViewController.m in Sources */,
 				0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */,
+				0206DD3215CB0DED00B76398 /* StudentReponseImportTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
