@@ -7,6 +7,7 @@
 //
 
 #import "GDVFormationFolderTVC.h"
+#import "GDVFormationTableViewController.h"
 
 @interface GDVFormationFolderTVC()
 
@@ -15,6 +16,8 @@
 @implementation GDVFormationFolderTVC
 
 @synthesize formationFolders=_formationFolders;
+
+@synthesize delegate=_delegate;
 
 #pragma mark - Getters and Setters
 
@@ -49,6 +52,20 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+#pragma mark - Prepare For Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Show Formations"]) {
+        //Get the selected formation folder
+        UITableViewCell *cell=(UITableViewCell *)sender;
+        Formation_Folder *selectedFormationFolder=[self.formationFolders objectAtIndex:[self.tableView indexPathForCell:cell].row];
+        [segue.destinationViewController setFormationFolder:selectedFormationFolder];
+        
+        //Notify the delegate
+        [self.delegate formationFolderTVC:self preparedToSegueToFormationTVC:segue.destinationViewController];
+    }
 }
 
 #pragma mark - Table view data source

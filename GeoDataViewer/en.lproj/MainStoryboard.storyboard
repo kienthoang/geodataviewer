@@ -39,7 +39,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="10" y="-1571"/>
+            <point key="canvasLocation" x="-4814" y="13"/>
         </scene>
         <!--Formation FolderTVC-->
         <scene sceneID="Zhd-Zo-2jQ">
@@ -74,7 +74,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="711" y="-490"/>
+            <point key="canvasLocation" x="-4113" y="1094"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="17A-Qg-kGC">
@@ -106,7 +106,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2177" y="-475"/>
+            <point key="canvasLocation" x="-2647" y="1109"/>
         </scene>
         <!--FolderTVC-->
         <scene sceneID="AXs-VJ-1qc">
@@ -141,7 +141,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1329" y="-1572"/>
+            <point key="canvasLocation" x="-3495" y="12"/>
         </scene>
         <!--RecordTVC-->
         <scene sceneID="Q6M-r5-sCM">
@@ -173,7 +173,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2533" y="-1576"/>
+            <point key="canvasLocation" x="-2291" y="8"/>
         </scene>
         <!--Controller-->
         <scene sceneID="Xdf-Am-2vG">
@@ -235,7 +235,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-2879" y="2085"/>
+            <point key="canvasLocation" x="-7703" y="3669"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="N5a-3u-MKf">
@@ -254,7 +254,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-1220" y="-1571"/>
+            <point key="canvasLocation" x="-6044" y="13"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ulz-Zw-N5U">
@@ -273,7 +273,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-704" y="-490"/>
+            <point key="canvasLocation" x="-5528" y="1094"/>
         </scene>
         <!--Student GroupTVC-->
         <scene sceneID="8eF-EC-whi">
@@ -295,7 +295,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="1vD-k9-Po8" kind="push" identifier="Show Feedbacks" id="laz-yA-ihs"/>
+                                    <segue destination="1vD-k9-Po8" kind="push" identifier="Show Student Responses" id="laz-yA-ihs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -308,7 +308,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="357" y="893"/>
+            <point key="canvasLocation" x="-4467" y="2477"/>
         </scene>
         <!--Student ResponseTVC-->
         <scene sceneID="dUY-7O-LbA">
@@ -321,7 +321,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Feedvack Cell" id="uOO-TH-RDF">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Student Response Cell" id="uOO-TH-RDF">
                                 <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -340,7 +340,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1711" y="913"/>
+            <point key="canvasLocation" x="-3113" y="2497"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ODd-Jm-1XJ">
@@ -359,7 +359,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-921" y="901"/>
+            <point key="canvasLocation" x="-5745" y="2485"/>
         </scene>
         <!--Record Map View Controller-->
         <scene sceneID="Fw5-Tl-AIi">
@@ -383,7 +383,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-1114" y="6649"/>
+            <point key="canvasLocation" x="-5938" y="8233"/>
         </scene>
         <!--Formation ImportTVC-->
         <scene sceneID="C46-Vg-IxO">
@@ -455,7 +455,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1042" y="3626"/>
+            <point key="canvasLocation" x="-3782" y="5210"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bVW-ZO-nw3">
@@ -478,7 +478,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-220" y="3642"/>
+            <point key="canvasLocation" x="-5044" y="5226"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="gaD-Cx-E68">
@@ -523,7 +523,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2217" y="3602"/>
+            <point key="canvasLocation" x="-2607" y="5186"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="hIc-Ju-pFq">
@@ -568,7 +568,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2177" y="2167"/>
+            <point key="canvasLocation" x="-2647" y="3751"/>
         </scene>
         <!--Record ImportTVC-->
         <scene sceneID="AM7-Xd-s7u">
@@ -644,7 +644,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="802" y="2154"/>
+            <point key="canvasLocation" x="-4022" y="3738"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hTZ-m4-00E">
@@ -669,7 +669,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-460" y="2154"/>
+            <point key="canvasLocation" x="-5284" y="3738"/>
         </scene>
         <!--Student Reponse ImportTVC-->
         <scene sceneID="Gne-D6-EL3">
@@ -741,7 +741,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1086" y="4954"/>
+            <point key="canvasLocation" x="-3738" y="6538"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aQM-07-pAE">
@@ -764,7 +764,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-176" y="4970"/>
+            <point key="canvasLocation" x="-5000" y="6554"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="2Zy-O4-XSA">
@@ -809,7 +809,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2261" y="4930"/>
+            <point key="canvasLocation" x="-2563" y="6514"/>
         </scene>
     </scenes>
     <classes>
@@ -866,19 +866,19 @@
                 <relationship kind="outlet" name="settingsButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
-        <class className="GDVFolderTVC" superclassName="UITableViewController">
+        <class className="GDVFolderTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFolderTVC.h"/>
         </class>
-        <class className="GDVFormationFolderTVC" superclassName="UITableViewController">
+        <class className="GDVFormationFolderTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationFolderTVC.h"/>
         </class>
-        <class className="GDVRecordTVC" superclassName="UITableViewController">
+        <class className="GDVRecordTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVRecordTVC.h"/>
         </class>
-        <class className="GDVStudentGroupTVC" superclassName="UITableViewController">
+        <class className="GDVStudentGroupTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentGroupTVC.h"/>
         </class>
-        <class className="GDVStudentResponseTVC" superclassName="UITableViewController">
+        <class className="GDVStudentResponseTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentResponseTVC.h"/>
         </class>
         <class className="ImportTableViewController" superclassName="UITableViewController">
@@ -889,6 +889,9 @@
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
             </relationships>
+        </class>
+        <class className="PrototypeLoadingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeLoadingTableViewController.h"/>
         </class>
         <class className="RecordImportTVC" superclassName="ImportTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordImportTVC.h"/>

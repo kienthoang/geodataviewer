@@ -8,7 +8,7 @@
 
 #import "GDVController.h"
 
-@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate>
+@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate,GDVStudentGroupTVCDelegate,GDVFolderTVCDelegate,GDVFormationFolderTVCDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
@@ -389,6 +389,51 @@
 {
     //Update the model
     [self.resourceManager importFeedbackCSVFiles:files];
+}
+
+#pragma mark - GDVStudentGroupTVCDelegate Protocol Methods
+
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToFolderTVC:(GDVFolderTVC *)folderTVC
+{
+    //Load the folders
+    [self.resourceManager fetchFoldersForStudentGroup:folderTVC.studentGroup completion:^(NSArray *folders) {
+        if (folders)
+            folderTVC.folders=folders;
+    }];
+    
+    //Set the delegate of the folder TVC
+    folderTVC.delegate=self;
+}
+
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToStudentResponseTVC:(GDVStudentResponseTVC *)studentResponseTVC
+{
+    //Load the student responses
+    [self.resourceManager fetchStudentResponsesForStudentGroup:studentResponseTVC.studentGroup completion:^(NSArray *studentResponses) {
+        if (studentResponses)
+            studentResponseTVC.studentResponses=studentResponses;
+    }];
+}
+
+#pragma mark - GDVFolderTVCDelegate Protocol Methods
+
+- (void)folderTVC:(GDVFolderTVC *)sender preparedToSegueToRecordTVC:(GDVRecordTVC *)recordTVC 
+{
+    //Load the records
+    [self.resourceManager fetchRecordsForFolder:recordTVC.folder completion:^(NSArray *records) {
+        if (records)
+            recordTVC.records=records;
+    }];
+}
+
+#pragma mark - GDVFormationFolderTVCDelegate Protocol Methods
+
+- (void)formationFolderTVC:(GDVFormationFolderTVC *)sender preparedToSegueToFormationTVC:(GDVFormationTableViewController *)formationTVC
+{
+    //Load the formation
+    [self.resourceManager fetchFormationsForFormationFolder:formationTVC.formationFolder completion:^(NSArray *formations) {
+        if (formations)
+            formationTVC.formations=formations;
+    }];
 }
 
 @end

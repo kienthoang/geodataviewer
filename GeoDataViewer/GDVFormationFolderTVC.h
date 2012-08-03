@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 #import "PrototypeLoadingTableViewController.h"
+#import "GDVFormationFolderTVCDelegate.h"
+
+#import "Formation_Folder.h"
 
 @interface GDVFormationFolderTVC : PrototypeLoadingTableViewController
 
 @property (nonatomic,strong) NSArray *formationFolders;
+
+@property (nonatomic,weak) id <GDVFormationFolderTVCDelegate> delegate;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "GDVFolderTVC.h"
 
+#import "GDVRecordTVC.h"
+
 @interface GDVFolderTVC ()
 
 @end
@@ -16,6 +18,8 @@
 
 @synthesize studentGroup=_studentGroup;
 @synthesize folders=_folders;
+
+@synthesize delegate=_delegate;
 
 #pragma mark - Getters and Setters
 
@@ -45,6 +49,20 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+#pragma mark - Prepare For Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Show Records"]) {
+        //Get the selected folder
+        UITableViewCell *cell=(UITableViewCell *)sender;
+        Folder *selectedFolder=[self.folders objectAtIndex:[self.tableView indexPathForCell:cell].row];
+        [segue.destinationViewController setFolder:selectedFolder];
+        
+        //Notify the delegate
+        [self.delegate folderTVC:self preparedToSegueToRecordTVC:segue.destinationViewController];
+    }
 }
 
 #pragma mark - Table view data source

@@ -168,6 +168,9 @@
 		0206DE9615CB2F5700B76398 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		0206DE9915CB320900B76398 /* PrototypeLoadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeLoadingTableViewController.h; sourceTree = "<group>"; };
 		0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeLoadingTableViewController.m; sourceTree = "<group>"; };
+		0206DEB215CB653400B76398 /* GDVStudentGroupTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentGroupTVCDelegate.h; sourceTree = "<group>"; };
+		0206DEB315CB65D500B76398 /* GDVFolderTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFolderTVCDelegate.h; sourceTree = "<group>"; };
+		0206DEB415CB661400B76398 /* GDVFormationFolderTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationFolderTVCDelegate.h; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -952,6 +955,9 @@
 				02F31B3515C9D5AC0070EDC7 /* ImportTableViewControllerDelegate.h */,
 				02F31AF715C9D0BA0070EDC7 /* CSVTableViewControllerDelegate.h */,
 				0206DD3415CB147900B76398 /* GDVTransientDataProcessorDelegate.h */,
+				0206DEB215CB653400B76398 /* GDVStudentGroupTVCDelegate.h */,
+				0206DEB315CB65D500B76398 /* GDVFolderTVCDelegate.h */,
+				0206DEB415CB661400B76398 /* GDVFormationFolderTVCDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
