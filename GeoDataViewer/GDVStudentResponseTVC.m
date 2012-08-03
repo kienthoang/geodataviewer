@@ -14,16 +14,30 @@
 
 @implementation GDVStudentResponseTVC
 
-#pragma mark - View Controller Lifecycle
+@synthesize studentGroup=_studentGroup;
+@synthesize studentResponses=_studentResponses;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void)setStudentResponses:(NSArray *)studentResponses {
+    if (studentResponses) {
+        _studentResponses=studentResponses;
+        
+        //Stop the loading screen
+        [self stopLoadingScreen];
+        
+        //Relaod table view
+        [self.tableView reloadData];
+    }
 }
 
-- (void)viewDidUnload
+#pragma mark - View Controller Lifecycle
+
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidUnload];
+    [super viewDidAppear:animated];
+    
+    //Show loading screen while asking for data
+    if (!self.studentResponses)
+        [self showLoadingScreen];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -33,23 +47,15 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.studentResponses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Student Response Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...

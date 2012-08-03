@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDVStudentResponseTVC : UITableViewController
+#import "PrototypeLoadingTableViewController.h"
+
+#import "Group.h"
+#import "Answer.h"
+
+@interface GDVStudentResponseTVC : PrototypeLoadingTableViewController
+
+@property (nonatomic,strong) Group *studentGroup;
+@property (nonatomic,strong) NSArray *studentResponses;
 
 @end

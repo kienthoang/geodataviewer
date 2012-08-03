@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SSToolkit/SSLoadingView.h>
 
-@interface GDVFormationFolderTVC : UITableViewController
+#import "PrototypeLoadingTableViewController.h"
 
-- (void)showLoadingScreen;
+@interface GDVFormationFolderTVC : PrototypeLoadingTableViewController
 
 @property (nonatomic,strong) NSArray *formationFolders;
 
