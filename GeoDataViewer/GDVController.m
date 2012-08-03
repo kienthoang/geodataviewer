@@ -33,7 +33,7 @@
 @synthesize settingsButton = _settingsButton;
 
 @synthesize recordList=_recordList;
-@synthesize feedbackList=_feedbackList;
+@synthesize studentResponseList=_studentResponseList;
 @synthesize formationListPopover=_formationListPopover;
 @synthesize importPopover=_importPopover;
 
@@ -43,6 +43,44 @@
 
 - (GDVResourceManager *)resourceManager {
     return [GDVResourceManager defaultResourceManager];
+}
+
+#pragma mark - View Manipulators
+
+- (UINavigationController *)recordListNav {
+    return (UINavigationController *)self.recordList.contentViewController;
+}
+
+- (GDVStudentGroupTVC *)recordListStudentGroupTVC {
+    UIViewController *studentGroupTVC=self.recordListNav.topViewController;
+    if ([studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
+        studentGroupTVC=nil;
+    
+    return (GDVStudentGroupTVC *)studentGroupTVC;
+}
+
+- (UINavigationController *)formationListNav {
+    return self.formationListPopover.isPopoverVisible ? (UINavigationController *)self.formationListPopover.contentViewController : nil;
+}
+
+- (GDVFormationFolderTVC *)formationFolderTVC {
+    UIViewController *formationFolderTVC=self.formationListNav.topViewController;
+    if ([formationFolderTVC isKindOfClass:[GDVFormationFolderTVC class]]) 
+        formationFolderTVC=nil;
+    
+    return (GDVFormationFolderTVC *)formationFolderTVC;
+}
+
+- (UINavigationController *)studentResponseListNav {
+    return (UINavigationController *)self.studentResponseList.contentViewController;
+}
+
+- (GDVStudentGroupTVC *)studentResponseListStudentGroupTVC {
+    UIViewController *studentGroupTVC=self.studentResponseListNav.topViewController;
+    if ([studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
+        studentGroupTVC=nil;
+    
+    return (GDVStudentGroupTVC *)studentGroupTVC;
 }
 
 #pragma mark - Prepare for Segues
@@ -55,10 +93,10 @@
         self.recordList=[[UIPopoverController alloc] initWithContentViewController:recordList];
     }
     
-    //Segue to feedback list
-    else if ([segueIdentifier isEqualToString:@"Feedback List"]) {
-        UIViewController *feedbackList=[self.storyboard instantiateViewControllerWithIdentifier:@"Feedback List"];
-        self.feedbackList=[[UIPopoverController alloc] initWithContentViewController:feedbackList];
+    //Segue to Student Response List
+    else if ([segueIdentifier isEqualToString:@"Student Response List"]) {
+        UIViewController *feedbackList=[self.storyboard instantiateViewControllerWithIdentifier:@"Student Response List"];
+        self.studentResponseList=[[UIPopoverController alloc] initWithContentViewController:feedbackList];
     }
     
     //Segue to map view
@@ -108,13 +146,13 @@
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-- (void)presentFeedbackImportPopover {
+- (void)presentStudentResponseImportPopover {
     //Dismiss all visible popovers
     [self dismissAllVisiblePopoversAnimated:NO];
     
-    //Instantiate the record import popover
-    UINavigationController *feedbackImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FEEDBACK_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
-    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:feedbackImportTVC];
+    //Instantiate the student response import popover
+    UINavigationController *studentResponseImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:STUDENT_RESPONSE_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
+    self.importPopover=[[UIPopoverController alloc] initWithContentViewController:studentResponseImportTVC];
     
     //Present it
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -132,21 +170,84 @@
             else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Formations"])
                 [self presentFormationImportPopover];
             
-            //If user clicked import feedbacks
-            else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Feedbacks"]) {
-                [self presentFeedbackImportPopover];
+            //If user clicked import student responses
+            else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Import Student Responses"]) {
+                [self presentStudentResponseImportPopover];
             }
         }
     }
 }
 
+#pragma mark - KVO/NSNotification Managers
+
+- (void)recordDatabaseDidChange:(NSNotification *)notification {
+    //Pop record list's nav to root vc
+    [self.recordListNav popToRootViewControllerAnimated:YES];
+    
+    //Show loading screen in the student group vc in record list
+    GDVStudentGroupTVC *studentGroupTVC=self.recordListStudentGroupTVC;
+    [studentGroupTVC showLoadingScreen];
+    
+    //Update student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        if (studentGroups)
+            studentGroupTVC.studentGroups=studentGroups;
+    }];
+}
+
+- (void)formationDatabaseDidChange:(NSNotification *)notification {
+    //Pop formation list's nav to root vc if the formation list popover is visible (if not, the formationListNav will be nil, and popToRootVCAnimated will have no effect
+    [self.formationListNav popToRootViewControllerAnimated:YES];
+    
+    //Show loading screen in the formation folder vc in formation list
+    GDVFormationFolderTVC *formationFolderTVC=self.formationFolderTVC;
+    [formationFolderTVC showLoadingScreen];
+    
+    //Update formation folders
+    [self.resourceManager fetchFormationFoldersWithCompletionHandler:^(NSArray *formationFolders){
+        if (formationFolderTVC)
+            formationFolderTVC.formationFolders=formationFolders;
+    }];
+}
+
+- (void)studentResponseDatabaseDidChange:(NSNotification *)notification {
+    //Pop student response list's nav to root vc
+    [self.studentResponseListNav popToRootViewControllerAnimated:YES];
+    
+    //Show loading screen in the student group vc in student response list
+    GDVStudentGroupTVC *studentGroupTVC=self.studentResponseListStudentGroupTVC;
+    [studentGroupTVC showLoadingScreen];
+    
+    //Update student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        if (studentGroups)
+            studentGroupTVC.studentGroups=studentGroups;
+    }];
+}
+
+- (void)registerNotifications {
+    //Register to receive notifications from the model group
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self 
+                           selector:@selector(recordDatabaseDidChange:) 
+                               name:GDVResourceManagerRecordDatabaseDidUpdate 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(formationDatabaseDidChange:) 
+                               name:GDVResourceManagerFormationDatabaseDidUpdate 
+                             object:nil];
+    [notificationCenter addObserver:self 
+                           selector:@selector(studentResponseDatabaseDidChange:) 
+                               name:GDVResourceManagerStudentResponseDatabaseDidUpdate 
+                             object:nil];
+}
 
 #pragma mark - Target-Action Handlers
 
 - (void)dismissAllVisiblePopoversAnimated:(BOOL)animated {
     [self.formationListPopover dismissPopoverAnimated:NO];
     [self.recordList dismissPopoverAnimated:NO];
-    [self.feedbackList dismissPopoverAnimated:NO];
+    [self.studentResponseList dismissPopoverAnimated:NO];
     [self.importPopover dismissPopoverAnimated:NO];
     self.importPopover=nil;
 }
@@ -175,7 +276,7 @@
     [self dismissAllVisiblePopoversAnimated:NO];
     
     //Present
-    [self.feedbackList presentPopoverFromBarButtonItem:self.feedbackListButton 
+    [self.studentResponseList presentPopoverFromBarButtonItem:self.feedbackListButton 
                               permittedArrowDirections:UIPopoverArrowDirectionAny 
                                               animated:YES];
 }
@@ -189,7 +290,7 @@
                                                                        delegate:self 
                                                               cancelButtonTitle:@"Cancel" 
                                                          destructiveButtonTitle:nil 
-                                                              otherButtonTitles:@"Import Records",@"Import Formations", @"Import Feedbacks",nil];
+                                                              otherButtonTitles:@"Import Records",@"Import Formations", @"Import Student Responses",nil];
     [importExportActionSheet showInView:self.contentView];
 }
 
@@ -205,12 +306,15 @@
     
     //Perform custom segues
     [self performSegueWithIdentifier:@"Record List" sender:nil];
-    [self performSegueWithIdentifier:@"Feedback List" sender:nil];
+    [self performSegueWithIdentifier:@"Student Response List" sender:nil];
     [self performSegueWithIdentifier:@"Map View" sender:nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Register to receive notifications
+    [self registerNotifications];
     
     //Change the look of the master presenter
     UIButton *recordListButtonCustomView=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -262,7 +366,6 @@
     [self setContentView:nil];
     [self setRecordListButton:nil];
     [self setFormationListButton:nil];
-    [self setFeedbackListButton:nil];
     [self setImportExportButton:nil];
     [self setSettingsButton:nil];
     [super viewDidUnload];

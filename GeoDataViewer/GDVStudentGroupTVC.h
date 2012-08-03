@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDVStudentGroupTVC : UITableViewController
+#import "PrototypeLoadingTableViewController.h"
+
+#import "Group.h"
+
+@interface GDVStudentGroupTVC : PrototypeLoadingTableViewController
+
+@property (nonatomic,strong) NSArray *studentGroups;
 
 @end

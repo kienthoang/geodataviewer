@@ -7,10 +7,11 @@
 //
 
 #import "RecordImportTVC.h"
+#import "CSVTableViewController.h"
 
 #import "TransientProject.h"
 
-@interface RecordImportTVC() <UIAlertViewDelegate,UIActionSheetDelegate,CSVTableViewControllerDelegate>
+@interface RecordImportTVC() <CSVTableViewControllerDelegate>
 
 @end
 
@@ -61,8 +62,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Add File"]) {
-        [segue.destinationViewController setDelegate:self];
-        [segue.destinationViewController setBlacklistedExtensions:[NSArray arrayWithObjects:@".record.csv",@".formation.csv",nil]];
+        [segue.destinationViewController setAddDelegate:self];
+        [segue.destinationViewController setBlacklistedExtensions:[NSArray arrayWithObjects:@".record.csv",@".formation.csv",@".response.csv",nil]];
     }
 }
 

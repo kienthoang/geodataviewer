@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0206DD3215CB0DED00B76398 /* StudentReponseImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */; };
+		0206DD3715CB14EE00B76398 /* GDVTransientDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */; };
+		0206DE7115CB1D3100B76398 /* libSSToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0206DE6815CB1CC600B76398 /* libSSToolkit.a */; };
+		0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */; };
+		0206DE9115CB2F3400B76398 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9015CB2F3400B76398 /* Group.m */; };
+		0206DE9415CB2F4700B76398 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9315CB2F4700B76398 /* Answer.m */; };
+		0206DE9715CB2F5700B76398 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9615CB2F5700B76398 /* Folder.m */; };
+		0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */; };
 		0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251901A15C9FA4E009B8BDA /* IEFormatter.m */; };
 		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
 		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
@@ -72,17 +80,14 @@
 		02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC315C9C7B70070EDC7 /* GDVFolderTVC.m */; };
 		02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */; };
 		02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */; };
-		02F31ACD15C9C8D20070EDC7 /* GDVFeedbackTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */; };
+		02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */; };
 		02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ADA15C9D0160070EDC7 /* GeoFilter.m */; };
 		02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AE815C9D0490070EDC7 /* SettingManager.m */; };
-		02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0415C9D4AF0070EDC7 /* Answer.m */; };
 		02F31B0815C9D4BE0070EDC7 /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0715C9D4BE0070EDC7 /* Bedding.m */; };
 		02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0A15C9D4CD0070EDC7 /* Contact.m */; };
 		02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0D15C9D4DD0070EDC7 /* Fault.m */; };
-		02F31B1115C9D4ED0070EDC7 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1015C9D4ED0070EDC7 /* Folder.m */; };
 		02F31B1415C9D5030070EDC7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1315C9D5030070EDC7 /* Formation.m */; };
 		02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */; };
-		02F31B1A15C9D51C0070EDC7 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1915C9D51C0070EDC7 /* Group.m */; };
 		02F31B1D15C9D5280070EDC7 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1C15C9D5280070EDC7 /* Image.m */; };
 		02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1F15C9D5340070EDC7 /* JointSet.m */; };
 		02F31B2315C9D5440070EDC7 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B2215C9D5440070EDC7 /* Other.m */; };
@@ -99,10 +104,45 @@
 		02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4B15C9D7310070EDC7 /* iAd.framework */; };
 		02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */; };
 		02F31B5115C9D7790070EDC7 /* TransientBedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B5015C9D7790070EDC7 /* TransientBedding.m */; };
-		2141069C15CB4E01007F1FE0 /* TransientDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141069B15CB4E01007F1FE0 /* TransientDataProcessor.m */; };
+		214106AF15CB5BDC007F1FE0 /* TransientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 214106AE15CB5BDC007F1FE0 /* TransientGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0206DE6715CB1CC600B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		0206DE6915CB1CC600B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B239101D1357DC3E00ADE21B;
+			remoteInfo = SSToolkitTests;
+		};
+		0206DE6B15CB1CC600B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2C507EA151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
+		0206DE6D15CB1D2100B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		0206DE6F15CB1D2100B76398 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C507E9151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
 		02F319AF15C9BCB70070EDC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02F3198015C9BCB70070EDC7 /* Project object */;
@@ -113,6 +153,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0206DD3015CB0DED00B76398 /* StudentReponseImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentReponseImportTVC.h; sourceTree = "<group>"; };
+		0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentReponseImportTVC.m; sourceTree = "<group>"; };
+		0206DD3415CB147900B76398 /* GDVTransientDataProcessorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVTransientDataProcessorDelegate.h; sourceTree = "<group>"; };
+		0206DD3515CB14EE00B76398 /* GDVTransientDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVTransientDataProcessor.h; sourceTree = "<group>"; };
+		0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVTransientDataProcessor.m; sourceTree = "<group>"; };
+		0206DD3815CB180A00B76398 /* GDVResourceManagerNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVResourceManagerNotificationNames.h; sourceTree = "<group>"; };
+		0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SSToolkit.xcodeproj; sourceTree = "<group>"; };
+		0206DE8F15CB2F3400B76398 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		0206DE9015CB2F3400B76398 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		0206DE9215CB2F4700B76398 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		0206DE9315CB2F4700B76398 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		0206DE9515CB2F5700B76398 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		0206DE9615CB2F5700B76398 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
+		0206DE9915CB320900B76398 /* PrototypeLoadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeLoadingTableViewController.h; sourceTree = "<group>"; };
+		0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeLoadingTableViewController.m; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -123,7 +178,6 @@
 		02782FC615C9ECA900A0A062 /* FormationImportTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormationImportTVC.m; sourceTree = "<group>"; };
 		02782FC715C9ECA900A0A062 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		02782FC815C9ECA900A0A062 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
-		02782FE015C9F97400A0A062 /* GDVIEEngineNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVIEEngineNotificationNames.h; sourceTree = "<group>"; };
 		0281DBF415CAD44F00D1D8B1 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group.png; sourceTree = "<group>"; };
 		02F3198915C9BCB70070EDC7 /* GeoDataViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoDataViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3198D15C9BCB70070EDC7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -133,8 +187,8 @@
 		02F3199715C9BCB70070EDC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		02F3199915C9BCB70070EDC7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		02F3199B15C9BCB70070EDC7 /* GeoDataViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeoDataViewer-Prefix.pch"; sourceTree = "<group>"; };
-		02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeoDataViewerAppDelegate.h; path = ../GeoDataViewer/GeoDataViewerAppDelegate.h; sourceTree = "<group>"; };
-		02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GeoDataViewerAppDelegate.m; path = ../GeoDataViewer/GeoDataViewerAppDelegate.m; sourceTree = "<group>"; };
+		02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoDataViewerAppDelegate.h; sourceTree = "<group>"; };
+		02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoDataViewerAppDelegate.m; sourceTree = "<group>"; };
 		02F319A015C9BCB70070EDC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		02F319AA15C9BCB70070EDC7 /* GeoDataViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoDataViewerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F319AB15C9BCB70070EDC7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -225,30 +279,24 @@
 		02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVRecordTVC.m; sourceTree = "<group>"; };
 		02F31AC815C9C8A30070EDC7 /* CustomStudentGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomStudentGroupCell.h; sourceTree = "<group>"; };
 		02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomStudentGroupCell.m; sourceTree = "<group>"; };
-		02F31ACB15C9C8D20070EDC7 /* GDVFeedbackTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFeedbackTVC.h; sourceTree = "<group>"; };
-		02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFeedbackTVC.m; sourceTree = "<group>"; };
+		02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentResponseTVC.h; sourceTree = "<group>"; };
+		02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVStudentResponseTVC.m; sourceTree = "<group>"; };
 		02F31AD915C9D0150070EDC7 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
 		02F31ADA15C9D0160070EDC7 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
 		02F31AE715C9D0490070EDC7 /* SettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManager.h; sourceTree = "<group>"; };
 		02F31AE815C9D0490070EDC7 /* SettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingManager.m; sourceTree = "<group>"; };
 		02F31AF615C9D0BA0070EDC7 /* RecordMapViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordMapViewControllerDelegate.h; sourceTree = "<group>"; };
 		02F31AF715C9D0BA0070EDC7 /* CSVTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewControllerDelegate.h; sourceTree = "<group>"; };
-		02F31B0315C9D4AF0070EDC7 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
-		02F31B0415C9D4AF0070EDC7 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		02F31B0615C9D4BE0070EDC7 /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
 		02F31B0715C9D4BE0070EDC7 /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		02F31B0915C9D4CD0070EDC7 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		02F31B0A15C9D4CD0070EDC7 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		02F31B0C15C9D4DD0070EDC7 /* Fault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fault.h; sourceTree = "<group>"; };
 		02F31B0D15C9D4DD0070EDC7 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
-		02F31B0F15C9D4ED0070EDC7 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
-		02F31B1015C9D4ED0070EDC7 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		02F31B1215C9D5030070EDC7 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		02F31B1315C9D5030070EDC7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
 		02F31B1515C9D50D0070EDC7 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
 		02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
-		02F31B1815C9D51C0070EDC7 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		02F31B1915C9D51C0070EDC7 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		02F31B1B15C9D5280070EDC7 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		02F31B1C15C9D5280070EDC7 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		02F31B1E15C9D5340070EDC7 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
@@ -276,8 +324,8 @@
 		02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		02F31B4F15C9D7790070EDC7 /* TransientBedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientBedding.h; sourceTree = "<group>"; };
 		02F31B5015C9D7790070EDC7 /* TransientBedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientBedding.m; sourceTree = "<group>"; };
-		2141069A15CB4E01007F1FE0 /* TransientDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientDataProcessor.h; sourceTree = "<group>"; };
-		2141069B15CB4E01007F1FE0 /* TransientDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientDataProcessor.m; sourceTree = "<group>"; };
+		214106AD15CB5BDC007F1FE0 /* TransientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientGroup.h; sourceTree = "<group>"; };
+		214106AE15CB5BDC007F1FE0 /* TransientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientGroup.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0206DE7115CB1D3100B76398 /* libSSToolkit.a in Frameworks */,
 				02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */,
 				02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */,
 				02F31B4A15C9D72B0070EDC7 /* MessageUI.framework in Frameworks */,
@@ -311,6 +360,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0206DD5115CB1CC600B76398 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0206DD5215CB1CC600B76398 /* SSToolkit */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		0206DD5215CB1CC600B76398 /* SSToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */,
+			);
+			path = SSToolkit;
+			sourceTree = "<group>";
+		};
+		0206DDF015CB1CC600B76398 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0206DE6815CB1CC600B76398 /* libSSToolkit.a */,
+				0206DE6A15CB1CC600B76398 /* SSToolkitTests.app */,
+				0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0206DE9815CB319E00B76398 /* View Controller Prototype */ = {
+			isa = PBXGroup;
+			children = (
+				0206DE9915CB320900B76398 /* PrototypeLoadingTableViewController.h */,
+				0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */,
+			);
+			name = "View Controller Prototype";
+			sourceTree = "<group>";
+		};
 		02F3197E15C9BCB70070EDC7 = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +446,8 @@
 				02F319FB15C9BF8F0070EDC7 /* Library */,
 				02F31B3615C9D5F10070EDC7 /* Notification Registrations */,
 				02F31A0815C9BFC80070EDC7 /* Database */,
+				0206DE9815CB319E00B76398 /* View Controller Prototype */,
+				0206DD5115CB1CC600B76398 /* Vendor */,
 				02F3199415C9BCB70070EDC7 /* Supporting Files */,
 			);
 			path = GeoDataViewer;
@@ -370,6 +456,8 @@
 		02F3199415C9BCB70070EDC7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */,
+				02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */,
 				02F3199515C9BCB70070EDC7 /* GeoDataViewer-Info.plist */,
 				02F3199615C9BCB70070EDC7 /* InfoPlist.strings */,
 				02F3199915C9BCB70070EDC7 /* main.m */,
@@ -381,8 +469,6 @@
 		02F319B115C9BCB70070EDC7 /* GeoDataViewerTests */ = {
 			isa = PBXGroup;
 			children = (
-				02F3199C15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.h */,
-				02F3199D15C9BCB70070EDC7 /* GeoDataViewerAppDelegate.m */,
 				02F319B715C9BCB70070EDC7 /* GeoDataViewerTests.h */,
 				02F319B815C9BCB70070EDC7 /* GeoDataViewerTests.m */,
 				02F319B215C9BCB70070EDC7 /* Supporting Files */,
@@ -408,8 +494,8 @@
 				02F319CD15C9BDB40070EDC7 /* GDVIEEngine.m */,
 				02F319CF15C9BDF80070EDC7 /* GDVServerCommunicator.h */,
 				02F319D015C9BDF80070EDC7 /* GDVServerCommunicator.m */,
-				2141069A15CB4E01007F1FE0 /* TransientDataProcessor.h */,
-				2141069B15CB4E01007F1FE0 /* TransientDataProcessor.m */,
+				0206DD3515CB14EE00B76398 /* GDVTransientDataProcessor.h */,
+				0206DD3615CB14EE00B76398 /* GDVTransientDataProcessor.m */,
 			);
 			name = "Resource Manager Group";
 			sourceTree = "<group>";
@@ -431,6 +517,8 @@
 				02782FC415C9ECA900A0A062 /* RecordImportTVC.m */,
 				02782FC515C9ECA900A0A062 /* FormationImportTVC.h */,
 				02782FC615C9ECA900A0A062 /* FormationImportTVC.m */,
+				0206DD3015CB0DED00B76398 /* StudentReponseImportTVC.h */,
+				0206DD3115CB0DED00B76398 /* StudentReponseImportTVC.m */,
 				02782FC715C9ECA900A0A062 /* CSVTableViewController.h */,
 				02782FC815C9ECA900A0A062 /* CSVTableViewController.m */,
 			);
@@ -519,6 +607,8 @@
 				02F31A2A15C9C0C30070EDC7 /* JointSet */,
 				02F31A2E15C9C0D70070EDC7 /* Record */,
 				02F31A3215C9C0F00070EDC7 /* Other */,
+				214106AD15CB5BDC007F1FE0 /* TransientGroup.h */,
+				214106AE15CB5BDC007F1FE0 /* TransientGroup.m */,
 			);
 			name = TransientManagedObjects;
 			sourceTree = "<group>";
@@ -636,8 +726,8 @@
 		02F31A6115C9C2F30070EDC7 /* Answer */ = {
 			isa = PBXGroup;
 			children = (
-				02F31B0315C9D4AF0070EDC7 /* Answer.h */,
-				02F31B0415C9D4AF0070EDC7 /* Answer.m */,
+				0206DE9215CB2F4700B76398 /* Answer.h */,
+				0206DE9315CB2F4700B76398 /* Answer.m */,
 			);
 			name = Answer;
 			sourceTree = "<group>";
@@ -645,8 +735,8 @@
 		02F31A6215C9C3260070EDC7 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				02F31B1815C9D51C0070EDC7 /* Group.h */,
-				02F31B1915C9D51C0070EDC7 /* Group.m */,
+				0206DE8F15CB2F3400B76398 /* Group.h */,
+				0206DE9015CB2F3400B76398 /* Group.m */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -692,8 +782,8 @@
 		02F31A6715C9C3760070EDC7 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
-				02F31B0F15C9D4ED0070EDC7 /* Folder.h */,
-				02F31B1015C9D4ED0070EDC7 /* Folder.m */,
+				0206DE9515CB2F5700B76398 /* Folder.h */,
+				0206DE9615CB2F5700B76398 /* Folder.m */,
 			);
 			name = Folder;
 			sourceTree = "<group>";
@@ -762,7 +852,7 @@
 			isa = PBXGroup;
 			children = (
 				02F31A9515C9C4EA0070EDC7 /* Custom Views */,
-				02F31A7315C9C4140070EDC7 /* Feedback Group */,
+				02F31A7315C9C4140070EDC7 /* Student Response Group */,
 				02F31A7215C9C40D0070EDC7 /* Formation Group */,
 				02F319D315C9BE3A0070EDC7 /* Import/Export Group */,
 				02F319EC15C9BEA10070EDC7 /* Record List Group */,
@@ -782,13 +872,13 @@
 			name = "Formation Group";
 			sourceTree = "<group>";
 		};
-		02F31A7315C9C4140070EDC7 /* Feedback Group */ = {
+		02F31A7315C9C4140070EDC7 /* Student Response Group */ = {
 			isa = PBXGroup;
 			children = (
-				02F31ACB15C9C8D20070EDC7 /* GDVFeedbackTVC.h */,
-				02F31ACC15C9C8D20070EDC7 /* GDVFeedbackTVC.m */,
+				02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */,
+				02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */,
 			);
-			name = "Feedback Group";
+			name = "Student Response Group";
 			sourceTree = "<group>";
 		};
 		02F31A7A15C9C4A50070EDC7 /* Images */ = {
@@ -861,6 +951,7 @@
 				02F31AF615C9D0BA0070EDC7 /* RecordMapViewControllerDelegate.h */,
 				02F31B3515C9D5AC0070EDC7 /* ImportTableViewControllerDelegate.h */,
 				02F31AF715C9D0BA0070EDC7 /* CSVTableViewControllerDelegate.h */,
+				0206DD3415CB147900B76398 /* GDVTransientDataProcessorDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -868,8 +959,8 @@
 		02F31B3615C9D5F10070EDC7 /* Notification Registrations */ = {
 			isa = PBXGroup;
 			children = (
-				02782FE015C9F97400A0A062 /* GDVIEEngineNotificationNames.h */,
 				02F31B3715C9D6010070EDC7 /* SettingManagerNotificationNames.h */,
+				0206DD3815CB180A00B76398 /* GDVResourceManagerNotificationNames.h */,
 			);
 			name = "Notification Registrations";
 			sourceTree = "<group>";
@@ -888,6 +979,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				0206DE6E15CB1D2100B76398 /* PBXTargetDependency */,
+				0206DE7015CB1D2100B76398 /* PBXTargetDependency */,
 			);
 			name = GeoDataViewer;
 			productName = GeoDataViewer;
@@ -929,10 +1022,31 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
+				es,
+				fr,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nl,
+				pt,
+				pt_PT,
+				ru,
+				sv,
+				zh_Hans,
+				zh_Hant,
 			);
 			mainGroup = 02F3197E15C9BCB70070EDC7;
 			productRefGroup = 02F3198A15C9BCB70070EDC7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0206DDF015CB1CC600B76398 /* Products */;
+					ProjectRef = 0206DDEF15CB1CC600B76398 /* SSToolkit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				02F3198815C9BCB70070EDC7 /* GeoDataViewer */,
@@ -940,6 +1054,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0206DE6815CB1CC600B76398 /* libSSToolkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSSToolkit.a;
+			remoteRef = 0206DE6715CB1CC600B76398 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0206DE6A15CB1CC600B76398 /* SSToolkitTests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SSToolkitTests.app;
+			remoteRef = 0206DE6915CB1CC600B76398 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SSToolkitResources.bundle;
+			remoteRef = 0206DE6B15CB1CC600B76398 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		02F3198715C9BCB70070EDC7 /* Resources */ = {
@@ -959,6 +1097,7 @@
 				02F31A9015C9C4C70070EDC7 /* gear2.png in Resources */,
 				02F31A9115C9C4C70070EDC7 /* green_pin.png in Resources */,
 				0281DBF515CAD44F00D1D8B1 /* group.png in Resources */,
+				0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,17 +1171,14 @@
 				02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */,
 				02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */,
 				02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */,
-				02F31ACD15C9C8D20070EDC7 /* GDVFeedbackTVC.m in Sources */,
+				02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */,
 				02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */,
 				02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */,
-				02F31B0515C9D4AF0070EDC7 /* Answer.m in Sources */,
 				02F31B0815C9D4BE0070EDC7 /* Bedding.m in Sources */,
 				02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */,
 				02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */,
-				02F31B1115C9D4ED0070EDC7 /* Folder.m in Sources */,
 				02F31B1415C9D5030070EDC7 /* Formation.m in Sources */,
 				02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */,
-				02F31B1A15C9D51C0070EDC7 /* Group.m in Sources */,
 				02F31B1D15C9D5280070EDC7 /* Image.m in Sources */,
 				02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */,
 				02F31B2315C9D5440070EDC7 /* Other.m in Sources */,
@@ -1057,7 +1193,13 @@
 				02782FCB15C9ECA900A0A062 /* FormationImportTVC.m in Sources */,
 				02782FCC15C9ECA900A0A062 /* CSVTableViewController.m in Sources */,
 				0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */,
-				2141069C15CB4E01007F1FE0 /* TransientDataProcessor.m in Sources */,
+				0206DD3215CB0DED00B76398 /* StudentReponseImportTVC.m in Sources */,
+				0206DD3715CB14EE00B76398 /* GDVTransientDataProcessor.m in Sources */,
+				0206DE9115CB2F3400B76398 /* Group.m in Sources */,
+				0206DE9415CB2F4700B76398 /* Answer.m in Sources */,
+				0206DE9715CB2F5700B76398 /* Folder.m in Sources */,
+				0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */,
+				214106AF15CB5BDC007F1FE0 /* TransientGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,6 +1214,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0206DE6E15CB1D2100B76398 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkit;
+			targetProxy = 0206DE6D15CB1D2100B76398 /* PBXContainerItemProxy */;
+		};
+		0206DE7015CB1D2100B76398 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkitResources;
+			targetProxy = 0206DE6F15CB1D2100B76398 /* PBXContainerItemProxy */;
+		};
 		02F319B015C9BCB70070EDC7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 02F3198815C9BCB70070EDC7 /* GeoDataViewer */;
@@ -1159,9 +1311,18 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = Vendor/SSToolkit;
 				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";
@@ -1174,9 +1335,18 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GeoDataViewer/GeoDataViewer-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = Vendor/SSToolkit;
 				INFOPLIST_FILE = "GeoDataViewer/GeoDataViewer-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ACD9A3FD-2C45-49BA-82F2-EE1BB16B048A";

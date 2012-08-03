@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDVRecordTVC : UITableViewController
+#import "PrototypeLoadingTableViewController.h"
+
+#import "Folder.h"
+#import "Record.h"
+
+@interface GDVRecordTVC : PrototypeLoadingTableViewController
+
+@property (nonatomic,strong) Folder *folder;
+@property (nonatomic,strong) NSArray *records;
 
 @end

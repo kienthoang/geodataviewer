@@ -51,8 +51,16 @@
 @synthesize spinner=_spinner;
 
 @synthesize csvFileExtension=_csvFileExtension;
+@synthesize blacklistedExtensions=_blacklistedExtensions;
 
 @synthesize delegate=_delegate;
+
+- (NSArray *)blacklistedExtensions {
+    if (!_blacklistedExtensions)
+        _blacklistedExtensions=[NSArray array];
+    
+    return _blacklistedExtensions;
+}
 
 - (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
@@ -72,6 +80,14 @@
         NSString *fileName=[url lastPathComponent];
         if ([fileName hasSuffix:self.csvFileExtension])
             [csvFileNames addObject:fileName];
+    }
+    
+    //Blacklist
+    for (NSString *extension in self.blacklistedExtensions) {
+        for (NSString *fileName in csvFileNames) {
+            if ([fileName hasSuffix:extension])
+                [csvFileNames removeObject:fileName];
+        }
     }
     
     self.csvFileNames=csvFileNames;

@@ -2,11 +2,12 @@
 //  Answer.m
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 8/2/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import "Answer.h"
+#import "Group.h"
 #import "Question.h"
 
 
@@ -18,5 +19,6 @@
 @dynamic longitude;
 @dynamic numberOfRecords;
 @dynamic question;
+@dynamic group;
 
 @end

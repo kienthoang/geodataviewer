@@ -11,8 +11,6 @@
 
 @interface CSVTableViewController : ImportTableViewController
 
-@property (nonatomic,strong) NSArray *blacklistedExtensions;
-
-@property (nonatomic,weak) id <CSVTableViewControllerDelegate> delegate;
+@property (nonatomic,weak) id <CSVTableViewControllerDelegate> addDelegate;
 
 @end

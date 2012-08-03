@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDVFolderTVC : UITableViewController
+#import "PrototypeLoadingTableViewController.h"
+
+#import "Group.h"
+#import "Folder.h"
+
+@interface GDVFolderTVC : PrototypeLoadingTableViewController
+
+@property (nonatomic,strong) Group *studentGroup;
+@property (nonatomic,strong) NSArray *folders;
 
 @end

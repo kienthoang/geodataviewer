@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GDVTransientDataProcessor.h"
+
 @interface GDVIEEngine : NSObject
+
++ (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor;
+
+@property (nonatomic,strong) GDVTransientDataProcessor *processor;
 
 #pragma mark - Import
 
