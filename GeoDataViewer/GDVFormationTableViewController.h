@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDVFormationTableViewController : UITableViewController
+#import "PrototypeLoadingTableViewController.h"
+
+#import "Formation_Folder.h"
+#import "Formation.h"
+
+@interface GDVFormationTableViewController : PrototypeLoadingTableViewController
+
+@property (nonatomic,strong) Formation_Folder *formationFolder;
+@property (nonatomic,strong) NSArray *formations;
 
 @end

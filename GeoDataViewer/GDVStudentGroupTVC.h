@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 #import "PrototypeLoadingTableViewController.h"
+#import "GDVStudentGroupTVCDelegate.h"
 
 #import "Group.h"
 
 @interface GDVStudentGroupTVC : PrototypeLoadingTableViewController
 
 @property (nonatomic,strong) NSArray *studentGroups;
+
+@property (nonatomic,weak) id <GDVStudentGroupTVCDelegate> delegate;
 
 @end

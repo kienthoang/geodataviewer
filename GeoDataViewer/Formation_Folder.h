@@ -2,7 +2,7 @@
 //  Formation_Folder.h
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 8/2/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -14,20 +14,21 @@
 @interface Formation_Folder : NSManagedObject
 
 @property (nonatomic, retain) NSString * folderName;
-@property (nonatomic, retain) NSSet *formations;
+@property (nonatomic, retain) NSNumber * faulty;
 @property (nonatomic, retain) NSSet *folders;
+@property (nonatomic, retain) NSSet *formations;
 @end
 
 @interface Formation_Folder (CoreDataGeneratedAccessors)
-
-- (void)addFormationsObject:(Formation *)value;
-- (void)removeFormationsObject:(Formation *)value;
-- (void)addFormations:(NSSet *)values;
-- (void)removeFormations:(NSSet *)values;
 
 - (void)addFoldersObject:(Folder *)value;
 - (void)removeFoldersObject:(Folder *)value;
 - (void)addFolders:(NSSet *)values;
 - (void)removeFolders:(NSSet *)values;
+
+- (void)addFormationsObject:(Formation *)value;
+- (void)removeFormationsObject:(Formation *)value;
+- (void)addFormations:(NSSet *)values;
+- (void)removeFormations:(NSSet *)values;
 
 @end

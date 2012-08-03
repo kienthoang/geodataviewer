@@ -8,7 +8,7 @@
 
 #import "GDVController.h"
 
-@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate>
+@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate,GDVStudentGroupTVCDelegate,GDVFolderTVCDelegate,GDVFormationFolderTVCDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
@@ -110,7 +110,7 @@
         [mapViewController willMoveToParentViewController:self];
         [self addChildViewController:mapViewController];
         [self.contentView addSubview:mapViewController.mapView];
-        [mapViewController didMoveToParentViewController:self];
+        [mapViewController didMoveToParentViewController:self];        
     }
     
     //Segue to formation list
@@ -307,7 +307,6 @@
     //Perform custom segues
     [self performSegueWithIdentifier:@"Record List" sender:nil];
     [self performSegueWithIdentifier:@"Student Response List" sender:nil];
-    [self performSegueWithIdentifier:@"Map View" sender:nil];
 }
 
 - (void)viewDidLoad {
@@ -357,6 +356,13 @@
     self.feedbackListButton.customView=feedbackListCustomView;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Load the map view
+    [self performSegueWithIdentifier:@"Map View" sender:nil];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
@@ -389,6 +395,51 @@
 {
     //Update the model
     [self.resourceManager importFeedbackCSVFiles:files];
+}
+
+#pragma mark - GDVStudentGroupTVCDelegate Protocol Methods
+
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToFolderTVC:(GDVFolderTVC *)folderTVC
+{
+    //Load the folders
+    [self.resourceManager fetchFoldersForStudentGroup:folderTVC.studentGroup completion:^(NSArray *folders) {
+        if (folders)
+            folderTVC.folders=folders;
+    }];
+    
+    //Set the delegate of the folder TVC
+    folderTVC.delegate=self;
+}
+
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToStudentResponseTVC:(GDVStudentResponseTVC *)studentResponseTVC
+{
+    //Load the student responses
+    [self.resourceManager fetchStudentResponsesForStudentGroup:studentResponseTVC.studentGroup completion:^(NSArray *studentResponses) {
+        if (studentResponses)
+            studentResponseTVC.studentResponses=studentResponses;
+    }];
+}
+
+#pragma mark - GDVFolderTVCDelegate Protocol Methods
+
+- (void)folderTVC:(GDVFolderTVC *)sender preparedToSegueToRecordTVC:(GDVRecordTVC *)recordTVC 
+{
+    //Load the records
+    [self.resourceManager fetchRecordsForFolder:recordTVC.folder completion:^(NSArray *records) {
+        if (records)
+            recordTVC.records=records;
+    }];
+}
+
+#pragma mark - GDVFormationFolderTVCDelegate Protocol Methods
+
+- (void)formationFolderTVC:(GDVFormationFolderTVC *)sender preparedToSegueToFormationTVC:(GDVFormationTableViewController *)formationTVC
+{
+    //Load the formation
+    [self.resourceManager fetchFormationsForFormationFolder:formationTVC.formationFolder completion:^(NSArray *formations) {
+        if (formations)
+            formationTVC.formations=formations;
+    }];
 }
 
 @end

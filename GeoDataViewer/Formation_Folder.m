@@ -2,7 +2,7 @@
 //  Formation_Folder.m
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 8/2/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -14,7 +14,8 @@
 @implementation Formation_Folder
 
 @dynamic folderName;
-@dynamic formations;
+@dynamic faulty;
 @dynamic folders;
+@dynamic formations;
 
 @end

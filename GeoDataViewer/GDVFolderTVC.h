@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "PrototypeLoadingTableViewController.h"
+#import "GDVFolderTVCDelegate.h"
 
 #import "Group.h"
 #import "Folder.h"
@@ -17,5 +18,7 @@
 
 @property (nonatomic,strong) Group *studentGroup;
 @property (nonatomic,strong) NSArray *folders;
+
+@property (nonatomic,weak) id <GDVFolderTVCDelegate> delegate;
 
 @end

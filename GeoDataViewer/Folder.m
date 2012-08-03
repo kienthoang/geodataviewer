@@ -16,8 +16,9 @@
 
 @dynamic folderDescription;
 @dynamic folderName;
+@dynamic faulty;
 @dynamic formationFolder;
-@dynamic records;
 @dynamic group;
+@dynamic records;
 
 @end

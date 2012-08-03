@@ -7,6 +7,8 @@
 //
 
 #import "GDVStudentGroupTVC.h"
+#import "GDVFolderTVC.h"
+#import "GDVStudentResponseTVC.h"
 
 @interface GDVStudentGroupTVC ()
 
@@ -15,6 +17,8 @@
 @implementation GDVStudentGroupTVC
 
 @synthesize studentGroups=_studentGroups;
+
+@synthesize delegate=_delegate;
 
 #pragma mark - Getters and Setters
 
@@ -49,8 +53,28 @@
 #pragma mark - Prepare for Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    Group *selectedGroup=nil;
+    
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        //Get the selected student group
+        UITableViewCell *cell=(UITableViewCell *)sender;
+        selectedGroup=[self.studentGroups objectAtIndex:[self.tableView indexPathForCell:cell].row];
+    }
+    
     if ([segue.identifier isEqualToString:@"Show Folders"]) {
+        //Set the student group of the destination
+        [segue.destinationViewController setStudentGroup:selectedGroup];
         
+        //Notify the delegate
+        [self.delegate studentGroupTVC:self preparedToSegueToFolderTVC:segue.destinationViewController];
+    }
+    
+    else if ([segue.identifier isEqualToString:@"Show Student Responses"]) {
+        //Set the student group of the destination
+        [segue.destinationViewController setStudentGroup:selectedGroup];
+        
+        //Notify the delegate
+        [self.delegate studentGroupTVC:self preparedToSegueToStudentResponseTVC:segue.destinationViewController];
     }
 }
 
