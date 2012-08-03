@@ -14,4 +14,6 @@
 
 @property (nonatomic,weak) id<GDVTransientDataProcessorDelegate> delegate;
 
+
+
 @end
