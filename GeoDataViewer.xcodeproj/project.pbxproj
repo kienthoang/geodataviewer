@@ -13,8 +13,9 @@
 		0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */; };
 		0206DE9115CB2F3400B76398 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9015CB2F3400B76398 /* Group.m */; };
 		0206DE9415CB2F4700B76398 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9315CB2F4700B76398 /* Answer.m */; };
-		0206DE9715CB2F5700B76398 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9615CB2F5700B76398 /* Folder.m */; };
 		0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */; };
+		0206DEB715CB6ACA00B76398 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DEB615CB6ACA00B76398 /* Formation_Folder.m */; };
+		0206DEBA15CB6AD800B76398 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DEB915CB6AD800B76398 /* Folder.m */; };
 		0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251901A15C9FA4E009B8BDA /* IEFormatter.m */; };
 		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
 		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
@@ -87,7 +88,6 @@
 		02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0A15C9D4CD0070EDC7 /* Contact.m */; };
 		02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B0D15C9D4DD0070EDC7 /* Fault.m */; };
 		02F31B1415C9D5030070EDC7 /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1315C9D5030070EDC7 /* Formation.m */; };
-		02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */; };
 		02F31B1D15C9D5280070EDC7 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1C15C9D5280070EDC7 /* Image.m */; };
 		02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B1F15C9D5340070EDC7 /* JointSet.m */; };
 		02F31B2315C9D5440070EDC7 /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B2215C9D5440070EDC7 /* Other.m */; };
@@ -164,13 +164,15 @@
 		0206DE9015CB2F3400B76398 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		0206DE9215CB2F4700B76398 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
 		0206DE9315CB2F4700B76398 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
-		0206DE9515CB2F5700B76398 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
-		0206DE9615CB2F5700B76398 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		0206DE9915CB320900B76398 /* PrototypeLoadingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrototypeLoadingTableViewController.h; sourceTree = "<group>"; };
 		0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrototypeLoadingTableViewController.m; sourceTree = "<group>"; };
 		0206DEB215CB653400B76398 /* GDVStudentGroupTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentGroupTVCDelegate.h; sourceTree = "<group>"; };
 		0206DEB315CB65D500B76398 /* GDVFolderTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFolderTVCDelegate.h; sourceTree = "<group>"; };
 		0206DEB415CB661400B76398 /* GDVFormationFolderTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationFolderTVCDelegate.h; sourceTree = "<group>"; };
+		0206DEB515CB6ACA00B76398 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
+		0206DEB615CB6ACA00B76398 /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
+		0206DEB815CB6AD800B76398 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		0206DEB915CB6AD800B76398 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
@@ -298,8 +300,6 @@
 		02F31B0D15C9D4DD0070EDC7 /* Fault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fault.m; sourceTree = "<group>"; };
 		02F31B1215C9D5030070EDC7 /* Formation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation.h; sourceTree = "<group>"; };
 		02F31B1315C9D5030070EDC7 /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
-		02F31B1515C9D50D0070EDC7 /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
-		02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
 		02F31B1B15C9D5280070EDC7 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		02F31B1C15C9D5280070EDC7 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		02F31B1E15C9D5340070EDC7 /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
@@ -785,8 +785,8 @@
 		02F31A6715C9C3760070EDC7 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
-				0206DE9515CB2F5700B76398 /* Folder.h */,
-				0206DE9615CB2F5700B76398 /* Folder.m */,
+				0206DEB815CB6AD800B76398 /* Folder.h */,
+				0206DEB915CB6AD800B76398 /* Folder.m */,
 			);
 			name = Folder;
 			sourceTree = "<group>";
@@ -794,8 +794,8 @@
 		02F31A6815C9C3840070EDC7 /* Formation Folder */ = {
 			isa = PBXGroup;
 			children = (
-				02F31B1515C9D50D0070EDC7 /* Formation_Folder.h */,
-				02F31B1615C9D50D0070EDC7 /* Formation_Folder.m */,
+				0206DEB515CB6ACA00B76398 /* Formation_Folder.h */,
+				0206DEB615CB6ACA00B76398 /* Formation_Folder.m */,
 			);
 			name = "Formation Folder";
 			sourceTree = "<group>";
@@ -1184,7 +1184,6 @@
 				02F31B0B15C9D4CD0070EDC7 /* Contact.m in Sources */,
 				02F31B0E15C9D4DD0070EDC7 /* Fault.m in Sources */,
 				02F31B1415C9D5030070EDC7 /* Formation.m in Sources */,
-				02F31B1715C9D50D0070EDC7 /* Formation_Folder.m in Sources */,
 				02F31B1D15C9D5280070EDC7 /* Image.m in Sources */,
 				02F31B2015C9D5340070EDC7 /* JointSet.m in Sources */,
 				02F31B2315C9D5440070EDC7 /* Other.m in Sources */,
@@ -1203,9 +1202,10 @@
 				0206DD3715CB14EE00B76398 /* GDVTransientDataProcessor.m in Sources */,
 				0206DE9115CB2F3400B76398 /* Group.m in Sources */,
 				0206DE9415CB2F4700B76398 /* Answer.m in Sources */,
-				0206DE9715CB2F5700B76398 /* Folder.m in Sources */,
 				0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */,
 				214106AF15CB5BDC007F1FE0 /* TransientGroup.m in Sources */,
+				0206DEB715CB6ACA00B76398 /* Formation_Folder.m in Sources */,
+				0206DEBA15CB6AD800B76398 /* Folder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

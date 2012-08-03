@@ -15,9 +15,10 @@
 
 @property (nonatomic, retain) NSString * folderDescription;
 @property (nonatomic, retain) NSString * folderName;
+@property (nonatomic, retain) NSNumber * faulty;
 @property (nonatomic, retain) Formation_Folder *formationFolder;
-@property (nonatomic, retain) NSSet *records;
 @property (nonatomic, retain) Group *group;
+@property (nonatomic, retain) NSSet *records;
 @end
 
 @interface Folder (CoreDataGeneratedAccessors)

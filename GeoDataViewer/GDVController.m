@@ -110,7 +110,7 @@
         [mapViewController willMoveToParentViewController:self];
         [self addChildViewController:mapViewController];
         [self.contentView addSubview:mapViewController.mapView];
-        [mapViewController didMoveToParentViewController:self];
+        [mapViewController didMoveToParentViewController:self];        
     }
     
     //Segue to formation list
@@ -307,7 +307,6 @@
     //Perform custom segues
     [self performSegueWithIdentifier:@"Record List" sender:nil];
     [self performSegueWithIdentifier:@"Student Response List" sender:nil];
-    [self performSegueWithIdentifier:@"Map View" sender:nil];
 }
 
 - (void)viewDidLoad {
@@ -355,6 +354,13 @@
     [feedbackListCustomView addTarget:self action:@selector(feedbackButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     feedbackListCustomView.showsTouchWhenHighlighted=YES;
     self.feedbackListButton.customView=feedbackListCustomView;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Load the map view
+    [self performSegueWithIdentifier:@"Map View" sender:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
