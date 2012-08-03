@@ -21,6 +21,7 @@
 @synthesize formationFolder;
 @synthesize folderName=_folderName;
 @synthesize records=_records;
+@synthesize group=_group;
 
 @synthesize nsManagedFolder=_nsManagedFolder;
 

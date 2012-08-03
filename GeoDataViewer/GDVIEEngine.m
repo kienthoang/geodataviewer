@@ -25,12 +25,15 @@
 #import "IEFormatter.h"
 #import "ColorManager.h"
 
+#import "TransientGroup.h"
+
 @interface GDVIEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
 @property (nonatomic, strong) NSMutableArray *records;
 @property (nonatomic, strong) NSMutableArray *formations;
 @property (nonatomic, strong) NSDictionary *foldersByFolderNames;
+@property (nonatomic, strong) NSMutableDictionary *groupDictionaryByID;
 @property (nonatomic, strong) NSArray *formationFolders;
 
 @property (nonatomic, strong) ValidationMessageBoard *validationMessageBoard;
@@ -49,6 +52,8 @@
 
 @synthesize processor=_processor;
 
+@synthesize groupDictionaryByID=_groupDictionaryByID;
+
 + (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor {
     GDVIEEngine *engine=[[GDVIEEngine alloc] init];
     engine.processor=processor;
@@ -60,6 +65,12 @@
 typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
 
 #pragma mark - Getters
+-(NSMutableDictionary *) groupDictionaryByID {
+    if(!_groupDictionaryByID) {
+        _groupDictionaryByID = [NSMutableDictionary dictionary];
+    }
+    return _groupDictionaryByID;
+}
 
 -(NSMutableArray *) projects {
     if(!_records) 
@@ -136,7 +147,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 
 #pragma mark - Record Importing
 
-- (TransientRecord *)recordForTokenArray:(NSArray *)tokenArray withFolderName:(NSString *)folderName {
+- (TransientRecord *)recordForTokenArray:(NSArray *)tokenArray withFolderName:(NSString *)folderName withGroupID:(NSString *) groupID {
     //Initialize the transient record
     NSString *typeToken=[tokenArray objectAtIndex:1];
     TransientRecord *transientRecord=[TransientRecord recordWithType:typeToken];
@@ -185,6 +196,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     //Set the folder
     transientRecord.folder=[self.foldersByFolderNames objectForKey:folderName];
+    
+    //set the group 
+    transientRecord.folder.group = [self.groupDictionaryByID objectForKey:groupID];
     
     //identify the record type and populate record specific fields
     if([typeToken isEqualToString:@"Contact"]) {
@@ -239,8 +253,27 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //Get all the token arrays 9each of them corresponding to a line in the csv file)
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
     
-    //Remove the first token array which contains the column headings
-    [tokenArrays removeObjectAtIndex:0];
+    NSString *groupName;
+    NSString *groupID;
+    if([[tokenArrays objectAtIndex:0] isEqualToString:GROUP_INFO_HEADER]) {
+        [tokenArrays removeObjectAtIndex:0];
+        groupName = [tokenArrays objectAtIndex:1];
+        [tokenArrays removeObjectAtIndex:1];
+        groupID = [tokenArrays objectAtIndex:2];
+        [tokenArrays removeObjectAtIndex:2];
+        [tokenArrays removeObjectAtIndex:3];
+    } else {
+        //old format, remove just the column headings
+        [tokenArrays removeObjectAtIndex:4];
+    }
+   
+    //first construct a group from the group ID if not created already
+    if(![self.groupDictionaryByID valueForKey:groupID]) {
+        //key does not exist
+        TransientGroup *newGroup = [[TransientGroup alloc] init];
+        newGroup.name = groupName;
+        newGroup.identifier = groupID;        
+    }
     
     //Now create transient records from the rest
     for(NSArray *tokenArray in tokenArrays) {
@@ -255,7 +288,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         else {
             //Create a transient record from the token array
             NSString *folderName=[[path.lastPathComponent componentsSeparatedByString:@"."] objectAtIndex:0];
-            TransientRecord *record=[self recordForTokenArray:tokenArray withFolderName:folderName];
+            TransientRecord *record=[self recordForTokenArray:tokenArray withFolderName:folderName withGroupID:groupID];
             
             //add the record to the array of records
             [transientRecords addObject:record];

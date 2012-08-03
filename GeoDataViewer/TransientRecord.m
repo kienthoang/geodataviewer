@@ -30,6 +30,7 @@
 @synthesize folder=_folder;
 @synthesize image=_image;
 
+
 @synthesize nsManagedRecord=_nsManagedRecord;
 
 #pragma mark - Database Operations

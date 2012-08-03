@@ -104,6 +104,7 @@
 		02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4B15C9D7310070EDC7 /* iAd.framework */; };
 		02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */; };
 		02F31B5115C9D7790070EDC7 /* TransientBedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B5015C9D7790070EDC7 /* TransientBedding.m */; };
+		214106AF15CB5BDC007F1FE0 /* TransientGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 214106AE15CB5BDC007F1FE0 /* TransientGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -323,6 +324,8 @@
 		02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		02F31B4F15C9D7790070EDC7 /* TransientBedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientBedding.h; sourceTree = "<group>"; };
 		02F31B5015C9D7790070EDC7 /* TransientBedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientBedding.m; sourceTree = "<group>"; };
+		214106AD15CB5BDC007F1FE0 /* TransientGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientGroup.h; sourceTree = "<group>"; };
+		214106AE15CB5BDC007F1FE0 /* TransientGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientGroup.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -604,6 +607,8 @@
 				02F31A2A15C9C0C30070EDC7 /* JointSet */,
 				02F31A2E15C9C0D70070EDC7 /* Record */,
 				02F31A3215C9C0F00070EDC7 /* Other */,
+				214106AD15CB5BDC007F1FE0 /* TransientGroup.h */,
+				214106AE15CB5BDC007F1FE0 /* TransientGroup.m */,
 			);
 			name = TransientManagedObjects;
 			sourceTree = "<group>";
@@ -1194,6 +1199,7 @@
 				0206DE9415CB2F4700B76398 /* Answer.m in Sources */,
 				0206DE9715CB2F5700B76398 /* Folder.m in Sources */,
 				0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */,
+				214106AF15CB5BDC007F1FE0 /* TransientGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

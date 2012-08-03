@@ -11,6 +11,7 @@
 #import "TransientFormation_Folder.h"
 
 #import "Folder.h"
+#import "Group.h"
 
 @interface TransientProject : TransientManagedObject
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSString * folderDescription;
 @property (nonatomic, strong) TransientFormation_Folder *formationFolder;
 @property (nonatomic, strong) NSArray *records;
+@property (nonatomic, strong) Group *group;
 
 - (Folder *)saveFolderToManagedObjectContext:(NSManagedObjectContext *)context;
 

@@ -24,5 +24,6 @@
 - (void)createFeedbacksFromCSVFiles:(NSArray *)files; //passes the array of feedbacks
 
 #define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16
+#define GROUP_INFO_HEADER @"Group Information"
 
 @end

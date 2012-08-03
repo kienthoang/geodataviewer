@@ -27,6 +27,7 @@
 @property (nonatomic, strong) TransientProject *folder;
 @property (nonatomic, strong) TransientImage *image; 
 
+
 #define TransientRecordMinimumDip 0
 #define TransientRecordMaximumDip 90
 #define TransientRecordMinimumStrike 0
