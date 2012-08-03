@@ -99,6 +99,7 @@
 		02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4B15C9D7310070EDC7 /* iAd.framework */; };
 		02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */; };
 		02F31B5115C9D7790070EDC7 /* TransientBedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B5015C9D7790070EDC7 /* TransientBedding.m */; };
+		2141069C15CB4E01007F1FE0 /* TransientDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141069B15CB4E01007F1FE0 /* TransientDataProcessor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,6 +276,8 @@
 		02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		02F31B4F15C9D7790070EDC7 /* TransientBedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientBedding.h; sourceTree = "<group>"; };
 		02F31B5015C9D7790070EDC7 /* TransientBedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientBedding.m; sourceTree = "<group>"; };
+		2141069A15CB4E01007F1FE0 /* TransientDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransientDataProcessor.h; sourceTree = "<group>"; };
+		2141069B15CB4E01007F1FE0 /* TransientDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransientDataProcessor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +408,8 @@
 				02F319CD15C9BDB40070EDC7 /* GDVIEEngine.m */,
 				02F319CF15C9BDF80070EDC7 /* GDVServerCommunicator.h */,
 				02F319D015C9BDF80070EDC7 /* GDVServerCommunicator.m */,
+				2141069A15CB4E01007F1FE0 /* TransientDataProcessor.h */,
+				2141069B15CB4E01007F1FE0 /* TransientDataProcessor.m */,
 			);
 			name = "Resource Manager Group";
 			sourceTree = "<group>";
@@ -1052,6 +1057,7 @@
 				02782FCB15C9ECA900A0A062 /* FormationImportTVC.m in Sources */,
 				02782FCC15C9ECA900A0A062 /* CSVTableViewController.m in Sources */,
 				0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */,
+				2141069C15CB4E01007F1FE0 /* TransientDataProcessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

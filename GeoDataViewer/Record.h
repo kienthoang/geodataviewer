@@ -23,5 +23,7 @@
 @property (nonatomic, retain) NSNumber * strike;
 @property (nonatomic, retain) Folder *folder;
 @property (nonatomic, retain) Image *image;
+@property (nonatomic, retain) NSString *groupName;
+@property (nonatomic, retain) NSString *groupID;
 
 @end

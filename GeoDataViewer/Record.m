@@ -23,5 +23,6 @@
 @dynamic strike;
 @dynamic folder;
 @dynamic image;
-
+@dynamic groupName;
+@dynamic groupID;
 @end

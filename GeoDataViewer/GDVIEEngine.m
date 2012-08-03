@@ -238,6 +238,19 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //Get all the token arrays 9each of them corresponding to a line in the csv file)
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
     
+    NSString *groupName;
+    NSString *groupID;
+    if([[tokenArrays objectAtIndex:0] isEqualToString:GROUP_INFO_HEADER]) {
+        [tokenArrays removeObjectAtIndex:0];
+        groupName = [tokenArrays objectAtIndex:1];
+        [tokenArrays removeObjectAtIndex:1];
+        groupID = [tokenArrays objectAtIndex:2];
+        [tokenArrays removeObjectAtIndex:2];
+        [tokenArrays removeObjectAtIndex:3];
+    } else {
+        //old format, remove just the column headings
+        [tokenArrays removeObjectAtIndex:4];
+    }
     //Remove the first token array which contains the column headings
     [tokenArrays removeObjectAtIndex:0];
     

@@ -29,6 +29,8 @@
 @synthesize strike=_strike;
 @synthesize folder=_folder;
 @synthesize image=_image;
+@synthesize groupName=_groupName;
+@synthesize groupID=_groupID;
 
 @synthesize nsManagedRecord=_nsManagedRecord;
 

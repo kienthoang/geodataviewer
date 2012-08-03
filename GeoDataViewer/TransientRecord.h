@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSNumber * strike;
 @property (nonatomic, strong) TransientProject *folder;
 @property (nonatomic, strong) TransientImage *image; 
+@property (nonatomic, strong) NSString *groupName;
+@property (nonatomic, strong) NSString *groupID;
 
 #define TransientRecordMinimumDip 0
 #define TransientRecordMaximumDip 90
