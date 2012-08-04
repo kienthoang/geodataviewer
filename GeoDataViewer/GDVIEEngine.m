@@ -371,7 +371,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     return transientRecord;
 }
 
-- (NSArray *)constructRecordsFromCSVFileWithPath:(NSString *)path {
+- (void)createRecordObjectsAndSaveFromCSVFileWithPath:(NSString *)path {
     NSMutableArray *transientRecords=[NSMutableArray array];
     
     //Get all the token arrays (each of them corresponding to a line in the csv file)
@@ -443,31 +443,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             //post some notification that the database was updated
         }
     }];
-    
-    //Now create transient records from the rest
-    for(NSArray *tokenArray in tokenArrays) {
-        //If the current token array does not have enough tokens, add an error message to the message board
-        if(tokenArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) {
-            [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
-            NSLog(@"Corrupted: %@",tokenArray);
-        }
-        
-        //Else, process the token array and contruct a corresponding transient record
-        else {
-            
-            //Create a transient record from the token array            
-            TransientRecord *record=[self recordForTokenArray:tokenArray withFolderName:folderName withGroupID:groupID];
-            
-            //TODO: add pointers inside the group and folder objects to its children
-            
-            //add the record to the array of records
-            [transientRecords addObject:record];
-        }
-        
-        
-    }
-    
-    return transientRecords.copy;
 }
 
 -(NSMutableDictionary *) extractRecordInfoFromTokenArray:(NSArray *)tokenArray withFolderName:(NSString *)folderName {
@@ -546,11 +521,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     
     //Iterate through each csv files and create transient records from each of them
     for (NSString *path in self.selectedFilePaths) {
-        //Construct the records
-        NSArray *records=[self constructRecordsFromCSVFileWithPath:path];
-        
-        //Add them to self.records
-        [self.records addObjectsFromArray:records];
+        //Construct the records, folders and groups and save
+        [self createRecordObjectsAndSaveFromCSVFileWithPath:path];
+       
     }
 }
 
