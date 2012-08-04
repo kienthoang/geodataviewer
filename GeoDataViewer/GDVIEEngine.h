@@ -10,21 +10,19 @@
 
 #import "Group.h"
 #import "Group+Creation.h"
-
 #import "Folder.h"
 #import "Folder+Creation.h"
-
 #import "Record.h"
-
 #import "Formation_Folder.h"
-
 #import "Formation.h"
-
 #import "Answer.h"
+
+#import "GDVIEEngineDelegate.h"
 
 @interface GDVIEEngine : NSObject
 
 @property (nonatomic,strong) UIManagedDocument *database;
+@property (nonatomic,weak) id <GDVIEEngineDelegate> delegate;
 
 #pragma mark - Import
 

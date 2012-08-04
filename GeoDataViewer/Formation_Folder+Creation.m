@@ -23,10 +23,10 @@
         folder=results.lastObject;
     else {
         //Create a new folder with the default name
-        folder=[NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:context];
+        folder=[NSEntityDescription insertNewObjectForEntityForName:@"Formation_Folder" inManagedObjectContext:context];
         folder.folderName=DEFAULT_FORMATION_FOLDER_NAME;
     }
-    
+        
     return folder;
 }
 

@@ -10,18 +10,18 @@
 
 @implementation Contact (Creation)
 
-+ (Record *)recordForInfo:(NSDictionary *)recordInfo inFolder:(Folder *)folder {
++ (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context {
     //Add the record type to the info dictionary
     NSMutableDictionary *updatedRecordInfo=recordInfo.mutableCopy;
-    [updatedRecordInfo setObject:@"Joint Set" forKey:RECORD_TYPE];
-    
+    [updatedRecordInfo setObject:@"Contact" forKey:RECORD_TYPE];
+        
     //Call super to get a record
-    Contact *record=(Contact *)[Record recordForInfo:updatedRecordInfo.copy inFolder:folder];
-    
+    Contact *record=(Contact *)[Record recordForInfo:updatedRecordInfo.copy inManagedObjectContext:context];
+            
     //Set the upper and lower formations
-    record.upperFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_UPPER_FORMATION] inManagedObjectContext:folder.managedObjectContext];
-    record.lowerFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_LOWER_FORMATION] inManagedObjectContext:folder.managedObjectContext];
-    
+    //record.upperFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_UPPER_FORMATION] inManagedObjectContext:context];
+    //record.lowerFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_LOWER_FORMATION] inManagedObjectContext:context];
+            
     return record;
 }
 

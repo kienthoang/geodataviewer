@@ -13,23 +13,24 @@
 + (Formation *)formationWithName:(NSString *)formationName inManagedObjectContext:(NSManagedObjectContext *)context 
 {    
     Formation *formation=nil;
-    
-    //Look for a formation with the given name in the database
-    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Formation"];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
-    NSArray *results=[context executeFetchRequest:request error:NULL];
-    if (results.count)
-        formation=results.lastObject;
-    else {
-        //If no such formation exists, create one
-        Formation_Folder *folder=[Formation_Folder defaultFormationFolderInManagedObjectContext:context];
-        formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
-        formation.formationName=formationName;
-        formation.formationSortNumber=[NSNumber numberWithInt:folder.formations.count+1];
-        formation.formationFolder=folder;
+            
+    if (formationName.length) {
+        //Look for a formation with the given name in the database
+        NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Formation"];
+        request.predicate=[NSPredicate predicateWithFormat:@"formationName=%@",formationName];
+        request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationName" ascending:YES]];
+        NSArray *results=[context executeFetchRequest:request error:NULL];
+        if (results.count)
+            formation=results.lastObject;
+        else {
+            //If no such formation exists, create one
+            formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
+            formation.formationName=formationName;
+            formation.formationFolder=[Formation_Folder defaultFormationFolderInManagedObjectContext:context];
+        }        
     }
 #warning Set default color for imported formations
-    
+        
     return formation;
 }
 

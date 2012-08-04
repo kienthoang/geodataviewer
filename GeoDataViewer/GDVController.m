@@ -45,7 +45,7 @@
     return [GDVResourceManager defaultResourceManager];
 }
 
-#pragma mark - View Manipulators
+#pragma mark - View Accessors
 
 - (UINavigationController *)recordListNav {
     return (UINavigationController *)self.recordList.contentViewController;
@@ -53,7 +53,7 @@
 
 - (GDVStudentGroupTVC *)recordListStudentGroupTVC {
     UIViewController *studentGroupTVC=self.recordListNav.topViewController;
-    if ([studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
+    if (![studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
         studentGroupTVC=nil;
     
     return (GDVStudentGroupTVC *)studentGroupTVC;
@@ -65,7 +65,7 @@
 
 - (GDVFormationFolderTVC *)formationFolderTVC {
     UIViewController *formationFolderTVC=self.formationListNav.topViewController;
-    if ([formationFolderTVC isKindOfClass:[GDVFormationFolderTVC class]]) 
+    if (![formationFolderTVC isKindOfClass:[GDVFormationFolderTVC class]]) 
         formationFolderTVC=nil;
     
     return (GDVFormationFolderTVC *)formationFolderTVC;
@@ -77,10 +77,30 @@
 
 - (GDVStudentGroupTVC *)studentResponseListStudentGroupTVC {
     UIViewController *studentGroupTVC=self.studentResponseListNav.topViewController;
-    if ([studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
+    if (![studentGroupTVC isKindOfClass:[GDVStudentGroupTVC class]]) 
         studentGroupTVC=nil;
     
     return (GDVStudentGroupTVC *)studentGroupTVC;
+}
+
+#pragma mark - View Updators
+
+- (void)updateRecordListStudentGroupTVC {
+    //Update student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        if (studentGroups) {
+            self.recordListStudentGroupTVC.studentGroups=studentGroups;          
+            NSLog(@"Groups: %@",self.recordListStudentGroupTVC);
+        }
+    }];
+}
+
+- (void)updateStudentResponseListStudentGroupTVC {
+    //Update student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        if (studentGroups)
+            self.studentResponseListStudentGroupTVC.studentGroups=studentGroups;
+    }];
 }
 
 #pragma mark - Prepare for Segues
@@ -130,6 +150,10 @@
     UINavigationController *recordImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:RECORD_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
     self.importPopover=[[UIPopoverController alloc] initWithContentViewController:recordImportTVC];
     
+    //Set the delegate
+    ImportTableViewController *importTVC=(ImportTableViewController *)recordImportTVC.topViewController;
+    importTVC.delegate=self;
+    
     //Present it
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
@@ -142,6 +166,10 @@
     UINavigationController *formationImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:FORMATION_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
     self.importPopover=[[UIPopoverController alloc] initWithContentViewController:formationImportTVC];
     
+    //Set the delegate
+    ImportTableViewController *importTVC=(ImportTableViewController *)formationImportTVC.topViewController;
+    importTVC.delegate=self;
+    
     //Present it
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
@@ -153,6 +181,10 @@
     //Instantiate the student response import popover
     UINavigationController *studentResponseImportTVC=[self.storyboard instantiateViewControllerWithIdentifier:STUDENT_RESPONSE_IMPORT_TABLE_VIEW_CONTROLLER_IDENTIFIER];
     self.importPopover=[[UIPopoverController alloc] initWithContentViewController:studentResponseImportTVC];
+    
+    //Set the delegate
+    ImportTableViewController *importTVC=(ImportTableViewController *)studentResponseImportTVC.topViewController;
+    importTVC.delegate=self;
     
     //Present it
     [self.importPopover presentPopoverFromBarButtonItem:self.importExportButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -188,11 +220,10 @@
     GDVStudentGroupTVC *studentGroupTVC=self.recordListStudentGroupTVC;
     [studentGroupTVC showLoadingScreen];
     
-    //Update student groups
-    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
-        if (studentGroups)
-            studentGroupTVC.studentGroups=studentGroups;
-    }];
+    NSLog(@"Finished importing");
+    
+    //Update
+    [self updateRecordListStudentGroupTVC];
 }
 
 - (void)formationDatabaseDidChange:(NSNotification *)notification {
@@ -219,10 +250,7 @@
     [studentGroupTVC showLoadingScreen];
     
     //Update student groups
-    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
-        if (studentGroups)
-            studentGroupTVC.studentGroups=studentGroups;
-    }];
+    [self updateStudentResponseListStudentGroupTVC];
 }
 
 - (void)registerNotifications {
@@ -301,14 +329,6 @@
 
 #pragma mark - View Controller Lifecycle
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    //Perform custom segues
-    [self performSegueWithIdentifier:@"Record List" sender:nil];
-    [self performSegueWithIdentifier:@"Student Response List" sender:nil];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -359,7 +379,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Load the map view
+    //Perform custom segues
+    [self performSegueWithIdentifier:@"Record List" sender:nil];
+    [self performSegueWithIdentifier:@"Student Response List" sender:nil];    
     [self performSegueWithIdentifier:@"Map View" sender:nil];
 }
 

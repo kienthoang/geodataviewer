@@ -1,15 +1,15 @@
 //
-//  Bedding+Creation.h
+//  Other+Creation.h
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/3/12.
+//  Created by Kien Hoang on 8/4/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "Bedding.h"
+#import "Other.h"
 #import "Record+Creation.h"
 
-@interface Bedding (Creation)
+@interface Other (Creation)
 
 + (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 

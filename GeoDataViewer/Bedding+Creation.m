@@ -10,17 +10,17 @@
 
 @implementation Bedding (Creation)
 
-+ (Record *)recordForInfo:(NSDictionary *)recordInfo inFolder:(Folder *)folder {
++ (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context {
     //Add the record type to the info dictionary
     NSMutableDictionary *updatedRecordInfo=recordInfo.mutableCopy;
-    [updatedRecordInfo setObject:@"Joint Set" forKey:RECORD_TYPE];
-    
+    [updatedRecordInfo setObject:@"Bedding" forKey:RECORD_TYPE];
+        
     //Call super to get a record
-    Bedding *record=(Bedding *)[Record recordForInfo:updatedRecordInfo.copy inFolder:folder];
-    
+    Bedding *record=(Bedding *)[Record recordForInfo:updatedRecordInfo.copy inManagedObjectContext:context];
+                    
     //Set the formation
-    record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:folder.managedObjectContext];
-
+    //record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:context];
+            
     return record;
 }
 

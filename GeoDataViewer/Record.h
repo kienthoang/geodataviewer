@@ -2,7 +2,7 @@
 //  Record.h
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 8/4/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -23,6 +23,5 @@
 @property (nonatomic, retain) NSNumber * strike;
 @property (nonatomic, retain) Folder *folder;
 @property (nonatomic, retain) Image *image;
-
 
 @end

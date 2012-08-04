@@ -2,7 +2,7 @@
 //  Folder.h
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/2/12.
+//  Created by Kien Hoang on 8/4/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 
 @interface Folder : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * faulty;
 @property (nonatomic, retain) NSString * folderDescription;
 @property (nonatomic, retain) NSString * folderName;
-@property (nonatomic, retain) NSNumber * faulty;
 @property (nonatomic, retain) Formation_Folder *formationFolder;
 @property (nonatomic, retain) Group *group;
 @property (nonatomic, retain) NSSet *records;

@@ -12,6 +12,6 @@
 
 @interface Folder (Creation)
 
-+ (Folder *)folderForName:(NSString *)folderName inStudentGroup:(Group *)studentGroup;
++ (Folder *)folderForName:(NSString *)folderName inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

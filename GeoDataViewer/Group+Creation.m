@@ -12,6 +12,7 @@
 
 + (Group *)studentGroupForInfo:(NSDictionary *)groupInfo inManagedObjectContext:(NSManagedObjectContext *)context {
     //Extract the id
+    Group *selectedGroup=nil;
     NSString *groupID=[groupInfo objectForKey:GDVStudentGroupIdentifier];
     
     //Grabs all groups from the database to compare ids (faster than letting the database compare the ids itself)
@@ -19,16 +20,21 @@
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     NSArray *results=[context executeFetchRequest:request error:NULL];
     for (Group *group in results) {
-        if ([group.identifier isEqualToString:groupID])
-            return group;
+        if ([group.identifier isEqualToString:groupID]) {
+            selectedGroup=group;
+            break;
+        }
     }
     
-    //Create a new student group
-    Group *group=[NSEntityDescription insertNewObjectForEntityForName:@"Group" inManagedObjectContext:context];
-    group.name=[groupInfo objectForKey:GDVStudentGroupName];
-    group.faulty=[groupInfo objectForKey:GDVStudentGroupIsFaulty];
-    
-    return group;
+    if (!selectedGroup) {
+        //Create a new student group
+        selectedGroup=[NSEntityDescription insertNewObjectForEntityForName:@"Group" inManagedObjectContext:context];
+        selectedGroup.identifier=groupID;
+        selectedGroup.name=[groupInfo objectForKey:GDVStudentGroupName];
+        selectedGroup.faulty=[groupInfo objectForKey:GDVStudentGroupIsFaulty];
+    }
+        
+    return selectedGroup;
 }
 
 @end

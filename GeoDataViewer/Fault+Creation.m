@@ -10,21 +10,21 @@
 
 @implementation Fault (Creation)
 
-+ (Record *)recordForInfo:(NSDictionary *)recordInfo inFolder:(Folder *)folder {
++ (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context {
     //Add the record type to the info dictionary
     NSMutableDictionary *updatedRecordInfo=recordInfo.mutableCopy;
-    [updatedRecordInfo setObject:@"Joint Set" forKey:RECORD_TYPE];
-    
+    [updatedRecordInfo setObject:@"Fault" forKey:RECORD_TYPE];
+        
     //Call super to get a record
-    Fault *record=(Fault *)[Record recordForInfo:updatedRecordInfo.copy inFolder:folder];
-    
+    Fault *record=(Fault *)[Record recordForInfo:updatedRecordInfo.copy inManagedObjectContext:context];
+            
     //Set the formation
-    record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:folder.managedObjectContext];
-    
+    //record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:context];
+            
     //Set the plunge and trend
-    record.trend=[recordInfo objectForKey:RECORD_TREND];
-    record.plunge=[recordInfo objectForKey:RECORD_PLUNGE];
-    
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    record.trend=[numberFormatter numberFromString:[recordInfo objectForKey:RECORD_TREND]];
+    record.plunge=[numberFormatter numberFromString:[recordInfo objectForKey:RECORD_PLUNGE]];
     return record;
 }
 

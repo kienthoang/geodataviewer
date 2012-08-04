@@ -12,6 +12,6 @@
 
 @interface Fault (Creation)
 
-+ (Record *)recordForInfo:(NSDictionary *)recordInfo inFolder:(Folder *)folder;
++ (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

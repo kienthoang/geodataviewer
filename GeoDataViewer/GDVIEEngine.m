@@ -14,7 +14,11 @@
 #import "IEFormatter.h"
 #import "ColorManager.h"
 
-#import "Record+Creation.h"
+#import "Bedding+Creation.h"
+#import "Contact+Creation.m"
+#import "Fault+Creation.h"
+#import "JointSet+Creation.h"
+#import "Other+Creation.h"
 
 @interface GDVIEEngine()
 
@@ -40,6 +44,19 @@
 @synthesize validationMessageBoard=_validationMessageBoard;
 
 @synthesize groupDictionaryByID=_groupDictionaryByID;
+
+@synthesize delegate=_delegate;
+
+typedef void (^database_save_t)(UIManagedDocument *database);
+
+- (void)saveDatabaseWithCompletionHandler:(database_save_t)completionHandler {
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+        if (success)
+            completionHandler(self.database);
+        else
+            NSLog(@"Failed to save changes to database!");
+    }];
+}
 
 //enum for columnHeadings
 typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
@@ -127,7 +144,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 
 #pragma mark - Record Importing
 
-- (Record *)recordForTokenArray:(NSArray *)tokenArray withFolder:(Folder *)folder {
+- (Record *)recordForTokenArray:(NSArray *)tokenArray {
     //Create the record dictionary info from the token array
     Record *record=nil;
     NSMutableDictionary *recordInfo=[NSMutableDictionary dictionary];
@@ -140,44 +157,39 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     [recordInfo setObject:[tokenArray objectAtIndex:Observations] forKey:RECORD_FIELD_OBSERVATION];
     [recordInfo setObject:[tokenArray objectAtIndex:Latitude] forKey:RECORD_LATITUDE];
     [recordInfo setObject:[tokenArray objectAtIndex:Longitude] forKey:RECORD_LONGITUDE];
-    
+    [recordInfo setObject:[tokenArray objectAtIndex:FormationField] forKey:RECORD_FORMATION];
+    [recordInfo setObject:[tokenArray objectAtIndex:LowerFormation] forKey:RECORD_LOWER_FORMATION];
+    [recordInfo setObject:[tokenArray objectAtIndex:UpperFormation] forKey:RECORD_UPPER_FORMATION];
+    [recordInfo setObject:[tokenArray objectAtIndex:Trend] forKey:RECORD_TREND];
+    [recordInfo setObject:[tokenArray objectAtIndex:Plunge] forKey:RECORD_PLUNGE];
+            
     //Populate the date field
     NSString *dateToken = [[tokenArray objectAtIndex:Date] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *timeToken = [[tokenArray objectAtIndex:Time] stringByReplacingOccurrencesOfString:@" " withString:@""];
     [recordInfo setObject:[self dateFromDateToken:dateToken andTimeToken:timeToken] forKey:RECORD_DATE]; 
-    
-    //Set the image of the record using the given image file name in the csv file
-//    NSData *imageData=[self imageInDocumentDirectoryForName:[tokenArray objectAtIndex:imageName]];
-//    if (imageData) {
-//        TransientImage *image=[[TransientImage alloc] init];
-//        image.imageData=imageData;
-//        transientRecord.image=image;
-//    }
-    
+            
     //Create the record
     NSString *typeToken=[tokenArray objectAtIndex:Type];
     if([typeToken isEqualToString:@"Contact"]) {
-        record=[Contact recordForInfo:recordInfo inFolder:folder];
+        record=[Contact recordForInfo:recordInfo.copy inManagedObjectContext:self.database.managedObjectContext];
     } else if ([typeToken isEqualToString:@"Bedding"]) {
-        record=[Bedding recordForInfo:recordInfo inFolder:folder];
+        record=[Bedding recordForInfo:recordInfo.copy inManagedObjectContext:self.database.managedObjectContext];
     } else if([typeToken isEqualToString:@"Joint Set"]) {
-        record=[JointSet recordForInfo:recordInfo inFolder:folder];
+        record=[JointSet recordForInfo:recordInfo.copy inManagedObjectContext:self.database.managedObjectContext];
     } else if([typeToken isEqualToString:@"Fault"]) {        
-        record=[Fault recordForInfo:recordInfo inFolder:folder];
+        record=[Fault recordForInfo:recordInfo.copy inManagedObjectContext:self.database.managedObjectContext];
     } else if([typeToken isEqualToString:@"Other"]) {
-        record=[Record recordForInfo:recordInfo inFolder:folder];
+        record=[Other recordForInfo:recordInfo.copy inManagedObjectContext:self.database.managedObjectContext];
     }
-    
+       
     return record;
 }
 
-- (NSArray *)constructRecordsFromCSVFileWithPath:(NSString *)path {
-    NSMutableArray *records=[NSMutableArray array];;
-    
+- (void)constructRecordsFromCSVFileWithPath:(NSString *)path {    
     //Get all the token arrays, each of them corresponding to a line in the csv file)
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
     
-    if([[tokenArrays objectAtIndex:0] isEqualToString:METADATA_HEADER]) {
+    if([[[tokenArrays objectAtIndex:0] objectAtIndex:0] isEqualToString:METADATA_HEADER]) {
         //Get the group from the metadata info
         NSString *groupName=[[tokenArrays objectAtIndex:1] objectAtIndex:1];
         NSString *groupID=[[tokenArrays objectAtIndex:2] objectAtIndex:1];
@@ -185,24 +197,26 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
        
         //Try to get the student group from the student-group-by-id dictionary
         Group *studentGroup=[self.groupDictionaryByID objectForKey:groupID];
-        
+                
         //If it does not exist, create a new one and erase all of its folders
         if (!studentGroup) {
              NSDictionary *groupInfo=[NSDictionary dictionaryWithObjectsAndKeys:groupName,GDVStudentGroupName,groupID,GDVStudentGroupIdentifier,faulty,GDVStudentGroupIsFaulty, nil];
             studentGroup=[Group studentGroupForInfo:groupInfo inManagedObjectContext:self.database.managedObjectContext];
+            [self.groupDictionaryByID setObject:studentGroup forKey:groupID];
             [studentGroup removeFolders:studentGroup.folders];
         }
-        
+                
         //Create the folder from the file path
         NSString *folderName=[[tokenArrays objectAtIndex:3] objectAtIndex:1];
-        Folder *folder=[Folder folderForName:folderName inStudentGroup:studentGroup];
+        Folder *folder=[Folder folderForName:folderName inManagedObjectContext:self.database.managedObjectContext];
+        folder.group=studentGroup;
         
         //Remove the metadata token arrays and the record header token array
         NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 6)];
         [tokenArrays removeObjectsAtIndexes:indexes];
         
         //Now create transient records from the rest
-        for(NSArray *tokenArray in tokenArrays) {
+        for(NSArray *tokenArray in tokenArrays.copy) {
             //If the current token array does not have enough tokens, add an error message to the message board
             if(tokenArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) {
                 NSString *error=[NSString stringWithFormat:@"Invalid CSV File Format: %@. Please ensure that your csv file has the required format.",path.lastPathComponent];
@@ -213,10 +227,8 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             //Else, process the token array and contruct a corresponding record
             else {
                 //Create a record from the token array
-                Record *record=[self recordForTokenArray:tokenArray withFolder:folder];
-                
-                //add the record to the array of records
-                [records addObject:record];
+                Record *record=[self recordForTokenArray:tokenArray];
+                record.folder=folder;                
             }
         }
     } else {
@@ -225,8 +237,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         [self.validationMessageBoard addErrorWithMessage:error];
         NSLog(@"Missing metadata: %@",path.lastPathComponent);
     }
-     
-    return records.copy;
 }
 
 /*
@@ -238,11 +248,19 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     //get paths to the selected files
     self.selectedFilePaths = [self getSelectedFilePaths:files];
         
-    //Iterate through each csv files and create records from each of them
-    for (NSString *path in self.selectedFilePaths) {
-        //Construct the records
-        NSArray *records=[self constructRecordsFromCSVFileWithPath:path];
-    }
+    [self.database.managedObjectContext performBlock:^{
+        //Iterate through each csv files and create records from each of them
+        for (NSString *path in self.selectedFilePaths) {
+            //Construct the records
+            [self constructRecordsFromCSVFileWithPath:path];
+        }
+        
+        //Save to database
+        [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){
+            //Notify the delegate that the importing was finished
+            [self.delegate engineDidFinishProcessingRecords:self];
+        }];
+    }];
 }
 
 #pragma mark - CSV File Parsing

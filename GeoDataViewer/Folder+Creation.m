@@ -10,11 +10,11 @@
 
 @implementation Folder (Creation)
 
-+ (Folder *)folderForName:(NSString *)folderName inStudentGroup:(Group *)studentGroup {
++ (Folder *)folderForName:(NSString *)folderName inManagedObjectContext:(NSManagedObjectContext *)context {
     //Create a new folder in the given student group
-    Folder *folder=[NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:studentGroup.managedObjectContext];
+    Folder *folder=[NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:context];
     folder.folderName=folderName;
-    folder.group=studentGroup;
+    folder.records=[NSSet set];
     
     return folder;
 }

@@ -15,13 +15,8 @@
 
 #import "Formation+Creation.h"
 
-#import "Bedding+Creation.h"
-#import "Contact+Creation.h"
-#import "Fault+Creation.h"
-#import "JointSet+Creation.h"
-
 @interface Record (Creation)
 
-+ (Record *)recordForInfo:(NSDictionary *)recordInfo inFolder:(Folder *)folder;
++ (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "GDVResourceManager.h"
 
-@interface GDVResourceManager() 
+@interface GDVResourceManager() <GDVIEEngineDelegate>
 
 @end
 
@@ -36,11 +36,12 @@ static GDVResourceManager *defaultResourceManager;
 - (id)init {
     if (self=[super init]) {
         //Initialize the database
-        GDVResourceManager *weakSelf=self;
         GeoDatabaseManager *databaseManager=[GeoDatabaseManager standardDatabaseManager];
-        [databaseManager fetchDatabaseFromDisk:self completion:^(UIManagedDocument *database){
-            weakSelf.database=database;
-        }];
+        self.database=[databaseManager fetchDatabaseFromDisk:self completion:^(BOOL success){}];
+        
+        if (self.database.documentState==UIDocumentStateClosed) {
+            [self.database openWithCompletionHandler:^(BOOL success){}];
+        }
     }
     
     return self;
@@ -49,9 +50,14 @@ static GDVResourceManager *defaultResourceManager;
 #pragma mark - Getters and Setters
 
 - (GDVIEEngine *)engine {
-    if (!_engine)
+    if (!_engine) {
         _engine=[[GDVIEEngine alloc] init];
-    
+        
+        //Setup the enging
+        _engine.database=self.database;
+        _engine.delegate=self;
+    }
+        
     return _engine;
 }
 
@@ -106,7 +112,12 @@ static GDVResourceManager *defaultResourceManager;
 #pragma mark - Data
 
 - (void)fetchStudentGroupsWithCompletionHandler:(data_completion_handler_t)completionHandler {
-    
+    //Fetch all the student group in the database
+    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Group"];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    NSLog(@"Database: %@ Results: %@",self.database,results);
+    completionHandler(results);
 }
 
 - (void)fetchFoldersForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
