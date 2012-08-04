@@ -8,31 +8,19 @@
 
 #import "GDVIEEngine.h"
 
-#import "TransientRecord.h"
-#import "TransientFault.h"
-#import "TransientBedding.h"
-#import "TransientContact.h"
-#import "TransientJointSet.h"
-#import "TransientOther.h"
-#import "TransientFormation.h"
-#import "TransientImage.h"
-#import "TransientFormation_Folder.h"
-#import "TransientProject.h"
-
 #import "ValidationMessageBoard.h"
 
 #import "TextInputFilter.h"
 #import "IEFormatter.h"
 #import "ColorManager.h"
 
-#import "TransientGroup.h"
+#import "Record+Creation.h"
 
 @interface GDVIEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
 @property (nonatomic, strong) NSMutableArray *records;
 @property (nonatomic, strong) NSMutableArray *formations;
-@property (nonatomic, strong) NSDictionary *foldersByFolderNames;
 @property (nonatomic, strong) NSMutableDictionary *groupDictionaryByID;
 @property (nonatomic, strong) NSArray *formationFolders;
 
@@ -42,24 +30,16 @@
 
 @implementation GDVIEEngine
 
+@synthesize database=_database;
+
 @synthesize selectedFilePaths=_selectedFilePaths;
 @synthesize records=_records;
 @synthesize formations=_formations;
-@synthesize foldersByFolderNames=_foldersByFolderNames;
 @synthesize formationFolders=_formationFolders;
 
 @synthesize validationMessageBoard=_validationMessageBoard;
 
-@synthesize processor=_processor;
-
 @synthesize groupDictionaryByID=_groupDictionaryByID;
-
-+ (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor {
-    GDVIEEngine *engine=[[GDVIEEngine alloc] init];
-    engine.processor=processor;
-    
-    return engine;
-}
 
 //enum for columnHeadings
 typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
@@ -147,170 +127,106 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 
 #pragma mark - Record Importing
 
-- (TransientRecord *)recordForTokenArray:(NSArray *)tokenArray withFolderName:(NSString *)folderName withGroupID:(NSString *) groupID {
-    //Initialize the transient record
-    NSString *typeToken=[tokenArray objectAtIndex:1];
-    TransientRecord *transientRecord=[TransientRecord recordWithType:typeToken];
-    NSString *errorMessage=nil;
+- (Record *)recordForTokenArray:(NSArray *)tokenArray withFolder:(Folder *)folder {
+    //Create the record dictionary info from the token array
+    Record *record=nil;
+    NSMutableDictionary *recordInfo=[NSMutableDictionary dictionary];
     
-    //Populate the common fields for all the records and save the errors messages if there's any
-    //Populate the name
-    transientRecord.name = [tokenArray objectAtIndex:Name];
-    
-    //Set the strike value with validations
-    if ((errorMessage=[transientRecord setStrikeWithValidations:[tokenArray objectAtIndex:Strike]]))
-        [self.validationMessageBoard addErrorWithMessage:errorMessage];
-    
-    //Set the dip value with validations
-    if ((errorMessage=[transientRecord setDipWithValidations:[tokenArray objectAtIndex:Dip]]))
-        [self.validationMessageBoard addErrorWithMessage:errorMessage];
-    
-    //Set the dip direction value with validations
-    if ((errorMessage=[transientRecord setDipDirectionWithValidations:[tokenArray objectAtIndex:dipDirection]]))
-        [self.validationMessageBoard addErrorWithMessage:errorMessage];
-    
-    //Set the field observation value with validations
-    if ((errorMessage=[transientRecord setFieldObservationWithValidations:[tokenArray objectAtIndex:Observations]]))
-        [self.validationMessageBoard addErrorWithMessage:errorMessage];
-    
-    //Set the latitude value with validations
-    if ((errorMessage=[transientRecord setLatitudeWithValidations:[tokenArray objectAtIndex:Latitude]]))
-        [self.validationMessageBoard addErrorWithMessage:errorMessage];
-    
-    //Set the longitude value with validations
-    if ((errorMessage=[transientRecord setLongitudeWithValidations:[tokenArray objectAtIndex:Longitude]]))
-        [self.validationMessageBoard addErrorWithMessage:errorMessage];
+    //Populate the common fields for all the records
+    [recordInfo setObject:[tokenArray objectAtIndex:Name] forKey:RECORD_NAME];
+    [recordInfo setObject:[tokenArray objectAtIndex:Strike] forKey:RECORD_STRIKE];
+    [recordInfo setObject:[tokenArray objectAtIndex:Dip] forKey:RECORD_DIP];   
+    [recordInfo setObject:[tokenArray objectAtIndex:dipDirection] forKey:RECORD_DIP_DIRECTION];
+    [recordInfo setObject:[tokenArray objectAtIndex:Observations] forKey:RECORD_FIELD_OBSERVATION];
+    [recordInfo setObject:[tokenArray objectAtIndex:Latitude] forKey:RECORD_LATITUDE];
+    [recordInfo setObject:[tokenArray objectAtIndex:Longitude] forKey:RECORD_LONGITUDE];
     
     //Populate the date field
     NSString *dateToken = [[tokenArray objectAtIndex:Date] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *timeToken = [[tokenArray objectAtIndex:Time] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    transientRecord.date = [self dateFromDateToken:dateToken andTimeToken:timeToken];
+    [recordInfo setObject:[self dateFromDateToken:dateToken andTimeToken:timeToken] forKey:RECORD_DATE]; 
     
     //Set the image of the record using the given image file name in the csv file
-    NSData *imageData=[self imageInDocumentDirectoryForName:[tokenArray objectAtIndex:imageName]];
-    if (imageData) {
-        TransientImage *image=[[TransientImage alloc] init];
-        image.imageData=imageData;
-        transientRecord.image=image;
-    }
+//    NSData *imageData=[self imageInDocumentDirectoryForName:[tokenArray objectAtIndex:imageName]];
+//    if (imageData) {
+//        TransientImage *image=[[TransientImage alloc] init];
+//        image.imageData=imageData;
+//        transientRecord.image=image;
+//    }
     
-    //Set the folder
-    transientRecord.folder=[self.foldersByFolderNames objectForKey:folderName];
-    
-    //set the group 
-    transientRecord.folder.group = [self.groupDictionaryByID objectForKey:groupID];
-    
-    //identify the record type and populate record specific fields
+    //Create the record
+    NSString *typeToken=[tokenArray objectAtIndex:Type];
     if([typeToken isEqualToString:@"Contact"]) {
-        TransientContact *contact=(TransientContact *)transientRecord;
-        
-        //Set lower formation
-        TransientFormation *lowerFormation=[[TransientFormation alloc] init];
-        lowerFormation.formationName=[tokenArray objectAtIndex:LowerFormation];
-        [contact setLowerFormation:lowerFormation];
-        
-        //Set upper formation
-        TransientFormation *upperFormation=[[TransientFormation alloc] init];
-        upperFormation.formationName=[tokenArray objectAtIndex:UpperFormation];
-        [contact setUpperFormation:upperFormation];
+        record=[Contact recordForInfo:recordInfo inFolder:folder];
     } else if ([typeToken isEqualToString:@"Bedding"]) {
-        TransientBedding *bedding=(TransientBedding *)transientRecord;
-        
-        //Set formation
-        TransientFormation *formation=[[TransientFormation alloc] init];
-        formation.formationName=[tokenArray objectAtIndex:FormationField];
-        [bedding setFormation:formation];
+        record=[Bedding recordForInfo:recordInfo inFolder:folder];
     } else if([typeToken isEqualToString:@"Joint Set"]) {
-        TransientJointSet *jointSet=(TransientJointSet *)transientRecord;
-        
-        //Set formation
-        TransientFormation *formation=[[TransientFormation alloc] init];
-        formation.formationName=[tokenArray objectAtIndex:FormationField];
-        [jointSet setFormation:formation];
+        record=[JointSet recordForInfo:recordInfo inFolder:folder];
     } else if([typeToken isEqualToString:@"Fault"]) {        
-        //Set the plunge and trend (need to populate name in case validaiton error occurs)
-        TransientFault *transientFault=(TransientFault *)transientRecord;
-        transientFault.name = [tokenArray objectAtIndex:Name];
-        if ((errorMessage=[transientFault setPlungeWithValidations:[tokenArray objectAtIndex:Plunge]]))
-            [self.validationMessageBoard addErrorWithMessage:errorMessage];
-        if ((errorMessage=[transientFault setTrendWithValidations:[tokenArray objectAtIndex:Trend]]))
-            [self.validationMessageBoard addErrorWithMessage:errorMessage];
-        
-        //Set formation
-        TransientFormation *formation=[[TransientFormation alloc] init];
-        formation.formationName=[tokenArray objectAtIndex:FormationField];
-        [(TransientFault *)transientRecord setFormation:formation];
+        record=[Fault recordForInfo:recordInfo inFolder:folder];
     } else if([typeToken isEqualToString:@"Other"]) {
-        //Nothing to populate
+        record=[Record recordForInfo:recordInfo inFolder:folder];
     }
     
-    return transientRecord;
+    return record;
 }
 
 - (NSArray *)constructRecordsFromCSVFileWithPath:(NSString *)path {
-    NSMutableArray *transientRecords=[NSMutableArray array];;
+    NSMutableArray *records=[NSMutableArray array];;
     
-    //Get all the token arrays 9each of them corresponding to a line in the csv file)
+    //Get all the token arrays, each of them corresponding to a line in the csv file)
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
     
-    NSString *groupName;
-    NSString *groupID;
-    if([[tokenArrays objectAtIndex:0] isEqualToString:GROUP_INFO_HEADER]) {
-        [tokenArrays removeObjectAtIndex:0];
-        groupName = [tokenArrays objectAtIndex:1];
-        [tokenArrays removeObjectAtIndex:1];
-        groupID = [tokenArrays objectAtIndex:2];
-        [tokenArrays removeObjectAtIndex:2];
-        [tokenArrays removeObjectAtIndex:3];
-    } else {
-        //old format, remove just the column headings
-        [tokenArrays removeObjectAtIndex:4];
-    }
-   
-    //first construct a group from the group ID if not created already
-    if(![self.groupDictionaryByID valueForKey:groupID]) {
-        //key does not exist
-        TransientGroup *newGroup = [[TransientGroup alloc] init];
-        newGroup.name = groupName;
-        newGroup.identifier = groupID;        
-    }
-    
-    //Now create transient records from the rest
-    for(NSArray *tokenArray in tokenArrays) {
+    if([[tokenArrays objectAtIndex:0] isEqualToString:METADATA_HEADER]) {
+        //Get the group from the metadata info
+        NSString *groupName=[[tokenArrays objectAtIndex:1] objectAtIndex:1];
+        NSString *groupID=[[tokenArrays objectAtIndex:2] objectAtIndex:1];
+        NSNumber *faulty=[NSNumber numberWithBool:NO];
+       
+        //Try to get the student group from the student-group-by-id dictionary
+        Group *studentGroup=[self.groupDictionaryByID objectForKey:groupID];
         
-        //If the current token array does not have enough tokens, add an error message to the message board
-        if(tokenArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) {
-            [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
-            NSLog(@"Corrupted: %@",tokenArray);
+        //If it does not exist, create a new one and erase all of its folders
+        if (!studentGroup) {
+             NSDictionary *groupInfo=[NSDictionary dictionaryWithObjectsAndKeys:groupName,GDVStudentGroupName,groupID,GDVStudentGroupIdentifier,faulty,GDVStudentGroupIsFaulty, nil];
+            studentGroup=[Group studentGroupForInfo:groupInfo inManagedObjectContext:self.database.managedObjectContext];
+            [studentGroup removeFolders:studentGroup.folders];
         }
         
-        //Else, process the token array and contruct a corresponding transient record
-        else {
-            //Create a transient record from the token array
-            NSString *folderName=[[path.lastPathComponent componentsSeparatedByString:@"."] objectAtIndex:0];
-            TransientRecord *record=[self recordForTokenArray:tokenArray withFolderName:folderName withGroupID:groupID];
+        //Create the folder from the file path
+        NSString *folderName=[[tokenArrays objectAtIndex:3] objectAtIndex:1];
+        Folder *folder=[Folder folderForName:folderName inStudentGroup:studentGroup];
+        
+        //Remove the metadata token arrays and the record header token array
+        NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 6)];
+        [tokenArrays removeObjectsAtIndexes:indexes];
+        
+        //Now create transient records from the rest
+        for(NSArray *tokenArray in tokenArrays) {
+            //If the current token array does not have enough tokens, add an error message to the message board
+            if(tokenArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) {
+                NSString *error=[NSString stringWithFormat:@"Invalid CSV File Format: %@. Please ensure that your csv file has the required format.",path.lastPathComponent];
+                [self.validationMessageBoard addErrorWithMessage:error];
+                NSLog(@"Corrupted: %@",tokenArray);
+            }
             
-            //add the record to the array of records
-            [transientRecords addObject:record];
+            //Else, process the token array and contruct a corresponding record
+            else {
+                //Create a record from the token array
+                Record *record=[self recordForTokenArray:tokenArray withFolder:folder];
+                
+                //add the record to the array of records
+                [records addObject:record];
+            }
         }
+    } else {
+        //No metadata, add an error message
+        NSString *error=[NSString stringWithFormat:@"Missing metadata in: %@. Please ensure that your csv file has the required format.",path.lastPathComponent];
+        [self.validationMessageBoard addErrorWithMessage:error];
+        NSLog(@"Missing metadata: %@",path.lastPathComponent);
     }
-    
-    return transientRecords.copy;
-}
-
-- (NSDictionary *)createFoldersFromCSVFiles:(NSArray *)files {
-    NSMutableDictionary *foldersByFolderNames=[NSMutableDictionary dictionaryWithCapacity:files.count];
-    for (NSString *csvFile in files) {
-        //Create a folder with the folder name specified in the csv file
-        NSString *folderName=[[csvFile componentsSeparatedByString:@"."] objectAtIndex:0];
-        TransientProject *folder=[[TransientProject alloc] init];
-        folder.folderName=folderName;
-        
-        //Add it the dictionary as value with its name as key
-        [foldersByFolderNames setObject:folder forKey:folderName];
-    }
-    
-    return foldersByFolderNames.copy;
+     
+    return records.copy;
 }
 
 /*
@@ -321,134 +237,13 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 {       
     //get paths to the selected files
     self.selectedFilePaths = [self getSelectedFilePaths:files];
-    
-    //Create the folders
-    self.foldersByFolderNames=[self createFoldersFromCSVFiles:files];
-    
-    //Iterate through each csv files and create transient records from each of them
+        
+    //Iterate through each csv files and create records from each of them
     for (NSString *path in self.selectedFilePaths) {
         //Construct the records
         NSArray *records=[self constructRecordsFromCSVFileWithPath:path];
-        
-        //Add them to self.records
-        [self.records addObjectsFromArray:records];
     }
 }
-
-#pragma mark - Reading of Formation files
-
-- (void)constructFormationsFromCSVFilePath:(NSString *)path {
-    //this is an array lines, which is an array of tokens
-    NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
-    
-    //Transpose the array of tokens (expecting the csv file to contains formation columns sorted by formation folders)
-    tokenArrays=[IEFormatter transposeTwoDimensionalArray:tokenArrays.copy].mutableCopy;
-    
-    //for each array of tokens 
-    NSMutableArray *formationFolders=self.formationFolders.mutableCopy;
-    for (int index=0;index<tokenArrays.count;index++) {
-        //Create one formation for each line
-        NSMutableArray *tokenArray=[[tokenArrays objectAtIndex:index] mutableCopy];
-        NSString *folder = [tokenArray objectAtIndex:0];
-        [tokenArray removeObjectAtIndex:0];
-        TransientFormation_Folder *newFormationFolder = [[TransientFormation_Folder alloc] init];
-        newFormationFolder.folderName = [TextInputFilter filterDatabaseInputText:folder];
-        
-        //Save the newly created transient formation folder
-        [formationFolders addObject:newFormationFolder];
-        
-        //Keep track of the sort number (formations will be sorted by the order they are in the csv file)
-        int sortNumber=1;
-        
-        //for each token(formation) in such an array of line record(formation folder)
-        for (NSString *formation in tokenArray) {
-            //if the formation name is not empty
-            NSString *formationName=[TextInputFilter filterDatabaseInputText:formation];
-            if (formationName.length) {
-                TransientFormation *newFormation = [[TransientFormation alloc] init];
-                newFormation.formationFolder = newFormationFolder;
-                newFormation.formationName = formationName;
-                newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
-                [self.formations addObject:newFormation];
-            }
-        }
-    }    
-    self.formationFolders=formationFolders.copy;
-}
-
--(void) constructFormationsWithColorsfromCSVFilePath:(NSString *) path withFolderName:(NSString *) fileName;
-{
-    
-    NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy; // A 2D array with rows as each line, and tokens en each line as the columns in each row    
-    
-    TransientFormation_Folder *newTransientFormationFolder;
-    NSMutableArray *formationFolders = self.formationFolders.mutableCopy;
-    
-    if([tokenArrays count]) {
-        NSString *newFormationFolderName = fileName;//get the object as the first row and column.
-        newFormationFolderName = [TextInputFilter filterDatabaseInputText:newFormationFolderName];
-        newTransientFormationFolder = [[TransientFormation_Folder alloc] init];
-        newTransientFormationFolder.folderName = [TextInputFilter filterDatabaseInputText:newFormationFolderName];
-        //save the object in the array of folders to be added to the database
-        [formationFolders addObject:newTransientFormationFolder];
-    }
-    
-    [tokenArrays removeObjectAtIndex:0];//get rid of the column headings
-    if(![tokenArrays count]) return; //if no data, return
-    
-    int sortNumber = 1;
-    for (int line = 0; line<tokenArrays.count; line++) {
-        NSMutableArray *tokenArray = [tokenArrays objectAtIndex:line];
-        NSString *formationName = [TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:0]];
-        ColorManager *colorManager=[ColorManager standardColorManager];
-        
-        //if formation name is not empty, then create the transient object
-        if (formationName.length) {
-            TransientFormation *newFormation = [[TransientFormation alloc] init];
-            newFormation.formationFolder = newTransientFormationFolder;
-            newFormation.formationName = formationName;
-            newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
-            newFormation.formationColor = [colorManager colorWithName:[TextInputFilter filterDatabaseInputText:[tokenArray objectAtIndex:1]]];
-            newFormation.colorName = [tokenArray objectAtIndex:1];
-            [self.formations addObject:newFormation];
-        }       
-    }
-    self.formationFolders = formationFolders.copy;
-}
-
-- (void)createFormationsFromCSVFiles:(NSArray *) files
-{    
-    //get the complete file paths for the selected files that exist
-    self.selectedFilePaths=[self getSelectedFilePaths:files];
-    
-    //read each of those files line by line and create the formation objects and add it to self.formations array.
-    for(NSString *path in self.selectedFilePaths) {
-        //Construct formations from the file path
-        [self constructFormationsFromCSVFilePath:path];
-    }
-}
-
-/* The format of this file would be two columns of data in a file for each formation folder. The first column is the formation type and the second would be the color associated with that formation type. If the color column is empty, the color would be default when the annotations are drawn.
- For example:
- 
- Formations  Color  -> Column headings
- Formation1  Red
- Formation2  Blue
- ...         ...
- */
-- (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
-{    
-    self.selectedFilePaths = [self getSelectedFilePaths:files];    
-    
-    //read each of those files line by line and create the formation objects and add it to self.formations array.
-    for(NSString *path in self.selectedFilePaths) {
-        //Construct formations from the file path
-        NSString *folderName = [[[[path componentsSeparatedByString:@"/"] lastObject] componentsSeparatedByString:@"."] objectAtIndex:0];
-        [self constructFormationsWithColorsfromCSVFilePath:path withFolderName:folderName];
-    }
-}
-
-
 
 #pragma mark - CSV File Parsing
 

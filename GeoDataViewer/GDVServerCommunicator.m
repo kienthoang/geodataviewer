@@ -10,13 +10,4 @@
 
 @implementation GDVServerCommunicator
 
-@synthesize processor=_processor;
-
-+ (GDVServerCommunicator *)serverCommunicatorWithProcessor:(GDVTransientDataProcessor *)processor {
-    GDVServerCommunicator *serverCommunicator=[[GDVServerCommunicator alloc] init];
-    serverCommunicator.processor=processor;
-    
-    return serverCommunicator;
-}
-
 @end

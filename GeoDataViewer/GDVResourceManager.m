@@ -8,7 +8,7 @@
 
 #import "GDVResourceManager.h"
 
-@interface GDVResourceManager() <GDVTransientDataProcessorDelegate>
+@interface GDVResourceManager() 
 
 @end
 
@@ -18,8 +18,6 @@
 
 @synthesize engine=_engine;
 @synthesize server=_server;
-@synthesize serverProcessor=_serverProcessor;
-@synthesize engineProcessor=_engineProcessor;
 
 static GDVResourceManager *defaultResourceManager;
 
@@ -50,35 +48,16 @@ static GDVResourceManager *defaultResourceManager;
 
 #pragma mark - Getters and Setters
 
-- (GDVTransientDataProcessor *)serverProcessor {
-    if (!_serverProcessor) {
-        _serverProcessor=[[GDVTransientDataProcessor alloc] init];
-        _serverProcessor.delegate=self;
-    }
-        
-    return _serverProcessor;
-}
-
-- (GDVTransientDataProcessor *)engineProcessor {
-    if (!_engineProcessor) {
-        _engineProcessor=[[GDVTransientDataProcessor alloc] init];
-        _engineProcessor.delegate=self;
-    }
-    
-    return _engineProcessor;
-}
-
-
 - (GDVIEEngine *)engine {
     if (!_engine)
-        _engine=[GDVIEEngine engineWithDataProcessor:self.engineProcessor];
+        _engine=[[GDVIEEngine alloc] init];
     
     return _engine;
 }
 
 - (GDVServerCommunicator *)server {
     if (!_server)
-        _server=[GDVServerCommunicator serverCommunicatorWithProcessor:self.serverProcessor];
+        _server=[[GDVServerCommunicator alloc] init];
     
     return _server;
 }
@@ -107,19 +86,19 @@ static GDVResourceManager *defaultResourceManager;
     [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
 }
 
-#pragma mark - GDVTransientDataProcessor Protocol Methods
+#pragma mark - GDVIEEngineDelegate Protocol Methods
 
-- (void)processorDidFinishProcessingRecords:(GDVTransientDataProcessor *)processor {
+- (void)engineDidFinishProcessingRecords:(GDVIEEngine *)engine {
     //Post notification
     [self postNotificationWithName:GDVResourceManagerRecordDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
 }
 
-- (void)processorDidFinishProcessingFormations:(GDVTransientDataProcessor *)processor {
+- (void)engineDidFinishProcessingFormations:(GDVIEEngine *)engine {
     //Post notification
     [self postNotificationWithName:GDVResourceManagerFormationDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
 }
 
-- (void)processorDidFinishProcessingStudentResponses:(GDVTransientDataProcessor *)processor {
+- (void)engineDidFinishProcessingStudentResponses:(GDVIEEngine *)engine {
     //Post notification
     [self postNotificationWithName:GDVResourceManagerStudentResponseDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
 }

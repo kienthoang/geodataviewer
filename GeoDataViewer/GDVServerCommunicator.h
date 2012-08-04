@@ -8,12 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GDVTransientDataProcessor.h"
-
 @interface GDVServerCommunicator : NSObject
-
-+ (GDVServerCommunicator *)serverCommunicatorWithProcessor:(GDVTransientDataProcessor *)processor;
-
-@property (nonatomic,strong) GDVTransientDataProcessor *processor;
 
 @end

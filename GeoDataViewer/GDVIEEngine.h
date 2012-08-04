@@ -8,13 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GDVTransientDataProcessor.h"
+#import "Group.h"
+#import "Group+Creation.h"
+
+#import "Folder.h"
+#import "Folder+Creation.h"
+
+#import "Record.h"
+
+#import "Formation_Folder.h"
+
+#import "Formation.h"
+
+#import "Answer.h"
 
 @interface GDVIEEngine : NSObject
 
-+ (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor;
-
-@property (nonatomic,strong) GDVTransientDataProcessor *processor;
+@property (nonatomic,strong) UIManagedDocument *database;
 
 #pragma mark - Import
 
@@ -24,6 +34,6 @@
 - (void)createFeedbacksFromCSVFiles:(NSArray *)files; //passes the array of feedbacks
 
 #define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16
-#define GROUP_INFO_HEADER @"Group Information"
+#define METADATA_HEADER @">>>>>> Metadata <<<<<<<"
 
 @end
