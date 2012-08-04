@@ -14,6 +14,9 @@
 
 + (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor;
 
+typedef void(^save_completion_handler_t)(BOOL success);
+
+
 @property (nonatomic,strong) GDVTransientDataProcessor *processor;
 
 #pragma mark - Import

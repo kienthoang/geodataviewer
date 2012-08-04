@@ -12,9 +12,9 @@
 
 + (GeoDatabaseManager *)standardDatabaseManager;   //Return the singleton instance of this class
 
-typedef void (^completion_handler_t)(UIManagedDocument *database);
+typedef void(^database_completion_handler_t)(UIManagedDocument *database);
 
-- (void)fetchDatabaseFromDisk:(id)sender completion:(completion_handler_t)completionBlock;
+- (void)fetchDatabaseFromDisk:(id)sender completion:(database_completion_handler_t)completionBlock;
 
 @property (nonatomic,strong) UIManagedDocument *mainDatabase;      //Return the UIManagedDocument for the entire database, which will be shared throughout the app
 

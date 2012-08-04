@@ -1,8 +1,8 @@
 //
 //  Record.m
-//  GeoDataViewer
+//  GeoFieldBook
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 7/24/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -16,11 +16,13 @@
 @dynamic date;
 @dynamic dip;
 @dynamic dipDirection;
-@dynamic fieldObservations;
+@dynamic fieldOservations;
+@dynamic idOnServer;
 @dynamic latitude;
 @dynamic longitude;
 @dynamic name;
 @dynamic strike;
+@dynamic state;
 @dynamic folder;
 @dynamic image;
 

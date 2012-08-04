@@ -13,7 +13,7 @@
 - (void)synchronizeWithMainDatabase;                                    //synchronize the database with the main database
 - (void)createMainDatabaseWithURL:(NSURL *)databaseURL;                  //create the main database if it does not exist on disk
 
-@property (nonatomic,strong) completion_handler_t completionBlockForFetchingDatabase;
+@property (nonatomic,strong) database_completion_handler_t completionBlockForFetchingDatabase;
 
 @end
 
@@ -102,7 +102,7 @@ static GeoDatabaseManager *standardDatabaseManager;
 }
 
 //Fetch the database
-- (void)fetchDatabaseFromDisk:(id)sender completion:(completion_handler_t)completionBlock {
+- (void)fetchDatabaseFromDisk:(id)sender completion:(database_completion_handler_t)completionBlock {
     UIManagedDocument *mainDatabase=self.mainDatabase;
     
     if (self.mainDatabase) {

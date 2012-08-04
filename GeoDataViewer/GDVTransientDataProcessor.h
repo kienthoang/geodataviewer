@@ -14,6 +14,10 @@
 
 @property (nonatomic,weak) id<GDVTransientDataProcessorDelegate> delegate;
 
+-(void) updateDatabaseWithRecords:(NSArray *)records withFolders:(NSArray *)folders withGroups:(NSArray *) groups;
+
+-(void) updateDatabaseWithFormations:(NSArray *)formations withFormationFolders:(NSArray *)formationFolders;
+
 
 
 @end

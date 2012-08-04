@@ -27,6 +27,18 @@
 
 #import "TransientGroup.h"
 
+#import "GeoDatabaseManager.h"
+#import "Group.h"
+#import "Group+DictionaryKeys.h"
+#import "Group+Creation.h"
+#import "Record.h"
+#import "Record+DictionaryKeys.h"
+#import "Record+Creation.h"
+#import "Folder.h"
+#import "Folder+Creation.h"
+#import "Folder+DictionaryKeys.h"
+#import "Formation.h"
+
 @interface GDVIEEngine()
 
 @property (nonatomic, strong) NSArray *selectedFilePaths;
@@ -35,6 +47,11 @@
 @property (nonatomic, strong) NSDictionary *foldersByFolderNames;
 @property (nonatomic, strong) NSMutableDictionary *groupDictionaryByID;
 @property (nonatomic, strong) NSArray *formationFolders;
+
+@property (nonatomic, strong) UIManagedDocument *database;
+@property (nonatomic, strong) NSMutableDictionary *groupInfo;
+@property (nonatomic, strong) NSMutableDictionary *folderInfo;
+@property (nonatomic, strong) NSMutableDictionary *recordInfo;
 
 @property (nonatomic, strong) ValidationMessageBoard *validationMessageBoard;
 
@@ -54,6 +71,14 @@
 
 @synthesize groupDictionaryByID=_groupDictionaryByID;
 
+@synthesize database=_database;
+@synthesize folderInfo=_folderInfo;
+@synthesize groupInfo=_groupInfo;
+@synthesize recordInfo=_recordInfo;
+
+
+
+
 + (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor {
     GDVIEEngine *engine=[[GDVIEEngine alloc] init];
     engine.processor=processor;
@@ -65,6 +90,12 @@
 typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
 
 #pragma mark - Getters
+-(UIManagedDocument *) database {
+    if(!_database)
+        _database = [GeoDatabaseManager standardDatabaseManager].mainDatabase;
+    return _database;
+}
+
 -(NSMutableDictionary *) groupDictionaryByID {
     if(!_groupDictionaryByID) {
         _groupDictionaryByID = [NSMutableDictionary dictionary];
@@ -104,6 +135,99 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     if (!_records)
         _records=[NSMutableArray array];
     return _records;
+}
+
+#pragma mark - Database modification
+//delete if already present, delete it. otherwise return a new group object
+//-(Group *) groupWithID:(NSString *)groupID {
+//    //first query the database 
+//    Group *someGroup =[self queryDatabaseForGroupWithID:groupID];    
+//    if(someGroup) {
+//        //if present, delete it first
+//        [self.database.managedObjectContext deleteObject:someGroup];
+//        //now write it to the database
+//        someGroup=[NSEntityDescription insertNewObjectForEntityForName:@"Group" inManagedObjectContext:self.database.managedObjectContext];
+//    }
+//    return someGroup;
+//}
+//
+//-(Folder *) folderWithName:(NSString *) folderName {
+//    //first query the database 
+//    Folder *someFolder =[self queryDatabaseForFolderWithName:folderName];    
+//    if(someFolder) {
+//        //if present, delete it first
+//        [self.database.managedObjectContext deleteObject:someFolder];
+//        //now write it to the database
+//        someFolder=[NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:self.database.managedObjectContext];
+//    }
+//    return someFolder;
+//}
+//
+//-(Record *) recordWithName:(NSString *)name inFolder:(NSString *)folderName {
+//   //first query the database for records in that folder
+//    Record *someRecord = [self querydatabaseForRecord:name inFolder:folderName];
+//    
+//    if(someRecord){
+//        //if present, delete it first
+//        [self.database.managedObjectContext deleteObject:someRecord];
+//        //now write it to the database
+//        someRecord=[NSEntityDescription insertNewObjectForEntityForName:@"Record" inManagedObjectContext:self.database.managedObjectContext];
+//    }
+//    return someRecord;
+//}
+
+-(void)saveChangesToDatabase:(UIManagedDocument *)database completion:(save_completion_handler_t)completionHandler {
+    //Save changes to database
+    [database saveToURL:database.fileURL 
+       forSaveOperation:UIDocumentSaveForOverwriting 
+      completionHandler:^(BOOL success)
+     {
+         //If there was a failure, put up an alert
+         if (!success) {
+             //[self putUpDatabaseErrorAlertWithMessage:@"Could not save changes to the database. Please try again."];
+         }         
+         //Pass control to the completion handler when the saving is done
+         completionHandler(success);
+     }];
+}
+
+#pragma mark - database query
+- (Group *)queryDatabaseForGroupWithID:(NSString *)groupID {
+    //Query the database for a folder with the given named
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Group"];
+    request.predicate=[NSPredicate predicateWithFormat:@"identifier=%@",groupID];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    //If there is a result return it
+    return results.count>0 ? [results lastObject] : nil;
+}
+
+- (Folder *)queryDatabaseForFolderWithName:(NSString *)folderName {
+    //Query the database for a folder with the given named
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",folderName];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    //If there is a result return it
+    return results.count>0 ? [results lastObject] : nil;
+}
+    
+-(Record *)querydatabaseForRecord:name inFolder:folderName {
+    //query the database for records within the folder with the given name
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
+    request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",folderName];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    
+    //if the record is in the list of fetched records, return it
+    for(Record *someRecord in results) {
+        if([someRecord.name isEqualToString:name])
+            return someRecord;
+    }
+    //if not found, return nil;
+    return nil;
 }
 
 #pragma mark - Data Managers
@@ -248,25 +372,39 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 }
 
 - (NSArray *)constructRecordsFromCSVFileWithPath:(NSString *)path {
-    NSMutableArray *transientRecords=[NSMutableArray array];;
+    NSMutableArray *transientRecords=[NSMutableArray array];
     
-    //Get all the token arrays 9each of them corresponding to a line in the csv file)
+    //Get all the token arrays (each of them corresponding to a line in the csv file)
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
     
     NSString *groupName;
     NSString *groupID;
+    NSString *folderName;
     if([[tokenArrays objectAtIndex:0] isEqualToString:GROUP_INFO_HEADER]) {
         [tokenArrays removeObjectAtIndex:0];
         groupName = [tokenArrays objectAtIndex:1];
         [tokenArrays removeObjectAtIndex:1];
         groupID = [tokenArrays objectAtIndex:2];
         [tokenArrays removeObjectAtIndex:2];
+        folderName = [tokenArrays objectAtIndex:3];
         [tokenArrays removeObjectAtIndex:3];
     } else {
         //old format, remove just the column headings
         [tokenArrays removeObjectAtIndex:4];
+        //also get the foldername from the filename itself
+        folderName=[[path.lastPathComponent componentsSeparatedByString:@"."] objectAtIndex:0];
     }
-   
+    //create groupInfo
+    [self.groupInfo removeAllObjects];
+    [self.groupInfo setObject:groupName forKey:GROUP_NAME];
+    [self.groupInfo setObject:groupID forKey:GROUP_ID];
+    
+    //create folderInfo
+    [self.folderInfo removeAllObjects];
+    [self.groupInfo setObject:folderName forKey:FOLDER_NAME];
+    
+    
+    //delete:
     //first construct a group from the group ID if not created already
     if(![self.groupDictionaryByID valueForKey:groupID]) {
         //key does not exist
@@ -275,9 +413,39 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         newGroup.identifier = groupID;        
     }
     
+    //get the group object and create one if it does not yet exist
+    Group *currentGroup = [self queryDatabaseForGroupWithID:groupID];
+    if(!currentGroup) 
+        currentGroup = [Group groupWithGroupInfo:self.groupInfo inManagedObjectContext:self.database.managedObjectContext];
+        
+    
+    //get the folder object and create new if does not yet exist, delete it if it already exists
+    Folder *currentFolder = [self queryDatabaseForFolderWithName:folderName];
+    if(!currentFolder){
+        currentFolder = [Folder folderWithInfo:self.folderInfo inManagedObjectContext:self.database.managedObjectContext];
+        currentFolder.group = currentGroup;
+    } else {
+        //if it exists, delete it, then create a new with the same name
+        [self.database.managedObjectContext deleteObject:currentFolder];
+        currentFolder = [Folder folderWithInfo:self.folderInfo inManagedObjectContext:self.database.managedObjectContext];
+        currentFolder.group = currentGroup;
+    }
+    
+    for(NSArray *lineTokens in tokenArrays) {
+         self.recordInfo = [self extractRecordInfoFromTokenArray:lineTokens withFolderName:folderName];
+        Record *newRecord = [Record recordForRecordType:[self.recordInfo objectForKey:RECORD_TYPE ] andFolderName:folderName inManagedObjectContext:self.database.managedObjectContext];
+        newRecord.folder = currentFolder;       
+    }
+    
+    //Save changes to database
+    [self saveChangesToDatabase:self.database completion:^(BOOL success){
+        if (success) {
+            //post some notification that the database was updated
+        }
+    }];
+    
     //Now create transient records from the rest
     for(NSArray *tokenArray in tokenArrays) {
-        
         //If the current token array does not have enough tokens, add an error message to the message board
         if(tokenArray.count!=NUMBER_OF_COLUMNS_PER_RECORD_LINE) {
             [self.validationMessageBoard addErrorWithMessage:@"Invalid CSV File Format. Please ensure that your csv file has the required format."];
@@ -286,16 +454,67 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         
         //Else, process the token array and contruct a corresponding transient record
         else {
-            //Create a transient record from the token array
-            NSString *folderName=[[path.lastPathComponent componentsSeparatedByString:@"."] objectAtIndex:0];
+            
+            //Create a transient record from the token array            
             TransientRecord *record=[self recordForTokenArray:tokenArray withFolderName:folderName withGroupID:groupID];
+            
+            //TODO: add pointers inside the group and folder objects to its children
             
             //add the record to the array of records
             [transientRecords addObject:record];
         }
+        
+        
     }
     
     return transientRecords.copy;
+}
+
+-(NSMutableDictionary *) extractRecordInfoFromTokenArray:(NSArray *)tokenArray withFolderName:(NSString *)folderName {
+    NSMutableDictionary *recordInfo;
+    
+    NSString *type = [tokenArray objectAtIndex:Type];
+    
+    //get the common fields first
+    [recordInfo setObject:[tokenArray objectAtIndex:Name] forKey:RECORD_NAME];
+    [recordInfo setObject:[tokenArray objectAtIndex:Type] forKey:RECORD_TYPE];
+    [recordInfo setObject:[tokenArray objectAtIndex:Longitude] forKey:RECORD_LONGITUDE];
+    [recordInfo setObject:[tokenArray objectAtIndex:Latitude] forKey:RECORD_LATITUDE];
+    [recordInfo setObject:[tokenArray objectAtIndex:Strike] forKey:RECORD_STRIKE];
+    [recordInfo setObject:[tokenArray objectAtIndex:Dip] forKey:RECORD_DIP];
+    [recordInfo setObject:[tokenArray objectAtIndex:dipDirection] forKey:RECORD_DIP_DIRECTION];
+    [recordInfo setObject:[tokenArray objectAtIndex:Observations] forKey:RECORD_FIELD_OBSERVATION];
+    
+    //Populate the date field
+    NSString *dateToken = [[tokenArray objectAtIndex:Date] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *timeToken = [[tokenArray objectAtIndex:Time] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [recordInfo setObject:[self dateFromDateToken:dateToken andTimeToken:timeToken] forKey:RECORD_DATE];    
+    
+    //Set the image of the record using the given image file name in the csv file
+    NSData *imageData=[self imageInDocumentDirectoryForName:[tokenArray objectAtIndex:imageName]];
+    if (imageData) {
+        TransientImage *image=[[TransientImage alloc] init];
+        image.imageData=imageData;
+        [recordInfo setObject:image forKey:RECORD_IMAGE];
+    }
+    
+    //now put the record-specific types
+    if([type isEqualToString:@"Contact"]) {
+        [recordInfo setObject:[tokenArray objectAtIndex:LowerFormation] forKey:RECORD_LOWER_FORMATION];
+        [recordInfo setObject:[tokenArray objectAtIndex:UpperFormation] forKey:RECORD_UPPER_FORMATION];        
+    } else if ([type isEqualToString:@"Bedding"]) {
+        [recordInfo setObject:[tokenArray objectAtIndex:FormationField] forKey:RECORD_FORMATION];
+    } else if([type isEqualToString:@"Joint Set"]) {
+        [recordInfo setObject:[tokenArray objectAtIndex:FormationField] forKey:RECORD_FORMATION];
+    } else if([type isEqualToString:@"Fault"]) {  
+        [recordInfo setObject:[tokenArray objectAtIndex:FormationField] forKey:RECORD_FORMATION];
+        [recordInfo setObject:[tokenArray objectAtIndex:Trend] forKey:RECORD_TREND];
+        [recordInfo setObject:[tokenArray objectAtIndex:Plunge] forKey:RECORD_PLUNGE];
+    } else if([type isEqualToString:@"Other"]) {
+        //Nothing to populate
+    }    
+    
+    return recordInfo;
 }
 
 - (NSDictionary *)createFoldersFromCSVFiles:(NSArray *)files {
