@@ -8,6 +8,8 @@
 
 #import "GDVFormationTableViewController.h"
 
+#import "CustomFormationCell.h"
+
 @interface GDVFormationTableViewController ()
 
 @end
@@ -57,9 +59,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Formation Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomFormationCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    Formation *formation=[self.formations objectAtIndex:indexPath.row];
+    cell.formation=formation;
     
     return cell;
 }

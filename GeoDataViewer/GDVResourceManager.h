@@ -35,7 +35,7 @@
 
 - (void)importRecordCSVFiles:(NSArray *)csvFiles;
 - (void)importFormationCSVFiles:(NSArray *)csvFiles;
-- (void)importFeedbackCSVFiles:(NSArray *)csvFiles;
+- (void)importStudentResponseCSVFiles:(NSArray *)csvFiles;
 
 #pragma mark - Data
 

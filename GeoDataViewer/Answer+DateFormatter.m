@@ -1,20 +1,20 @@
 //
-//  Record+DateAndTimeFormatter.m
-//  GeoFieldBook
+//  Answer+DateFormatter.m
+//  GeoDataViewer
 //
-//  Created by excel 2011 on 6/28/12.
+//  Created by Kien Hoang on 8/5/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "Record+DateAndTimeFormatter.h"
+#import "Answer+DateFormatter.h"
 
-@implementation Record (DateAndTimeFormatter)
+@implementation Answer (DateFormatter)
 
 + (NSString *)dateFromNSDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
     return [dateFormatter stringFromDate:date];
-     
+    
 }
 
 + (NSString *)timeFromNSDate:(NSDate *)date {

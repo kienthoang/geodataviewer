@@ -31,12 +31,18 @@
 #import "Folder+DictionaryKeys.h"
 #import "Formation.h"
 
+#import "Group+Modification.h"
+
 #import "Formation_Folder.h"
 #import "Formation_Folder+Creation.h"
+#import "Formation_Folder+Modification.h"
 
 #import "Formation.h"
 #import "Formation+Creation.h"
 #import "Formation+DictionaryKeys.h"
+
+#import "Answer+Creation.h"
+#import "Answer+DateFormatter.h"
 
 @interface GDVIEEngine()
 
@@ -49,7 +55,6 @@
 @property (nonatomic, strong) NSMutableDictionary *groupInfo;
 @property (nonatomic, strong) NSMutableDictionary *folderInfo;
 @property (nonatomic, strong) NSMutableDictionary *recordInfo;
-@property (nonatomic, strong) NSMutableDictionary *formationInfo;
 
 @property (nonatomic, strong) ValidationMessageBoard *validationMessageBoard;
 
@@ -71,7 +76,6 @@
 @synthesize folderInfo=_folderInfo;
 @synthesize groupInfo=_groupInfo;
 @synthesize recordInfo=_recordInfo;
-@synthesize formationInfo=_formationInfo;
 
 @synthesize delegate=_delegate;
 
@@ -271,7 +275,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
              NSDictionary *groupInfo=[NSDictionary dictionaryWithObjectsAndKeys:groupName,GDVStudentGroupName,groupID,GDVStudentGroupIdentifier,faulty,GDVStudentGroupIsFaulty, nil];
             studentGroup=[Group studentGroupForInfo:groupInfo inManagedObjectContext:self.database.managedObjectContext];
             [self.groupDictionaryByID setObject:studentGroup forKey:groupID];
-            [studentGroup removeFolders:studentGroup.folders];
+            [studentGroup removeAndDeleteAllFolders];
         }
                 
         //Create the folder from the file path
@@ -330,6 +334,83 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     }];
 }
 
+#pragma mark - Reading of Student Response CSV Files
+
+typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,ResponseTime,ResponseLatitude,ResponseLongitude,NumberOfRecords} responseHeadings;
+
+- (Answer *)studentResponseForTokenArray:(NSArray *)tokenArray {
+    Answer *response=nil;
+    
+    //Create an info dictionary from the info in the token array
+    NSMutableDictionary *responseDictionary=[NSMutableDictionary dictionary];
+    [responseDictionary setObject:[tokenArray objectAtIndex:QuestionPrompt] forKey:GDVStudentResponseQuestionPrompt];
+    [responseDictionary setObject:[tokenArray objectAtIndex:ResponseContent] forKey:GDVStudentResponseContent];
+    
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLatitude]] forKey:GDVStudentResponseLatitude];
+    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLongitude]] forKey:GDVStudentResponseLongitude];
+    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:NumberOfRecords]] forKey:GDVStudentResponseNumRecords];
+    
+    NSString *dateToken = [[tokenArray objectAtIndex:ResponseDate] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *timeToken = [[tokenArray objectAtIndex:ResponseTime] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [responseDictionary setObject:[self dateFromDateToken:dateToken andTimeToken:timeToken] forKey:GDVStudentResponseDate];
+    
+    response=[Answer responseForInfo:responseDictionary inManagedObjectContext:self.database.managedObjectContext];
+    
+    return response;
+}
+
+- (void)constructStudentResponsesFromFilePath:(NSString *)path {
+    //Get all the token arrays, each of them corresponding to a line in the csv file)
+    NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
+    
+    if([[[tokenArrays objectAtIndex:0] objectAtIndex:0] isEqualToString:METADATA_HEADER]) {
+        //Get the group from the metadata info
+        NSString *groupName=[[tokenArrays objectAtIndex:1] objectAtIndex:1];
+        NSString *groupID=[[tokenArrays objectAtIndex:2] objectAtIndex:1];
+        NSNumber *faulty=[NSNumber numberWithBool:NO];
+        
+        //Try to get the student group from the student-group-by-id dictionary
+        Group *studentGroup=[self.groupDictionaryByID objectForKey:groupID];
+        
+        //If it does not exist, create a new one and erase all of its responses
+        if (!studentGroup) {
+            NSDictionary *groupInfo=[NSDictionary dictionaryWithObjectsAndKeys:groupName,GDVStudentGroupName,groupID,GDVStudentGroupIdentifier,faulty,GDVStudentGroupIsFaulty, nil];
+            studentGroup=[Group studentGroupForInfo:groupInfo inManagedObjectContext:self.database.managedObjectContext];
+            [self.groupDictionaryByID setObject:studentGroup forKey:groupID];
+            [studentGroup removeAndDeleteAllStudentResponses];
+        }
+        
+        //Remove the metadata token arrays and the response header token array
+        NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 5)];
+        [tokenArrays removeObjectsAtIndexes:indexes];
+        
+        //Loop through the token arrays and create responses
+        for (NSArray *tokenArray in tokenArrays) {
+            Answer *response=[self studentResponseForTokenArray:tokenArray];
+            response.group=studentGroup;
+        }
+    }
+}
+    
+- (void)createStudentResponsesFromCSVFiles:(NSArray *)files {
+    [self performDatabaseBlock:^(void){
+        self.selectedFilePaths = [self getSelectedFilePaths:files];    
+        
+        //read each of those files line by line and create the student response objects
+        for(NSString *path in self.selectedFilePaths) {
+            //Construct student responses from the file path
+            [self constructStudentResponsesFromFilePath:path];
+        }
+        
+        //now save the managedObjectcontext permanently in the database
+        [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){
+            //post some notification to the delegate that the database was updated
+            [self.delegate engineDidFinishProcessingStudentResponses:self];
+        }];
+    }];
+}
+
 #pragma mark - Reading of Formation files
 
 ///* The format of this file would be two columns of data in a file for each formation folder. The first column is the formation type and the second would be the color associated with that formation type. If the color column is empty, the color would be default when the annotations are drawn.
@@ -342,40 +423,34 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 // */
 - (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
 {    
-    self.selectedFilePaths = [self getSelectedFilePaths:files];    
-    
-    //read each of those files line by line and create the formation objects and add it to self.formations array.
-    for(NSString *path in self.selectedFilePaths) {
-        //Construct formations from the file path
-        NSString *folderName = [[[[path componentsSeparatedByString:@"/"] lastObject] componentsSeparatedByString:@"."] objectAtIndex:0];
-        [self constructFormationsWithColorsByParsingFilePath:path andFolderName:folderName];
-    }
-    
-    //now save the managedObjectcontext permanently in the database
-    [self saveChangesToDatabase:self.database completion:^(BOOL success){
-        if (success) {
-            NSLog(@"saved changes in formation");
+    [self performDatabaseBlock:^(void){
+        self.selectedFilePaths = [self getSelectedFilePaths:files];    
+        
+        //read each of those files line by line and create the formation objects and add it to self.formations array.
+        for(NSString *path in self.selectedFilePaths) {
+            //Construct formations from the file path
+            NSString *folderName = [[[path componentsSeparatedByString:@"/"].lastObject componentsSeparatedByString:@"."] objectAtIndex:0];
+            [self constructFormationsWithColorsByParsingFilePath:path andFolderName:folderName];
+        }
+        
+        //now save the managedObjectcontext permanently in the database
+        [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){
             //post some notification to the delegate that the database was updated
             [self.delegate engineDidFinishProcessingFormations:self];
-        }
+        }];
     }];
 }
 -(void) constructFormationsWithColorsByParsingFilePath:(NSString *) path andFolderName:(NSString *) fileName 
 {
     NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;// A 2D array with rows as each line, and tokens in each line as the columns in each row   
-    
-    //first see if the formation folder already in the core data database
-    Formation_Folder *folder = [self queryDatabaseForFormationFolderWithName:fileName];
-    
-    //if there is anything returned, delete it and crate a new Formation_Folder entitiy with the same name
-    if(folder) {
-        [self.database.managedObjectContext deleteObject:folder];
-        [Formation_Folder formationFolderForName:fileName inManagedObjectContext:self.database.managedObjectContext];
-    }
-    
+
+    //Get the formation folder
+    Formation_Folder *formationFolder=[Formation_Folder formationFolderForName:fileName inManagedObjectContext:self.database.managedObjectContext];    
+    [formationFolder removeAndDeleteAllFormations];
+        
     //now read the rest of the tokens and create Formation objects and add pointers to the folder inside that objects
     [tokenArrays removeObjectAtIndex:0];//get rid of the column headings
-    if(![tokenArrays count]) return; //return if no data in the file
+    if(!tokenArrays.count) return; //return if no data in the file
     
     int sortNumber = 1;
     for (int line = 0; line<tokenArrays.count; line++) {
@@ -385,19 +460,18 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         
         //if the name is not empty
         if(formationName.length) {
-            [self.formationInfo removeAllObjects];
-            [self.formationInfo setObject:formationName forKey:GeoFormationName];
-            [self.formationInfo setObject:formationColor forKey:GeoFormationColorName];
-            [self.formationInfo setObject:[[ColorManager standardColorManager] colorWithName:formationColor] forKey:GeoFormationColor];
-            [self.formationInfo setObject:[NSNumber numberWithInt:sortNumber++] forKey:GeoFormationSortIndex];
+            NSMutableDictionary *formationInfo=[NSMutableDictionary dictionary];
+            [formationInfo setObject:formationName forKey:GeoFormationName];
+            [formationInfo setObject:formationColor forKey:GeoFormationColorName];
+            [formationInfo setObject:[[ColorManager standardColorManager] colorWithName:formationColor] forKey:GeoFormationColor];
+            [formationInfo setObject:[NSNumber numberWithInt:sortNumber++] forKey:GeoFormationSortIndex];
+            
             //finally create a new entity
-            [Formation formationForInfo:self.formationInfo inFormationFolderWithName:fileName inManagedObjectContext:self.database.managedObjectContext];
+            Formation *formation=[Formation formationForInfo:formationInfo inManagedObjectContext:self.database.managedObjectContext];
+            formation.formationFolder=formationFolder;
         }                                                            
     }
-    
 }
-
-
 
 #pragma mark - CSV File Parsing
 

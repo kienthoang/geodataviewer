@@ -9,7 +9,6 @@
 @interface Formation (Creation)
 
 + (Formation *)formationForInfo:(NSDictionary *)formationInfo 
-      inFormationFolderWithName:(NSString *)folderName 
          inManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (Formation *)formationWithName:(NSString *)formationName inManagedObjectContext:(NSManagedObjectContext *)context;

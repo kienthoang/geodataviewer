@@ -60,7 +60,7 @@
 }
 
 - (UINavigationController *)formationListNav {
-    return self.formationListPopover.isPopoverVisible ? (UINavigationController *)self.formationListPopover.contentViewController : nil;
+    return self.formationListPopover ? (UINavigationController *)self.formationListPopover.contentViewController : nil;
 }
 
 - (GDVFormationFolderTVC *)formationFolderTVC {
@@ -113,6 +113,14 @@
     }];
 }
 
+- (void)updateDataForFormationFolderTVC:(GDVFormationFolderTVC *)formationFolderTVC {
+    //Update formation folders
+    [self.resourceManager fetchFormationFoldersWithCompletionHandler:^(NSArray *formationFolders){
+        if (formationFolderTVC)
+            formationFolderTVC.formationFolders=formationFolders;
+    }];
+}
+
 #pragma mark - Prepare for Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -149,6 +157,9 @@
     else if ([segueIdentifier isEqualToString:@"Formation List"]) {
         //Save the popover
         self.formationListPopover=[(UIStoryboardPopoverSegue *)segue popoverController];
+        
+        //Set the delegate
+        self.formationFolderTVC.delegate=self;
     }
 }
 
@@ -253,11 +264,8 @@
     GDVFormationFolderTVC *formationFolderTVC=self.formationFolderTVC;
     [formationFolderTVC showLoadingScreen];
     
-    //Update formation folders
-    [self.resourceManager fetchFormationFoldersWithCompletionHandler:^(NSArray *formationFolders){
-        if (formationFolderTVC)
-            formationFolderTVC.formationFolders=formationFolders;
-    }];
+    //Update
+    [self updateDataForFormationFolderTVC:formationFolderTVC];
 }
 
 - (void)studentResponseDatabaseDidChange:(NSNotification *)notification {
@@ -435,7 +443,7 @@
 - (void)userDidSelectFeedbackCSVFiles:(NSArray *)files forImportingInImportTVC:(ImportTableViewController *)sender
 {
     //Update the model
-    [self.resourceManager importFeedbackCSVFiles:files];
+    [self.resourceManager importStudentResponseCSVFiles:files];
 }
 
 #pragma mark - GDVStudentGroupTVCDelegate Protocol Methods
@@ -485,6 +493,11 @@
         if (formations)
             formationTVC.formations=formations;
     }];
+}
+
+- (void)updateFormationFoldersForFormationFolderTVC:(GDVFormationFolderTVC *)sender {
+    //Update
+    [self updateDataForFormationFolderTVC:sender];
 }
 
 @end

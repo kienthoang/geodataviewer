@@ -80,9 +80,9 @@ static GDVResourceManager *defaultResourceManager;
     [self.engine createFormationsWithColorFromCSVFiles:csvFiles];
 }
 
-- (void)importFeedbackCSVFiles:(NSArray *)csvFiles {
+- (void)importStudentResponseCSVFiles:(NSArray *)csvFiles {
     //Import the record csv files
-    [self.engine createFeedbacksFromCSVFiles:csvFiles];
+    [self.engine createStudentResponsesFromCSVFiles:csvFiles];
 }
 
 #pragma mark - Notification Management Mechanisms
@@ -135,7 +135,6 @@ static GDVResourceManager *defaultResourceManager;
     else {
         completionHandler(studentGroup.folders.allObjects);
     }
-    
 }
 
 - (void)fetchRecordsForFolder:(Folder *)folder completion:(data_completion_handler_t)completionHandler {
@@ -150,15 +149,35 @@ static GDVResourceManager *defaultResourceManager;
 }
 
 - (void)fetchFormationFoldersWithCompletionHandler:(data_completion_handler_t)completionHandler {
-    
+    //Fetch all the formation folders in the database
+    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Formation_Folder"];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    completionHandler(results);    
 }
 
 - (void)fetchFormationsForFormationFolder:(Formation_Folder *)formationFolder completion:(data_completion_handler_t)completionHandler {
-    
+    //Fetch all the formations for the given folder
+    BOOL faulty=formationFolder.faulty.boolValue;
+    if (faulty) {
+        //Data is faulty, fetch formations from server
+    }
+    else {
+        completionHandler(formationFolder.formations.allObjects);
+    }
 }
 
 - (void)fetchStudentResponsesForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
-    
+    //Fetch all the student responses for the given student group
+    BOOL faulty=studentGroup.faulty.boolValue;
+    if (faulty) {
+        //Data is faulty, fetch student responses from server
+    }
+    else {
+        completionHandler(studentGroup.responses.allObjects);
+        
+        NSLog(@"Responses: %@",studentGroup.responses);
+    }
 }
 
 @end

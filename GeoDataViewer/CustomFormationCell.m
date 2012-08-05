@@ -32,12 +32,12 @@
 
 - (void)setFormation:(Formation *)formation {
     _formation=formation;
-    
+        
     //Redraw the color patch
     self.colorPatch.backgroundColor=[self colorForFormation:formation];
     
     //Set the name
-    self.name.text=formation.formationName;
+    self.name.text=formation.formationName;    
 }
 
 //Override set Selected to be sure the color patch's background color does not get covered by the cell's selected state background color

@@ -8,6 +8,8 @@
 
 #import "GDVStudentResponseTVC.h"
 
+#import "Answer.h"
+
 @interface GDVStudentResponseTVC ()
 
 @end
@@ -59,6 +61,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    Answer *response=[self.studentResponses objectAtIndex:indexPath.row];
+    cell.textLabel.text=response.content;
     
     return cell;
 }

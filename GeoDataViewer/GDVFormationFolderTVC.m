@@ -35,6 +35,14 @@
 
 #pragma mark - View Controller Lifecycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Load data
+    NSLog(@"Delegate: %@",self.delegate);
+    [self.delegate updateFormationFoldersForFormationFolderTVC:self];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -82,6 +90,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    Formation_Folder *folder=[self.formationFolders objectAtIndex:indexPath.row];
+    cell.textLabel.text=folder.folderName;
     
     return cell;
 }

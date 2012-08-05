@@ -20,9 +20,9 @@
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
     NSArray *results=[context executeFetchRequest:request error:NULL];
     
-    //if there result or results is nil, handle error
-    if (!results || [results count]) {
-        //handle errors
+    //if there exists such a formation folder, return it
+    if (results.count) {
+        formationFolder=results.lastObject;
     }
     
     //Else, create a new formation folder

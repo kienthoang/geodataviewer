@@ -76,11 +76,11 @@
             </objects>
             <point key="canvasLocation" x="-4113" y="1094"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Formation Table View Controller-->
         <scene sceneID="17A-Qg-kGC">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wma-Co-i3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="tfS-x7-S3R" sceneMemberID="viewController">
+                <tableViewController id="tfS-x7-S3R" customClass="GDVFormationTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g9O-Wh-zUE">
                         <rect key="frame" x="0.0" y="44" width="1024" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1010,6 +1010,9 @@
         </class>
         <class className="GDVFormationFolderTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationFolderTVC.h"/>
+        </class>
+        <class className="GDVFormationTableViewController" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationTableViewController.h"/>
         </class>
         <class className="GDVRecordTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVRecordTVC.h"/>

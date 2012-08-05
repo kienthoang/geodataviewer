@@ -15,4 +15,6 @@
 
 - (void)formationFolderTVC:(GDVFormationFolderTVC *)sender preparedToSegueToFormationTVC:(GDVFormationTableViewController *)formationTVC;
 
+- (void)updateFormationFoldersForFormationFolderTVC:(GDVFormationFolderTVC *)sender;
+
 @end
