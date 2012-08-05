@@ -26,14 +26,11 @@
 		0238B0B415CDB68800B3A67A /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0B315CDB68700B3A67A /* JointSet.m */; };
 		0238B0B715CDB69300B3A67A /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0B615CDB69300B3A67A /* Other.m */; };
 		0238B0BA15CDB69D00B3A67A /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0B915CDB69D00B3A67A /* Question.m */; };
-		0238B0BD15CDB6A800B3A67A /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0BC15CDB6A800B3A67A /* Record.m */; };
 		0251901B15C9FA4E009B8BDA /* IEFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251901A15C9FA4E009B8BDA /* IEFormatter.m */; };
 		0251C89E15CCADB200075C60 /* Group+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C89D15CCADB200075C60 /* Group+Creation.m */; };
 		0251C8A115CCAE1900075C60 /* Group+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8A015CCAE1900075C60 /* Group+DictionaryKeys.m */; };
 		0251C8A415CCB4D000075C60 /* Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8A315CCB4D000075C60 /* Folder+Creation.m */; };
-		0251C8AC15CCBDE300075C60 /* Record+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8A915CCBDE300075C60 /* Record+DictionaryKeys.m */; };
 		0251C8B315CCBED200075C60 /* Image+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8B215CCBED200075C60 /* Image+Creation.m */; };
-		0251C8B615CCBF3300075C60 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8B515CCBF3100075C60 /* Record+Creation.m */; };
 		0251C8B915CCC0C700075C60 /* JointSet+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8B815CCC0C700075C60 /* JointSet+Creation.m */; };
 		0251C8BC15CCC39900075C60 /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8BB15CCC39900075C60 /* Formation_Folder+Creation.m */; };
 		0251C8BF15CCC48900075C60 /* Formation+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8BE15CCC48900075C60 /* Formation+Creation.m */; };
@@ -95,8 +92,6 @@
 		02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */; };
 		02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ADA15C9D0160070EDC7 /* GeoFilter.m */; };
 		02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AE815C9D0490070EDC7 /* SettingManager.m */; };
-		02F31B3A15C9D6620070EDC7 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		02F31B3D15C9D67E0070EDC7 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		02F31B4015C9D6CC0070EDC7 /* Contact+Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B3F15C9D6CC0070EDC7 /* Contact+Formation.m */; };
 		02F31B4215C9D6F10070EDC7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4115C9D6F00070EDC7 /* MapKit.framework */; };
 		02F31B4415C9D6F90070EDC7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4315C9D6F80070EDC7 /* CoreLocation.framework */; };
@@ -201,7 +196,6 @@
 		0238B0B615CDB69300B3A67A /* Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other.m; sourceTree = "<group>"; };
 		0238B0B815CDB69D00B3A67A /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		0238B0B915CDB69D00B3A67A /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
-		0238B0BC15CDB6A800B3A67A /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		0251901915C9FA4E009B8BDA /* IEFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IEFormatter.h; sourceTree = "<group>"; };
 		0251901A15C9FA4E009B8BDA /* IEFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IEFormatter.m; sourceTree = "<group>"; };
 		0251C89C15CCADB200075C60 /* Group+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Group+Creation.h"; sourceTree = "<group>"; };
@@ -210,10 +204,8 @@
 		0251C8A015CCAE1900075C60 /* Group+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Group+DictionaryKeys.m"; sourceTree = "<group>"; };
 		0251C8A215CCB4D000075C60 /* Folder+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+Creation.h"; sourceTree = "<group>"; };
 		0251C8A315CCB4D000075C60 /* Folder+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Folder+Creation.m"; sourceTree = "<group>"; };
-		0251C8A915CCBDE300075C60 /* Record+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+DictionaryKeys.m"; sourceTree = "<group>"; };
 		0251C8B115CCBED200075C60 /* Image+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Image+Creation.h"; sourceTree = "<group>"; };
 		0251C8B215CCBED200075C60 /* Image+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Image+Creation.m"; sourceTree = "<group>"; };
-		0251C8B515CCBF3100075C60 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
 		0251C8B715CCC0C700075C60 /* JointSet+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JointSet+Creation.h"; sourceTree = "<group>"; };
 		0251C8B815CCC0C700075C60 /* JointSet+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JointSet+Creation.m"; sourceTree = "<group>"; };
 		0251C8BA15CCC39900075C60 /* Formation_Folder+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation_Folder+Creation.h"; sourceTree = "<group>"; };
@@ -1095,8 +1087,6 @@
 				02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */,
 				02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */,
 				02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */,
-				02F31B3A15C9D6620070EDC7 /* (null) in Sources */,
-				02F31B3D15C9D67E0070EDC7 /* (null) in Sources */,
 				02F31B4015C9D6CC0070EDC7 /* Contact+Formation.m in Sources */,
 				02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */,
 				02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */,
@@ -1108,9 +1098,7 @@
 				0251C89E15CCADB200075C60 /* Group+Creation.m in Sources */,
 				0251C8A115CCAE1900075C60 /* Group+DictionaryKeys.m in Sources */,
 				0251C8A415CCB4D000075C60 /* Folder+Creation.m in Sources */,
-				0251C8AC15CCBDE300075C60 /* Record+DictionaryKeys.m in Sources */,
 				0251C8B315CCBED200075C60 /* Image+Creation.m in Sources */,
-				0251C8B615CCBF3300075C60 /* Record+Creation.m in Sources */,
 				0251C8B915CCC0C700075C60 /* JointSet+Creation.m in Sources */,
 				0251C8BC15CCC39900075C60 /* Formation_Folder+Creation.m in Sources */,
 				0251C8BF15CCC48900075C60 /* Formation+Creation.m in Sources */,
@@ -1132,7 +1120,6 @@
 				0238B0B415CDB68800B3A67A /* JointSet.m in Sources */,
 				0238B0B715CDB69300B3A67A /* Other.m in Sources */,
 				0238B0BA15CDB69D00B3A67A /* Question.m in Sources */,
-				0238B0BD15CDB6A800B3A67A /* Record.m in Sources */,
 				21C2C9C515CE10C100FF7EA3 /* Record+Creation.m in Sources */,
 				21C2C9C615CE10C100FF7EA3 /* Record+DateAndTimeFormatter.m in Sources */,
 				21C2C9C815CE10C100FF7EA3 /* Record+DipDirectionValues.m in Sources */,

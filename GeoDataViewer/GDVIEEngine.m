@@ -147,7 +147,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
      {
          //If there was a failure, put up an alert
          if (!success) {
-             //do something
+             //some error
         }         
          //Pass control to the completion handler when the saving is done
          completionHandler(success);
@@ -155,48 +155,11 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 }
 
 #pragma mark - database query
-- (Group *)queryDatabaseForGroupWithID:(NSString *)groupID {
-    //Query the database for a folder with the given named
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Group"];
-    request.predicate=[NSPredicate predicateWithFormat:@"identifier=%@",groupID];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
-    
-    //If there is a result return it
-    return results.count>0 ? [results lastObject] : nil;
-}
-
-- (Folder *)queryDatabaseForFolderWithName:(NSString *)folderName {
-    //Query the database for a folder with the given named
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
-    request.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",folderName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
-    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
-    
-    //If there is a result return it
-    return results.count>0 ? [results lastObject] : nil;
-}
-    
--(Record *)querydatabaseForRecord:name inFolder:folderName {
-    //query the database for records within the folder with the given name
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"Record"];
-    request.predicate=[NSPredicate predicateWithFormat:@"folder.folderName=%@",folderName];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
-    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
-    
-    //if the record is in the list of fetched records, return it
-    for(Record *someRecord in results) {
-        if([someRecord.name isEqualToString:name])
-            return someRecord;
-    }
-    //if not found, return nil;
-    return nil;
-}
 
 -(Formation_Folder *) queryDatabaseForFormationFolderWithName:(NSString *) name {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Formation_Folder"];
     request.predicate = [NSPredicate predicateWithFormat:@"folderName=%@",name];
-    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey: @"name" ascending:YES]];
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey: @"folderName" ascending:YES]];
     NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
     
     //if there is any such formation folder fetched, return it
@@ -362,82 +325,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 
 #pragma mark - Reading of Formation files
 
-//- (void)constructFormationsFromCSVFilePath:(NSString *)path {
-//    //this is an array lines, which is an array of tokens
-//    NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;
-//    
-//    //Transpose the array of tokens (expecting the csv file to contains formation columns sorted by formation folders)
-//    tokenArrays=[IEFormatter transposeTwoDimensionalArray:tokenArrays.copy].mutableCopy;
-//    
-//    //for each array of tokens 
-//    NSMutableArray *formationFolders=self.formationFolders.mutableCopy;
-//    for (int index=0;index<tokenArrays.count;index++) {
-//        //Create one formation for each line
-//        NSMutableArray *tokenArray=[[tokenArrays objectAtIndex:index] mutableCopy];
-//        NSString *folder = [tokenArray objectAtIndex:0];
-//        [tokenArray removeObjectAtIndex:0];
-//        TransientFormation_Folder *newFormationFolder = [[TransientFormation_Folder alloc] init];
-//        newFormationFolder.folderName = [TextInputFilter filterDatabaseInputText:folder];
-//        
-//        //Save the newly created transient formation folder
-//        [formationFolders addObject:newFormationFolder];
-//        
-//        //Keep track of the sort number (formations will be sorted by the order they are in the csv file)
-//        int sortNumber=1;
-//        
-//        //for each token(formation) in such an array of line record(formation folder)
-//        for (NSString *formation in tokenArray) {
-//            //if the formation name is not empty
-//            NSString *formationName=[TextInputFilter filterDatabaseInputText:formation];
-//            if (formationName.length) {
-//                TransientFormation *newFormation = [[TransientFormation alloc] init];
-//                newFormation.formationFolder = newFormationFolder;
-//                newFormation.formationName = formationName;
-//                newFormation.formationSortNumber=[NSNumber numberWithInt:sortNumber++];
-//                [self.formations addObject:newFormation];
-//            }
-//        }
-//    }    
-//    self.formationFolders=formationFolders.copy;
-//}
-//
-//-(void) constructFormationsWithColorsByParsingFilePath:(NSString *) path andFolderName:(NSString *) fileName 
-//{
-//    NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;// A 2D array with rows as each line, and tokens in each line as the columns in each row   
-//    
-//    //first see if the formation folder already in the core data database
-//    Formation_Folder *folder = [self queryDatabaseForFormationFolderWithName:fileName];
-//    
-//    //if there is anything returned, delete it and crate a new Formation_Folder entitiy with the same name
-//    if(folder) {
-//        [self.database.managedObjectContext deleteObject:folder];
-//        [Formation_Folder formationFolderForName:fileName inManagedObjectContext:self.database.managedObjectContext];
-//    }
-//    
-//    //now read the rest of the tokens and create Formation objects and add pointers to the folder inside that objects
-//    [tokenArrays removeObjectAtIndex:0];//get rid of the column headings
-//    if(![tokenArrays count]) return; //return if no data in the file
-//    
-//    int sortNumber = 1;
-//    for (int line = 0; line<tokenArrays.count; line++) {
-//        NSMutableArray * formationTokens = [tokenArrays objectAtIndex:line];
-//        NSString  *formationName = [TextInputFilter filterDatabaseInputText:[formationTokens objectAtIndex:0]];
-//        NSString *formationColor = [TextInputFilter filterDatabaseInputText:[formationTokens objectAtIndex:1]];
-//        
-//        //if the name is not empty
-//        if(formationName.length) {
-//            [self.formationInfo removeAllObjects];
-//            [self.formationInfo setObject:formationName forKey:GeoFormationName];
-//            [self.formationInfo setObject:formationColor forKey:GeoFormationColorName];
-//            [self.formationInfo setObject:[[ColorManager standardColorManager] colorWithName:formationColor] forKey:GeoFormationColor];
-//            [self.formationInfo setObject:[NSNumber numberWithInt:sortNumber++] forKey:GeoFormationSortIndex];
-//            //finally create a new entity
-//            [Formation formationForInfo:self.formationInfo inFormationFolderWithName:fileName inManagedObjectContext:self.database.managedObjectContext];
-//        }                                                            
-//    }
-//    
-//}
-//
 ///* The format of this file would be two columns of data in a file for each formation folder. The first column is the formation type and the second would be the color associated with that formation type. If the color column is empty, the color would be default when the annotations are drawn.
 // For example:
 // 
@@ -446,37 +333,64 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 // Formation2  Blue
 // ...         ...
 // */
-//- (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
-//{    
-//    self.selectedFilePaths = [self getSelectedFilePaths:files];    
-//    
-//    //read each of those files line by line and create the formation objects and add it to self.formations array.
-//    for(NSString *path in self.selectedFilePaths) {
-//        //Construct formations from the file path
-//        NSString *folderName = [[[[path componentsSeparatedByString:@"/"] lastObject] componentsSeparatedByString:@"."] objectAtIndex:0];
-//        [self constructFormationsWithColorsByParsingFilePath:path andFolderName:folderName];
-//    }
-//    
-//    //now save the managedObjectcontext permanently in the database
-//    [self saveChangesToDatabase:self.database completion:^(BOOL success){
-//        if (success) {
-//            //post some notification that the database was updated
-//        }
-//    }];
-//}
-//
-//- (void)createFormationsFromCSVFiles:(NSArray *) files
-//{    
-//    //get the complete file paths for the selected files that exist
-//    self.selectedFilePaths=[self getSelectedFilePaths:files];
-//    
-//    //read each of those files line by line and create the formation objects and add it to self.formations array.
-//    for(NSString *path in self.selectedFilePaths) {
-//        //Construct formations from the file path
-//        [self constructFormationsFromCSVFilePath:path];
-//    }
-//}
-//
+- (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
+{    
+    self.selectedFilePaths = [self getSelectedFilePaths:files];    
+    
+    //read each of those files line by line and create the formation objects and add it to self.formations array.
+    for(NSString *path in self.selectedFilePaths) {
+        //Construct formations from the file path
+        NSString *folderName = [[[[path componentsSeparatedByString:@"/"] lastObject] componentsSeparatedByString:@"."] objectAtIndex:0];
+        [self constructFormationsWithColorsByParsingFilePath:path andFolderName:folderName];
+    }
+    
+    //now save the managedObjectcontext permanently in the database
+    [self saveChangesToDatabase:self.database completion:^(BOOL success){
+        if (success) {
+            NSLog(@"saved changes in formation");
+            //post some notification to the delegate that the database was updated
+            [self.delegate engineDidFinishProcessingFormations:self];
+        }
+    }];
+}
+-(void) constructFormationsWithColorsByParsingFilePath:(NSString *) path andFolderName:(NSString *) fileName 
+{
+    NSMutableArray *tokenArrays = [self tokenArraysFromFile:path].mutableCopy;// A 2D array with rows as each line, and tokens in each line as the columns in each row   
+    
+    //first see if the formation folder already in the core data database
+    Formation_Folder *folder = [self queryDatabaseForFormationFolderWithName:fileName];
+    
+    //if there is anything returned, delete it and crate a new Formation_Folder entitiy with the same name
+    if(folder) {
+        [self.database.managedObjectContext deleteObject:folder];
+        [Formation_Folder formationFolderForName:fileName inManagedObjectContext:self.database.managedObjectContext];
+    }
+    
+    //now read the rest of the tokens and create Formation objects and add pointers to the folder inside that objects
+    [tokenArrays removeObjectAtIndex:0];//get rid of the column headings
+    if(![tokenArrays count]) return; //return if no data in the file
+    
+    int sortNumber = 1;
+    for (int line = 0; line<tokenArrays.count; line++) {
+        NSMutableArray * formationTokens = [tokenArrays objectAtIndex:line];
+        NSString  *formationName = [TextInputFilter filterDatabaseInputText:[formationTokens objectAtIndex:0]];
+        NSString *formationColor = [TextInputFilter filterDatabaseInputText:[formationTokens objectAtIndex:1]];
+        
+        //if the name is not empty
+        if(formationName.length) {
+            [self.formationInfo removeAllObjects];
+            [self.formationInfo setObject:formationName forKey:GeoFormationName];
+            [self.formationInfo setObject:formationColor forKey:GeoFormationColorName];
+            [self.formationInfo setObject:[[ColorManager standardColorManager] colorWithName:formationColor] forKey:GeoFormationColor];
+            [self.formationInfo setObject:[NSNumber numberWithInt:sortNumber++] forKey:GeoFormationSortIndex];
+            //finally create a new entity
+            [Formation formationForInfo:self.formationInfo inFormationFolderWithName:fileName inManagedObjectContext:self.database.managedObjectContext];
+        }                                                            
+    }
+    
+}
+
+
 
 #pragma mark - CSV File Parsing
 
