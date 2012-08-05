@@ -1,8 +1,5 @@
 //
 //  Formation_Folder+Creation.h
-//  GeoDataViewer
-//
-//  Created by Kien Hoang on 8/3/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -10,6 +7,7 @@
 
 @interface Formation_Folder (Creation)
 
++ (Formation_Folder *)formationFolderForName:(NSString *)folderName inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Formation_Folder *)defaultFormationFolderInManagedObjectContext:(NSManagedObjectContext *)context;
 
 #define DEFAULT_FORMATION_FOLDER_NAME @"__Imported Formations"

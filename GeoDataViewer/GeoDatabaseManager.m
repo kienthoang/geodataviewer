@@ -99,6 +99,7 @@ static GeoDatabaseManager *standardDatabaseManager;
 }
 
 //Fetch the database
+
 - (UIManagedDocument *)fetchDatabaseFromDisk:(id)sender completion:(completion_handler_t)completionBlock {
     //Save the completion block
     self.completionBlockForFetchingDatabase=completionBlock;

@@ -1,8 +1,8 @@
 //
 //  Record+Creation.m
-//  GeoDataViewer
+//  GeoFieldBook
 //
-//  Created by Kien Hoang on 8/3/12.
+//  Created by excel_2012 
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 

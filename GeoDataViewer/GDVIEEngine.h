@@ -21,6 +21,9 @@
 
 @interface GDVIEEngine : NSObject
 
+typedef void(^save_completion_handler_t)(BOOL success);
+
+
 @property (nonatomic,strong) UIManagedDocument *database;
 @property (nonatomic,weak) id <GDVIEEngineDelegate> delegate;
 

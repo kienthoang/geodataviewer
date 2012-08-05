@@ -10,8 +10,8 @@
 #import "Folder.h"
 #import "Image+Creation.h"
 
-#import "Record+DictionaryKeys.h"
 #import "Record+Types.h"
+#import "Record+DictionaryKeys.h"
 
 #import "Formation+Creation.h"
 
