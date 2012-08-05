@@ -47,6 +47,7 @@
     formation.formationName=formationName;
     formation.formationFolder=formationFolder;
     formation.colorName=colorName;
+    formation.formationSortNumber = [formationInfo objectForKey:GeoFormationSortIndex];
     
     return formation;
 }

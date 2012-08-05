@@ -27,6 +27,6 @@ typedef void(^save_completion_handler_t)(BOOL success);
 - (void)createFeedbacksFromCSVFiles:(NSArray *)files; //passes the array of feedbacks
 
 #define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16
-#define GROUP_INFO_HEADER @"Group Information"
+#define METADATA_HEADER @">>>>>> Metadata <<<<<<<"
 
 @end

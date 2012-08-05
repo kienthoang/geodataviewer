@@ -129,6 +129,7 @@
 		2141072015CC292D007F1FE0 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141071E15CC292D007F1FE0 /* Record+DipDirectionValues.m */; };
 		2141072315CC29AB007F1FE0 /* Group+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141072215CC29AA007F1FE0 /* Group+Creation.m */; };
 		2141072615CC2A6C007F1FE0 /* Group+DictionaryKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141072515CC2A6B007F1FE0 /* Group+DictionaryKeys.m */; };
+		216C655415CDF0AB007FDF8C /* Formation_Folder+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 216C655315CDF0AB007FDF8C /* Formation_Folder+Creation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +402,8 @@
 		2141072215CC29AA007F1FE0 /* Group+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Group+Creation.m"; sourceTree = "<group>"; };
 		2141072415CC2A6B007F1FE0 /* Group+DictionaryKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Group+DictionaryKeys.h"; sourceTree = "<group>"; };
 		2141072515CC2A6B007F1FE0 /* Group+DictionaryKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Group+DictionaryKeys.m"; sourceTree = "<group>"; };
+		216C655215CDF0AB007FDF8C /* Formation_Folder+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Formation_Folder+Creation.h"; sourceTree = "<group>"; };
+		216C655315CDF0AB007FDF8C /* Formation_Folder+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Formation_Folder+Creation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -892,6 +895,8 @@
 			children = (
 				0206DEB515CB6ACA00B76398 /* Formation_Folder.h */,
 				0206DEB615CB6ACA00B76398 /* Formation_Folder.m */,
+				216C655215CDF0AB007FDF8C /* Formation_Folder+Creation.h */,
+				216C655315CDF0AB007FDF8C /* Formation_Folder+Creation.m */,
 			);
 			name = "Formation Folder";
 			sourceTree = "<group>";
@@ -1350,6 +1355,7 @@
 				2141072015CC292D007F1FE0 /* Record+DipDirectionValues.m in Sources */,
 				2141072315CC29AB007F1FE0 /* Group+Creation.m in Sources */,
 				2141072615CC2A6C007F1FE0 /* Group+DictionaryKeys.m in Sources */,
+				216C655415CDF0AB007FDF8C /* Formation_Folder+Creation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
