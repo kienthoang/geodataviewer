@@ -7,8 +7,9 @@
 //
 
 #import "GDVFolderTVC.h"
-
 #import "GDVRecordTVC.h"
+
+#import "CustomFolderCell.h"
 
 @interface GDVFolderTVC ()
 
@@ -67,17 +68,20 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return self.folders.count;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Folder Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomFolderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     Folder *folder=[self.folders objectAtIndex:indexPath.row];
-    cell.textLabel.text=folder.folderName;
-    int numRecords=folder.records.count;
-    NSString *recordCounter=numRecords>1 ?[NSString stringWithFormat:@"%d Records",numRecords] : [NSString stringWithFormat:@"%d Record",numRecords];
-    cell.detailTextLabel.text=recordCounter;
+    cell.folder=folder;
     
     return cell;
 }

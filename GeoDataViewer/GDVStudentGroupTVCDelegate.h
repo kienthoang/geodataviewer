@@ -17,4 +17,8 @@
 - (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToFolderTVC:(GDVFolderTVC *)folderTVC;
 - (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToStudentResponseTVC:(GDVStudentResponseTVC *)studentResponseTVC;
 
+@optional
+
+- (void)updateStudentGroupsForStudenGroupTVC:(GDVStudentGroupTVC *)sender;
+
 @end

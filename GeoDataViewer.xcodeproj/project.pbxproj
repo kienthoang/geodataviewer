@@ -455,8 +455,6 @@
 				0206DE9815CB319E00B76398 /* View Controller Prototype */,
 				0206DD5115CB1CC600B76398 /* Vendor */,
 				02F3199415C9BCB70070EDC7 /* Supporting Files */,
-				0238B09415CD8FE200B3A67A /* CustomManagedDocument.h */,
-				0238B09515CD8FE300B3A67A /* CustomManagedDocument.m */,
 			);
 			path = GeoDataViewer;
 			sourceTree = "<group>";
@@ -570,6 +568,8 @@
 		02F319FB15C9BF8F0070EDC7 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				0238B09415CD8FE200B3A67A /* CustomManagedDocument.h */,
+				0238B09515CD8FE300B3A67A /* CustomManagedDocument.m */,
 				0238B09115CD138700B3A67A /* GeoDatabaseManager.h */,
 				0238B09215CD138700B3A67A /* GeoDatabaseManager.m */,
 				02F31AE715C9D0490070EDC7 /* SettingManager.h */,

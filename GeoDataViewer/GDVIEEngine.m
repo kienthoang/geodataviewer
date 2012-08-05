@@ -58,6 +58,12 @@ typedef void (^database_save_t)(UIManagedDocument *database);
     }];
 }
 
+typedef void (^database_t)(void);
+
+- (void)performDatabaseBlock:(database_t)block {
+    [self.database.managedObjectContext performBlock:block];
+}
+
 //enum for columnHeadings
 typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike, Dip, dipDirection, Observations, FormationField, LowerFormation, UpperFormation, Trend, Plunge, imageName}columnHeadings;
 
@@ -210,7 +216,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
         NSString *folderName=[[tokenArrays objectAtIndex:3] objectAtIndex:1];
         Folder *folder=[Folder folderForName:folderName inManagedObjectContext:self.database.managedObjectContext];
         folder.group=studentGroup;
-        
+                
         //Remove the metadata token arrays and the record header token array
         NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 6)];
         [tokenArrays removeObjectsAtIndexes:indexes];
@@ -245,10 +251,10 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
  */
 -(void)createRecordsFromCSVFiles:(NSArray *)files
 {       
-    //get paths to the selected files
-    self.selectedFilePaths = [self getSelectedFilePaths:files];
+    [self performDatabaseBlock:^{
+        //get paths to the selected files
+        self.selectedFilePaths = [self getSelectedFilePaths:files];
         
-    [self.database.managedObjectContext performBlock:^{
         //Iterate through each csv files and create records from each of them
         for (NSString *path in self.selectedFilePaths) {
             //Construct the records

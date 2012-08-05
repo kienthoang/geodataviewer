@@ -36,6 +36,14 @@
 
 #pragma mark - View Controller Lifecycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Ask for data if self does not have any student group yet
+    if (!self.studentGroups && [self.delegate respondsToSelector:@selector(updateStudentGroupsForStudenGroupTVC:)])
+        [self.delegate updateStudentGroupsForStudenGroupTVC:self];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -65,6 +73,8 @@
         //Set the student group of the destination
         [segue.destinationViewController setStudentGroup:selectedGroup];
         
+        NSLog(@"group: %@",selectedGroup);
+                
         //Notify the delegate
         [self.delegate studentGroupTVC:self preparedToSegueToFolderTVC:segue.destinationViewController];
     }

@@ -18,6 +18,23 @@
 @synthesize checkBox = _checkBox;
 @synthesize spinner=_spinner;
 
+@synthesize record=_record;
+
+- (void)setRecord:(Record *)record {
+    if (record) {
+        _record=record;
+        
+        //show the name, date and time
+        self.name.text=[NSString stringWithFormat:@"%@",record.name];
+        self.type.text=[record.class description];
+        self.date.text=[Record dateFromNSDate:record.date];
+        self.time.text = [Record timeFromNSDate:record.date];
+        
+        //Hide the spinner (in case it's still animating as the cell has been reused)
+        self.spinner.hidden=YES;
+    }
+}
+
 - (void)showCheckBoxAnimated:(BOOL)animated {
     //Only execute if alpha is 0
     if (!self.checkBox.alpha) {

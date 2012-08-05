@@ -8,6 +8,8 @@
 
 #import "GDVRecordTVC.h"
 
+#import "CustomRecordCell.h"
+
 @interface GDVRecordTVC ()
 
 @end
@@ -58,9 +60,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Record Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    Record *record=[self.records objectAtIndex:indexPath.row];
+    cell.record=record;
     
     return cell;
 }

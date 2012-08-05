@@ -92,21 +92,28 @@ static GDVResourceManager *defaultResourceManager;
     [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
 }
 
+- (NSDictionary *)userInfoWithUpdateMechanism:(NSString *)updateMechanism {
+    return [NSDictionary dictionaryWithObject:updateMechanism forKey:GDVResourceManagerUserInfoUpdateMechanismKey];
+}
+
 #pragma mark - GDVIEEngineDelegate Protocol Methods
 
 - (void)engineDidFinishProcessingRecords:(GDVIEEngine *)engine {
     //Post notification
-    [self postNotificationWithName:GDVResourceManagerRecordDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
+    NSDictionary *userInfo=[self userInfoWithUpdateMechanism:GDVResourceManagerUpdateByImporting];
+    [self postNotificationWithName:GDVResourceManagerRecordDatabaseDidUpdate withUserInfo:userInfo];
 }
 
 - (void)engineDidFinishProcessingFormations:(GDVIEEngine *)engine {
     //Post notification
-    [self postNotificationWithName:GDVResourceManagerFormationDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
+    NSDictionary *userInfo=[self userInfoWithUpdateMechanism:GDVResourceManagerUpdateByImporting];
+    [self postNotificationWithName:GDVResourceManagerFormationDatabaseDidUpdate withUserInfo:userInfo];
 }
 
 - (void)engineDidFinishProcessingStudentResponses:(GDVIEEngine *)engine {
     //Post notification
-    [self postNotificationWithName:GDVResourceManagerStudentResponseDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
+    NSDictionary *userInfo=[self userInfoWithUpdateMechanism:GDVResourceManagerUpdateByImporting];
+    [self postNotificationWithName:GDVResourceManagerStudentResponseDatabaseDidUpdate withUserInfo:userInfo];
 }
 
 #pragma mark - Data
@@ -116,16 +123,30 @@ static GDVResourceManager *defaultResourceManager;
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Group"];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
-    NSLog(@"Database: %@ Results: %@",self.database,results);
     completionHandler(results);
 }
 
 - (void)fetchFoldersForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
+    //Fetch all the folders for the given student group
+    BOOL faulty=studentGroup.faulty.boolValue;
+    if (faulty) {
+        //Data is faulty, fetch folders from server
+    }
+    else {
+        completionHandler(studentGroup.folders.allObjects);
+    }
     
 }
 
 - (void)fetchRecordsForFolder:(Folder *)folder completion:(data_completion_handler_t)completionHandler {
-    
+    //Fetch all the records for the given folder
+    BOOL faulty=folder.faulty.boolValue;
+    if (faulty) {
+        //Data is faulty, fetch records from server
+    }
+    else {
+        completionHandler(folder.records.allObjects);
+    }
 }
 
 - (void)fetchFormationFoldersWithCompletionHandler:(data_completion_handler_t)completionHandler {

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CheckBox.h"
 
+#import "Record.h"
+#import "Record+DateAndTimeFormatter.h"
+
 @interface CustomRecordCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *name;
@@ -18,6 +21,8 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic, weak) IBOutlet UILabel *type;
 @property (nonatomic, weak) IBOutlet CheckBox *checkBox;
+
+@property (nonatomic,strong) Record *record;
 
 - (void)showCheckBoxAnimated:(BOOL)animated;
 - (void)hideCheckBoxAnimated:(BOOL)animated;

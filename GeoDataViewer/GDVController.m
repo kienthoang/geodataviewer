@@ -83,23 +83,33 @@
     return (GDVStudentGroupTVC *)studentGroupTVC;
 }
 
+- (ImportTableViewController *)importTableViewController {
+    ImportTableViewController *importTVC=nil;
+    if (self.importPopover.isPopoverVisible) {
+        UINavigationController *importNav=(UINavigationController *)self.importPopover.contentViewController;
+        importTVC=(ImportTableViewController *)importNav.topViewController;
+    }
+    
+    return importTVC;
+}
+
 #pragma mark - View Updators
 
 - (void)updateRecordListStudentGroupTVC {
     //Update student groups
-    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
-        if (studentGroups) {
-            self.recordListStudentGroupTVC.studentGroups=studentGroups;          
-            NSLog(@"Groups: %@",self.recordListStudentGroupTVC);
-        }
-    }];
+    [self updateDataForStudentGroupTVC:self.recordListStudentGroupTVC];
 }
 
 - (void)updateStudentResponseListStudentGroupTVC {
     //Update student groups
+    [self updateDataForStudentGroupTVC:self.studentResponseListStudentGroupTVC];
+}
+
+- (void)updateDataForStudentGroupTVC:(GDVStudentGroupTVC *)studentGroupTVC {
+    //Update student groups
     [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
         if (studentGroups)
-            self.studentResponseListStudentGroupTVC.studentGroups=studentGroups;
+            studentGroupTVC.studentGroups=studentGroups;
     }];
 }
 
@@ -111,12 +121,14 @@
     if ([segueIdentifier isEqualToString:@"Record List"]) {
          UIViewController *recordList=[self.storyboard instantiateViewControllerWithIdentifier:@"Record List"];
         self.recordList=[[UIPopoverController alloc] initWithContentViewController:recordList];
+        self.recordListStudentGroupTVC.delegate=self;
     }
     
     //Segue to Student Response List
     else if ([segueIdentifier isEqualToString:@"Student Response List"]) {
         UIViewController *feedbackList=[self.storyboard instantiateViewControllerWithIdentifier:@"Student Response List"];
         self.studentResponseList=[[UIPopoverController alloc] initWithContentViewController:feedbackList];
+        self.studentResponseListStudentGroupTVC.delegate=self;
     }
     
     //Segue to map view
@@ -219,11 +231,18 @@
     //Show loading screen in the student group vc in record list
     GDVStudentGroupTVC *studentGroupTVC=self.recordListStudentGroupTVC;
     [studentGroupTVC showLoadingScreen];
-    
-    NSLog(@"Finished importing");
-    
+        
     //Update
     [self updateRecordListStudentGroupTVC];
+    
+    //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
+    NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
+    if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
+        [self.importTableViewController putImportButtonBack];
+        
+        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
+        [doneAlert show];
+    }
 }
 
 - (void)formationDatabaseDidChange:(NSNotification *)notification {
@@ -440,6 +459,10 @@
         if (studentResponses)
             studentResponseTVC.studentResponses=studentResponses;
     }];
+}
+
+- (void)updateStudentGroupsForStudenGroupTVC:(GDVStudentGroupTVC *)sender {
+    [self updateDataForStudentGroupTVC:sender];
 }
 
 #pragma mark - GDVFolderTVCDelegate Protocol Methods

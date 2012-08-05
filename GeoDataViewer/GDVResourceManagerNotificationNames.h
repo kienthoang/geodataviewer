@@ -10,8 +10,12 @@
 
 @protocol GDVResourceManagerNotificationNames <NSObject>
 
-#define GDVResourceManagerRecordDatabaseDidUpdate @"GDVresourceManager.Notifications.RecordDatabase.DidUpdate"
-#define GDVResourceManagerFormationDatabaseDidUpdate @"GDVresourceManager.Notifications.FormationDatabase.DidUpdate"
-#define GDVResourceManagerStudentResponseDatabaseDidUpdate @"GDVresourceManager.Notifications.StudentResponseDatabase.DidUpdate"
+#define GDVResourceManagerRecordDatabaseDidUpdate @"GDVResourceManager.Notifications.RecordDatabase.DidUpdate"
+#define GDVResourceManagerFormationDatabaseDidUpdate @"GDVResourceManager.Notifications.FormationDatabase.DidUpdate"
+#define GDVResourceManagerStudentResponseDatabaseDidUpdate @"GDVResourceManager.Notifications.StudentResponseDatabase.DidUpdate"
+
+#define GDVResourceManagerUserInfoUpdateMechanismKey @"GDVResourceManager.Notifications.UserInfo.UpdateMechanismKey"
+#define GDVResourceManagerUpdateByImporting @"GDVResourceManager.Notifications.UpdateMechanism.ByImporting"
+#define GDVResourceManagerUpdateBySynchronizingWithServer @"GDVResourceManager.Notifications.UpdateMechanism.BySynchronizingWithServer"
 
 @end
