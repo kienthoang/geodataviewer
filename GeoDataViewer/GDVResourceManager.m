@@ -77,7 +77,7 @@ static GDVResourceManager *defaultResourceManager;
 
 - (void)importFormationCSVFiles:(NSArray *)csvFiles {
     //Import the formation csv files
-    [self.engine createFormationsFromCSVFiles:csvFiles];
+    [self.engine createFormationsWithColorFromCSVFiles:csvFiles];
 }
 
 - (void)importFeedbackCSVFiles:(NSArray *)csvFiles {
