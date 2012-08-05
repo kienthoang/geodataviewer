@@ -31,6 +31,9 @@
         //Stop the loading screen
         [self stopLoadingScreen];
         
+        //sort folders
+        _folders=[_folders sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
+        
         //Relaod table view
         [self.tableView reloadData];
     }

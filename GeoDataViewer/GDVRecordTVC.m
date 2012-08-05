@@ -28,6 +28,9 @@
         //Stop the loading screen
         [self stopLoadingScreen];
         
+        //Sort records
+        _records=[_records sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+        
         //Relaod table view
         [self.tableView reloadData];
     }

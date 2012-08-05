@@ -266,6 +266,15 @@
     
     //Update
     [self updateDataForFormationFolderTVC:formationFolderTVC];
+    
+    //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
+    NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
+    if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
+        [self.importTableViewController putImportButtonBack];
+        
+        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
+        [doneAlert show];
+    }
 }
 
 - (void)studentResponseDatabaseDidChange:(NSNotification *)notification {
@@ -278,6 +287,15 @@
     
     //Update student groups
     [self updateStudentResponseListStudentGroupTVC];
+    
+    //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
+    NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
+    if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
+        [self.importTableViewController putImportButtonBack];
+        
+        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
+        [doneAlert show];
+    }
 }
 
 - (void)registerNotifications {

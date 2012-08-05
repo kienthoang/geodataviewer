@@ -174,9 +174,7 @@ static GDVResourceManager *defaultResourceManager;
         //Data is faulty, fetch student responses from server
     }
     else {
-        completionHandler(studentGroup.responses.allObjects);
-        
-        NSLog(@"Responses: %@",studentGroup.responses);
+        completionHandler(studentGroup.responses.allObjects);        
     }
 }
 

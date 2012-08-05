@@ -23,7 +23,6 @@
 
 typedef void(^save_completion_handler_t)(BOOL success);
 
-
 @property (nonatomic,strong) UIManagedDocument *database;
 @property (nonatomic,weak) id <GDVIEEngineDelegate> delegate;
 
@@ -31,7 +30,6 @@ typedef void(^save_completion_handler_t)(BOOL success);
 
 - (void)createRecordsFromCSVFiles:(NSArray *)files; //passes the array of records
 - (void)createFormationsWithColorFromCSVFiles:(NSArray *)files; //this reads the new version of formation files with colors.
-- (void)createFormationsFromCSVFiles:(NSArray *)files; //passes the array of formations
 - (void)createStudentResponsesFromCSVFiles:(NSArray *)files; //passes the array of feedbacks
 
 #define NUMBER_OF_COLUMNS_PER_RECORD_LINE 16

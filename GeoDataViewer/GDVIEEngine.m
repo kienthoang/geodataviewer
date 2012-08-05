@@ -46,16 +46,7 @@
 
 @interface GDVIEEngine()
 
-@property (nonatomic, strong) NSArray *selectedFilePaths;
-@property (nonatomic, strong) NSMutableArray *records;
-@property (nonatomic, strong) NSMutableArray *formations;
 @property (nonatomic, strong) NSMutableDictionary *groupDictionaryByID;
-@property (nonatomic, strong) NSArray *formationFolders;
-
-@property (nonatomic, strong) NSMutableDictionary *groupInfo;
-@property (nonatomic, strong) NSMutableDictionary *folderInfo;
-@property (nonatomic, strong) NSMutableDictionary *recordInfo;
-
 @property (nonatomic, strong) ValidationMessageBoard *validationMessageBoard;
 
 @end
@@ -63,21 +54,10 @@
 @implementation GDVIEEngine
 
 @synthesize database=_database;
-
-@synthesize selectedFilePaths=_selectedFilePaths;
-@synthesize records=_records;
-@synthesize formations=_formations;
-@synthesize formationFolders=_formationFolders;
+@synthesize delegate=_delegate;
 
 @synthesize validationMessageBoard=_validationMessageBoard;
-
 @synthesize groupDictionaryByID=_groupDictionaryByID;
-
-@synthesize folderInfo=_folderInfo;
-@synthesize groupInfo=_groupInfo;
-@synthesize recordInfo=_recordInfo;
-
-@synthesize delegate=_delegate;
 
 typedef void (^database_save_t)(UIManagedDocument *database);
 
@@ -94,6 +74,12 @@ typedef void (^database_t)(void);
 
 - (void)performDatabaseBlock:(database_t)block {
     [self.database.managedObjectContext performBlock:block];
+}
+
+- (void)reset {
+    //Reset states
+    self.groupDictionaryByID=[NSMutableDictionary dictionary];
+    self.validationMessageBoard=[[ValidationMessageBoard alloc] init];
 }
 
 //enum for columnHeadings
@@ -113,38 +99,11 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     return _groupDictionaryByID;
 }
 
--(NSMutableArray *) projects {
-    if(!_records) 
-        _records = [[NSMutableArray alloc] init];
-    
-    return _records;
-}
-
--(NSMutableArray *) formations {
-    if(!_formations) 
-        _formations = [[NSMutableArray alloc] init];
-    
-    return _formations;
-}
-
-- (NSArray *)formationFolders {
-    if (!_formationFolders)
-        _formationFolders=[NSArray array];
-    
-    return _formationFolders;
-}
-
 - (ValidationMessageBoard *)validationMessageBoard {
     if (!_validationMessageBoard)
         _validationMessageBoard=[[ValidationMessageBoard alloc] init];
     
     return _validationMessageBoard;
-}
-
-- (NSMutableArray *)records {
-    if (!_records)
-        _records=[NSMutableArray array];
-    return _records;
 }
 
 #pragma mark - Database modification
@@ -319,9 +278,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 {       
     [self performDatabaseBlock:^{
         //get paths to the selected files
-        self.selectedFilePaths = [self getSelectedFilePaths:files];
+        NSArray *selectedPaths = [self getSelectedFilePaths:files];
         //Iterate through each csv files and create records from each of them
-        for (NSString *path in self.selectedFilePaths) {
+        for (NSString *path in selectedPaths) {
             //Construct the records
             [self constructRecordsFromCSVFileWithPath:path];
         }
@@ -331,6 +290,9 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
             //Notify the delegate that the importing was finished
             [self.delegate engineDidFinishProcessingRecords:self];
         }];
+        
+        //Reset
+        [self reset];
     }];
 }
 
@@ -338,26 +300,25 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 
 typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,ResponseTime,ResponseLatitude,ResponseLongitude,NumberOfRecords} responseHeadings;
 
-- (Answer *)studentResponseForTokenArray:(NSArray *)tokenArray {
-    Answer *response=nil;
-    
-    //Create an info dictionary from the info in the token array
-    NSMutableDictionary *responseDictionary=[NSMutableDictionary dictionary];
-    [responseDictionary setObject:[tokenArray objectAtIndex:QuestionPrompt] forKey:GDVStudentResponseQuestionPrompt];
-    [responseDictionary setObject:[tokenArray objectAtIndex:ResponseContent] forKey:GDVStudentResponseContent];
-    
-    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
-    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLatitude]] forKey:GDVStudentResponseLatitude];
-    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLongitude]] forKey:GDVStudentResponseLongitude];
-    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:NumberOfRecords]] forKey:GDVStudentResponseNumRecords];
-    
-    NSString *dateToken = [[tokenArray objectAtIndex:ResponseDate] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *timeToken = [[tokenArray objectAtIndex:ResponseTime] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [responseDictionary setObject:[self dateFromDateToken:dateToken andTimeToken:timeToken] forKey:GDVStudentResponseDate];
-    
-    response=[Answer responseForInfo:responseDictionary inManagedObjectContext:self.database.managedObjectContext];
-    
-    return response;
+- (void)createStudentResponsesFromCSVFiles:(NSArray *)files {
+    [self performDatabaseBlock:^(void){
+        NSArray *selectedPaths = [self getSelectedFilePaths:files];    
+        
+        //read each of those files line by line and create the student response objects
+        for(NSString *path in selectedPaths) {
+            //Construct student responses from the file path
+            [self constructStudentResponsesFromFilePath:path];
+        }
+        
+        //now save the managedObjectcontext permanently in the database
+        [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){
+            //post some notification to the delegate that the database was updated
+            [self.delegate engineDidFinishProcessingStudentResponses:self];
+        }];
+        
+        //Reset
+        [self reset];
+    }];
 }
 
 - (void)constructStudentResponsesFromFilePath:(NSString *)path {
@@ -392,23 +353,27 @@ typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,Respo
         }
     }
 }
+
+- (Answer *)studentResponseForTokenArray:(NSArray *)tokenArray {
+    Answer *response=nil;
     
-- (void)createStudentResponsesFromCSVFiles:(NSArray *)files {
-    [self performDatabaseBlock:^(void){
-        self.selectedFilePaths = [self getSelectedFilePaths:files];    
-        
-        //read each of those files line by line and create the student response objects
-        for(NSString *path in self.selectedFilePaths) {
-            //Construct student responses from the file path
-            [self constructStudentResponsesFromFilePath:path];
-        }
-        
-        //now save the managedObjectcontext permanently in the database
-        [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){
-            //post some notification to the delegate that the database was updated
-            [self.delegate engineDidFinishProcessingStudentResponses:self];
-        }];
-    }];
+    //Create an info dictionary from the info in the token array
+    NSMutableDictionary *responseDictionary=[NSMutableDictionary dictionary];
+    [responseDictionary setObject:[tokenArray objectAtIndex:QuestionPrompt] forKey:GDVStudentResponseQuestionPrompt];
+    [responseDictionary setObject:[tokenArray objectAtIndex:ResponseContent] forKey:GDVStudentResponseContent];
+    
+    NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLatitude]] forKey:GDVStudentResponseLatitude];
+    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLongitude]] forKey:GDVStudentResponseLongitude];
+    [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:NumberOfRecords]] forKey:GDVStudentResponseNumRecords];
+    
+    NSString *dateToken = [[tokenArray objectAtIndex:ResponseDate] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *timeToken = [[tokenArray objectAtIndex:ResponseTime] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [responseDictionary setObject:[self dateFromDateToken:dateToken andTimeToken:timeToken] forKey:GDVStudentResponseDate];
+    
+    response=[Answer responseForInfo:responseDictionary inManagedObjectContext:self.database.managedObjectContext];
+    
+    return response;
 }
 
 #pragma mark - Reading of Formation files
@@ -424,10 +389,10 @@ typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,Respo
 - (void)createFormationsWithColorFromCSVFiles:(NSArray *)files 
 {    
     [self performDatabaseBlock:^(void){
-        self.selectedFilePaths = [self getSelectedFilePaths:files];    
+        NSArray *selectedPaths = [self getSelectedFilePaths:files];    
         
         //read each of those files line by line and create the formation objects and add it to self.formations array.
-        for(NSString *path in self.selectedFilePaths) {
+        for(NSString *path in selectedPaths) {
             //Construct formations from the file path
             NSString *folderName = [[[path componentsSeparatedByString:@"/"].lastObject componentsSeparatedByString:@"."] objectAtIndex:0];
             [self constructFormationsWithColorsByParsingFilePath:path andFolderName:folderName];
@@ -438,6 +403,9 @@ typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,Respo
             //post some notification to the delegate that the database was updated
             [self.delegate engineDidFinishProcessingFormations:self];
         }];
+        
+        //Reset
+        [self reset];
     }];
 }
 -(void) constructFormationsWithColorsByParsingFilePath:(NSString *) path andFolderName:(NSString *) fileName 

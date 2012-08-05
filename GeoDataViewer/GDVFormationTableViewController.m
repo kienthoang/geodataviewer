@@ -26,6 +26,9 @@
         //Stop the loading screen
         [self stopLoadingScreen];
         
+        //Sort formations
+        _formations=[_formations sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"formationSortNumber" ascending:YES]]];
+        
         //Relaod table view
         [self.tableView reloadData];
     }

@@ -29,6 +29,9 @@
         //Stop the loading screen
         [self stopLoadingScreen];
         
+        //Sort the student groups
+        _studentGroups=[_studentGroups sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
+        
         //Relaod table view
         [self.tableView reloadData];
     }
@@ -39,8 +42,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Ask for data if self does not have any student group yet
-    if (!self.studentGroups && [self.delegate respondsToSelector:@selector(updateStudentGroupsForStudenGroupTVC:)])
+    //Ask for data
+    if ([self.delegate respondsToSelector:@selector(updateStudentGroupsForStudenGroupTVC:)])
         [self.delegate updateStudentGroupsForStudenGroupTVC:self];
 }
 
@@ -72,9 +75,7 @@
     if ([segue.identifier isEqualToString:@"Show Folders"]) {
         //Set the student group of the destination
         [segue.destinationViewController setStudentGroup:selectedGroup];
-        
-        NSLog(@"group: %@",selectedGroup);
-                
+                        
         //Notify the delegate
         [self.delegate studentGroupTVC:self preparedToSegueToFolderTVC:segue.destinationViewController];
     }

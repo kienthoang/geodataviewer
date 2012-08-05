@@ -28,6 +28,9 @@
         //Stop the loading screen
         [self stopLoadingScreen];
         
+        //Sort formation folders
+        _formationFolders=[_formationFolders sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
+        
         //Relaod table view
         [self.tableView reloadData];
     }
