@@ -8,12 +8,14 @@
 
 #import "GeoDatabaseManager.h"
 
+#import "CustomManagedDocument.h"
+
 @interface GeoDatabaseManager()
 
 - (void)synchronizeWithMainDatabase;                                    //synchronize the database with the main database
 - (void)createMainDatabaseWithURL:(NSURL *)databaseURL;                  //create the main database if it does not exist on disk
 
-@property (nonatomic,strong) database_completion_handler_t completionBlockForFetchingDatabase;
+@property (nonatomic,strong) completion_handler_t completionBlockForFetchingDatabase;
 
 @end
 
@@ -63,25 +65,20 @@ static GeoDatabaseManager *standardDatabaseManager;
 
 - (void)createMainDatabaseWithURL:(NSURL *)databaseURL {
     //Create a UIManagedDocument with the database URL and save it first before keeping it as a property in case the user accesses the property in the middle of the saving process
-    UIManagedDocument *mainDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
-    __weak GeoDatabaseManager *weakSelf=self;
-    [mainDatabase saveToURL:databaseURL
+    self.mainDatabase=[[CustomManagedDocument alloc] initWithFileURL:databaseURL];
+    NSLog(@"Creating database");
+    [self.mainDatabase saveToURL:databaseURL
                    forSaveOperation:UIDocumentSaveForCreating 
                   completionHandler:^(BOOL success){
                       if (success) {
-                          weakSelf.mainDatabase=mainDatabase;
-                          
-                          //Execute any waiting completion handler
                           if (self.completionBlockForFetchingDatabase)
-                              self.completionBlockForFetchingDatabase(mainDatabase);
+                              self.completionBlockForFetchingDatabase(YES);
                       } else {
-                          //Execute any waiting completion handler
+                          //handle errors
+                          NSLog(@"Failed: %@",self.mainDatabase);
                           if (self.completionBlockForFetchingDatabase)
-                              self.completionBlockForFetchingDatabase(nil);
+                              self.completionBlockForFetchingDatabase(NO);
                       }
-                      
-                      //Nillify any waiting completion handler
-                      self.completionBlockForFetchingDatabase=nil;
                   }];
 }
 
@@ -97,25 +94,17 @@ static GeoDatabaseManager *standardDatabaseManager;
     
     //Else if it already exists, assign it to the property geoFieldBookDatabase
     else {
-        self.mainDatabase=[[UIManagedDocument alloc] initWithFileURL:databaseURL];
+        self.mainDatabase=[[CustomManagedDocument alloc] initWithFileURL:databaseURL];
     }
 }
 
 //Fetch the database
-- (void)fetchDatabaseFromDisk:(id)sender completion:(database_completion_handler_t)completionBlock {
-    UIManagedDocument *mainDatabase=self.mainDatabase;
+
+- (UIManagedDocument *)fetchDatabaseFromDisk:(id)sender completion:(completion_handler_t)completionBlock {
+    //Save the completion block
+    self.completionBlockForFetchingDatabase=completionBlock;
     
-    if (self.mainDatabase) {
-        if (mainDatabase.documentState==UIDocumentStateClosed) {
-            [mainDatabase openWithCompletionHandler:^(BOOL success){
-                completionBlock(mainDatabase);
-            }];
-        } else if (mainDatabase.documentState==UIDocumentStateNormal) {
-            completionBlock(mainDatabase);
-        }
-    } else {
-        self.completionBlockForFetchingDatabase=completionBlock;
-    }
+    return self.mainDatabase;
 }
 
 @end

@@ -8,16 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GDVTransientDataProcessor.h"
+#import "Group.h"
+#import "Group+Creation.h"
+#import "Folder.h"
+#import "Folder+Creation.h"
+#import "Record.h"
+#import "Formation_Folder.h"
+#import "Formation.h"
+#import "Answer.h"
+
+#import "GDVIEEngineDelegate.h"
 
 @interface GDVIEEngine : NSObject
-
-+ (GDVIEEngine *)engineWithDataProcessor:(GDVTransientDataProcessor *)processor;
 
 typedef void(^save_completion_handler_t)(BOOL success);
 
 
-@property (nonatomic,strong) GDVTransientDataProcessor *processor;
+@property (nonatomic,strong) UIManagedDocument *database;
+@property (nonatomic,weak) id <GDVIEEngineDelegate> delegate;
 
 #pragma mark - Import
 

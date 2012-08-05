@@ -2,7 +2,6 @@
 //  Group+DictionaryKeys.h
 //  GeoDataViewer
 //
-//  Created by excel 2011 on 8/3/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -10,7 +9,8 @@
 
 @interface Group (DictionaryKeys)
 
-#define GROUP_NAME @"Group_Name"
-#define GROUP_ID @"Group_ID"
+#define GDVStudentGroupName @"GeoDataViewer.StudentGroup.GroupName"
+#define GDVStudentGroupIdentifier @"GeoDataViewer.StudentGroup.GroupIdentifier"
+#define GDVStudentGroupIsFaulty @"GeoDataViewer.StudentGroup.IsFaulty"
 
 @end

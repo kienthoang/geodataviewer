@@ -1,21 +1,16 @@
 //
-//  Record+Creation.h
+//  Fault+Creation.h
 //  GeoDataViewer
 //
 //  Created by Kien Hoang on 8/3/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "Record.h"
-#import "Folder.h"
-#import "Image+Creation.h"
+#import "Fault.h"
 
-#import "Record+DictionaryKeys.h"
-#import "Record+Types.h"
+#import "Record+Creation.m"
 
-#import "Formation+Creation.h"
-
-@interface Record (Creation)
+@interface Fault (Creation)
 
 + (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 

@@ -2,7 +2,8 @@
 //  Group+Creation.m
 //  GeoDataViewer
 //
-//  Created by excel 2011 on 8/3/12.
+
+//  Created by Kien Hoang on 8/3/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -12,36 +13,31 @@
 
 @implementation Group (Creation)
 
-+(Group *)groupWithGroupInfo:(NSDictionary *)info
-      inManagedObjectContext:(NSManagedObjectContext *)context {
++ (Group *)studentGroupForInfo:(NSDictionary *)groupInfo inManagedObjectContext:(NSManagedObjectContext *)context {
+    //Extract the id
+    Group *selectedGroup=nil;
+    NSString *groupID=[groupInfo objectForKey:GDVStudentGroupIdentifier];
     
-    //Get info out of the dictionary
-    NSString *groupName=[TextInputFilter filterDatabaseInputText:[info objectForKey:GROUP_NAME]];
-    NSString *groupID=[TextInputFilter filterDatabaseInputText:[info objectForKey:GROUP_ID]];
-    
-    //Query the database for the group with group name
+    //Grabs all groups from the database to compare ids (faster than letting the database compare the ids itself)
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Group"];
-    request.predicate=[NSPredicate predicateWithFormat:@"identifier=%@",groupID];
-    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
     NSArray *results=[context executeFetchRequest:request error:NULL];
-    
-    
-    Group *group=nil;
-    //If there is result or the result array is nil, handle errors
-    if ([results count] || !results) {
-        //handle errors
+    for (Group *group in results) {
+        if ([group.identifier isEqualToString:groupID]) {
+            selectedGroup=group;
+            break;
+        }
     }
     
-    //If there is no result, create a new folder
-    else {
-        //Insert a folder entity into the database
-        group=[NSEntityDescription insertNewObjectForEntityForName:@"Group" inManagedObjectContext:context];
-        group.name=groupName;
-        group.identifier=groupID;
+    if (!selectedGroup) {
+        //Create a new student group
+        selectedGroup=[NSEntityDescription insertNewObjectForEntityForName:@"Group" inManagedObjectContext:context];
+        selectedGroup.identifier=groupID;
+        selectedGroup.name=[groupInfo objectForKey:GDVStudentGroupName];
+        selectedGroup.faulty=[groupInfo objectForKey:GDVStudentGroupIsFaulty];
     }
-    
-    return group;
-    
+        
+    return selectedGroup;
 }
 
 @end

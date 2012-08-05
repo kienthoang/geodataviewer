@@ -1,21 +1,15 @@
 //
-//  Record+Creation.h
+//  Bedding+Creation.h
 //  GeoDataViewer
 //
 //  Created by Kien Hoang on 8/3/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "Record.h"
-#import "Folder.h"
-#import "Image+Creation.h"
+#import "Bedding.h"
+#import "Record+Creation.h"
 
-#import "Record+DictionaryKeys.h"
-#import "Record+Types.h"
-
-#import "Formation+Creation.h"
-
-@interface Record (Creation)
+@interface Bedding (Creation)
 
 + (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 

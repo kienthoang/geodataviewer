@@ -219,21 +219,7 @@
         
         //Put up a spinner for the import button
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIActivityIndicatorView *spinner=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-            UIBarButtonItem *spinnerBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:spinner];
-            [spinner startAnimating];
-            
-            //Save the spinner
-            weakSelf.spinner=spinnerBarButtonItem;
-            
-            //Hide the import button and put the spinner there
-            NSMutableArray *toolbarItems=weakSelf.toolbarItems.mutableCopy;
-            
-            int index=[toolbarItems indexOfObject:weakSelf.importButton];
-            [toolbarItems removeObject:weakSelf.importButton];
-            [toolbarItems insertObject:spinnerBarButtonItem atIndex:index];
-            weakSelf.toolbarItems=toolbarItems.copy;
-            
+
             //Unset selected records
             [weakSelf selectNone:nil];
         });     

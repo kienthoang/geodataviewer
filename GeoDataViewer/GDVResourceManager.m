@@ -8,7 +8,7 @@
 
 #import "GDVResourceManager.h"
 
-@interface GDVResourceManager() <GDVTransientDataProcessorDelegate>
+@interface GDVResourceManager() <GDVIEEngineDelegate>
 
 @end
 
@@ -18,8 +18,6 @@
 
 @synthesize engine=_engine;
 @synthesize server=_server;
-@synthesize serverProcessor=_serverProcessor;
-@synthesize engineProcessor=_engineProcessor;
 
 static GDVResourceManager *defaultResourceManager;
 
@@ -38,11 +36,12 @@ static GDVResourceManager *defaultResourceManager;
 - (id)init {
     if (self=[super init]) {
         //Initialize the database
-        GDVResourceManager *weakSelf=self;
         GeoDatabaseManager *databaseManager=[GeoDatabaseManager standardDatabaseManager];
-        [databaseManager fetchDatabaseFromDisk:self completion:^(UIManagedDocument *database){
-            weakSelf.database=database;
-        }];
+        self.database=[databaseManager fetchDatabaseFromDisk:self completion:^(BOOL success){}];
+        
+        if (self.database.documentState==UIDocumentStateClosed) {
+            [self.database openWithCompletionHandler:^(BOOL success){}];
+        }
     }
     
     return self;
@@ -50,35 +49,21 @@ static GDVResourceManager *defaultResourceManager;
 
 #pragma mark - Getters and Setters
 
-- (GDVTransientDataProcessor *)serverProcessor {
-    if (!_serverProcessor) {
-        _serverProcessor=[[GDVTransientDataProcessor alloc] init];
-        _serverProcessor.delegate=self;
+- (GDVIEEngine *)engine {
+    if (!_engine) {
+        _engine=[[GDVIEEngine alloc] init];
+        
+        //Setup the enging
+        _engine.database=self.database;
+        _engine.delegate=self;
     }
         
-    return _serverProcessor;
-}
-
-- (GDVTransientDataProcessor *)engineProcessor {
-    if (!_engineProcessor) {
-        _engineProcessor=[[GDVTransientDataProcessor alloc] init];
-        _engineProcessor.delegate=self;
-    }
-    
-    return _engineProcessor;
-}
-
-
-- (GDVIEEngine *)engine {
-    if (!_engine)
-        _engine=[GDVIEEngine engineWithDataProcessor:self.engineProcessor];
-    
     return _engine;
 }
 
 - (GDVServerCommunicator *)server {
     if (!_server)
-        _server=[GDVServerCommunicator serverCommunicatorWithProcessor:self.serverProcessor];
+        _server=[[GDVServerCommunicator alloc] init];
     
     return _server;
 }
@@ -107,19 +92,19 @@ static GDVResourceManager *defaultResourceManager;
     [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
 }
 
-#pragma mark - GDVTransientDataProcessor Protocol Methods
+#pragma mark - GDVIEEngineDelegate Protocol Methods
 
-- (void)processorDidFinishProcessingRecords:(GDVTransientDataProcessor *)processor {
+- (void)engineDidFinishProcessingRecords:(GDVIEEngine *)engine {
     //Post notification
     [self postNotificationWithName:GDVResourceManagerRecordDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
 }
 
-- (void)processorDidFinishProcessingFormations:(GDVTransientDataProcessor *)processor {
+- (void)engineDidFinishProcessingFormations:(GDVIEEngine *)engine {
     //Post notification
     [self postNotificationWithName:GDVResourceManagerFormationDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
 }
 
-- (void)processorDidFinishProcessingStudentResponses:(GDVTransientDataProcessor *)processor {
+- (void)engineDidFinishProcessingStudentResponses:(GDVIEEngine *)engine {
     //Post notification
     [self postNotificationWithName:GDVResourceManagerStudentResponseDatabaseDidUpdate withUserInfo:[NSDictionary dictionary]];
 }
@@ -127,7 +112,12 @@ static GDVResourceManager *defaultResourceManager;
 #pragma mark - Data
 
 - (void)fetchStudentGroupsWithCompletionHandler:(data_completion_handler_t)completionHandler {
-    
+    //Fetch all the student group in the database
+    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Group"];
+    request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    NSArray *results=[self.database.managedObjectContext executeFetchRequest:request error:NULL];
+    NSLog(@"Database: %@ Results: %@",self.database,results);
+    completionHandler(results);
 }
 
 - (void)fetchFoldersForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {

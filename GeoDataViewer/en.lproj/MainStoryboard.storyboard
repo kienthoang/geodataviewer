@@ -545,10 +545,16 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="WFU-wA-nbw"/>
                         <barButtonItem enabled="NO" title="Delete" width="100" id="yv4-gn-tKb">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="EMP-oq-RqC" id="hS9-B1-DqG"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="zDE-n5-SGA"/>
                         <barButtonItem enabled="NO" title="Import" width="100" style="done" id="FLX-ov-Uoe">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="importPressed:" destination="EMP-oq-RqC" id="vgn-kx-qiH"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="0FS-w2-pDW"/>
                         <barButtonItem title="Add File" width="100" id="UM3-lP-oLj">
@@ -730,10 +736,16 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bL4-S9-okT"/>
                         <barButtonItem enabled="NO" title="Delete" width="100" id="yV2-hR-Mnd">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="xhg-vP-BrP" id="5AC-n5-Bgp"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="Jr5-o1-8jz"/>
                         <barButtonItem enabled="NO" title="Import" width="100" style="done" id="jLg-c8-Ocj">
                             <color key="tintColor" red="0.22152870190000001" green="0.2694055628" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="importPressed:" destination="xhg-vP-BrP" id="WRC-V4-gkW"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="5qj-Sq-iDc"/>
                         <barButtonItem title="Add File" width="100" id="HaU-tC-hBo">
@@ -831,10 +843,16 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="jw0-yj-QBi"/>
                         <barButtonItem enabled="NO" title="Delete" width="100" id="nXs-LE-FwS">
                             <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="CYl-uD-YDe" id="SNy-KF-jSI"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="GOB-wd-0W2"/>
                         <barButtonItem enabled="NO" title="Import" width="100" style="done" id="sNB-Ev-qPa">
                             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="importPressed:" destination="CYl-uD-YDe" id="Ga4-K7-5hL"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="Gia-uB-d3L"/>
                         <barButtonItem title="Add File" width="100" id="Hfn-44-4RH">
@@ -933,6 +951,100 @@
             <point key="canvasLocation" x="-2563" y="6514"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CSVTableViewController" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CSVTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="CheckBox" superclassName="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CheckBox.h"/>
+        </class>
+        <class className="CustomFolderCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFolderCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomFormationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFormationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomRecordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="CheckBox"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="type" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomStudentGroupCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomStudentGroupCell.h"/>
+        </class>
+        <class className="FormationImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationImportTVC.h"/>
+        </class>
+        <class className="GDVController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="feedbackListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="formationListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="recordListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="settingsButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="GDVFolderTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFolderTVC.h"/>
+        </class>
+        <class className="GDVFormationFolderTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationFolderTVC.h"/>
+        </class>
+        <class className="GDVRecordTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVRecordTVC.h"/>
+        </class>
+        <class className="GDVStudentGroupTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentGroupTVC.h"/>
+        </class>
+        <class className="GDVStudentResponseTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentResponseTVC.h"/>
+        </class>
+        <class className="ImportTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="importPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="PrototypeLoadingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeLoadingTableViewController.h"/>
+        </class>
+        <class className="RecordImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordImportTVC.h"/>
+        </class>
+        <class className="RecordMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="StudentReponseImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StudentReponseImportTVC.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

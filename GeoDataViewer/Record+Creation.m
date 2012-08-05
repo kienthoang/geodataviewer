@@ -9,26 +9,17 @@
 #import "Record+Creation.h"
 #import "Record+Types.h"
 
+
 @implementation Record (Creation)
 
-+ (Record *)recordForRecordType:(NSString *)recordType 
-                  andFolderName:(NSString *)folderName 
-         inManagedObjectContext:(NSManagedObjectContext *)context {
-    
++ (Record *)recordForInfo:(NSDictionary *)recordInfo inManagedObjectContext:(NSManagedObjectContext *)context {
     Record *record=nil;
-    
-    //If the record type is known, proceed
-    if ([[Record allRecordTypes] containsObject:recordType]) {
-        //Query for the folder name
-        NSFetchRequest *folderRequest=[[NSFetchRequest alloc] initWithEntityName:@"Folder"];
-        folderRequest.predicate=[NSPredicate predicateWithFormat:@"folderName=%@",folderName];
-        folderRequest.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"folderName" ascending:YES]];
-        NSArray *results=[context executeFetchRequest:folderRequest error:NULL];
         
-        //If there is a folder with that name, proceed
-        Folder *folder=[results lastObject];
-        if (folder) {
-            //Handle different record types
+    if (recordInfo) {
+        //Get the record type
+        NSString *recordType=[recordInfo objectForKey:RECORD_TYPE];
+        if ([[Record allRecordTypes] containsObject:recordType]) {
+            //Create a new record
             if ([recordType isEqualToString:@"Contact"]) {
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
             } else if ([recordType isEqualToString:@"Bedding"]) {
@@ -41,10 +32,24 @@
                 record=[NSEntityDescription insertNewObjectForEntityForName:@"Fault" inManagedObjectContext:context];
             }
             
-            //Set the name of the record
-            record.name=@"";
-            record.folder=folder;
+            //Populate fields
+            NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+            record.name=[recordInfo objectForKey:RECORD_NAME];
+            record.latitude=[recordInfo objectForKey:RECORD_LATITUDE];
+            record.longitude=[recordInfo objectForKey:RECORD_LONGITUDE];
+            record.dip=[numberFormatter numberFromString:[recordInfo objectForKey:RECORD_DIP]];
+            record.strike=[numberFormatter numberFromString:[recordInfo objectForKey:RECORD_STRIKE]];
+            record.dipDirection=[recordInfo objectForKey:RECORD_DIP_DIRECTION];
+            record.fieldObservations=[recordInfo objectForKey:RECORD_FIELD_OBSERVATION];
+            record.date=[recordInfo objectForKey:RECORD_DATE];
             record.image=nil;
+            
+            //Update the image if it's not NSNULL
+            id imageData = [recordInfo objectForKey:RECORD_IMAGE_DATA];
+            if ([imageData isKindOfClass:[NSData class]]) {
+                //Set the image
+                record.image =[Image imageWithBinaryData:imageData inManagedObjectContext:record.managedObjectContext];    
+            }     
         }
     }
     

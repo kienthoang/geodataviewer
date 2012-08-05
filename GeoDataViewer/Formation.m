@@ -2,7 +2,7 @@
 //  Formation.m
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 8/4/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -19,11 +19,11 @@
 @dynamic colorName;
 @dynamic formationName;
 @dynamic formationSortNumber;
-@dynamic formationFolder;
+@dynamic beddings;
 @dynamic faults;
+@dynamic formationFolder;
+@dynamic jointSets;
 @dynamic lowerContacts;
 @dynamic upperContacts;
-@dynamic beddings;
-@dynamic jointSets;
 
 @end

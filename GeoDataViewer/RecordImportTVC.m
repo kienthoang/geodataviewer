@@ -9,8 +9,6 @@
 #import "RecordImportTVC.h"
 #import "CSVTableViewController.h"
 
-#import "TransientProject.h"
-
 @interface RecordImportTVC() <CSVTableViewControllerDelegate>
 
 @end
