@@ -178,4 +178,26 @@ static GDVResourceManager *defaultResourceManager;
     }
 }
 
+#pragma mark - Data Manipulators
+
+typedef void (^database_save_t)(UIManagedDocument *database);
+
+- (void)saveDatabaseWithCompletionHandler:(database_save_t)completionHandler {
+    [self.database saveToURL:self.database.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+        if (success)
+            completionHandler(self.database);
+        else
+            NSLog(@"Failed to save changes to database!");
+    }];
+}
+
+- (void)deleteStudentGroups:(NSArray *)studentGroups {
+    //Destroy the given student groups
+    for (Group *group in studentGroups)
+        [self.database.managedObjectContext deleteObject:group];
+    
+    //Save changes to database
+    [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){}];
+}
+
 @end

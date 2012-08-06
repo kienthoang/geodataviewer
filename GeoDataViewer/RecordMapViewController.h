@@ -10,11 +10,17 @@
 #import <MapKit/MapKit.h>
 
 #import "RecordMapViewControllerDelegate.h"
-#import "Record.h"
+
+#import "MKGeoRecordAnnotation.h"
+#import "MKStudentResponseAnnotation.h"
+
+#import "MKCustomAnnotationView.h"
 
 @interface RecordMapViewController : UIViewController
 
 @property (nonatomic,strong) NSArray *records;
+@property (nonatomic,strong) NSArray *responses;
+
 @property (nonatomic,strong) Record *selectedRecord;
 
 @property (weak,nonatomic) IBOutlet MKMapView *mapView;
@@ -22,6 +28,7 @@
 @property (weak,nonatomic) id <RecordMapViewControllerDelegate> mapDelegate;
 
 - (void)updateRecords:(NSArray *)records forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
+- (void)updateResponses:(NSArray *)responses forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
 - (void)reloadAnnotationViews;
 
 @end

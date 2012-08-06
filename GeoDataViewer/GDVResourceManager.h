@@ -48,4 +48,8 @@ typedef void (^data_completion_handler_t)(NSArray *data);
 - (void)fetchFormationsForFormationFolder:(Formation_Folder *)formationFolder completion:(data_completion_handler_t)completionHandler;
 - (void)fetchStudentResponsesForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler;
 
+#pragma mark - Data Manipulators
+
+- (void)deleteStudentGroups:(NSArray *)studentGroups;
+
 @end

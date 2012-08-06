@@ -11,23 +11,36 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4iq-Ft-3Ht" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="ikV-MY-EBg" customClass="GDVStudentGroupTVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fnV-Lc-xlh">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fnV-Lc-xlh">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Student Group Cell" id="q7c-Z2-Luc" customClass="CustomStudentGroupCell">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Student Group Cell" textLabel="z2j-bj-5Md" detailTextLabel="wTT-u7-SNu" style="IBUITableViewCellStyleSubtitle" id="q7c-Z2-Luc">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="43"/>
+                                    <rect key="frame" x="45" y="1" width="914" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z2j-bj-5Md">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wTT-u7-SNu">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="4r6-dQ-sci" kind="push" identifier="Show Folders" id="T6i-vP-6wO"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -35,8 +48,42 @@
                             <outlet property="delegate" destination="ikV-MY-EBg" id="SwS-O1-VMo"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="cpm-s8-0Mb"/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="JsK-40-9Ke"/>
+                        <barButtonItem title="Select All" width="100" id="M6E-1J-ooV">
+                            <connections>
+                                <action selector="selectAll:" destination="ikV-MY-EBg" id="xsT-ez-HOd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" title="Delete" width="120" id="y4K-jy-ezK">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="ikV-MY-EBg" id="bAh-dB-dx1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Select None" width="100" id="54U-In-lvI">
+                            <connections>
+                                <action selector="selectNone:" destination="ikV-MY-EBg" id="oEQ-do-JdR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="iZ9-yv-ne9"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="cpm-s8-0Mb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="InV-KX-0Es">
+                            <connections>
+                                <action selector="editPressed:" destination="ikV-MY-EBg" id="Gha-Xo-Kse"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="deleteButton" destination="y4K-jy-ezK" id="Lq2-rS-eZ4"/>
+                        <outlet property="editButton" destination="InV-KX-0Es" id="waG-K2-4Ea"/>
+                        <outlet property="selectAllButton" destination="M6E-1J-ooV" id="R0q-Lc-e4X"/>
+                        <outlet property="selectNoneButton" destination="54U-In-lvI" id="Lss-A4-PhC"/>
+                        <segue destination="4r6-dQ-sci" kind="push" identifier="Show Folders" id="DVB-Gb-WGo"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-4814" y="13"/>
@@ -140,7 +187,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4o7-TU-6sP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="4r6-dQ-sci" customClass="GDVFolderTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="mSF-Ld-IzD">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -198,7 +245,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaT-zg-i3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="jJn-iV-xM0" customClass="GDVRecordTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="82" sectionHeaderHeight="22" sectionFooterHeight="22" id="HuH-xn-bZk">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -362,14 +409,20 @@
         <scene sceneID="N5a-3u-MKf">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ucy-dV-LhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Record List" id="rDG-bq-TWN" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Record List" toolbarHidden="NO" id="rDG-bq-TWN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="mAN-xm-WaW">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackOpaque"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="mAN-xm-WaW">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" barStyle="blackOpaque" id="KCT-P1-THI">
+                        <rect key="frame" x="0.0" y="724" width="1024" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="ikV-MY-EBg" kind="relationship" relationship="rootViewController" id="2X7-Ym-Z3y"/>
                     </connections>
@@ -401,23 +454,20 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ci-XR-cXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="J9T-5K-PEe" customClass="GDVStudentGroupTVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8nQ-k7-9Rv">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="8nQ-k7-9Rv">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Student Group Cell" id="6qi-5f-pyV" customClass="CustomStudentGroupCell">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1004" height="43"/>
+                                    <rect key="frame" x="45" y="1" width="914" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="1vD-k9-Po8" kind="push" identifier="Show Student Responses" id="laz-yA-ihs"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -425,8 +475,38 @@
                             <outlet property="delegate" destination="J9T-5K-PEe" id="3xd-m8-8XW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="YaG-bw-WGC"/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="lEt-Yv-g68"/>
+                        <barButtonItem title="Select All" width="100" id="LBx-wY-0ND">
+                            <connections>
+                                <action selector="selectAll:" destination="ikV-MY-EBg" id="O0J-Ss-McX"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem enabled="NO" title="Delete" width="120" id="NgK-RN-0Vb">
+                            <color key="tintColor" red="0.74509803919999995" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="ikV-MY-EBg" id="kkV-OL-ksl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Select None" width="100" id="r29-FL-qDd">
+                            <connections>
+                                <action selector="selectNone:" destination="ikV-MY-EBg" id="JGl-kd-eml"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bEh-jt-ayX"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="YaG-bw-WGC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="bqc-rK-1DG"/>
+                    </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="deleteButton" destination="NgK-RN-0Vb" id="6GT-iH-Yn4"/>
+                        <outlet property="editButton" destination="bqc-rK-1DG" id="VKa-LB-w2Y"/>
+                        <outlet property="selectAllButton" destination="LBx-wY-0ND" id="4HR-EO-bRU"/>
+                        <outlet property="selectNoneButton" destination="r29-FL-qDd" id="Wyu-rZ-bMl"/>
+                        <segue destination="1vD-k9-Po8" kind="push" identifier="Show Student Responses" id="hh0-4S-LYJ"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-4467" y="2477"/>
@@ -437,7 +517,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvL-Oj-73U" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="1vD-k9-Po8" customClass="GDVStudentResponseTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOG-WK-UFL">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -467,7 +547,7 @@
         <scene sceneID="ODd-Jm-1XJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCP-1y-xgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Student Response List" id="09O-RO-VwQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Student Response List" toolbarHidden="NO" id="09O-RO-VwQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0nR-O5-xkh">
@@ -475,6 +555,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yEa-Zr-TTL">
+                        <rect key="frame" x="0.0" y="960" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="J9T-5K-PEe" kind="relationship" relationship="rootViewController" id="w7u-Tb-JYF"/>
                     </connections>
@@ -1019,6 +1103,16 @@
         </class>
         <class className="GDVStudentGroupTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentGroupTVC.h"/>
+            <relationships>
+                <relationship kind="action" name="deletePressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="editPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="selectAll:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="selectNone:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNoneButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="GDVStudentResponseTVC" superclassName="PrototypeLoadingTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentResponseTVC.h"/>

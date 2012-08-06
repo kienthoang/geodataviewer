@@ -31,7 +31,7 @@
     </entity>
     <entity name="Formation" representedClassName="Formation" syncable="YES">
         <attribute name="colorName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="formationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="formationName" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="formationSortNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="beddings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bedding" inverseName="formation" inverseEntity="Bedding" syncable="YES"/>
         <relationship name="faults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fault" inverseName="formation" inverseEntity="Fault" syncable="YES"/>
@@ -42,14 +42,14 @@
     </entity>
     <entity name="Formation_Folder" representedClassName="Formation_Folder" syncable="YES">
         <attribute name="faulty" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="folderName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="folderName" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="folders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Folder" inverseName="formationFolder" inverseEntity="Folder" syncable="YES"/>
         <relationship name="formations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Formation" inverseName="formationFolder" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="faulty" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="numberOfMembers" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="folders" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Folder" inverseName="group" inverseEntity="Folder" syncable="YES"/>
         <relationship name="responses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Answer" inverseName="group" inverseEntity="Answer" syncable="YES"/>
@@ -64,7 +64,7 @@
     <entity name="Other" representedClassName="Other" parentEntity="Record" syncable="YES"/>
     <entity name="Question" representedClassName="Question" syncable="YES">
         <attribute name="prompt" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Answer" inverseName="question" inverseEntity="Answer" syncable="YES"/>
     </entity>
@@ -75,7 +75,7 @@
         <attribute name="fieldObservations" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="strike" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
         <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="record" inverseEntity="Image" syncable="YES"/>

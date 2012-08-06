@@ -27,7 +27,7 @@
         [self stopLoadingScreen];
         
         //Sort the student responses
-        _studentResponses=[_studentResponses sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"content" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
+        _studentResponses=[_studentResponses sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
         
         //Reload table view
         [self.tableView reloadData];

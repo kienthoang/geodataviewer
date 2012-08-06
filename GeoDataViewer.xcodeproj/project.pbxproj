@@ -11,6 +11,7 @@
 		0206DE7115CB1D3100B76398 /* libSSToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0206DE6815CB1CC600B76398 /* libSSToolkit.a */; };
 		0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0206DE6C15CB1CC600B76398 /* SSToolkitResources.bundle */; };
 		0206DE9B15CB320900B76398 /* PrototypeLoadingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0206DE9A15CB320900B76398 /* PrototypeLoadingTableViewController.m */; };
+		020D073915CF1A230023B106 /* MKStudentResponseAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 020D073815CF1A230023B106 /* MKStudentResponseAnnotation.m */; };
 		0238B09015CCE30D00B3A67A /* Other+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B08F15CCE30D00B3A67A /* Other+Creation.m */; };
 		0238B09315CD138700B3A67A /* GeoDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B09215CD138700B3A67A /* GeoDatabaseManager.m */; };
 		0238B09615CD8FE400B3A67A /* CustomManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B09515CD8FE300B3A67A /* CustomManagedDocument.m */; };
@@ -171,6 +172,8 @@
 		0206DEB215CB653400B76398 /* GDVStudentGroupTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentGroupTVCDelegate.h; sourceTree = "<group>"; };
 		0206DEB315CB65D500B76398 /* GDVFolderTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFolderTVCDelegate.h; sourceTree = "<group>"; };
 		0206DEB415CB661400B76398 /* GDVFormationFolderTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationFolderTVCDelegate.h; sourceTree = "<group>"; };
+		020D073715CF1A230023B106 /* MKStudentResponseAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStudentResponseAnnotation.h; sourceTree = "<group>"; };
+		020D073815CF1A230023B106 /* MKStudentResponseAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStudentResponseAnnotation.m; sourceTree = "<group>"; };
 		0238B08E15CCE30D00B3A67A /* Other+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Other+Creation.h"; sourceTree = "<group>"; };
 		0238B08F15CCE30D00B3A67A /* Other+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Other+Creation.m"; sourceTree = "<group>"; };
 		0238B09115CD138700B3A67A /* GeoDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoDatabaseManager.h; sourceTree = "<group>"; };
@@ -420,6 +423,15 @@
 			name = "View Controller Prototype";
 			sourceTree = "<group>";
 		};
+		020D075B15CF2A5C0023B106 /* Student Group TVCs */ = {
+			isa = PBXGroup;
+			children = (
+				02F31ABF15C9C78D0070EDC7 /* GDVStudentGroupTVC.h */,
+				02F31AC015C9C78D0070EDC7 /* GDVStudentGroupTVC.m */,
+			);
+			name = "Student Group TVCs";
+			sourceTree = "<group>";
+		};
 		02F3197E15C9BCB70070EDC7 = {
 			isa = PBXGroup;
 			children = (
@@ -551,8 +563,6 @@
 		02F319EC15C9BEA10070EDC7 /* Record List Group */ = {
 			isa = PBXGroup;
 			children = (
-				02F31ABF15C9C78D0070EDC7 /* GDVStudentGroupTVC.h */,
-				02F31AC015C9C78D0070EDC7 /* GDVStudentGroupTVC.m */,
 				02F31AC215C9C7B70070EDC7 /* GDVFolderTVC.h */,
 				02F31AC315C9C7B70070EDC7 /* GDVFolderTVC.m */,
 				02F31AC515C9C7C70070EDC7 /* GDVRecordTVC.h */,
@@ -580,6 +590,8 @@
 			children = (
 				02F319F815C9BF760070EDC7 /* MKGeoRecordAnnotation.h */,
 				02F319F915C9BF760070EDC7 /* MKGeoRecordAnnotation.m */,
+				020D073715CF1A230023B106 /* MKStudentResponseAnnotation.h */,
+				020D073815CF1A230023B106 /* MKStudentResponseAnnotation.m */,
 			);
 			name = MKAnnotation;
 			sourceTree = "<group>";
@@ -783,6 +795,7 @@
 		02F31A7115C9C3ED0070EDC7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				020D075B15CF2A5C0023B106 /* Student Group TVCs */,
 				02F31A9515C9C4EA0070EDC7 /* Custom Views */,
 				02F31A7315C9C4140070EDC7 /* Student Response Group */,
 				02F31A7215C9C40D0070EDC7 /* Formation Group */,
@@ -1161,6 +1174,7 @@
 				0238B10F15CE4C2500B3A67A /* Answer+DictionaryKeys.m in Sources */,
 				0238B11215CE511F00B3A67A /* Question+Creation.m in Sources */,
 				0238B11815CE595D00B3A67A /* Answer+DateFormatter.m in Sources */,
+				020D073915CF1A230023B106 /* MKStudentResponseAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

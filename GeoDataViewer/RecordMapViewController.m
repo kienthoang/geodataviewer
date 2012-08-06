@@ -14,9 +14,6 @@
 #import "MKMapRecordInfoViewController.h"
 #import "Image.h"
 
-#import "MKGeoRecordAnnotation.h"
-#import "MKCustomAnnotationView.h"
-
 #import "Bedding.h"
 #import "Contact.h"
 

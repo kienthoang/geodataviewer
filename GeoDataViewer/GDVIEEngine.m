@@ -106,22 +106,6 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
     return _validationMessageBoard;
 }
 
-#pragma mark - Database modification
--(void)saveChangesToDatabase:(UIManagedDocument *)database completion:(save_completion_handler_t)completionHandler {
-    //Save changes to database
-    [database saveToURL:database.fileURL 
-       forSaveOperation:UIDocumentSaveForOverwriting 
-      completionHandler:^(BOOL success)
-     {
-         //If there was a failure, put up an alert
-         if (!success) {
-             //some error
-        }         
-         //Pass control to the completion handler when the saving is done
-         completionHandler(success);
-     }];
-}
-
 #pragma mark - database query
 
 -(Formation_Folder *) queryDatabaseForFormationFolderWithName:(NSString *) name {

@@ -20,5 +20,6 @@
 @optional
 
 - (void)updateStudentGroupsForStudenGroupTVC:(GDVStudentGroupTVC *)sender;
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender deleteStudentGroups:(NSArray *)studentGroups;
 
 @end

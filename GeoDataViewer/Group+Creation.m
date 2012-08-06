@@ -18,6 +18,8 @@
     Group *selectedGroup=nil;
     NSString *groupID=[groupInfo objectForKey:GDVStudentGroupIdentifier];
     
+    NSLog(@"groupID:%@!",groupID);
+    
     //Grabs all groups from the database to compare ids (faster than letting the database compare the ids itself)
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Group"];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];

@@ -130,6 +130,7 @@
          UIViewController *recordList=[self.storyboard instantiateViewControllerWithIdentifier:@"Record List"];
         self.recordList=[[UIPopoverController alloc] initWithContentViewController:recordList];
         self.recordListStudentGroupTVC.delegate=self;
+        self.recordListStudentGroupTVC.identifier=RECORD_LIST_STUDENT_GROUP_IDENTIFIER;
     }
     
     //Segue to Student Response List
@@ -137,6 +138,7 @@
         UIViewController *feedbackList=[self.storyboard instantiateViewControllerWithIdentifier:@"Student Response List"];
         self.studentResponseList=[[UIPopoverController alloc] initWithContentViewController:feedbackList];
         self.studentResponseListStudentGroupTVC.delegate=self;
+        self.studentResponseListStudentGroupTVC.identifier=RESPONSE_LIST_STUDENT_GROUP_IDENTIFIER;
     }
     
     //Segue to map view
@@ -243,8 +245,10 @@
     GDVStudentGroupTVC *studentGroupTVC=self.recordListStudentGroupTVC;
     [studentGroupTVC showLoadingScreen];
         
-    //Update
+    //Update the record list
     [self updateRecordListStudentGroupTVC];
+    
+    //Update the map
     
     //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
     NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
@@ -489,6 +493,11 @@
 
 - (void)updateStudentGroupsForStudenGroupTVC:(GDVStudentGroupTVC *)sender {
     [self updateDataForStudentGroupTVC:sender];
+}
+
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender deleteStudentGroups:(NSArray *)studentGroups {
+    //Delete the student groups
+    [self.resourceManager deleteStudentGroups:studentGroups];
 }
 
 #pragma mark - GDVFolderTVCDelegate Protocol Methods
