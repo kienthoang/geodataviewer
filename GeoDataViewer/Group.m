@@ -2,7 +2,7 @@
 //  Group.m
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/4/12.
+//  Created by Kien Hoang on 8/6/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -17,6 +17,9 @@
 @dynamic identifier;
 @dynamic name;
 @dynamic numberOfMembers;
+@dynamic redComponent;
+@dynamic blueComponent;
+@dynamic greenComponent;
 @dynamic folders;
 @dynamic responses;
 

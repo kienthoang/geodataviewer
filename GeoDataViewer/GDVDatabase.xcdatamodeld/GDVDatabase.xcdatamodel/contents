@@ -47,10 +47,13 @@
         <relationship name="formations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Formation" inverseName="formationFolder" inverseEntity="Formation" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="blueComponent" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="faulty" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="greenComponent" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="numberOfMembers" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="redComponent" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="folders" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Folder" inverseName="group" inverseEntity="Folder" syncable="YES"/>
         <relationship name="responses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Answer" inverseName="group" inverseEntity="Answer" syncable="YES"/>
     </entity>
@@ -88,7 +91,7 @@
         <element name="Folder" positionX="-225" positionY="90" width="128" height="135"/>
         <element name="Formation" positionX="-108" positionY="687" width="128" height="180"/>
         <element name="Formation_Folder" positionX="-297" positionY="261" width="128" height="105"/>
-        <element name="Group" positionX="-497" positionY="162" width="128" height="135"/>
+        <element name="Group" positionX="-497" positionY="162" width="128" height="180"/>
         <element name="Image" positionX="-45" positionY="9" width="128" height="75"/>
         <element name="JointSet" positionX="216" positionY="297" width="128" height="60"/>
         <element name="Other" positionX="180" positionY="108" width="128" height="45"/>

@@ -22,7 +22,6 @@
 		0238B0A515CDB65A00B3A67A /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0A415CDB65A00B3A67A /* Folder.m */; };
 		0238B0A815CDB66300B3A67A /* Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0A715CDB66300B3A67A /* Formation.m */; };
 		0238B0AB15CDB66B00B3A67A /* Formation_Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0AA15CDB66B00B3A67A /* Formation_Folder.m */; };
-		0238B0AE15CDB67500B3A67A /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0AD15CDB67500B3A67A /* Group.m */; };
 		0238B0B115CDB67E00B3A67A /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0B015CDB67E00B3A67A /* Image.m */; };
 		0238B0B415CDB68800B3A67A /* JointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0B315CDB68700B3A67A /* JointSet.m */; };
 		0238B0B715CDB69300B3A67A /* Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0B615CDB69300B3A67A /* Other.m */; };
@@ -45,6 +44,14 @@
 		0251C8C215CCC6CE00075C60 /* Fault+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C115CCC6CE00075C60 /* Fault+Creation.m */; };
 		0251C8C515CCC81000075C60 /* Contact+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C415CCC81000075C60 /* Contact+Creation.m */; };
 		0251C8C815CCC88100075C60 /* Bedding+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C715CCC88000075C60 /* Bedding+Creation.m */; };
+		026F31FB15D02462001F99EB /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FA15D02462001F99EB /* Group.m */; };
+		026F31FE15D02776001F99EB /* GDVFormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FD15D02776001F99EB /* GDVFormationViewController.m */; };
+		026F322115D0281E001F99EB /* RGB-HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321815D0281E001F99EB /* RGB-HSL.m */; };
+		026F322215D0281E001F99EB /* NPColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321A15D0281E001F99EB /* NPColorPickerView.m */; };
+		026F322315D0281E001F99EB /* NPPickerIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321C15D0281E001F99EB /* NPPickerIndicator.m */; };
+		026F322415D0281E001F99EB /* NPColorQuadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321E15D0281E001F99EB /* NPColorQuadView.m */; };
+		026F322515D0281E001F99EB /* NPConicGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F322015D0281E001F99EB /* NPConicGradient.m */; };
+		026F322815D0282A001F99EB /* ColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F322715D0282A001F99EB /* ColorPickerViewController.m */; };
 		02782FC915C9ECA900A0A062 /* ImportTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC215C9ECA900A0A062 /* ImportTableViewController.m */; };
 		02782FCA15C9ECA900A0A062 /* RecordImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC415C9ECA900A0A062 /* RecordImportTVC.m */; };
 		02782FCB15C9ECA900A0A062 /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC615C9ECA900A0A062 /* FormationImportTVC.m */; };
@@ -194,8 +201,6 @@
 		0238B0A715CDB66300B3A67A /* Formation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation.m; sourceTree = "<group>"; };
 		0238B0A915CDB66B00B3A67A /* Formation_Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Formation_Folder.h; sourceTree = "<group>"; };
 		0238B0AA15CDB66B00B3A67A /* Formation_Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formation_Folder.m; sourceTree = "<group>"; };
-		0238B0AC15CDB67500B3A67A /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		0238B0AD15CDB67500B3A67A /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		0238B0AF15CDB67E00B3A67A /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		0238B0B015CDB67E00B3A67A /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		0238B0B215CDB68700B3A67A /* JointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JointSet.h; sourceTree = "<group>"; };
@@ -240,6 +245,23 @@
 		0251C8C415CCC81000075C60 /* Contact+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+Creation.m"; sourceTree = "<group>"; };
 		0251C8C615CCC88000075C60 /* Bedding+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bedding+Creation.h"; sourceTree = "<group>"; };
 		0251C8C715CCC88000075C60 /* Bedding+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bedding+Creation.m"; sourceTree = "<group>"; };
+		026F31F915D02462001F99EB /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		026F31FA15D02462001F99EB /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		026F31FC15D02776001F99EB /* GDVFormationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationViewController.h; sourceTree = "<group>"; };
+		026F31FD15D02776001F99EB /* GDVFormationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFormationViewController.m; sourceTree = "<group>"; };
+		026F321715D0281E001F99EB /* RGB-HSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RGB-HSL.h"; sourceTree = "<group>"; };
+		026F321815D0281E001F99EB /* RGB-HSL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RGB-HSL.m"; sourceTree = "<group>"; };
+		026F321915D0281E001F99EB /* NPColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPColorPickerView.h; sourceTree = "<group>"; };
+		026F321A15D0281E001F99EB /* NPColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPColorPickerView.m; sourceTree = "<group>"; };
+		026F321B15D0281E001F99EB /* NPPickerIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPPickerIndicator.h; sourceTree = "<group>"; };
+		026F321C15D0281E001F99EB /* NPPickerIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPPickerIndicator.m; sourceTree = "<group>"; };
+		026F321D15D0281E001F99EB /* NPColorQuadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPColorQuadView.h; sourceTree = "<group>"; };
+		026F321E15D0281E001F99EB /* NPColorQuadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPColorQuadView.m; sourceTree = "<group>"; };
+		026F321F15D0281E001F99EB /* NPConicGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPConicGradient.h; sourceTree = "<group>"; };
+		026F322015D0281E001F99EB /* NPConicGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPConicGradient.m; sourceTree = "<group>"; };
+		026F322615D0282A001F99EB /* ColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerViewController.h; sourceTree = "<group>"; };
+		026F322715D0282A001F99EB /* ColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerViewController.m; sourceTree = "<group>"; };
+		026F323415D0289F001F99EB /* ColorPickerViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerViewControllerDelegate.h; sourceTree = "<group>"; };
 		02782FC115C9ECA900A0A062 /* ImportTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportTableViewController.h; sourceTree = "<group>"; };
 		02782FC215C9ECA900A0A062 /* ImportTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportTableViewController.m; sourceTree = "<group>"; };
 		02782FC315C9ECA900A0A062 /* RecordImportTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordImportTVC.h; sourceTree = "<group>"; };
@@ -430,6 +452,31 @@
 				02F31AC015C9C78D0070EDC7 /* GDVStudentGroupTVC.m */,
 			);
 			name = "Student Group TVCs";
+			sourceTree = "<group>";
+		};
+		026F321515D027F0001F99EB /* Color Picker */ = {
+			isa = PBXGroup;
+			children = (
+				026F321615D02805001F99EB /* Color Picker View */,
+			);
+			name = "Color Picker";
+			sourceTree = "<group>";
+		};
+		026F321615D02805001F99EB /* Color Picker View */ = {
+			isa = PBXGroup;
+			children = (
+				026F321715D0281E001F99EB /* RGB-HSL.h */,
+				026F321815D0281E001F99EB /* RGB-HSL.m */,
+				026F321915D0281E001F99EB /* NPColorPickerView.h */,
+				026F321A15D0281E001F99EB /* NPColorPickerView.m */,
+				026F321B15D0281E001F99EB /* NPPickerIndicator.h */,
+				026F321C15D0281E001F99EB /* NPPickerIndicator.m */,
+				026F321D15D0281E001F99EB /* NPColorQuadView.h */,
+				026F321E15D0281E001F99EB /* NPColorQuadView.m */,
+				026F321F15D0281E001F99EB /* NPConicGradient.h */,
+				026F322015D0281E001F99EB /* NPConicGradient.m */,
+			);
+			name = "Color Picker View";
 			sourceTree = "<group>";
 		};
 		02F3197E15C9BCB70070EDC7 = {
@@ -666,8 +713,8 @@
 		02F31A6215C9C3260070EDC7 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				0238B0AC15CDB67500B3A67A /* Group.h */,
-				0238B0AD15CDB67500B3A67A /* Group.m */,
+				026F31F915D02462001F99EB /* Group.h */,
+				026F31FA15D02462001F99EB /* Group.m */,
 				0251C89F15CCAE1900075C60 /* Group+DictionaryKeys.h */,
 				0251C8A015CCAE1900075C60 /* Group+DictionaryKeys.m */,
 				0251C89C15CCADB200075C60 /* Group+Creation.h */,
@@ -796,12 +843,12 @@
 			isa = PBXGroup;
 			children = (
 				020D075B15CF2A5C0023B106 /* Student Group TVCs */,
-				02F31A9515C9C4EA0070EDC7 /* Custom Views */,
 				02F31A7315C9C4140070EDC7 /* Student Response Group */,
 				02F31A7215C9C40D0070EDC7 /* Formation Group */,
 				02F319D315C9BE3A0070EDC7 /* Import/Export Group */,
 				02F319EC15C9BEA10070EDC7 /* Record List Group */,
 				02F319ED15C9BF100070EDC7 /* Map View Group */,
+				02F31A9515C9C4EA0070EDC7 /* Custom Views */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -813,6 +860,8 @@
 				02F31AAB15C9C59C0070EDC7 /* GDVFormationTableViewController.m */,
 				02F31AAD15C9C5B10070EDC7 /* GDVFormationFolderTVC.h */,
 				02F31AAE15C9C5B10070EDC7 /* GDVFormationFolderTVC.m */,
+				026F31FC15D02776001F99EB /* GDVFormationViewController.h */,
+				026F31FD15D02776001F99EB /* GDVFormationViewController.m */,
 			);
 			name = "Formation Group";
 			sourceTree = "<group>";
@@ -847,6 +896,9 @@
 		02F31A9515C9C4EA0070EDC7 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				026F321515D027F0001F99EB /* Color Picker */,
+				026F322615D0282A001F99EB /* ColorPickerViewController.h */,
+				026F322715D0282A001F99EB /* ColorPickerViewController.m */,
 				02F31AA315C9C5170070EDC7 /* Dip Strike Symbol */,
 				02F31A9615C9C4F40070EDC7 /* Table Cells */,
 			);
@@ -900,6 +952,7 @@
 				0206DEB215CB653400B76398 /* GDVStudentGroupTVCDelegate.h */,
 				0206DEB315CB65D500B76398 /* GDVFolderTVCDelegate.h */,
 				0206DEB415CB661400B76398 /* GDVFormationFolderTVCDelegate.h */,
+				026F323415D0289F001F99EB /* ColorPickerViewControllerDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -1157,7 +1210,6 @@
 				0238B0A515CDB65A00B3A67A /* Folder.m in Sources */,
 				0238B0A815CDB66300B3A67A /* Formation.m in Sources */,
 				0238B0AB15CDB66B00B3A67A /* Formation_Folder.m in Sources */,
-				0238B0AE15CDB67500B3A67A /* Group.m in Sources */,
 				0238B0B115CDB67E00B3A67A /* Image.m in Sources */,
 				0238B0B415CDB68800B3A67A /* JointSet.m in Sources */,
 				0238B0B715CDB69300B3A67A /* Other.m in Sources */,
@@ -1175,6 +1227,14 @@
 				0238B11215CE511F00B3A67A /* Question+Creation.m in Sources */,
 				0238B11815CE595D00B3A67A /* Answer+DateFormatter.m in Sources */,
 				020D073915CF1A230023B106 /* MKStudentResponseAnnotation.m in Sources */,
+				026F31FB15D02462001F99EB /* Group.m in Sources */,
+				026F31FE15D02776001F99EB /* GDVFormationViewController.m in Sources */,
+				026F322115D0281E001F99EB /* RGB-HSL.m in Sources */,
+				026F322215D0281E001F99EB /* NPColorPickerView.m in Sources */,
+				026F322315D0281E001F99EB /* NPPickerIndicator.m in Sources */,
+				026F322415D0281E001F99EB /* NPColorQuadView.m in Sources */,
+				026F322515D0281E001F99EB /* NPConicGradient.m in Sources */,
+				026F322815D0282A001F99EB /* ColorPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,8 +1345,8 @@
 		02F319BD15C9BCB70070EDC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",
@@ -1309,8 +1369,8 @@
 		02F319BE15C9BCB70070EDC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",

@@ -13,6 +13,7 @@
 @implementation CustomFormationCell
 
 @synthesize formation=_formation;
+
 @synthesize colorPatch=_colorPatch;
 @synthesize name=_name;
 

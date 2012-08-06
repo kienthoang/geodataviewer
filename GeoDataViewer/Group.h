@@ -2,7 +2,7 @@
 //  Group.h
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/4/12.
+//  Created by Kien Hoang on 8/6/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -17,6 +17,9 @@
 @property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * numberOfMembers;
+@property (nonatomic, retain) NSNumber * redComponent;
+@property (nonatomic, retain) NSNumber * blueComponent;
+@property (nonatomic, retain) NSNumber * greenComponent;
 @property (nonatomic, retain) NSSet *folders;
 @property (nonatomic, retain) NSSet *responses;
 @end

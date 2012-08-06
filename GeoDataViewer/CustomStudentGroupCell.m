@@ -10,20 +10,41 @@
 
 @implementation CustomStudentGroupCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+@synthesize studentGroup=_studentGroup;
+
+@synthesize colorPatch=_colorPatch;
+@synthesize name=_name;
+
+- (UIColor *)colorForStudentGroup:(Group *)group {
+    double redComponent=group.redComponent.doubleValue;
+    double greenComponent=group.greenComponent.doubleValue;
+    double blueComponent=group.blueComponent.doubleValue;
+    
+    return [UIColor colorWithRed:redComponent green:greenComponent blue:blueComponent alpha:1.0];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setColorPatch:(UIButton *)colorPatch {
+    //Setup the color patch
+    _colorPatch=colorPatch;
+    self.colorPatch.layer.borderColor=[UIColor blackColor].CGColor;
+    self.colorPatch.layer.cornerRadius=8.0f;
+    self.colorPatch.layer.borderWidth=1.0f;
+}
+
+- (void)setStudentGroup:(Group *)studentGroup {
+    _studentGroup=studentGroup;
+    
+    //Redraw the color patch
+    self.colorPatch.backgroundColor=[self colorForStudentGroup:studentGroup];
+    
+    //Set the name
+    self.name.text=studentGroup.name;    
+}
+
+//Override set Selected to be sure the color patch's background color does not get covered by the cell's selected state background color
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    
+    self.colorPatch.backgroundColor=[self colorForStudentGroup:self.studentGroup];
 }
-
 @end

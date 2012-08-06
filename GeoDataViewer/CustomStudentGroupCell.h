@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+
+#import "Group.h"
 
 @interface CustomStudentGroupCell : UITableViewCell
+
+@property (nonatomic,weak) IBOutlet UILabel *name;
+@property (nonatomic,weak) IBOutlet UIButton *colorPatch;
+@property (nonatomic,strong) Group *studentGroup;
 
 @end

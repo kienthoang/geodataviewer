@@ -10,6 +10,8 @@
 #import "GDVFolderTVC.h"
 #import "GDVStudentResponseTVC.h"
 
+#import "CustomStudentGroupCell.h"
+
 @interface GDVStudentGroupTVC() <UIActionSheetDelegate>
 
 @end
@@ -240,12 +242,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Student Group Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CustomStudentGroupCell *cell = (CustomStudentGroupCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     Group *group=[self.studentGroups objectAtIndex:indexPath.row];
-    cell.textLabel.text=group.name;
-    cell.detailTextLabel.text=group.identifier;
+    cell.studentGroup=group;
     
     return cell;
 }
