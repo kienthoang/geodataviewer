@@ -1271,8 +1271,8 @@
 		02F319BD15C9BCB70070EDC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",
@@ -1295,8 +1295,8 @@
 		02F319BE15C9BCB70070EDC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",

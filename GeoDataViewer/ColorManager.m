@@ -60,7 +60,7 @@ static ColorManager *standardColorManager;
     UIColor *teal = [UIColor colorWithRed:0.0f green:0.5f blue:0.5f alpha:1.0f];
     UIColor *mocha = [UIColor colorWithRed:0.5f green:0.25f blue:0.0f alpha:1.0f];
     UIColor *aqua = [UIColor cyanColor];
-    UIColor *green = [UIColor greenColor];
+    UIColor *green = [UIColor colorWithRed:0.0f green:0.5f blue:0.0f alpha:1.0f];
     UIColor *lime = [UIColor colorWithRed:0.5f green:1.0f blue:0.0f alpha:1.0f];
     UIColor *olive = [UIColor colorWithRed:0.5f green:0.5f blue:0.0f alpha:1.0f];
     UIColor *yellow = [UIColor yellowColor];
