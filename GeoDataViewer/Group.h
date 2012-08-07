@@ -26,7 +26,7 @@
 
 @interface Group (CoreDataGeneratedAccessors)
 
--(void)setColorWithRed:(NSNumber *)red withGreen:(NSNumber *)green withBlue:(NSNumber *)blue; 
+-(void)setColorWithRed:(NSString *)red withGreen:(NSString *)green withBlue:(NSString *)blue; 
 
 - (void)addFoldersObject:(Folder *)value;
 - (void)removeFoldersObject:(Folder *)value;

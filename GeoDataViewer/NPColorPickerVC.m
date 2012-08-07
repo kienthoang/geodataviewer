@@ -16,11 +16,21 @@
 @synthesize picker=_picker;
 @synthesize quad=_quad;
 @synthesize delegate=_delegate;
+@synthesize selectedColors=_selectedColors;
 
 - (IBAction)donePickingColor:(id)sender {
-    [self.quad pushColor:self.picker.color];
-    [self.delegate userDidDismissPopoverWithColor:self.picker.color];
-    
+    self.picker.color = self.quad.selectedColor;
+    [self.delegate userDidDismissPopoverWithColor:self.quad.selectedColor andSelectedColors:self.quad.getSelectedColors];    
+}
+- (IBAction)addColor:(id)sender {
+    [self.quad pushColor:self.picker.color];    
+}
+
+-(void) pushInitialColors:(NSMutableArray *) colors 
+{
+    for(UIColor *color in colors) {
+        [self.quad pushColor:color];
+    }
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,10 +44,15 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [super viewDidLoad]; 
+    
 }
 
+-(void) viewWillAppear:(BOOL)animated 
+{
+    //set up the four initial colors
+    [self pushInitialColors:self.selectedColors];
+}
 - (void)viewDidUnload
 {
     [self setPicker:nil];

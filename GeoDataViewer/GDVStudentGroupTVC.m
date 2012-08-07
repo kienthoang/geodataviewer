@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) UIStoryboardPopoverSegue *colorPickerPopoverSegue;
 @property (nonatomic, strong) CustomStudentGroupCell *colorPickerSenderCell;
+@property (nonatomic, strong) NSMutableArray *initialPopoverColors;
 
 @end
 
@@ -37,8 +38,14 @@
 
 @synthesize colorPickerPopoverSegue=_colorPickerPopoverSegue;
 @synthesize colorPickerSenderCell=_colorPickerSenderCell;
+@synthesize initialPopoverColors=_initialPopoverColors;
 
 #pragma mark - Getters and Setters
+-(NSMutableArray *) initialPopoverColors {
+    if(!_initialPopoverColors)
+        _initialPopoverColors = [[NSMutableArray alloc] initWithObjects:[UIColor redColor], [UIColor greenColor], [UIColor blueColor], [UIColor yellowColor], nil];
+    return _initialPopoverColors;
+}
 
 - (void)setStudentGroups:(NSArray *)studentGroups {
     if (studentGroups) {
@@ -179,7 +186,6 @@
 
 #pragma mark - CustomStudentGroupCell protocol methods
 -(void)colorPatchPressedWithColorRGB:(UIColor *)backgroundColor andSender:(CustomStudentGroupCell *)cell {
-    NSLog(@"I'm here!");
     [self performSegueWithIdentifier:@"NPColorPicker" sender:cell];
     self.colorPickerSenderCell=cell;
 }
@@ -246,8 +252,8 @@
     }
     
     else if ([segue.identifier isEqualToString:@"NPColorPicker"]) {
-        NSLog(@"UIStoryBoardSegue is of type: %@", [segue.destinationViewController class]);
         self.colorPickerPopoverSegue = (UIStoryboardPopoverSegue *)segue;
+        [segue.destinationViewController setSelectedColors:self.initialPopoverColors];
         [segue.destinationViewController setDelegate:self];
     }
 }
@@ -308,17 +314,20 @@
 }
 
 #pragma mark - NPColorPickerVC protocol methods
--(void) userDidDismissPopoverWithColor:(UIColor *)color {
+-(void) userDidDismissPopoverWithColor:(UIColor *)color andSelectedColors:(NSMutableArray *)colors {
+    self.initialPopoverColors = colors;
     [self.colorPickerPopoverSegue.popoverController dismissPopoverAnimated:YES]; 
     CGFloat *red = nil;
     CGFloat *green = nil;
     CGFloat *blue = nil;
     CGFloat *alpha = nil;
     [color getRed:red green:green blue:blue alpha:alpha];
-    NSLog(@"float value: %g %g %g", red, green, blue);
-    NSNumber *r = [NSNumber numberWithFloat:1.0f];//[NSNumber numberWithFloat:(float)*red];
-    NSNumber *g = [NSNumber numberWithFloat:0.5f];//[NSNumber numberWithFloat:(float)*green];
-    NSNumber *b = [NSNumber numberWithFloat:0.5f ];//[NSNumber numberWithFloat:(float)*blue];
+    NSLog(@"before formatting %g %g %g", red, green, blue);
+    NSString *r = [NSString stringWithFormat:@"%e", red];
+    NSString *g = [NSString stringWithFormat:@"%e", green];
+    NSString *b = [NSString stringWithFormat:@"%e", blue];
+    
+   
     [self.colorPickerSenderCell.studentGroup setColorWithRed:r withGreen:g withBlue:b];
     [self.colorPickerSenderCell updatePatchColor:color];
 }

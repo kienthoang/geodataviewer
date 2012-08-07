@@ -15,6 +15,15 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+@class NPColorQuadView;
+
+@protocol NPColorQuadViewDelegate <NSObject> 
+
+-(void) userDidSelectColor:(UIColor *) color;
+
+@end
 
 @interface NPColorQuadView : UIView
 
@@ -24,5 +33,6 @@
 @property (nonatomic, readwrite, assign) NSUInteger depht;
 @property (nonatomic, readwrite, assign) CGSize intercellSpace;
 -(void) pushColor:(UIColor *) color;
+-(NSMutableArray *) getSelectedColors;
 
 @end

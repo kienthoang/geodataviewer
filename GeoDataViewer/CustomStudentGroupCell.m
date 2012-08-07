@@ -59,7 +59,7 @@
 
 -(void) updatePatchColor:(UIColor *) color {
     self.colorPatch.backgroundColor = color;
-    NSLog(@"color set!");
+    
 }
 
 @end

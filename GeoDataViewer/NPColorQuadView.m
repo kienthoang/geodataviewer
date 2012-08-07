@@ -64,7 +64,7 @@
 //--------------------------------------------------------------------------------------------------------------------
 
 -(void) defaultInitializer_ {
-   self.insets = UIEdgeInsetsMake(5,15, 5, 15);
+   self.insets = UIEdgeInsetsMake(5,10,5,10);
    selectedIndex_ = 0;
    intercellSpace_ = CGSizeMake(5, 0);
    depht_ = 4;
@@ -159,10 +159,11 @@
    while ([colors_ count] > depht_) {
       [colors_ removeObjectAtIndex: [colors_ count]-1];
    }
-   
-   if (selectedIndex_ != NSNotFound) {
-      selectedIndex_ = MIN(selectedIndex_ +1, depht_-1); 
-   }
+       
+    selectedIndex_ = 0;
+//     if (selectedIndex_ != NSNotFound) {
+//      selectedIndex_ = MIN(selectedIndex_ +1, depht_-1); 
+//     }  
    
    [self setNeedsDisplay];
 }
@@ -268,9 +269,16 @@
 
       NSUInteger index = MIN((t.x - origin.x) / swatchSize.width, depht_);
       [self setSelectedIndex: index];
+       NSLog(@"tapped color %@", self.selectedColor);
       [self setNeedsDisplay];
    }
 }
 
+#pragma mark - getters added
+-(NSMutableArray *) getSelectedColors 
+{   
+    NSArray *reversed = [[colors_ reverseObjectEnumerator] allObjects];
+    return reversed.mutableCopy;
+}
 
 @end

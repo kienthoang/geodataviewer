@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "NPColorPickerView.h"
 #import "NPColorQuadView.h"
@@ -15,7 +16,7 @@
 
 @protocol NPColorPickerVCDelegate <NSObject>
 
--(void) userDidDismissPopoverWithColor:(UIColor *) color;
+-(void) userDidDismissPopoverWithColor:(UIColor *) color andSelectedColors:(NSMutableArray *)colors;
 
 @end
 
@@ -24,5 +25,8 @@
 @property (weak, nonatomic) IBOutlet NPColorPickerView *picker;
 @property (weak, nonatomic) IBOutlet NPColorQuadView *quad;
 @property (nonatomic, strong) id <NPColorPickerVCDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *selectedColors;
+
+-(void) pushInitialColors:(NSMutableArray *) colors;
 
 @end
