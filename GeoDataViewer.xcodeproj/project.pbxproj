@@ -115,6 +115,7 @@
 		02F31B4A15C9D72B0070EDC7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4915C9D72B0070EDC7 /* MessageUI.framework */; };
 		02F31B4C15C9D7310070EDC7 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4B15C9D7310070EDC7 /* iAd.framework */; };
 		02F31B4E15C9D73A0070EDC7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */; };
+		2104DFC915D0861400CD734A /* NPColorPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2104DFC815D0861400CD734A /* NPColorPickerVC.m */; };
 		2125AA4615CE121D008E78CB /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125AA4515CE121D008E78CB /* Record.m */; };
 		2125AA4715CE121D008E78CB /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125AA4515CE121D008E78CB /* Record.m */; };
 		21C2C9C515CE10C100FF7EA3 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C2C9BC15CE10C000FF7EA3 /* Record+Creation.m */; };
@@ -366,6 +367,8 @@
 		02F31B4915C9D72B0070EDC7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		02F31B4B15C9D7310070EDC7 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		02F31B4D15C9D7390070EDC7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		2104DFC715D0861400CD734A /* NPColorPickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPColorPickerVC.h; sourceTree = "<group>"; };
+		2104DFC815D0861400CD734A /* NPColorPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPColorPickerVC.m; sourceTree = "<group>"; };
 		2125AA4415CE121D008E78CB /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		2125AA4515CE121D008E78CB /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		21C2C9BB15CE10C000FF7EA3 /* Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Creation.h"; sourceTree = "<group>"; };
@@ -457,6 +460,8 @@
 		026F321515D027F0001F99EB /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
+				2104DFC715D0861400CD734A /* NPColorPickerVC.h */,
+				2104DFC815D0861400CD734A /* NPColorPickerVC.m */,
 				026F321615D02805001F99EB /* Color Picker View */,
 			);
 			name = "Color Picker";
@@ -1235,6 +1240,7 @@
 				026F322415D0281E001F99EB /* NPColorQuadView.m in Sources */,
 				026F322515D0281E001F99EB /* NPConicGradient.m in Sources */,
 				026F322815D0282A001F99EB /* ColorPickerViewController.m in Sources */,
+				2104DFC915D0861400CD734A /* NPColorPickerVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1345,8 +1351,8 @@
 		02F319BD15C9BCB70070EDC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",
@@ -1369,8 +1375,8 @@
 		02F319BE15C9BCB70070EDC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kien Hoang (Y8ZTM7CWYV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Prabhat Rimal (6WRV9WEL6U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GeoDataViewer/Vendor/SSToolkit/Tests\"",

@@ -12,7 +12,12 @@
 
 #import "CustomStudentGroupCell.h"
 
-@interface GDVStudentGroupTVC() <UIActionSheetDelegate>
+#import "NPColorPickerVC.h"
+
+@interface GDVStudentGroupTVC() <UIActionSheetDelegate, CustomStudentGroupCellDelegate, NPColorPickerVCDelegate>
+
+@property (nonatomic, strong) UIStoryboardPopoverSegue *colorPickerPopoverSegue;
+@property (nonatomic, strong) CustomStudentGroupCell *colorPickerSenderCell;
 
 @end
 
@@ -29,6 +34,9 @@
 @synthesize delegate=_delegate;
 
 @synthesize identifier=_identifier;
+
+@synthesize colorPickerPopoverSegue=_colorPickerPopoverSegue;
+@synthesize colorPickerSenderCell=_colorPickerSenderCell;
 
 #pragma mark - Getters and Setters
 
@@ -169,6 +177,13 @@
     }
 }
 
+#pragma mark - CustomStudentGroupCell protocol methods
+-(void)colorPatchPressedWithColorRGB:(UIColor *)backgroundColor andSender:(CustomStudentGroupCell *)cell {
+    NSLog(@"I'm here!");
+    [self performSegueWithIdentifier:@"NPColorPicker" sender:cell];
+    self.colorPickerSenderCell=cell;
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad {
@@ -229,6 +244,12 @@
         //Notify the delegate
         [self.delegate studentGroupTVC:self preparedToSegueToStudentResponseTVC:segue.destinationViewController];
     }
+    
+    else if ([segue.identifier isEqualToString:@"NPColorPicker"]) {
+        NSLog(@"UIStoryBoardSegue is of type: %@", [segue.destinationViewController class]);
+        self.colorPickerPopoverSegue = (UIStoryboardPopoverSegue *)segue;
+        [segue.destinationViewController setDelegate:self];
+    }
 }
 
 #pragma mark - Table view data source
@@ -247,6 +268,7 @@
     // Configure the cell...
     Group *group=[self.studentGroups objectAtIndex:indexPath.row];
     cell.studentGroup=group;
+    cell.delegate = self;
     
     return cell;
 }
@@ -284,4 +306,24 @@
         self.toBeDeletedGroups=toBeDeletedGroups.copy;
     }
 }
+
+#pragma mark - NPColorPickerVC protocol methods
+-(void) userDidDismissPopoverWithColor:(UIColor *)color {
+    [self.colorPickerPopoverSegue.popoverController dismissPopoverAnimated:YES]; 
+    CGFloat *red = nil;
+    CGFloat *green = nil;
+    CGFloat *blue = nil;
+    CGFloat *alpha = nil;
+    [color getRed:red green:green blue:blue alpha:alpha];
+    NSLog(@"float value: %g %g %g", red, green, blue);
+    NSNumber *r = [NSNumber numberWithFloat:1.0f];//[NSNumber numberWithFloat:(float)*red];
+    NSNumber *g = [NSNumber numberWithFloat:0.5f];//[NSNumber numberWithFloat:(float)*green];
+    NSNumber *b = [NSNumber numberWithFloat:0.5f ];//[NSNumber numberWithFloat:(float)*blue];
+    [self.colorPickerSenderCell.studentGroup setColorWithRed:r withGreen:g withBlue:b];
+    [self.colorPickerSenderCell updatePatchColor:color];
+}
+
+- (IBAction)colorPatchPressed:(UIButton *)sender {
+}
+
 @end

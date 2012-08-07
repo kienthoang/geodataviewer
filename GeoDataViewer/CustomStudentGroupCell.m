@@ -8,12 +8,21 @@
 
 #import "CustomStudentGroupCell.h"
 
+
+
 @implementation CustomStudentGroupCell
 
 @synthesize studentGroup=_studentGroup;
 
 @synthesize colorPatch=_colorPatch;
 @synthesize name=_name;
+
+@synthesize delegate=_delegate;
+
+- (IBAction)colorPatchPressed:(UIButton *)sender
+{
+    [self.delegate colorPatchPressedWithColorRGB:sender.backgroundColor andSender:self];
+}
 
 - (UIColor *)colorForStudentGroup:(Group *)group {
     double redComponent=group.redComponent.doubleValue;
@@ -47,4 +56,10 @@
     
     self.colorPatch.backgroundColor=[self colorForStudentGroup:self.studentGroup];
 }
+
+-(void) updatePatchColor:(UIColor *) color {
+    self.colorPatch.backgroundColor = color;
+    NSLog(@"color set!");
+}
+
 @end

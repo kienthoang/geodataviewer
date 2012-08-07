@@ -23,4 +23,10 @@
 @dynamic folders;
 @dynamic responses;
 
+-(void)setColorWithRed:(NSNumber *)red withGreen:(NSNumber *)green withBlue:(NSNumber *)blue {
+    self.redComponent = red;
+    self.greenComponent = green;
+    self.blueComponent = blue;
+}
+
 @end
