@@ -58,5 +58,6 @@ typedef void (^data_completion_handler_t)(NSArray *data);
 #pragma mark - Data Manipulators
 
 - (void)deleteStudentGroups:(NSArray *)studentGroups;
+- (BOOL)updateFormation:(Formation *)formation withNewInfo:(NSDictionary *)formationInfo;
 
 @end

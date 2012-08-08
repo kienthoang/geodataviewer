@@ -17,8 +17,16 @@
 @synthesize colorPatch=_colorPatch;
 @synthesize name=_name;
 
+- (void)reload {
+    //Redraw the color patch
+    self.colorPatch.backgroundColor=[self colorForFormation:self.formation];
+    
+    //Set the name
+    self.name.text=self.formation.formationName; 
+}
+
 - (UIColor *)colorForFormation:(Formation *)formation {
-    UIColor *formationColor=[[ColorManager standardColorManager] colorWithName:formation.colorName];
+    UIColor *formationColor=[[ColorManager standardColorManager] colorWithName:formation.color];
     
     return formationColor;
 }
@@ -34,11 +42,8 @@
 - (void)setFormation:(Formation *)formation {
     _formation=formation;
         
-    //Redraw the color patch
-    self.colorPatch.backgroundColor=[self colorForFormation:formation];
-    
-    //Set the name
-    self.name.text=formation.formationName;    
+    //Reload
+    [self reload];
 }
 
 //Override set Selected to be sure the color patch's background color does not get covered by the cell's selected state background color

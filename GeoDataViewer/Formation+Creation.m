@@ -17,12 +17,12 @@
     //Get the formation name and color from the info dictionary
     NSString *formationName=[formationInfo objectForKey:GeoFormationName];
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
-    NSString *colorName=[formationInfo objectForKey:GeoFormationColorName];
+    NSString *color=[formationInfo objectForKey:GeoFormationColorName];
 
     //Create a new formation
     Formation *formation=[NSEntityDescription insertNewObjectForEntityForName:@"Formation" inManagedObjectContext:context];
     formation.formationName=formationName;
-    formation.colorName=colorName;
+    formation.color=color;
     formation.formationSortNumber = [formationInfo objectForKey:GeoFormationSortIndex];
         
     return formation;

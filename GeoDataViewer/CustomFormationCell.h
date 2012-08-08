@@ -17,4 +17,6 @@
 @property (nonatomic,weak) IBOutlet UIButton *colorPatch;
 @property (nonatomic,strong) Formation *formation;
 
+- (void)reload;
+
 @end

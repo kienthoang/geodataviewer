@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Key</key>
+			<string>dip_number_enabled</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Title</key>
+			<string>Dip Number</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Contact Formation As:</string>
+			<key>Key</key>
+			<string>contact_default_formation</string>
+			<key>DefaultValue</key>
+			<string>Upper Formation</string>
+			<key>Titles</key>
+			<array>
+				<string>Upper Formation</string>
+				<string>Lower Formation</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>Upper Formation</string>
+				<string>Lower Formation</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

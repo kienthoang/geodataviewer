@@ -64,7 +64,7 @@
     self.formationName=self.formation.formationName;
     
     //Update the color
-    UIColor *formationColor=[[ColorManager standardColorManager] colorWithName:formation.colorName];
+    UIColor *formationColor=[[ColorManager standardColorManager] colorWithName:formation.color];
     self.formationColor=formationColor;
 }
 
@@ -99,16 +99,9 @@
         
         //Process new info
         NSDictionary *formationInfo=[self formationInfoFromForm];
-        //If the formation has not been set before, send the delegate the new info
-        if (!self.formation)
-            [self.delegate formationViewController:self 
-                         didObtainNewFormationInfo:formationInfo];
-        
-        //Else send both the formation and the info
-        else 
-            [self.delegate formationViewController:self 
-                           didAskToModifyFormation:self.formation 
-                                andObtainedNewInfo:formationInfo];
+        [self.delegate formationViewController:self 
+                       didAskToModifyFormation:self.formation 
+                            andObtainedNewInfo:formationInfo];
     }
 }
 

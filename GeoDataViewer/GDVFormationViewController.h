@@ -16,9 +16,6 @@
 @protocol GDVFormationViewControllerDelegate <NSObject>
 
 - (void)formationViewController:(GDVFormationViewController *)sender 
-      didObtainNewFormationInfo:(NSDictionary *)formationInfo;
-
-- (void)formationViewController:(GDVFormationViewController *)sender 
         didAskToModifyFormation:(Formation *)formation 
              andObtainedNewInfo:(NSDictionary *)formationInfo;
 

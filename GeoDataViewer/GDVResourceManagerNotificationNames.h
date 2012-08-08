@@ -17,5 +17,6 @@
 #define GDVResourceManagerUserInfoUpdateMechanismKey @"GDVResourceManager.Notifications.UserInfo.UpdateMechanismKey"
 #define GDVResourceManagerUpdateByImporting @"GDVResourceManager.Notifications.UpdateMechanism.ByImporting"
 #define GDVResourceManagerUpdateBySynchronizingWithServer @"GDVResourceManager.Notifications.UpdateMechanism.BySynchronizingWithServer"
+#define GDVResourceManagerUpdateByUser @"GDVResourceManager.Notifications.UpdateMechanism.ByUser"
 
 @end
