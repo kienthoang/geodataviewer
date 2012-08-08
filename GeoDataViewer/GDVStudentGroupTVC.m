@@ -12,7 +12,13 @@
 
 #import "CustomStudentGroupCell.h"
 
-@interface GDVStudentGroupTVC() <UIActionSheetDelegate>
+#import "NPColorPickerVC.h"
+
+@interface GDVStudentGroupTVC() <UIActionSheetDelegate, CustomStudentGroupCellDelegate, NPColorPickerVCDelegate>
+
+@property (nonatomic, strong) UIStoryboardPopoverSegue *colorPickerPopoverSegue;
+@property (nonatomic, strong) CustomStudentGroupCell *colorPickerSenderCell;
+@property (nonatomic, strong) NSMutableArray *initialPopoverColors;
 
 @end
 
@@ -31,8 +37,16 @@
 @synthesize identifier=_identifier;
 
 @synthesize selectedStudentGroups=_selectedStudentGroups;
+@synthesize colorPickerPopoverSegue=_colorPickerPopoverSegue;
+@synthesize colorPickerSenderCell=_colorPickerSenderCell;
+@synthesize initialPopoverColors=_initialPopoverColors;
 
 #pragma mark - Getters and Setters
+-(NSMutableArray *) initialPopoverColors {
+    if(!_initialPopoverColors)
+        _initialPopoverColors = [[NSMutableArray alloc] initWithObjects:[UIColor redColor], [UIColor greenColor], [UIColor blueColor], [UIColor yellowColor], nil];
+    return _initialPopoverColors;
+}
 
 - (void)setStudentGroups:(NSArray *)studentGroups {
     if (studentGroups) {
@@ -176,6 +190,12 @@
     }
 }
 
+#pragma mark - CustomStudentGroupCell protocol methods
+-(void)colorPatchPressedWithColorRGB:(UIColor *)backgroundColor andSender:(CustomStudentGroupCell *)cell {
+    [self performSegueWithIdentifier:@"NPColorPicker" sender:cell];
+    self.colorPickerSenderCell=cell;
+}
+
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad {
@@ -236,6 +256,12 @@
         //Notify the delegate
         [self.delegate studentGroupTVC:self preparedToSegueToStudentResponseTVC:segue.destinationViewController];
     }
+    
+    else if ([segue.identifier isEqualToString:@"NPColorPicker"]) {
+        self.colorPickerPopoverSegue = (UIStoryboardPopoverSegue *)segue;
+        [segue.destinationViewController setSelectedColors:self.initialPopoverColors];
+        [segue.destinationViewController setDelegate:self];
+    }
 }
 
 #pragma mark - Table view data source
@@ -254,6 +280,7 @@
     // Configure the cell...
     Group *group=[self.studentGroups objectAtIndex:indexPath.row];
     cell.studentGroup=group;
+    cell.delegate = self;
     
     return cell;
 }
@@ -291,4 +318,25 @@
         self.toBeDeletedGroups=toBeDeletedGroups.copy;
     }
 }
+
+#pragma mark - NPColorPickerVC protocol methods
+-(void) userDidDismissPopoverWithColor:(UIColor *)color andSelectedColors:(NSMutableArray *)colors {
+    self.initialPopoverColors = colors;
+    [self.colorPickerPopoverSegue.popoverController dismissPopoverAnimated:YES]; 
+    
+    
+    CGFloat red = 0.0 ;
+    CGFloat green = 0.0;
+    CGFloat blue = 0.0;
+    CGFloat alpha = 0.0;    
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];        
+   
+   
+    [self.colorPickerSenderCell.studentGroup setColorWithRed:(double)red withGreen:(double)green withBlue:(double)blue];
+    [self.colorPickerSenderCell updatePatchColor:color];
+}
+
+- (IBAction)colorPatchPressed:(UIButton *)sender {
+}
+
 @end

@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="GV0-DT-OWQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="GV0-DT-OWQ">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
+        <!--Color PickerVC-->
+        <scene sceneID="bOt-lC-8yU">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZh-XQ-63z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="ULM-ZO-aR1" customClass="NPColorPickerVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Ed-gT-d2H">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="8gc-dA-Y2E" customClass="NPColorPickerView">
+                                <rect key="frame" x="8" y="41" width="342" height="318"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="PRT-Co-wfQ" customClass="NPColorQuadView">
+                                <rect key="frame" x="20" y="373" width="330" height="95"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wYp-6N-mg4">
+                                <rect key="frame" x="292" y="16" width="58" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="donePickingColor:" destination="ULM-ZO-aR1" eventType="touchUpInside" id="Occ-Sc-7O7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YPY-QL-bUs">
+                                <rect key="frame" x="13" y="16" width="58" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Add">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addColor:" destination="ULM-ZO-aR1" eventType="touchUpInside" id="ezX-2t-9p7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ccd-Qj-0e5"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="270" height="370"/>
+                    <connections>
+                        <outlet property="picker" destination="8gc-dA-Y2E" id="AE9-to-82G"/>
+                        <outlet property="quad" destination="PRT-Co-wfQ" id="m6H-b5-Kb0"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-3487" y="-1149"/>
+        </scene>
         <!--Student GroupTVC-->
         <scene sceneID="qMH-hR-iJb">
             <objects>
@@ -32,7 +94,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EFo-n2-dgs">
-                                            <rect key="frame" x="13" y="3" width="72" height="37"/>
+                                            <rect key="frame" x="8" y="3" width="72" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -43,12 +105,16 @@
                                             <state key="highlighted">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="colorPatchPressed:" destination="ikV-MY-EBg" eventType="touchUpInside" id="afv-Ld-QrG"/>
+                                                <action selector="colorPatchPressed:" destination="q7c-Z2-Luc" eventType="touchUpInside" id="bt0-U8-df2"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <outlet property="colorPatch" destination="EFo-n2-dgs" id="EzQ-ZV-eBQ"/>
+                                    <outlet property="colorPatch" destination="EFo-n2-dgs" id="2rN-v2-3mH"/>
                                     <outlet property="name" destination="wrI-Ak-0yo" id="GlV-bH-DfH"/>
                                 </connections>
                             </tableViewCell>
@@ -93,6 +159,9 @@
                         <outlet property="selectAllButton" destination="M6E-1J-ooV" id="R0q-Lc-e4X"/>
                         <outlet property="selectNoneButton" destination="54U-In-lvI" id="Lss-A4-PhC"/>
                         <segue destination="4r6-dQ-sci" kind="push" identifier="Show Folders" id="DVB-Gb-WGo"/>
+                        <segue destination="ULM-ZO-aR1" kind="popover" identifier="NPColorPicker" popoverAnchorView="fnV-Lc-xlh" id="6pG-eg-6Ns">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1128,6 +1197,18 @@
                                     </segue>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V4x-Sj-XOJ">
+                                <rect key="frame" x="291" y="69" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -2051,6 +2132,19 @@
                 <relationship kind="outlet" name="strike" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="upperFormation" candidateClass="UILabel"/>
             </relationships>
+        </class>
+        <class className="NPColorPickerVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorPickerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="picker" candidateClass="NPColorPickerView"/>
+                <relationship kind="outlet" name="quad" candidateClass="NPColorQuadView"/>
+            </relationships>
+        </class>
+        <class className="NPColorPickerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorPickerView.h"/>
+        </class>
+        <class className="NPColorQuadView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorQuadView.h"/>
         </class>
         <class className="PrototypeLoadingTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeLoadingTableViewController.h"/>
