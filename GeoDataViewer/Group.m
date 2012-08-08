@@ -23,12 +23,10 @@
 @dynamic folders;
 @dynamic responses;
 
--(void)setColorWithRed:(NSString *)red withGreen:(NSString *)green withBlue:(NSString *)blue{
-    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    self.redComponent = [formatter numberFromString:red];
-    self.greenComponent = [formatter numberFromString:green];
-    self.blueComponent = [formatter numberFromString:blue];
+-(void)setColorWithRed:(double)red withGreen:(double)green withBlue:(double)blue{
+    self.redComponent = [NSNumber numberWithDouble:red];
+    self.greenComponent = [NSNumber numberWithDouble:green];
+    self.blueComponent = [NSNumber numberWithDouble:blue];
 }
 
 @end

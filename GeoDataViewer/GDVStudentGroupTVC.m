@@ -317,16 +317,16 @@
 -(void) userDidDismissPopoverWithColor:(UIColor *)color andSelectedColors:(NSMutableArray *)colors {
     self.initialPopoverColors = colors;
     [self.colorPickerPopoverSegue.popoverController dismissPopoverAnimated:YES]; 
-    CGFloat *red = nil;
-    CGFloat *green = nil;
-    CGFloat *blue = nil;
-    CGFloat *alpha = nil;
-    [color getRed:red green:green blue:blue alpha:alpha];
-    NSString *r = [NSString stringWithFormat:@"%e", red];
-    NSString *g = [NSString stringWithFormat:@"%e", green];
-    NSString *b = [NSString stringWithFormat:@"%e", blue];    
+    
+    
+    CGFloat red = 0.0 ;
+    CGFloat green = 0.0;
+    CGFloat blue = 0.0;
+    CGFloat alpha = 0.0;    
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];        
    
-    [self.colorPickerSenderCell.studentGroup setColorWithRed:r withGreen:g withBlue:b];
+   
+    [self.colorPickerSenderCell.studentGroup setColorWithRed:(double)red withGreen:(double)green withBlue:(double)blue];
     [self.colorPickerSenderCell updatePatchColor:color];
 }
 
