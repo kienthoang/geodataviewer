@@ -21,6 +21,8 @@
 @property (nonatomic,strong) NSArray *studentGroups;
 @property (strong, nonatomic) NSArray *toBeDeletedGroups;
 
+@property (nonatomic,strong) NSArray *selectedStudentGroups;
+
 @property (nonatomic,weak) id <GDVStudentGroupTVCDelegate> delegate;
 
 @property (nonatomic,strong) NSString *identifier;

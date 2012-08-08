@@ -30,6 +30,8 @@
 
 @synthesize identifier=_identifier;
 
+@synthesize selectedStudentGroups=_selectedStudentGroups;
+
 #pragma mark - Getters and Setters
 
 - (void)setStudentGroups:(NSArray *)studentGroups {
@@ -63,6 +65,11 @@
     
     //Disable the delete button if no group is selected
     self.deleteButton.enabled=numGroups>0;
+}
+
+- (NSArray *)selectedStudentGroups {
+#warning Needs implementation
+    return self.studentGroups;
 }
 
 #pragma mark - Target-Action Handlers

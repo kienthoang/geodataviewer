@@ -19,7 +19,7 @@
     JointSet *record=(JointSet *)[Record recordForInfo:updatedRecordInfo.copy inManagedObjectContext:context];
         
     //Set the formation
-    //record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:context];
+    record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:context];
         
     return record;
 }

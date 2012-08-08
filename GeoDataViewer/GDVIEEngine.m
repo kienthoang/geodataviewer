@@ -492,7 +492,7 @@ typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,Respo
     NSString *merged=@"";
     NSString *current=@"";
     BOOL repeat=NO;
-    NSMutableArray *copy = [array mutableCopy];
+    NSMutableArray *copy = array.mutableCopy;
     do {
         repeat = NO;
         int length = copy.count;

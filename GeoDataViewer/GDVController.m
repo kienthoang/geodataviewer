@@ -8,7 +8,7 @@
 
 #import "GDVController.h"
 
-@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate,GDVStudentGroupTVCDelegate,GDVFolderTVCDelegate,GDVFormationFolderTVCDelegate>
+@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate,GDVStudentGroupTVCDelegate,GDVFolderTVCDelegate,GDVFormationFolderTVCDelegate,RecordMapViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *settingsButton;
 
 @property (nonatomic, strong) UIPopoverController *importPopover;
+
+@property (nonatomic, strong) NSDictionary *selectedFoldersByStudentGroups;
 
 @end
 
@@ -39,10 +41,19 @@
 
 @synthesize mapViewController=_mapViewController;
 
+@synthesize selectedFoldersByStudentGroups=_selectedFoldersByStudentGroups;
+
 #pragma mark - Getters and Setters
 
 - (GDVResourceManager *)resourceManager {
     return [GDVResourceManager defaultResourceManager];
+}
+
+- (NSDictionary *)selectedFoldersByStudentGroups {
+    if (!_selectedFoldersByStudentGroups)
+        _selectedFoldersByStudentGroups=[NSDictionary dictionary];
+    
+    return _selectedFoldersByStudentGroups;
 }
 
 #pragma mark - View Accessors
@@ -121,6 +132,17 @@
     }];
 }
 
+- (void)updateDataForMapViewController:(RecordMapViewController *)mapViewController {
+    //Fetch the records for the selected student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        [self.resourceManager fetchFoldersForStudentGroups:studentGroups scompletion:^(NSArray *folders){
+            [self.resourceManager fetchRecordsForFolders:folders completion:^(NSArray *records){
+                [mapViewController updateRecords:records forceUpdate:YES updateRegion:YES];
+            }];
+        }];
+    }];
+}
+
 #pragma mark - Prepare for Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -148,11 +170,16 @@
         
         //Add map vc as child vc
         RecordMapViewController *mapViewController=self.mapViewController;
+        
+        //Set self as the delegate of the map
+        self.mapViewController.mapDelegate=self;
+        
+        //Setup the map's view
         self.mapViewController.view.frame=self.contentView.bounds;
         [mapViewController willMoveToParentViewController:self];
         [self addChildViewController:mapViewController];
         [self.contentView addSubview:mapViewController.mapView];
-        [mapViewController didMoveToParentViewController:self];        
+        [mapViewController didMoveToParentViewController:self];       
     }
     
     //Segue to formation list
@@ -446,6 +473,12 @@
     [self setImportExportButton:nil];
     [self setSettingsButton:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - RecordMapViewControllerDelegate Protocol Methods
+
+- (void)updateRecordsForMapViewController:(RecordMapViewController *)mapViewController {
+    [self updateDataForMapViewController:mapViewController];
 }
 
 #pragma mark - ImportTableViewControllerDelegate Protocol Methods

@@ -128,24 +128,48 @@ static GDVResourceManager *defaultResourceManager;
 
 - (void)fetchFoldersForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
     //Fetch all the folders for the given student group
-    BOOL faulty=studentGroup.faulty.boolValue;
-    if (faulty) {
-        //Data is faulty, fetch folders from server
+    [self fetchFoldersForStudentGroups:[NSArray arrayWithObject:studentGroup] scompletion:completionHandler];
+}
+
+- (void)fetchFoldersForStudentGroups:(NSArray *)studentGroups scompletion:(data_completion_handler_t)completionHandler {
+    NSMutableArray *folders=[NSMutableArray array];
+    
+    //Take all the folders in the student groups
+    for (Group *studentGroup in studentGroups) {
+        BOOL faulty=studentGroup.faulty.boolValue;
+        if (faulty) {
+            //Data is faulty, fetch folders from server
+        }
+        else {
+            [folders addObjectsFromArray:studentGroup.folders.allObjects];
+        }
     }
-    else {
-        completionHandler(studentGroup.folders.allObjects);
-    }
+    
+    //Execute the completion handler
+    completionHandler(folders.copy);
 }
 
 - (void)fetchRecordsForFolder:(Folder *)folder completion:(data_completion_handler_t)completionHandler {
-    //Fetch all the records for the given folder
-    BOOL faulty=folder.faulty.boolValue;
-    if (faulty) {
-        //Data is faulty, fetch records from server
+    //Fetch all the folders for the given student group
+    [self fetchRecordsForFolders:[NSArray arrayWithObject:folder] completion:completionHandler];
+}
+
+- (void)fetchRecordsForFolders:(NSArray *)folders completion:(data_completion_handler_t)completionHandler {
+    NSMutableArray *records=[NSMutableArray array];
+    
+    //Take all the records in the groups
+    for (Folder *folder in folders) {
+        BOOL faulty=folder.faulty.boolValue;
+        if (faulty) {
+            //Data is faulty, fetch records from server
+        }
+        else {
+            [records addObjectsFromArray:folder.records.allObjects];
+        }
     }
-    else {
-        completionHandler(folder.records.allObjects);
-    }
+    
+    //Execute the completion handler
+    completionHandler(records.copy);
 }
 
 - (void)fetchFormationFoldersWithCompletionHandler:(data_completion_handler_t)completionHandler {
@@ -169,13 +193,25 @@ static GDVResourceManager *defaultResourceManager;
 
 - (void)fetchStudentResponsesForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
     //Fetch all the student responses for the given student group
-    BOOL faulty=studentGroup.faulty.boolValue;
-    if (faulty) {
-        //Data is faulty, fetch student responses from server
+    [self fetchStudentResponsesForStudentGroups:[NSArray arrayWithObject:studentGroup] completion:completionHandler];
+}
+
+- (void)fetchStudentResponsesForStudentGroups:(NSArray *)studentGroups completion:(data_completion_handler_t)completionHandler {
+    NSMutableArray *responses=[NSMutableArray array];
+    
+    //Take all the responses in the student groups
+    for (Group *studentGroup in studentGroups) {
+        BOOL faulty=studentGroup.faulty.boolValue;
+        if (faulty) {
+            //Data is faulty, fetch responses from server
+        }
+        else {
+            [responses addObjectsFromArray:studentGroup.responses.allObjects];
+        }
     }
-    else {
-        completionHandler(studentGroup.responses.allObjects);        
-    }
+    
+    //Execute the completion handler
+    completionHandler(responses.copy);
 }
 
 #pragma mark - Data Manipulators

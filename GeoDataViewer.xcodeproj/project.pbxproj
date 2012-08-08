@@ -44,6 +44,8 @@
 		0251C8C215CCC6CE00075C60 /* Fault+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C115CCC6CE00075C60 /* Fault+Creation.m */; };
 		0251C8C515CCC81000075C60 /* Contact+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C415CCC81000075C60 /* Contact+Creation.m */; };
 		0251C8C815CCC88100075C60 /* Bedding+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C715CCC88000075C60 /* Bedding+Creation.m */; };
+		025B708615D2BD3400BCA39E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 025B708515D2BD3400BCA39E /* Settings.bundle */; };
+		025B708815D2BD4A00BCA39E /* Color.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025B708715D2BD4A00BCA39E /* Color.plist */; };
 		026F31FB15D02462001F99EB /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FA15D02462001F99EB /* Group.m */; };
 		026F31FE15D02776001F99EB /* GDVFormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FD15D02776001F99EB /* GDVFormationViewController.m */; };
 		026F322115D0281E001F99EB /* RGB-HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321815D0281E001F99EB /* RGB-HSL.m */; };
@@ -245,6 +247,8 @@
 		0251C8C415CCC81000075C60 /* Contact+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+Creation.m"; sourceTree = "<group>"; };
 		0251C8C615CCC88000075C60 /* Bedding+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bedding+Creation.h"; sourceTree = "<group>"; };
 		0251C8C715CCC88000075C60 /* Bedding+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bedding+Creation.m"; sourceTree = "<group>"; };
+		025B708515D2BD3400BCA39E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		025B708715D2BD4A00BCA39E /* Color.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Color.plist; sourceTree = "<group>"; };
 		026F31F915D02462001F99EB /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		026F31FA15D02462001F99EB /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		026F31FC15D02776001F99EB /* GDVFormationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationViewController.h; sourceTree = "<group>"; };
@@ -454,6 +458,15 @@
 			name = "Student Group TVCs";
 			sourceTree = "<group>";
 		};
+		025B708415D2BD1B00BCA39E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				025B708515D2BD3400BCA39E /* Settings.bundle */,
+				025B708715D2BD4A00BCA39E /* Color.plist */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		026F321515D027F0001F99EB /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +537,7 @@
 				02F319C615C9BD480070EDC7 /* GDVController.m */,
 				02F319C815C9BD730070EDC7 /* Resource Manager Group */,
 				02F31A7115C9C3ED0070EDC7 /* Views */,
+				025B708415D2BD1B00BCA39E /* Settings */,
 				02F31ABB15C9C6AC0070EDC7 /* Custom Segues */,
 				02F31AF515C9D0930070EDC7 /* Protocols */,
 				02F31A7A15C9C4A50070EDC7 /* Images */,
@@ -1118,6 +1132,8 @@
 				02F31A9115C9C4C70070EDC7 /* green_pin.png in Resources */,
 				0281DBF515CAD44F00D1D8B1 /* group.png in Resources */,
 				0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */,
+				025B708615D2BD3400BCA39E /* Settings.bundle in Resources */,
+				025B708815D2BD4A00BCA39E /* Color.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
