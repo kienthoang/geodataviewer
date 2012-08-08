@@ -27,7 +27,7 @@
 }
 
 -(void) pushInitialColors:(NSMutableArray *) colors 
-{
+{ 
     for(UIColor *color in colors) {
         [self.quad pushColor:color];
     }

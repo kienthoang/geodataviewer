@@ -322,11 +322,9 @@
     CGFloat *blue = nil;
     CGFloat *alpha = nil;
     [color getRed:red green:green blue:blue alpha:alpha];
-    NSLog(@"before formatting %g %g %g", red, green, blue);
     NSString *r = [NSString stringWithFormat:@"%e", red];
     NSString *g = [NSString stringWithFormat:@"%e", green];
-    NSString *b = [NSString stringWithFormat:@"%e", blue];
-    
+    NSString *b = [NSString stringWithFormat:@"%e", blue];    
    
     [self.colorPickerSenderCell.studentGroup setColorWithRed:r withGreen:g withBlue:b];
     [self.colorPickerSenderCell updatePatchColor:color];

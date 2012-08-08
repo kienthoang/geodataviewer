@@ -12,63 +12,61 @@
                 <viewController id="ULM-ZO-aR1" customClass="NPColorPickerVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Ed-gT-d2H">
                         <rect key="frame" x="0.0" y="0.0" width="370" height="500"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="8gc-dA-Y2E" customClass="NPColorPickerView">
-                                <rect key="frame" x="6" y="0.0" width="356" height="390"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wYp-6N-mg4">
-                                        <rect key="frame" x="298" y="7" width="58" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Done">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="donePickingColor:" destination="ULM-ZO-aR1" eventType="touchUpInside" id="Occ-Sc-7O7"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YPY-QL-bUs">
-                                        <rect key="frame" x="298" y="45" width="58" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Add">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addColor:" destination="ULM-ZO-aR1" eventType="touchUpInside" id="ezX-2t-9p7"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                                <rect key="frame" x="8" y="41" width="342" height="318"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="PRT-Co-wfQ" customClass="NPColorQuadView">
-                                <rect key="frame" x="20" y="398" width="342" height="82"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="20" y="373" width="330" height="95"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wYp-6N-mg4">
+                                <rect key="frame" x="292" y="16" width="58" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="donePickingColor:" destination="ULM-ZO-aR1" eventType="touchUpInside" id="Occ-Sc-7O7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YPY-QL-bUs">
+                                <rect key="frame" x="13" y="16" width="58" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Add">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addColor:" destination="ULM-ZO-aR1" eventType="touchUpInside" id="ezX-2t-9p7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="ccd-Qj-0e5"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="370" height="500"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="270" height="370"/>
                     <connections>
                         <outlet property="picker" destination="8gc-dA-Y2E" id="AE9-to-82G"/>
                         <outlet property="quad" destination="PRT-Co-wfQ" id="m6H-b5-Kb0"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-3482" y="-1148"/>
+            <point key="canvasLocation" x="-3487" y="-1149"/>
         </scene>
         <!--Student GroupTVC-->
         <scene sceneID="qMH-hR-iJb">
@@ -1629,6 +1627,151 @@
             <point key="canvasLocation" x="-18" y="1120"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CSVTableViewController" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CSVTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="CheckBox" superclassName="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CheckBox.h"/>
+        </class>
+        <class className="ColorPickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ColorPickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="aquaPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="blackPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bluePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fuchsiaPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="greenPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="limePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="maroonPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mochaPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="navyPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="olivePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="purplePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="redPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="silverPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tealPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="whitePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="yellowPatch" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="CustomFolderCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFolderCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomFormationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFormationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomRecordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="CheckBox"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="type" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomStudentGroupCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomStudentGroupCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="FormationImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationImportTVC.h"/>
+        </class>
+        <class className="GDVController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="feedbackListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="formationListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="recordListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="settingsButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="GDVFolderTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFolderTVC.h"/>
+        </class>
+        <class className="GDVFormationFolderTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationFolderTVC.h"/>
+        </class>
+        <class className="GDVFormationTableViewController" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationTableViewController.h"/>
+        </class>
+        <class className="GDVRecordTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVRecordTVC.h"/>
+        </class>
+        <class className="GDVStudentGroupTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentGroupTVC.h"/>
+            <relationships>
+                <relationship kind="action" name="deletePressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="editPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="selectAll:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="selectNone:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNoneButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="GDVStudentResponseTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentResponseTVC.h"/>
+        </class>
+        <class className="ImportTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="importPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NPColorPickerVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorPickerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="picker" candidateClass="NPColorPickerView"/>
+                <relationship kind="outlet" name="quad" candidateClass="NPColorQuadView"/>
+            </relationships>
+        </class>
+        <class className="NPColorPickerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorPickerView.h"/>
+        </class>
+        <class className="NPColorQuadView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorQuadView.h"/>
+        </class>
+        <class className="PrototypeLoadingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeLoadingTableViewController.h"/>
+        </class>
+        <class className="RecordImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordImportTVC.h"/>
+        </class>
+        <class className="RecordMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="StudentReponseImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StudentReponseImportTVC.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
