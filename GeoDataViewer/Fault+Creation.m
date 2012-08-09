@@ -19,7 +19,7 @@
     Fault *record=(Fault *)[Record recordForInfo:updatedRecordInfo.copy inManagedObjectContext:context];
             
     //Set the formation
-    //record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:context];
+    record.formation=[Formation formationWithName:[recordInfo objectForKey:RECORD_FORMATION] inManagedObjectContext:context];
             
     //Set the plunge and trend
     NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];

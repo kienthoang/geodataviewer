@@ -1,17 +1,12 @@
 //
 //  Formation+Modification.m
-//  GeoFieldBook
+//  GeoDataViewer
 //
-//  Created by Kien Hoang on 6/26/12.
+//  Created by Kien Hoang on 8/8/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import "Formation+Modification.h"
-
-#import "Formation_Folder.h"
-#import "Formation+DictionaryKeys.h"
-
-#import "TextInputFilter.h"
 
 @implementation Formation (Modification)
 
@@ -20,8 +15,8 @@
     NSString *formationName=[formationInfo objectForKey:GeoFormationName];
     formationName=[TextInputFilter filterDatabaseInputText:formationName];
     UIColor *formationColor=[formationInfo objectForKey:GeoFormationColor];
-    NSString *colorName=[formationInfo objectForKey:GeoFormationColorName];
-
+    NSString *color=[formationInfo objectForKey:GeoFormationColorName];
+    
     //if the name is nil, return NO
     if (!formationName)
         return NO;
@@ -48,7 +43,7 @@
     
     //Update the formation name
     self.formationName=formationName;
-    self.colorName=colorName;
+    self.color=color;
     
     return YES;
 }

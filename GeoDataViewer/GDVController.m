@@ -8,7 +8,7 @@
 
 #import "GDVController.h"
 
-@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate,GDVStudentGroupTVCDelegate,GDVFolderTVCDelegate,GDVFormationFolderTVCDelegate>
+@interface GDVController() <ImportTableViewControllerDelegate,UIActionSheetDelegate,GDVStudentGroupTVCDelegate,GDVFolderTVCDelegate,GDVFormationFolderTVCDelegate,RecordMapViewControllerDelegate,GDVFormationTVCDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *settingsButton;
 
 @property (nonatomic, strong) UIPopoverController *importPopover;
+
+@property (nonatomic, strong) NSDictionary *selectedFoldersByStudentGroups;
 
 @end
 
@@ -39,10 +41,19 @@
 
 @synthesize mapViewController=_mapViewController;
 
+@synthesize selectedFoldersByStudentGroups=_selectedFoldersByStudentGroups;
+
 #pragma mark - Getters and Setters
 
 - (GDVResourceManager *)resourceManager {
     return [GDVResourceManager defaultResourceManager];
+}
+
+- (NSDictionary *)selectedFoldersByStudentGroups {
+    if (!_selectedFoldersByStudentGroups)
+        _selectedFoldersByStudentGroups=[NSDictionary dictionary];
+    
+    return _selectedFoldersByStudentGroups;
 }
 
 #pragma mark - View Accessors
@@ -121,6 +132,17 @@
     }];
 }
 
+- (void)updateDataForMapViewController:(RecordMapViewController *)mapViewController {
+    //Fetch the records for the selected student groups
+    [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
+        [self.resourceManager fetchFoldersForStudentGroups:studentGroups scompletion:^(NSArray *folders){
+            [self.resourceManager fetchRecordsForFolders:folders completion:^(NSArray *records){
+                [mapViewController updateRecords:records forceUpdate:YES updateRegion:YES];
+            }];
+        }];
+    }];
+}
+
 #pragma mark - Prepare for Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -148,11 +170,16 @@
         
         //Add map vc as child vc
         RecordMapViewController *mapViewController=self.mapViewController;
+        
+        //Set self as the delegate of the map
+        self.mapViewController.mapDelegate=self;
+        
+        //Setup the map's view
         self.mapViewController.view.frame=self.contentView.bounds;
         [mapViewController willMoveToParentViewController:self];
         [self addChildViewController:mapViewController];
         [self.contentView addSubview:mapViewController.mapView];
-        [mapViewController didMoveToParentViewController:self];        
+        [mapViewController didMoveToParentViewController:self];       
     }
     
     //Segue to formation list
@@ -261,24 +288,31 @@
 }
 
 - (void)formationDatabaseDidChange:(NSNotification *)notification {
-    //Pop formation list's nav to root vc if the formation list popover is visible (if not, the formationListNav will be nil, and popToRootVCAnimated will have no effect
-    [self.formationListNav popToRootViewControllerAnimated:YES];
-    
-    //Show loading screen in the formation folder vc in formation list
-    GDVFormationFolderTVC *formationFolderTVC=self.formationFolderTVC;
-    [formationFolderTVC showLoadingScreen];
-    
-    //Update
-    [self updateDataForFormationFolderTVC:formationFolderTVC];
-    
-    //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
+    //If the update mechanism is not by user, update the formation folder tvc
     NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
-    if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
-        [self.importTableViewController putImportButtonBack];
+    if (![updateMechanism isEqualToString:GDVResourceManagerUpdateByUser]) {
+        //Pop formation list's nav to root vc if the formation list popover is visible (if not, the formationListNav will be nil, and popToRootVCAnimated will have no effect
+        [self.formationListNav popToRootViewControllerAnimated:YES];
         
-        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
-        [doneAlert show];
+        //Show loading screen in the formation folder vc in formation list
+        GDVFormationFolderTVC *formationFolderTVC=self.formationFolderTVC;
+        [formationFolderTVC showLoadingScreen];
+        
+        //Update
+        [self updateDataForFormationFolderTVC:formationFolderTVC];
+        
+        //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
+        NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
+        if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
+            [self.importTableViewController putImportButtonBack];
+            
+            UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
+            [doneAlert show];
+        }
     }
+    
+    //Reload the map's annotation views to reflect the formation changes
+    [self.mapViewController reloadAnnotationViews];
 }
 
 - (void)studentResponseDatabaseDidChange:(NSNotification *)notification {
@@ -373,7 +407,7 @@
 
 - (IBAction)settingButtonPressed:(UIButton *)sender {
     //Segue to the settings view controller
-    //[self performSegueWithIdentifier:@"Settings" sender:nil];
+    [self performSegueWithIdentifier:@"Settings" sender:nil];
 }
 
 #pragma mark - View Controller Lifecycle
@@ -448,6 +482,12 @@
     [super viewDidUnload];
 }
 
+#pragma mark - RecordMapViewControllerDelegate Protocol Methods
+
+- (void)updateRecordsForMapViewController:(RecordMapViewController *)mapViewController {
+    [self updateDataForMapViewController:mapViewController];
+}
+
 #pragma mark - ImportTableViewControllerDelegate Protocol Methods
 
 - (void)userDidSelectRecordCSVFiles:(NSArray *)files forImportingInImportTVC:(ImportTableViewController *)sender
@@ -515,6 +555,9 @@
 
 - (void)formationFolderTVC:(GDVFormationFolderTVC *)sender preparedToSegueToFormationTVC:(GDVFormationTableViewController *)formationTVC
 {
+    //Set the delegate
+    formationTVC.delegate=self;
+    
     //Load the formation
     [self.resourceManager fetchFormationsForFormationFolder:formationTVC.formationFolder completion:^(NSArray *formations) {
         if (formations)
@@ -525,6 +568,16 @@
 - (void)updateFormationFoldersForFormationFolderTVC:(GDVFormationFolderTVC *)sender {
     //Update
     [self updateDataForFormationFolderTVC:sender];
+}
+
+#pragma mark - GDVFormationTVCDelegate Protocol Methods
+
+- (BOOL)gdvFormationTVC:(GDVFormationTableViewController *)sender 
+   needsUpdateFormation:(Formation *)formation 
+               withInfo:(NSDictionary *)formationInfo
+{
+    //Update
+    return [self.resourceManager updateFormation:formation withNewInfo:formationInfo];
 }
 
 @end

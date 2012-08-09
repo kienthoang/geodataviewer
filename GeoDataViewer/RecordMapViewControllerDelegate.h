@@ -14,6 +14,6 @@
 
 @protocol RecordMapViewControllerDelegate <NSObject>
 
-- (NSArray *)recordsForMapViewController:(RecordMapViewController *)mapViewController;
+- (void)updateRecordsForMapViewController:(RecordMapViewController *)mapViewController;
 
 @end

@@ -19,8 +19,8 @@
     Contact *record=(Contact *)[Record recordForInfo:updatedRecordInfo.copy inManagedObjectContext:context];
             
     //Set the upper and lower formations
-    //record.upperFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_UPPER_FORMATION] inManagedObjectContext:context];
-    //record.lowerFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_LOWER_FORMATION] inManagedObjectContext:context];
+    record.upperFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_UPPER_FORMATION] inManagedObjectContext:context];
+    record.lowerFormation=[Formation formationWithName:[recordInfo objectForKey:RECORD_LOWER_FORMATION] inManagedObjectContext:context];
             
     return record;
 }

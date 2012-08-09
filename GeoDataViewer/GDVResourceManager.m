@@ -8,6 +8,9 @@
 
 #import "GDVResourceManager.h"
 
+#import "TextInputFilter.h"
+#import "Formation+Modification.h"
+
 @interface GDVResourceManager() <GDVIEEngineDelegate>
 
 @end
@@ -68,6 +71,18 @@ static GDVResourceManager *defaultResourceManager;
     return _server;
 }
 
+#pragma mark - Alert Generators
+
+- (void)putUpAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)putUpDuplicateNameAlertWithName:(NSString *)duplicateName {
+    NSString *message=[NSString stringWithFormat:@"A formation with the name '%@' already exists in this folder!",duplicateName];
+    [self putUpAlertWithTitle:@"Name Duplicate" andMessage:message];
+}
+
 #pragma mark - Import Mechanisms
 
 - (void)importRecordCSVFiles:(NSArray *)csvFiles {
@@ -87,7 +102,7 @@ static GDVResourceManager *defaultResourceManager;
 
 #pragma mark - Notification Management Mechanisms
 
-- (void)postNotificationWithName:(NSString *)notificationName withUserInfo:(NSDictionary *)userInfo {
+- (void)postNotificationWithName:(NSString *)notificationName andUserInfo:(NSDictionary *)userInfo {
     NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:notificationName object:self userInfo:userInfo];
 }
@@ -101,19 +116,19 @@ static GDVResourceManager *defaultResourceManager;
 - (void)engineDidFinishProcessingRecords:(GDVIEEngine *)engine {
     //Post notification
     NSDictionary *userInfo=[self userInfoWithUpdateMechanism:GDVResourceManagerUpdateByImporting];
-    [self postNotificationWithName:GDVResourceManagerRecordDatabaseDidUpdate withUserInfo:userInfo];
+    [self postNotificationWithName:GDVResourceManagerRecordDatabaseDidUpdate andUserInfo:userInfo];
 }
 
 - (void)engineDidFinishProcessingFormations:(GDVIEEngine *)engine {
     //Post notification
     NSDictionary *userInfo=[self userInfoWithUpdateMechanism:GDVResourceManagerUpdateByImporting];
-    [self postNotificationWithName:GDVResourceManagerFormationDatabaseDidUpdate withUserInfo:userInfo];
+    [self postNotificationWithName:GDVResourceManagerFormationDatabaseDidUpdate andUserInfo:userInfo];
 }
 
 - (void)engineDidFinishProcessingStudentResponses:(GDVIEEngine *)engine {
     //Post notification
     NSDictionary *userInfo=[self userInfoWithUpdateMechanism:GDVResourceManagerUpdateByImporting];
-    [self postNotificationWithName:GDVResourceManagerStudentResponseDatabaseDidUpdate withUserInfo:userInfo];
+    [self postNotificationWithName:GDVResourceManagerStudentResponseDatabaseDidUpdate andUserInfo:userInfo];
 }
 
 #pragma mark - Data
@@ -128,24 +143,48 @@ static GDVResourceManager *defaultResourceManager;
 
 - (void)fetchFoldersForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
     //Fetch all the folders for the given student group
-    BOOL faulty=studentGroup.faulty.boolValue;
-    if (faulty) {
-        //Data is faulty, fetch folders from server
+    [self fetchFoldersForStudentGroups:[NSArray arrayWithObject:studentGroup] scompletion:completionHandler];
+}
+
+- (void)fetchFoldersForStudentGroups:(NSArray *)studentGroups scompletion:(data_completion_handler_t)completionHandler {
+    NSMutableArray *folders=[NSMutableArray array];
+    
+    //Take all the folders in the student groups
+    for (Group *studentGroup in studentGroups) {
+        BOOL faulty=studentGroup.faulty.boolValue;
+        if (faulty) {
+            //Data is faulty, fetch folders from server
+        }
+        else {
+            [folders addObjectsFromArray:studentGroup.folders.allObjects];
+        }
     }
-    else {
-        completionHandler(studentGroup.folders.allObjects);
-    }
+    
+    //Execute the completion handler
+    completionHandler(folders.copy);
 }
 
 - (void)fetchRecordsForFolder:(Folder *)folder completion:(data_completion_handler_t)completionHandler {
-    //Fetch all the records for the given folder
-    BOOL faulty=folder.faulty.boolValue;
-    if (faulty) {
-        //Data is faulty, fetch records from server
+    //Fetch all the folders for the given student group
+    [self fetchRecordsForFolders:[NSArray arrayWithObject:folder] completion:completionHandler];
+}
+
+- (void)fetchRecordsForFolders:(NSArray *)folders completion:(data_completion_handler_t)completionHandler {
+    NSMutableArray *records=[NSMutableArray array];
+    
+    //Take all the records in the groups
+    for (Folder *folder in folders) {
+        BOOL faulty=folder.faulty.boolValue;
+        if (faulty) {
+            //Data is faulty, fetch records from server
+        }
+        else {
+            [records addObjectsFromArray:folder.records.allObjects];
+        }
     }
-    else {
-        completionHandler(folder.records.allObjects);
-    }
+    
+    //Execute the completion handler
+    completionHandler(records.copy);
 }
 
 - (void)fetchFormationFoldersWithCompletionHandler:(data_completion_handler_t)completionHandler {
@@ -169,13 +208,25 @@ static GDVResourceManager *defaultResourceManager;
 
 - (void)fetchStudentResponsesForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
     //Fetch all the student responses for the given student group
-    BOOL faulty=studentGroup.faulty.boolValue;
-    if (faulty) {
-        //Data is faulty, fetch student responses from server
+    [self fetchStudentResponsesForStudentGroups:[NSArray arrayWithObject:studentGroup] completion:completionHandler];
+}
+
+- (void)fetchStudentResponsesForStudentGroups:(NSArray *)studentGroups completion:(data_completion_handler_t)completionHandler {
+    NSMutableArray *responses=[NSMutableArray array];
+    
+    //Take all the responses in the student groups
+    for (Group *studentGroup in studentGroups) {
+        BOOL faulty=studentGroup.faulty.boolValue;
+        if (faulty) {
+            //Data is faulty, fetch responses from server
+        }
+        else {
+            [responses addObjectsFromArray:studentGroup.responses.allObjects];
+        }
     }
-    else {
-        completionHandler(studentGroup.responses.allObjects);        
-    }
+    
+    //Execute the completion handler
+    completionHandler(responses.copy);
 }
 
 #pragma mark - Data Manipulators
@@ -198,6 +249,27 @@ typedef void (^database_save_t)(UIManagedDocument *database);
     
     //Save changes to database
     [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){}];
+}
+
+- (BOOL)updateFormation:(Formation *)formation withNewInfo:(NSDictionary *)formationInfo {
+    //Filter formation name
+    NSString *formationName=[formationInfo objectForKey:GeoFormationName];
+    formationName=[TextInputFilter filterDatabaseInputText:formationName];
+    
+    //Update the formation, if that returns NO (i.e. the update failed because of name duplication), put up an alert
+    if (![formation updateFormationWithFormationInfo:formationInfo]) {
+        [self putUpDuplicateNameAlertWithName:formationName];
+        return NO;
+    }
+    
+    //Save changes to database
+    [self saveDatabaseWithCompletionHandler:^(UIManagedDocument *database){
+        //Broadcast changes
+        NSDictionary *userInfo=[self userInfoWithUpdateMechanism:GDVResourceManagerUpdateByUser];
+        [self postNotificationWithName:GDVResourceManagerFormationDatabaseDidUpdate andUserInfo:userInfo];
+    }];
+    
+    return YES;
 }
 
 @end

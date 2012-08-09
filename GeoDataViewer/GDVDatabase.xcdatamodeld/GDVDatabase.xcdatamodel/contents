@@ -30,7 +30,7 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Record" inverseName="folder" inverseEntity="Record" syncable="YES"/>
     </entity>
     <entity name="Formation" representedClassName="Formation" syncable="YES">
-        <attribute name="colorName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="formationName" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="formationSortNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="beddings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bedding" inverseName="formation" inverseEntity="Bedding" syncable="YES"/>

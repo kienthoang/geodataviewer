@@ -36,6 +36,7 @@
 @implementation RecordMapViewController
 
 @synthesize records=_records;
+@synthesize responses=_responses;
 
 @synthesize mapView = _mapView;
 @synthesize mapAnnotations=_mapAnnotations;
@@ -203,7 +204,7 @@
     self.mapView.showsUserLocation=YES;
     
     //Update records
-    [self updateRecords:[self.mapDelegate recordsForMapViewController:self] forceUpdate:NO updateRegion:YES];    
+    [self.mapDelegate updateRecordsForMapViewController:self];    
     
     //Register for notifications
     [self registerForNotifications];
@@ -326,7 +327,6 @@
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         [view setFrame:endFrame];
         [UIView commitAnimations];
-        
     }
 }
 
