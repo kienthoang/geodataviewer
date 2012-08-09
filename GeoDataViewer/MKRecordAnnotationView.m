@@ -1,19 +1,19 @@
 //
-//  MKCustomAnnotationView.m
-//  GeoFieldBook
+//  MKRecordAnnotationView.m
+//  GeoDataViewer
 //
 //  Created by excel2011 on 7/20/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
-#import "MKCustomAnnotationView.h"
+#import "MKRecordAnnotationView.h"
 
 #import "SettingManager.h"
 #import "ColorManager.h"
 
 #import "Contact+Formation.h"
 
-@implementation MKCustomAnnotationView
+@implementation MKRecordAnnotationView
 
 - (void)reloadAnnotationView {
     [self drawDipStrikeSymbolWithAnnotation:self.annotation];
@@ -41,7 +41,10 @@
         
         //Setup the color of the dip strike symbol if specified by user preference
         UIColor *color=settingManager.defaultSymbolColor;
-        if (settingManager.formationColorEnabled && [(id)record formation]) {
+        if (settingManager.colorByGroup) {
+            
+        }
+        else if (settingManager.colorByFormation && [(id)record formation]) {
             if (![record isKindOfClass:[Other class]]) {
                 Formation *formation=[(id)record formation];
                 color=[[ColorManager standardColorManager] colorWithName:formation.color];

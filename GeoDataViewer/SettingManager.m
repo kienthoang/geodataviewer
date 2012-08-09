@@ -67,20 +67,6 @@ static SettingManager *settingManager;
     [center postNotificationName:name object:self userInfo:userInfo];    
 }
 
-- (void)postFeedbackNotification {
-    //If the feedback system is enabled, proceed
-    if (self.feedbackEnabled) {
-        //Get the interval and counter
-        int feedbackInterval=self.feedbackInterval.intValue;
-        int feedbackCounter=self.feedbackCounter.intValue;
-        
-        if (feedbackCounter>=feedbackInterval) {
-            //Post a notification
-            [self postNotificationWithName:SettingManagerFeedbackTimeout andUserInfo:[NSDictionary dictionary]];
-        }
-    }
-}
-
 - (void)userPreferencesDidChange:(NSNotification *)notification {
     //Post notifications
     NSDictionary *userInfo=[NSDictionary dictionary];
@@ -93,12 +79,12 @@ static SettingManager *settingManager;
     return [self.userDefaults objectForKey:NSUserDefaultsDefaultFormationColor];
 }
 
-- (BOOL)formationColorEnabled {
-    return [self.userDefaults boolForKey:NSUserDefaultsFormationColorEnabled];
+- (BOOL)colorByGroup {
+    return [[self.userDefaults objectForKey:NSUserDefaultsSymbolColor] isEqualToString:NSUserDefaultsColorByGroup];
 }
 
-- (void)setFormationColorEnabled:(BOOL)formationColorEnabled {
-    [self userDefaultsSetBool:formationColorEnabled forKey:NSUserDefaultsFormationColorEnabled];
+- (BOOL)colorByFormation {
+    return [[self.userDefaults objectForKey:NSUserDefaultsSymbolColor] isEqualToString:NSUserDefaultsColorByFormation];
 }
 
 - (UIColor *)defaultFormationColor {
@@ -134,62 +120,6 @@ static SettingManager *settingManager;
 
 - (void)setDefaultSymbolColor:(NSString *)defaultSymbolColor {
     [self userDefaultsSetObject:defaultSymbolColor forKey:NSUserDefaultsDefaultSymbolColor];
-}
-
-#pragma mark - Gestures Group
-
-- (BOOL)longGestureEnabled {
-    return [self.userDefaults boolForKey:NSUserDefaultsLongPressEnabled];
-}
-
-- (void)setLongGestureEnabled:(BOOL)longGestureEnabled {
-    [self userDefaultsSetBool:longGestureEnabled forKey:NSUserDefaultsLongPressEnabled];
-}
-
-- (BOOL)swipeToTurnRecordEnabled {
-    return [self.userDefaults boolForKey:NSUserDefaultsSwipeRecordEnabled];
-}
-
-- (void)setSwipeToTurnRecordEnabled:(BOOL)swipeToTurnRecordEnabled {
-    return [self userDefaultsSetBool:swipeToTurnRecordEnabled forKey:NSUserDefaultsSwipeRecordEnabled];
-}
-
--(NSNumber *)recordSwipeGestureNumberOfFingersRequired {
-    return [self.userDefaults objectForKey:NSUserDefaultsSwipeRecord];
-}
-
-- (void)setRecordSwipeGestureNumberOfFingersRequired:(NSNumber *)recordSwipeGestureNumberOfFingersRequired {
-    [self userDefaultsSetObject:recordSwipeGestureNumberOfFingersRequired forKey:NSUserDefaultsSwipeRecord];
-}
-
-#pragma mark - Feedback Group
-
-- (BOOL)feedbackEnabled {
-    return [self.userDefaults boolForKey:NSUserDefaultsFeedbackEnabled];
-}
-
-- (void)setFeedbackEnabled:(BOOL)feedbackEnabled {
-    [self userDefaultsSetBool:feedbackEnabled forKey:NSUserDefaultsFeedbackEnabled];
-}
-
-- (NSNumber *)feedbackInterval {
-    return [self.userDefaults objectForKey:NSUserDefaultsFeedbackInterval];
-}
-
-- (void)setFeedbackInterval:(NSNumber *)feedbackInterval {
-    [self userDefaultsSetObject:feedbackInterval forKey:NSUserDefaultsFeedbackInterval];
-}
-
-- (NSNumber *)feedbackCounter {
-    return [self.userDefaults objectForKey:NSUserDefaultsFeedbackCounter];
-}
-
-- (void)setFeedbackCounter:(NSNumber *)feedbackCounter {
-    //Set the feedback counter
-    [self userDefaultsSetObject:feedbackCounter forKey:NSUserDefaultsFeedbackCounter];
-    
-    //Feedback notification
-    [self postFeedbackNotification];
 }
 
 #pragma mark - Dip Strike Symbol Group

@@ -30,7 +30,7 @@
 }
 
 - (NSString *)title {
-    NSString *title=[NSString stringWithFormat:@"%@'s response",self.response.group.name];
+    NSString *title=[NSString stringWithFormat:@"%@'s Response",self.response.group.name];
     return title;
 }
 

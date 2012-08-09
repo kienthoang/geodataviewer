@@ -11,10 +11,8 @@
 
 #import "RecordMapViewControllerDelegate.h"
 
-#import "MKGeoRecordAnnotation.h"
-#import "MKStudentResponseAnnotation.h"
-
-#import "MKCustomAnnotationView.h"
+#import "MKRecordAnnotationView.h"
+#import "MKResponseAnnotationView.h"
 
 @interface RecordMapViewController : UIViewController
 
@@ -22,6 +20,7 @@
 @property (nonatomic,strong) NSArray *responses;
 
 @property (nonatomic,strong) Record *selectedRecord;
+@property (nonatomic,strong) Answer *selectedResponse;
 
 @property (weak,nonatomic) IBOutlet MKMapView *mapView;
 

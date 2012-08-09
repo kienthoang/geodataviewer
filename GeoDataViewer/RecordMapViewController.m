@@ -26,44 +26,60 @@
 @property (nonatomic, strong) NSMutableSet *recordsTypesToDisplay;
 
 @property (nonatomic,strong) NSArray *mapAnnotations;
+@property (nonatomic,strong) NSArray *recordAnnotations;
+@property (nonatomic,strong) NSArray *responseAnnotations;
 
 @property (nonatomic,strong) GeoFilter *recordFilter;
 
 #define RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER @"Record Annotation View"
+#define RESPONSE_ANNOTATION_VIEW_REUSE_IDENTIFIER @"Responses Annotation View"
 
 @end
 
 @implementation RecordMapViewController
 
+@synthesize mapView = _mapView;
+
 @synthesize records=_records;
 @synthesize responses=_responses;
 
-@synthesize mapView = _mapView;
 @synthesize mapAnnotations=_mapAnnotations;
+@synthesize recordAnnotations=_recordAnnotations;
+@synthesize responseAnnotations=_responseAnnotations;
 
 @synthesize filterPopover=_filterPopover;
 @synthesize annotationCalloutPopover=_annotationCalloutPopover;
 
 @synthesize recordsTypesToDisplay=_recordsTypesToDisplay;
-
 @synthesize recordFilter=_recordFilter;
+
 @synthesize selectedRecord=_selectedRecord;
+@synthesize selectedResponse=_selectedResponse;
 
 @synthesize mapDelegate=_mapDelegate;
 
+#pragma mark - Getters and Setters
+
+- (NSArray *)mapAnnotations {
+    if (!_mapAnnotations)
+        _mapAnnotations=[NSArray array];
+    
+    return _mapAnnotations;
+}
+
 #pragma mark - Map View Setup methods
 
-- (void)updateMapView:(MKMapView *)mapView willUpdateRegion:(BOOL)willUpdateRegion {
+- (void)updateMapView:(MKMapView *)mapView forRecords:(NSArray *)records willUpdateRegion:(BOOL)willUpdateRegion {
     //Filter the records
-    NSArray *records=[self.recordFilter filterRecordCollectionByRecordType:self.records];
+    records=[self.recordFilter filterRecordCollectionByRecordType:records];
      
     //Save the old region
     MKCoordinateRegion mapRegion=mapView.region;
     
-    //Remove the old annotations
+    //Remove the old record annotations
     if (mapView.annotations) {
-        NSMutableArray *removedAnnotations=[NSMutableArray arrayWithCapacity:mapView.annotations.count];
-        for (id <MKAnnotation> annotation in mapView.annotations) {
+        NSMutableArray *removedAnnotations=[NSMutableArray arrayWithCapacity:self.recordAnnotations.count];
+        for (id <MKAnnotation> annotation in self.recordAnnotations) {
             if (![annotation isKindOfClass:[MKUserLocation class]])
                 [removedAnnotations addObject:annotation];
         }
@@ -72,18 +88,25 @@
     }
     
     //Reset the saved annotations
-    self.mapAnnotations=[NSArray array];
+    NSMutableArray *recordAnnotations=[NSMutableArray array];
+    NSMutableArray *mapAnnotations=self.mapAnnotations.mutableCopy;
+    [mapAnnotations removeObjectsInArray:self.recordAnnotations];
     
     mapView.centerCoordinate=mapView.userLocation.coordinate;
     
     //Set up the annotations for the map view
     if (records.count) {
         //Convert the array of records into annotations
-        for (Record *record in records)
-            [mapView addAnnotation:[MKGeoRecordAnnotation annotationForRecord:record]];
+        for (Record *record in records) {
+            MKGeoRecordAnnotation *annotation=[MKGeoRecordAnnotation annotationForRecord:record];
+            [mapView addAnnotation:annotation];
+            [recordAnnotations addObject:annotation];
+        }
 
         //Save the annotations
-        self.mapAnnotations=mapView.annotations;
+        self.recordAnnotations=recordAnnotations.copy;
+        [mapAnnotations addObjectsFromArray:self.recordAnnotations];
+        self.mapAnnotations=mapAnnotations.copy;
         
         //Set the location span of the map if desired
         if (willUpdateRegion)
@@ -95,6 +118,57 @@
         [mapView setCenterCoordinate:center];
     }    
 }
+
+- (void)updateMapView:(MKMapView *)mapView forResponses:(NSArray *)responses willUpdateRegion:(BOOL)willUpdateRegion {
+    //Filter the responses
+    //recorresponsesds=[self.recordFilter filterRecordCollectionByRecordType:records];
+    
+    //Save the old region
+    MKCoordinateRegion mapRegion=mapView.region;
+    
+    //Remove the old responses annotations
+    if (mapView.annotations) {
+        NSMutableArray *removedAnnotations=[NSMutableArray arrayWithCapacity:self.responseAnnotations.count];
+        for (id <MKAnnotation> annotation in self.responseAnnotations) {
+            if (![annotation isKindOfClass:[MKUserLocation class]])
+                [removedAnnotations addObject:annotation];
+        }
+        
+        [mapView removeAnnotations:removedAnnotations.copy];
+    }
+    
+    //Reset the saved annotations
+    NSMutableArray *responseAnnotations=[NSMutableArray array];
+    NSMutableArray *mapAnnotations=self.mapAnnotations.mutableCopy;
+    [mapAnnotations removeObjectsInArray:self.responseAnnotations];
+    
+    mapView.centerCoordinate=mapView.userLocation.coordinate;
+    
+    //Set up the annotations for the map view
+    if (responses.count) {
+        //Convert the array of records into annotations
+        for (Answer *response in responses) {
+            MKStudentResponseAnnotation *annotation=[MKStudentResponseAnnotation annotationForStudentResponse:response];
+            [mapView addAnnotation:annotation];
+            [responseAnnotations addObject:annotation];
+        }
+        
+        //Save the annotations
+        self.responseAnnotations=responseAnnotations.copy;
+        [mapAnnotations addObjectsFromArray:self.responseAnnotations];
+        self.mapAnnotations=mapAnnotations.copy;
+        
+        //Set the location span of the map if desired
+        if (willUpdateRegion)
+            mapView.region=[self regionFromLocationsUserLocationIncluded:NO];
+        else
+            mapView.region=mapRegion;
+        
+        CLLocationCoordinate2D center = [mapView centerCoordinate];
+        [mapView setCenterCoordinate:center];
+    }        
+}
+
 
 #pragma mark - Getters and Setters
 
@@ -108,7 +182,14 @@
 - (void)updateRecords:(NSArray *)records forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion {
     if ((willForceUpdate && self.records!=records) || (!willForceUpdate && ![self.records isEqualToArray:records])) {
         self.records=records;
-        [self updateMapView:self.mapView willUpdateRegion:willUpdateRegion];
+        [self updateMapView:self.mapView forRecords:self.records willUpdateRegion:willUpdateRegion];
+    }
+}
+
+- (void)updateResponses:(NSArray *)responses forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion {
+    if ((willForceUpdate && self.responses!=responses) || (!willForceUpdate && ![self.responses isEqualToArray:responses])) {
+        self.responses=responses;
+        [self updateMapView:self.mapView forResponses:self.responses willUpdateRegion:willUpdateRegion];
     }
 }
 
@@ -116,9 +197,9 @@
     //Redraw all annotation views
     for (MKGeoRecordAnnotation *annotation in self.mapView.annotations) {
         MKAnnotationView *annotationView=[self.mapView viewForAnnotation:annotation];
-        if ([annotationView isKindOfClass:[MKCustomAnnotationView class]]) {
+        if ([annotationView isKindOfClass:[MKRecordAnnotationView class]]) {
             //Reload annotation view 
-            MKCustomAnnotationView *customAnnotationView=(MKCustomAnnotationView *)annotationView;
+            MKRecordAnnotationView *customAnnotationView=(MKRecordAnnotationView *)annotationView;
             [customAnnotationView reloadAnnotationView];
         }
     }
@@ -128,13 +209,15 @@
     _mapView=mapView;
     self.mapView.delegate=self;
     
-    [self updateMapView:mapView willUpdateRegion:YES];
+    //update the map initially
+    [self updateMapView:mapView forRecords:self.records willUpdateRegion:YES];
+    [self updateMapView:mapView forResponses:self.responses willUpdateRegion:YES];
 }
 
 - (void)deselectAnnotationForRecord:(Record *)selectedRecord {
     //Deselect the previous record if it's not nil
     if (selectedRecord) {
-        for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+        for (MKGeoRecordAnnotation *annotation in self.recordAnnotations) {
             if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==selectedRecord) {
                 [self.mapView deselectAnnotation:annotation animated:YES];
                 break;
@@ -145,7 +228,7 @@
 
 - (void)selectAnnotationForRecord:(Record *)selectedRecord {
     if (selectedRecord) {
-        for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+        for (MKGeoRecordAnnotation *annotation in self.recordAnnotations) {
             if (![annotation isKindOfClass:[MKUserLocation class]] && annotation.record==selectedRecord) {
                 //Set the location span and the center of the map
                 self.mapView.centerCoordinate=annotation.coordinate;
@@ -231,20 +314,31 @@
 
 #pragma mark - MKMapViewDelegate methods
 
-- (MKAnnotationView *)viewForAnnotation:(MKGeoRecordAnnotation *)annotation {
-    //Get the record of the annotation
-    Record *record=annotation.record;
+- (MKAnnotationView *)viewForAnnotation:(id <MKAnnotation>)annotation {
+    //If the given annotation is a record annotation
+    if ([annotation isKindOfClass:[MKGeoRecordAnnotation class]]) {
+        MKGeoRecordAnnotation *recordAnnotation=(MKGeoRecordAnnotation *)annotation;
+        //Get the record of the annotation
+        Record *record=recordAnnotation.record;
+        
+        //If the record is of type bedding or contact return a MKCustomAnnotationView
+        if ([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[Contact class]])
+            return [[MKRecordAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+        
+        return [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    }
     
-    //If the record is of type bedding or contact return a MKCustomAnnotationView
-    if ([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[Contact class]])
-        return [[MKCustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
-
-    return [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];;
+    //Else if the given annotation is a response annotation
+    else if ([annotation isKindOfClass:[MKStudentResponseAnnotation class]]) {
+        return [[MKResponseAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:RESPONSE_ANNOTATION_VIEW_REUSE_IDENTIFIER];        
+    }
+    
+    return nil;
 }
 
 - (BOOL)annotationView:(MKAnnotationView *)annotationView isCorrectKindOfAnnotationViewFor:(Record *)record {
     if ([record isKindOfClass:[Bedding class]] || [record isKindOfClass:[Contact class]])
-        return [annotationView isKindOfClass:[MKCustomAnnotationView class]];
+        return [annotationView isKindOfClass:[MKRecordAnnotationView class]];
     else
         return [annotationView isKindOfClass:[MKPinAnnotationView class]];
 }
@@ -253,11 +347,13 @@
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
-    //Get an annotation view
-    MKAnnotationView *annotationView=[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+    MKAnnotationView *annotationView=nil;
         
-    //Else if it's a single annotation
+    //Else if it's a single record annotation
     if ([annotation isKindOfClass:[MKGeoRecordAnnotation class]]) {
+        //Get an annotation view
+        annotationView=[self.mapView dequeueReusableAnnotationViewWithIdentifier:RECORD_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+        
         Record *record=[(MKGeoRecordAnnotation *)annotation record];
         if (!annotationView || ![self annotationView:annotationView isCorrectKindOfAnnotationViewFor:record]) {
             annotationView=[self viewForAnnotation:annotation];
@@ -271,17 +367,28 @@
             infoButton.frame=CGRectMake(0, 0, 15, 15);
             annotationView.rightCalloutAccessoryView=infoButton;
         }
-        
-        //Set up the annotation view
-        annotationView.annotation=annotation;
     }
+    
+    //Else if it is a response annotation 
+    else if ([annotation isKindOfClass:[MKStudentResponseAnnotation class]]) {
+        //Get an annotation view
+        annotationView=[self.mapView dequeueReusableAnnotationViewWithIdentifier:RESPONSE_ANNOTATION_VIEW_REUSE_IDENTIFIER];
+        
+        if (!annotationView) {
+            annotationView=[self viewForAnnotation:annotation];
+            annotationView.canShowCallout=YES;
+        }
+    }
+    
+    //Set up the annotation view
+    annotationView.annotation=annotation;
     
     return annotationView;
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    //Show the image
-    if (![view.annotation isKindOfClass:[MKUserLocation class]]) {
+    //Show the image if the annotation view is a record annotation view
+    if ([view.annotation isKindOfClass:[MKRecordAnnotationView class]]) {
         MKGeoRecordAnnotation *annotation=view.annotation;
         Record *record=annotation.record;
         UIImage *recordImage=[UIImage imageWithData:record.image.imageData];
@@ -300,19 +407,21 @@
         self.annotationCalloutPopover=nil;
     }
 
-    //show the popover
-    MKGeoRecordAnnotation *annotation=view.annotation;
-    Record *record=annotation.record;
-    MKMapRecordInfoViewController *recordInfo=[record isKindOfClass:[Contact class]] ? [self.storyboard instantiateViewControllerWithIdentifier:@"Contact Info Popover"] :
-                                                                                    [self.storyboard instantiateViewControllerWithIdentifier:@"Non-Contact Info Popover"];
-    recordInfo.record=record;
-    recordInfo.delegate=self;
-    UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
-    [annotationCalloutPopover presentPopoverFromRect:view.bounds 
-                                              inView:view 
-                            permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                            animated:YES];
-    self.annotationCalloutPopover=annotationCalloutPopover;
+    if ([view isKindOfClass:[MKRecordAnnotationView class]]) {
+        //show the popover
+        MKGeoRecordAnnotation *annotation=view.annotation;
+        Record *record=annotation.record;
+        MKMapRecordInfoViewController *recordInfo=[record isKindOfClass:[Contact class]] ? [self.storyboard instantiateViewControllerWithIdentifier:@"Contact Info Popover"] :
+        [self.storyboard instantiateViewControllerWithIdentifier:@"Non-Contact Info Popover"];
+        recordInfo.record=record;
+        recordInfo.delegate=self;
+        UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
+        [annotationCalloutPopover presentPopoverFromRect:view.bounds 
+                                                  inView:view 
+                                permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                animated:YES];
+        self.annotationCalloutPopover=annotationCalloutPopover;
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views { 
@@ -337,7 +446,8 @@
     // Get the upper and lower coordinates for the location span
     CLLocationCoordinate2D upper=[[self.mapAnnotations objectAtIndex:0] coordinate];
     CLLocationCoordinate2D lower=[[self.mapAnnotations objectAtIndex:0] coordinate];
-    for (MKGeoRecordAnnotation *annotation in self.mapAnnotations) {
+    
+    for (id <MKAnnotation> annotation in self.mapAnnotations) {
         if (userLocationIncluded || (!userLocationIncluded && ![annotation isKindOfClass:[MKUserLocation class]])) {
             if (annotation.coordinate.longitude>upper.longitude) 
                 upper.longitude=annotation.coordinate.longitude;
@@ -349,6 +459,8 @@
                 lower.latitude=annotation.coordinate.latitude;
         }
     }
+    
+    
     
     // Set the spans for the location span
     MKCoordinateSpan locationSpan;
@@ -370,7 +482,7 @@
     [self.recordFilter userDidSelectRecordType:recordType];
     
     //Update the map view
-    [self updateMapView:self.mapView willUpdateRegion:YES];
+    [self updateMapView:self.mapView forRecords:self.records willUpdateRegion:YES];
 }
 
 - (void)filterByTypeController:(FilterByRecordTypeController *)sender userDidDeselectRecordType:(NSString *)recordType {
@@ -378,7 +490,7 @@
     [self.recordFilter userDidDeselectRecordType:recordType];
     
     //Update the map view
-    [self updateMapView:self.mapView willUpdateRegion:YES];
+    [self updateMapView:self.mapView forRecords:self.records willUpdateRegion:YES];
 }
 
 #pragma mark - MKMapRecordInfoViewControllerDelegate methods
