@@ -318,6 +318,7 @@
     [color getRed:&red green:&green blue:&blue alpha:&alpha]; 
     [self.colorPickerSenderCell.studentGroup setColorWithRed:red withGreen:green withBlue:blue];
     [self.colorPickerSenderCell updatePatchColor:color];
+    
 }
 
 -(void) userDidDismissPopover:(NSMutableArray *)selectedColors
@@ -329,11 +330,6 @@
 -(void)colorPatchPressedWithColorRGB:(UIColor *)backgroundColor andSender:(CustomStudentGroupCell *)cell {
     self.colorPickerSenderCell=cell;
     [self performSegueWithIdentifier:@"NPColorPicker" sender:cell];    
-}
-
-
-- (IBAction)colorPatchPressed:(UIButton *)sender {
-    
 }
 
 @end
