@@ -1,6 +1,6 @@
 //
-//  MKCustomAnnotationView.h
-//  GeoFieldBook
+//  MKRecordAnnotationView.h
+//  GeoDataViewer
 //
 //  Created by excel2011 on 7/20/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
@@ -17,7 +17,7 @@
 #import "Contact.h"
 #import "Other.h"
 
-@interface MKCustomAnnotationView : MKAnnotationView
+@interface MKRecordAnnotationView : MKAnnotationView
 
 - (void)reloadAnnotationView;
 

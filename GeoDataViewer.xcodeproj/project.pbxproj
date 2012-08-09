@@ -64,6 +64,8 @@
 		025B70EA15D30F6E00BCA39E /* MainSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 025B70E615D30F6E00BCA39E /* MainSettingsTableViewController.m */; };
 		025B70EE15D30F9600BCA39E /* CustomSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 025B70ED15D30F9600BCA39E /* CustomSplitViewController.m */; };
 		025B70F215D3106900BCA39E /* CustomSplitViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 025B70F115D3106900BCA39E /* CustomSplitViewControllerSegue.m */; };
+		025B70F515D331D200BCA39E /* MKResponseAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 025B70F415D331D100BCA39E /* MKResponseAnnotationView.m */; };
+		025B710315D404A400BCA39E /* response.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 025B710215D404A400BCA39E /* response.jpeg */; };
 		026F31FB15D02462001F99EB /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FA15D02462001F99EB /* Group.m */; };
 		026F31FE15D02776001F99EB /* GDVFormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FD15D02776001F99EB /* GDVFormationViewController.m */; };
 		026F322115D0281E001F99EB /* RGB-HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321815D0281E001F99EB /* RGB-HSL.m */; };
@@ -103,20 +105,17 @@
 		02F31A3815C9C1150070EDC7 /* GDVDatabase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A3615C9C1150070EDC7 /* GDVDatabase.xcdatamodeld */; };
 		02F31A8815C9C4C70070EDC7 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7B15C9C4C70070EDC7 /* checked.png */; };
 		02F31A8915C9C4C70070EDC7 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7C15C9C4C70070EDC7 /* unchecked.png */; };
-		02F31A8A15C9C4C70070EDC7 /* RecordVCBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7D15C9C4C70070EDC7 /* RecordVCBackground.jpg */; };
-		02F31A8B15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7E15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png */; };
 		02F31A8C15C9C4C70070EDC7 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A7F15C9C4C70070EDC7 /* folder.png */; };
 		02F31A8D15C9C4C70070EDC7 /* formation.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8015C9C4C70070EDC7 /* formation.png */; };
 		02F31A8E15C9C4C70070EDC7 /* import_export.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8115C9C4C70070EDC7 /* import_export.png */; };
 		02F31A8F15C9C4C70070EDC7 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8215C9C4C70070EDC7 /* gear.png */; };
 		02F31A9015C9C4C70070EDC7 /* gear2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8315C9C4C70070EDC7 /* gear2.png */; };
-		02F31A9115C9C4C70070EDC7 /* green_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F31A8415C9C4C70070EDC7 /* green_pin.png */; };
 		02F31A9F15C9C50F0070EDC7 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9815C9C50F0070EDC7 /* CheckBox.m */; };
 		02F31AA015C9C50F0070EDC7 /* CustomFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9A15C9C50F0070EDC7 /* CustomFolderCell.m */; };
 		02F31AA115C9C50F0070EDC7 /* CustomRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9C15C9C50F0070EDC7 /* CustomRecordCell.m */; };
 		02F31AA215C9C50F0070EDC7 /* CustomFormationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31A9E15C9C50F0070EDC7 /* CustomFormationCell.m */; };
 		02F31AA815C9C52F0070EDC7 /* DipStrikeSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AA515C9C52F0070EDC7 /* DipStrikeSymbol.m */; };
-		02F31AA915C9C52F0070EDC7 /* MKCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AA715C9C52F0070EDC7 /* MKCustomAnnotationView.m */; };
+		02F31AA915C9C52F0070EDC7 /* MKRecordAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AA715C9C52F0070EDC7 /* MKRecordAnnotationView.m */; };
 		02F31AAC15C9C59C0070EDC7 /* GDVFormationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AAB15C9C59C0070EDC7 /* GDVFormationTableViewController.m */; };
 		02F31AAF15C9C5B10070EDC7 /* GDVFormationFolderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AAE15C9C5B10070EDC7 /* GDVFormationFolderTVC.m */; };
 		02F31ABE15C9C6CA0070EDC7 /* GDVControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ABD15C9C6CA0070EDC7 /* GDVControllerSegue.m */; };
@@ -308,6 +307,9 @@
 		025B70EF15D30FD300BCA39E /* CustomSplitViewControllerChildren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSplitViewControllerChildren.h; sourceTree = "<group>"; };
 		025B70F015D3106900BCA39E /* CustomSplitViewControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSplitViewControllerSegue.h; sourceTree = "<group>"; };
 		025B70F115D3106900BCA39E /* CustomSplitViewControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSplitViewControllerSegue.m; sourceTree = "<group>"; };
+		025B70F315D331D100BCA39E /* MKResponseAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKResponseAnnotationView.h; sourceTree = "<group>"; };
+		025B70F415D331D100BCA39E /* MKResponseAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKResponseAnnotationView.m; sourceTree = "<group>"; };
+		025B710215D404A400BCA39E /* response.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = response.jpeg; sourceTree = "<group>"; };
 		026F31F915D02462001F99EB /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		026F31FA15D02462001F99EB /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		026F31FC15D02776001F99EB /* GDVFormationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationViewController.h; sourceTree = "<group>"; };
@@ -376,14 +378,11 @@
 		02F31A3715C9C1150070EDC7 /* GDVDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GDVDatabase.xcdatamodel; sourceTree = "<group>"; };
 		02F31A7B15C9C4C70070EDC7 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		02F31A7C15C9C4C70070EDC7 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
-		02F31A7D15C9C4C70070EDC7 /* RecordVCBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RecordVCBackground.jpg; sourceTree = "<group>"; };
-		02F31A7E15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeoFieldBookFrontPage.png; sourceTree = "<group>"; };
 		02F31A7F15C9C4C70070EDC7 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		02F31A8015C9C4C70070EDC7 /* formation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = formation.png; sourceTree = "<group>"; };
 		02F31A8115C9C4C70070EDC7 /* import_export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_export.png; sourceTree = "<group>"; };
 		02F31A8215C9C4C70070EDC7 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		02F31A8315C9C4C70070EDC7 /* gear2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear2.png; sourceTree = "<group>"; };
-		02F31A8415C9C4C70070EDC7 /* green_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_pin.png; sourceTree = "<group>"; };
 		02F31A9715C9C50F0070EDC7 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
 		02F31A9815C9C50F0070EDC7 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
 		02F31A9915C9C50F0070EDC7 /* CustomFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomFolderCell.h; sourceTree = "<group>"; };
@@ -394,8 +393,8 @@
 		02F31A9E15C9C50F0070EDC7 /* CustomFormationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomFormationCell.m; sourceTree = "<group>"; };
 		02F31AA415C9C52F0070EDC7 /* DipStrikeSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DipStrikeSymbol.h; sourceTree = "<group>"; };
 		02F31AA515C9C52F0070EDC7 /* DipStrikeSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DipStrikeSymbol.m; sourceTree = "<group>"; };
-		02F31AA615C9C52F0070EDC7 /* MKCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCustomAnnotationView.h; sourceTree = "<group>"; };
-		02F31AA715C9C52F0070EDC7 /* MKCustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKCustomAnnotationView.m; sourceTree = "<group>"; };
+		02F31AA615C9C52F0070EDC7 /* MKRecordAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRecordAnnotationView.h; sourceTree = "<group>"; };
+		02F31AA715C9C52F0070EDC7 /* MKRecordAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRecordAnnotationView.m; sourceTree = "<group>"; };
 		02F31AAA15C9C59C0070EDC7 /* GDVFormationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationTableViewController.h; sourceTree = "<group>"; };
 		02F31AAB15C9C59C0070EDC7 /* GDVFormationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFormationTableViewController.m; sourceTree = "<group>"; };
 		02F31AAD15C9C5B10070EDC7 /* GDVFormationFolderTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationFolderTVC.h; sourceTree = "<group>"; };
@@ -594,6 +593,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		025B70F615D331D800BCA39E /* MKAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				025B70F715D3321100BCA39E /* Response Annotation View */,
+				02F31AA315C9C5170070EDC7 /* Record Annotation View */,
+			);
+			name = MKAnnotationView;
+			sourceTree = "<group>";
+		};
+		025B70F715D3321100BCA39E /* Response Annotation View */ = {
+			isa = PBXGroup;
+			children = (
+				025B70F315D331D100BCA39E /* MKResponseAnnotationView.h */,
+				025B70F415D331D100BCA39E /* MKResponseAnnotationView.m */,
+			);
+			name = "Response Annotation View";
+			sourceTree = "<group>";
+		};
 		026F321515D027F0001F99EB /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +782,7 @@
 			isa = PBXGroup;
 			children = (
 				02F319F715C9BF5E0070EDC7 /* MKAnnotation */,
+				025B70F615D331D800BCA39E /* MKAnnotationView */,
 				02F319EE15C9BF2D0070EDC7 /* RecordMapViewController.h */,
 				02F319EF15C9BF2D0070EDC7 /* RecordMapViewController.m */,
 				02F319F015C9BF2D0070EDC7 /* MKMapRecordInfoViewController.h */,
@@ -1025,15 +1043,13 @@
 			children = (
 				02F31A7B15C9C4C70070EDC7 /* checked.png */,
 				02F31A7C15C9C4C70070EDC7 /* unchecked.png */,
-				02F31A7D15C9C4C70070EDC7 /* RecordVCBackground.jpg */,
-				02F31A7E15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png */,
 				02F31A7F15C9C4C70070EDC7 /* folder.png */,
 				02F31A8015C9C4C70070EDC7 /* formation.png */,
 				02F31A8115C9C4C70070EDC7 /* import_export.png */,
 				02F31A8215C9C4C70070EDC7 /* gear.png */,
 				02F31A8315C9C4C70070EDC7 /* gear2.png */,
-				02F31A8415C9C4C70070EDC7 /* green_pin.png */,
 				0281DBF415CAD44F00D1D8B1 /* group.png */,
+				025B710215D404A400BCA39E /* response.jpeg */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1044,7 +1060,6 @@
 				026F321515D027F0001F99EB /* Color Picker */,
 				026F322615D0282A001F99EB /* ColorPickerViewController.h */,
 				026F322715D0282A001F99EB /* ColorPickerViewController.m */,
-				02F31AA315C9C5170070EDC7 /* Dip Strike Symbol */,
 				02F31A9615C9C4F40070EDC7 /* Table Cells */,
 			);
 			name = "Custom Views";
@@ -1067,15 +1082,15 @@
 			name = "Table Cells";
 			sourceTree = "<group>";
 		};
-		02F31AA315C9C5170070EDC7 /* Dip Strike Symbol */ = {
+		02F31AA315C9C5170070EDC7 /* Record Annotation View */ = {
 			isa = PBXGroup;
 			children = (
 				02F31AA415C9C52F0070EDC7 /* DipStrikeSymbol.h */,
 				02F31AA515C9C52F0070EDC7 /* DipStrikeSymbol.m */,
-				02F31AA615C9C52F0070EDC7 /* MKCustomAnnotationView.h */,
-				02F31AA715C9C52F0070EDC7 /* MKCustomAnnotationView.m */,
+				02F31AA615C9C52F0070EDC7 /* MKRecordAnnotationView.h */,
+				02F31AA715C9C52F0070EDC7 /* MKRecordAnnotationView.m */,
 			);
-			name = "Dip Strike Symbol";
+			name = "Record Annotation View";
 			sourceTree = "<group>";
 		};
 		02F31ABB15C9C6AC0070EDC7 /* Custom Segues */ = {
@@ -1257,17 +1272,15 @@
 				02F319A115C9BCB70070EDC7 /* MainStoryboard.storyboard in Resources */,
 				02F31A8815C9C4C70070EDC7 /* checked.png in Resources */,
 				02F31A8915C9C4C70070EDC7 /* unchecked.png in Resources */,
-				02F31A8A15C9C4C70070EDC7 /* RecordVCBackground.jpg in Resources */,
-				02F31A8B15C9C4C70070EDC7 /* GeoFieldBookFrontPage.png in Resources */,
 				02F31A8C15C9C4C70070EDC7 /* folder.png in Resources */,
 				02F31A8D15C9C4C70070EDC7 /* formation.png in Resources */,
 				02F31A8E15C9C4C70070EDC7 /* import_export.png in Resources */,
 				02F31A8F15C9C4C70070EDC7 /* gear.png in Resources */,
 				02F31A9015C9C4C70070EDC7 /* gear2.png in Resources */,
-				02F31A9115C9C4C70070EDC7 /* green_pin.png in Resources */,
 				0281DBF515CAD44F00D1D8B1 /* group.png in Resources */,
 				0206DE7215CB1D5200B76398 /* SSToolkitResources.bundle in Resources */,
 				025B708615D2BD3400BCA39E /* Settings.bundle in Resources */,
+				025B710315D404A400BCA39E /* response.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,7 +1334,7 @@
 				02F31AA115C9C50F0070EDC7 /* CustomRecordCell.m in Sources */,
 				02F31AA215C9C50F0070EDC7 /* CustomFormationCell.m in Sources */,
 				02F31AA815C9C52F0070EDC7 /* DipStrikeSymbol.m in Sources */,
-				02F31AA915C9C52F0070EDC7 /* MKCustomAnnotationView.m in Sources */,
+				02F31AA915C9C52F0070EDC7 /* MKRecordAnnotationView.m in Sources */,
 				02F31AAC15C9C59C0070EDC7 /* GDVFormationTableViewController.m in Sources */,
 				02F31AAF15C9C5B10070EDC7 /* GDVFormationFolderTVC.m in Sources */,
 				02F31ABE15C9C6CA0070EDC7 /* GDVControllerSegue.m in Sources */,
@@ -1405,6 +1418,7 @@
 				025B70EA15D30F6E00BCA39E /* MainSettingsTableViewController.m in Sources */,
 				025B70EE15D30F9600BCA39E /* CustomSplitViewController.m in Sources */,
 				025B70F215D3106900BCA39E /* CustomSplitViewControllerSegue.m in Sources */,
+				025B70F515D331D200BCA39E /* MKResponseAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -133,14 +133,18 @@
 }
 
 - (void)updateDataForMapViewController:(RecordMapViewController *)mapViewController {
-    //Fetch the records for the selected student groups
+    //Fetch the records and responses for the selected student groups
     [self.resourceManager fetchStudentGroupsWithCompletionHandler:^(NSArray *studentGroups){
         [self.resourceManager fetchFoldersForStudentGroups:studentGroups scompletion:^(NSArray *folders){
             [self.resourceManager fetchRecordsForFolders:folders completion:^(NSArray *records){
                 [mapViewController updateRecords:records forceUpdate:YES updateRegion:YES];
             }];
         }];
-    }];
+        
+        [self.resourceManager fetchStudentResponsesForStudentGroups:studentGroups completion:^(NSArray *studentResponses){
+            [mapViewController updateResponses:studentResponses forceUpdate:YES updateRegion:YES];
+        }];
+    }];    
 }
 
 #pragma mark - Prepare for Segues
