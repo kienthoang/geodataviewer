@@ -12,5 +12,6 @@
 
 - (void)removeAndDeleteAllFolders;
 - (void)removeAndDeleteAllStudentResponses;
+-(void)setColorWithRed:(double)red withGreen:(double)green withBlue:(double)blue; 
 
 @end

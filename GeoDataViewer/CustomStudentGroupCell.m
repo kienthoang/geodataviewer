@@ -17,6 +17,8 @@
 @synthesize colorPatch=_colorPatch;
 @synthesize name=_name;
 
+@synthesize groupID = _groupID;
+
 @synthesize delegate=_delegate;
 
 - (IBAction)colorPatchPressed:(UIButton *)sender
@@ -41,13 +43,13 @@
 }
 
 - (void)setStudentGroup:(Group *)studentGroup {
-    _studentGroup=studentGroup;
-    
+    _studentGroup=studentGroup;    
     //Redraw the color patch
-    self.colorPatch.backgroundColor=[self colorForStudentGroup:studentGroup];
-    
+    self.colorPatch.backgroundColor=[self colorForStudentGroup:studentGroup];    
     //Set the name
-    self.name.text=studentGroup.name;    
+    self.name.text=studentGroup.name;       
+    //set the group id
+    self.groupID.text = studentGroup.identifier;
 }
 
 //Override set Selected to be sure the color patch's background color does not get covered by the cell's selected state background color

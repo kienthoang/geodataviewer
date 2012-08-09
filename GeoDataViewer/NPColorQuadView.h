@@ -21,7 +21,7 @@
 
 @protocol NPColorQuadViewDelegate <NSObject> 
 
--(void) userDidSelectColor:(UIColor *) color;
+-(void) userDidSelectColorTile:(UIColor *) color;
 
 @end
 
@@ -32,6 +32,9 @@
 @property (nonatomic, readwrite, assign) UIEdgeInsets insets;
 @property (nonatomic, readwrite, assign) NSUInteger depht;
 @property (nonatomic, readwrite, assign) CGSize intercellSpace;
+@property (nonatomic, strong) id <NPColorQuadViewDelegate> delegate;
+
+
 -(void) pushColor:(UIColor *) color;
 -(NSMutableArray *) getSelectedColors;
 

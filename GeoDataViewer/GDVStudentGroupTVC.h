@@ -12,6 +12,7 @@
 #import "GDVStudentGroupTVCDelegate.h"
 
 #import "Group.h"
+#import "Group+Modification.h"
 
 @interface GDVStudentGroupTVC : PrototypeLoadingTableViewController
 

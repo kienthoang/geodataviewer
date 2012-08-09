@@ -184,11 +184,6 @@
     }
 }
 
-#pragma mark - CustomStudentGroupCell protocol methods
--(void)colorPatchPressedWithColorRGB:(UIColor *)backgroundColor andSender:(CustomStudentGroupCell *)cell {
-    [self performSegueWithIdentifier:@"NPColorPicker" sender:cell];
-    self.colorPickerSenderCell=cell;
-}
 
 #pragma mark - View Controller Lifecycle
 
@@ -252,8 +247,8 @@
     }
     
     else if ([segue.identifier isEqualToString:@"NPColorPicker"]) {
-        self.colorPickerPopoverSegue = (UIStoryboardPopoverSegue *)segue;
         [segue.destinationViewController setSelectedColors:self.initialPopoverColors];
+        [segue.destinationViewController setPickerColor:self.colorPickerSenderCell.colorPatch.backgroundColor];
         [segue.destinationViewController setDelegate:self];
     }
 }
@@ -274,6 +269,7 @@
     // Configure the cell...
     Group *group=[self.studentGroups objectAtIndex:indexPath.row];
     cell.studentGroup=group;
+    
     cell.delegate = self;
     
     return cell;
@@ -314,23 +310,30 @@
 }
 
 #pragma mark - NPColorPickerVC protocol methods
--(void) userDidDismissPopoverWithColor:(UIColor *)color andSelectedColors:(NSMutableArray *)colors {
-    self.initialPopoverColors = colors;
-    [self.colorPickerPopoverSegue.popoverController dismissPopoverAnimated:YES]; 
-    
-    
+-(void) userDidSelectColor:(UIColor *)color{
     CGFloat red = 0.0 ;
     CGFloat green = 0.0;
     CGFloat blue = 0.0;
     CGFloat alpha = 0.0;    
-    [color getRed:&red green:&green blue:&blue alpha:&alpha];        
-   
-   
-    [self.colorPickerSenderCell.studentGroup setColorWithRed:(double)red withGreen:(double)green withBlue:(double)blue];
+    [color getRed:&red green:&green blue:&blue alpha:&alpha]; 
+    [self.colorPickerSenderCell.studentGroup setColorWithRed:red withGreen:green withBlue:blue];
     [self.colorPickerSenderCell updatePatchColor:color];
 }
 
+-(void) userDidDismissPopover:(NSMutableArray *)selectedColors
+{
+    self.initialPopoverColors = selectedColors;
+}
+
+#pragma mark - CustomStudentGroupCell protocol methods
+-(void)colorPatchPressedWithColorRGB:(UIColor *)backgroundColor andSender:(CustomStudentGroupCell *)cell {
+    self.colorPickerSenderCell=cell;
+    [self performSegueWithIdentifier:@"NPColorPicker" sender:cell];    
+}
+
+
 - (IBAction)colorPatchPressed:(UIButton *)sender {
+    
 }
 
 @end

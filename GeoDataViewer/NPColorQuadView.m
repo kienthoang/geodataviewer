@@ -25,6 +25,7 @@
 @synthesize intercellSpace = intercellSpace_;
 @synthesize insets = insets_;
 @synthesize depht = depht_;
+@synthesize delegate=_delegate;
 
 
 
@@ -165,7 +166,8 @@
 //      selectedIndex_ = MIN(selectedIndex_ +1, depht_-1); 
 //     }  
    
-   [self setNeedsDisplay];
+    [self setNeedsDisplay];
+//    [self.delegate userDidSelectColorTile:self.selectedColor];
 }
 
 
@@ -271,6 +273,9 @@
       [self setSelectedIndex: index];
        NSLog(@"tapped color %@", self.selectedColor);
       [self setNeedsDisplay];
+       
+       //call the delegate to set the picker's position
+       [self.delegate userDidSelectColorTile:self.selectedColor];
    }
 }
 

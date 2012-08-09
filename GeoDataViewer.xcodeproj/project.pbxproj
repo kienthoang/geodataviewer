@@ -44,7 +44,6 @@
 		0251C8C215CCC6CE00075C60 /* Fault+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C115CCC6CE00075C60 /* Fault+Creation.m */; };
 		0251C8C515CCC81000075C60 /* Contact+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C415CCC81000075C60 /* Contact+Creation.m */; };
 		0251C8C815CCC88100075C60 /* Bedding+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0251C8C715CCC88000075C60 /* Bedding+Creation.m */; };
-		026F31FB15D02462001F99EB /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FA15D02462001F99EB /* Group.m */; };
 		026F31FE15D02776001F99EB /* GDVFormationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F31FD15D02776001F99EB /* GDVFormationViewController.m */; };
 		026F322115D0281E001F99EB /* RGB-HSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321815D0281E001F99EB /* RGB-HSL.m */; };
 		026F322215D0281E001F99EB /* NPColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 026F321A15D0281E001F99EB /* NPColorPickerView.m */; };
@@ -118,6 +117,7 @@
 		2104DFC915D0861400CD734A /* NPColorPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2104DFC815D0861400CD734A /* NPColorPickerVC.m */; };
 		2125AA4615CE121D008E78CB /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125AA4515CE121D008E78CB /* Record.m */; };
 		2125AA4715CE121D008E78CB /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125AA4515CE121D008E78CB /* Record.m */; };
+		215960C115D35D9600478C86 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 215960C015D35D9600478C86 /* Group.m */; };
 		21C2C9C515CE10C100FF7EA3 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C2C9BC15CE10C000FF7EA3 /* Record+Creation.m */; };
 		21C2C9C615CE10C100FF7EA3 /* Record+DateAndTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C2C9BE15CE10C000FF7EA3 /* Record+DateAndTimeFormatter.m */; };
 		21C2C9C815CE10C100FF7EA3 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C2C9C215CE10C000FF7EA3 /* Record+DipDirectionValues.m */; };
@@ -246,8 +246,6 @@
 		0251C8C415CCC81000075C60 /* Contact+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+Creation.m"; sourceTree = "<group>"; };
 		0251C8C615CCC88000075C60 /* Bedding+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bedding+Creation.h"; sourceTree = "<group>"; };
 		0251C8C715CCC88000075C60 /* Bedding+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bedding+Creation.m"; sourceTree = "<group>"; };
-		026F31F915D02462001F99EB /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		026F31FA15D02462001F99EB /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		026F31FC15D02776001F99EB /* GDVFormationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVFormationViewController.h; sourceTree = "<group>"; };
 		026F31FD15D02776001F99EB /* GDVFormationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVFormationViewController.m; sourceTree = "<group>"; };
 		026F321715D0281E001F99EB /* RGB-HSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RGB-HSL.h"; sourceTree = "<group>"; };
@@ -371,6 +369,8 @@
 		2104DFC815D0861400CD734A /* NPColorPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPColorPickerVC.m; sourceTree = "<group>"; };
 		2125AA4415CE121D008E78CB /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		2125AA4515CE121D008E78CB /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		215960BF15D35D9600478C86 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		215960C015D35D9600478C86 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		21C2C9BB15CE10C000FF7EA3 /* Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Creation.h"; sourceTree = "<group>"; };
 		21C2C9BC15CE10C000FF7EA3 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
 		21C2C9BD15CE10C000FF7EA3 /* Record+DateAndTimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DateAndTimeFormatter.h"; sourceTree = "<group>"; };
@@ -460,8 +460,6 @@
 		026F321515D027F0001F99EB /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
-				2104DFC715D0861400CD734A /* NPColorPickerVC.h */,
-				2104DFC815D0861400CD734A /* NPColorPickerVC.m */,
 				026F321615D02805001F99EB /* Color Picker View */,
 			);
 			name = "Color Picker";
@@ -470,6 +468,8 @@
 		026F321615D02805001F99EB /* Color Picker View */ = {
 			isa = PBXGroup;
 			children = (
+				2104DFC715D0861400CD734A /* NPColorPickerVC.h */,
+				2104DFC815D0861400CD734A /* NPColorPickerVC.m */,
 				026F321715D0281E001F99EB /* RGB-HSL.h */,
 				026F321815D0281E001F99EB /* RGB-HSL.m */,
 				026F321915D0281E001F99EB /* NPColorPickerView.h */,
@@ -487,6 +487,8 @@
 		02F3197E15C9BCB70070EDC7 = {
 			isa = PBXGroup;
 			children = (
+				215960BF15D35D9600478C86 /* Group.h */,
+				215960C015D35D9600478C86 /* Group.m */,
 				02F3199315C9BCB70070EDC7 /* GeoDataViewer */,
 				02F319B115C9BCB70070EDC7 /* GeoDataViewerTests */,
 				02F3198C15C9BCB70070EDC7 /* Frameworks */,
@@ -718,8 +720,6 @@
 		02F31A6215C9C3260070EDC7 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				026F31F915D02462001F99EB /* Group.h */,
-				026F31FA15D02462001F99EB /* Group.m */,
 				0251C89F15CCAE1900075C60 /* Group+DictionaryKeys.h */,
 				0251C8A015CCAE1900075C60 /* Group+DictionaryKeys.m */,
 				0251C89C15CCADB200075C60 /* Group+Creation.h */,
@@ -1232,7 +1232,6 @@
 				0238B11215CE511F00B3A67A /* Question+Creation.m in Sources */,
 				0238B11815CE595D00B3A67A /* Answer+DateFormatter.m in Sources */,
 				020D073915CF1A230023B106 /* MKStudentResponseAnnotation.m in Sources */,
-				026F31FB15D02462001F99EB /* Group.m in Sources */,
 				026F31FE15D02776001F99EB /* GDVFormationViewController.m in Sources */,
 				026F322115D0281E001F99EB /* RGB-HSL.m in Sources */,
 				026F322215D0281E001F99EB /* NPColorPickerView.m in Sources */,
@@ -1241,6 +1240,7 @@
 				026F322515D0281E001F99EB /* NPConicGradient.m in Sources */,
 				026F322815D0282A001F99EB /* ColorPickerViewController.m in Sources */,
 				2104DFC915D0861400CD734A /* NPColorPickerVC.m in Sources */,
+				215960C115D35D9600478C86 /* Group.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

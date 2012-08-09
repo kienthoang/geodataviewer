@@ -8,7 +8,7 @@
 
 #import "NPColorPickerVC.h"
 
-@interface NPColorPickerVC ()
+@interface NPColorPickerVC ()<NPColorPickerViewDelegate, NPColorQuadViewDelegate>
 
 @end
 
@@ -18,12 +18,12 @@
 @synthesize delegate=_delegate;
 @synthesize selectedColors=_selectedColors;
 
-- (IBAction)donePickingColor:(id)sender {
-    self.picker.color = self.quad.selectedColor;
-    [self.delegate userDidDismissPopoverWithColor:self.quad.selectedColor andSelectedColors:self.quad.getSelectedColors];    
-}
-- (IBAction)addColor:(id)sender {
-    [self.quad pushColor:self.picker.color];    
+
+
+- (IBAction)addPressed:(UIButton *)sender {
+    NSLog(@"add tapped");
+    [self.quad pushColor:self.picker.color];
+    
 }
 
 -(void) pushInitialColors:(NSMutableArray *) colors 
@@ -31,6 +31,11 @@
     for(UIColor *color in colors) {
         [self.quad pushColor:color];
     }
+}
+
+-(void) setPickerColor:(UIColor *) color 
+{
+    [self.picker setColor:color];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,9 +55,19 @@
 
 -(void) viewWillAppear:(BOOL)animated 
 {
+    self.picker.delegate=self;
+    self.quad.delegate=self;
     //set up the four initial colors
     [self pushInitialColors:self.selectedColors];
+    
 }
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.delegate userDidDismissPopover:self.quad.getSelectedColors];
+
+}
+
 - (void)viewDidUnload
 {
     [self setPicker:nil];
@@ -64,6 +79,19 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - NPColorPickerView protocol methods
+-(void) NPColorPickerView:(NPColorPickerView *)view didSelectColor:(UIColor *)color
+{
+    [self.delegate userDidSelectColor:color];    
+}
+
+#pragma mark - NPColorQuadView protocol methods
+-(void) userDidSelectColorTile:(UIColor *)color 
+{
+    [self.picker setColor:color];
+    [self.delegate userDidSelectColor:color];
 }
 
 @end

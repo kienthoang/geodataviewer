@@ -2,7 +2,7 @@
 //  Group.h
 //  GeoDataViewer
 //
-//  Created by Kien Hoang on 8/6/12.
+//  Created by excel 2011 on 8/8/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
@@ -13,20 +13,18 @@
 
 @interface Group : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * blueComponent;
 @property (nonatomic, retain) NSNumber * faulty;
+@property (nonatomic, retain) NSNumber * greenComponent;
 @property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * numberOfMembers;
 @property (nonatomic, retain) NSNumber * redComponent;
-@property (nonatomic, retain) NSNumber * blueComponent;
-@property (nonatomic, retain) NSNumber * greenComponent;
 @property (nonatomic, retain) NSSet *folders;
 @property (nonatomic, retain) NSSet *responses;
 @end
 
 @interface Group (CoreDataGeneratedAccessors)
-
--(void)setColorWithRed:(double)red withGreen:(double)green withBlue:(double)blue; 
 
 - (void)addFoldersObject:(Folder *)value;
 - (void)removeFoldersObject:(Folder *)value;

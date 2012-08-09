@@ -16,7 +16,8 @@
 
 @protocol NPColorPickerVCDelegate <NSObject>
 
--(void) userDidDismissPopoverWithColor:(UIColor *) color andSelectedColors:(NSMutableArray *)colors;
+-(void) userDidSelectColor:(UIColor *) color;
+-(void) userDidDismissPopover:(NSMutableArray *)selectedColors;
 
 @end
 
@@ -28,5 +29,6 @@
 @property (nonatomic, strong) NSMutableArray *selectedColors;
 
 -(void) pushInitialColors:(NSMutableArray *) colors;
+-(void) setPickerColor:(UIColor *) color;
 
 @end

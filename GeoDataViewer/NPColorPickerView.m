@@ -305,6 +305,7 @@ NSString * kColorProperty = @"color";
     
     [hueIndicator_ setNeedsDisplay];
     [svIndicator_ setNeedsDisplay];
+    
 }
 
 
@@ -554,7 +555,7 @@ NSString * kColorProperty = @"color";
         [color_ getHue:NULL saturation:&sat brightness:&brigt alpha:NULL];
         [self setColor:[UIColor colorWithHue:hue saturation:sat brightness:brigt alpha:1.0f]];
     } else if ([recognizer state] == UIGestureRecognizerStateEnded) {
-        [[self delegate] NPColorPickerView:self didSelectColor:color_]; 
+        [self.delegate NPColorPickerView:self didSelectColor:color_];
     }
 }
 
@@ -579,7 +580,7 @@ NSString * kColorProperty = @"color";
         [self getSaturation:&sat brightness:&brigt position:CGPointMake(t.x,t.y)];
         [self setColor:[UIColor colorWithHue:hue saturation:sat brightness:brigt alpha:1.0f]];
     } else if ([recognizer state] == UIGestureRecognizerStateEnded) {
-        [[self delegate] NPColorPickerView:self didSelectColor:color_]; 
+        [self.delegate NPColorPickerView:self didSelectColor:color_];
     }
 }
 
