@@ -22,7 +22,6 @@
 @interface CustomStudentGroupCell : UITableViewCell
 
 @property (nonatomic,weak) IBOutlet UILabel *name;
-@property (nonatomic,weak) IBOutlet UILabel *groupID;
 @property (nonatomic,weak) IBOutlet UIButton *colorPatch;
 @property (nonatomic,strong) Group *studentGroup;
 @property (nonatomic, strong) id <CustomStudentGroupCellDelegate> delegate;

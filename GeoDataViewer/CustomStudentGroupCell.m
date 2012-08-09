@@ -17,8 +17,6 @@
 @synthesize colorPatch=_colorPatch;
 @synthesize name=_name;
 
-@synthesize groupID = _groupID;
-
 @synthesize delegate=_delegate;
 
 - (IBAction)colorPatchPressed:(UIButton *)sender
@@ -30,7 +28,7 @@
     double redComponent=group.redComponent.doubleValue;
     double greenComponent=group.greenComponent.doubleValue;
     double blueComponent=group.blueComponent.doubleValue;
-    
+        
     return [UIColor colorWithRed:redComponent green:greenComponent blue:blueComponent alpha:1.0];
 }
 
@@ -48,8 +46,6 @@
     self.colorPatch.backgroundColor=[self colorForStudentGroup:studentGroup];    
     //Set the name
     self.name.text=studentGroup.name;       
-    //set the group id
-    self.groupID.text = studentGroup.identifier;
 }
 
 //Override set Selected to be sure the color patch's background color does not get covered by the cell's selected state background color

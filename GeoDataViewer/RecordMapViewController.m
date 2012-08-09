@@ -67,6 +67,20 @@
     return _mapAnnotations;
 }
 
+- (NSArray *)responseAnnotations {
+    if (!_responseAnnotations)
+        _responseAnnotations=[NSArray array];
+    
+    return _responseAnnotations;
+}
+
+- (NSArray *)recordAnnotations {
+    if (!_recordAnnotations)
+        _recordAnnotations=[NSArray array];
+    
+    return _recordAnnotations;
+}
+
 #pragma mark - Map View Setup methods
 
 - (void)updateMapView:(MKMapView *)mapView forRecords:(NSArray *)records willUpdateRegion:(BOOL)willUpdateRegion {
@@ -92,10 +106,10 @@
     NSMutableArray *mapAnnotations=self.mapAnnotations.mutableCopy;
     [mapAnnotations removeObjectsInArray:self.recordAnnotations];
     
-    mapView.centerCoordinate=mapView.userLocation.coordinate;
-    
     //Set up the annotations for the map view
     if (records.count) {
+        mapView.centerCoordinate=mapView.userLocation.coordinate;
+        
         //Convert the array of records into annotations
         for (Record *record in records) {
             MKGeoRecordAnnotation *annotation=[MKGeoRecordAnnotation annotationForRecord:record];
@@ -142,10 +156,12 @@
     NSMutableArray *mapAnnotations=self.mapAnnotations.mutableCopy;
     [mapAnnotations removeObjectsInArray:self.responseAnnotations];
     
-    mapView.centerCoordinate=mapView.userLocation.coordinate;
+    
     
     //Set up the annotations for the map view
     if (responses.count) {
+        mapView.centerCoordinate=mapView.userLocation.coordinate;
+        
         //Convert the array of records into annotations
         for (Answer *response in responses) {
             MKStudentResponseAnnotation *annotation=[MKStudentResponseAnnotation annotationForStudentResponse:response];
@@ -459,8 +475,6 @@
                 lower.latitude=annotation.coordinate.latitude;
         }
     }
-    
-    
     
     // Set the spans for the location span
     MKCoordinateSpan locationSpan;

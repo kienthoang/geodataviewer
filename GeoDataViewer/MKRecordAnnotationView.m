@@ -13,6 +13,9 @@
 
 #import "Contact+Formation.h"
 
+#import "Folder.h"
+#import "Group.h"
+
 @implementation MKRecordAnnotationView
 
 - (void)reloadAnnotationView {
@@ -42,7 +45,8 @@
         //Setup the color of the dip strike symbol if specified by user preference
         UIColor *color=settingManager.defaultSymbolColor;
         if (settingManager.colorByGroup) {
-            
+            Group *group=record.folder.group;
+            color=[UIColor colorWithRed:group.redComponent.doubleValue green:group.greenComponent.doubleValue blue:group.blueComponent.doubleValue alpha:1.0];
         }
         else if (settingManager.colorByFormation && [(id)record formation]) {
             if (![record isKindOfClass:[Other class]]) {

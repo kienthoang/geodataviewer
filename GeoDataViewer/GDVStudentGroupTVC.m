@@ -316,15 +316,15 @@
 }
 
 #pragma mark - NPColorPickerVC protocol methods
--(void) userDidSelectColor:(UIColor *)color{
+-(void)userDidSelectColor:(UIColor *)color{
     CGFloat red = 0.0 ;
     CGFloat green = 0.0;
     CGFloat blue = 0.0;
     CGFloat alpha = 0.0;    
-    [color getRed:&red green:&green blue:&blue alpha:&alpha]; 
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    
     [self.colorPickerSenderCell.studentGroup setColorWithRed:red withGreen:green withBlue:blue];
     [self.colorPickerSenderCell updatePatchColor:color];
-    
 }
 
 -(void) userDidDismissPopover:(NSMutableArray *)selectedColors
@@ -333,6 +333,7 @@
 }
 
 #pragma mark - CustomStudentGroupCell protocol methods
+
 -(void)colorPatchPressedWithColorRGB:(UIColor *)backgroundColor andSender:(CustomStudentGroupCell *)cell {
     self.colorPickerSenderCell=cell;
     [self performSegueWithIdentifier:@"NPColorPicker" sender:cell];    

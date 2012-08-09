@@ -16,8 +16,8 @@
 -(void)setColorWithRed:(double)red withGreen:(double)green withBlue:(double)blue{
     self.redComponent = [NSNumber numberWithDouble:red];
     self.greenComponent = [NSNumber numberWithDouble:green];
-    self.blueComponent = [NSNumber numberWithDouble:blue];
-   }
+    self.blueComponent = [NSNumber numberWithDouble:blue];    
+}
 
 - (void)removeAndDeleteAllFolders {
     for (Folder *folder in self.folders)
