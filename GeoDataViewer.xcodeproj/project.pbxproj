@@ -369,8 +369,8 @@
 		2104DFC815D0861400CD734A /* NPColorPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPColorPickerVC.m; sourceTree = "<group>"; };
 		2125AA4415CE121D008E78CB /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		2125AA4515CE121D008E78CB /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
-		215960BF15D35D9600478C86 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		215960C015D35D9600478C86 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		215960BF15D35D9600478C86 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Group.h; path = ../Group.h; sourceTree = "<group>"; };
+		215960C015D35D9600478C86 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Group.m; path = ../Group.m; sourceTree = "<group>"; };
 		21C2C9BB15CE10C000FF7EA3 /* Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Creation.h"; sourceTree = "<group>"; };
 		21C2C9BC15CE10C000FF7EA3 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
 		21C2C9BD15CE10C000FF7EA3 /* Record+DateAndTimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DateAndTimeFormatter.h"; sourceTree = "<group>"; };
@@ -487,8 +487,6 @@
 		02F3197E15C9BCB70070EDC7 = {
 			isa = PBXGroup;
 			children = (
-				215960BF15D35D9600478C86 /* Group.h */,
-				215960C015D35D9600478C86 /* Group.m */,
 				02F3199315C9BCB70070EDC7 /* GeoDataViewer */,
 				02F319B115C9BCB70070EDC7 /* GeoDataViewerTests */,
 				02F3198C15C9BCB70070EDC7 /* Frameworks */,
@@ -720,6 +718,8 @@
 		02F31A6215C9C3260070EDC7 /* Group */ = {
 			isa = PBXGroup;
 			children = (
+				215960BF15D35D9600478C86 /* Group.h */,
+				215960C015D35D9600478C86 /* Group.m */,
 				0251C89F15CCAE1900075C60 /* Group+DictionaryKeys.h */,
 				0251C8A015CCAE1900075C60 /* Group+DictionaryKeys.m */,
 				0251C89C15CCADB200075C60 /* Group+Creation.h */,
