@@ -2,13 +2,13 @@
 //  Group.m
 //  GeoDataViewer
 //
-//  Created by excel 2011 on 8/8/12.
+//  Created by Kien Hoang on 8/13/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import "Group.h"
-#import "Answer.h"
 #import "Folder.h"
+#import "Response_Record.h"
 
 
 @implementation Group
@@ -21,6 +21,6 @@
 @dynamic numberOfMembers;
 @dynamic redComponent;
 @dynamic folders;
-@dynamic responses;
+@dynamic responseRecords;
 
 @end

@@ -17,7 +17,7 @@
 @interface RecordMapViewController : UIViewController
 
 @property (nonatomic,strong) NSArray *records;
-@property (nonatomic,strong) NSArray *responses;
+@property (nonatomic,strong) NSArray *responseRecords;
 
 @property (nonatomic,strong) Record *selectedRecord;
 @property (nonatomic,strong) Answer *selectedResponse;
@@ -27,7 +27,7 @@
 @property (weak,nonatomic) id <RecordMapViewControllerDelegate> mapDelegate;
 
 - (void)updateRecords:(NSArray *)records forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
-- (void)updateResponses:(NSArray *)responses forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
+- (void)updateResponseRecords:(NSArray *)responseRecords forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion;
 - (void)reloadAnnotationViews;
 
 @end

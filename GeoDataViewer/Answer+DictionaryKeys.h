@@ -17,5 +17,6 @@
 #define GDVStudentResponseLatitude @"GeoDataViewer.StudentResponse.Latitude"
 #define GDVStudentResponseLongitude @"GeoDataViewer.StudentResponse.Longitude"
 #define GDVStudentResponseNumRecords @"GeoDataViewer.StudentResponse.NumRecords"
+#define GDVStudentResponseResponseRecord @"GeoDataViewer.StudentResponse.ResponseRecord"
 
 @end

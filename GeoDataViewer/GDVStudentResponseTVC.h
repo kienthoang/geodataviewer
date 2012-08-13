@@ -1,21 +1,15 @@
 //
 //  GDVStudentResponseTVC.h
-//  GeoDataViewer
+//  GeoFieldBook
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 7/23/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#import "PrototypeLoadingTableViewController.h"
+@interface GDVStudentResponseTVC : UITableViewController
 
-#import "Group.h"
-#import "Answer.h"
-
-@interface GDVStudentResponseTVC : PrototypeLoadingTableViewController
-
-@property (nonatomic,strong) Group *studentGroup;
 @property (nonatomic,strong) NSArray *studentResponses;
 
 @end

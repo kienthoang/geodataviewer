@@ -15,7 +15,7 @@
 }
 
 - (void)drawStudentResponseSymbolForAnnotation:(MKStudentResponseAnnotation *)annotation {
-    if (annotation.response)
+    if (annotation.responseRecord)
         self.image=[UIImage imageNamed:@"response.jpeg"];
 }
 

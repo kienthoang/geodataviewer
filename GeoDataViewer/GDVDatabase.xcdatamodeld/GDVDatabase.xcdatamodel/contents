@@ -6,8 +6,8 @@
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="numberOfRecords" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="group" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="responses" inverseEntity="Group" syncable="YES"/>
         <relationship name="question" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Question" inverseName="questions" inverseEntity="Question" syncable="YES"/>
+        <relationship name="responseRecord" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Response_Record" inverseName="responses" inverseEntity="Response_Record" syncable="YES"/>
     </entity>
     <entity name="Bedding" representedClassName="Bedding" parentEntity="Record" syncable="YES">
         <relationship name="formation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Formation" inverseName="beddings" inverseEntity="Formation" syncable="YES"/>
@@ -53,9 +53,9 @@
         <attribute name="identifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="numberOfMembers" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="redComponent" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="redComponent" optional="YES" attributeType="Float" defaultValueString="1" syncable="YES"/>
         <relationship name="folders" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Folder" inverseName="group" inverseEntity="Folder" syncable="YES"/>
-        <relationship name="responses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Answer" inverseName="group" inverseEntity="Answer" syncable="YES"/>
+        <relationship name="responseRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Response_Record" inverseName="group" inverseEntity="Response_Record" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -83,6 +83,13 @@
         <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="records" inverseEntity="Folder" syncable="YES"/>
         <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="record" inverseEntity="Image" syncable="YES"/>
     </entity>
+    <entity name="Response_Record" representedClassName="Response_Record" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="group" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="responseRecords" inverseEntity="Group" syncable="YES"/>
+        <relationship name="responses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Answer" inverseName="responseRecord" inverseEntity="Answer" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Answer" positionX="-668" positionY="18" width="128" height="150"/>
         <element name="Bedding" positionX="178" positionY="396" width="128" height="60"/>
@@ -97,5 +104,6 @@
         <element name="Other" positionX="180" positionY="108" width="128" height="45"/>
         <element name="Question" positionX="-666" positionY="300" width="128" height="105"/>
         <element name="Record" positionX="-65" positionY="243" width="128" height="195"/>
+        <element name="Response_Record" positionX="-468" positionY="-33" width="128" height="120"/>
     </elements>
 </model>

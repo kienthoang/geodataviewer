@@ -14,7 +14,7 @@
 #import "GDVFolderTVC.h"
 #import "GDVRecordTVC.h"
 
-#import "GDVStudentResponseTVC.h"
+#import "GDVResponseRecordTVC.h"
 
 #import "GDVFormationFolderTVC.h"
 #import "GDVFormationTableViewController.h"

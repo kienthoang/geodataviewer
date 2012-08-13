@@ -9,7 +9,7 @@
 #import "Group+Modification.h"
 
 #import "Folder.h"
-#import "Answer.h"
+#import "Response_Record.h"
 
 @implementation Group (Modification)
 
@@ -25,8 +25,8 @@
 }
 
 - (void)removeAndDeleteAllStudentResponses {
-    for (Answer *response in self.responses)
-        [self.managedObjectContext deleteObject:response];
+    for (Response_Record *responseRecord in self.responseRecords)
+        [self.managedObjectContext deleteObject:responseRecord];
 }
 
 @end

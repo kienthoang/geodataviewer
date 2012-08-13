@@ -12,6 +12,8 @@
 
 #import "CustomStudentGroupCell.h"
 
+#import "GDVResourceManagerNotificationNames.h"
+
 #import "NPColorPickerVC.h"
 
 @interface GDVStudentGroupTVC() <UIActionSheetDelegate, CustomStudentGroupCellDelegate, NPColorPickerVCDelegate>
@@ -244,12 +246,12 @@
         [self.delegate studentGroupTVC:self preparedToSegueToFolderTVC:segue.destinationViewController];
     }
     
-    else if ([segue.identifier isEqualToString:@"Show Student Responses"]) {
+    else if ([segue.identifier isEqualToString:@"Show Response Records"]) {
         //Set the student group of the destination
         [segue.destinationViewController setStudentGroup:selectedGroup];
         
         //Notify the delegate
-        [self.delegate studentGroupTVC:self preparedToSegueToStudentResponseTVC:segue.destinationViewController];
+        [self.delegate studentGroupTVC:self preparedToSegueToResponseRecordTVC:segue.destinationViewController];
     }
     
     else if ([segue.identifier isEqualToString:@"NPColorPicker"]) {
@@ -300,7 +302,7 @@
         if ([self.identifier isEqualToString:RECORD_LIST_STUDENT_GROUP_IDENTIFIER])
             [self performSegueWithIdentifier:@"Show Folders" sender:cell];
         else if ([self.identifier isEqualToString:RESPONSE_LIST_STUDENT_GROUP_IDENTIFIER])
-            [self performSegueWithIdentifier:@"Show Student Responses" sender:cell];
+            [self performSegueWithIdentifier:@"Show Response Records" sender:cell];
     }
 }
 
@@ -325,6 +327,9 @@
     
     [self.colorPickerSenderCell.studentGroup setColorWithRed:red withGreen:green withBlue:blue];
     [self.colorPickerSenderCell updatePatchColor:color];
+    
+    NSDictionary *userInfo=[NSDictionary dictionaryWithObject:GDVResourceManagerUpdateByUser forKey:GDVResourceManagerUserInfoUpdateMechanismKey];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GDVResourceManagerFormationDatabaseDidUpdate object:self userInfo:userInfo];
 }
 
 -(void) userDidDismissPopover:(NSMutableArray *)selectedColors

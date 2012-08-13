@@ -12,6 +12,8 @@
 #import "GeoFilter.h"
 
 #import "MKMapRecordInfoViewController.h"
+#import "GDVStudentResponseTVC.h"
+
 #import "Image.h"
 
 #import "Bedding.h"
@@ -41,7 +43,7 @@
 @synthesize mapView = _mapView;
 
 @synthesize records=_records;
-@synthesize responses=_responses;
+@synthesize responseRecords=_responseRecords;
 
 @synthesize mapAnnotations=_mapAnnotations;
 @synthesize recordAnnotations=_recordAnnotations;
@@ -133,7 +135,7 @@
     }    
 }
 
-- (void)updateMapView:(MKMapView *)mapView forResponses:(NSArray *)responses willUpdateRegion:(BOOL)willUpdateRegion {
+- (void)updateMapView:(MKMapView *)mapView forResponseRecords:(NSArray *)responseRecords willUpdateRegion:(BOOL)willUpdateRegion {
     //Filter the responses
     //recorresponsesds=[self.recordFilter filterRecordCollectionByRecordType:records];
     
@@ -156,15 +158,13 @@
     NSMutableArray *mapAnnotations=self.mapAnnotations.mutableCopy;
     [mapAnnotations removeObjectsInArray:self.responseAnnotations];
     
-    
-    
     //Set up the annotations for the map view
-    if (responses.count) {
+    if (responseRecords.count) {
         mapView.centerCoordinate=mapView.userLocation.coordinate;
         
         //Convert the array of records into annotations
-        for (Answer *response in responses) {
-            MKStudentResponseAnnotation *annotation=[MKStudentResponseAnnotation annotationForStudentResponse:response];
+        for (Response_Record *responseRecord in responseRecords) {
+            MKStudentResponseAnnotation *annotation=[MKStudentResponseAnnotation annotationForStudentResponseRecord:responseRecord];
             [mapView addAnnotation:annotation];
             [responseAnnotations addObject:annotation];
         }
@@ -202,10 +202,10 @@
     }
 }
 
-- (void)updateResponses:(NSArray *)responses forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion {
-    if ((willForceUpdate && self.responses!=responses) || (!willForceUpdate && ![self.responses isEqualToArray:responses])) {
-        self.responses=responses;
-        [self updateMapView:self.mapView forResponses:self.responses willUpdateRegion:willUpdateRegion];
+- (void)updateResponseRecords:(NSArray *)responseRecords forceUpdate:(BOOL)willForceUpdate updateRegion:(BOOL)willUpdateRegion {
+    if ((willForceUpdate && self.responseRecords!=responseRecords) || (!willForceUpdate && ![self.responseRecords isEqualToArray:responseRecords])) {
+        self.responseRecords=responseRecords;
+        [self updateMapView:self.mapView forResponseRecords:self.responseRecords willUpdateRegion:willUpdateRegion];
     }
 }
 
@@ -227,7 +227,7 @@
     
     //update the map initially
     [self updateMapView:mapView forRecords:self.records willUpdateRegion:YES];
-    [self updateMapView:mapView forResponses:self.responses willUpdateRegion:YES];
+    [self updateMapView:mapView forResponseRecords:self.responseRecords willUpdateRegion:YES];
 }
 
 - (void)deselectAnnotationForRecord:(Record *)selectedRecord {
@@ -393,6 +393,11 @@
         if (!annotationView) {
             annotationView=[self viewForAnnotation:annotation];
             annotationView.canShowCallout=YES;
+            
+            //Make the right view of the callout an info button
+            UIButton *infoButton=[UIButton buttonWithType:UIButtonTypeInfoLight];
+            infoButton.frame=CGRectMake(0, 0, 15, 15);
+            annotationView.rightCalloutAccessoryView=infoButton;
         }
     }
     
@@ -423,6 +428,7 @@
         self.annotationCalloutPopover=nil;
     }
 
+    //If the annotation view selected is a record annotation view, show the info of the record
     if ([view isKindOfClass:[MKRecordAnnotationView class]]) {
         //show the popover
         MKGeoRecordAnnotation *annotation=view.annotation;
@@ -432,6 +438,21 @@
         recordInfo.record=record;
         recordInfo.delegate=self;
         UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:recordInfo];
+        [annotationCalloutPopover presentPopoverFromRect:view.bounds 
+                                                  inView:view 
+                                permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                animated:YES];
+        self.annotationCalloutPopover=annotationCalloutPopover;
+    }
+    
+    //If the annotation view selected is a response annotation view
+    if ([view isKindOfClass:[MKResponseAnnotationView class]]) {
+        //show the popover
+        MKStudentResponseAnnotation *annotation=view.annotation;
+        Response_Record *responseRecord=annotation.responseRecord;
+        GDVStudentResponseTVC *responseInfo=[self.storyboard instantiateViewControllerWithIdentifier:@"Response Info Popover"];
+        responseInfo.studentResponses=responseRecord.responses.allObjects;
+        UIPopoverController *annotationCalloutPopover=[[UIPopoverController alloc] initWithContentViewController:responseInfo];
         [annotationCalloutPopover presentPopoverFromRect:view.bounds 
                                                   inView:view 
                                 permittedArrowDirections:UIPopoverArrowDirectionAny 

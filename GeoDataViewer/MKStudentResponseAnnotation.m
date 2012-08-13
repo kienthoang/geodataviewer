@@ -12,25 +12,25 @@
 
 @implementation MKStudentResponseAnnotation
 
-@synthesize response=_response;
+@synthesize responseRecord=_responseRecord;
 
-+ (MKStudentResponseAnnotation *)annotationForStudentResponse:(Answer *)response {
++ (MKStudentResponseAnnotation *)annotationForStudentResponseRecord:(Response_Record *)responseRecord {
     MKStudentResponseAnnotation *annotation=[[MKStudentResponseAnnotation alloc] init];
-    annotation.response=response;
+    annotation.responseRecord=responseRecord;
     
     return annotation;
 }
 
 - (CLLocationCoordinate2D)coordinate {
     CLLocationCoordinate2D coordinate;
-    coordinate.latitude=self.response.latitude.doubleValue;
-    coordinate.longitude=self.response.longitude.doubleValue;
+    coordinate.latitude=self.responseRecord.latitude.doubleValue;
+    coordinate.longitude=self.responseRecord.longitude.doubleValue;
     
     return coordinate;
 }
 
 - (NSString *)title {
-    NSString *title=[NSString stringWithFormat:@"%@'s Response",self.response.group.name];
+    NSString *title=[NSString stringWithFormat:@"%@'s Responses",self.responseRecord.group.name];
     return title;
 }
 

@@ -41,6 +41,7 @@
 #import "Formation+Creation.h"
 #import "Formation+DictionaryKeys.h"
 
+#import "Response_Record+Creation.h"
 #import "Answer+Creation.h"
 #import "Answer+DateFormatter.h"
 
@@ -121,6 +122,7 @@ typedef enum columnHeadings{Name, Type, Longitude, Latitude, Date, Time, Strike,
 #pragma mark - Data Managers
 
 - (NSDate *)dateFromDateToken:(NSString *)dateToken andTimeToken:(NSString *)timeToken {
+    NSLog(@"Date token: %@ Time token: %@",dateToken,timeToken);
     //Get date and time components and create a NSDate from them
     NSArray *dateComponents = [dateToken componentsSeparatedByString:@"/"];
     NSArray *timeComponents = [timeToken componentsSeparatedByString:@":"];
@@ -313,6 +315,8 @@ typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,Respo
         //Get the group from the metadata info
         NSString *groupName=[[tokenArrays objectAtIndex:1] objectAtIndex:1];
         NSString *groupID=[[tokenArrays objectAtIndex:2] objectAtIndex:1];
+        NSNumberFormatter *numberFormatter=[[NSNumberFormatter alloc] init];
+        int numResponses=[numberFormatter numberFromString:[[tokenArrays objectAtIndex:3] objectAtIndex:1]].intValue;
         NSNumber *faulty=[NSNumber numberWithBool:NO];
         
         //Try to get the student group from the student-group-by-id dictionary
@@ -327,18 +331,29 @@ typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,Respo
         }
         
         //Remove the metadata token arrays and the response header token array
-        NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 5)];
+        NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 6)];
         [tokenArrays removeObjectsAtIndexes:indexes];
         
         //Loop through the token arrays and create responses
+        int responseCounter=0;
+        Response_Record *responseRecord=nil;
         for (NSArray *tokenArray in tokenArrays) {
-            Answer *response=[self studentResponseForTokenArray:tokenArray];
-            response.group=studentGroup;
+            if (!responseCounter++) {
+                responseRecord=[Response_Record responseRecordInManagedObjectContext:self.database.managedObjectContext];
+                responseRecord.group=studentGroup;
+            }
+            
+            //Reset counter if necessary
+            if (responseCounter==numResponses)
+                responseCounter=0;
+                
+            //Create a new response
+            [self studentResponseForTokenArray:tokenArray andResponseRecord:responseRecord];
         }
     }
 }
 
-- (Answer *)studentResponseForTokenArray:(NSArray *)tokenArray {
+- (Answer *)studentResponseForTokenArray:(NSArray *)tokenArray andResponseRecord:(Response_Record *)responseRecord {
     Answer *response=nil;
     
     //Create an info dictionary from the info in the token array
@@ -350,6 +365,7 @@ typedef enum responseHeadings {QuestionPrompt,ResponseContent,ResponseDate,Respo
     [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLatitude]] forKey:GDVStudentResponseLatitude];
     [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:ResponseLongitude]] forKey:GDVStudentResponseLongitude];
     [responseDictionary setObject:[numberFormatter numberFromString:[tokenArray objectAtIndex:NumberOfRecords]] forKey:GDVStudentResponseNumRecords];
+    [responseDictionary setObject:responseRecord forKey:GDVStudentResponseResponseRecord];
     
     NSString *dateToken = [[tokenArray objectAtIndex:ResponseDate] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *timeToken = [[tokenArray objectAtIndex:ResponseTime] stringByReplacingOccurrencesOfString:@" " withString:@""];

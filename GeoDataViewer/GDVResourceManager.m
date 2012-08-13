@@ -87,17 +87,23 @@ static GDVResourceManager *defaultResourceManager;
 
 - (void)importRecordCSVFiles:(NSArray *)csvFiles {
     //Import the record csv files
-    [self.engine createRecordsFromCSVFiles:csvFiles];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self.engine createRecordsFromCSVFiles:csvFiles];
+    });
 }
 
 - (void)importFormationCSVFiles:(NSArray *)csvFiles {
     //Import the formation csv files
-    [self.engine createFormationsWithColorFromCSVFiles:csvFiles];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self.engine createFormationsWithColorFromCSVFiles:csvFiles];
+    });
 }
 
 - (void)importStudentResponseCSVFiles:(NSArray *)csvFiles {
     //Import the record csv files
-    [self.engine createStudentResponsesFromCSVFiles:csvFiles];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self.engine createStudentResponsesFromCSVFiles:csvFiles];
+    });
 }
 
 #pragma mark - Notification Management Mechanisms
@@ -206,22 +212,22 @@ static GDVResourceManager *defaultResourceManager;
     }
 }
 
-- (void)fetchStudentResponsesForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
+- (void)fetchResponseRecordsForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler {
     //Fetch all the student responses for the given student group
-    [self fetchStudentResponsesForStudentGroups:[NSArray arrayWithObject:studentGroup] completion:completionHandler];
+    [self fetchResponseRecordsForStudentGroups:[NSArray arrayWithObject:studentGroup] completion:completionHandler];
 }
 
-- (void)fetchStudentResponsesForStudentGroups:(NSArray *)studentGroups completion:(data_completion_handler_t)completionHandler {
+- (void)fetchResponseRecordsForStudentGroups:(NSArray *)studentGroups completion:(data_completion_handler_t)completionHandler {
     NSMutableArray *responses=[NSMutableArray array];
     
-    //Take all the responses in the student groups
+    //Take all the response record in the student groups
     for (Group *studentGroup in studentGroups) {
         BOOL faulty=studentGroup.faulty.boolValue;
         if (faulty) {
             //Data is faulty, fetch responses from server
         }
         else {
-            [responses addObjectsFromArray:studentGroup.responses.allObjects];
+            [responses addObjectsFromArray:studentGroup.responseRecords.allObjects];
         }
     }
     

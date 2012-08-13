@@ -10,12 +10,12 @@
 
 @class GDVStudentGroupTVC;
 @class GDVFolderTVC;
-@class GDVStudentResponseTVC;
+@class GDVResponseRecordTVC;
 
 @protocol GDVStudentGroupTVCDelegate <NSObject>
 
 - (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToFolderTVC:(GDVFolderTVC *)folderTVC;
-- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToStudentResponseTVC:(GDVStudentResponseTVC *)studentResponseTVC;
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToResponseRecordTVC:(GDVResponseRecordTVC *)responseRecordTVC;
 
 @optional
 

@@ -141,8 +141,8 @@
             }];
         }];
         
-        [self.resourceManager fetchStudentResponsesForStudentGroups:studentGroups completion:^(NSArray *studentResponses){
-            [mapViewController updateResponses:studentResponses forceUpdate:YES updateRegion:YES];
+        [self.resourceManager fetchResponseRecordsForStudentGroups:studentGroups completion:^(NSArray *responseRecords){
+            [mapViewController updateResponseRecords:responseRecords forceUpdate:YES updateRegion:YES];
         }];
     }];    
 }
@@ -269,6 +269,17 @@
 #pragma mark - KVO/NSNotification Managers
 
 - (void)recordDatabaseDidChange:(NSNotification *)notification {
+    //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
+    NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
+    if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.importTableViewController putImportButtonBack];
+            
+            UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
+            [doneAlert show];
+        });
+    }
+    
     //Pop record list's nav to root vc
     [self.recordListNav popToRootViewControllerAnimated:YES];
     
@@ -280,15 +291,7 @@
     [self updateRecordListStudentGroupTVC];
     
     //Update the map
-    
-    //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
-    NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
-    if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
-        [self.importTableViewController putImportButtonBack];
-        
-        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
-        [doneAlert show];
-    }
+    [self updateDataForMapViewController:self.mapViewController];
 }
 
 - (void)formationDatabaseDidChange:(NSNotification *)notification {
@@ -305,13 +308,18 @@
         //Update
         [self updateDataForFormationFolderTVC:formationFolderTVC];
         
+        //Update the map
+        [self updateDataForMapViewController:self.mapViewController];
+        
         //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
         NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
         if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
-            [self.importTableViewController putImportButtonBack];
-            
-            UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
-            [doneAlert show];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.importTableViewController putImportButtonBack];
+                
+                UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
+                [doneAlert show];
+            });
         }
     }
     
@@ -330,13 +338,18 @@
     //Update student groups
     [self updateStudentResponseListStudentGroupTVC];
     
+    //Update the map
+    [self updateDataForMapViewController:self.mapViewController];
+    
     //If the update mechanism was importing, stop the spinner in the import tvc (if it's still on screen) and put up a done alert
     NSString *updateMechanism=[notification.userInfo objectForKey:GDVResourceManagerUserInfoUpdateMechanismKey];
     if ([updateMechanism isEqualToString:GDVResourceManagerUpdateByImporting]) {
-        [self.importTableViewController putImportButtonBack];
-        
-        UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
-        [doneAlert show];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.importTableViewController putImportButtonBack];
+            
+            UIAlertView *doneAlert=[[UIAlertView alloc] initWithTitle:@"Importing Succeeded" message:@"" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil];
+            [doneAlert show];
+        });
     }
 }
 
@@ -526,12 +539,12 @@
     folderTVC.delegate=self;
 }
 
-- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToStudentResponseTVC:(GDVStudentResponseTVC *)studentResponseTVC
+- (void)studentGroupTVC:(GDVStudentGroupTVC *)sender preparedToSegueToResponseRecordTVC:(GDVResponseRecordTVC *)responseRecordTVC
 {
     //Load the student responses
-    [self.resourceManager fetchStudentResponsesForStudentGroup:studentResponseTVC.studentGroup completion:^(NSArray *studentResponses) {
-        if (studentResponses)
-            studentResponseTVC.studentResponses=studentResponses;
+    [self.resourceManager fetchResponseRecordsForStudentGroup:responseRecordTVC.studentGroup completion:^(NSArray *responseRecords) {
+        if (responseRecords)
+            responseRecordTVC.responseRecords=responseRecords;
     }];
 }
 

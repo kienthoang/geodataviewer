@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-#import "Answer.h"
+#import "Response_Record.h"
 
 @interface MKStudentResponseAnnotation : NSObject <MKAnnotation>
 
-+ (MKStudentResponseAnnotation *)annotationForStudentResponse:(Answer *)response;
++ (MKStudentResponseAnnotation *)annotationForStudentResponseRecord:(Response_Record *)responseRecord;
 
-@property (nonatomic,strong) Answer *response;
+@property (nonatomic,strong) Response_Record *responseRecord;
 
 @end

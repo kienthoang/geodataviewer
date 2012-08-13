@@ -15,7 +15,6 @@
 		0238B09015CCE30D00B3A67A /* Other+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B08F15CCE30D00B3A67A /* Other+Creation.m */; };
 		0238B09315CD138700B3A67A /* GeoDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B09215CD138700B3A67A /* GeoDatabaseManager.m */; };
 		0238B09615CD8FE400B3A67A /* CustomManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B09515CD8FE300B3A67A /* CustomManagedDocument.m */; };
-		0238B09915CDB62700B3A67A /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B09815CDB62700B3A67A /* Answer.m */; };
 		0238B09C15CDB63900B3A67A /* Bedding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B09B15CDB63900B3A67A /* Bedding.m */; };
 		0238B09F15CDB64800B3A67A /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B09E15CDB64800B3A67A /* Contact.m */; };
 		0238B0A215CDB65200B3A67A /* Fault.m in Sources */ = {isa = PBXBuildFile; fileRef = 0238B0A115CDB65200B3A67A /* Fault.m */; };
@@ -78,6 +77,14 @@
 		02782FCB15C9ECA900A0A062 /* FormationImportTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC615C9ECA900A0A062 /* FormationImportTVC.m */; };
 		02782FCC15C9ECA900A0A062 /* CSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02782FC815C9ECA900A0A062 /* CSVTableViewController.m */; };
 		0281DBF515CAD44F00D1D8B1 /* group.png in Resources */ = {isa = PBXBuildFile; fileRef = 0281DBF415CAD44F00D1D8B1 /* group.png */; };
+		02E7234015D947C200B71BD9 /* Response_Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7233F15D947C200B71BD9 /* Response_Record+Creation.m */; };
+		02E7234315D9497C00B71BD9 /* Response_Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7234215D9497C00B71BD9 /* Response_Record.m */; };
+		02E7234615D9498A00B71BD9 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7234515D9498A00B71BD9 /* Answer.m */; };
+		02E7234C15D949B200B71BD9 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7234B15D949B200B71BD9 /* Group.m */; };
+		02E7234F15D94DA500B71BD9 /* GDVStudentResponseTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7234E15D94DA500B71BD9 /* GDVStudentResponseTVC.m */; };
+		02E7235215D94E3000B71BD9 /* CustomQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7235115D94E3000B71BD9 /* CustomQuestionCell.m */; };
+		02E7235615D94E5700B71BD9 /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7235515D94E5700B71BD9 /* UICustomSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		02E7235B15D94F4200B71BD9 /* Question+Types.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E7235815D94F4200B71BD9 /* Question+Types.m */; };
 		02F3198E15C9BCB70070EDC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198D15C9BCB70070EDC7 /* UIKit.framework */; };
 		02F3199015C9BCB70070EDC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3198F15C9BCB70070EDC7 /* Foundation.framework */; };
 		02F3199215C9BCB70070EDC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3199115C9BCB70070EDC7 /* CoreGraphics.framework */; };
@@ -122,7 +129,7 @@
 		02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC315C9C7B70070EDC7 /* GDVFolderTVC.m */; };
 		02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */; };
 		02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */; };
-		02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */; };
+		02F31ACD15C9C8D20070EDC7 /* GDVResponseRecordTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ACC15C9C8D20070EDC7 /* GDVResponseRecordTVC.m */; };
 		02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31ADA15C9D0160070EDC7 /* GeoFilter.m */; };
 		02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31AE815C9D0490070EDC7 /* SettingManager.m */; };
 		02F31B4015C9D6CC0070EDC7 /* Contact+Formation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F31B3F15C9D6CC0070EDC7 /* Contact+Formation.m */; };
@@ -136,7 +143,6 @@
 		2104DFC915D0861400CD734A /* NPColorPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2104DFC815D0861400CD734A /* NPColorPickerVC.m */; };
 		2125AA4615CE121D008E78CB /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125AA4515CE121D008E78CB /* Record.m */; };
 		2125AA4715CE121D008E78CB /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 2125AA4515CE121D008E78CB /* Record.m */; };
-		215960C115D35D9600478C86 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 215960C015D35D9600478C86 /* Group.m */; };
 		21C2C9C515CE10C100FF7EA3 /* Record+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C2C9BC15CE10C000FF7EA3 /* Record+Creation.m */; };
 		21C2C9C615CE10C100FF7EA3 /* Record+DateAndTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C2C9BE15CE10C000FF7EA3 /* Record+DateAndTimeFormatter.m */; };
 		21C2C9C815CE10C100FF7EA3 /* Record+DipDirectionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C2C9C215CE10C000FF7EA3 /* Record+DipDirectionValues.m */; };
@@ -207,8 +213,6 @@
 		0238B09215CD138700B3A67A /* GeoDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoDatabaseManager.m; sourceTree = "<group>"; };
 		0238B09415CD8FE200B3A67A /* CustomManagedDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomManagedDocument.h; sourceTree = "<group>"; };
 		0238B09515CD8FE300B3A67A /* CustomManagedDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomManagedDocument.m; sourceTree = "<group>"; };
-		0238B09715CDB62700B3A67A /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
-		0238B09815CDB62700B3A67A /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		0238B09A15CDB63800B3A67A /* Bedding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bedding.h; sourceTree = "<group>"; };
 		0238B09B15CDB63900B3A67A /* Bedding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bedding.m; sourceTree = "<group>"; };
 		0238B09D15CDB64800B3A67A /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -334,6 +338,22 @@
 		02782FC715C9ECA900A0A062 /* CSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVTableViewController.h; sourceTree = "<group>"; };
 		02782FC815C9ECA900A0A062 /* CSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVTableViewController.m; sourceTree = "<group>"; };
 		0281DBF415CAD44F00D1D8B1 /* group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group.png; sourceTree = "<group>"; };
+		02E7233E15D947C200B71BD9 /* Response_Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Response_Record+Creation.h"; sourceTree = "<group>"; };
+		02E7233F15D947C200B71BD9 /* Response_Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Response_Record+Creation.m"; sourceTree = "<group>"; };
+		02E7234115D9497C00B71BD9 /* Response_Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response_Record.h; sourceTree = "<group>"; };
+		02E7234215D9497C00B71BD9 /* Response_Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response_Record.m; sourceTree = "<group>"; };
+		02E7234415D9498900B71BD9 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		02E7234515D9498A00B71BD9 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		02E7234A15D949B200B71BD9 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		02E7234B15D949B200B71BD9 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		02E7234D15D94DA500B71BD9 /* GDVStudentResponseTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentResponseTVC.h; sourceTree = "<group>"; };
+		02E7234E15D94DA500B71BD9 /* GDVStudentResponseTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVStudentResponseTVC.m; sourceTree = "<group>"; };
+		02E7235015D94E3000B71BD9 /* CustomQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomQuestionCell.h; sourceTree = "<group>"; };
+		02E7235115D94E3000B71BD9 /* CustomQuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomQuestionCell.m; sourceTree = "<group>"; };
+		02E7235415D94E5700B71BD9 /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomSwitch.h; sourceTree = "<group>"; };
+		02E7235515D94E5700B71BD9 /* UICustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomSwitch.m; sourceTree = "<group>"; };
+		02E7235715D94F4200B71BD9 /* Question+Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Question+Types.h"; sourceTree = "<group>"; };
+		02E7235815D94F4200B71BD9 /* Question+Types.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Question+Types.m"; sourceTree = "<group>"; };
 		02F3198915C9BCB70070EDC7 /* GeoDataViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoDataViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3198D15C9BCB70070EDC7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		02F3198F15C9BCB70070EDC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -407,8 +427,8 @@
 		02F31AC615C9C7C70070EDC7 /* GDVRecordTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVRecordTVC.m; sourceTree = "<group>"; };
 		02F31AC815C9C8A30070EDC7 /* CustomStudentGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomStudentGroupCell.h; sourceTree = "<group>"; };
 		02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomStudentGroupCell.m; sourceTree = "<group>"; };
-		02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVStudentResponseTVC.h; sourceTree = "<group>"; };
-		02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVStudentResponseTVC.m; sourceTree = "<group>"; };
+		02F31ACB15C9C8D20070EDC7 /* GDVResponseRecordTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDVResponseRecordTVC.h; sourceTree = "<group>"; };
+		02F31ACC15C9C8D20070EDC7 /* GDVResponseRecordTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDVResponseRecordTVC.m; sourceTree = "<group>"; };
 		02F31AD915C9D0150070EDC7 /* GeoFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFilter.h; sourceTree = "<group>"; };
 		02F31ADA15C9D0160070EDC7 /* GeoFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFilter.m; sourceTree = "<group>"; };
 		02F31AE715C9D0490070EDC7 /* SettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingManager.h; sourceTree = "<group>"; };
@@ -430,8 +450,6 @@
 		2104DFC815D0861400CD734A /* NPColorPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPColorPickerVC.m; sourceTree = "<group>"; };
 		2125AA4415CE121D008E78CB /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		2125AA4515CE121D008E78CB /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
-		215960BF15D35D9600478C86 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Group.h; path = ../Group.h; sourceTree = "<group>"; };
-		215960C015D35D9600478C86 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Group.m; path = ../Group.m; sourceTree = "<group>"; };
 		21C2C9BB15CE10C000FF7EA3 /* Record+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+Creation.h"; sourceTree = "<group>"; };
 		21C2C9BC15CE10C000FF7EA3 /* Record+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Record+Creation.m"; sourceTree = "<group>"; };
 		21C2C9BD15CE10C000FF7EA3 /* Record+DateAndTimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Record+DateAndTimeFormatter.h"; sourceTree = "<group>"; };
@@ -638,6 +656,26 @@
 			name = "Color Picker View";
 			sourceTree = "<group>";
 		};
+		02E7232F15D9447B00B71BD9 /* Response Record */ = {
+			isa = PBXGroup;
+			children = (
+				02E7234115D9497C00B71BD9 /* Response_Record.h */,
+				02E7234215D9497C00B71BD9 /* Response_Record.m */,
+				02E7233E15D947C200B71BD9 /* Response_Record+Creation.h */,
+				02E7233F15D947C200B71BD9 /* Response_Record+Creation.m */,
+			);
+			name = "Response Record";
+			sourceTree = "<group>";
+		};
+		02E7235315D94E4700B71BD9 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				02E7235415D94E5700B71BD9 /* UICustomSwitch.h */,
+				02E7235515D94E5700B71BD9 /* UICustomSwitch.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
 		02F3197E15C9BCB70070EDC7 = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +877,7 @@
 		02F31A3915C9C11C0070EDC7 /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				02E7232F15D9447B00B71BD9 /* Response Record */,
 				2141070215CC28D1007F1FE0 /* Record */,
 				02F31A6C15C9C3A80070EDC7 /* Formation */,
 				02F31A6B15C9C3A10070EDC7 /* Question */,
@@ -859,8 +898,8 @@
 		02F31A6115C9C2F30070EDC7 /* Answer */ = {
 			isa = PBXGroup;
 			children = (
-				0238B09715CDB62700B3A67A /* Answer.h */,
-				0238B09815CDB62700B3A67A /* Answer.m */,
+				02E7234415D9498900B71BD9 /* Answer.h */,
+				02E7234515D9498A00B71BD9 /* Answer.m */,
 				0238B10A15CE4B4300B3A67A /* Answer+Creation.h */,
 				0238B10B15CE4B4300B3A67A /* Answer+Creation.m */,
 				0238B10D15CE4C2500B3A67A /* Answer+DictionaryKeys.h */,
@@ -874,8 +913,8 @@
 		02F31A6215C9C3260070EDC7 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				215960BF15D35D9600478C86 /* Group.h */,
-				215960C015D35D9600478C86 /* Group.m */,
+				02E7234A15D949B200B71BD9 /* Group.h */,
+				02E7234B15D949B200B71BD9 /* Group.m */,
 				0251C89F15CCAE1900075C60 /* Group+DictionaryKeys.h */,
 				0251C8A015CCAE1900075C60 /* Group+DictionaryKeys.m */,
 				0251C89C15CCADB200075C60 /* Group+Creation.h */,
@@ -985,6 +1024,8 @@
 				0238B0B915CDB69D00B3A67A /* Question.m */,
 				0238B11015CE511F00B3A67A /* Question+Creation.h */,
 				0238B11115CE511F00B3A67A /* Question+Creation.m */,
+				02E7235715D94F4200B71BD9 /* Question+Types.h */,
+				02E7235815D94F4200B71BD9 /* Question+Types.m */,
 			);
 			name = Question;
 			sourceTree = "<group>";
@@ -1032,8 +1073,10 @@
 		02F31A7315C9C4140070EDC7 /* Student Response Group */ = {
 			isa = PBXGroup;
 			children = (
-				02F31ACB15C9C8D20070EDC7 /* GDVStudentResponseTVC.h */,
-				02F31ACC15C9C8D20070EDC7 /* GDVStudentResponseTVC.m */,
+				02F31ACB15C9C8D20070EDC7 /* GDVResponseRecordTVC.h */,
+				02F31ACC15C9C8D20070EDC7 /* GDVResponseRecordTVC.m */,
+				02E7234D15D94DA500B71BD9 /* GDVStudentResponseTVC.h */,
+				02E7234E15D94DA500B71BD9 /* GDVStudentResponseTVC.m */,
 			);
 			name = "Student Response Group";
 			sourceTree = "<group>";
@@ -1061,6 +1104,7 @@
 				026F322615D0282A001F99EB /* ColorPickerViewController.h */,
 				026F322715D0282A001F99EB /* ColorPickerViewController.m */,
 				02F31A9615C9C4F40070EDC7 /* Table Cells */,
+				02E7235315D94E4700B71BD9 /* Misc */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -1078,6 +1122,8 @@
 				02F31A9E15C9C50F0070EDC7 /* CustomFormationCell.m */,
 				02F31AC815C9C8A30070EDC7 /* CustomStudentGroupCell.h */,
 				02F31AC915C9C8A30070EDC7 /* CustomStudentGroupCell.m */,
+				02E7235015D94E3000B71BD9 /* CustomQuestionCell.h */,
+				02E7235115D94E3000B71BD9 /* CustomQuestionCell.m */,
 			);
 			name = "Table Cells";
 			sourceTree = "<group>";
@@ -1342,7 +1388,7 @@
 				02F31AC415C9C7B70070EDC7 /* GDVFolderTVC.m in Sources */,
 				02F31AC715C9C7C70070EDC7 /* GDVRecordTVC.m in Sources */,
 				02F31ACA15C9C8A30070EDC7 /* CustomStudentGroupCell.m in Sources */,
-				02F31ACD15C9C8D20070EDC7 /* GDVStudentResponseTVC.m in Sources */,
+				02F31ACD15C9C8D20070EDC7 /* GDVResponseRecordTVC.m in Sources */,
 				02F31ADB15C9D0160070EDC7 /* GeoFilter.m in Sources */,
 				02F31AE915C9D0490070EDC7 /* SettingManager.m in Sources */,
 				02F31B4015C9D6CC0070EDC7 /* Contact+Formation.m in Sources */,
@@ -1366,7 +1412,6 @@
 				0238B09015CCE30D00B3A67A /* Other+Creation.m in Sources */,
 				0238B09315CD138700B3A67A /* GeoDatabaseManager.m in Sources */,
 				0238B09615CD8FE400B3A67A /* CustomManagedDocument.m in Sources */,
-				0238B09915CDB62700B3A67A /* Answer.m in Sources */,
 				0238B09C15CDB63900B3A67A /* Bedding.m in Sources */,
 				0238B09F15CDB64800B3A67A /* Contact.m in Sources */,
 				0238B0A215CDB65200B3A67A /* Fault.m in Sources */,
@@ -1397,7 +1442,6 @@
 				026F322515D0281E001F99EB /* NPConicGradient.m in Sources */,
 				026F322815D0282A001F99EB /* ColorPickerViewController.m in Sources */,
 				2104DFC915D0861400CD734A /* NPColorPickerVC.m in Sources */,
-				215960C115D35D9600478C86 /* Group.m in Sources */,
 				025B70A415D300E200BCA39E /* Formation.m in Sources */,
 				025B70B215D302E100BCA39E /* Formation+Modification.m in Sources */,
 				025B70D515D30F5900BCA39E /* IASKAppSettingsViewController.m in Sources */,
@@ -1419,6 +1463,14 @@
 				025B70EE15D30F9600BCA39E /* CustomSplitViewController.m in Sources */,
 				025B70F215D3106900BCA39E /* CustomSplitViewControllerSegue.m in Sources */,
 				025B70F515D331D200BCA39E /* MKResponseAnnotationView.m in Sources */,
+				02E7234015D947C200B71BD9 /* Response_Record+Creation.m in Sources */,
+				02E7234315D9497C00B71BD9 /* Response_Record.m in Sources */,
+				02E7234615D9498A00B71BD9 /* Answer.m in Sources */,
+				02E7234C15D949B200B71BD9 /* Group.m in Sources */,
+				02E7234F15D94DA500B71BD9 /* GDVStudentResponseTVC.m in Sources */,
+				02E7235215D94E3000B71BD9 /* CustomQuestionCell.m in Sources */,
+				02E7235615D94E5700B71BD9 /* UICustomSwitch.m in Sources */,
+				02E7235B15D94F4200B71BD9 /* Question+Types.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

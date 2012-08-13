@@ -602,31 +602,34 @@
                         <outlet property="editButton" destination="bqc-rK-1DG" id="VKa-LB-w2Y"/>
                         <outlet property="selectAllButton" destination="LBx-wY-0ND" id="4HR-EO-bRU"/>
                         <outlet property="selectNoneButton" destination="r29-FL-qDd" id="Wyu-rZ-bMl"/>
-                        <segue destination="1vD-k9-Po8" kind="push" identifier="Show Student Responses" id="hh0-4S-LYJ"/>
+                        <segue destination="1vD-k9-Po8" kind="push" identifier="Show Response Records" id="hh0-4S-LYJ"/>
                     </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-4467" y="2477"/>
         </scene>
-        <!--Student ResponseTVC-->
+        <!--Response RecordTVC-->
         <scene sceneID="dUY-7O-LbA">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvL-Oj-73U" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="1vD-k9-Po8" customClass="GDVStudentResponseTVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOG-WK-UFL">
+                <tableViewController id="1vD-k9-Po8" customClass="GDVResponseRecordTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OOG-WK-UFL">
                         <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Student Response Cell" id="uOO-TH-RDF">
-                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Student Response Cell" id="uOO-TH-RDF">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <rect key="frame" x="45" y="1" width="914" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="YvP-jX-fnJ" kind="push" identifier="Show Responses" id="Jqm-ov-Buz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1740,21 +1743,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="QhU-C8-6XT">
-                                <rect key="frame" x="300" y="69" width="29" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="accessoryTapped:" destination="2fU-bG-EVH" eventType="touchUpInside" id="WJN-5r-ssN"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Strike:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="uoB-D9-egS">
                                 <rect key="frame" x="206" y="110" width="49" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1893,21 +1881,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="7bI-rM-Xhc">
-                                <rect key="frame" x="320" y="69" width="29" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="accessoryTapped:" destination="DVV-cu-THj" eventType="touchUpInside" id="Q9c-SL-1M6"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Strike:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="kiB-Pl-Vkc">
                                 <rect key="frame" x="219" y="110" width="49" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2305,7 +2278,411 @@
             </objects>
             <point key="canvasLocation" x="-4375" y="8554"/>
         </scene>
+        <!--Student ResponseTVC-->
+        <scene sceneID="jjl-ql-bb5">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0vZ-E8-KO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="YvP-jX-fnJ" customClass="GDVStudentResponseTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="372" sectionHeaderHeight="10" sectionFooterHeight="10" id="i4R-06-Gbl">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GeoFieldBook.Feedback.Question.BooleanType" rowHeight="371" id="GLq-2U-1fr" customClass="CustomQuestionCell">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="372"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="370"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Question Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="QN1-Jg-j6h">
+                                            <rect key="frame" x="20" y="5" width="874" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.01085100634" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="dE7-2e-VDn">
+                                            <rect key="frame" x="20" y="45" width="874" height="1"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" id="nVb-ya-h9Z">
+                                            <rect key="frame" x="36" y="106" width="867" height="212"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="TsI-RD-jUY" customClass="UICustomSwitch">
+                                            <rect key="frame" x="279" y="76" width="374" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        </slider>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="answerSwitch" destination="TsI-RD-jUY" id="QrV-li-CGz"/>
+                                    <outlet property="answerTextView" destination="nVb-ya-h9Z" id="m2s-v6-aT9"/>
+                                    <outlet property="questionPrompt" destination="QN1-Jg-j6h" id="wR0-Tx-qrq"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GeoFieldBook.Feedback.Question.TextType" rowHeight="372" id="31T-0K-Dyr" customClass="CustomQuestionCell">
+                                <rect key="frame" x="0.0" y="426" width="1024" height="373"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="0.0" width="934" height="371"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Question Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WrN-qb-Fmo">
+                                            <rect key="frame" x="30" y="11" width="874" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.01085100634" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="dNX-S7-opJ">
+                                            <rect key="frame" x="30" y="59" width="874" height="1"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" id="eBm-HD-gsx">
+                                            <rect key="frame" x="30" y="85" width="874" height="266"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="answerTextView" destination="eBm-HD-gsx" id="MOz-EA-qqc"/>
+                                    <outlet property="questionPrompt" destination="WrN-qb-Fmo" id="XYA-fp-u5u"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="YvP-jX-fnJ" id="74t-u9-qpU"/>
+                            <outlet property="delegate" destination="YvP-jX-fnJ" id="MEt-Ty-2Xm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="NxK-mD-wcF"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-1702" y="2514"/>
+        </scene>
+        <!--Student ResponseTVC-->
+        <scene sceneID="CXa-AR-4wt">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pAi-Qd-4lQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="Response Info Popover" id="up8-5m-7do" customClass="GDVStudentResponseTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="372" sectionHeaderHeight="10" sectionFooterHeight="10" id="PSe-O6-e09">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GeoFieldBook.Feedback.Question.BooleanType" rowHeight="371" id="qWk-4f-7mn" customClass="CustomQuestionCell">
+                                <rect key="frame" x="0.0" y="54" width="1024" height="372"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="1" width="934" height="370"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Question Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Aci-yg-KSn">
+                                            <rect key="frame" x="20" y="5" width="874" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.01085100634" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="gs3-Z2-t4g">
+                                            <rect key="frame" x="20" y="45" width="874" height="1"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" id="FGZ-oU-i3B">
+                                            <rect key="frame" x="36" y="106" width="867" height="212"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="rzq-q5-PSO" customClass="UICustomSwitch">
+                                            <rect key="frame" x="279" y="76" width="374" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        </slider>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="answerSwitch" destination="rzq-q5-PSO" id="vfU-uq-Ukh"/>
+                                    <outlet property="answerTextView" destination="FGZ-oU-i3B" id="LlF-1Q-7wo"/>
+                                    <outlet property="questionPrompt" destination="Aci-yg-KSn" id="JUO-pY-vck"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GeoFieldBook.Feedback.Question.TextType" rowHeight="372" id="meS-J5-NQR" customClass="CustomQuestionCell">
+                                <rect key="frame" x="0.0" y="426" width="1024" height="373"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="45" y="0.0" width="934" height="371"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Question Prompt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="P0d-Ge-wUo">
+                                            <rect key="frame" x="30" y="11" width="874" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.01085100634" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="kQu-Ht-6VO">
+                                            <rect key="frame" x="30" y="59" width="874" height="1"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" id="eDE-aO-LJE">
+                                            <rect key="frame" x="30" y="85" width="874" height="266"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="answerTextView" destination="eDE-aO-LJE" id="2ag-Vy-cbG"/>
+                                    <outlet property="questionPrompt" destination="P0d-Ge-wUo" id="uGb-js-MH2"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="up8-5m-7do" id="DMb-wS-Auo"/>
+                            <outlet property="delegate" destination="up8-5m-7do" id="Eiq-gV-l7j"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Hfo-z0-hL2">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Xv5-uQ-Aef">
+                            <connections>
+                                <action selector="donePressed:" destination="up8-5m-7do" id="KE5-Ok-Ltb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-4855" y="14970"/>
+        </scene>
     </scenes>
+    <classes>
+        <class className="CSVTableViewController" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CSVTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="CheckBox" superclassName="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CheckBox.h"/>
+        </class>
+        <class className="ColorPickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ColorPickerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="aquaPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="blackPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bluePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fuchsiaPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="greenPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="limePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="maroonPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mochaPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="navyPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="olivePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="purplePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="redPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="silverPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tealPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="whitePatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="yellowPatch" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="CustomFolderCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFolderCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomFormationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomFormationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomQuestionCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomQuestionCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="answerSwitch" candidateClass="UICustomSwitch"/>
+                <relationship kind="outlet" name="answerTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="questionPrompt" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomRecordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomRecordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="checkBox" candidateClass="CheckBox"/>
+                <relationship kind="outlet" name="date" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="time" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="type" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="CustomSplitViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomSplitViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="masterView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="CustomStudentGroupCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomStudentGroupCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="name" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="FilterByRecordTypeController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FilterByRecordTypeController.h"/>
+        </class>
+        <class className="FormationImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormationImportTVC.h"/>
+        </class>
+        <class className="GDVController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="feedbackListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="formationListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importExportButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="recordListButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="settingsButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="GDVFolderTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFolderTVC.h"/>
+        </class>
+        <class className="GDVFormationFolderTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationFolderTVC.h"/>
+        </class>
+        <class className="GDVFormationTableViewController" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationTableViewController.h"/>
+        </class>
+        <class className="GDVFormationViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVFormationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="colorPatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="GDVRecordTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVRecordTVC.h"/>
+        </class>
+        <class className="GDVResponseRecordTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVResponseRecordTVC.h"/>
+        </class>
+        <class className="GDVStudentGroupTVC" superclassName="PrototypeLoadingTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentGroupTVC.h"/>
+            <relationships>
+                <relationship kind="action" name="deletePressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="editPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="selectAll:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="selectNone:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectAllButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="selectNoneButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="GDVStudentResponseTVC" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GDVStudentResponseTVC.h"/>
+        </class>
+        <class className="IASKAppSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IASKAppSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+        <class className="ImportTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="importPressed:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MKMapRecordInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MKMapRecordInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dip" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dipDirection" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="formation" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lowerFormation" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="recordType" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="strike" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="upperFormation" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MainSettingsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainSettingsTableViewController.h"/>
+        </class>
+        <class className="NPColorPickerVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorPickerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="picker" candidateClass="NPColorPickerView"/>
+                <relationship kind="outlet" name="quad" candidateClass="NPColorQuadView"/>
+            </relationships>
+        </class>
+        <class className="NPColorPickerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorPickerView.h"/>
+        </class>
+        <class className="NPColorQuadView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NPColorQuadView.h"/>
+        </class>
+        <class className="PrototypeLoadingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PrototypeLoadingTableViewController.h"/>
+        </class>
+        <class className="RecordImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordImportTVC.h"/>
+        </class>
+        <class className="RecordMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="SettingsSplitViewController" superclassName="CustomSplitViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsSplitViewController.h"/>
+        </class>
+        <class className="StudentReponseImportTVC" superclassName="ImportTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StudentReponseImportTVC.h"/>
+        </class>
+        <class className="UICustomSwitch" superclassName="UISlider">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICustomSwitch.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>

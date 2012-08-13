@@ -52,8 +52,8 @@ typedef void (^data_completion_handler_t)(NSArray *data);
 - (void)fetchFormationFoldersWithCompletionHandler:(data_completion_handler_t)completionHandler;
 - (void)fetchFormationsForFormationFolder:(Formation_Folder *)formationFolder completion:(data_completion_handler_t)completionHandler;
 
-- (void)fetchStudentResponsesForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler;
-- (void)fetchStudentResponsesForStudentGroups:(NSArray *)studentGroups completion:(data_completion_handler_t)completionHandler;
+- (void)fetchResponseRecordsForStudentGroup:(Group *)studentGroup completion:(data_completion_handler_t)completionHandler;
+- (void)fetchResponseRecordsForStudentGroups:(NSArray *)studentGroups completion:(data_completion_handler_t)completionHandler;
 
 #pragma mark - Data Manipulators
 

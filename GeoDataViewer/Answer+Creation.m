@@ -8,6 +8,8 @@
 
 #import "Answer+Creation.h"
 
+#import "Response_Record.h"
+
 @implementation Answer (Creation)
 
 + (Answer *)responseForInfo:(NSDictionary *)responseInfo inManagedObjectContext:(NSManagedObjectContext *)context {
@@ -23,6 +25,13 @@
     
     //Set the question of the response
     response.question=[Question questionForPrompt:[responseInfo objectForKey:GDVStudentResponseQuestionPrompt] inManagedObjectContext:context];
+    
+    //Set the response record of the response
+    Response_Record *record=[responseInfo objectForKey:GDVStudentResponseResponseRecord];
+    response.responseRecord=record;
+    record.latitude=response.latitude;
+    record.longitude=response.longitude;
+    record.date=response.date;
     
     return response;
 }

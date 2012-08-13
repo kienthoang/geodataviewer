@@ -2,14 +2,14 @@
 //  Group.h
 //  GeoDataViewer
 //
-//  Created by excel 2011 on 8/8/12.
+//  Created by Kien Hoang on 8/13/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Answer, Folder;
+@class Folder, Response_Record;
 
 @interface Group : NSManagedObject
 
@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSNumber * numberOfMembers;
 @property (nonatomic, retain) NSNumber * redComponent;
 @property (nonatomic, retain) NSSet *folders;
-@property (nonatomic, retain) NSSet *responses;
+@property (nonatomic, retain) NSSet *responseRecords;
 @end
 
 @interface Group (CoreDataGeneratedAccessors)
@@ -31,9 +31,9 @@
 - (void)addFolders:(NSSet *)values;
 - (void)removeFolders:(NSSet *)values;
 
-- (void)addResponsesObject:(Answer *)value;
-- (void)removeResponsesObject:(Answer *)value;
-- (void)addResponses:(NSSet *)values;
-- (void)removeResponses:(NSSet *)values;
+- (void)addResponseRecordsObject:(Response_Record *)value;
+- (void)removeResponseRecordsObject:(Response_Record *)value;
+- (void)addResponseRecords:(NSSet *)values;
+- (void)removeResponseRecords:(NSSet *)values;
 
 @end

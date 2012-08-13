@@ -17,9 +17,7 @@
     //Extract the id
     Group *selectedGroup=nil;
     NSString *groupID=[groupInfo objectForKey:GDVStudentGroupIdentifier];
-    
-    NSLog(@"groupID:%@!",groupID);
-    
+        
     //Grabs all groups from the database to compare ids (faster than letting the database compare the ids itself)
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"Group"];
     request.sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
@@ -35,10 +33,12 @@
         //Create a new student group
         selectedGroup=[NSEntityDescription insertNewObjectForEntityForName:@"Group" inManagedObjectContext:context];
         selectedGroup.identifier=groupID;
-        selectedGroup.name=[groupInfo objectForKey:GDVStudentGroupName];
         selectedGroup.faulty=[groupInfo objectForKey:GDVStudentGroupIsFaulty];
     }
         
+    //Update the group's name
+    selectedGroup.name=[groupInfo objectForKey:GDVStudentGroupName];
+    
     return selectedGroup;
 }
 

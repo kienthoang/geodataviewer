@@ -1,49 +1,38 @@
 //
 //  GDVStudentResponseTVC.m
-//  GeoDataViewer
+//  GeoFieldBook
 //
-//  Created by Kien Hoang on 8/1/12.
+//  Created by Kien Hoang on 7/23/12.
 //  Copyright (c) 2012 Lafayette College. All rights reserved.
 //
 
 #import "GDVStudentResponseTVC.h"
 
+#import "CustomQuestionCell.h"
+#import "Question+Types.h"
+
 #import "Answer.h"
 
-@interface GDVStudentResponseTVC ()
+#import "GeoDatabaseManager.h"
+
+@interface GDVStudentResponseTVC()
 
 @end
 
 @implementation GDVStudentResponseTVC
 
-@synthesize studentGroup=_studentGroup;
 @synthesize studentResponses=_studentResponses;
 
+#pragma mark - Getters and Setters
+
 - (void)setStudentResponses:(NSArray *)studentResponses {
-    if (studentResponses) {
+    if (_studentResponses!=studentResponses) {
         _studentResponses=studentResponses;
-        
-        //Stop the loading screen
-        [self stopLoadingScreen];
-        
-        //Sort the student responses
-        _studentResponses=[_studentResponses sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
-        
-        //Reload table view
         [self.tableView reloadData];
     }
 }
 
 #pragma mark - View Controller Lifecycle
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    //Show loading screen while asking for data
-    if (!self.studentResponses)
-        [self showLoadingScreen];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -52,20 +41,37 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.studentResponses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Student Response Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"";
     
-    // Configure the cell...
+    //Get the corresponding question
     Answer *response=[self.studentResponses objectAtIndex:indexPath.row];
-    cell.textLabel.text=response.content;
+    Question *question=response.question;
+    
+    // Determine the cell type
+    //QuestionType questionType=[Question questionTypeForTypeName:question.type]; 
+    //if (questionType==BooleanQuestionType)
+        //CellIdentifier=FeedbackQuestionBooleanType;
+   // else if (questionType==TextQuestionType)
+        CellIdentifier=FeedbackQuestionTextType;
+    //else
+        //CellIdentifier=@"Unrecognized Type";
+    
+    CustomQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell)
+        cell=[[CustomQuestionCell alloc] init];
+    
+    //Configure the cell
+    cell.question=question;
+    cell.response=response;
+    
+    NSLog(@"Question: %@",question);
     
     return cell;
 }
